@@ -1,2 +1,2 @@
 # dotfiles
-Here I share my configurations using dofiles.
+Here I share my configurations using dotfiles.
