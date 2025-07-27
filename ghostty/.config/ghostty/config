@@ -1,0 +1,31 @@
+font-family = "CaskaydiaCove Nerd Font Mono"
+font-size = 12
+# theme = Sublette
+theme = tokyonight_night
+minimum-contrast = 1
+window-theme = ghostty
+alpha-blending = linear-corrected
+
+shell-integration-features = no-cursor, sudo, title	
+cursor-style = block
+cursor-style-blink = true
+cursor-click-to-move = true
+cursor-color = red
+cursor-opacity = 1
+keybind = ctrl+alt+l=goto_split:right
+
+mouse-hide-while-typing = true
+#mouse-shift-capture = true
+
+bold-is-bright = true
+
+#keybind=ctrl+a=toggle_quick_terminal
+#quick-terminal-position="top"
+#quick-terminal-screen="mouse"
+#quick-terminal-animation-duration=0.1
+#quick-terminal-autohide=true
+#quick-terminal-space-behavior="move"
+
+selection-background = #1bcf2a
+selection-foreground = #000000
+
