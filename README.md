@@ -8,7 +8,13 @@ To use these dotfiles:
   git clone --recurse-submodules https://github.com/ErfanRasti/dotfiles
   ```
 
-2. Run:
+2. Install `stow`:
+
+  ```sh
+  sudo pacman -S stow
+  ```
+
+3. Run:
 
   ```sh
   stow */
