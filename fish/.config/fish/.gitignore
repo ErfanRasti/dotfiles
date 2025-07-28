@@ -1,0 +1,7 @@
+fish_*
+fish_variables
+completions
+conf.d
+_*
+tide*
+fzf*
