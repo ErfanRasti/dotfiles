@@ -1,8 +1,8 @@
 # stratup tmux
-if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
-    # exec tmux new-session -A -s ${USER} >/dev/null 2>&1
-    exec tmux new
-fi
+# if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
+#     # exec tmux new-session -A -s ${USER} >/dev/null 2>&1
+#     exec tmux new
+# fi
 
 # Activate fish
 # if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" && -z ${BASH_EXECUTION_STRING} && ${SHLVL} == 1 ]]
