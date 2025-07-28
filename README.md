@@ -27,7 +27,7 @@ To use these `dotfiles`:
   stow nvim/ tmux/
   ```
 
-4. After opening `fish`, updaer `fisher` to get the plugins:
+4. After opening `fish`, update `fisher` to get the plugins:
 
   ```fish
   fisher update
@@ -36,4 +36,15 @@ To use these `dotfiles`:
   Also I open `fish` using `bash`. To make it default:
 
   ```sh
+  chsh -s $(which bash)
   ```
+
+  To configure tide use `tide configure`.
+
+  For manual page completions run:
+
+  ```fish
+  fish_update_completions
+  ```
+
+  For more tools and info about `fish` check [this](https://github.com/ErfanRasti/arch-setup/blob/main/docs/09_Shell_and_Terminal/1_shell_and_terminal.md#fish).

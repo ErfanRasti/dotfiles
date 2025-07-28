@@ -5,7 +5,7 @@
 # end
 #
 # Enable Vim mode key bindings
-# fish_vi_key_bindings
+fish_vi_key_bindings
 
 # Define a custom function that runs the cd command with fzf
 # function fzf-cd-widget
