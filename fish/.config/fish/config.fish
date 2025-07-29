@@ -56,7 +56,8 @@ end
 zoxide init fish | source
 
 # Welcome page with ascii
-ascii-image-converter ~/Pictures/MyImages/(ls ~/Pictures/MyImages/ | grep -E '\.(jpg|png)$' | shuf -n 1) -C -c
+# ascii-image-converter ~/Pictures/MyImages/(ls ~/Pictures/MyImages/ | grep -E '\.(jpg|png)$' | shuf -n 1) -C -c
+fastfetch
 
 # Supress fish welcoming message
 set fish_greeting
