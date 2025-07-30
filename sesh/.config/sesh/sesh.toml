@@ -1,0 +1,18 @@
+[[session]]
+name = "Downloads 📥"
+path = "~/Downloads"
+startup_command = "ls"
+
+[[session]]
+name = "configure"
+windows = [ " arch-setup", " dotfiles" ]
+
+[[window]]
+path = "~/projects/arch-setup/"
+name = " arch-setup"
+startup_script = "nvim"
+
+[[window]]
+path = "~/dotfiles/"
+name = " dotfiles"
+startup_script = "nvim"
