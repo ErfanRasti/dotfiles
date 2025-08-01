@@ -1,7 +1,7 @@
 {
   "bar.customModules.updates.pollingInterval": 1440000,
   "theme.font.name": "CaskaydiaCove Nerd Font Mono",
-  "theme.font.size": "0.7rem",
+  "theme.font.size": "0.9rem",
   "theme.bar.floating": false,
   "theme.bar.border.location": "none",
   "theme.bar.buttons.enableBorders": false,

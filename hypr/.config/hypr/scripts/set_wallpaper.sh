@@ -109,6 +109,7 @@ update_hyprpanel_wallpaper() {
 
 # Kill and restart hyprpanel
 if pgrep hyprpanel >/dev/null; then
+  # killall "$(pgrep hyprpanel)"
   hyprpanel -q
   update_hyprpanel_wallpaper
   hyprpanel &
