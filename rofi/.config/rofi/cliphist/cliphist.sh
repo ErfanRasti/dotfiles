@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+style="$dir/tmp/rofi-cliphist-style.rasi"
+
+case $1 in
+d)
+  cliphist list | rofi -dmenu -replace -config $style | cliphist delete
+  ;;
+
+w)
+  if [ $(echo -e "Clear\nCancel" | rofi -dmenu -config $stle) == "Clear" ]; then
+    cliphist wipe
+  fi
+  ;;
+
+*)
+  cliphist list | rofi -dmenu -replace -config $style | cliphist decode | wl-copy
+  ;;
+esac
