@@ -2,6 +2,7 @@
 configuration {
 	modi:                       "drun,run,filebrowser,window";
     show-icons:                 true;
+    icon-theme:                 "Papirus-Dark";
     display-drun:               "  APPS";
     display-run:                "  RUN";
     display-filebrowser:        "  FILES";
@@ -69,11 +70,9 @@ inputbar {
 textbox-prompt-colon {
     enabled:                     true;
     expand:                      false;
-    str:                         "  ";
-    padding:                     1em 0.2em 0em 0em;
-    text-color:                  @foreground;
-    border-radius:               2em 0em 0em 2em;
+    str:                         "";
     background-color:            inherit;
+    text-color:                  inherit;
 }
 
 entry {
