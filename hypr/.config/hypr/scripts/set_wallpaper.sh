@@ -1,32 +1,90 @@
 #!/bin/bash
 
-# Check if a file path was provided as an argument
-if [ -z "$1" ]; then
-  echo "Error: Please provide the wallpaper image path as an argument."
-  echo "Usage: $0 /path/to/wallpaper.jpg"
+# Default wallpapers root used by -r when no path is provided
+DEFAULT_WALLPAPER_DIR="$HOME/wallpapers"
+
+print_help() {
+  cat <<'EOF'
+Usage:
+  set_wallpaper.sh /path/to/wallpaper.jpg
+    Set the wallpaper to the specified image file.
+
+  set_wallpaper.sh -r
+    Pick a random image from $HOME/wallpapers (recursively) and set it.
+
+  set_wallpaper.sh -r <FOLDER_PATH>
+    Pick a random image from <FOLDER_PATH> (recursively) and set it.
+
+  set_wallpaper.sh -h | --help
+    Show this help message.
+
+Notes:
+- Random selection searches common image extensions recursively: jpg, jpeg, png, webp, bmp, tiff, gif.
+- The image is copied to: ~/.config/hypr/tmp/hyprland-wallpaper (no extension).
+EOF
+}
+
+# Pick a random image (recursively) from a directory
+pick_random_image() {
+  local root="$1"
+  # Follow symlinks so "$HOME/wallpapers" works even if it's a symlink.
+  find -L "$root" -type f \( \
+    -iname '*.jpg' -o -iname '*.jpeg' -o \
+    -iname '*.png' -o -iname '*.webp' -o \
+    -iname '*.bmp' -o -iname '*.tif' -o -iname '*.tiff' -o \
+    -iname '*.gif' \
+    \) 2>/dev/null | shuf -n 1
+}
+
+# ---- Argument parsing ----
+if [ $# -eq 0 ]; then
+  echo "Error: Please provide an image path or a flag."
+  echo "Try: $0 -h"
   exit 1
 fi
 
-# Check if the provided file exists
-if [ ! -f "$1" ]; then
-  echo "Error: The specified wallpaper file '$1' does not exist."
+case "$1" in
+-h | --help)
+  print_help
+  exit 0
+  ;;
+-r)
+  TARGET_DIR="${2:-$DEFAULT_WALLPAPER_DIR}"
+  if [ ! -d "$TARGET_DIR" ]; then
+    echo "Error: Directory '$TARGET_DIR' does not exist."
+    exit 1
+  fi
+  SELECTED="$(pick_random_image "$TARGET_DIR")"
+  if [ -z "$SELECTED" ]; then
+    echo "Error: No images found under '$TARGET_DIR'."
+    exit 1
+  fi
+  WALLPAPER_PATH="$SELECTED"
+  echo "Randomly selected wallpaper: $WALLPAPER_PATH"
+  ;;
+*)
+  WALLPAPER_PATH="$1"
+  ;;
+esac
+
+# ---- Validation for explicit or selected file ----
+if [ ! -f "$WALLPAPER_PATH" ]; then
+  echo "Error: The specified wallpaper file '$WALLPAPER_PATH' does not exist."
   exit 1
 fi
 
-# Temp directory and wallpaper name
+# ---- Prepare temp path ----
 TMP_DIR="$HOME/.config/hypr/tmp"
 TMP_WALLPAPER="$TMP_DIR/hyprland-wallpaper"
 
-# Ensure temp directory exists
-mkdir -p "$TMP_DIR"
-
 # Copy wallpaper (ignore extension, keep raw data)
-cp "$1" "$TMP_WALLPAPER"
+mkdir -p "$TMP_DIR"
+cp "$WALLPAPER_PATH" "$TMP_WALLPAPER"
 
-# Reload hyprpaper
+# ---- Hyprpaper reload ----
 hyprctl hyprpaper reload ,$TMP_WALLPAPER
 
-# Update hyprpanel wallpaper
+# ---- Hyprpanel update ----
 update_hyprpanel_wallpaper() {
   HYPRPANEL_MAIN_FILE="$HOME/.config/hyprpanel/hyprpanel-main.json"
   HYPRPANEL_OUTPUT_FILE="$HOME/.config/hyprpanel/config.json"
@@ -38,7 +96,7 @@ update_hyprpanel_wallpaper() {
     if [ ! -f "$HYPRPANEL_OUTPUT_FILE" ]; then
       echo "$HYPRPANEL_OUTPUT_FILE not found - creating from template..."
     else
-      echo "$HYPRPANEL_OUTPUT_FILE already exists - updating to template ... "
+      echo "$HYPRPANEL_OUTPUT_FILE already exists - updating to template ..."
     fi
     # Process template with environment variable substitution
     envsubst <"$HYPRPANEL_MAIN_FILE" >"$HYPRPANEL_OUTPUT_FILE"
@@ -61,7 +119,7 @@ else
   echo "Hyprpanel started."
 fi
 
-# Only run rofi config update if the script exists and is executable
+# ---- Rofi configs (optional helper) ----
 if [ -x "$HOME/.config/hypr/scripts/update_rofi_configs.sh" ]; then
   "$HOME/.config/hypr/scripts/update_rofi_configs.sh"
 else
