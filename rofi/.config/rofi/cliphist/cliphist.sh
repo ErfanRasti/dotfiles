@@ -8,12 +8,12 @@ d)
   ;;
 
 w)
-  if [ $(echo -e "Clear\nCancel" | rofi -dmenu -config $stle) == "Clear" ]; then
+  if [ $(echo -e "Clear\nCancel" | rofi -dmenu -config $style) == "Clear" ]; then
     cliphist wipe
   fi
   ;;
 
 *)
-  cliphist list | rofi -dmenu -replace -config $style | cliphist decode | wl-copy
+  rofi -modi clipboard:~/.config/rofi/cliphist/cliphist-rofi-img.sh -show clipboard -show-icons -config $style
   ;;
 esac
