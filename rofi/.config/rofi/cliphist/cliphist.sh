@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-style="$dir/tmp/rofi-cliphist-style.rasi"
+style="~/.config/rofi/cliphist/style.rasi"
 
 case $1 in
 d)
