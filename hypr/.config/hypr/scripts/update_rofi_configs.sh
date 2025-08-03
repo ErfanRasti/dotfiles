@@ -1,53 +1,18 @@
 #!/bin/bash
 
-# Update rofi applets
+# Update rofi colors
 
-## Define variables
-dir="$HOME/.config/rofi"
-style="$dir/tmp/rofi-apps-style.rasi"
-
-## Source the generate_colors.sh
-source "$dir/scripts/generate_colors.sh"
-
-## Create tmp style
-mkdir -p "$dir/tmp"
-envsubst <$HOME/.config/rofi/applets/style.rasi >$style
-
-# Update rofi cliphist
-
-## Define variables
-dir="$HOME/.config/rofi"
-style="$dir/tmp/rofi-cliphist-style.rasi"
+## Define rofi dir
+rofi_dir="$HOME/.config/rofi"
 
 ## Source the generate_colors.sh
-source "$dir/scripts/generate_colors.sh"
+source "$rofi_dir/scripts/generate_colors.sh"
 
-## Create tmp style
-mkdir -p "$dir/tmp"
-envsubst <$dir/cliphist/style.rasi >$style
+# Create rofi colors
+rofi_settings_dir="$rofi_dir/settings"
 
-# Update rofi launcher
+echo $rofi_settings_dir
 
-## Define variables
-dir="$HOME/.config/rofi"
-style="$dir/tmp/rofi-launcher-style.rasi"
-
-## Source the generate_colors.sh
-source "$dir/scripts/generate_colors.sh"
-
-## Create tmp style
-mkdir -p "$dir/tmp"
-envsubst <$dir/launcher/style.rasi >$style
-
-# Update rofi powermenu
-
-## Define variables
-dir="$HOME/.config/rofi"
-style="$dir/tmp/rofi-powermenu-style.rasi"
-
-## Source the generate_colors.sh
-source "$dir/scripts/generate_colors.sh"
-
-## Create tmp style
-mkdir -p "$dir/tmp"
-envsubst <$dir/powermenu/style.rasi >$style
+colors="$rofi_settings_dir/colors.rasi"
+mkdir -p "$rofi_settings_dir"
+envsubst <"$rofi_settings_dir/colors-template.rasi" >$colors
