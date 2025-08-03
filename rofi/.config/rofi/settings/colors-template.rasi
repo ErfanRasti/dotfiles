@@ -1,0 +1,8 @@
+* {
+    background:                  $COLOR_BACKGROUND;
+    background-alt:              $COLOR_BACKGROUND_ALT;
+    foreground:                  $COLOR_FOREGROUND;
+    selected:                    $COLOR_SELECTED;
+    active:                      $COLOR_ACTIVE;
+    urgent:                      $COLOR_URGENT;
+}
