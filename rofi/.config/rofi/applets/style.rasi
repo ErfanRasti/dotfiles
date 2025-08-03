@@ -4,15 +4,8 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-* {
-    font:                        "CaskaydiaCove Nerd Font Mono 10";
-    background:                  $COLOR_BACKGROUND;
-    background-alt:              $COLOR_BACKGROUND_ALT;
-    foreground:                  $COLOR_FOREGROUND;
-    selected:                    $COLOR_SELECTED;
-    active:                      $COLOR_ACTIVE;
-    urgent:                      $COLOR_URGENT;
-}
+@import "~/.config/rofi/settings/font.rasi"
+@import "~/.config/rofi/settings/colors.rasi"
 
 /*
 USE_ICON=YES
@@ -55,7 +48,7 @@ inputbar {
     border-radius:               20px;
     border-color:                @selected;
     background-color:            transparent;
-    background-image:            url("$WALLPAPER", width);
+    background-image:            url("~/.config/hypr/tmp/hyprland-wallpaper", width);
     text-color:                  @foreground;
       children:                    [ "dummy", "prompt", "dummy"];
     /*children:                    [ "dummy", "textbox-prompt-colon", "prompt", "dummy"];*/
