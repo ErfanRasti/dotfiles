@@ -12,15 +12,8 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-* {
-    font:                        "CaskaydiaCove Nerd Font Mono 10";
-    background:                  $COLOR_BACKGROUND;
-    background-alt:              $COLOR_BACKGROUND_ALT;
-    foreground:                  $COLOR_FOREGROUND;
-    selected:                    $COLOR_SELECTED;
-    active:                      $COLOR_ACTIVE;
-    urgent:                      $COLOR_URGENT;
-}
+@import "~/.config/rofi/settings/font.rasi"
+@import "~/.config/rofi/settings/colors.rasi"
 
 /*****----- Main Window -----*****/
 window {
@@ -52,7 +45,7 @@ mainbox {
 imagebox {
     padding:                     20px;
     background-color:            transparent;
-    background-image:            url("$WALLPAPER", height);
+    background-image:            url("~/.config/hypr/tmp/hyprland-wallpaper", height);
     orientation:                 vertical;
     children:                    [ "inputbar", "dummy", "mode-switcher" ];
 }
