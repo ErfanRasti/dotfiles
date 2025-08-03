@@ -128,5 +128,7 @@ else
   exit 1
 fi
 
+# metugan image $TMP_WALLPAPER -m "dark" -t scheme-fidelity
+
 echo "Wallpaper updated to: $TMP_WALLPAPER"
 echo "Note: File has no extension but retains original image data."
