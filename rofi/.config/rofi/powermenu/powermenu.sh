@@ -1,19 +1,7 @@
 #!/usr/bin/env bash
 
 ## Define variables
-dir="$HOME/.config/rofi"
-style="$dir/powermenu/style.rasi"
-
-## Source the generate_colors.sh
-source "$dir/scripts/generate_colors.sh"
-
-## Create tmp style
-mkdir -p "$dir/tmp"
-envsubst <$dir/powermenu/style.rasi >$style
-
-# Current Theme
-dir="$dir/tmp"
-theme='rofi-powermenu-style'
+style="~/.config/rofi/powermenu/style.rasi"
 
 # CMDs
 lastlogin="$(last $USER | head -n1 | tr -s ' ' | cut -d' ' -f5,6,7)"
@@ -34,8 +22,8 @@ no=''
 rofi_cmd() {
   rofi -dmenu \
     -p " $USER@$host" \
-    -mesg "󰍂 Last Login: $lastlogin |  Uptime: $uptime" \
-    -theme ${dir}/${theme}.rasi
+    -mesg $'󰍂 Last Login: '"$lastlogin"$'\n Uptime: '"$uptime" \
+    -theme ${style}
 }
 
 # Confirmation CMD
@@ -48,7 +36,7 @@ confirm_cmd() {
     -dmenu \
     -p 'Confirmation' \
     -mesg 'Are you Sure?' \
-    -theme ${dir}/${theme}.rasi
+    -theme ${style}
 }
 
 # Ask for confirmation
