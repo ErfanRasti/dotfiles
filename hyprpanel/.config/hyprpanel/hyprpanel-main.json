@@ -1,6 +1,6 @@
 {
   "bar.customModules.updates.pollingInterval": 1440000,
-  "theme.font.name": "CaskaydiaCove Nerd Font Mono",
+  "theme.font.name": "CaskaydiaCove Nerd Font Propo",
   "theme.font.size": "0.9rem",
   "theme.bar.floating": false,
   "theme.bar.border.location": "none",
@@ -144,7 +144,7 @@
   "bar.customModules.storage.paths": [
     "/"
   ],
-  "theme.font.label": "CaskaydiaCove Nerd Font Mono",
+  "theme.font.label": "CaskaydiaCove Nerd Font Propo",
   "theme.font.style": "normal",
   "theme.matugen_settings.contrast": 0,
   "theme.bar.buttons.modules.kbLayout.enableBorder": false,
@@ -156,6 +156,6 @@
   "bar.workspaces.showAllActive": true,
   "menus.power.lowBatteryNotification": true,
   "menus.dashboard.stats.enable_gpu": false,
-  "menus.dashboard.shortcuts.left.shortcut4.command": "rofi -show drun -theme \"$HOME/.config/rofi/tmp/rofi-launcher-style.rasi\"",
+  "menus.dashboard.shortcuts.left.shortcut4.command": "rofi -show drun -theme \"$HOME/.config/rofi/launcher/style.rasi\"",
   "menus.dashboard.shortcuts.left.shortcut2.command": "spotify"
 }
