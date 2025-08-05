@@ -1,7 +1,28 @@
-
 [config]
 
+[templates.hyprland]
+input_path = '~/.config/matugen/templates/hyprland-colors.conf'
+output_path = '~/.config/hypr/conf/colors.conf'
+post_hook = 'hyprctl reload'
+
+[config.wallpaper]
+command = "hyprctl"
+arguments = ["hyprpaper", "reload", ","]
+set = true
+
 [templates.rofi]
-input_path = '~/.config/matugen/templates/rofi-colors.toml'
+input_path = '~/.config/matugen/templates/rofi-colors.rasi'
 output_path = '~/.config/rofi/settings/colors.rasi'
+
+[templates.btop]
+input_path = '~/.config/matugen/templates/btop.theme'
+output_path = '~/.config/btop/themes/matugen.theme'
+
+[templates.yazi]
+input_path = '~/.config/matugen/templates/yazi-theme.toml'
+output_path = '~/.config/yazi/theme.toml'
+
+[templates.zathura]
+input_path = '~/.config/matugen/templates/zathura-colors'
+output_path = '~/.config/zathura/zathurarc'
 
