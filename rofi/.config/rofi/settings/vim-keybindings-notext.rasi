@@ -1,0 +1,5 @@
+configuration {
+kb-row-up: "h,k";
+kb-row-down: "j,l";
+kb-accept-entry: "Control+m,Return,KP_Enter";
+}
