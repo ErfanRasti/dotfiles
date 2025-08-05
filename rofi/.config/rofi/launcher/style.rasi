@@ -13,6 +13,7 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
+@import "~/.config/rofi/settings/vim-keybindings.rasi"
 @import "~/.config/rofi/settings/font.rasi"
 @import "~/.config/rofi/settings/colors.rasi"
 
