@@ -121,14 +121,20 @@ else
 fi
 
 # ---- Rofi configs (optional helper) ----
-if [ -x "$HOME/.config/hypr/scripts/update_rofi_configs.sh" ]; then
-  "$HOME/.config/hypr/scripts/update_rofi_configs.sh"
+# if [ -x "$HOME/.config/hypr/scripts/update_rofi_configs.sh" ]; then
+#   "$HOME/.config/hypr/scripts/update_rofi_configs.sh"
+# else
+#   echo "Error: update_rofi_configs.sh not found or not executable"
+#   exit 1
+# fi
+#
+
+if matugen image "$TMP_WALLPAPER" -m "light" -t scheme-fruit-salad; then
+  echo "matugen ran successfully"
 else
-  echo "Error: update_rofi_configs.sh not found or not executable"
+  echo "Error: matugen failed to run" >&2
   exit 1
 fi
-
-# metugan image $TMP_WALLPAPER -m "dark" -t scheme-fidelity
 
 echo "Wallpaper updated to: $TMP_WALLPAPER"
 echo "Note: File has no extension but retains original image data."
