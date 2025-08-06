@@ -5,8 +5,8 @@ source "$HOME"/.config/rofi/applets/shared/theme.bash
 theme="$type/$style"
 
 # Brightness Info
-backlight="$(printf "%.0f\n" $(light -G))"
-card="$(light -L | grep 'backlight' | head -n1 | cut -d'/' -f3)"
+backlight="$(brightnessctl -m | cut -d',' -f4 | tr -d '%')"
+card="$(brightnessctl -m | cut -d',' -f2 | cut -d'/' -f3)"
 
 if [[ $backlight -ge 0 ]] && [[ $backlight -le 29 ]]; then
   level="Low"
