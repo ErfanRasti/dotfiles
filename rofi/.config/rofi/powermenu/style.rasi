@@ -90,7 +90,7 @@ listview {
 /*****----- Elements -----*****/
 element {
     enabled:                    true;
-    padding:                    28px 0;
+    padding:                    15px 10px;
     margin:                     0px;
     border-radius:             100%;
     border-color:               @outline;
@@ -104,7 +104,7 @@ element {
 }
 
 element-text {
-    font:                       @font-big;
+    font:                       @font-enormous;
     background-color:           transparent;
     text-color:                inherit;
     cursor:                   inherit;
