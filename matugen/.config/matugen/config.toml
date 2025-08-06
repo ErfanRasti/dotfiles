@@ -5,10 +5,15 @@ input_path = '~/.config/matugen/templates/hyprland-colors.conf'
 output_path = '~/.config/hypr/conf/colors.conf'
 post_hook = 'hyprctl reload'
 
-[config.wallpaper]
-command = "hyprctl"
-arguments = ["hyprpaper", "reload", ","]
-set = true
+# [config.wallpaper] # Blazing fast and beautiful
+# command = "hyprctl"
+# arguments = ["hyprpaper", "reload", ","]
+# set = false
+
+[config.wallpaper] # Animated nad nice llok
+command = "swww"
+arguments = ["img", "--transition-type", "center"]
+set = false
 
 [templates.rofi]
 input_path = '~/.config/matugen/templates/rofi-colors.rasi'
@@ -31,6 +36,11 @@ post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings s
 [templates.gtk4]
 input_path = '~/.config/matugen/templates/gtk-colors.css'
 output_path = '~/.config/gtk-4.0/colors.css'
+
+# [templates.kitty]
+# input_path = '~/.config/matugen/templates/kitty-colors.conf'
+# output_path = '~/.config/kitty/themes/matugen.conf'
+# post_hook = "kitty +kitten themes --reload-in=all matugen"
 
 [templates.btop]
 input_path = '~/.config/matugen/templates/btop.theme'
