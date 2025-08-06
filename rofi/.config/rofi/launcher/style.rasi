@@ -41,7 +41,8 @@ window {
 mainbox {
     enabled:                     true;
     spacing:                     0px;
-    background-color:            @surface-container;
+    // background-color:            @surface-container;
+    background-color:            @inverse-on-surface;
     orientation:                 horizontal;
     children:                    [ "imagebox", "listbox" ];
 }
@@ -135,7 +136,8 @@ listview {
 /*****----- Scrollbar -----*****/
 scrollbar {
     handle-width:               8px;
-    handle-color:               @primary;
+    // handle-color:               @primary;
+    handle-color:            @primary-container;
     handle-rounded-corners:     true;
     border-radius:              4px;
     background-color:           @surface-container-high;
@@ -149,32 +151,36 @@ element {
     padding:                     8px;
     border-radius:               10px;
     background-color:            transparent;
-    text-color:                  @on-surface;
+    text-color:                  @tertiary;
     cursor:                      pointer;
 }
-element normal.normal {
+element normal.normal,
+element alternate.normal {
     background-color:            inherit;
-    text-color:                  inherit;
+    text-color:                  @tertiary;
 }
-element normal.urgent {
-    background-color:            @error-container;
-    text-color:                  @on-error-container;
-}
-element normal.active {
+
+
+element normal.active,
+element alternate.active {
     background-color:            @secondary-container;
     text-color:                  @on-secondary-container;
 }
-element selected.normal {
-    background-color:            @primary-container;
-    text-color:                  @on-primary-container;
-}
-element selected.urgent {
+
+
+element normal.urgent,
+element alternate.urgent {
     background-color:            @error-container;
     text-color:                  @on-error-container;
 }
-element selected.active {
-    background-color:            @tertiary-container;
-    text-color:                  @on-tertiary-container;
+
+element selected.normal,
+element selected.active,
+element selected.urgent {
+  // background-color:            @primary-container;
+    background-color:            @primary;
+    // text-color:                  @on-primary-container;
+    text-color:                   @on-primary;
 }
 element-icon {
     background-color:            transparent;
@@ -182,6 +188,7 @@ element-icon {
     size:                        32px;
     cursor:                      inherit;
 }
+
 element-text {
     background-color:            transparent;
     text-color:                  inherit;
