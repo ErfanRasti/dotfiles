@@ -36,7 +36,8 @@ mainbox {
     padding:                     0px;
     orientation:                 vertical;
     children:                    [ "inputbar", "listview" ];
-    background-color:            transparent;
+    // background-color:            transparent;
+    background-color:            @inverse-on-surface;
     // border:                      0px; /* Ensure no border */
 }
 
@@ -95,7 +96,8 @@ listview {
 /*****----- Scrollbar -----*****/
 scrollbar {
     handle-width:               8px;
-    handle-color:               @primary;
+    // handle-color:               @primary;
+    handle-color:            @primary-container;
     handle-rounded-corners:     true;
     border-radius:              4px;
     background-color:           @surface-container-high;
@@ -109,42 +111,36 @@ element {
     spacing:                     12px;
     cursor:                      pointer;
     background-color:            transparent;
-    text-color:                  @on-surface;
+    text-color:                  @tertiary;
     border-radius:               8px;
 }
 
 
-element alternate.normal,
-element normal.normal {
-    background-color:            transparent;
-    text-color:                  @on-surface;
+element normal.normal, 
+element alternate.normal{
+    background-color:            inherit;
+    text-color:                  @tertiary;
 }
 
-element alternate.active,
-element normal.active {
+element normal.active,
+element alternate.active{
     background-color:            @secondary-container;
     text-color:                  @on-secondary-container;
 }
 
-element alternate.urgent,
-element normal.urgent {
+element normal.urgent,
+element alternate.urgent {
     background-color:            @error-container;
     text-color:                  @on-error-container;
 }
 
-element selected.normal {
-    background-color:            @primary-container;
-    text-color:                  @on-primary-container;
-}
-
-element selected.active {
-    background-color:            @tertiary-container;
-    text-color:                  @on-tertiary-container;
-}
-
-element selected.urgent {
-    background-color:            @error-container;
-    text-color:                  @on-error-container;
+element selected.normal,
+element selected.active,
+element selected.urgent{
+    // background-color:            @primary-container;
+    background-color:            @primary;
+    // text-color:                  @on-primary-container;
+    text-color:                   @on-primary;
 }
 
 element-icon {
