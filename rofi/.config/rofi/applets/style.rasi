@@ -35,7 +35,7 @@ mainbox {
     spacing:                    20px;
     margin:                     0px;
     padding:                    20px;
-    background-color:           transparent;
+    background-color:            @inverse-on-surface;
     children:                   [ "inputbar", "listview", "message" ];
 }
 
@@ -116,7 +116,7 @@ element {
     border-radius:              20px;
     border-color:               @outline;
     background-color:           @surface-container;
-    text-color:                 @on-surface;
+    text-color:                 @tertiary;
     cursor:                     pointer;
     orientation:                horizontal;  /* Added for better text alignment */
 }
@@ -133,13 +133,7 @@ element-text {
 element normal.normal,
 element alternate.normal {
     background-color:           @surface-container-high;
-    text-color:                @on-surface;
-}
-
-element normal.urgent,
-element alternate.urgent {
-    background-color:          @error-container;
-    text-color:                @on-error-container;
+    text-color:                @tertiary;
 }
 
 element normal.active,
@@ -148,19 +142,18 @@ element alternate.active {
     text-color:               @on-tertiary-container;
 }
 
-element selected.normal {
-    background-color:          @primary-container;
-    text-color:               @on-primary-container;
+element normal.urgent,
+element alternate.urgent {
+    background-color:          @error-container;
+    text-color:                @on-error-container;
 }
 
-element selected.active {
-    background-color:            @tertiary-container;
-    text-color:                  @on-tertiary-container;
+element selected.normal,
+element selected.active,
+element selected.urgent{
+    // background-color:          @primary-container;
+    background-color:            @primary;
+    // text-color:               @on-primary-container;
+    text-color:                 @on-primary;
 }
-
-element selected.urgent {
-    background-color:            @error-container;
-    text-color:                  @on-error-container;
-}
-
 
