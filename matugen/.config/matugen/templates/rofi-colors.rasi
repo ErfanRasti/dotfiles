@@ -27,6 +27,7 @@
     on-error: {{colors.on_error.default.hex}};
     error-container: {{colors.error_container.default.hex}};
     on-error-container: {{colors.on_error_container.default.hex}};
+    surface-tint: {{colors.surface_tint.default.hex}};
     surface: {{colors.surface.default.hex}}99;  /* 60% opacity */
     on-surface: {{colors.on_surface.default.hex}};
     on-surface-variant: {{colors.on_surface_variant.default.hex}};
