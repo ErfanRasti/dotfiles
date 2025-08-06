@@ -159,8 +159,9 @@
   "menus.dashboard.shortcuts.left.shortcut4.command": "rofi -show drun -theme \"$HOME/.config/rofi/launcher/style.rasi\"",
   "menus.dashboard.shortcuts.left.shortcut2.command": "spotify",
   "theme.bar.buttons.opacity": 90,
-  "theme.bar.buttons.background_opacity": 60,
+  "theme.bar.buttons.background_opacity": 75,
   "theme.osd.opacity": 80,
   "theme.notification.opacity": 90,
-  "theme.bar.menus.menu.dashboard.scaling": 90
+  "theme.bar.menus.menu.dashboard.scaling": 90,
+  "theme.bar.buttons.background_hover_opacity": 100
 }
