@@ -35,7 +35,7 @@ mainbox {
     // border:                     0px solid;
     // border-radius:              0px;
     border-color:              @primary;
-    background-color:           transparent;
+    background-color:            @inverse-on-surface;
     children:                   [ "inputbar", "listview", "message" ];
 }
 
@@ -93,8 +93,11 @@ element {
     padding:                    28px 0;
     margin:                     0px;
     border-radius:             100%;
-    background-color:          @surface-container-high;
-    text-color:                @on-surface;
+    border-color:               @outline;
+    // background-color:          @surface-container-high;
+    background-color:           @surface-container;
+    // text-color:                @on-surface;
+    text-color:                 @tertiary;
     cursor:                    pointer;
     vertical-align:            0.5;
     horizontal-align:          0.5;
@@ -110,11 +113,32 @@ element-text {
     text-align:               center;
 }
 
-element selected.normal {
-    background-color:          @primary-container;
-    text-color:                @on-primary-container;
+element normal.normal,
+element alternate.normal {
+    background-color:           @surface-container-high;
+    text-color:                @tertiary;
 }
 
+element normal.active,
+element alternate.active {
+    background-color:          @tertiary-container;
+    text-color:               @on-tertiary-container;
+}
+
+element normal.urgent,
+element alternate.urgent {
+    background-color:          @error-container;
+    text-color:                @on-error-container;
+}
+
+element selected.normal,
+element selected.active,
+element selected.urgent {
+    // background-color:          @primary-container;
+    background-color:            @primary;
+    // text-color:               @on-primary-container;
+    text-color:                 @on-primary;
+}
 /*****----- Message -----*****/
 message {
     enabled:                    true;
