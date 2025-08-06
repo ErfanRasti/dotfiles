@@ -13,7 +13,7 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-@import "~/.config/rofi/settings/vim-keybindings.rasi"
+@import "~/.config/rofi/settings/vim-keybindings-notext.rasi"
 @import "~/.config/rofi/settings/font.rasi"
 @import "~/.config/rofi/settings/colors.rasi"
 
@@ -25,7 +25,7 @@ window {
     location:                    center;
     anchor:                      center;
     fullscreen:                  false;
-    width:                       1000px;
+    width:                       400px;
     x-offset:                    0px;
     y-offset:                    0px;
 
@@ -34,7 +34,6 @@ window {
     border-radius:               15px;
     cursor:                      "default";
     background-color:            @surface;
-    // background-color:            @surface-dim;  /* Slightly darker for better contrast */
 }
 
 /*****----- Main Box -----*****/
@@ -44,82 +43,21 @@ mainbox {
     // background-color:            @surface-container;
     background-color:            @inverse-on-surface;
     orientation:                 horizontal;
-    children:                    [ "imagebox", "listbox" ];
+    children:                    [  "listbox" ];
 }
-
-imagebox {
-    padding:                     20px;
-    background-color:            transparent;
-    background-image:            @wallpaper-image-height;
-    border-radius:               15px;
-    orientation:                 vertical;
-    children:                    [ "inputbar", "dummy", "mode-switcher" ];
-}
-
 listbox {
     spacing:                     0px;
     padding:                     15px;
     background-color:            transparent;
     border-radius:               0px 15px 15px 0px;  /* Only round right corners */
     orientation:                 vertical;
-    children:                    [ "message", "listview" ];
+    children:                    [ "listview" ];
 }
-
-dummy {
-    background-color:            transparent;
-}
-
-/*****----- Inputbar -----*****/
-inputbar {
-    enabled:                     true;
-    spacing:                     10px;
-    padding:                     15px;
-    border-radius:               10px;
-    background-color:            @surface-container-high;
-    text-color:                  @on-surface;
-    children:                    [ "textbox-prompt-colon", "entry" ];
-}
-textbox-prompt-colon {
-    enabled:                     true;
-    expand:                      false;
-    str:                         "";
-    background-color:            transparent;
-    text-color:                  @primary;
-}
-entry {
-    enabled:                     true;
-    expand:                      true;
-    background-color:            transparent;
-    text-color:                  inherit;
-    cursor:                      text;
-    placeholder:                 "Search";
-    placeholder-color:           @on-surface-variant;
-}
-
-/*****----- Mode Switcher -----*****/
-mode-switcher{
-    enabled:                     true;
-    spacing:                     20px;
-    background-color:            transparent;
-    text-color:                  @on-surface;
-}
-button {
-    padding:                     15px;
-    border-radius:               10px;
-    background-color:            @surface-container-high;
-    text-color:                  inherit;
-    cursor:                      pointer;
-}
-button selected {
-    background-color:            @primary-container;
-    text-color:                  @on-primary-container;
-}
-
 /*****----- Listview -----*****/
 listview {
     enabled:                     true;
     columns:                     1;
-    lines:                       8;
+    lines:                       5;
     cycle:                       false;
     dynamic:                     true;
     scrollbar:                   true;
@@ -150,13 +88,13 @@ element {
     spacing:                     15px;
     padding:                     8px;
     border-radius:               10px;
-    background-color:            transparent;
+    background-color:            @surface-container;
     text-color:                  @tertiary;
     cursor:                      pointer;
 }
 element normal.normal,
 element alternate.normal {
-    background-color:            inherit;
+    background-color:            @surface-container-high;
     text-color:                  @tertiary;
 }
 
@@ -197,21 +135,3 @@ element-text {
     horizontal-align:            0.0;
 }
 
-/*****----- Message -----*****/
-message {
-    background-color:            transparent;
-}
-textbox {
-    padding:                     15px;
-    border-radius:               10px;
-    background-color:            @surface-container-high;
-    text-color:                  @on-surface;
-    vertical-align:              0.5;
-    horizontal-align:            0.0;
-}
-error-message {
-    padding:                     15px;
-    border-radius:               20px;
-    background-color:            @error-container;
-    text-color:                  @on-error-container;
-}

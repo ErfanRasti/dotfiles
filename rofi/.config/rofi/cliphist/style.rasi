@@ -13,6 +13,7 @@ configuration {
 
 /*****----- Main Window -----*****/
 window {
+    transparency:                "real";
     enabled:                     true;
     width:                       30em;
     x-offset:                    -2em;
@@ -21,7 +22,6 @@ window {
     padding:                     0px;
     margin:                      0px;
     cursor:                      "default";
-    transparency:                "real";
     location:                    northeast;
     anchor:                      northeast;
     fullscreen:                  false;
