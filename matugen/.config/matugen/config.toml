@@ -10,10 +10,10 @@ post_hook = 'hyprctl reload'
 # arguments = ["hyprpaper", "reload", ","]
 # set = false
 
-[config.wallpaper] # Animated nad nice llok
-command = "swww"
-arguments = ["img", "--transition-type", "center"]
-set = false
+# [config.wallpaper] # Animated nad nice llok
+# command = "swww"
+# arguments = ["img", "--transition-type", "center"]
+# set = false
 
 [templates.rofi]
 input_path = '~/.config/matugen/templates/rofi-colors.rasi'
