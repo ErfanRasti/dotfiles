@@ -18,9 +18,9 @@ fi
 prompt="$status"
 mesg="${battery}: ${percentage}%,${time}"
 
-list_col='4'
+list_col='5'
 list_row='1'
-win_width='550px'
+win_width='600px'
 
 # Charging Status
 active=""
@@ -54,6 +54,7 @@ option_1="$ICON_DISCHRG"
 option_2="$ICON_CHRG"
 option_3=""
 option_4="󰂑"
+option_5="󱈏"
 
 # Rofi CMD
 rofi_cmd() {
@@ -70,7 +71,7 @@ rofi_cmd() {
 
 # Pass variables to rofi dmenu
 run_rofi() {
-  echo -e "$option_1\n$option_2\n$option_3\n$option_4" | rofi_cmd
+  echo -e "$option_1\n$option_2\n$option_3\n$option_4\n$option_5" | rofi_cmd
 }
 
 # Execute Command
@@ -83,6 +84,8 @@ run_cmd() {
     env XDG_CURRENT_DESKTOP=GNOME gnome-control-center power
   elif [[ "$1" == '--opt4' ]]; then
     sudo powertop
+  elif [[ "$1" == '--opt5' ]]; then
+    exec ~/.config/rofi/applets/bin/battery_charge_threshold.sh
   fi
 }
 
@@ -100,5 +103,8 @@ $option_3)
   ;;
 $option_4)
   run_cmd --opt4
+  ;;
+$option_5)
+  run_cmd --opt5
   ;;
 esac
