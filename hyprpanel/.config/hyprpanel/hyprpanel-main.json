@@ -70,6 +70,7 @@
         "cpu",
         "cputemp",
         "ram",
+        "custom/capslock",
         "kbinput",
         "volume",
         "bluetooth",
