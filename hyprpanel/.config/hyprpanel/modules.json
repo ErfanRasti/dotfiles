@@ -1,1 +1,11 @@
-{}
+{
+ "custom/capslock": {
+        "icon": "󰘲",
+        "label": "{state}",
+        "truncationSize": -1,
+        "tooltip": "Caps Lock is {state}",
+        "execute": "~/.config/hyprpanel/scripts/capslock.sh",
+        "interval": 300,
+        "hideOnEmpty": true
+    }
+}
