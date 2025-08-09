@@ -1,11 +1,21 @@
 {
- "custom/capslock": {
-        "icon": "󰘲",
-        "label": "{state}",
-        "truncationSize": -1,
-        "tooltip": "Caps Lock is {state}",
-        "execute": "~/.config/hyprpanel/scripts/capslock.sh",
-        "interval": 300,
-        "hideOnEmpty": true
-    }
+  "custom/capslock": {
+    "icon": "󰘲",
+    "label": "{state}",
+    "truncationSize": -1,
+    "tooltip": "Caps Lock is {state}",
+    "executeOnAction": "",
+    "execute": "~/.config/hyprpanel/scripts/capslock.sh",
+    "interval": 200,
+    "hideOnEmpty": true
+  },
+  "custom/kblayout": {
+    "icon": "󰌏",
+    "label": "{state}",
+    "interval": 100,
+    "executeOnAction": "",
+    "tooltip": "Keyboard Language: {state}",
+    "execute": "~/.config/hyprpanel/scripts/kblayout.sh",
+    "on-left-click": "menu:dashboard"
+  }
 }
