@@ -83,7 +83,7 @@ run_cmd() {
   elif [[ "$1" == '--opt3' ]]; then
     env XDG_CURRENT_DESKTOP=GNOME gnome-control-center power
   elif [[ "$1" == '--opt4' ]]; then
-    sudo powertop
+    kitty pkexec powertop
   elif [[ "$1" == '--opt5' ]]; then
     exec ~/.config/rofi/applets/bin/battery_charge_threshold.sh
   fi
