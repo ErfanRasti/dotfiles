@@ -1,0 +1,19 @@
+@include styleModule(
+    // class name
+    'cmodule-capslock',
+    // styling properties
+    (
+            'inner-spacing': 0.5em,
+            'border-enabled': true,
+            'icon-size': 1.2em
+        )
+);
+@include styleModule(
+    // class name
+    'cmodule-kblayout',
+    // styling properties
+    (
+            'icon-size': 1.0em,
+            'text-color': inherit
+        )
+);
