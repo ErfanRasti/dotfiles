@@ -1,0 +1,7 @@
+[mgr]
+show_hidden = true
+
+[opener]
+ play = [
+  { run = 'vlc "$@"', orphan = true, desc="Open in VLC", for = "linux"},
+]
