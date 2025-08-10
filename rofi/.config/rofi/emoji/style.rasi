@@ -3,6 +3,7 @@ configuration {
 
     show-icons:                 false;
     icon-theme:                 "Papirus-Dark";
+    opacity:                    true;
     // hover-select: true; 
 }
 
@@ -26,7 +27,7 @@ window {
     anchor:                      southeast;
     fullscreen:                  false;
     border-radius:               12px;
-    background-color:            @surface-dim; /* Semi-transparent background */
+    background-color:            transparent; /* Semi-transparent background */
 }
 
 /*****----- Main Box -----*****/
@@ -87,7 +88,7 @@ listview {
     spacing:                     4px;
     padding:                     8px;
     margin:                      0px;
-    background-color:            @surface-container;
+    background-color:            transparent;
     border-radius:               12px 12px 12px 12px; /* Only round bottom corners */
     border:                      0px; /* Ensure no border */
     cursor:                      "default";
@@ -110,7 +111,7 @@ element {
     margin:                      0px;
     spacing:                     12px;
     cursor:                      pointer;
-    background-color:            transparent;
+    background-color:            @surface-container;
     text-color:                  @tertiary;
     border-radius:               8px;
      vertical-align:            0.5;
@@ -127,7 +128,7 @@ element-text {
 
 element normal.normal, 
 element alternate.normal{
-    background-color:            inherit;
+    background-color:            @surface-container;
     text-color:                  @tertiary;
 }
 
