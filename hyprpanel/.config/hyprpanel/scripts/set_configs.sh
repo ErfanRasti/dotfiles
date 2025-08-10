@@ -97,6 +97,11 @@ matugen image $wallpaper -m $mode -t $type
 # Restart hyprpolkitagent.service to apply qt themes on it
 systemctl --user restart hyprpolkitagent.service
 
+# Apply spicetify themes
+spicetify config current_theme matugen
+spicetify config color_scheme matugen
+spicetify apply
+
 # Kill and restart hyprpanel
 if pgrep hyprpanel >/dev/null; then
   # killall "$(pgrep hyprpanel)"
