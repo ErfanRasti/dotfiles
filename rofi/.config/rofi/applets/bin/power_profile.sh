@@ -27,11 +27,20 @@ option_1="󰌪"
 option_2=""
 option_3="󰓅"
 
+ICON_PROFILE="??"
+if [[ "$status" == "power-saver" ]]; then
+  ICON_PROFILE=$option_1
+elif [[ "$status" == "balanced" ]]; then
+  ICON_PROFILE=$option_2
+elif [[ "$status" == "performance" ]]; then
+  ICON_PROFILE=$option_3
+fi
+
 # Rofi CMD
 rofi_cmd() {
   rofi -theme-str "window {width: $win_width;}" \
     -theme-str "listview {columns: $list_col; lines: $list_row;}" \
-    -theme-str "textbox-prompt-colon {str: \"$ICON_DISCHRG\";}" \
+    -theme-str "textbox-prompt-colon {str: \"$ICON_PROFILE\";}" \
     -dmenu \
     -p "$prompt" \
     -mesg "$mesg" \
@@ -41,7 +50,7 @@ rofi_cmd() {
 
 # Pass variables to rofi dmenu
 run_rofi() {
-  echo -e "$option_1\n$option_2\n$option_3\n" | rofi_cmd
+  echo -e "$option_1\n$option_2\n$option_3" | rofi_cmd
 }
 
 # Execute Command
