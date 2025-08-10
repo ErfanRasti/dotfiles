@@ -1,7 +1,7 @@
 /*****----- Configuration -----*****/
 configuration {
 
-    show-icons:                 true;
+    show-icons:                 false;
     icon-theme:                 "Papirus-Dark";
     // hover-select: true; 
 }
@@ -15,15 +15,15 @@ configuration {
 window {
     transparency:                "real";
     enabled:                     true;
-    width:                       30em;
-    x-offset:                    -2em;
-    y-offset:                    2em;
+    width:                       20em;
+    x-offset:                    -5px;
+    y-offset:                    -5px;
     spacing:                     0px;
     padding:                     0px;
     margin:                      0px;
     cursor:                      "default";
-    location:                    northeast;
-    anchor:                      northeast;
+    location:                    southeast;
+    anchor:                      southeast;
     fullscreen:                  false;
     border-radius:               12px;
     background-color:            @surface-dim; /* Semi-transparent background */
@@ -56,7 +56,7 @@ inputbar {
 textbox-prompt-colon {
     enabled:                     true;
     expand:                      false;
-    str:                         ""; /* Clipboard icon */
+    str:                         "󰞅"; /* Clipboard icon */
     margin:                      0px 8px 0px 0px;
     background-color:            transparent;
     text-color:                  @primary;
@@ -68,15 +68,15 @@ entry {
     background-color:            transparent;
     text-color:                  @on-surface;
     cursor:                      text;
-    placeholder:                 "Search clipboard history...";
+    placeholder:                 "Search for your emoji ";
     placeholder-color:           @on-surface-variant;
 }
 
 /*****----- Listview -----*****/
 listview {
     enabled:                     true;
-    columns:                     1;
-    lines:                       8;
+    columns:                     5;
+    lines:                       5;
     cycle:                       false;
     dynamic:                     true;
     scrollbar:                   true;
@@ -113,8 +113,17 @@ element {
     background-color:            transparent;
     text-color:                  @tertiary;
     border-radius:               8px;
+     vertical-align:            0.5;
+    horizontal-align:          0.5;
 }
 
+element-text {
+  font: @font-regular;
+    cursor:                      inherit;
+    background-color:            transparent;
+    text-color:                  inherit;
+  text-align: center;
+}
 
 element normal.normal, 
 element alternate.normal{
@@ -142,43 +151,4 @@ element selected.urgent{
     // text-color:                  @on-primary-container;
     text-color:                   @on-primary;
 }
-
-element-icon {
-    background-color:            transparent;
-    text-color:                  inherit;
-    size:                        24px;
-    cursor:                      inherit;
-}
-
-element-text {
-    vertical-align:              0.5;
-    horizontal-align:            0.0;
-    cursor:                      inherit;
-    background-color:            transparent;
-    text-color:                  inherit;
-}
-
-/*****----- Message -----*****/
-message {
-    background-color:            transparent;
-    margin:                      8px 0 0 0;
-    padding:                     0px;
-}
-
-textbox {
-    padding:                     12px 16px;
-    border-radius:               8px;
-    background-color:            @surface-container-high;
-    text-color:                  @on-surface;
-    vertical-align:              0.5;
-    horizontal-align:            0.0;
-}
-
-error-message {
-    padding:                     12px 16px;
-    border-radius:               8px;
-    background-color:            @error-container;
-    text-color:                  @on-error-container;
-}
-
 
