@@ -57,13 +57,13 @@ run_rofi() {
 run_cmd() {
   if [[ "$1" == '--opt1' ]]; then
     powerprofilesctl set power-saver
-    notify-send -u low "Power profile : ${option_1} power-saver"
+    notify-send -u normal -i battery "Power Profile Updated" "New: ${option_1} power-saver\n(Was: $ICON_PROFILE $status)"
   elif [[ "$1" == '--opt2' ]]; then
     powerprofilesctl set balanced
-    notify-send -u low "Power profile : ${option_2} balanced"
+    notify-send -u normal -i battery "Power Profile Updated" "New: ${option_2} balanced\n(Was: $ICON_PROFILE $status)"
   elif [[ "$1" == '--opt3' ]]; then
     powerprofilesctl set performance
-    notify-send -u low "Power profile : ${option_3} performance"
+    notify-send -u normal -i battery "Power Profile Updated" "New: ${option_3} performance\n(Was: $ICON_PROFILE $status)"
   fi
 
 }
