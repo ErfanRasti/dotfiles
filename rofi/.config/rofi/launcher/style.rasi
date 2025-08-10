@@ -1,14 +1,15 @@
 /*****----- Configuration -----*****/
 configuration {
 	modi:                       "drun,run,filebrowser,window";
-    show-icons:                 true;
-    icon-theme:                 "Papirus-Dark";
-    display-drun:               "  APPS";
-    display-run:                "  RUN";
-    display-filebrowser:        "  FILES";
-    display-window:             "  WINDOW";
+  show-icons:                 true;
+  icon-theme:                 "Papirus-Dark";
+  display-drun:               "  APPS";
+  display-run:                "  RUN";
+  display-filebrowser:        "  FILES";
+  display-window:             "  WINDOW";
 	drun-display-format:        "{name}";
 	window-format:              "{w} · {c} · {t}";
+  opacity: true;
     // hover-select: true; 
 }
 
@@ -20,59 +21,36 @@ configuration {
 
 /*****----- Main Window -----*****/
 window {
-    /* properties for window widget */
     transparency:                "real";
     location:                    center;
     anchor:                      center;
     fullscreen:                  false;
-    width:                       1000px;
+    width:                       500px;
     x-offset:                    0px;
     y-offset:                    0px;
-
-    /* properties for all widgets */
+    border:                     0px;
+    border-color:               transparent;
     enabled:                     true;
     border-radius:               15px;
     cursor:                      "default";
-    background-color:            @surface;
-    // background-color:            @surface-dim;  /* Slightly darker for better contrast */
+    background-color:            transparent;
 }
 
 /*****----- Main Box -----*****/
 mainbox {
     enabled:                     true;
     spacing:                     0px;
-    // background-color:            @surface-container;
+    padding:                     0px;
     background-color:            @inverse-on-surface;
-    orientation:                 horizontal;
-    children:                    [ "imagebox", "listbox" ];
-}
-
-imagebox {
-    padding:                     20px;
-    background-color:            transparent;
-    background-image:            @wallpaper-image-height;
-    border-radius:               15px;
     orientation:                 vertical;
-    children:                    [ "inputbar", "dummy", "mode-switcher" ];
-}
-
-listbox {
-    spacing:                     0px;
-    padding:                     15px;
-    background-color:            transparent;
-    border-radius:               0px 15px 15px 0px;  /* Only round right corners */
-    orientation:                 vertical;
-    children:                    [ "message", "listview" ];
-}
-
-dummy {
-    background-color:            transparent;
+    children:                    [ "inputbar", "mode-switcher", "listbox" ];
 }
 
 /*****----- Inputbar -----*****/
 inputbar {
     enabled:                     true;
     spacing:                     10px;
+    margin:                      10px 10px 5px 10px;
     padding:                     15px;
     border-radius:               10px;
     background-color:            @surface-container-high;
@@ -100,6 +78,7 @@ entry {
 mode-switcher{
     enabled:                     true;
     spacing:                     20px;
+    padding:                     5px 10px 5px 10px;
     background-color:            transparent;
     text-color:                  @on-surface;
 }
@@ -115,6 +94,37 @@ button selected {
     text-color:                  @on-primary-container;
 }
 
+/*****----- Listbox -----*****/
+listbox {
+    spacing:                     0px;
+    padding:                     0px;
+    background-color:            transparent;
+    border-radius:               0px 15px 15px 0px;  /* Only round right corners */
+    orientation:                 vertical;
+    children:                    [ "message", "listview" ];
+}
+
+/*****----- Message -----*****/
+message {
+    background-color:            transparent;
+  margin:                        5px 10px 5px 10px;
+
+}
+textbox {
+    padding:                     15px;
+    border-radius:               10px;
+    background-color:            @surface-container-high;
+    text-color:                  @on-surface;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+error-message {
+    padding:                     15px;
+    border-radius:               20px;
+    background-color:            @error-container;
+    text-color:                  @on-error-container;
+}
+
 /*****----- Listview -----*****/
 listview {
     enabled:                     true;
@@ -126,8 +136,8 @@ listview {
     layout:                      vertical;
     reverse:                     false;
     fixed-height:                true;
+    margin:                      5px 10px 10px 10px;
     fixed-columns:               true;
-    spacing:                     10px;
     background-color:            transparent;
     text-color:                  @on-surface;
     cursor:                      "default";
@@ -137,12 +147,11 @@ listview {
 scrollbar {
     handle-width:               8px;
     // handle-color:               @primary;
-    handle-color:            @primary-container;
+    handle-color:               @primary-container;
     handle-rounded-corners:     true;
     border-radius:              4px;
     background-color:           @surface-container-high;
 }
-
 
 /*****----- Elements -----*****/
 element {
@@ -160,13 +169,11 @@ element alternate.normal {
     text-color:                  @tertiary;
 }
 
-
 element normal.active,
 element alternate.active {
     background-color:            @secondary-container;
     text-color:                  @on-secondary-container;
 }
-
 
 element normal.urgent,
 element alternate.urgent {
@@ -180,7 +187,7 @@ element selected.urgent {
   // background-color:            @primary-container;
     background-color:            @primary;
     // text-color:                  @on-primary-container;
-    text-color:                   @on-primary;
+    text-color:                  @on-primary;
 }
 element-icon {
     background-color:            transparent;
@@ -197,21 +204,4 @@ element-text {
     horizontal-align:            0.0;
 }
 
-/*****----- Message -----*****/
-message {
-    background-color:            transparent;
-}
-textbox {
-    padding:                     15px;
-    border-radius:               10px;
-    background-color:            @surface-container-high;
-    text-color:                  @on-surface;
-    vertical-align:              0.5;
-    horizontal-align:            0.0;
-}
-error-message {
-    padding:                     15px;
-    border-radius:               20px;
-    background-color:            @error-container;
-    text-color:                  @on-error-container;
-}
+
