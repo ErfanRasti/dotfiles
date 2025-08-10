@@ -39,7 +39,6 @@ mainbox {
     children:                    [ "inputbar", "listview" ];
     // background-color:            transparent;
     background-color:            @inverse-on-surface;
-    // border:                      0px; /* Ensure no border */
 }
 
 /*****----- Inputbar -----*****/

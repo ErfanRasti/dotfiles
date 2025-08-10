@@ -24,7 +24,7 @@ window {
     border-radius:              20px;
     border-color:               @primary;
     cursor:                     "default";
-    background-color:           @surface-dim;
+    background-color:           transparent;
 }
 
 /*****----- Main Box -----*****/

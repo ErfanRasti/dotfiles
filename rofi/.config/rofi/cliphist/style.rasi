@@ -3,6 +3,7 @@ configuration {
 
     show-icons:                 true;
     icon-theme:                 "Papirus-Dark";
+    opacity:                    true;
     // hover-select: true; 
 }
 
@@ -15,9 +16,9 @@ configuration {
 window {
     transparency:                "real";
     enabled:                     true;
-    width:                       30em;
-    x-offset:                    -2em;
-    y-offset:                    2em;
+    width:                       400px;
+    x-offset:                    -10px;
+    y-offset:                    10px;
     spacing:                     0px;
     padding:                     0px;
     margin:                      0px;
@@ -26,7 +27,7 @@ window {
     anchor:                      northeast;
     fullscreen:                  false;
     border-radius:               12px;
-    background-color:            @surface-dim; /* Semi-transparent background */
+    background-color:            transparent; /* Semi-transparent background */
 }
 
 /*****----- Main Box -----*****/
