@@ -18,7 +18,7 @@ fi
 prompt="$status"
 mesg="${battery}: ${percentage}%,${time}"
 
-list_col='5'
+list_col='6'
 list_row='1'
 win_width='600px'
 
@@ -49,12 +49,23 @@ elif [[ $percentage -ge 80 ]] && [[ $percentage -le 100 ]]; then
   ICON_DISCHRG="󰂁"
 fi
 
+power_profile="$(powerprofilesctl get)"
+profile_icon=""
+if [[ $power_profile = *"performance"* ]]; then
+  profile_icon="󰓅"
+elif [[ $power_profile = *"balanced"* ]]; then
+  profile_icon=""
+elif [[ $power_profile = *"power-saver"* ]]; then
+  profile_icon="󰌪"
+fi
+
 # Options
 option_1="$ICON_DISCHRG"
 option_2="$ICON_CHRG"
 option_3=""
 option_4="󰂑"
 option_5="󱈏"
+option_6="$profile_icon"
 
 # Rofi CMD
 rofi_cmd() {
@@ -71,7 +82,7 @@ rofi_cmd() {
 
 # Pass variables to rofi dmenu
 run_rofi() {
-  echo -e "$option_1\n$option_2\n$option_3\n$option_4\n$option_5" | rofi_cmd
+  echo -e "$option_1\n$option_2\n$option_3\n$option_4\n$option_5\n$option_6" | rofi_cmd
 }
 
 # Execute Command
@@ -86,6 +97,8 @@ run_cmd() {
     kitty pkexec powertop
   elif [[ "$1" == '--opt5' ]]; then
     exec ~/.config/rofi/applets/bin/battery_charge_threshold.sh
+  elif [[ "$1" == '--opt6' ]]; then
+    exec ~/.config/rofi/applets/bin/power_profile.sh
   fi
 }
 
@@ -106,5 +119,8 @@ $option_4)
   ;;
 $option_5)
   run_cmd --opt5
+  ;;
+$option_6)
+  run_cmd --opt6
   ;;
 esac
