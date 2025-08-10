@@ -47,10 +47,10 @@ artist=$(playerctl metadata artist 2>/dev/null)
 # Format output (icon + play/pause + title - artist)
 if [ -n "$title" ]; then
   if [ -n "$artist" ]; then
-    echo "$player_icon $play_pause_icon  $title - $artist"
+    echo "$player_icon $play_pause_icon $title - $artist"
   else
-    echo "$player_icon $play_pause_icon  $title"
+    echo "$player_icon $play_pause_icon $title"
   fi
 else
-  echo "$player_icon $play_pause_icon  No title detected"
+  echo "$player_icon $play_pause_icon No title detected"
 fi
