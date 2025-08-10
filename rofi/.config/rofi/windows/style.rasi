@@ -34,7 +34,7 @@ window {
     enabled:                     true;
     border-radius:               15px;
     cursor:                      "default";
-    background-color:            @surface;
+    background-color:            transparent;
 }
 
 /*****----- Main Box -----*****/
@@ -76,7 +76,7 @@ listview {
 scrollbar {
     handle-width:               8px;
     // handle-color:               @primary;
-    handle-color:            @primary-container;
+    handle-color:               @primary-container;
     handle-rounded-corners:     true;
     border-radius:              4px;
     background-color:           @surface-container-high;
