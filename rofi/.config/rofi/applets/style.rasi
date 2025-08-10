@@ -50,7 +50,7 @@ inputbar {
     background-color:           transparent;
     background-image:          @wallpaper-image-width;  /* Background image restored */
     text-color:                 @on-surface;
-    children:                   [ "dummy", "prompt", "dummy" ];
+    children:                   [ "dummy","textbox-prompt-colon", "prompt" ,"dummy"];
 }
 
 dummy {
