@@ -9,7 +9,7 @@ configuration {
   display-window:             "  WINDOW";
 	drun-display-format:        "{name}";
 	window-format:              "{w} · {c} · {t}";
-  opacity: true;
+  opacity:                    true;
     // hover-select: true; 
 }
 
