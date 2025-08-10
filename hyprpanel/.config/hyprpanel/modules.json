@@ -16,6 +16,12 @@
     "executeOnAction": "",
     "tooltip": "Keyboard Language: {state}",
     "execute": "~/.config/hyprpanel/scripts/kblayout.sh",
-    "on-left-click": "menu:dashboard"
+    "actions": {
+      "onLeftClick": "hyprctl switchxkblayout gsr-ui-virtual-keyboard next",
+      "onRightClick": "hyprctl switchxkblayout gsr-ui-virtual-keyboard prev",
+      "onMiddleClick": "",
+      "onScrollUp": "hyprctl switchxkblayout gsr-ui-virtual-keyboard next",
+      "onScrollDown": "hyprctl switchxkblayout gsr-ui-virtual-keyboard prev"
+    }
   }
 }
