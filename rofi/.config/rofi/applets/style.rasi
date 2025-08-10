@@ -4,6 +4,7 @@ configuration {
     hover-select:               true; 
     drun-display-format:        "{name}";
     modi:                       "drun";
+    opacity:                    true;
 }
 
 /*****----- Global Properties -----*****/
@@ -22,11 +23,11 @@ window {
     y-offset:                   0px;
     margin:                     0px;
     padding:                    0px;
-    border:                     0px solid;
+    border:                     0px;
     border-radius:              20px;
-    border-color:               @primary;
+    border-color:               transparent;
     cursor:                     "default";
-    background-color:           @surface-dim;
+    background-color:           transparent;
 }
 
 /*****----- Main Box -----*****/
@@ -83,7 +84,7 @@ message {
     border:                     0px solid;
     border-radius:              10px;
     border-color:               @primary;
-    background-color:           @surface-container-high;
+    background-color:           transparent;
     text-color:                 @on-surface;
 }
 
@@ -133,13 +134,13 @@ element-text {
 element normal.normal,
 element alternate.normal {
     background-color:           @surface-container-high;
-    text-color:                @tertiary;
+    text-color:                 @tertiary;
 }
 
 element normal.active,
 element alternate.active {
     background-color:          @tertiary-container;
-    text-color:               @on-tertiary-container;
+    text-color:                @on-tertiary-container;
 }
 
 element normal.urgent,
