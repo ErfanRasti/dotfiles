@@ -11,12 +11,12 @@ percentage="$(acpi -b | cut -d',' -f2 | tr -d ' ',\%)"
 time="$(acpi -b | cut -d',' -f3)"
 
 if [[ -z "$time" ]]; then
-  time=' Fully Charged'
+  time='Threshold Charged'
 fi
 
 # Theme Elements
 prompt="$status"
-mesg="${battery}: ${percentage}%,${time}"
+mesg="${battery}: ${percentage}%, ${time}"
 
 list_col='6'
 list_row='1'
