@@ -94,9 +94,6 @@ update_hyprpanel_wallpaper() {
 # Apply matugen configurations
 # matugen image $wallpaper -m $mode -t $type
 
-# Restart hyprpolkitagent.service to apply qt themes on it
-systemctl --user restart hyprpolkitagent.service
-
 # Kill and restart hyprpanel
 if pgrep hyprpanel >/dev/null; then
   # killall "$(pgrep hyprpanel)"
@@ -109,3 +106,6 @@ else
   hyprpanel &
   echo "Hyprpanel started."
 fi
+
+# Restart hyprpolkitagent.service to apply qt themes on it
+systemctl --user restart hyprpolkitagent.service
