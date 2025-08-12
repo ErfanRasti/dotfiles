@@ -92,7 +92,7 @@ update_hyprpanel_wallpaper() {
 }
 
 # Apply matugen configurations
-matugen image $wallpaper -m $mode -t $type
+# matugen image $wallpaper -m $mode -t $type
 
 # Restart hyprpolkitagent.service to apply qt themes on it
 systemctl --user restart hyprpolkitagent.service
