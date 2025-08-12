@@ -110,18 +110,27 @@
   height: 20px;
   width: 20px;
 }
+/* Reset existing styles */
 .playback-bar__progress-time-elapsed,
 .main-playbackBarRemainingTime-container {
-  color: var(--spice-subtext);
   position: absolute;
-  margin-bottom: 30px;
-  right: 266px;
+  bottom: 10px;
+  color: var(--spice-subtext);
+  font-size: 0.75rem;
+  white-space: nowrap;
 }
+
+/* Position elapsed time */
 .playback-bar__progress-time-elapsed {
-  right: 308px;
+  left: calc(50% - 40px); /* Adjust this value as needed */
+}
+
+/* Position remaining time */
+.main-playbackBarRemainingTime-container {
+  left: calc(50% + 10px); /* Adjust this value as needed */
 }
 .playback-bar__progress-time-elapsed::after {
-  content: '  /';
+  content: ' /';
 }
 .player-controls__buttons {
   margin: 0;
