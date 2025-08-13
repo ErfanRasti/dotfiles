@@ -171,5 +171,8 @@
   "theme.bar.buttons.background_opacity": 40,
   "theme.bar.buttons.background_hover_opacity": 100,
   "theme.osd.opacity": 80,
-  "theme.notification.opacity": 90
+  "theme.notification.opacity": 90,
+  "bar.customModules.cpu.pollingInterval": 5000,
+  "bar.customModules.cpuTemp.pollingInterval": 5000,
+  "bar.customModules.ram.pollingInterval": 10000
 }
