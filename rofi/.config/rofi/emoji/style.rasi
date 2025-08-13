@@ -2,7 +2,6 @@
 configuration {
 
     show-icons:                 false;
-    icon-theme:                 "Papirus-Dark";
     opacity:                    true;
     // hover-select: true; 
 }
