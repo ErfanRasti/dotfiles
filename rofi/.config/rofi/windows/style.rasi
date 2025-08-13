@@ -2,7 +2,6 @@
 configuration {
 	modi:                       "drun,run,filebrowser,window";
   show-icons:                 true;
-  icon-theme:                 "Papirus-Dark";
   display-drun:               "  APPS";
   display-run:                "  RUN";
   display-filebrowser:        "  FILES";
@@ -14,6 +13,7 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
+@import "~/.config/rofi/settings/icon.rasi"
 @import "~/.config/rofi/settings/vim-keybindings-notext.rasi"
 @import "~/.config/rofi/settings/font.rasi"
 @import "~/.config/rofi/settings/colors.rasi"

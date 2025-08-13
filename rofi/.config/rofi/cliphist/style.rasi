@@ -1,13 +1,12 @@
 /*****----- Configuration -----*****/
 configuration {
-
     show-icons:                 true;
-    icon-theme:                 "Papirus-Dark";
     opacity:                    true;
     // hover-select: true; 
 }
 
 /*****----- Global Properties -----*****/
+@import "~/.config/rofi/settings/icon.rasi"
 @import "~/.config/rofi/settings/vim-keybindings.rasi"
 @import "~/.config/rofi/settings/font.rasi"
 @import "~/.config/rofi/settings/colors.rasi"
