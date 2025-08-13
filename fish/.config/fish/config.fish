@@ -28,7 +28,8 @@ if status is-interactive
     #
     # Clipboard managing in vi mode
     bind -M visual y fish_clipboard_copy
-    bind -M default yy fish_clipboard_copy
+    # bind -M default yy fish_clipboard_copy
+    bind -M default yy 'commandline -f beginning-of-line end-of-line; fish_clipboard_copy; sleep 0.1;commandline -f repaint repaint'
     bind p fish_clipboard_paste
 
     # Or use Ctrl+E
