@@ -19,6 +19,7 @@
     "~/.config/waybar/modules/clock.jsonc",
     "~/.config/waybar/modules/power-profiles-daemon.jsonc",
     "~/.config/waybar/modules/tray.jsonc",
+    "~/.config/waybar/modules/custom-keyboard-state.jsonc",
     "~/.config/waybar/modules/hyprland-language.jsonc",
     "~/.config/waybar/modules/gamemode.jsonc",
     "~/.config/waybar/modules/cpu.jsonc",
@@ -28,7 +29,6 @@
     "~/.config/waybar/modules/network.jsonc",
     "~/.config/waybar/modules/pulseaudio.jsonc",
     "~/.config/waybar/modules/battery.jsonc"
-    // "~/.config/waybar/modules/keyboard-state.jsonc",
   ],
   "modules-left": [
     "hyprland/workspaces",
@@ -41,8 +41,8 @@
     "power-profiles-daemon"
   ],
   "modules-right": [
-    "custom-keyboard-state",
     "tray",
+    "custom/keyboard-state",
     "hyprland/language",
     "gamemode",
     "cpu",
