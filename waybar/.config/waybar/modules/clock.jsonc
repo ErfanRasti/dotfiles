@@ -17,7 +17,7 @@
     },
     "interval": 1,
     "format": " {:%H:%M}",
-    "format-alt": "󱛡 {:%a %B %d, %H:%M:%S}",
+    "format-alt": "󱛡 {:%a %B %d %H:%M:%S}",
     "actions": {
       "on-click-right": "mode",
       "on-click-forward": "tz_up",
