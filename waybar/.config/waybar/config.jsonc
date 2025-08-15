@@ -1,0 +1,56 @@
+{
+  // See https://github.com/Alexays/Waybar/wiki/Configuration
+  "layer": "top", // Make the bar appear at the top of another windows.
+  "position": "top",
+  "height": 15,
+  "mode": "dock",
+  "exclusive": true, // Option to request an exclusive zone from the compositor.
+  "passtrough": false, //  Pass any pointer events to the window under the bar.
+  "reload_style_on_change": true,
+  "margin-top": 0,
+  "margin-left": 1,
+  "margin-bottom": 0,
+  "margin-right": 1,
+  "include": [
+    "~/.config/waybar/modules/hyprland-workspaces.jsonc",
+    "~/.config/waybar/modules/custom-appmenu.jsonc",
+    "~/.config/waybar/modules/hyprland-window.jsonc",
+    "~/.config/waybar/modules/custom-notification.jsonc",
+    "~/.config/waybar/modules/clock.jsonc",
+    "~/.config/waybar/modules/power-profiles-daemon.jsonc",
+    "~/.config/waybar/modules/tray.jsonc",
+    "~/.config/waybar/modules/hyprland-language.jsonc",
+    "~/.config/waybar/modules/gamemode.jsonc",
+    "~/.config/waybar/modules/cpu.jsonc",
+    "~/.config/waybar/modules/temperature.jsonc",
+    "~/.config/waybar/modules/memory.jsonc",
+    "~/.config/waybar/modules/bluetooth.jsonc",
+    "~/.config/waybar/modules/network.jsonc",
+    "~/.config/waybar/modules/pulseaudio.jsonc",
+    "~/.config/waybar/modules/battery.jsonc"
+    // "~/.config/waybar/modules/keyboard-state.jsonc",
+  ],
+  "modules-left": [
+    "hyprland/workspaces",
+    "custom/appmenu",
+    "hyprland/window"
+  ],
+  "modules-center": [
+    "custom/notification",
+    "clock",
+    "power-profiles-daemon"
+  ],
+  "modules-right": [
+    "custom-keyboard-state",
+    "tray",
+    "hyprland/language",
+    "gamemode",
+    "cpu",
+    "temperature",
+    "memory",
+    "bluetooth",
+    "network",
+    "pulseaudio",
+    "battery"
+  ]
+}
