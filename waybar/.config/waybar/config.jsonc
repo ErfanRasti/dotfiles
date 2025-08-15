@@ -12,6 +12,7 @@
   "margin-bottom": 0,
   "margin-right": 1,
   "include": [
+    "~/.config/waybar/modules/group-power.jsonc",
     "~/.config/waybar/modules/hyprland-workspaces.jsonc",
     "~/.config/waybar/modules/custom-appmenu.jsonc",
     "~/.config/waybar/modules/hyprland-window.jsonc",
@@ -31,6 +32,7 @@
     "~/.config/waybar/modules/battery.jsonc"
   ],
   "modules-left": [
+    "group/group-power",
     "hyprland/workspaces",
     "custom/appmenu",
     "hyprland/window"
