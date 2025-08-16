@@ -70,6 +70,36 @@ run_cmd() {
   fi
 }
 
+# If called with arguments, skip menu
+if [[ -n "$1" ]]; then
+  case "$1" in
+  shutdown)
+    run_cmd --shutdown
+    exit 0
+    ;;
+  reboot)
+    run_cmd --reboot
+    exit 0
+    ;;
+  hibernate)
+    run_cmd --hibernate
+    exit 0
+    ;;
+  suspend)
+    run_cmd --suspend
+    exit 0
+    ;;
+  logout)
+    run_cmd --logout
+    exit 0
+    ;;
+  lock)
+    hyprlock
+    exit 0
+    ;;
+  esac
+fi
+
 # Actions
 chosen="$(run_rofi)"
 case ${chosen} in
