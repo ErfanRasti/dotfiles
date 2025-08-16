@@ -1,0 +1,135 @@
+
+@import 'colors.css';
+
+* {
+    font-family: "CaskaydiaCove Nerd Font Propo";
+    font-size: 14px;
+    min-height: 0;
+    font-weight: bold;
+}
+
+window#waybar {
+    background: transparent;
+    background-color: transparent;
+    color: transparent;
+    transition-property: background-color;
+    transition-duration: 0.1s;
+    margin: 0;
+    border-radius: 0px
+}
+
+/* General Settings */
+#group-power,
+#workspaces,
+#custom-appmenu,
+#window,
+#custom-notification,
+#clock,
+#power-profiles-daemon,
+#tray,
+#custom-keyboard-state,
+#language,
+#gamemode,
+#cpu,
+#temperature,
+#memory,
+#bluetooth,
+#network,
+#pulseaudio,
+#backlight,
+#network,
+#battery,
+.default {
+	background-color: alpha(@surface_container_low, 0.3);
+  color: @primary;
+	padding: 1px 1px 1px 1px;
+	margin: 0px 0px 0px 0px;
+	border-radius: 20px;
+	box-shadow: 0px 0px 0px 0px alpha(@shadow, 0.21);
+	border: 0px solid transparent;
+	background-clip: padding-box;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+window#waybar.hidden {
+	opacity: 0;
+}
+
+button {
+    box-shadow: inset 0 -3px transparent;
+    border: none;
+    border-radius: 0;
+}
+
+#workspaces * {
+	font-size: 14px;
+}
+
+#workspaces button {
+  border-radius: 10px;
+  margin-right: 1px;
+  margin-left: 1px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  padding: 1px;
+  font-weight: bold;
+  color: @shadow;
+  transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682);
+}
+
+#workspaces button label {
+	color: @tertiary;
+	font-weight: bold;
+	transition: all 0.5s cubic-bezier(0.55, -0.68, 0.48, 1.68);
+}
+
+#workspaces button.active label {
+	color: @on-secondary-container;
+	font-weight: bolder;
+}
+
+#workspaces button.urgent {
+	background-color: @error-container;
+}
+
+#workspaces button.urgent label {
+	color: @on-error-container;
+	font-weight: bold;
+}
+
+#workspaces button.active {
+	padding-right: 2px;
+	padding-left: 2px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+	box-shadow: 1px 1px 1px 1px alpha(@shadow, 0.7);
+	margin-top: 2px;
+	margin-bottom: 2px;
+	background: linear-gradient(
+		45deg,
+		@secondary,
+		@primary,
+		@inverse_primary,
+    @on_tertiary,
+    @tertiary
+	);
+	background-size: 100% 100%;
+	/* animation: gradient 15s ease infinite; */
+	transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682);
+	color: @primary;
+	border-radius: 10px;
+}
+
+#workspaces button:hover {
+	background-color: @secondary;
+}
+#workspaces button.focused:hover {
+	background-color: alpha(@tertiary, 0.9);
+}
+
+#workspaces button.focused:hover label {
+	color: @on_secondary;
+}
+
+

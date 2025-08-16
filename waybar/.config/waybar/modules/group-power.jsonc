@@ -4,8 +4,8 @@
     "drawer": {
       "transition-duration": 500,
       "children-class": "not-power",
-      "transition-left-to-right": false,
-      "click-to-reveal": true
+      "transition-left-to-right": true,
+      "click-to-reveal": false
     },
     "modules": [
       "custom/power", // First element is the "group leader" and won't ever be hidden
