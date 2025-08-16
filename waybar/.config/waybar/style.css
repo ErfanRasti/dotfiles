@@ -18,34 +18,13 @@ window#waybar {
     border-radius: 0px
 }
 
-/* General Settings */
-#group-power,
-#workspaces,
-#custom-appmenu,
-#window,
-#custom-notification,
-#clock,
-#power-profiles-daemon,
-#tray,
-#custom-keyboard-state,
-#language,
-#gamemode,
-#cpu,
-#temperature,
-#memory,
-#bluetooth,
-#network,
-#pulseaudio,
-#backlight,
-#network,
-#battery,
-.default {
+.module {
 	background-color: alpha(@surface_container_low, 0.3);
   color: @primary;
 	padding: 1px 1px 1px 1px;
-	margin: 0px 0px 0px 0px;
-	border-radius: 20px;
-	box-shadow: 0px 0px 0px 0px alpha(@shadow, 0.21);
+	margin: 0px 1px 0px 1px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 0px 0px alpha(@shadow, 0.25);
 	border: 0px solid transparent;
 	background-clip: padding-box;
   padding-left: 5px;
@@ -60,10 +39,6 @@ button {
     box-shadow: inset 0 -3px transparent;
     border: none;
     border-radius: 0;
-}
-
-#workspaces * {
-	font-size: 14px;
 }
 
 #workspaces button {
@@ -103,22 +78,24 @@ button {
 	padding-left: 2px;
   padding-bottom: 0px;
   padding-top: 0px;
-	box-shadow: 1px 1px 1px 1px alpha(@shadow, 0.7);
+	box-shadow: 0px 1px 1px 0px alpha(@shadow, 0.3);
 	margin-top: 2px;
 	margin-bottom: 2px;
 	background: linear-gradient(
 		45deg,
-		@secondary,
 		@primary,
-		@inverse_primary,
-    @on_tertiary,
+    @secondary,
     @tertiary
 	);
 	background-size: 100% 100%;
-	/* animation: gradient 15s ease infinite; */
 	transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682);
-	color: @primary;
+	color: @tertiary;
 	border-radius: 10px;
+}
+
+#workspaces button.active label{
+  color:@on_primary;
+
 }
 
 #workspaces button:hover {
@@ -132,4 +109,39 @@ button {
 	color: @on_secondary;
 }
 
+#custom-notification,
+#clock,
+#power-profiles-daemon{
+   color: @tertiary; 
+}
+
+#cpu,
+#memory,
+#temperature {
+  color: @secondary;
+}
+#custom-lock{
+  padding: 1px 1px 1px 1px;
+  padding-right: 5px;
+  padding-left: 5px;
+	margin: 0px 0px 0px 0px;
+	border-radius: 0px 0px 0px 10px;
+
+}
+#custom-quit{
+  padding: 1px 1px 1px 1px;
+  padding-right: 5px;
+  padding-left: 5px;
+	margin: 0px 0px 0px 0px;
+	border-radius: 0px 0px 0px 0px;
+
+}
+#custom-suspend{
+  padding: 1px 1px 1px 1px;
+  padding-right: 5px;
+  padding-left: 5px;
+	margin: 0px 0px 0px 0px;
+	border-radius: 0px 10px 0px 0px;
+
+}
 

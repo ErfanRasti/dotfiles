@@ -9,29 +9,31 @@
     },
     "modules": [
       "custom/power", // First element is the "group leader" and won't ever be hidden
-      "custom/quit",
       "custom/lock",
-      "custom/reboot"
+      "custom/quit",
+      "custom/suspend"
     ]
-  },
-  "custom/quit": {
-    "format": "󰗼",
-    "tooltip": false,
-    "on-click": "hyprctl dispatch exit"
-  },
-  "custom/lock": {
-    "format": "󰍁",
-    "tooltip": false,
-    "on-click": "swaylock"
-  },
-  "custom/reboot": {
-    "format": "󰜉",
-    "tooltip": false,
-    "on-click": "reboot"
   },
   "custom/power": {
     "format": "",
+    "tooltip": true,
+    "tooltip-format": "Open power menu",
+    "on-click": "~/.config/rofi/powermenu/run.sh"
+  },
+  "custom/lock": {
+    "format": "󰍁",
+    "tooltip-format": "Lock the system",
+    "on-click": "~/.config/rofi/powermenu/run.sh lock"
+  },
+  "custom/quit": {
+    "format": "󰗼",
+    "tooltip-format": "Logout",
+    "on-click": "~/.config/rofi/powermenu/run.sh logout"
+  },
+  "custom/suspend": {
+    "format": "󰒲",
+    "tooltip-format": "Suspend the system",
     "tooltip": false,
-    "on-click": "shutdown now"
+    "on-click": "~/.config/rofi/powermenu/run.sh suspend"
   }
 }
