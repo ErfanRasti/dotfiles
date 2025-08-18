@@ -1,4 +1,5 @@
 
+/*****----- Global Properties -----*****/
 @import 'colors.css';
 
 * {
@@ -6,16 +7,6 @@
     font-size: 14px;
     min-height: 0;
     font-weight: bold;
-}
-
-window#waybar {
-    background: transparent;
-    background-color: transparent;
-    color: transparent;
-    transition-property: background-color;
-    transition-duration: 0.1s;
-    margin: 0;
-    border-radius: 0px
 }
 
 .module {
@@ -31,8 +22,9 @@ window#waybar {
   padding-right: 5px;
 }
 
-window#waybar.hidden {
-	opacity: 0;
+.module:hover:not(#workspaces){
+  background-color: @tertiary;
+  color: @on_tertiary;
 }
 
 button {
@@ -41,91 +33,28 @@ button {
     border-radius: 0;
 }
 
-#workspaces button {
-  border-radius: 10px;
-  margin-right: 1px;
-  margin-left: 1px;
-  margin-top: 1px;
-  margin-bottom: 1px;
-  padding: 1px;
-  font-weight: bold;
-  color: @shadow;
-  transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682);
+/*****----- waybar window -----*****/
+window#waybar {
+  background: transparent;
+  background-color: transparent;
+  color: transparent;
+  transition-property: background-color;
+  transition-duration: 0.1s;
+  margin: 0;
+  border-radius: 0px
 }
 
-#workspaces button label {
-	color: @tertiary;
-	font-weight: bold;
-	transition: all 0.5s cubic-bezier(0.55, -0.68, 0.48, 1.68);
+window#waybar.hidden {
+	opacity: 0;
 }
 
-#workspaces button.active label {
-	color: @on-secondary-container;
-	font-weight: bolder;
-}
-
-#workspaces button.urgent {
-	background-color: @error-container;
-}
-
-#workspaces button.urgent label {
-	color: @on-error-container;
-	font-weight: bold;
-}
-
-#workspaces button.active {
-	padding-right: 2px;
-	padding-left: 2px;
-  padding-bottom: 0px;
-  padding-top: 0px;
-	box-shadow: 0px 1px 1px 0px alpha(@shadow, 0.3);
-	margin-top: 2px;
-	margin-bottom: 2px;
-	background: linear-gradient(
-		45deg,
-		@primary,
-    @secondary,
-    @tertiary
-	);
-	background-size: 100% 100%;
-	transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682);
-	color: @tertiary;
-	border-radius: 10px;
-}
-
-#workspaces button.active label{
-  color:@on_primary;
-
-}
-
-#workspaces button:hover {
-	background-color: @secondary;
-}
-#workspaces button.focused:hover {
-	background-color: alpha(@tertiary, 0.9);
-}
-
-#workspaces button.focused:hover label {
-	color: @on_secondary;
-}
-
-#custom-notification,
-#clock,
-#power-profiles-daemon{
-   color: @tertiary; 
-}
-
-#cpu,
-#memory,
-#temperature {
-  color: @secondary;
-}
+/*****----- powermenu group -----*****/
 #custom-lock{
   padding: 1px 1px 1px 1px;
   padding-right: 5px;
   padding-left: 5px;
 	margin: 0px 0px 0px 0px;
-	border-radius: 0px 0px 0px 10px;
+	border-radius: 10px 0px 0px 10px;
 
 }
 #custom-quit{
@@ -141,7 +70,51 @@ button {
   padding-right: 5px;
   padding-left: 5px;
 	margin: 0px 0px 0px 0px;
-	border-radius: 0px 10px 0px 0px;
+	border-radius: 0px 10px 10px 0px;
 
+}
+
+/*****----- workspaces -----*****/
+
+#workspaces button {
+  padding: 0 2px 0 2px;
+  margin: 0px 1px 0px 1px;
+  background-color: @tertiary_container;
+  color: @primary;
+	/* border-radius: 20px; */
+}
+
+#workspaces button.empty {
+  /* background-color: @tertiary_container; */
+  color:@secondary;
+}
+#workspaces button.visible {
+/* background-color: @tertiary_container; */
+color:@tertiary;
+}
+/* #workspaces .workspace-label, */
+/* #workspaces .taskbar-window.active, */
+/* #workspaces .taskbar-window, */
+#workspaces button.active {
+/* background-color: @primary; */
+color:@primary;
+}
+
+#workspaces button.urgent {
+background-color:@error_container;
+border-radius: 5px;
+  color: @primary;
+}
+
+#custom-notification,
+#clock,
+#power-profiles-daemon{
+   color: @tertiary; 
+}
+
+#cpu,
+#memory,
+#temperature {
+  color: @secondary;
 }
 
