@@ -1,7 +1,7 @@
 {
   "custom/keyboard-state": {
     "return-type": "json",
-    "exec": "~/.config/waybar/scripts/keyboard-state.sh",
+    "exec": "~/.config/waybar/scripts/keyboard_state.sh",
     "restart-interval": 5,
     "hide-empty-text": true
   }
