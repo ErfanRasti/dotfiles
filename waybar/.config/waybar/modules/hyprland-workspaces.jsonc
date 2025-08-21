@@ -1,31 +1,22 @@
 {
   "hyprland/workspaces": {
-    // "active-only": false,
-    // "all-outputs": false,
-    // "format": "{id}",
-    // "on-scroll-up": "hyprctl dispatch workspace r-1",
-    // "on-scroll-down": "hyprctl dispatch workspace r+1",
-    // "on-click": "activate",
-    // "sort-by-number": true,
-    // "show-special": true,
+    "format": "{icon} {windows}",
+    "show-special": true,
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e-1",
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "format-window-separator": "",
+    "format-icons": {
+      "special": "󰰢"
+    },
     "workspace-taskbar": {
-      // Enable the workspace taskbar. Default: false
       "enable": true,
-      // If true, the active/focused window will have an 'active' class. Could cause higher CPU usage due to more frequent redraws. Default: false
-      "update-active-window": false,
-      // Format of the windows in the taskbar. Default: "{icon}". Allowed variables: {icon}, {title}
+      "update-active-window": false, // increases cpu usage
       "format": "{icon}",
-      // Icon size in pixels. Default: 16
       "icon-size": 16,
-      // Either the name of an installed icon theme or an array of themes (ordered by priority). If not set, the default icon theme is used.
-      "icon-theme": "some_icon_theme",
-      // Orientation of the taskbar ("horizontal" or "vertical"). Default: "horizontal".
-      "orientation": "horizontal"
-      //   "code",
-      //   "Firefox - .*"
-      // ],
-      // // Command to run when a window is clicked. Default: "" (switch to the workspace as usual). Allowed variables: {address}, {button}
-      // "on-click-window": "/some/arbitrary/script {address} {button}"
+      "icon-theme": "Breeze-Dark",
+      "orientation": "horizontal",
+      "on-click-window": "~/.config/waybar/scripts/focus-window.sh {address} {button}"
     }
   }
 }
