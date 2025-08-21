@@ -17,14 +17,15 @@ post_hook = 'hyprctl reload'
 # arguments = ["img", "--transition-type", "center"]
 # set = false
 
-[templates.rofi]
-input_path = '~/.config/matugen/templates/rofi-colors.rasi'
-output_path = '~/.config/rofi/settings/colors.rasi'
-
 [templates.waybar]
 input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/waybar/colors.css'
-post_hook = 'pkill -SIGUSR2 waybar'
+# `post_hook` is not needed because waybar handles it using `reload_style_on_change`
+# post_hook = 'pkill waybar && waybar & disown'
+
+[templates.rofi]
+input_path = '~/.config/matugen/templates/rofi-colors.rasi'
+output_path = '~/.config/rofi/settings/colors.rasi'
 
 [templates.qt5ct]
 input_path = '~/.config/matugen/templates/qtct-colors.conf'
