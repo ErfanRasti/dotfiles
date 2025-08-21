@@ -16,7 +16,7 @@
       "icon-size": 16,
       "icon-theme": "Breeze-Dark",
       "orientation": "horizontal",
-      "on-click-window": "~/.config/waybar/scripts/focus-window.sh {address} {button}"
+      "on-click-window": "~/.config/waybar/scripts/focus_window.sh {address} {button}"
     }
   }
 }
