@@ -1,0 +1,7 @@
+{
+  "hyprland/submap": {
+    "format": " {}",
+    "max-length": 12,
+    "tooltip": true
+  }
+}
