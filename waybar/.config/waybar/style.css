@@ -15,7 +15,7 @@
 	padding: 0px 5px 0px 5px;
 	margin: 1px 1px 1px 1px;
 	border-radius: 5px;
-	box-shadow: 0px 0px 0px 0px alpha(@shadow, 0.25);
+	box-shadow: 0px 0px 1px 0px alpha(@shadow, 0.25);
 	border: 0px solid transparent;
 	background-clip: padding-box;
   transition: all 0.2s ease-in-out;
@@ -199,6 +199,11 @@ window#waybar.fullscreen #windowcount {
   -gtk-icon-effect: highlight;
 }
 
+/*****----- custom keyboard state -----*****/
+#custom-keyboard-state {
+  font-size: 14px;
+  border: 2px solid @secondary;
+}
 #cpu,
 #memory,
 #temperature {
