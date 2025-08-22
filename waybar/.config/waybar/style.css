@@ -59,6 +59,17 @@ tooltip label {
   color: @on_primary_container;
 }
 
+/*****----- tooltip -----*****/
+tooltip {
+  background: alpha(@secondary_container, 0.9);
+  border: 1px solid @outline;
+  color: @on_secondary_container;
+  transition: all 0.2s ease-in-out;
+}
+tooltip label {
+  color: @on_secondary_container;
+}
+
 /*****----- powermenu group -----*****/
 #custom-lock{
   padding: 1px 1px 1px 1px;
