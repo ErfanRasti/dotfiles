@@ -1,7 +1,9 @@
 {
   "memory": {
     "format": " {used} GB",
+    "interval": 5,
     "tooltip": true,
-    "interval": 5
+    "tooltip-format": "Total: {used:5.2f} / {total:5.2f} GB\nSwap:  {swapUsed:5.2f} / {swapTotal:5.2f} GB",
+    "on-click": "kitty --title btop -e btop"
   }
 }
