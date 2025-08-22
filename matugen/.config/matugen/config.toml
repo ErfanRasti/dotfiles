@@ -1,10 +1,10 @@
 [config]
 
-version_check = true
+version_check = false
 
 [templates.hyprland]
 input_path = '~/.config/matugen/templates/hyprland-colors.conf'
-output_path = '~/.config/hypr/conf/colors.conf'
+output_path = '~/.config/hypr/config/colors.conf'
 post_hook = 'hyprctl reload'
 
 # [config.wallpaper] # Blazing fast and beautiful
