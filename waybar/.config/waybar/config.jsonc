@@ -16,6 +16,7 @@
     "~/.config/waybar/modules/group-power.jsonc",
     "~/.config/waybar/modules/hyprland-workspaces.jsonc",
     "~/.config/waybar/modules/custom-appmenu.jsonc",
+    "~/.config/waybar/modules/hyprland-window-count.jsonc",
     "~/.config/waybar/modules/hyprland-window.jsonc",
     "~/.config/waybar/modules/custom-notification.jsonc",
     "~/.config/waybar/modules/clock.jsonc",
@@ -37,6 +38,7 @@
     "group/group-power",
     "custom/appmenu",
     "hyprland/workspaces",
+    "hyprland/windowcount",
     "hyprland/window"
   ],
   "modules-center": [
