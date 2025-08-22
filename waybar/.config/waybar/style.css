@@ -77,7 +77,7 @@ window#waybar.hidden {
 
 /*****----- workspaces -----*****/
 #workspaces {
-  padding: 0px 2px 0px 2px;
+  padding: 0px 3px 0px 3px;
 }
 
 #workspaces button {
@@ -124,6 +124,26 @@ border-radius: 5px;
   color: transparent;
   padding: 0px 1px 0px 1px;
 }
+
+/*****----- window -----*****/
+window#waybar.empty #window {
+  background-color: transparent;
+  padding: 0px;
+  margin: 0px;
+
+}
+
+window#waybar.fullscreen #window {
+  background-color: @primary_container;
+   color: @on_primary_container; 
+
+}
+
+window#waybar.floating #window {
+  background-color: @secondary;
+   color: @on_secondary; 
+}
+
 
 #custom-notification,
 #clock,
