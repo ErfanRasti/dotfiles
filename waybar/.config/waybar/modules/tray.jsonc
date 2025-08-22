@@ -1,5 +1,7 @@
 {
   "tray": {
-    "spacing": 5
+    "spacing": 5,
+    "icon-size": 16,
+    "smooth-scrolling-threshold": 3.0
   }
 }
