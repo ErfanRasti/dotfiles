@@ -83,7 +83,7 @@ window#waybar.hidden {
 #workspaces button {
   padding: 0px 1px 0px 1px;
   margin: 1px 1px 1px 1px;
-  background-color: alpha(@primary_container, 0.6);
+  background-color: alpha(@primary, 0.2);
   color: @on_primary_container;
 	border-radius: 5px;
   transition: all 0.3s ease-in-out;
@@ -126,11 +126,11 @@ border-radius: 5px;
 }
 
 /*****----- window -----*****/
-window#waybar.empty #window {
+window#waybar.empty #window{
   background-color: transparent;
+  color: transparent;
   padding: 0px;
   margin: 0px;
-
 }
 
 window#waybar.fullscreen #window {
@@ -150,6 +150,7 @@ window#waybar.fullscreen #windowcount {
   color: @on_primary_container; 
 }
 
+/*****----- custom notification -----*****/
 #custom-notification,
 #clock,
 #power-profiles-daemon{

@@ -1,8 +1,9 @@
 {
   "hyprland/windowcount": {
-    "format": "#:{}",
-    "format-empty": "",
-    "format-fullscreen": "#:{},󰊓",
-    "separate-outputs": true
+    "format": "󱂬:{}",
+    "format-empty": "",
+    "format-fullscreen": "󱂬:{},󰊓",
+    "separate-outputs": true,
+    "hide-empty-text": true
   }
 }
