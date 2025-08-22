@@ -201,9 +201,17 @@ window#waybar.fullscreen #windowcount {
 
 /*****----- custom keyboard state -----*****/
 #custom-keyboard-state {
-  font-size: 14px;
   border: 2px solid @secondary;
 }
+
+/*****----- hyprland submap -----*****/
+#submap {
+  background-color: alpha(@secondary, 0.7);
+  color: @on_secondary;
+}
+
+
+
 #cpu,
 #memory,
 #temperature {
