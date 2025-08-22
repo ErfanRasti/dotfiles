@@ -1,10 +1,10 @@
 {
   "cpu": {
-    "format": "{icon} {usage}%",
-    "format-icons": [
-      "",
-      "<span color='red'></span>"
-    ],
+    "format": " {usage}%",
+    "states": {
+      "warning": 50,
+      "critical": 80
+    },
     "interval": 5,
     "tooltip": true,
     "on-click": "kitty --title btop -e btop"

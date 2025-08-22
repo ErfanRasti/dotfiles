@@ -232,6 +232,9 @@ window#waybar.fullscreen #windowcount {
 	margin: 0px 0px 0px 0px;
 }
 
+#cpu.warning, #memory.warning {color: orange;}
+#cpu.critical, #memory.critical {color: red;}
+
 /*****----- game mode -----*****/
 #gamemode.running {
   background-color: alpha(@surface_container_low, 0.3);

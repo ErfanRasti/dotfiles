@@ -2,7 +2,7 @@
   "temperature": {
     "critical-threshold": 70,
     "format": "{icon} {temperatureC}°C",
-    "format-critical": "<span color='red'>{icon}</span> {temperatureC}°C",
+    "format-critical": "<span color='red'>{icon} {temperatureC}°C</span>",
     "format-icons": [
       "",
       "",
