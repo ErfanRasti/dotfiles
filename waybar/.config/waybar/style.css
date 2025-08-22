@@ -161,11 +161,19 @@ window#waybar.fullscreen #windowcount {
   color: @on_primary_container; 
 }
 
-/*****----- custom notification -----*****/
+/*****----- custom notification, clock, and power profiles daemon -----*****/
 #custom-notification,
 #clock,
 #power-profiles-daemon{
    color: @tertiary; 
+}
+
+/*****----- power profiles state -----*****/
+#power-profiles-daemon.performance {
+  background-color: alpha(red, 0.3);
+}
+#power-profiles-daemon.power-saver {
+  background-color: alpha(green, 0.3);
 }
 
 #cpu,
