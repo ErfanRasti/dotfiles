@@ -157,6 +157,14 @@ window#waybar.empty #window{
 
 window#waybar.fullscreen #window {
   background-color: @primary_container;
+/*****----- power profiles state -----*****/
+#power-profiles-daemon.performance {
+  background-color: alpha(red, 0.3);
+}
+#power-profiles-daemon.power-saver {
+  background-color: alpha(green, 0.3);
+}
+
   color: @on_primary_container; 
 
 }
