@@ -135,7 +135,7 @@ window#waybar.empty #window {
 
 window#waybar.fullscreen #window {
   background-color: @primary_container;
-   color: @on_primary_container; 
+  color: @on_primary_container; 
 
 }
 
@@ -144,6 +144,11 @@ window#waybar.floating #window {
    color: @on_secondary; 
 }
 
+/*****----- window count -----*****/
+window#waybar.fullscreen #windowcount {
+  background-color: @primary_container;
+  color: @on_primary_container; 
+}
 
 #custom-notification,
 #clock,
