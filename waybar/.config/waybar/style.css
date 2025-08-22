@@ -52,17 +52,6 @@ window#waybar.hidden {
 tooltip {
   background: alpha(@secondary_container, 0.9);
   border: 1px solid @outline;
-  color: @on_primary_container;
-  transition: all 0.2s ease-in-out;
-}
-tooltip label {
-  color: @on_primary_container;
-}
-
-/*****----- tooltip -----*****/
-tooltip {
-  background: alpha(@secondary_container, 0.9);
-  border: 1px solid @outline;
   color: @on_secondary_container;
   transition: all 0.2s ease-in-out;
 }
@@ -157,14 +146,6 @@ window#waybar.empty #window{
 
 window#waybar.fullscreen #window {
   background-color: @primary_container;
-/*****----- power profiles state -----*****/
-#power-profiles-daemon.performance {
-  background-color: alpha(red, 0.3);
-}
-#power-profiles-daemon.power-saver {
-  background-color: alpha(green, 0.3);
-}
-
   color: @on_primary_container; 
 
 }
@@ -187,12 +168,35 @@ window#waybar.fullscreen #windowcount {
    color: @tertiary; 
 }
 
-/*****----- power profiles state -----*****/
+/*****----- power profiles daemon -----*****/
 #power-profiles-daemon.performance {
   background-color: alpha(red, 0.3);
 }
 #power-profiles-daemon.power-saver {
   background-color: alpha(green, 0.3);
+}
+
+/*****----- tray -----*****/
+#tray menu {
+  background: alpha(@secondary_container, 0.9);
+  border: 1px solid @outline;
+  color: @on_secondary_container;
+  transition: all 0.2s ease-in-out;
+}
+
+#tray > .passive {
+  color: @secondary;
+  /* It controls how icons are visually rendered */
+  -gtk-icon-effect: dim; /* GTK CSS property */
+}
+
+#tray > .needs-attention {
+  color: @tertiary;
+}
+
+#tray > .active {
+  color: @primary;
+  -gtk-icon-effect: highlight;
 }
 
 #cpu,
