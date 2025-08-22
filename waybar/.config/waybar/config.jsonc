@@ -55,9 +55,9 @@
     "cpu",
     "temperature",
     "memory",
+    "pulseaudio",
     "bluetooth",
     "network",
-    "pulseaudio",
     "battery"
   ]
 }
