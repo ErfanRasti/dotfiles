@@ -1,8 +1,8 @@
 {
   "hyprland/window": {
-    "format": "{class}",
+    "format": "{initialTitle}",
     "icon": true,
-    "icon-size": 20,
+    "icon-size": 18,
     "separate-outputs": false
   }
 }
