@@ -1,11 +1,14 @@
 {
   "clock": {
+    "format": " {:%H:%M}",
+    "format-alt": "󱛡 {:%a %b %d | %H:%M:%S}",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "interval": 1,
     // "on-click": "gnome-calendar",
     "calendar": {
       "mode": "month",
       "mode-mon-col": 3,
-      "weeks-pos": "right",
+      "weeks-pos": "left",
       "on-scroll": 1,
       "format": {
         "months": "<span color='#eed49f'><b>{}</b></span>",
@@ -15,16 +18,14 @@
         "today": "<span color='#ed8796'><b><u>{}</u></b></span>"
       }
     },
-    "interval": 1,
-    "format": " {:%H:%M}",
-    "format-alt": "󱛡 {:%a %b %d | %H:%M:%S}",
     "actions": {
       "on-click-right": "mode",
       "on-click-forward": "tz_up",
       "on-click-backward": "tz_down",
-      "on-scroll-up": "shift_up",
-      "on-scroll-down": "shift_down"
+      "on-scroll-up": "shift_down",
+      "on-scroll-down": "shift_up"
     },
-    "on-click-middle": "thunderbird -calendar && hyprctl dispatch workspace 23"
+    "smooth-scrolling-threshold": 3.0,
+    "on-click-middle": "thunderbird -calendar"
   }
 }
