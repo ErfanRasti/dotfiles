@@ -6,14 +6,14 @@
     // An application can request the notification server to enter
     // an "inhibited" state, usually because it wants full user attention without interruptions.
     "format-icons": {
-      "notification": "<span foreground='#28d67f'><sup></sup></span>",
-      "none": "",
-      "dnd-notification": "<span foreground='#28d67f'><sup></sup></span>",
-      "dnd-none": "",
-      "inhibited-notification": "<span foreground='#28d67f'><sup></sup></span>",
-      "inhibited-none": "",
-      "dnd-inhibited-notification": "<span foreground='#28d67f'><sup></sup></span>",
-      "dnd-inhibited-none": ""
+      "notification": "󰂚<span foreground='#28d67f'><sup></sup></span>",
+      "dnd-notification": "󰂛<span foreground='#28d67f'><sup></sup></span>",
+      "none": "󰂚",
+      "dnd-none": "󰂛",
+      "inhibited-notification": "󰂚<span foreground='#28d67f'><sup></sup></span>",
+      "dnd-inhibited-notification": "󰂛<span foreground='#28d67f'><sup></sup></span>",
+      "inhibited-none": "󰂚",
+      "dnd-inhibited-none": "󰂛"
     },
     "return-type": "json",
     "exec-if": "which swaync-client",
