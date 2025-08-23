@@ -4,8 +4,8 @@
     "format-muted": "<span color='red'>{icon}</span> {format_source}",
     "format-bluetooth": "{icon} 󰂯 {volume}% {format_source}",
     "format-bluetooth-muted": "<span color='red'>{icon} 󰂯</span> {format_source}",
-    "format-source": "",
-    "format-source-muted": "<span color='red'></span>",
+    "format-source": "󰍬",
+    "format-source-muted": "<span color='red'>󰍭</span>",
     "format-icons": {
       "default": [
         "",
@@ -26,13 +26,14 @@
       "car": "",
       "car-muted": "󰸜"
     },
-    "tooltip-format": "{desc}, {volume}%",
+    "tooltip-format": "{desc}, volume: {volume}%\nMicrophone: {format_source}",
     "on-click": "swayosd-client --output-volume mute-toggle",
     "on-click-right": "swayosd-client --input-volume mute-toggle",
     "on-click-middle": "pypr toggle volume",
     "on-scroll-up": "swayosd-client --output-volume -1", // Reverese it for the touchpad behavior
     "on-scroll-down": "swayosd-client --output-volume +1", // Reverese it for the touchpad behavior
     "reverse-mouse-scrolling": true, // Logical behavior on mouse
+    "scroll-step": 1,
     "smooth-scrolling-threshold": 3.0
   }
 }
