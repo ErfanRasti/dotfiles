@@ -210,6 +210,19 @@ window#waybar.fullscreen #windowcount {
   color: @on_secondary;
 }
 
+/*****----- game mode -----*****/
+#gamemode.running {
+  background-color: alpha(@surface_container_low, 0.3);
+  color: @primary;
+	padding: 0px 5px 0px 5px;
+	margin: 1px 1px 1px 1px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 1px 0px alpha(@shadow, 0.25);
+	border: 0px solid transparent;
+	background-clip: padding-box;
+  transition: all 0.2s ease-in-out;
+}
+
 /*****----- cpu, memory, and temperature -----*****/
 #cpu,
 #temperature,
@@ -235,16 +248,10 @@ window#waybar.fullscreen #windowcount {
 #cpu.warning, #memory.warning {color: orange;}
 #cpu.critical, #memory.critical {color: red;}
 
-/*****----- game mode -----*****/
-#gamemode.running {
-  background-color: alpha(@surface_container_low, 0.3);
-  color: @primary;
-	padding: 0px 5px 0px 5px;
-	margin: 1px 1px 1px 1px;
-	border-radius: 5px;
-	box-shadow: 0px 0px 1px 0px alpha(@shadow, 0.25);
-	border: 0px solid transparent;
-	background-clip: padding-box;
-  transition: all 0.2s ease-in-out;
-}
+/*****----- bluetooth -----*****/
+#bluetooth.disabled {color: red;}
+#bluetooth.no-controller {color: orange;}
+#bluetooth.discovering {color: cyan;}
+#bluetooth.discoverable {color: purple;}
+
 
