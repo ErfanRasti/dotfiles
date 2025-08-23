@@ -254,4 +254,6 @@ window#waybar.fullscreen #windowcount {
 #bluetooth.discovering {color: cyan;}
 #bluetooth.discoverable {color: purple;}
 
+/*****----- network -----*****/
+#network.disconnected {color: orange;}
 
