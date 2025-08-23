@@ -2,8 +2,11 @@
   "bluetooth": {
     "format": " {status}",
     "format-disabled": "",
+    "format-on": "",
+    "format-off": "󰂲",
     "format-connected": " {num_connections}",
-    "format-connected-battery": "{icon} {num_connections}",
+    "format-connected-battery": "{icon} {device_battery_percentage} {num_connections}",
+    "format-no-controller": " ",
     "format-icons": [
       "󰥇",
       "󰤾",
@@ -18,10 +21,12 @@
       "󰥈"
     ],
     "tooltip-format": "{controller_alias}\n{num_connections} connected",
+    "tooltip-format-off": "Off",
     "tooltip-format-connected": "{controller_alias}\n{num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}",
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t{icon} {device_battery_percentage}%",
-    "on-click": "pypr toggle bluetooth"
+    "on-click": "pypr toggle bluetooth",
+    "on-click-right": "~/.config/waybar/scripts/bluetooth_toggle.sh"
     //turn off bluetooth on right click
   }
 }
