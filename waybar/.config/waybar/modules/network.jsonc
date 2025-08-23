@@ -1,9 +1,12 @@
 {
   "network": {
+    "format": "{icon}",
+    "format-alt": "{icon} {essid}",
     "format-wifi": "{icon}",
     "format-ethernet": "󰈀 {ifname}",
     "format-linked": " {ifname}",
-    "format-disconnected": "󰤩",
+    "format-disconnected": "󰤫",
+    "format-disabled": "󰤮",
     "format-icons": [
       "󰤯",
       "󰤟",
@@ -11,9 +14,9 @@
       "󰤥",
       "󰤨"
     ],
+    "max-length": 10,
     "tooltip-format-wifi": "Network: <b>{essid}</b>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>\n<span foreground='#eed49f'> {bandwidthDownBytes}</span> <span foreground='#b7bdf8'> {bandwidthUpBytes}</span>",
     "tooltip-format-ethernet": "Network: <b>{essid}</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>\n<span foreground='#eed49f'> {bandwidthDownBytes}</span> <span foreground='#b7bdf8'> {bandwidthUpBytes}</span>",
-    "format-disabled": "󰀝 Flight Mode",
     "tooltip": true,
     "interval": 2
   }
