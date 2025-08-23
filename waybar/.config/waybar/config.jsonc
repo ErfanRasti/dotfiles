@@ -2,7 +2,7 @@
   // See https://github.com/Alexays/Waybar/wiki/Configuration
   "layer": "top", // Make the bar appear at the top of another windows.
   "position": "top",
-  "height": 15,
+  "height": 12,
   "mode": "dock",
   "exclusive": true, // Option to request an exclusive zone from the compositor.
   "passtrough": false, //  Pass any pointer events to the window under the bar.

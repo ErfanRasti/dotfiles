@@ -1,29 +1,38 @@
 {
   "pulseaudio": {
     "format": "{icon} {volume}% {format_source}",
-    "format-bluetooth": "{icon} {volume}% {format_source}",
-    "format-bluetooth-muted": "   {volume}% {format_source}",
-    "format-muted": "  {format_source}",
-    "format-source": " ",
-    "format-source-muted": " ",
+    "format-muted": "<span color='red'>{icon}</span> {format_source}",
+    "format-bluetooth": "{icon} 󰂯 {volume}% {format_source}",
+    "format-bluetooth-muted": "<span color='red'>{icon} 󰂯</span> {format_source}",
+    "format-source": "",
+    "format-source-muted": "<span color='red'></span>",
     "format-icons": {
-      "headphone": " ",
-      "hands-free": " ",
-      "headset": " ",
-      "phone": " ",
-      "portable": " ",
-      "car": " ",
       "default": [
-        " ",
-        " ",
-        " "
+        "",
+        "",
+        ""
       ],
+      "default-muted": "",
+      "headphone": "",
+      "headphone-muted": "󰟎",
+      "hands-free": "",
+      "hands-free-muted": "󰟎",
+      "headset": "",
+      "headset-muted": "󰋐",
+      "phone": "",
+      "phone-muted": "",
+      "portable": "󰏲",
+      "portable-muted": "󰷯",
+      "car": "",
+      "car-muted": "󰸜"
     },
     "tooltip-format": "{desc}, {volume}%",
     "on-click": "swayosd-client --output-volume mute-toggle",
     "on-click-right": "swayosd-client --input-volume mute-toggle",
     "on-click-middle": "pypr toggle volume",
-    "on-scroll-up": "swayosd-client --output-volume +1",
-    "on-scroll-down": "swayosd-client --output-volume -1",
-  },
+    "on-scroll-up": "swayosd-client --output-volume -1", // Reverese it for the touchpad behavior
+    "on-scroll-down": "swayosd-client --output-volume +1", // Reverese it for the touchpad behavior
+    "reverse-mouse-scrolling": true, // Logical behavior on mouse
+    "smooth-scrolling-threshold": 3.0
+  }
 }
