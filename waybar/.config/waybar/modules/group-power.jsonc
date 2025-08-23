@@ -21,19 +21,18 @@
     "on-click": "~/.config/rofi/powermenu/run.sh"
   },
   "custom/lock": {
-    "format": "󰍁",
+    "format": "󰌾",
     "tooltip-format": "Lock the system",
     "on-click": "~/.config/rofi/powermenu/run.sh lock"
   },
   "custom/quit": {
-    "format": "󰗼",
+    "format": "󰍃",
     "tooltip-format": "Logout",
     "on-click": "~/.config/rofi/powermenu/run.sh logout"
   },
   "custom/suspend": {
-    "format": "󰒲",
+    "format": "󰤄",
     "tooltip-format": "Suspend the system",
-    "tooltip": false,
     "on-click": "~/.config/rofi/powermenu/run.sh suspend"
   }
 }
