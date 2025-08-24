@@ -9,6 +9,7 @@ battery="$(acpi -b | cut -d',' -f1 | cut -d':' -f1)"
 status="$(acpi -b | cut -d',' -f1 | cut -d':' -f2 | tr -d ' ')"
 percentage="$(acpi -b | cut -d',' -f2 | tr -d ' ',\%)"
 time="$(acpi -b | cut -d',' -f3)"
+current_threshold=$(cat /sys/class/power_supply/BAT0/charge_control_end_threshold 2>/dev/null || echo "Unknown")
 
 if [[ -z "$time" ]]; then
   time='Threshold Charged'
@@ -16,7 +17,7 @@ fi
 
 # Theme Elements
 prompt="$status"
-mesg="${battery}: ${percentage}%, ${time}"
+mesg="${battery}: ${percentage}%, ${time}, Threshold: ${current_threshold}"
 
 list_col='6'
 list_row='1'

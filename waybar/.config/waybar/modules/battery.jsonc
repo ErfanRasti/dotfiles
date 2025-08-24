@@ -1,9 +1,9 @@
 {
   "battery": {
     "format": "{icon} {capacity}%",
+    "format-alt": "{icon} {time}",
     "format-charging": "󰂄 {capacity}%",
     "format-plugged": " {capacity}%",
-    "format-alt": "{time} {icon}",
     "format-icons": [
       "󰂎",
       "󰁺",
@@ -17,12 +17,13 @@
       "󰂂",
       "󰁹"
     ],
-    "interval": 5,
+    "format-time": "{H}h {M}min",
+    "interval": 2,
     "states": {
       "warning": 30,
       "critical": 10
     },
     "tooltip": true,
-    "tooltip-format": "{timeTo}"
+    "tooltip-format": "{timeTo}\nPower usage: {power} watts\nCycles: {cycles}\nHealth: {health}"
   }
 }
