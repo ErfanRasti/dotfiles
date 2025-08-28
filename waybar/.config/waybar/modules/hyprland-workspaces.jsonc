@@ -15,7 +15,7 @@
       "update-active-window": false, // increases cpu usage
       "format": "{icon}",
       "icon-size": 16,
-      "icon-theme": "Breeze-Dark",
+      "icon-theme": "Flat-Remix-Blue-Dark",
       "orientation": "horizontal",
       "on-click-window": "~/.config/waybar/scripts/focus_window.sh {address} {button}"
     }
