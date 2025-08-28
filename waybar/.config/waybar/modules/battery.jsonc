@@ -21,7 +21,7 @@
     "interval": 2,
     "states": {
       "warning": 30,
-      "critical": 10
+      "critical": 15
     },
     "tooltip": true,
     "tooltip-format": "{timeTo}\nPower usage: {power} watts\nCycles: {cycles}\nHealth: {health}"
