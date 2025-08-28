@@ -202,6 +202,7 @@ window#waybar.fullscreen #windowcount {
 /*****----- custom keyboard state -----*****/
 #custom-keyboard-state {
   border: 2px solid @secondary;
+  color: #28d67f;
 }
 
 /*****----- hyprland submap -----*****/
@@ -245,19 +246,19 @@ window#waybar.fullscreen #windowcount {
 	margin: 0px 0px 0px 0px;
 }
 
-#cpu.warning, #memory.warning {color: orange;}
-#cpu.critical, #memory.critical {color: red;}
+#cpu.warning, #memory.warning {color: #ffbe61;}
+#cpu.critical, #memory.critical {color: #f53c3c;}
 
 /*****----- bluetooth -----*****/
-#bluetooth.disabled {color: red;}
-#bluetooth.no-controller {color: orange;}
+#bluetooth.disabled {color: #f53c3c;}
+#bluetooth.no-controller {color: #ffbe61;}
 #bluetooth.discovering {color: cyan;}
 #bluetooth.discoverable {color: purple;}
 
 /*****----- network -----*****/
-#network.disconnected {color: orange;}
+#network.disconnected {color: #ffbe61;}
 
 /*****----- battery -----*****/
-#battery.warning {color: orange;}
-#battery.critical {color: red;}
+#battery.critical:not(.charging) {color: #f53c3c;}
+#battery.warning:not(.charging) {color: #ffbe61;}
 #battery.charging {color: #28d67f;}
