@@ -2,6 +2,7 @@
   "tray": {
     "spacing": 5,
     "icon-size": 16,
+    "show-passive-items": true,
     "smooth-scrolling-threshold": 3.0
   }
 }
