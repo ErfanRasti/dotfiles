@@ -7,9 +7,10 @@ configuration {
   display-filebrowser:        "  FILES";
   display-window:             "  WINDOW";
 	drun-display-format:        "{name}";
-	window-format:              "{w} · {c} · {t}";
+  window-format: "<b>{c}</b>\n<span size='smaller' alpha='70%'>{t}</span>";
+  markup-rows:                true;
   opacity:                    true;
-    // hover-select: true; 
+  // hover-select: true; 
 }
 
 /*****----- Global Properties -----*****/

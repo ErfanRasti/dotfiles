@@ -1,6 +1,5 @@
 /*****----- Configuration -----*****/
 configuration {
-
     show-icons:                 false;
     opacity:                    true;
     // hover-select: true; 
