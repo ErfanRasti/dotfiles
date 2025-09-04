@@ -201,8 +201,9 @@ window#waybar.fullscreen #windowcount {
 
 /*****----- custom keyboard state -----*****/
 #custom-keyboard-state {
+  background-color: @primary;
   border: 2px solid @secondary;
-  color: #28d67f;
+  color: @on_primary;
 }
 
 /*****----- hyprland submap -----*****/
@@ -252,8 +253,8 @@ window#waybar.fullscreen #windowcount {
 /*****----- bluetooth -----*****/
 #bluetooth.disabled {color: #f53c3c;}
 #bluetooth.no-controller {color: #ffbe61;}
-#bluetooth.discovering {color: cyan;}
-#bluetooth.discoverable {color: purple;}
+#bluetooth.discovering {color: #3cd6a9;}
+#bluetooth.discoverable {color: #ff7a61;}
 
 /*****----- network -----*****/
 #network.disconnected {color: #ffbe61;}
