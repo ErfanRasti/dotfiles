@@ -2,6 +2,9 @@
 show_hidden = true
 
 [opener]
- play = [
+play = [
   { run = 'vlc "$@"', orphan = true, desc="Open in VLC", for = "linux"},
+]
+edit = [
+	{ run = '$EDITOR "$@"', block = true, for = "linux" },
 ]
