@@ -37,7 +37,7 @@ if status is-interactive
 end
 
 # Set default editor
-export EDITOR=nvim
+# export EDITOR=nvim
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
