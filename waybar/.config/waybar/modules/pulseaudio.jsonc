@@ -1,11 +1,11 @@
 {
   "pulseaudio": {
     "format": "{icon} {volume}% {format_source}",
-    "format-muted": "<span color='red'>{icon}</span> {format_source}",
+    "format-muted": "<span color='#f53c3c'>{icon}</span> {format_source}",
     "format-bluetooth": "{icon} 󰂯 {volume}% {format_source}",
-    "format-bluetooth-muted": "<span color='red'>{icon} 󰂯</span> {format_source}",
+    "format-bluetooth-muted": "<span color='#f53c3c'>{icon} 󰂯</span> {format_source}",
     "format-source": "󰍬",
-    "format-source-muted": "<span color='red'>󰍭</span>",
+    "format-source-muted": "<span color='#f53c3c'>󰍭</span>",
     "format-icons": {
       "default": [
         "",
