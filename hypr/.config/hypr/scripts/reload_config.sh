@@ -1,6 +1,8 @@
 #!/bin/bash
 
 waypaper --restore
-killall waybar
+
+pkill waybar
 waybar &
+
 spicetify apply
