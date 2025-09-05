@@ -28,6 +28,11 @@ input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/swaync/colors.css'
 post_hook = 'pkill swaync && swaync & disown'
 
+[templates.swayosd]
+input_path = '~/.config/matugen/templates/colors.css'
+output_path = '~/.config/swayosd/colors.css'
+post_hook = 'pkill swayosd-server && swayosd-server & disown'
+
 [templates.rofi]
 input_path = '~/.config/matugen/templates/rofi-colors.rasi'
 output_path = '~/.config/rofi/settings/colors.rasi'
@@ -77,4 +82,3 @@ post_hook = 'spicetify config current_theme matugen;spicetify config color_schem
 input_path = '~/.config/matugen/templates/pywalfox-colors.json'
 output_path = '~/.cache/wal/colors.json'
 post_hook = 'pywalfox update'
-
