@@ -1,27 +1,26 @@
-
 /*****----- Global Properties -----*****/
-@import 'colors.css';
+@import "colors.css";
 
 * {
-    font-family: "CaskaydiaCove Nerd Font Propo";
-    font-size: 14px;
-    min-height: 0;
-    font-weight: bold;
+  font-family: "CaskaydiaCove Nerd Font Propo";
+  font-size: 14px;
+  min-height: 0;
+  font-weight: bold;
 }
 
 .module {
-	background-color: alpha(@surface_container_low, 0.3);
+  background-color: alpha(@surface_container_low, 0.3);
   color: @primary;
-	padding: 0px 5px 0px 5px;
-	margin: 1px 1px 1px 1px;
-	border-radius: 5px;
-	box-shadow: 0px 0px 1px 0px alpha(@shadow, 0.25);
-	border: 0px solid transparent;
-	background-clip: padding-box;
+  padding: 0px 5px 0px 5px;
+  margin: 1px 1px 1px 1px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 1px 0px alpha(@shadow, 0.25);
+  border: 0px solid transparent;
+  background-clip: padding-box;
   transition: all 0.2s ease-in-out;
 }
 
-.module:hover:not(#workspaces){
+.module:hover:not(#workspaces) {
   background-color: @tertiary;
   color: @on_tertiary;
   border-radius: 5px;
@@ -41,11 +40,11 @@ window#waybar {
   transition-property: background-color;
   transition-duration: 0.1s;
   margin: 0;
-  border-radius: 0px
+  border-radius: 0px;
 }
 
 window#waybar.hidden {
-	opacity: 0;
+  opacity: 0;
 }
 
 /*****----- tooltip -----*****/
@@ -60,30 +59,28 @@ tooltip label {
 }
 
 /*****----- powermenu group -----*****/
-#custom-lock{
+#custom-lock {
   padding: 1px 1px 1px 1px;
   padding-right: 5px;
   padding-left: 5px;
-	margin: 0px 0px 0px 0px;
-	border-radius: 5px 0px 0px 5px;
-
+  margin: 0px 0px 0px 0px;
+  border-radius: 5px 0px 0px 5px;
 }
 
-#custom-quit{
+#custom-quit {
   padding: 1px 1px 1px 1px;
   padding-right: 5px;
   padding-left: 5px;
-	margin: 0px 0px 0px 0px;
-	border-radius: 0px 0px 0px 0px;
-
+  margin: 0px 0px 0px 0px;
+  border-radius: 0px 0px 0px 0px;
 }
 
-#custom-suspend{
+#custom-suspend {
   padding: 1px 1px 1px 1px;
   padding-right: 5px;
   padding-left: 5px;
-	margin: 0px 0px 0px 0px;
-	border-radius: 0px 5px 5px 0px;
+  margin: 0px 0px 0px 0px;
+  border-radius: 0px 5px 5px 0px;
 }
 
 /*****----- workspaces -----*****/
@@ -96,31 +93,31 @@ tooltip label {
   margin: 1px 1px 1px 1px;
   background-color: alpha(@primary, 0.2);
   color: @on_primary_container;
-	border-radius: 5px;
+  border-radius: 5px;
   transition: all 0.3s ease-in-out;
 }
 
 #workspaces button.empty {
   background-color: @tertiary;
-  color:@on_tertiary;
+  color: @on_tertiary;
 }
 
 #workspaces button.special,
 #workspaces button.persistent,
 #workspaces button.visible {
   background-color: @tertiary_container;
-  color:@on_tertiary_container;
+  color: @on_tertiary_container;
 }
 
 #workspaces button.urgent {
-background-color:@error_container;
-border-radius: 5px;
+  background-color: @error_container;
+  border-radius: 5px;
   color: @on_error_container;
 }
 
 #workspaces button.active {
   background-color: @primary;
-  color:@on_primary;
+  color: @on_primary;
   transition: all 0.3s ease-in-out;
 }
 
@@ -137,7 +134,7 @@ border-radius: 5px;
 }
 
 /*****----- window -----*****/
-window#waybar.empty #window{
+window#waybar.empty #window {
   background-color: transparent;
   color: transparent;
   padding: 0px;
@@ -146,26 +143,25 @@ window#waybar.empty #window{
 
 window#waybar.fullscreen #window {
   background-color: @primary_container;
-  color: @on_primary_container; 
-
+  color: @on_primary_container;
 }
 
 window#waybar.floating #window {
   background-color: @secondary;
-   color: @on_secondary; 
+  color: @on_secondary;
 }
 
 /*****----- window count -----*****/
 window#waybar.fullscreen #windowcount {
   background-color: @primary_container;
-  color: @on_primary_container; 
+  color: @on_primary_container;
 }
 
 /*****----- custom notification, clock, and power profiles daemon -----*****/
 #custom-notification,
 #clock,
-#power-profiles-daemon{
-   color: @tertiary; 
+#power-profiles-daemon {
+  color: @tertiary;
 }
 
 /*****----- power profiles daemon -----*****/
@@ -202,7 +198,7 @@ window#waybar.fullscreen #windowcount {
 /*****----- custom keyboard state -----*****/
 #custom-keyboard-state {
   background-color: @primary;
-  border: 2px solid @secondary;
+  border: 2px solid @tertiary;
   color: @on_primary;
 }
 
@@ -216,12 +212,12 @@ window#waybar.fullscreen #windowcount {
 #gamemode.running {
   background-color: alpha(@surface_container_low, 0.3);
   color: @primary;
-	padding: 0px 5px 0px 5px;
-	margin: 1px 1px 1px 1px;
-	border-radius: 5px;
-	box-shadow: 0px 0px 1px 0px alpha(@shadow, 0.25);
-	border: 0px solid transparent;
-	background-clip: padding-box;
+  padding: 0px 5px 0px 5px;
+  margin: 1px 1px 1px 1px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 1px 0px alpha(@shadow, 0.25);
+  border: 0px solid transparent;
+  background-clip: padding-box;
   transition: all 0.2s ease-in-out;
 }
 
@@ -233,33 +229,55 @@ window#waybar.fullscreen #windowcount {
 }
 
 #cpu {
-	border-radius: 5px 0px 0px 5px;
-	margin: 0px 0px 0px 0px;
+  border-radius: 5px 0px 0px 5px;
+  margin: 0px 0px 0px 0px;
 }
 
 #temperature {
-	border-radius: 0px;
-	margin: 0px 0px 0px 0px;
+  border-radius: 0px;
+  margin: 0px 0px 0px 0px;
 }
 
 #memory {
-	border-radius: 0px 5px 5px 0px;
-	margin: 0px 0px 0px 0px;
+  border-radius: 0px 5px 5px 0px;
+  margin: 0px 0px 0px 0px;
 }
 
-#cpu.warning, #memory.warning {color: #ffbe61;}
-#cpu.critical, #memory.critical {color: #f53c3c;}
+#cpu.warning,
+#memory.warning {
+  color: #ffbe61;
+}
+#cpu.critical,
+#memory.critical {
+  color: #f53c3c;
+}
 
 /*****----- bluetooth -----*****/
-#bluetooth.disabled {color: #f53c3c;}
-#bluetooth.no-controller {color: #ffbe61;}
-#bluetooth.discovering {color: #3cd6a9;}
-#bluetooth.discoverable {color: #ff7a61;}
+#bluetooth.disabled {
+  color: #f53c3c;
+}
+#bluetooth.no-controller {
+  color: #ffbe61;
+}
+#bluetooth.discovering {
+  color: #3cd6a9;
+}
+#bluetooth.discoverable {
+  color: #ff7a61;
+}
 
 /*****----- network -----*****/
-#network.disconnected {color: #ffbe61;}
+#network.disconnected {
+  color: #ffbe61;
+}
 
 /*****----- battery -----*****/
-#battery.critical:not(.charging) {color: #f53c3c;}
-#battery.warning:not(.charging) {color: #ffbe61;}
-#battery.charging {color: #28d67f;}
+#battery.critical:not(.charging) {
+  color: #f53c3c;
+}
+#battery.warning:not(.charging) {
+  color: #ffbe61;
+}
+#battery.charging {
+  color: #28d67f;
+}
