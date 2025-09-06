@@ -1,9 +1,8 @@
 @import "colors.css";
 
 window#osd {
-  border-radius: 15px;
-  /* border: 1px solid @outline; */
-  border: none;
+  border-radius: 10px;
+  border: 1px solid @primary_container;
   background: alpha(@surface_container_low, 0.4);
 }
 
