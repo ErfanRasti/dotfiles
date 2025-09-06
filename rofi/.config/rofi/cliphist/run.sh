@@ -23,6 +23,6 @@ w)
   ;;
 
 *)
-  rofi -config $style -show clipboard
+  rofi -config $style -show " clipboard"
   ;;
 esac
