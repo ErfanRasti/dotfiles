@@ -1,3 +1,8 @@
+/*****----- Global Properties -----*****/
+@import "~/.config/rofi/settings/vim-keybindings-notext.rasi"
+@import "~/.config/rofi/settings/font.rasi"
+@import "~/.config/rofi/settings/colors.rasi"
+
 /*****----- Configuration -----*****/
 configuration {
     show-icons:                 false;
@@ -6,11 +11,6 @@ configuration {
     modi:                       "drun";
     opacity:                    true;
 }
-
-/*****----- Global Properties -----*****/
-@import "~/.config/rofi/settings/vim-keybindings-notext.rasi"
-@import "~/.config/rofi/settings/font.rasi"
-@import "~/.config/rofi/settings/colors.rasi"
 
 /*****----- Main Window -----*****/
 window {

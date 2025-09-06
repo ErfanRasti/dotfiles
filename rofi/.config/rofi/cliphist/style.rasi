@@ -1,16 +1,16 @@
-/*****----- Configuration -----*****/
-configuration {
-    show-icons:                 true;
-    opacity:                    true;
-  modes: "clipboard:~/.config/rofi/cliphist/cliphist_rofi_img.sh,delete:~/.config/rofi/cliphist/run.sh d,wipe:~/.config/rofi/cliphist/run.sh w";
-    // hover-select: true; 
-}
-
 /*****----- Global Properties -----*****/
 @import "~/.config/rofi/settings/icon.rasi"
 @import "~/.config/rofi/settings/vim-keybindings.rasi"
 @import "~/.config/rofi/settings/font.rasi"
 @import "~/.config/rofi/settings/colors.rasi"
+
+/*****----- Configuration -----*****/
+configuration {
+    show-icons:                 true;
+    opacity:                    true;
+    modes: " clipboard:~/.config/rofi/cliphist/cliphist_rofi_img.sh,󰗨 delete:~/.config/rofi/cliphist/run.sh d, wipe:~/.config/rofi/cliphist/run.sh w";
+    // hover-select: true; 
+}
 
 /*****----- Main Window -----*****/
 window {
@@ -76,13 +76,14 @@ entry {
 /*****----- Mode Switcher -----*****/
 mode-switcher {
     enabled:                     true;
-    spacing:                     10px;
-    padding:                     1px 2px 1px 2px;
+    spacing:                     5px;
+    padding:                     1px;
+    margin: 0px 5px 5px 5px;
     background-color:            transparent;
     text-color:                  @on-surface;
 }
 button {
-    padding:                     15px;
+    padding:                     5px 0px 5px 0px;
     border-radius:               10px;
     background-color:            @surface-container-high;
     text-color:                  inherit;
@@ -201,5 +202,4 @@ error-message {
     background-color:            @error-container;
     text-color:                  @on-error-container;
 }
-
 

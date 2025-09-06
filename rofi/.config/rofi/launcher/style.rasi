@@ -1,3 +1,9 @@
+/*****----- Global Properties -----*****/
+@import "~/.config/rofi/settings/icon.rasi"
+@import "~/.config/rofi/settings/vim-keybindings.rasi"
+@import "~/.config/rofi/settings/font.rasi"
+@import "~/.config/rofi/settings/colors.rasi"
+
 /*****----- Configuration -----*****/
 configuration {
 	modi:                       "drun,run,filebrowser,window";
@@ -12,13 +18,6 @@ configuration {
   opacity:                    true;
     // hover-select: true; 
 }
-
-/*****----- Global Properties -----*****/
-@import "~/.config/rofi/settings/icon.rasi"
-@import "~/.config/rofi/settings/vim-keybindings.rasi"
-@import "~/.config/rofi/settings/font.rasi"
-@import "~/.config/rofi/settings/colors.rasi"
-
 
 /*****----- Main Window -----*****/
 window {
