@@ -2,6 +2,7 @@
 configuration {
     show-icons:                 true;
     opacity:                    true;
+  modes: "clipboard:~/.config/rofi/cliphist/cliphist_rofi_img.sh,delete:~/.config/rofi/cliphist/run.sh d,wipe:~/.config/rofi/cliphist/run.sh w";
     // hover-select: true; 
 }
 
@@ -35,7 +36,7 @@ mainbox {
     spacing:                     0px;
     padding:                     0px;
     orientation:                 vertical;
-    children:                    [ "inputbar", "listview" ];
+    children:                    [ "inputbar", "mode-switcher", "listview" ];
     // background-color:            transparent;
     background-color:            @inverse-on-surface;
     // border:                      0px; /* Ensure no border */
@@ -70,6 +71,26 @@ entry {
     cursor:                      text;
     placeholder:                 "Search clipboard history...";
     placeholder-color:           @on-surface-variant;
+}
+
+/*****----- Mode Switcher -----*****/
+mode-switcher {
+    enabled:                     true;
+    spacing:                     10px;
+    padding:                     1px 2px 1px 2px;
+    background-color:            transparent;
+    text-color:                  @on-surface;
+}
+button {
+    padding:                     15px;
+    border-radius:               10px;
+    background-color:            @surface-container-high;
+    text-color:                  inherit;
+    cursor:                      pointer;
+}
+button selected {
+    background-color:            @primary-container;
+    text-color:                  @on-primary-container;
 }
 
 /*****----- Listview -----*****/
