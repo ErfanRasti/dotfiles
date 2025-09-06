@@ -4,16 +4,25 @@ style="~/.config/rofi/cliphist/style.rasi"
 
 case $1 in
 d)
-  cliphist list | rofi -dmenu -replace -config $style | cliphist delete
+  if [ ! -z "$2" ]; then
+    echo "$2" | cliphist delete
+  fi
+  ~/.config/rofi/cliphist/cliphist_rofi_img.sh
+  # cliphist list
   ;;
 
 w)
-  if [ $(echo -e "Clear\nCancel" | rofi -dmenu -config $style) == "Clear" ]; then
-    cliphist wipe
+  if [ -z "$2" ]; then
+    echo -e "Clear\nCancel"
+  else
+
+    if [ "$2" == "Clear" ]; then
+      cliphist wipe
+    fi
   fi
   ;;
 
 *)
-  rofi -modi clipboard:~/.config/rofi/cliphist/cliphist-rofi-img.sh -show clipboard -show-icons -config $style
+  rofi -config $style -show clipboard
   ;;
 esac
