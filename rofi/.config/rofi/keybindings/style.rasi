@@ -1,0 +1,181 @@
+/*****----- Global Properties -----*****/
+@import "~/.config/rofi/settings/icon.rasi"
+@import "~/.config/rofi/settings/vim-keybindings.rasi"
+@import "~/.config/rofi/settings/font.rasi"
+@import "~/.config/rofi/settings/colors.rasi"
+
+/*****----- Configuration -----*****/
+configuration {
+	modi:                       "drun";
+  show-icons:                 false;
+	drun-display-format:        "{name}";
+  opacity:                    true;
+    // hover-select: true; 
+}
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       500px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+    border:                     0px;
+    border-color:               transparent;
+    enabled:                     true;
+    border-radius:               15px;
+    cursor:                      "default";
+    background-color:            transparent;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     0px;
+    padding:                     0px;
+    background-color:            @inverse-on-surface;
+    orientation:                 vertical;
+    children:                    [ "inputbar", "listbox" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      10px 10px 5px 10px;
+    padding:                     15px;
+    border-radius:               10px;
+    background-color:            @surface-container-high;
+    text-color:                  @on-surface;
+    children:                    [ "textbox-prompt-colon", "entry" ];
+}
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "";
+    background-color:            transparent;
+    text-color:                  @primary;
+}
+entry {
+    enabled:                     true;
+    expand:                      true;
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "Search";
+    placeholder-color:           @on-surface-variant;
+}
+
+/*****----- Listbox -----*****/
+listbox {
+    spacing:                     0px;
+    padding:                     0px;
+    background-color:            transparent;
+    border-radius:               0px 15px 15px 0px;  /* Only round right corners */
+    orientation:                 vertical;
+    children:                    [ "message", "listview" ];
+}
+
+/*****----- Message -----*****/
+message {
+    background-color:            transparent;
+  margin:                        5px 10px 5px 10px;
+
+}
+textbox {
+    padding:                     15px;
+    border-radius:               10px;
+    background-color:            @surface-container-high;
+    text-color:                  @on-surface;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+error-message {
+    padding:                     15px;
+    border-radius:               20px;
+    background-color:            @error-container;
+    text-color:                  @on-error-container;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       8;
+    cycle:                       false;
+    dynamic:                     true;
+    scrollbar:                   true;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    margin:                      5px 10px 10px 10px;
+    fixed-columns:               true;
+  border:                        0px; /* Ensure no border to prevent dashed line */
+    background-color:            transparent;
+    text-color:                  @on-surface;
+    cursor:                      "default";
+}
+
+/*****----- Scrollbar -----*****/
+scrollbar {
+    handle-width:               8px;
+    // handle-color:               @primary;
+    handle-color:               @secondary;
+    handle-rounded-corners:     true;
+    border-radius:              4px;
+    background-color:           @surface-container-high;
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    spacing:                     15px;
+    padding:                     8px;
+    border-radius:               10px;
+    background-color:            transparent;
+    text-color:                  @tertiary;
+    cursor:                      pointer;
+}
+element normal.normal,
+element alternate.normal {
+    background-color:            inherit;
+    text-color:                  @tertiary;
+}
+
+element normal.active,
+element alternate.active {
+    background-color:            @secondary-container;
+    text-color:                  @on-secondary-container;
+}
+
+element normal.urgent,
+element alternate.urgent {
+    background-color:            @error-container;
+    text-color:                  @on-error-container;
+}
+
+element selected.normal,
+element selected.active,
+element selected.urgent {
+  // background-color:            @primary-container;
+    background-color:            @primary;
+    // text-color:                  @on-primary-container;
+    text-color:                  @on-primary;
+}
+element-icon {
+    background-color:            transparent;
+    text-color:                  inherit;
+    size:                        32px;
+    cursor:                      inherit;
+}
+
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+
