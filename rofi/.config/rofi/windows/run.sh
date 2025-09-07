@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-style="~/.config/rofi/windows/style.rasi"
+style=~/.config/rofi/windows/style.rasi
 
 ## Run
 rofi \
