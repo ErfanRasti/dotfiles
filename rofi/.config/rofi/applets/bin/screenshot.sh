@@ -70,7 +70,7 @@ shotarea() {
 }
 
 toggle_gpu_screen_recorder() {
-  YDOTOOL_SOCKET="$HOME/.ydotool_socket" ydotool key 56:1 44:1 44:0 56:0
+  ydotool key 56:1 44:1 44:0 56:0
 }
 
 # Execute Command
