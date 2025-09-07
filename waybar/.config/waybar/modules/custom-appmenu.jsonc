@@ -4,7 +4,7 @@
     "format": "",
     // END APPS LABEL
     "on-click": "~/.config/rofi/launcher/run.sh",
-    // "on-click-right": "~/.config/hypr/scripts/keybindings.sh",
-    "tooltip-format": "Left: Open the application launcher\nRight: Show all keybindings"
-  }
+    "on-click-right": "~/.config/rofi/keybindings/run.sh",
+    "tooltip-format": "Left: Open the application launcher\nRight: Show all keybindings",
+  },
 }
