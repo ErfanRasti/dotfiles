@@ -70,6 +70,7 @@ shotarea() {
 }
 
 toggle_gpu_screen_recorder() {
+  # Press Alt+z to show gpu screen recorder
   ydotool key 56:1 44:1 44:0 56:0
 }
 

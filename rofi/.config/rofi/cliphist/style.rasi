@@ -111,7 +111,7 @@ listview {
     margin:                      0px;
     background-color:            @surface-container;
     border-radius:               12px 12px 12px 12px; /* Only round bottom corners */
-    border:                      0px; /* Ensure no border */
+    border:                      0px; /* Ensure no border to prevent dashed line */
     cursor:                      "default";
 }
 
