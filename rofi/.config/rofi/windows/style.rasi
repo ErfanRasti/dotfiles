@@ -15,6 +15,7 @@ configuration {
 	drun-display-format:        "{name}";
   window-format: "<b>{c}</b>\n<span size='smaller' alpha='70%'>{t}</span>";
   markup-rows:                true;
+  markup:                     true;
   opacity:                    true;
   // hover-select: true; 
 }
