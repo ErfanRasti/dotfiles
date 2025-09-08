@@ -1,37 +1,52 @@
-#!/bin/env sh
+#!/usr/bin/env bash
+set -euo pipefail
 
-TMP_FILE="$XDG_RUNTIME_DIR/hyprland-show-desktop"
+TMP_FILE="${XDG_RUNTIME_DIR:-/tmp}/hyprland-show-desktop"
 
-CURRENT_WORKSPACE=$(hyprctl monitors -j | jq '.[] | .activeWorkspace | .name' | sed 's/"//g')
+# Current workspace name (unquoted string)
+CURRENT_WORKSPACE="$(hyprctl monitors -j | jq -r '.[].activeWorkspace.name')"
 
-if [ -s "$TMP_FILE-$CURRENT_WORKSPACE" ]; then
-  readarray -d $'\n' -t ADDRESS_ARRAY <<< $(< "$TMP_FILE-$CURRENT_WORKSPACE")
+STATE_FILE="${TMP_FILE}-${CURRENT_WORKSPACE}"
 
-  for address in "${ADDRESS_ARRAY[@]}"
-  do
-    CMDS+="dispatch movetoworkspacesilent name:$CURRENT_WORKSPACE,address:$address;"
+# Accumulate hyprctl --batch commands here
+CMDS=""
+
+if [[ -s "$STATE_FILE" ]]; then
+  # We have a saved list of addresses to restore to the current workspace
+  mapfile -t ADDRESS_ARRAY <"$STATE_FILE"
+
+  for address in "${ADDRESS_ARRAY[@]}"; do
+    [[ -n "$address" ]] || continue
+    CMDS+="dispatch movetoworkspacesilent name:${CURRENT_WORKSPACE},address:${address};"
   done
 
-  hyprctl --batch "$CMDS"
+  # Only call hyprctl if we actually queued commands
+  if [[ -n "$CMDS" ]]; then
+    hyprctl --batch "$CMDS"
+  fi
 
-  rm "$TMP_FILE-$CURRENT_WORKSPACE"
+  rm -f -- "$STATE_FILE"
 else
-  HIDDEN_WINDOWS=$(hyprctl clients -j | jq --arg CW "$CURRENT_WORKSPACE" '.[] | select (.workspace .name == $CW) | .address')
+  # Collect all client addresses on the current workspace
+  # jq -r outputs raw strings (no quotes), one per line
+  mapfile -t ADDRESS_ARRAY < <(
+    hyprctl clients -j |
+      jq -r --arg CW "$CURRENT_WORKSPACE" '.[] | select(.workspace.name == $CW) | .address'
+  )
 
-  readarray -d $'\n' -t ADDRESS_ARRAY <<< $HIDDEN_WINDOWS
-
-  for address in "${ADDRESS_ARRAY[@]}"
-  do
-    address=$(sed 's/"//g' <<< $address )
-
-    if [[ -n address ]]; then
-      TMP_ADDRESS+="$address\n"
-    fi
-
-    CMDS+="dispatch movetoworkspacesilent special:desktop,address:$address;"
+  TMP_ADDRESS=""
+  for address in "${ADDRESS_ARRAY[@]}"; do
+    [[ -n "$address" ]] || continue
+    TMP_ADDRESS+="${address}"$'\n'
+    CMDS+="dispatch movetoworkspacesilent special:desktop,address:${address};"
   done
 
-  hyprctl --batch "$CMDS"
+  if [[ -n "$CMDS" ]]; then
+    hyprctl --batch "$CMDS"
+  fi
 
-  echo -e "$TMP_ADDRESS" | sed -e '/^$/d' > "$TMP_FILE-$CURRENT_WORKSPACE"
+  # Save the list of addresses (without empty lines)
+  if [[ -n "${TMP_ADDRESS}" ]]; then
+    printf '%s' "$TMP_ADDRESS" | sed -e '/^$/d' >"$STATE_FILE"
+  fi
 fi
