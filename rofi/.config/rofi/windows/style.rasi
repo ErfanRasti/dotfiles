@@ -3,6 +3,7 @@
 @import "~/.config/rofi/settings/vim-keybindings-notext.rasi"
 @import "~/.config/rofi/settings/font.rasi"
 @import "~/.config/rofi/settings/colors.rasi"
+@import "~/.config/rofi/settings/mouse-options.rasi"
 
 /*****----- Configuration -----*****/
 configuration {
@@ -17,7 +18,6 @@ configuration {
   markup-rows:                true;
   markup:                     true;
   opacity:                    true;
-  // hover-select: true; 
 }
 
 /*****----- Main Window -----*****/
