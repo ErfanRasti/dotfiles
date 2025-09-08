@@ -7,12 +7,13 @@
 
 /*****----- Configuration -----*****/
 configuration {
-	modi:                       "drun,run,filebrowser,window";
+	modi:                       "drun,run,filebrowser,window,calc";
   show-icons:                 true;
-  display-drun:               "  APPS";
-  display-run:                "  RUN";
-  display-filebrowser:        "  FILES";
-  display-window:             "  WINDOW";
+  display-drun:               " APPS";
+  display-run:                " RUN";
+  display-filebrowser:        " FILES";
+  display-window:             " WINS";
+  display-calc:               " CALC";
 	drun-display-format:        "{name}";
 	// window-format:              "{w} · {c} · {t}";
   window-format: "<b>{c}</b>\n<span size='smaller' alpha='70%'>[{w}] {t}</span>";
@@ -77,11 +78,12 @@ entry {
 /*****----- Mode Switcher -----*****/
 mode-switcher{
     enabled:                     true;
-    spacing:                     20px;
+    spacing:                     10px;
     padding:                     5px 10px 5px 10px;
     background-color:            transparent;
     text-color:                  @on-surface;
 }
+
 button {
     padding:                     15px;
     border-radius:               10px;
@@ -89,6 +91,7 @@ button {
     text-color:                  inherit;
     cursor:                      pointer;
 }
+
 button selected {
     background-color:            @primary-container;
     text-color:                  @on-primary-container;
@@ -110,6 +113,7 @@ message {
   margin:                        5px 10px 5px 10px;
 
 }
+
 textbox {
     padding:                     15px;
     border-radius:               10px;
@@ -118,6 +122,7 @@ textbox {
     vertical-align:              0.5;
     horizontal-align:            0.0;
 }
+
 error-message {
     padding:                     15px;
     border-radius:               20px;
@@ -163,6 +168,7 @@ element {
     text-color:                  @tertiary;
     cursor:                      pointer;
 }
+
 element normal.normal,
 element alternate.normal {
     background-color:            inherit;
@@ -189,6 +195,7 @@ element selected.urgent {
     // text-color:                  @on-primary-container;
     text-color:                  @on-primary;
 }
+
 element-icon {
     background-color:            transparent;
     text-color:                  inherit;
