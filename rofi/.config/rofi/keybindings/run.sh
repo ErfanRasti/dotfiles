@@ -10,13 +10,52 @@ ALT_ICON="${ALT_ICON:-󰘵}"
 CTRL_ICON="${CTRL_ICON:-󰘴}"
 SUPER_ICON="${SUPER_ICON:-󰘳}"
 SHIFT_ICON="${SHIFT_ICON:-⇧}" # Unicode, widely present in Nerd Fonts
-
-# Rofi theme path (your custom style)
+# Rofi theme paths
 STYLE="${STYLE:-${HOME}/.config/rofi/keybindings/style.rasi}"
+STYLE_OVERVIEW="${STYLE_OVERVIEW:-${HOME}/.config/rofi/keybindings/style-overview.rasi}"
 
 ROFI_CMD=${ROFI_CMD:-rofi}
 ROFI_PROMPT=${ROFI_PROMPT:-Keybindings}
 SEP=$'\x1f' # Unit Separator makes multi-line dmenu entries robust
+
+# --- arg parsing (only -o/--overview for now) ------------------------------
+OVERVIEW=0
+SHOW_HELP=0
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+  -o | --overview)
+    OVERVIEW=1
+    shift
+    ;;
+  -h | --help)
+    SHOW_HELP=1
+    shift
+    ;;
+  --)
+    shift
+    break
+    ;;
+  *)
+    echo "Unknown option: $1" >&2
+    exit 2
+    ;;
+  esac
+done
+
+if [[ $SHOW_HELP -eq 1 ]]; then
+  cat <<EOF
+Usage: $(basename "$0") [-o|--overview]
+
+Options:
+  -o, --overview   Use the overview style theme (style-overview.rasi)
+  -h, --help       Show this help and exit
+Environment overrides:
+  STYLE=~/.config/rofi/keybindings/style.rasi
+  STYLE_OVERVIEW=~/.config/rofi/keybindings/style-overview.rasi
+EOF
+  exit 0
+fi
 
 # --- checks ---------------------------------------------------------------
 
@@ -30,8 +69,15 @@ if [[ ! -f "$FILE" ]]; then
   exit 1
 fi
 
-if [[ ! -f "$STYLE" ]]; then
-  echo "Warning: style file not found at: $STYLE (continuing with rofi defaults)" >&2
+# Pick the active theme based on the flag
+if [[ $OVERVIEW -eq 1 ]]; then
+  ACTIVE_THEME="$STYLE_OVERVIEW"
+else
+  ACTIVE_THEME="$STYLE"
+fi
+
+if [[ ! -f "$ACTIVE_THEME" ]]; then
+  echo "Warning: style file not found at: $ACTIVE_THEME (continuing with rofi defaults)" >&2
 fi
 
 # --- builder --------------------------------------------------------------
@@ -77,6 +123,20 @@ awk \
     keymap["XF86MONBRIGHTNESSUP"]   = "󰃠";
     keymap["XF86MONBRIGHTNESSDOWN"] = "󰃞";
     keymap["XF86POWEROFF"] = "󰤄";
+
+    # Function keys
+    keymap["F1"] = "󱊫";
+    keymap["F2"] = "󱊬";
+    keymap["F3"] = "󱊭";
+    keymap["F4"] = "󱊮";
+    keymap["F5"] = "󱊯";
+    keymap["F6"] = "󱊰";
+    keymap["F7"] = "󱊱";
+    keymap["F8"] = "󱊲";
+    keymap["F9"] = "󱊳";
+    keymap["F10"] = "󱊴";
+    keymap["F11"] = "󱊵";
+    keymap["F12"] = "󱊶";
 
     # Mouse buttons often used in Hyprland binds
     keymap["MOUSE:272"] = "󰍽 LMB";
@@ -167,8 +227,8 @@ awk \
     -i
   )
 
-  if [[ -f "$STYLE" ]]; then
-    rofi_args+=(-theme "$STYLE")
+  if [[ -f "$ACTIVE_THEME" ]]; then
+    rofi_args+=(-theme "$ACTIVE_THEME")
   fi
 
   exec "$ROFI_CMD" "${rofi_args[@]}"
