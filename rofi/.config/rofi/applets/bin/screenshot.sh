@@ -44,29 +44,17 @@ file="Screenshot_${time}_${geometry}.png"
 # Create directory if it doesn't exist
 [[ ! -d "$dir" ]] && mkdir -p "$dir"
 
-# Notification function
-screenshot_notify_view() {
-  if [[ -e "${dir}/${file}" ]]; then
-    notify-send -u low "Screenshot Saved + Copied" "${file}"
-  else
-    notify-send -u critical "Screenshot Failed"
-  fi
-}
-
 # Screenshot functions
 shotnow() {
   hyprshot -m output -o "$dir" -f "$file"
-  screenshot_notify_view
 }
 
 shotwin() {
   hyprshot -m window -o "$dir" -f "$file"
-  screenshot_notify_view
 }
 
 shotarea() {
   hyprshot -m region -o "$dir" -f "$file"
-  screenshot_notify_view
 }
 
 toggle_gpu_screen_recorder() {
