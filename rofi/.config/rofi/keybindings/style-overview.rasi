@@ -136,12 +136,6 @@ element selected.urgent {
     // text-color:                  @on-primary-container;
     text-color:                  @on-primary;
 }
-element-icon {
-    background-color:            transparent;
-    text-color:                  inherit;
-    size:                        32px;
-    cursor:                      inherit;
-}
 
 element-text {
     background-color:            transparent;
