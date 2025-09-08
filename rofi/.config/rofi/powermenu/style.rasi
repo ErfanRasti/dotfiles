@@ -2,11 +2,11 @@
 @import "~/.config/rofi/settings/vim-keybindings-notext.rasi"
 @import "~/.config/rofi/settings/font.rasi"
 @import "~/.config/rofi/settings/colors.rasi"
+@import "~/.config/rofi/settings/mouse-options.rasi"
 
 /*****----- Configuration -----*****/
 configuration {
     show-icons:                 false;
-    hover-select:               true; 
     opacity:                    true;
 }
 

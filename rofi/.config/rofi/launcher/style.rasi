@@ -3,6 +3,7 @@
 @import "~/.config/rofi/settings/vim-keybindings.rasi"
 @import "~/.config/rofi/settings/font.rasi"
 @import "~/.config/rofi/settings/colors.rasi"
+@import "~/.config/rofi/settings/mouse-options.rasi"
 
 /*****----- Configuration -----*****/
 configuration {
@@ -16,7 +17,6 @@ configuration {
 	// window-format:              "{w} · {c} · {t}";
   window-format: "<b>{c}</b>\n<span size='smaller' alpha='70%'>[{w}] {t}</span>";
   opacity:                    true;
-    // hover-select: true; 
 }
 
 /*****----- Main Window -----*****/

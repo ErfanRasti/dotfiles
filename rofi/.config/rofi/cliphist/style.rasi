@@ -3,13 +3,13 @@
 @import "~/.config/rofi/settings/vim-keybindings.rasi"
 @import "~/.config/rofi/settings/font.rasi"
 @import "~/.config/rofi/settings/colors.rasi"
+@import "~/.config/rofi/settings/mouse-options.rasi"
 
 /*****----- Configuration -----*****/
 configuration {
     show-icons:                 true;
     opacity:                    true;
     modes: " clipboard:~/.config/rofi/cliphist/cliphist_rofi_img.sh,󰗨 delete:~/.config/rofi/cliphist/run.sh d, wipe:~/.config/rofi/cliphist/run.sh w";
-    // hover-select: true; 
 }
 
 /*****----- Main Window -----*****/
