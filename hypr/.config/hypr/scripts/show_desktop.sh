@@ -3,6 +3,9 @@ set -euo pipefail
 
 TMP_FILE="${XDG_RUNTIME_DIR:-/tmp}/hyprland-show-desktop"
 
+# Get the current layout from hyprctl
+CURRENT_LAYOUT=$(hyprctl getoption general:layout -j | jq -r '.str')
+
 # Current workspace name (unquoted string)
 CURRENT_WORKSPACE="$(hyprctl monitors -j | jq -r '.[].activeWorkspace.name')"
 
@@ -49,4 +52,15 @@ else
   if [[ -n "${TMP_ADDRESS}" ]]; then
     printf '%s' "$TMP_ADDRESS" | sed -e '/^$/d' >"$STATE_FILE"
   fi
+fi
+
+# Return to the previous layout
+if [[ "$CURRENT_LAYOUT" == "master" ]]; then
+  # Quick switch
+  hyprctl keyword general:layout dwindle
+  hyprctl keyword general:layout master
+elif [[ "$CURRENT_LAYOUT" == "dwindle" ]]; then
+  # Quick switch
+  hyprctl keyword general:layout master
+  hyprctl keyword general:layout dwindle
 fi
