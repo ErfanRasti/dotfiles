@@ -46,15 +46,15 @@ file="Screenshot_${time}_${geometry}.png"
 
 # Screenshot functions
 shotnow() {
-  hyprshot -m output -o "$dir" -f "$file"
+  hyprshot -m output -z -o "$dir" -f "$file"
 }
 
 shotwin() {
-  hyprshot -m window -o "$dir" -f "$file"
+  hyprshot -m window -z -o "$dir" -f "$file"
 }
 
 shotarea() {
-  hyprshot -m region -o "$dir" -f "$file"
+  hyprshot -m region -z -o "$dir" -f "$file"
 }
 
 toggle_gpu_screen_recorder() {
