@@ -9,7 +9,7 @@
 }
 
 .module {
-  background-color: alpha(@surface_container_low, 0.3);
+  background-color: alpha(@surface_container_low, 0.5);
   color: @primary;
   padding: 0px 5px 0px 5px;
   margin: 1px 1px 1px 1px;
@@ -110,9 +110,9 @@ tooltip label {
 }
 
 #workspaces button.urgent {
-  background-color: @error_container;
+  background-color: alpha(@tertiary, 0.5);
   border-radius: 5px;
-  color: @on_error_container;
+  color: @on_tertiary;
 }
 
 #workspaces button.active {
