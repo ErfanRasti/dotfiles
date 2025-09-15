@@ -20,7 +20,7 @@
   transition: all 0.2s ease-in-out;
 }
 
-.module:hover:not(#workspaces) {
+.module:hover:not(#workspaces):not(#pulseaudio-slider) {
   background-color: @tertiary;
   color: @on_tertiary;
   border-radius: 5px;
@@ -110,9 +110,9 @@ tooltip label {
 }
 
 #workspaces button.urgent {
-  background-color: alpha(@tertiary, 0.5);
+  background-color: alpha(@secondary, 0.75);
   border-radius: 5px;
-  color: @on_tertiary;
+  color: @on_secondary;
 }
 
 #workspaces button.active {
@@ -250,6 +250,42 @@ window#waybar.fullscreen #windowcount {
 #cpu.critical,
 #memory.critical {
   color: #f53c3c;
+}
+
+/*****----- pulseaudio-slider -----*****/
+#pulseaudio-slider:hover {
+  background-color: @primary_container;
+  color: @on_primary_container;
+}
+
+#pulseaudio-slider trough {
+  min-height: 5px;
+  min-width: 80px;
+  border-radius: 5px;
+  background-color: @surface_container;
+}
+
+#pulseaudio-slider highlight {
+  min-width: 2px;
+  border-radius: 5px;
+  background-color: @on_primary_container;
+}
+
+#pulseaudio-slider slider {
+  border: none;
+  background-color: @primary;
+  box-shadow: none;
+  min-height: 8px; /* adjust to your liking */
+  min-width: 8px;
+  margin: -3px; /* centers the knob if it shrinks */
+}
+
+#pulseaudio-slider slider:hover {
+  background-color: @tertiary;
+}
+
+#pulseaudio-slider highlight:hover {
+  background-color: @tertiary;
 }
 
 /*****----- bluetooth -----*****/
