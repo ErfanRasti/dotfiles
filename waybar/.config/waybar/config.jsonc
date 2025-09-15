@@ -13,7 +13,7 @@
   "margin-right": 1,
   "spacing": 0,
   "include": [
-    "~/.config/waybar/modules/group-power.jsonc",
+    "~/.config/waybar/modules/power-group.jsonc",
     "~/.config/waybar/modules/hyprland-workspaces.jsonc",
     "~/.config/waybar/modules/custom-appmenu.jsonc",
     "~/.config/waybar/modules/hyprland-window-count.jsonc",
@@ -31,21 +31,17 @@
     "~/.config/waybar/modules/memory.jsonc",
     "~/.config/waybar/modules/bluetooth.jsonc",
     "~/.config/waybar/modules/network.jsonc",
-    "~/.config/waybar/modules/pulseaudio.jsonc",
-    "~/.config/waybar/modules/battery.jsonc"
+    "~/.config/waybar/modules/pulseaudio-group.jsonc",
+    "~/.config/waybar/modules/battery.jsonc",
   ],
   "modules-left": [
-    "group/group-power",
+    "group/power-group",
     "custom/appmenu",
     "hyprland/workspaces",
     "hyprland/windowcount",
-    "hyprland/window"
+    "hyprland/window",
   ],
-  "modules-center": [
-    "custom/notification",
-    "clock",
-    "power-profiles-daemon"
-  ],
+  "modules-center": ["custom/notification", "clock", "power-profiles-daemon"],
   "modules-right": [
     "tray",
     "custom/keyboard-state",
@@ -55,9 +51,9 @@
     "cpu",
     "temperature",
     "memory",
-    "pulseaudio",
+    "group/pulseaudio-group",
     "bluetooth",
     "network",
-    "battery"
-  ]
+    "battery",
+  ],
 }
