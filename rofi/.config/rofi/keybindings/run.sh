@@ -115,6 +115,7 @@ awk \
     keymap["XF86AUDIOLOWERVOLUME"] = "󰕿";
     keymap["XF86AUDIORAISEVOLUME"] = "󰕾";
     keymap["XF86AUDIOMUTE"]        = "󰖁";
+    keymap["XF86AUDIOMICMUTE"]     = "";
     keymap["XF86AUDIOPLAY"]        = "󰐊";
     keymap["XF86AUDIOSTOP"]        = "󰓛";
     keymap["XF86AUDIOPAUSE"]       = "󰏤";
