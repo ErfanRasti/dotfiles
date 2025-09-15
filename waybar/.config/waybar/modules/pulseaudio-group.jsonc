@@ -1,4 +1,15 @@
 {
+  "group/pulseaudio-group": {
+    "orientation": "inherit",
+    "modules": ["pulseaudio", "pulseaudio/slider"],
+    "drawer": {
+      "transition-duration": 500,
+      "children-class": "pulseaudio-drawer",
+      "transition-left-to-right": false,
+      "click-to-reveal": false,
+    },
+  },
+
   "pulseaudio": {
     "format": "{icon} {volume}% {format_source}",
     "format-muted": "<span color='#f53c3c'>{icon}</span> {format_source}",
@@ -7,11 +18,7 @@
     "format-source": "󰍬",
     "format-source-muted": "<span color='#f53c3c'>󰍭</span>",
     "format-icons": {
-      "default": [
-        "",
-        "",
-        ""
-      ],
+      "default": ["", "", ""],
       "default-muted": "",
       "headphone": "",
       "headphone-muted": "󰟎",
@@ -24,7 +31,7 @@
       "portable": "󰏲",
       "portable-muted": "󰷯",
       "car": "",
-      "car-muted": "󰸜"
+      "car-muted": "󰸜",
     },
     "tooltip-format": "{desc}, volume: {volume}%\nMicrophone: {format_source}",
     "on-click": "swayosd-client --output-volume mute-toggle",
@@ -34,6 +41,11 @@
     "on-scroll-down": "swayosd-client --output-volume +1", // Reverese it for the touchpad behavior
     "reverse-mouse-scrolling": true, // Logical behavior on mouse
     "scroll-step": 1,
-    "smooth-scrolling-threshold": 3.0
-  }
+    "smooth-scrolling-threshold": 3.0,
+  },
+  "pulseaudio/slider": {
+    "min": 0,
+    "max": 100,
+    "orientation": "horizontal",
+  },
 }
