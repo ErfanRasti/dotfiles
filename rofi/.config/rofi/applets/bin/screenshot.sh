@@ -8,13 +8,13 @@ theme="$type/$style"
 prompt='Screenshot'
 printf -v mesg " Save DIR: $(xdg-user-dir PICTURES)/Screenshots"
 
-list_col='5'
+list_col='4'
 list_row='1'
 win_width='670px'
 
 # Options
-option_1="󰹑"
-option_2=""
+option_1=""
+option_2="󰹑"
 option_3=""
 option_4=""
 
@@ -46,18 +46,26 @@ file="Screenshot_${time}_${geometry}.png"
 
 # Screenshot functions
 shotnow() {
+  pkill rofi
+  sleep 0.2
   hyprshot -m output -z -o "$dir" -f "$file"
 }
 
 shotwin() {
+  pkill rofi
+  sleep 0.2
   hyprshot -m window -z -o "$dir" -f "$file"
 }
 
 shotarea() {
+  pkill rofi
+  sleep 0.2
   hyprshot -m region -z -o "$dir" -f "$file"
 }
 
 toggle_gpu_screen_recorder() {
+  pkill rofi
+  sleep 0.2
   # Press Alt+z to show gpu screen recorder
   ydotool key 56:1 44:1 44:0 56:0
 }
@@ -65,9 +73,9 @@ toggle_gpu_screen_recorder() {
 # Execute Command
 run_cmd() {
   if [[ "$1" == '--opt1' ]]; then
-    shotnow
-  elif [[ "$1" == '--opt2' ]]; then
     shotarea
+  elif [[ "$1" == '--opt2' ]]; then
+    shotnow
   elif [[ "$1" == '--opt3' ]]; then
     shotwin
   elif [[ "$1" == '--opt4' ]]; then
