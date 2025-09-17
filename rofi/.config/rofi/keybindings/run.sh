@@ -145,6 +145,9 @@ awk \
     keymap["MOUSE:273"] = "󰍽 RMB";
     keymap["MOUSE:274"] = "󰍽 MMB";
 
+    # Other keys
+    keymap["GRAVE"] = "`";
+
     # Common symbolic modifiers to glyphs (used if they appear within a key token)
     modglyph["SUPER"] = super;
     modglyph["ALT"]   = alt;
