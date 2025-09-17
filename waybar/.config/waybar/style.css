@@ -245,16 +245,16 @@ window#waybar.fullscreen #windowcount {
 
 #cpu.warning,
 #memory.warning {
-  color: #ffbe61;
+  color: @yellow;
 }
 #cpu.critical,
 #memory.critical {
-  color: #f53c3c;
+  color: @red_value;
 }
 
 /*****----- pulseaudio-slider -----*****/
 #pulseaudio-slider:hover {
-  background-color: @primary_container;
+  background-color: alpha(@primary_container, 0.5);
   color: @on_primary_container;
 }
 
@@ -290,30 +290,30 @@ window#waybar.fullscreen #windowcount {
 
 /*****----- bluetooth -----*****/
 #bluetooth.disabled {
-  color: #f53c3c;
+  color: @red;
 }
 #bluetooth.no-controller {
-  color: #ffbe61;
+  color: @yellow;
 }
 #bluetooth.discovering {
-  color: #3cd6a9;
+  color: @green;
 }
 #bluetooth.discoverable {
-  color: #ff7a61;
+  color: @orange;
 }
 
 /*****----- network -----*****/
 #network.disconnected {
-  color: #ffbe61;
+  color: @yellow;
 }
 
 /*****----- battery -----*****/
 #battery.critical:not(.charging) {
-  color: #f53c3c;
+  color: @red;
 }
 #battery.warning:not(.charging) {
-  color: #ffbe61;
+  color: @yellow;
 }
 #battery.charging {
-  color: #28d67f;
+  color: @green;
 }
