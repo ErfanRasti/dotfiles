@@ -209,4 +209,5 @@ zle -N fzf-cd-widget
 bindkey '^F' fzf-cd-widget
 
 
-
+# update-all alias
+alias update-all="exec ~/update-all.sh"
