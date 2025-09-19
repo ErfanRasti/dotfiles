@@ -3,12 +3,14 @@
 style="~/.config/rofi/cliphist/style.rasi"
 
 case $1 in
+c)
+  ~/.config/rofi/cliphist/cliphist_rofi_img.sh
+  ;;
 d)
   if [ ! -z "$2" ]; then
     echo "$2" | cliphist delete
   fi
   ~/.config/rofi/cliphist/cliphist_rofi_img.sh
-  # cliphist list
   ;;
 
 w)
