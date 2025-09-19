@@ -9,7 +9,7 @@
 configuration {
     show-icons:                 true;
     opacity:                    true;
-    modes: " clipboard:~/.config/rofi/cliphist/cliphist_rofi_img.sh,󰗨 delete:~/.config/rofi/cliphist/run.sh d, wipe:~/.config/rofi/cliphist/run.sh w";
+    modes: " clipboard:~/.config/rofi/cliphist/run.sh c,󰗨 delete:~/.config/rofi/cliphist/run.sh d, wipe:~/.config/rofi/cliphist/run.sh w";
 }
 
 /*****----- Main Window -----*****/
