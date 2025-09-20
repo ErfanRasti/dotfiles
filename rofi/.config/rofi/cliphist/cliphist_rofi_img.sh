@@ -1,11 +1,23 @@
 #!/usr/bin/env bash
 
 tmp_dir="/tmp/cliphist"
+current_clipboard="/tmp/cliphist-current"
 rm -rf "$tmp_dir"
 
 if [[ -n "$1" ]]; then
-  cliphist decode <<<"$1" | wl-copy
+  # Decode input
+  decoded="$1"
+
+  # Copy to clipboard
+  wl-copy <<<"$decoded"
+
+  # If on paste mode write the clipboard to the current_clipboard file
+  if [[ "${CLIPHIST_PASTE-}" = "1" ]]; then
+    echo -n "$decoded" >"$current_clipboard"
+  fi
   exit
+else
+  rm "$current_clipboard"
 fi
 
 mkdir -p "$tmp_dir"
@@ -19,4 +31,4 @@ match(\$0, /^([0-9]+)\s(\[\[\s)?binary.*(jpg|jpeg|png|bmp)/, grp) {
 }
 1
 EOF
-cliphist list | gawk "$prog"
+cliphist list | gawk "$prog" | cut -f2-
