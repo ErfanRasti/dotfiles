@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-style="~/.config/rofi/cliphist/style.rasi"
+style="$HOME/.config/rofi/cliphist/style.rasi"
 
 case $1 in
 c)
-  ~/.config/rofi/cliphist/cliphist_rofi_img.sh
+  CLIPHIST_PASTE=1 ~/.config/rofi/cliphist/cliphist_rofi_img.sh "$2"
   ;;
 d)
   if [ ! -z "$2" ]; then
@@ -25,6 +25,10 @@ w)
   ;;
 
 *)
-  rofi -config $style -show " clipboard"
+  rofi -config "$style" -show " clipboard"
+
+  if [[ -f "/tmp/cliphist-current" ]]; then
+    ydotool key 29:1 42:1 47:1 47:0 42:0 29:0
+  fi
   ;;
 esac
