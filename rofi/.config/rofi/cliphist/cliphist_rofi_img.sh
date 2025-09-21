@@ -6,7 +6,8 @@ rm -rf "$tmp_dir"
 
 if [[ -n "$1" ]]; then
   # Decode input
-  decoded="$1"
+  id=$(cliphist list | grep -F "$1" | awk '{print $1; exit}')
+  decoded=$(cliphist decode "$id")
 
   # Copy to clipboard
   wl-copy <<<"$decoded"
@@ -17,7 +18,9 @@ if [[ -n "$1" ]]; then
   fi
   exit
 else
-  rm "$current_clipboard"
+  if [[ -f "/tmp/cliphist-current" ]]; then
+    rm "$current_clipboard"
+  fi
 fi
 
 mkdir -p "$tmp_dir"
