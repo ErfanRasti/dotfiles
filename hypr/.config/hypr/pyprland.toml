@@ -1,23 +1,25 @@
 [pyprland]
 plugins = ["expose", "scratchpads", "toggle_special", "shift_monitors"]
 
-# using variables for demonstration purposes (not needed)
+# Using variables for demonstration purposes (not needed)
 [pyprland.variables]
-term_classed = "kitty --class"
+term_classed = "kitty --override confirm_os_window_close=0 --class"
 
 [scratchpads.terminal]
 animation = "fromTop"
-command = "[term_classed] main-dropterm"
-class = "main-dropterm"
+command = "[term_classed] kitty-dropterm"
+class = "kitty-dropterm"
 size = "75% 60%"
 max_size = "1920px 100%"
 lazy = true
+pinned = false
+excludes = "*"
 
 [scratchpads.yazi]
 animation = "fromTop"
 max_size = "1920px 100%"
-command = "[term_classed] main-dropyazi fish -c yazi"
-class = "main-dropyazi"
+command = "[term_classed] yazi fish -c yazi"
+class = "yazi"
 size = "75% 60%"
 unfocus = "hide"
 hysteresis = 0.1
@@ -25,21 +27,80 @@ hysteresis = 0.1
 # and you bump focus/move it slightly, Pyprland won’t immediately toggle it —
 # it waits until the change passes that threshold.
 lazy = true
+# hide other scratchpads
+excludes = "*"
+# make the window pinned on all workspaces
+pinned = false
 
 [scratchpads.btop]
 animation = "fromTop"
-command = "[term_classed] main-dropbtop btop"
-class = "main-dropbtop"
+command = "[term_classed] btop btop"
+class = "btop"
 max_size = "1920px 100%"
 size = "80% 70%"
 lazy = true
 close_on_hide = true
+excludes = "*"
+pinned = false
 
 [scratchpads.nvtop]
 animation = "fromTop"
-command = "[term_classed] main-dropnvtop nvtop"
-class = "main-dropnvtop"
+command = "[term_classed] nvtop nvtop"
+class = "nvtop"
 max_size = "1920px 100%"
 size = "80% 70%"
 lazy = true
 close_on_hide = true
+excludes = "*"
+pinned = false
+
+[scratchpads.nautilus]
+animation = "fromTop"
+command = "exec env XDG_CURRENT_DESKTOP=GNOME nautilus --new-window ~"
+class = "org.gnome.Nautilus"
+size = "900px 600px"
+unfocus = "hide"
+hysteresis = 0.1
+lazy = true
+excludes = "*"
+pinned = false
+
+[scratchpads.settings]
+animation = "fromTop"
+command = "env XDG_CURRENT_DESKTOP=GNOME gnome-control-center"
+class = "org.gnome.Settings"
+size = "900px 600px"
+unfocus = "hide"
+hysteresis = 0.1
+lazy = true
+excludes = "*"
+pinned = false
+
+[scratchpads.network]
+animation = "fromTop"
+command = "nm-connection-editor"
+class = "nm-connection-editor"
+position = "79% 4%"
+size = "20% 60%"
+lazy = true
+excludes = "*"
+pinned = false
+
+[scratchpads.bluetooth]
+animation = "fromTop"
+command = "overskride"
+class = "io.github.kaii_lb.Overskride"
+position = "77% 12%"
+size = "15% 50%"
+lazy = true
+excludes = "*"
+pinned = false
+
+[scratchpads.volume]
+animation = "fromTop"
+command = "pwvucontrol"
+class = "com.saivert.pwvucontrol"
+size = "550px 600px"
+lazy = true
+excludes = "*"
+pinned = false
