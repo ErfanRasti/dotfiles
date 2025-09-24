@@ -7,7 +7,7 @@
 top_margin = 0.04
 
 ## The maximum volume that can be reached in %
-max_volume = 150
+max_volume = 100
 
 ## show percentage on the right of the OSD
 show_percentage = true
