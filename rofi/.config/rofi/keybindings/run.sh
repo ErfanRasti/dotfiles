@@ -95,7 +95,7 @@ awk \
 
     # Map many common key tokens to Nerd Font/Unicode glyphs
     # Arrows
-    keymap["UP"] = "↑"; keymap["DOWN"] = "↓"; keymap["LEFT"] = "←"; keymap["RIGHT"] = "→";
+    keymap["UP"] = ""; keymap["DOWN"] = ""; keymap["LEFT"] = ""; keymap["RIGHT"] = "";
 
     # Navigation / editing
     keymap["RETURN"] = "󰌑"; keymap["ENTER"] = "󰌑";
@@ -144,9 +144,13 @@ awk \
     keymap["MOUSE:272"] = "󰍽 LMB";
     keymap["MOUSE:273"] = "󰍽 RMB";
     keymap["MOUSE:274"] = "󰍽 MMB";
+    keymap["MOUSE_UP"] = "󱕑";
+    keymap["MOUSE_DOWN"] = "󱕐";
 
     # Other keys
     keymap["GRAVE"] = "`";
+    keymap["EQUAL"] = "";
+    keymap["MINUS"] = "";
 
     # Common symbolic modifiers to glyphs (used if they appear within a key token)
     modglyph["SUPER"] = super;
