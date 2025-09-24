@@ -14,7 +14,7 @@ TMP_FILE="${XDG_RUNTIME_DIR:-/tmp}/hyprland-show-desktop"
 CURRENT_LAYOUT=$(hyprctl getoption general:layout -j | jq -r '.str')
 
 # Current active workspace name
-CURRENT_WORKSPACE="$(hyprctl monitors -j | jq -r '.[].activeWorkspace.name')"
+CURRENT_WORKSPACE=$(hyprctl activeworkspace -j | jq -r '.name')
 
 # State file for this workspace (stores hidden window addresses)
 STATE_FILE="${TMP_FILE}-${CURRENT_WORKSPACE}"
@@ -46,9 +46,6 @@ if [[ -s "$STATE_FILE" ]]; then
   # Only run restore if there are windows to move back
   if [[ -n "$CMDS" ]]; then
     hyprctl --batch "$CMDS"
-
-    # Switch back to the workspace we restored windows to
-    hyprctl dispatch focusworkspace name:"${CURRENT_WORKSPACE}"
 
     # Re-scan windows now present on this workspace
     mapfile -t NOW_ADDRS < <(
