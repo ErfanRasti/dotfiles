@@ -1,106 +1,106 @@
 [pyprland]
-plugins = ["expose", "scratchpads", "toggle_special", "shift_monitors"]
+plugins = [
+  "expose",
+  "scratchpads",
+  "toggle_special",
+  "shift_monitors",
+  "fetch_client_menu",
+]
 
-# Using variables for demonstration purposes (not needed)
+[fetch_client_menu]
+separator = ":"
+engine = "rofi"
+parameters = "-dmenu -matching fuzzy -i -p '[prompt]' -show-icons -theme ~/.config/rofi/windows/style.rasi -theme-str 'element-icon { enabled: false; }'"
+
 [pyprland.variables]
 term_classed = "kitty --override confirm_os_window_close=0 --class"
 
-[scratchpads.terminal]
-animation = "fromTop"
-command = "[term_classed] kitty-dropterm"
-class = "kitty-dropterm"
-size = "75% 60%"
-max_size = "1920px 100%"
-lazy = true
-pinned = false
-excludes = "*"
-
-[scratchpads.yazi]
-animation = "fromTop"
-max_size = "1920px 100%"
-command = "[term_classed] yazi fish -c yazi"
-class = "yazi"
-size = "75% 60%"
-unfocus = "hide"
-hysteresis = 0.1
-# means 10% margin tolerance. For example, if the scratchpad is nearly hidden
-# and you bump focus/move it slightly, Pyprland won’t immediately toggle it —
-# it waits until the change passes that threshold.
+[scratchpads._base]
+# Don't launch at pyprland startup
 lazy = true
 # hide other scratchpads
 excludes = "*"
 # make the window pinned on all workspaces
 pinned = false
+animation = "fromTop"
+
+[scratchpads.terminal]
+use = "_base"
+command = "[term_classed] kitty-dropterm"
+class = "kitty-dropterm"
+size = "75% 60%"
+max_size = "1920px 100%"
+
+[scratchpads.yazi]
+use = "_base"
+max_size = "1920px 100%"
+command = "[term_classed] yazi fish -c yazi"
+class = "yazi"
+size = "75% 60%"
+unfocus = "hide"
+# means 10% margin tolerance. For example, if the scratchpad is nearly hidden
+# and you bump focus/move it slightly, Pyprland won’t immediately toggle it —
+# it waits until the change passes that threshold.
+hysteresis = 0.1
 
 [scratchpads.btop]
-animation = "fromTop"
+use = "_base"
 command = "[term_classed] btop btop"
 class = "btop"
 max_size = "1920px 100%"
 size = "80% 70%"
-lazy = true
 close_on_hide = true
-excludes = "*"
-pinned = false
 
 [scratchpads.nvtop]
-animation = "fromTop"
+use = "_base"
 command = "[term_classed] nvtop nvtop"
 class = "nvtop"
 max_size = "1920px 100%"
 size = "80% 70%"
-lazy = true
 close_on_hide = true
-excludes = "*"
-pinned = false
 
 [scratchpads.nautilus]
-animation = "fromTop"
+use = "_base"
 command = "exec env XDG_CURRENT_DESKTOP=GNOME nautilus --new-window ~"
 class = "org.gnome.Nautilus"
 size = "900px 600px"
 unfocus = "hide"
 hysteresis = 0.1
-lazy = true
-excludes = "*"
-pinned = false
 
 [scratchpads.settings]
-animation = "fromTop"
+use = "_base"
 command = "env XDG_CURRENT_DESKTOP=GNOME gnome-control-center"
 class = "org.gnome.Settings"
 size = "900px 600px"
 unfocus = "hide"
 hysteresis = 0.1
-lazy = true
-excludes = "*"
-pinned = false
 
 [scratchpads.network]
-animation = "fromTop"
+use = "_base"
 command = "nm-connection-editor"
 class = "nm-connection-editor"
 position = "79% 4%"
 size = "20% 60%"
-lazy = true
-excludes = "*"
-pinned = false
+margin = "0"
 
 [scratchpads.bluetooth]
-animation = "fromTop"
+use = "_base"
 command = "overskride"
 class = "io.github.kaii_lb.Overskride"
 position = "77% 12%"
 size = "15% 50%"
-lazy = true
-excludes = "*"
-pinned = false
 
 [scratchpads.volume]
-animation = "fromTop"
+use = "_base"
 command = "pwvucontrol"
 class = "com.saivert.pwvucontrol"
 size = "550px 600px"
-lazy = true
-excludes = "*"
-pinned = false
+
+[scratchpads.htop]
+use = "_base"
+animation = "fromLeft"
+command = "[term_classed] htop -e htop"
+class = "htop"
+size = "30% 80%"
+unfocus = "hide"
+hysteresis = 0.1
