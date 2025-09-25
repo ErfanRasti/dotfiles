@@ -82,6 +82,11 @@ fi
 last_level="init"       # init|ok|low|critical|danger
 last_state="unknown"    # charging|discharging|fully-charged|pending|unknown
 ppd_powersave_applied=0 # 0/1
+if command -v powerprofilesctl >/dev/null 2>&1; then
+  if [[ "$(powerprofilesctl get 2>/dev/null)" == "power-saver" ]]; then
+    ppd_powersave_applied=1
+  fi
+fi
 notified_charge=0
 notified_discharge=0
 did_suspend=0
@@ -112,17 +117,22 @@ check_and_act() {
 
   # Charging/discharging notifications
   if [[ "$state" != "$last_state" ]]; then
-    if [[ "$state" == "charging" || "$state" == "fully-charged" ]]; then
+    if [[ "$state" == "charging" ]]; then
       if ((notified_charge == 0)); then
         notify normal "$ICON_PLUG  Charging" "$ICON_BOLT Now at ${pct}%."
         notified_charge=1
         notified_discharge=0
       fi
       # Reset PPD to balanced if plugged and > 5%
-      if ((ipct > 5)); then
+      if ((ipct > 5 && ppd_powersave_applied == 1)); then
         set_ppd_mode "balanced"
         ppd_powersave_applied=0
       fi
+    elif [[ "$state" == "fully-charged" ]]; then
+      notify normal "$ICON_PLUG  Fully charged" \
+        "$(percent_to_icon "$ipct") Battery is at ${pct}%."
+      notified_charge=0
+      notified_discharge=0
     elif [[ "$state" == "discharging" ]]; then
       if ((notified_discharge == 0)); then
         notify normal "$(percent_to_icon "$ipct")  Discharging" "Battery at ${pct}%."
@@ -149,19 +159,16 @@ check_and_act() {
     fi
 
     # Determine level bucket
-    local level="ok" urgency="normal" label="OK"
+    local level="ok" urgency="normal"
     if ((ipct <= DANGER)); then
       level="danger"
       urgency="critical"
-      label="DANGER"
     elif ((ipct <= CRIT)); then
       level="critical"
       urgency="critical"
-      label="CRITICAL"
     elif ((ipct <= LOW)); then
       level="low"
       urgency="normal"
-      label="Low"
     fi
 
     if [[ "$level" != "$last_level" ]]; then
@@ -190,7 +197,7 @@ check_and_act() {
     last_level="ok"
     did_suspend=0
     # If we got plugged in and >5%, ensure balanced (handled above on state change as well)
-    if ((ipct > 5)); then
+    if ((ipct > 5 && ppd_powersave_applied == 1)); then
       set_ppd_mode "balanced"
       ppd_powersave_applied=0
     fi
