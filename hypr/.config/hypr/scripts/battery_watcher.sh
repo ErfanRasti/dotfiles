@@ -7,6 +7,7 @@ CRIT=15
 DANGER=5
 SUSPEND_AT=2                 # suspend when discharging at/below this %
 PPD_LO_THRESH=20             # set power-saver at/under this %
+DISCONNECT_AT=85             # disconnect power at/above this %
 NOTIFY_APP="Battery Watcher" # notification app-name
 
 # Nerd Font glyphs (Font Awesome in Nerd Fonts)
@@ -89,6 +90,7 @@ if command -v powerprofilesctl >/dev/null 2>&1; then
 fi
 notified_charge=0
 notified_discharge=0
+notified_disconnect=0
 did_suspend=0
 
 # ---- Read current info ----
@@ -139,8 +141,16 @@ check_and_act() {
         notified_discharge=1
         notified_charge=0
       fi
+      notified_disconnect=0
     fi
     last_state="$state"
+  fi
+
+  # while charging, fire the disconnect reminder once when crossing threshold
+  if [[ "$state" == "charging" && ipct -ge DISCONNECT_AT && notified_disconnect -eq 0 ]]; then
+    notify normal "$ICON_PLUG  Battery high (${pct}%)" \
+      "Consider unplugging the charger."
+    notified_disconnect=1
   fi
 
   # Threshold notifications (only when discharging)
