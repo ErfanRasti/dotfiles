@@ -4,7 +4,10 @@
 * {
   font-family: "CaskaydiaCove Nerd Font Propo";
   font-size: 14px;
-  min-height: 0;
+  min-width: 0px;
+  min-height: 0px;
+  padding: 0;
+  margin: 0;
   font-weight: bold;
 }
 
@@ -12,7 +15,7 @@
   background-color: alpha(@surface_container_low, 0.5);
   color: @primary;
   padding: 0px 5px 0px 5px;
-  margin: 1px 1px 1px 1px;
+  margin: 1px;
   border-radius: 5px;
   box-shadow: 0px 0px 1px 0px alpha(@shadow, 0.25);
   border: 0px solid transparent;
@@ -51,6 +54,7 @@ window#waybar.hidden {
 tooltip {
   background: alpha(@secondary_container, 0.9);
   border: 1px solid @outline;
+  border-radius: 5px;
   color: @on_secondary_container;
   transition: all 0.2s ease-in-out;
 }
@@ -63,7 +67,7 @@ tooltip label {
   padding: 1px 1px 1px 1px;
   padding-right: 5px;
   padding-left: 5px;
-  margin: 0px 0px 0px 0px;
+  margin: 1px 0px 1px 1px;
   border-radius: 5px 0px 0px 5px;
 }
 
@@ -71,7 +75,7 @@ tooltip label {
   padding: 1px 1px 1px 1px;
   padding-right: 5px;
   padding-left: 5px;
-  margin: 0px 0px 0px 0px;
+  margin: 1px 0px 1px 0px;
   border-radius: 0px 0px 0px 0px;
 }
 
@@ -79,12 +83,13 @@ tooltip label {
   padding: 1px 1px 1px 1px;
   padding-right: 5px;
   padding-left: 5px;
-  margin: 0px 0px 0px 0px;
+  margin: 1px 1px 1px 0px;
   border-radius: 0px 5px 5px 0px;
 }
 
 /*****----- workspaces -----*****/
 #workspaces {
+  min-width: 0;
   padding: 0px 3px 0px 3px;
 }
 
@@ -116,6 +121,12 @@ tooltip label {
 }
 
 #workspaces button.active {
+  background: linear-gradient(
+    90deg,
+    @primary 0%,
+    @secondary 50%,
+    @tertiary 100%
+  );
   background-color: @primary;
   color: @on_primary;
   transition: all 0.3s ease-in-out;
@@ -198,7 +209,6 @@ window#waybar.fullscreen #windowcount {
 /*****----- custom keyboard state -----*****/
 #custom-keyboard-state {
   background-color: @primary;
-  border: 2px solid @tertiary;
   color: @on_primary;
 }
 
@@ -210,7 +220,7 @@ window#waybar.fullscreen #windowcount {
 
 /*****----- game mode -----*****/
 #gamemode.running {
-  background-color: alpha(@surface_container_low, 0.3);
+  background-color: alpha(@surface_container_low, 0.5);
   color: @primary;
   padding: 0px 5px 0px 5px;
   margin: 1px 1px 1px 1px;
@@ -230,17 +240,17 @@ window#waybar.fullscreen #windowcount {
 
 #cpu {
   border-radius: 5px 0px 0px 5px;
-  margin: 0px 0px 0px 0px;
+  margin: 1px 0px 1px 1px;
 }
 
 #temperature {
   border-radius: 0px;
-  margin: 0px 0px 0px 0px;
+  margin: 1px 0px 1px 0px;
 }
 
 #memory {
   border-radius: 0px 5px 5px 0px;
-  margin: 0px 0px 0px 0px;
+  margin: 1px 1px 1px 0px;
 }
 
 #cpu.warning,
