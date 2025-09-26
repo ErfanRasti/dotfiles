@@ -4,10 +4,11 @@
     "interval": 5,
     "states": {
       "warning": 80,
-      "critical": 90
+      "critical": 90,
     },
     "tooltip": true,
     "tooltip-format": "Total: {used:5.2f} / {total:5.2f} GB\nSwap:  {swapUsed:5.2f} / {swapTotal:5.2f} GB",
-    "on-click": "kitty --title btop -e btop"
-  }
+    "on-click": "pypr toggle btop",
+    "on-click-right": "pypr toggle htop",
+  },
 }
