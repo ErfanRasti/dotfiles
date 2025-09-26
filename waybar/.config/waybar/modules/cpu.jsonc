@@ -3,10 +3,11 @@
     "format": " {usage}%",
     "states": {
       "warning": 50,
-      "critical": 80
+      "critical": 80,
     },
     "interval": 5,
     "tooltip": true,
-    "on-click": "kitty --title btop -e btop"
-  }
+    "on-click": "pypr toggle btop",
+    "on-click-right": "pypr toggle htop",
+  },
 }
