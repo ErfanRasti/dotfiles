@@ -4,26 +4,15 @@
     "format-alt": "{icon} {time}",
     "format-charging": "󰂄 {capacity}%",
     "format-plugged": " {capacity}%",
-    "format-icons": [
-      "󰂎",
-      "󰁺",
-      "󰁻",
-      "󰁼",
-      "󰁽",
-      "󰁾",
-      "󰁿",
-      "󰂀",
-      "󰂁",
-      "󰂂",
-      "󰁹"
-    ],
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
     "format-time": "{H}h {M}min",
     "interval": 2,
     "states": {
       "warning": 30,
-      "critical": 15
+      "critical": 15,
     },
     "tooltip": true,
-    "tooltip-format": "{timeTo}\nPower usage: {power} watts\nCycles: {cycles}\nHealth: {health}"
-  }
+    "tooltip-format": "{timeTo}\nPower usage: {power} watts\nCycles: {cycles}\nHealth: {health}",
+    "on-click": "pypr toggle settings;env XDG_CURRENT_DESKTOP=GNOME gnome-control-center power",
+  },
 }
