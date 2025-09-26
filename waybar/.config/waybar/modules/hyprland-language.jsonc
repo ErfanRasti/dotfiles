@@ -2,6 +2,8 @@
   "hyprland/language": {
     "format": " {}",
     "format-en": "US",
-    "format-fa": "IR"
-  }
+    "format-fa": "IR",
+    // Press SUPER+SPACE on click
+    "on-click": "ydotool key 125:1 57:1 57:0 125:0",
+  },
 }
