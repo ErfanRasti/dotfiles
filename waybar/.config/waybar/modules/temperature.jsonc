@@ -3,16 +3,10 @@
     "critical-threshold": 70,
     "format": "{icon} {temperatureC}°C",
     "format-critical": "<span color='#f53c3c'>{icon} {temperatureC}°C</span>",
-    "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
+    "format-icons": ["", "", "", "", "", ""],
     "interval": 5,
     "tooltip": true,
-    "on-click": "kitty --title btop -e btop"
-  }
+    "on-click": "pypr toggle btop",
+    "on-click-right": "pypr toggle htop",
+  },
 }
