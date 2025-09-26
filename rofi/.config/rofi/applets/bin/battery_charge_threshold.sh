@@ -21,7 +21,7 @@ NEW_THRESHOLD=$(
 # Validate input
 if [[ "$NEW_THRESHOLD" =~ ^[0-9]+$ ]] && ((NEW_THRESHOLD >= 1 && NEW_THRESHOLD <= 100)); then
   if pkexec --user root bash -c "echo $NEW_THRESHOLD > /sys/class/power_supply/BAT0/charge_control_end_threshold"; then
-    notify-send -u normal -i battery "Threshold Updated" "New: $NEW_THRESHOLD% (Was: $CURRENT_THRESHOLD%)"
+    notify-send -u normal "󱈑 Threshold Updated" "New: $NEW_THRESHOLD% (Was: $CURRENT_THRESHOLD%)"
   else
     notify-send -u critical -i dialog-error "Error" "Failed to set threshold"
   fi
