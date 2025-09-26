@@ -12,5 +12,8 @@ if pgrep -x waybar >/dev/null; then
 fi
 waybar &
 
+# Restart hyprpolkitagent
+systemctl --user restart hyprpolkitagent
+
 # Apply spicetify
 spicetify apply
