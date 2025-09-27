@@ -10,7 +10,13 @@ pypr reload
 if pgrep -x waybar >/dev/null; then
   pkill waybar
 fi
-waybar &
+setsid -f waybar >/dev/null 2>&1
+
+# Restart swaync
+if pgrep -x swaync >/dev/null; then
+  pkill swaync
+fi
+setsid -f swaync >/dev/null 2>&1
 
 # Restart hyprpolkitagent
 systemctl --user restart hyprpolkitagent
