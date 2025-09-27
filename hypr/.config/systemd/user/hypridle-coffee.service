@@ -1,0 +1,15 @@
+# ~/.config/systemd/user/hypridle-coffee.service
+[Unit]
+Description=Hyprland's idle daemon
+Documentation=https://wiki.hyprland.org/Hypr-Ecosystem/hypridle
+PartOf=graphical-session.target
+After=graphical-session.target
+ConditionEnvironment=WAYLAND_DISPLAY
+
+[Service]
+Type=simple
+ExecStart=sh -c '/usr/bin/hypridle -c ~/.config/hypr/hypridle-coffee.conf'
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target
