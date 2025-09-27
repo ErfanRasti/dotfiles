@@ -34,4 +34,9 @@ match(\$0, /^([0-9]+)\s(\[\[\s)?binary.*(jpg|jpeg|png|bmp)/, grp) {
 }
 1
 EOF
-cliphist list | gawk "$prog" | cut -f2-
+if [[ "${CLIPHIST_PASTE-}" = "1" ]]; then
+
+  cliphist list | gawk "$prog" | cut -f2-
+else
+  cliphist list | gawk "$prog"
+fi
