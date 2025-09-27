@@ -29,17 +29,17 @@ post_hook = 'hyprctl reload'
 input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/waybar/colors.css'
 # `post_hook` is not needed because waybar handles it using `reload_style_on_change`
-# post_hook = 'pkill waybar && waybar & disown'
+post_hook = 'pkill waybar;setsid -f waybar >/dev/null 2>&1'
 
 [templates.swaync]
 input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/swaync/colors.css'
-post_hook = 'pkill swaync;swaync & disown'
+post_hook = 'swaync-client -rs'
 
 [templates.swayosd]
 input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/swayosd/colors.css'
-post_hook = 'pkill swayosd-server;swayosd-server & disown'
+post_hook = 'pkill swayosd-server;setsid -f swayosd-server >/dev/null 2>&1'
 
 [templates.rofi]
 input_path = '~/.config/matugen/templates/rofi-colors.rasi'
