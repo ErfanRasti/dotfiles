@@ -1,10 +1,10 @@
 [config.custom_colors]
-red = { color = "#ff0000", blend = true }
-green = { color = "#00ff00", blend = true }
-blue = { color = "#0000ff", blend = true }
-yellow = { color = "#ffff00", blend = true }
-orange = { color = "#ff8000", blend = true }
-purple = { color = "#8000ff", blend = true }
+red = { color = "#f13c40", blend = true }
+green = { color = "#41c257", blend = true }
+blue = { color = "#0e85f0", blend = true }
+yellow = { color = "#edc005", blend = true }
+orange = { color = "#fb8d2c", blend = true }
+purple = { color = "#bd30d4", blend = true }
 
 [config]
 
@@ -29,7 +29,7 @@ post_hook = 'hyprctl reload'
 input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/waybar/colors.css'
 # `post_hook` is not needed because waybar handles it using `reload_style_on_change`
-post_hook = 'pkill waybar;setsid -f waybar >/dev/null 2>&1'
+# post_hook = 'pkill waybar;setsid -f waybar >/dev/null 2>&1'
 
 [templates.swaync]
 input_path = '~/.config/matugen/templates/colors.css'
