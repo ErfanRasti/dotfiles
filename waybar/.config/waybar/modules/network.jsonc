@@ -1,7 +1,7 @@
 {
   "network": {
     "format": "{icon}",
-    "format-alt": "{icon} {essid}",
+    // "format-alt": "{icon} {essid}",
     "format-wifi": "{icon}",
     "format-ethernet": "󰈀 {ifname}",
     "format-linked": " {ifname}",
@@ -17,5 +17,6 @@
     "tooltip-format-disabled": "Off",
     "interval": 2,
     "on-click": "pypr toggle network",
+    "on-click-right": "~/.config/waybar/scripts/toggle_network.sh",
   },
 }
