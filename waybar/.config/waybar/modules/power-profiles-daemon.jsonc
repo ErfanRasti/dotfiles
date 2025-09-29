@@ -4,10 +4,10 @@
     "tooltip": true,
     "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
     "format-icons": {
-      "default": "",
+      "default": "",
       "performance": "󰓅",
       "balanced": "",
-      "power-saver": "󰌪"
-    }
-  }
+      "power-saver": "󰌪",
+    },
+  },
 }
