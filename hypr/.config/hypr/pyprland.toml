@@ -104,3 +104,12 @@ class = "htop"
 size = "30% 80%"
 unfocus = "hide"
 hysteresis = 0.1
+
+[scratchpads.gnome-system-monitor]
+use = "_base"
+command = "gnome-system-monitor"
+class = "org.gnome.SystemMonitor"
+max_size = "1920px 100%"
+size = "900px 600px"
+unfocus = "hide"
+hysteresis = 0.1
