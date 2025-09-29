@@ -11,7 +11,9 @@
   font-weight: bold;
 }
 
-.module {
+.module,
+#gamemode,
+#privacy-item {
   background-color: alpha(@surface_container_low, 0.5);
   color: @primary;
   padding: 0px 5px 0px 5px;
@@ -23,7 +25,9 @@
   transition: all 0.2s ease-in-out;
 }
 
-.module:hover:not(#workspaces):not(#pulseaudio-slider) {
+.module:hover:not(#workspaces):not(#pulseaudio-slider),
+#gamemode:hover,
+#privacy:hover {
   background-color: @tertiary;
   color: @on_tertiary;
   border-radius: 5px;
@@ -219,16 +223,9 @@ window#waybar.fullscreen #windowcount {
 }
 
 /*****----- game mode -----*****/
-#gamemode.running {
-  background-color: alpha(@surface_container_low, 0.5);
-  color: @primary;
-  padding: 0px 5px 0px 5px;
-  margin: 1px 1px 1px 1px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 1px 0px alpha(@shadow, 0.25);
-  border: 0px solid transparent;
-  background-clip: padding-box;
-  transition: all 0.2s ease-in-out;
+#gamemode {
+  background-color: @secondary;
+  color: @on_secondary;
 }
 
 /*****----- cpu, memory, and temperature -----*****/
@@ -259,7 +256,7 @@ window#waybar.fullscreen #windowcount {
 }
 #cpu.critical,
 #memory.critical {
-  color: @red_value;
+  color: @red;
 }
 
 /*****----- pulseaudio-slider -----*****/
@@ -297,7 +294,25 @@ window#waybar.fullscreen #windowcount {
 #pulseaudio-slider highlight:hover {
   background-color: @tertiary;
 }
+/*****----- custom camera usage -----*****/
+#custom-camera-usage {
+  background-color: @green_value;
+  color: white;
+}
 
+/*****----- privacy -----*****/
+#privacy-item.screenshare {
+  background-color: @red_value;
+  color: white;
+}
+#privacy-item.audio-out {
+  background-color: @blue_value;
+  color: white;
+}
+#privacy-item.audio-in {
+  background-color: @orange_value;
+  color: white;
+}
 /*****----- bluetooth -----*****/
 #bluetooth.disabled {
   color: @red;
