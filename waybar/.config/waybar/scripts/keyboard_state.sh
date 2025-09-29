@@ -1,22 +1,26 @@
 #!/usr/bin/env bash
 # ~/.local/bin/capslock-waybar.sh
 # Continuously report Caps Lock state to Waybar as single-line JSON.
+# Uses inotify when available (efficient, event-driven), otherwise falls back to polling.
 
-set -u
+set -u # Treat unset variables as errors
 
-# Find the first Caps Lock LED brightness file
+# --------------------------------------------------------------------
+# Find the first Caps Lock LED brightness file in /sys
+# (This file shows 1 when Caps Lock is ON, 0 when OFF)
 find_caps_file() {
-  ls /sys/class/leds/input*::capslock/brightness 2>/dev/null | head -n 1
+  find /sys/class/leds -maxdepth 1 -type l -name '*::capslock' \
+    -exec sh -c 'test -e "$1/brightness" && printf "%s/brightness\n" "$1" && exit 0' _ {} \; 2>/dev/null
 }
 
-caps_file="$(find_caps_file)"
-
-# Small helper to emit JSON in one line
+# --------------------------------------------------------------------
+# Emit JSON for Waybar (one line) with text, tooltip, class, etc.
+# Waybar expects JSON objects with "text", "alt", "tooltip", "class"
 emit_json() {
   local state="$1"
   local icon_on="󰪛" # Nerd Font icon for Caps Lock ON
   local icon_off="" # Show nothing when OFF
-  local alt tooltip class
+  local text alt tooltip class
 
   if [[ "$state" == "on" ]]; then
     text="$icon_on"
@@ -30,67 +34,84 @@ emit_json() {
     class='["caps","off"]'
   fi
 
+  # Print JSON (single line) for Waybar
   printf '{"text":"%s","alt":"%s","tooltip":"%s","class":%s}\n' \
     "$text" "$alt" "$tooltip" "$class"
 }
 
-# If no LED found, print an error JSON and exit
-if [[ -z "${caps_file:-}" ]]; then
-  printf '{"text":"","alt":"error","tooltip":"No Caps Lock LED found","class":["caps","error"]}\n'
-  exit 1
-fi
-
-prev=""
-
-# Optional: prefer inotify if available (fast + efficient), fall back to polling
+# --------------------------------------------------------------------
+# Detect if inotifywait is available (preferred method)
 have_inotify=0
 if command -v inotifywait >/dev/null 2>&1; then
-  # Some sysfs files don’t trigger MODIFY; CLOSE_WRITE tends to work better
   have_inotify=1
 fi
 
-# Emit once at startup
-curr="$(<"$caps_file")"
-if [[ "${curr:-0}" -eq 1 ]]; then
-  emit_json "on"
-  prev="1"
-else
-  emit_json "off"
-  prev="0"
-fi
+prev="" # Remember last Caps Lock state (0 or 1)
 
-# Main loop: wait for changes and emit updates
+# --------------------------------------------------------------------
+# Main loop: keeps running forever
 while :; do
-  # Re-detect the file if it disappeared (e.g., keyboard unplugged/replugged)
-  if [[ ! -e "$caps_file" ]]; then
-    caps_file="$(find_caps_file)"
-    if [[ -z "$caps_file" ]]; then
-      # Keep informing Waybar; it will update the tooltip and class
-      printf '{"text":"","alt":"error","tooltip":"No Caps Lock LED found","class":["caps","error"]}\n'
-      sleep 1
-      continue
-    fi
-    # Newly found file; force an update on next iteration
+  # Try to find the caps lock sysfs file
+  caps_file="$(find_caps_file)"
+
+  # If not found (e.g. keyboard unplugged), print error JSON
+  if [[ -z "${caps_file:-}" ]]; then
+    printf '{"text":"","alt":"error","tooltip":"No Caps Lock LED found","class":["caps","error"]}\n'
     prev=""
+    sleep 1 # Wait a bit, then retry
+    continue
   fi
 
-  # Wait for a change
-  if [[ $have_inotify -eq 1 ]]; then
-    # inotifywait exits after one event; suppress output
-    inotifywait -qq -e modify -e close_write --format "" "$caps_file" || sleep 0.2
-  else
-    # Lightweight polling fallback
-    sleep 0.2
-  fi
-
-  # Read current value and emit only if it changed
+  # Emit initial state once
   curr="$(<"$caps_file")"
-  if [[ "$curr" != "$prev" ]]; then
-    if [[ "$curr" -eq 1 ]]; then
-      emit_json "on"
-    else
-      emit_json "off"
-    fi
-    prev="$curr"
+  if [[ "${curr:-0}" -eq 1 ]]; then
+    emit_json "on"
+    prev="1"
+  else
+    emit_json "off"
+    prev="0"
+  fi
+
+  # ----------------------------------------------------------------
+  # If inotify is available, use event-driven mode (efficient)
+  if [[ $have_inotify -eq 1 ]]; then
+    # Watch the caps file for changes/deletion
+    # Process substitution (< <(...)) avoids an extra subshell
+    while IFS= read -r _; do
+      # If the file vanished, break out to rediscover
+      [[ -e "$caps_file" ]] || break
+
+      curr="$(<"$caps_file")"
+      if [[ "$curr" != "$prev" ]]; then
+        if [[ "$curr" -eq 1 ]]; then
+          emit_json "on"
+        else
+          emit_json "off"
+        fi
+        prev="$curr"
+      fi
+    done < <(inotifywait -mq \
+      -e modify -e close_write -e delete_self -e move_self \
+      --format "%e" "$caps_file")
+
+    # Reset state after file disappears or watcher stops
+    prev=""
+
+  else
+    # ----------------------------------------------------------------
+    # Fallback: polling mode (less efficient, uses sleep)
+    while [[ -e "$caps_file" ]]; do
+      sleep 0.2 # Check every 200ms
+      curr="$(<"$caps_file")"
+      if [[ "$curr" != "$prev" ]]; then
+        if [[ "$curr" -eq 1 ]]; then
+          emit_json "on"
+        else
+          emit_json "off"
+        fi
+        prev="$curr"
+      fi
+    done
+    prev=""
   fi
 done
