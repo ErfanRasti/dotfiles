@@ -4,9 +4,11 @@
 
 SOUND="${HOME}/.config/swaync/sounds/Chord.wav"
 
-if command -v paplay >/dev/null 2>&1 && [ -f "$SOUND" ]; then
-  paplay "$SOUND"
-elif command -v canberra-gtk-play >/dev/null 2>&1; then
-  # built-in theme sound as a fallback
-  canberra-gtk-play -i message
+if [[ "$(swaync-client --get-dnd)" == "false" ]]; then
+  if command -v paplay >/dev/null 2>&1 && [ -f "$SOUND" ]; then
+    paplay "$SOUND"
+  elif command -v canberra-gtk-play >/dev/null 2>&1; then
+    # built-in theme sound as a fallback
+    canberra-gtk-play -i message
+  fi
 fi
