@@ -1,19 +1,40 @@
+/********************************** General **********************************/
+@import "colors.css";
+
+* {
+  font-family: "Caskaydia Cove Nerd Font";
+  font-size: 14px;
+  font-weight: bold;
+}
 :root {
-  --cc-bg: rgba(46, 46, 46, 0.7);
-  --noti-border-color: rgba(255, 255, 255, 0.15);
-  --noti-bg: 48, 48, 48;
+  --cc-bg: @surface_container_low;
+  --cc-bg-alpha: 0.6;
+  --noti-border-color: @outline;
+  --noti-bg: @surface_container;
   --noti-bg-alpha: 0.8;
-  --noti-bg-darker: rgb(38, 38, 38);
-  --noti-bg-hover: rgb(56, 56, 56);
-  --noti-bg-focus: rgba(68, 68, 68, 0.6);
-  --noti-close-bg: rgb(78, 78, 78);
-  --noti-close-bg-hover: rgb(94, 94, 94);
-  --text-color: rgb(255, 255, 255);
-  --text-color-disabled: rgb(150, 150, 150);
-  --bg-selected: rgb(0, 128, 255);
+  --noti-bg-darker: @surface_dim;
+  --noti-bg-hover: @surface_container_bright;
+  --text-noti-close-bg-hover: @on_tertiary_container;
+  --noti-button-bg-hover: @primary_container;
+  --text-noti-button-bg-hover: @on_primary_container;
+  --noti-bg-focus: @surface_container_highest;
+  --noti-close-bg: @surface_container;
+  --noti-close-bg-hover: @primary_container;
+  --text-color: @on_surface;
+  --text-color-disabled: @on_secondary;
+  --bg-selected: @surface_tint;
   --notification-icon-size: 64px;
   --notification-app-icon-size: calc(var(--notification-icon-size) / 3);
   --notification-group-icon-size: 32px;
+  --border: 2px solid var(--noti-border-color);
+  --border-radius: 20px;
+  --notification-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.7),
+    0 2px 6px 2px rgba(0, 0, 0, 0.3);
+  --font-size-body: 15px;
+  --font-size-summary: 16px;
+  --hover-transition: background 0.15s ease-in-out;
+  --group-collapse-transition: opacity 400ms ease-in-out;
 }
 
 .close-button {
