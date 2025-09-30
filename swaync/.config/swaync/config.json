@@ -1,29 +1,24 @@
 {
   "$schema": "/etc/xdg/swaync/configSchema.json",
-  "ignore-gtk-theme": false,
-  "positionX": "right",
+  "ignore-gtk-theme": true,
+  "positionX": "left",
   "positionY": "top",
   "layer": "overlay",
-  "control-center-layer": "top",
   "layer-shell": true,
-  "layer-shell-cover-screen": true,
-  "cssPriority": "highest",
-  "control-center-margin-top": 0,
-  "control-center-margin-bottom": 0,
-  "control-center-margin-right": 0,
-  "control-center-margin-left": 0,
+  "cssPriority": "application",
+  "control-center-margin-top": 5,
+  "control-center-margin-bottom": 5,
+  "control-center-margin-right": 5,
+  "control-center-margin-left": 5,
+  "control-center-layer": "overlay",
+  "control-center-exclusive-zone": true,
   "notification-2fa-action": true,
-  "notification-inline-replies": false,
-  "notification-body-image-height": 100,
-  "notification-body-image-width": 200,
   "timeout": 10,
   "timeout-low": 5,
   "timeout-critical": 0,
-  "fit-to-screen": true,
-  "relative-timestamps": true,
-  "control-center-width": 500,
-  "control-center-height": 600,
   "notification-window-width": 500,
+  "notification-window-height": 500,
+  "notification-window-preferred-output": "",
   "keyboard-shortcuts": true,
   "notification-grouping": true,
   "image-visibility": "when-available",
@@ -31,31 +26,32 @@
   "hide-on-clear": false,
   "hide-on-action": true,
   "text-empty": "No Notifications",
-  "script-fail-notify": true,
-  "scripts": {
-    "example-script": {
-      "exec": "echo 'Do something...'",
-      "urgency": "Normal"
-    },
-    "example-action-script": {
-      "exec": "echo 'Do something actionable!'",
-      "urgency": "Normal",
-      "run-on": "action"
-    }
-  },
+  "fit-to-screen": true,
+  "relative-timestamps": true,
+  "control-center-height": 500,
+  "control-center-width": 400,
+  "control-center-preferred-output": "",
+  "layer-shell-cover-screen": true,
+  "notification-inline-replies": false,
+  "notification-body-image-height": 100,
+  "notification-body-image-width": 200,
   "notification-visibility": {
-    "example-name": {
+    "Spotify": {
       "state": "muted",
       "urgency": "Low",
-      "app-name": "Spotify"
+      "app-name": "Spotify",
+      "desktop-entry": "spotify.desktop"
     }
   },
   "widgets": [
     "inhibitors",
     "buttons-grid",
+    "volume",
+    "backlight",
+    "mpris",
     "title",
-    "dnd",
-    "notifications"
+    "notifications",
+    "dnd"
   ],
   "widget-config": {
     "inhibitors": {
@@ -66,7 +62,7 @@
     "title": {
       "text": "Notifications",
       "clear-all-button": true,
-      "button-text": "Clear All"
+      "button-text": ""
     },
     "dnd": {
       "text": "Do Not Disturb"
@@ -77,21 +73,99 @@
     },
     "mpris": {
       "blacklist": [],
-      "autohide": false,
+      "autohide": true,
       "show-album-art": "always",
       "loop-carousel": false
     },
     "buttons-grid": {
-      "buttons-per-row": 7,
+      "buttons-per-row": 3,
       "actions": [
         {
-          "label": "直",
+          "label": "",
           "type": "toggle",
           "active": true,
           "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && nmcli radio wifi on || nmcli radio wifi off'",
           "update-command": "sh -c '[[ $(nmcli radio wifi) == \"enabled\" ]] && echo true || echo false'"
+        },
+        {
+          "label": "󰂯",
+          "type": "toggle",
+          "active": true,
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && { rfkill unblock bluetooth;bluetoothctl power on; } || bluetoothctl power off'",
+          "update-command": "sh -c 'bluetoothctl show | grep -qF Powered:\\ yes && echo true || echo false'"
+        },
+        {
+          "label": "󰀝",
+          "type": "toggle",
+          "active": true,
+          "command": "sh -c '~/.config/swaync/scripts/toggle_airplanemode.sh'",
+          "update-command": "sh -c '[[ $(nmcli radio wifi) == \"enabled\" ]] || bluetoothctl show | grep -qF Powered:\\ yes && echo false || echo true'"
+        },
+
+        {
+          "label": "",
+          "type": "toggle",
+          "active": true,
+          "command": "swayosd-client --output-volume mute-toggle",
+          "update-command": "sh -c 'pactl get-sink-mute @DEFAULT_SINK@ | grep -q \"no\" && echo true || echo false'"
+        },
+        {
+          "label": "",
+          "type": "toggle",
+          "active": true,
+          "command": "swayosd-client --input-volume mute-toggle",
+          "update-command": "sh -c 'pactl get-source-mute @DEFAULT_SOURCE@ | grep -q \"no\" && echo true || echo false'"
+        },
+
+        {
+          "label": "",
+          "type": "toggle",
+          "active": true,
+          "command": "sh -c 'swaync-client -d -sw'",
+          "update-command": "sh -c 'swaync-client -D'"
+        },
+        {
+          "label": "",
+          "type": "toggle",
+          "active": true,
+          "command": "sh -c '~/.config/swaync/scripts/toggle_darkmode.sh'",
+          "update-command": "sh -c 'grep -q '^post_command.*dark' ~/.config/waypaper/config.ini && echo true || echo false'"
+        },
+        {
+          "label": "",
+          "type": "toggle",
+          "active": true,
+          "command": "sh -c '~/.config/swaync/scripts/toggle_hyprsunset.sh'",
+          "update-command": "sh -c 'pgrep -x hyprsunset >/dev/null && echo true || echo false'"
+        },
+        {
+          "label": "",
+          "type": "toggle",
+          "active": true,
+          "command": "sh -c '~/.config/swaync/scripts/toggle_hypridle.sh'",
+          "update-command": "sh -c 'systemctl --user is-active --quiet hypridle-coffee.service && echo true || echo false'"
         }
       ]
+    },
+    "volume": {
+      "label": "",
+      "show-per-app-icon": true,
+      "show-per-app": true
+    },
+    "backlight": {
+      "label": "󰃠",
+      "device": "intel_backlight",
+      "subsystem": "backlight",
+      "min": 5
+    }
+  },
+  "script-fail-notify": false,
+
+  "scripts": {
+    "play-sound": {
+      "exec": "~/.config/swaync/scripts/notify_sound.sh",
+      "app-name": ".*",
+      "run-on": "receive"
     }
   }
 }
