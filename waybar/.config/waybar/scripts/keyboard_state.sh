@@ -9,8 +9,12 @@ set -u # Treat unset variables as errors
 # Find the first Caps Lock LED brightness file in /sys
 # (This file shows 1 when Caps Lock is ON, 0 when OFF)
 find_caps_file() {
-  find /sys/class/leds -maxdepth 1 -type l -name '*::capslock' \
-    -exec sh -c 'test -e "$1/brightness" && printf "%s/brightness\n" "$1" && exit 0' _ {} \; 2>/dev/null
+  for f in /sys/class/leds/*::capslock/brightness; do
+    [[ -e "$f" ]] && {
+      printf '%s\n' "$f"
+      return
+    }
+  done
 }
 
 # --------------------------------------------------------------------
