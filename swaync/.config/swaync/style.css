@@ -37,6 +37,19 @@
   --group-collapse-transition: opacity 400ms ease-in-out;
 }
 
+.blank-window {
+  /* Window behind control center and on all other monitors */
+  background: transparent;
+}
+
+.floating-notifications {
+  background: transparent;
+}
+
+.floating-notifications .notification {
+  box-shadow: none;
+}
+
 /********************************** Close Button **********************************/
 .close-button {
   background: var(--noti-close-bg);
@@ -401,6 +414,35 @@
 
 .control-center {
   background: alpha(var(--cc-bg), var(--cc-bg-alpha));
+  color: var(--text-color);
+  border-radius: var(--border-radius);
   border: var(--border);
   padding: 5px;
+}
+
+.control-center .control-center-list-placeholder {
+  /* The placeholder when there are no notifications */
+  opacity: 0.5;
+}
+
+.control-center .control-center-list {
+  /* List of notifications */
+  background: transparent;
+}
+
+.control-center .control-center-list .notification {
+  box-shadow: var(--notification-shadow);
+}
+
+.control-center .control-center-list .notification .notification-default-action,
+.control-center .control-center-list .notification .notification-action {
+  transition: var(--group-collapse-tranistion), var(--hover-tranistion);
+}
+
+.control-center
+  .control-center-list
+  .notification
+  .notification-default-action:hover,
+.control-center .control-center-list .notification .notification-action:hover {
+  background-color: var(--noti-bg-hover);
 }
