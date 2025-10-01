@@ -446,6 +446,30 @@
 
 .control-center .control-center-list .notification .notification-default-action,
 .control-center .control-center-list .notification .notification-action {
+
+/************** Buttons Grid Widget **************/
+.widget-buttons-grid flowboxchild > button {
+  border-radius: var(--border-radius);
+}
+
+.widget-buttons-grid flowboxchild > button.toggle:checked {
+  /* style given to the active toggle button */
+  background: linear-gradient(
+    45deg,
+    @primary 0%,
+    @secondary 50%,
+    @tertiary 100%
+  );
+  color: @on_primary;
+}
+
+.widget-buttons-grid flowboxchild > button.toggle:hover {
+  /* style given to the active toggle button */
+  background: @tertiary;
+  color: @on_tertiary;
+  transition: opacity 0.15s ease-in-out;
+}
+
 /************** Label Widget **************/
 .widget-label > label {
   font-size: 1.1rem;
