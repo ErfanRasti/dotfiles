@@ -446,6 +446,31 @@
 
 .control-center .control-center-list .notification .notification-default-action,
 .control-center .control-center-list .notification .notification-action {
+}
+
+/************** DND Widget **************/
+.widget-dnd label {
+  color: var(--text-color);
+  margin-right: 8px;
+  font-size: 1.1rem;
+}
+
+.widget-dnd switch {
+  border-radius: var(--border-radius);
+  margin-left: 8px;
+}
+
+.widget-dnd switch:checked {
+  border-radius: var(--border-radius);
+  margin-left: 8px;
+  background: @primary;
+}
+
+.widget-dnd switch slider {
+  /* background: @tertiary; */
+  border-radius: var(--border-radius);
+}
+
   padding: 8px;
   border-radius: var(--border-radius);
 }
