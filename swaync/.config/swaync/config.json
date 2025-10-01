@@ -85,21 +85,21 @@
           "type": "toggle",
           "active": true,
           "command": "sh -c '~/.config/swaync/scripts/toggle_wifi.sh'",
-          "update-command": "sh -c '[[ $(nmcli radio wifi) == \"enabled\" ]] && echo true || echo false'"
+          "update-command": "sh -c '{ [[ $(nmcli radio wifi) == \"enabled\" ]] && echo true || echo false; } >/dev/null 2>&1 || :'"
         },
         {
           "label": "󰂯",
           "type": "toggle",
           "active": true,
           "command": "sh -c '~/.config/swaync/scripts/toggle_bluetooth.sh'",
-          "update-command": "sh -c 'bluetoothctl show | grep -qF Powered:\\ yes && echo true || echo false'"
+          "update-command": "sh -c '{ bluetoothctl show | grep -qF Powered:\\ yes && echo true || echo false; } >/dev/null 2>&1 || :'"
         },
         {
           "label": "󰀝",
           "type": "toggle",
           "active": true,
           "command": "sh -c '~/.config/swaync/scripts/toggle_airplanemode.sh'",
-          "update-command": "sh -c '[[ $(nmcli radio wifi) == \"enabled\" ]] || bluetoothctl show | grep -qF Powered:\\ yes && echo false || echo true'"
+          "update-command": "sh -c '{ [[ $(nmcli radio wifi) == \"enabled\" ]] || bluetoothctl show | grep -qF Powered:\\ yes && echo false || echo true; } >/dev/null 2>&1 || :'"
         },
 
         {
@@ -107,14 +107,14 @@
           "type": "toggle",
           "active": true,
           "command": "swayosd-client --output-volume mute-toggle",
-          "update-command": "sh -c 'pactl get-sink-mute @DEFAULT_SINK@ | grep -q \"no\" && echo true || echo false'"
+          "update-command": "sh -c '{ pactl get-sink-mute @DEFAULT_SINK@ | grep -q \"no\" && echo true || echo false; } >/dev/null 2>&1 || :'"
         },
         {
           "label": "",
           "type": "toggle",
           "active": true,
           "command": "swayosd-client --input-volume mute-toggle",
-          "update-command": "sh -c 'pactl get-source-mute @DEFAULT_SOURCE@ | grep -q \"no\" && echo true || echo false'"
+          "update-command": "sh -c '{ pactl get-source-mute @DEFAULT_SOURCE@ | grep -q \"no\" && echo true || echo false; } >/dev/null 2>&1 || :'"
         },
 
         {
@@ -122,28 +122,28 @@
           "type": "toggle",
           "active": true,
           "command": "sh -c 'swaync-client -d -sw'",
-          "update-command": "sh -c 'swaync-client -D'"
+          "update-command": "sh -c '{ swaync-client -D; } >/dev/null 2>&1 || :'"
         },
         {
           "label": "",
           "type": "toggle",
           "active": true,
           "command": "sh -c '~/.config/swaync/scripts/toggle_darkmode.sh'",
-          "update-command": "sh -c 'grep -q '^post_command.*dark' ~/.config/waypaper/config.ini && echo true || echo false'"
+          "update-command": "sh -c '{ grep -q '^post_command.*dark' ~/.config/waypaper/config.ini && echo true || echo false; } >/dev/null 2>&1 || :'"
         },
         {
           "label": "",
           "type": "toggle",
           "active": true,
           "command": "sh -c '~/.config/swaync/scripts/toggle_hyprsunset.sh'",
-          "update-command": "sh -c 'pgrep -x hyprsunset >/dev/null && echo true || echo false'"
+          "update-command": "sh -c '{ pgrep -x hyprsunset >/dev/null && echo true || echo false; } >/dev/null 2>&1 || :'"
         },
         {
           "label": "",
           "type": "toggle",
           "active": true,
           "command": "sh -c '~/.config/swaync/scripts/toggle_hypridle.sh'",
-          "update-command": "sh -c 'systemctl --user is-active --quiet hypridle-coffee.service && echo true || echo false'"
+          "update-command": "sh -c '{ systemctl --user is-active --quiet hypridle-coffee.service && echo true || echo false; } >/dev/null 2>&1 || :'"
         }
       ]
     },
