@@ -2,7 +2,7 @@
 @import "colors.css";
 
 * {
-  font-family: "Caskaydia Cove Nerd Font";
+  font-family: "Caskaydia Cove Nerd Font Propo";
   font-size: 14px;
   font-weight: bold;
 }
@@ -18,7 +18,7 @@
   --text-noti-button-bg-hover: @on_primary_container;
   --noti-bg-focus: @surface_container_highest;
   --noti-close-bg: @surface_container;
-  --noti-close-bg-hover: @primary_container;
+  --noti-close-bg-hover: @tertiary_container;
   --text-noti-close-bg-hover: @on_tertiary_container;
   --text-color: @on_surface;
   --text-color-disabled: @on_secondary;
@@ -86,16 +86,19 @@
 .notification-row .notification-background .notification.low {
   /* Low Priority Notification */
   background: alpha(@surface_container_low, var(--noti-bg-alpha));
+  box-shadow: 0px 0px 4px alpha(@on_surface, 1);
 }
 
 .notification-row .notification-background .notification.normal {
   /* Normal Priority Notification */
   background: alpha(var(--noti-bg), var(--noti-bg-alpha));
+  box-shadow: 0px 0px 4px alpha(@on_surface, 1);
 }
 
 .notification-row .notification-background .notification.critical {
   /* Critical Priority Notification */
   background: alpha(@surface_container_high, var(--noti-bg-alpha));
+  box-shadow: 0px 0px 4px alpha(@on_surface, 1);
 }
 
 .notification-row
@@ -396,6 +399,8 @@
 
 .notification-group.collapsed {
   /* When another group is expanded, lower the opacity of the collapsed ones */
+  background-color: transparent;
+  border: none;
 }
 
 .notification-group.collapsed.not-expanded {
@@ -420,6 +425,14 @@
   .notification-row:not(:only-child)
   .notification {
   background-color: var(--noti-bg-hover);
+}
+
+/* --- Group action buttons (close / clear) --- */
+.notification-group .notification-group-buttons button:hover,
+.notification-group .notification-group-close-button .close-button:hover {
+  background: var(--noti-button-bg-hover);
+  color: var(--text-noti-button-bg-hover);
+  transition: var(--hover-transition);
 }
 
 /********************************** Control Center **********************************/
@@ -475,6 +488,11 @@
 .widget-title > button {
   margin-left: 8px;
   border-radius: var(--border-radius);
+}
+
+.widget-title > button:hover {
+  background: var(--noti-button-bg-hover);
+  color: var(--text-noti-button-bg-hover);
 }
 
 /************** DND Widget **************/
@@ -691,7 +709,7 @@
     @primary_container 0%,
     @tertiary_container 100%
   );
-  box-shadow: 0px 0px 5px alpha(var(@on_surface), 0.5);
+  box-shadow: 0px 0px 5px alpha(@on_surface, 0.5);
 }
 
 .control-center trough highlight,
@@ -700,7 +718,7 @@
   padding: 5px;
   background: linear-gradient(90deg, @primary 0%, @tertiary 100%);
   border-radius: 20px;
-  box-shadow: 0px 0px 3px alpha(var(@on_surface), 1);
+  box-shadow: 0px 0px 3px alpha(@on_surface, 1);
   transition: all 0.4s ease;
 }
 
@@ -710,7 +728,7 @@
   padding: 5px;
   background: linear-gradient(90deg, @secondary 0%, @tertiary 100%);
   border-radius: 20px;
-  box-shadow: 0px 0px 3px alpha(var(@on_surface), 1);
+  box-shadow: 0px 0px 3px alpha(@on_surface, 1);
   transition: opacity 0.3s ease;
 }
 
@@ -725,7 +743,7 @@
 .widget-volume trough slider:hover {
   background: @tertiary;
   transition: opacity 0.3s ease-in-out;
-  box-shadow: 0px 0px 3px rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 3px alpha(@on_surface, 1);
 }
 
 /************** Inhibitors Widget **************/
