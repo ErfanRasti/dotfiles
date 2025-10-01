@@ -446,6 +446,27 @@
 
 .control-center .control-center-list .notification .notification-default-action,
 .control-center .control-center-list .notification .notification-action {
+
+/************** Volume Widget **************/
+:root {
+  --widget-volume-row-icon-size: 24px;
+}
+
+.widget-volume {
+}
+
+/* Each row app icon */
+.widget-volume row image {
+  -gtk-icon-size: var(--widget-volume-row-icon-size);
+}
+
+.per-app-volume {
+  background-color: var(--noti-bg-alt);
+  margin: 8px;
+  margin-bottom: 0;
+  border-radius: var(--border-radius);
+}
+
   transition: opacity 0.15s ease-in-out;
 }
 
