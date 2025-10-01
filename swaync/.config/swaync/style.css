@@ -446,7 +446,33 @@
 
 .control-center .control-center-list .notification .notification-default-action,
 .control-center .control-center-list .notification .notification-action {
-  transition: var(--group-collapse-tranistion), var(--hover-tranistion);
+  padding: 8px;
+  border-radius: var(--border-radius);
+}
+
+/************** Title Widget **************/
+.widget-title > label {
+  margin-right: 8px;
+  font-size: 20px;
+/********************************** Widgets **********************************/
+.widget {
+  margin: 8px;
+  padding: 8px;
+  border-radius: var(--border-radius);
+}
+
+/************** Title widget **************/
+.widget-title > label {
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+.widget-title > button {
+  margin-left: 8px;
+  border-radius: var(--border-radius);
+}
+
+  transition: var(--group-collapse-tranistion), var(--hover-transition);
 }
 
 .control-center
