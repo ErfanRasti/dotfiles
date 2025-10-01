@@ -446,6 +446,65 @@
 
 .control-center .control-center-list .notification .notification-default-action,
 .control-center .control-center-list .notification .notification-action {
+  margin-bottom: 0;
+  border-radius: var(--border-radius);
+}
+
+/************** Backlight Widget **************/
+.widget-backlight {
+}
+
+/************** Slider Widget **************/
+.widget-slider label {
+  font-size: inherit;
+}
+
+.control-center trough,
+.widget-backlight trough,
+.widget-volume trough {
+  border-radius: 20px;
+  background: linear-gradient(
+    90deg,
+    @primary_container 0%,
+    @tertiary_container 100%
+  );
+  box-shadow: 0px 0px 5px alpha(var(@on_surface), 0.5);
+}
+
+.control-center trough highlight,
+.widget-backlight trough highlight,
+.widget-volume trough highlight {
+  padding: 5px;
+  background: linear-gradient(90deg, @primary 0%, @tertiary 100%);
+  border-radius: 20px;
+  box-shadow: 0px 0px 3px alpha(var(@on_surface), 1);
+  transition: all 0.4s ease;
+}
+
+.control-center trough highlight:hover,
+.widget-backlight trough highlight:hover,
+.widget-volume trough highlight:hover {
+  padding: 5px;
+  background: linear-gradient(90deg, @secondary 0%, @tertiary 100%);
+  border-radius: 20px;
+  box-shadow: 0px 0px 3px alpha(var(@on_surface), 1);
+  transition: opacity 0.3s ease;
+}
+
+.widget-backlight trough slider,
+.widget-volume trough slider {
+  background: @secondary;
+  min-width: 2px;
+  min-height: 2px;
+}
+
+.widget-backlight trough slider:hover,
+.widget-volume trough slider:hover {
+  background: @tertiary;
+  transition: opacity 0.3s ease-in-out;
+  box-shadow: 0px 0px 3px rgba(255, 255, 255, 1);
+}
+
 
 /************** Volume Widget **************/
 :root {
