@@ -26,7 +26,7 @@
   --notification-icon-size: 64px;
   --notification-app-icon-size: calc(var(--notification-icon-size) / 3);
   --notification-group-icon-size: 32px;
-  --border: 2px solid var(--noti-border-color);
+  --border: 1px solid var(--noti-border-color);
   --border-radius: 20px;
   --notification-shadow:
     0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.7),
@@ -54,6 +54,10 @@
 .close-button {
   background: var(--noti-close-bg);
   color: var(--text-color);
+  min-width: 24px;
+  min-height: 24px;
+  min-width: 24px;
+  min-height: 24px;
 }
 .close-button:hover {
   background: var(--noti-close-bg-hover);
@@ -78,6 +82,7 @@
   /* The actual notification */
   min-height: 50px;
   background: alpha(var(--noti-bg), var(--noti-bg-alpha));
+  padding: 0px 0px 0px 5px;
 }
 
 .notification-row .notification-background .notification.low {
@@ -343,16 +348,25 @@
 .notification-group.low {
   /* Low Priority Group */
   background: alpha(@surface_container_low, var(--noti-bg-alpha));
+  border-radius: var(--border-radius);
+  border: var(--border);
+  padding: 5px 2px;
 }
 
 .notification-group.normal {
-  /* Low Priority Group */
+  /* Normal Priority Group */
   background: alpha(var(--noti-bg), var(--noti-bg-alpha));
+  border-radius: var(--border-radius);
+  border: var(--border);
+  padding: 5px 2px;
 }
 
 .notification-group.critical {
-  /* Low Priority Group */
+  /* High Priority Group */
   background: alpha(@surface_container_high, var(--noti-bg-alpha));
+  border-radius: var(--border-radius);
+  border: var(--border);
+  padding: 5px 2px;
 }
 
 .notification-group .notification-group-close-button .close-button {
@@ -380,10 +394,6 @@
 
 .notification-group .notification-group-buttons {
   /* Notification Group Buttons */
-}
-
-.notification-group.collapsed {
-  /* When another group is expanded, lower the opacity of the collapsed ones */
 }
 
 .notification-group.collapsed.not-expanded {
