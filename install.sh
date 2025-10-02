@@ -93,7 +93,6 @@ sudo pacman -S \
   libpng \
   wl-clipboard \
   cpio cmake git meson gcc \
-  hyprpm \
   mpv \
   hyprshot \
   libxkbcommon \
@@ -113,7 +112,6 @@ sudo pacman -S \
   rofi-calc \
   udiskie \
   superfile \
-  overskride \
   btop \
   bluez bluez-utils \
   dosfstools \
