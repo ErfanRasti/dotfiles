@@ -19,6 +19,7 @@ else
 fi
 
 echo "------------------- pacman packages -------------------"
+sudo pacman -Syu
 sudo pacman -S \
   linux-headers \
   linux-firmware \
@@ -32,7 +33,6 @@ sudo pacman -S \
   egl-wayland \
   zsh-autosuggestions zsh-syntax-highlighting \
   fish pkgfile inetutils \
-  emacs \
   nautilus-python python-dbus \
   hyprland vim wget curl kitty \
   hyprland \
@@ -125,6 +125,7 @@ sudo pacman -S \
 echo "✅ pacman packages installed successfully!"
 
 echo "------------------- AUR packages -------------------"
+paru
 paru -S \
   envycontrol \
   nix-zsh-completions \
