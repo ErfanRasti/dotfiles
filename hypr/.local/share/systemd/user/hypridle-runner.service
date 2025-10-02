@@ -1,0 +1,15 @@
+# ~/.local/share/systemd/user/hypridle.service
+[Unit]
+Description=Hyprland's idle daemon
+After=graphical-session.target
+PartOf=graphical-session.target
+ConditionEnvironment=WAYLAND_DISPLAY
+
+[Service]
+Type=simple
+ExecStart=sh -c '~/.config/hypr/scripts/hypridle_runner.sh'
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target
+
