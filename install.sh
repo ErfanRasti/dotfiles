@@ -88,7 +88,7 @@ sudo pacman -S \
   mpc \
   hyprsunset \
   hyprland-qtutils \
-  foot fzf chafa jq \
+  foot fzf chafa jq bat \
   pixman \
   libpng \
   wl-clipboard \
@@ -120,7 +120,8 @@ sudo pacman -S \
   gpsd upower \
   power-profiles-daemon \
   inotify-tools \
-  breeze-icons
+  breeze-icons \
+  wev
 
 echo "✅ pacman packages installed successfully!"
 
@@ -132,7 +133,7 @@ paru -S \
   zsh-nix-shell \
   shell-color-scripts-git \
   tabby \
-  zsh-theme-powerlevel10k zsh-autocomplete zsh-fast-syntax-highlighting \
+  zsh-theme-powerlevel10k zsh-autocomplete zsh-fast-syntax-highlighting zsh-vi-mode \
   ascii-image-converter \
   sesh-bin \
   apple-fonts \
@@ -164,6 +165,7 @@ echo "------------------- hyprpm packages -------------------"
 # hyprpm
 hyprpm add https://github.com/hyprwm/hyprland-plugins
 hyprpm add https://github.com/KZDKM/Hyprspace
+hyprpm update
 
 echo "✅ hyprpm packages installed successfully!"
 
