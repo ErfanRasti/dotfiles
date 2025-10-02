@@ -112,7 +112,7 @@ sudo pacman -S \
   rofi-calc \
   udiskie \
   superfile \
-  btop \
+  btop nvtop \
   bluez bluez-utils \
   dosfstools \
   swww \
@@ -156,6 +156,7 @@ echo "✅ AUR packages installed successfully!"
 echo "------------------- flatpak packages -------------------"
 # flatpak packages
 flatpak install flathub com.dec05eba.gpu_screen_recorder
+flatpak install flathub io.missioncenter.MissionCenter
 
 echo "✅ flatpak packages installed successfully!"
 
@@ -180,3 +181,7 @@ chsh -s "$(which bash)"
 fish_update_completions
 
 echo "✅ fish configured successfully!"
+
+echo "------------------- enable services -------------------"
+systemctl --user enable ydotoold.service
+systemctl --user start ydotoold.service

@@ -176,7 +176,7 @@ apply_gnome_proxy() {
 apply_gnome_proxy
 
 # Enables vim-style command-line editing in zsh
-# set -o vi
+set -o vi
 
 # Alias nvim-kickstart
 # alias nvim-kickstart='NVIM_APPNAME="nvim-kickstart" nvim'
@@ -211,3 +211,14 @@ bindkey '^F' fzf-cd-widget
 
 # update-all alias
 alias update-all="exec ~/update-all.sh"
+
+
+# Setup yazi to change the CWD
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
