@@ -13,6 +13,7 @@
     },
     "tooltip": true,
     "tooltip-format": "{timeTo}\nPower usage: {power} watts\nCycles: {cycles}\nHealth: {health}",
-    "on-click-right": "pypr toggle settings;env XDG_CURRENT_DESKTOP=GNOME gnome-control-center power",
+    "on-click-right": "better-control --battery",
+    "on-click-middle": "pypr toggle settings;env XDG_CURRENT_DESKTOP=GNOME gnome-control-center power",
   },
 }

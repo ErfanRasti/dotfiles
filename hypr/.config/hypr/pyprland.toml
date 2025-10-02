@@ -61,7 +61,7 @@ close_on_hide = true
 
 [scratchpads.nautilus]
 use = "_base"
-command = "exec env XDG_CURRENT_DESKTOP=GNOME nautilus --new-window ~"
+command = "env XDG_CURRENT_DESKTOP=GNOME nautilus --new-window ~"
 class = "org.gnome.Nautilus"
 size = "900px 600px"
 unfocus = "hide"

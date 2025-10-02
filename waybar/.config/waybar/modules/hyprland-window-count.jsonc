@@ -3,6 +3,7 @@
     "format": "󱂬:{}",
     "format-empty": "",
     "format-fullscreen": "󱂬:{},󰊓",
-    "separate-outputs": true
-  }
+    "separate-outputs": true,
+    "on-click": "better-control --display",
+  },
 }
