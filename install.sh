@@ -168,6 +168,9 @@ echo "✅ hyprpm packages installed successfully!"
 
 echo "------------------- dotfiles -------------------"
 git clone --recurse-submodules https://github.com/ErfanRasti/dotfiles.git "$HOME/dotfiles"
+cd "$HOME/dotfiles/" || exit
+stow */
+waypaper --wallpaper ~/wallpapers/School/arseniy-chebynkin-school-enter2.jpg
 
 echo "✅ dotfiles installed successfully!"
 
