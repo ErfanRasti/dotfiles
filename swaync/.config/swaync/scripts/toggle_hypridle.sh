@@ -13,6 +13,6 @@ else
   } >/dev/null 2>&1 || :
 fi
 
-{ systemctl --user restart hypridle.service; } >/dev/null 2>&1 || :
+{ systemctl --user restart hypridle-runner.service; } >/dev/null 2>&1 || :
 
 exit 0
