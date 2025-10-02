@@ -187,3 +187,6 @@ echo "✅ fish configured successfully!"
 echo "------------------- enable services -------------------"
 systemctl --user enable ydotoold.service
 systemctl --user start ydotoold.service
+
+systemctl --user enable hypridle-runner.service
+systemctl --user start hypridle-runner.service
