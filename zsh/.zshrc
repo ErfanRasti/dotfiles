@@ -127,6 +127,7 @@ source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 # source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 # change directory
@@ -177,6 +178,8 @@ apply_gnome_proxy
 
 # Enables vim-style command-line editing in zsh
 set -o vi
+
+ZVM_SYSTEM_CLIPBOARD_ENABLED=true
 
 # Alias nvim-kickstart
 # alias nvim-kickstart='NVIM_APPNAME="nvim-kickstart" nvim'
