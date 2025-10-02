@@ -1,18 +1,14 @@
 #!/usr/bin/env bash
-# Plays a short sound for every notification.
-# Tries paplay (PulseAudio/PipeWire), falls back to canberra.
-
 set +e # disable immediate exit on error
 
-SOUND="${HOME}/.config/swaync/sounds/Chord.wav"
+if [[ $SWAYNC_TOGGLE_STATE == true ]]; then
+  {
+    rfkill unblock bluetooth
+    bluetoothctl power on
+  } >/dev/null 2>&1 || :
+else
+  { bluetoothctl power off; } >/dev/null 2>&1 || :
 
-if [[ "$(swaync-client --get-dnd)" == "false" ]]; then
-  if command -v paplay >/dev/null 2>&1 && [ -f "$SOUND" ]; then
-    { paplay "$SOUND"; } >/dev/null 2>&1 || :
-  elif command -v canberra-gtk-play >/dev/null 2>&1; then
-    # built-in theme sound as a fallback
-    { canberra-gtk-play -i message; } >/dev/null 2>&1 || :
-  fi
 fi
 
 exit 0
