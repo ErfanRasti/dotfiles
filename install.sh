@@ -141,7 +141,7 @@ paru -S \
   spicetify-cli \
   spotify \
   libinput-gestures \
-  better-control \
+  better-control-git \
   pyprland \
   flat-remix \
   rofi-tools-bin \
