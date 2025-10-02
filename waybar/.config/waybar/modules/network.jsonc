@@ -16,7 +16,8 @@
     "tooltip-format-disconnected": "No network",
     "tooltip-format-disabled": "Off",
     "interval": 2,
-    "on-click": "pypr toggle network",
+    "on-click": "better-control --wifi",
     "on-click-right": "~/.config/waybar/scripts/toggle_network.sh",
+    "on-click-middle": "pypr toggle network",
   },
 }
