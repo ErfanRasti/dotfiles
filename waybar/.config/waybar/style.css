@@ -296,8 +296,8 @@ window#waybar.fullscreen #windowcount {
 }
 /*****----- custom camera usage -----*****/
 #custom-camera-usage {
-  background-color: @green_value;
-  color: white;
+  background-color: @green;
+  color: @on_green;
 }
 
 /*****----- privacy -----*****/
@@ -306,12 +306,12 @@ window#waybar.fullscreen #windowcount {
   color: white;
 }
 #privacy-item.audio-out {
-  background-color: @blue_value;
-  color: white;
+  background-color: @blue;
+  color: @on_blue;
 }
 #privacy-item.audio-in {
-  background-color: @orange_value;
-  color: white;
+  background-color: @orange;
+  color: @on_orange;
 }
 /*****----- bluetooth -----*****/
 #bluetooth.disabled {

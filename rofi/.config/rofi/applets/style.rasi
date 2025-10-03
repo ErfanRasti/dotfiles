@@ -64,8 +64,8 @@ textbox-prompt-colon {
     str:                        "";
     padding:                    10px 13px;
     border-radius:             10px;
-    background-color:           @error-container;
-    text-color:                 @on-error-container;
+    background-color:           @secondary;
+    text-color:                 @on-secondary;
 }
 
 prompt {
