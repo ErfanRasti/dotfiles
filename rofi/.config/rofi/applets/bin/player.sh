@@ -6,7 +6,7 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 theme="$type/$style"
 
 # Theme Elements
-status="$(playerctl status)"
+status="$(playerctl -p spotify status)"
 mesg=$("$HOME"/.config/hypr/scripts/song_detail.sh)
 
 list_col='6'
@@ -29,7 +29,7 @@ active=""
 urgent=""
 
 # Random
-random_status=$(playerctl shuffle)
+random_status=$(playerctl -p spotify shuffle)
 if [[ ${random_status} == "On" ]]; then
   option_5=""
   active="-a 4"
@@ -39,7 +39,7 @@ elif [[ ${random_status} == "Off" ]]; then
 fi
 
 # Repeat
-repeat_status=$(playerctl loop)
+repeat_status=$(playerctl -p spotify loop)
 repeat_next_state="Playlist"
 if [[ ${repeat_status} == "Track" ]]; then
   option_6="󰑘"
@@ -75,17 +75,17 @@ run_rofi() {
 # Execute Command
 run_cmd() {
   if [[ "$1" == '--opt1' ]]; then
-    playerctl play-pause
+    playerctl -p spotify play-pause
   elif [[ "$1" == '--opt2' ]]; then
-    playerctl stop
+    playerctl -p spotify stop
   elif [[ "$1" == '--opt3' ]]; then
-    playerctl previous
+    playerctl -p spotify previous
   elif [[ "$1" == '--opt4' ]]; then
-    playerctl next
+    playerctl -p spotify next
   elif [[ "$1" == '--opt5' ]]; then
-    playerctl shuffle "Toggle"
+    playerctl -p spotify shuffle "Toggle"
   elif [[ "$1" == '--opt6' ]]; then
-    playerctl loop "${repeat_next_state}"
+    playerctl -p spotify loop "${repeat_next_state}"
   fi
 }
 
