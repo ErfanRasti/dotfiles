@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 
 # Import Current Theme
-source "$HOME"/.config/rofi/applets/shared/theme.sh
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+. "$script_dir/../shared/theme.sh"
 theme="$type/$style"
 
 # Theme Elements
 prompt='Applications as root'
 mesg='Select an application to run as root'
 
-list_col='5'
+list_col='4'
 list_row='1'
 win_width='670px'
 
@@ -16,9 +17,8 @@ win_width='670px'
 
 option_1="󰊠"
 option_2=""
-option_3=""
+option_3=""
 option_4=""
-option_5=""
 
 # Rofi CMD
 rofi_cmd() {
@@ -29,39 +29,35 @@ rofi_cmd() {
     -p "$prompt" \
     -mesg "$mesg" \
     -markup-rows \
-    -theme ${theme}
+    -theme "${theme}"
 }
 
 # Pass variables to rofi dmenu
 run_rofi() {
-  echo -e "$option_1\n$option_2\n$option_3\n$option_4\n$option_5" | rofi_cmd
+  echo -e "$option_1\n$option_2\n$option_3\n$option_4" | rofi_cmd
+}
+
+run_pkexec() {
+  pkexec env XDG_RUNTIME_DIR="$XDG_RUNTIME_DIR" WAYLAND_DISPLAY="$WAYLAND_DISPLAY" "$1"
 }
 
 # Execute Command
 run_cmd() {
   # Ensure the necessary environment variables are available
-  local polkit_cmd="pkexec env PATH=\"$PATH\" \
-        DISPLAY=\"$DISPLAY\" \
-        XAUTHORITY=\"$XAUTHORITY\" \
-        WAYLAND_DISPLAY=\"$WAYLAND_DISPLAY\" \
-        HYPRLAND_INSTANCE_SIGNATURE=\"$HYPRLAND_INSTANCE_SIGNATURE\" \
-        XDG_CURRENT_DESKTOP=\"$XDG_CURRENT_DESKTOP\""
 
   case "$1" in
   '--opt1')
-    sudo -i /usr/bin/ghostty
+
+    run_pkexec /usr/bin/ghostty
     ;;
   '--opt2')
     nautilus admin:///root/
     ;;
   '--opt3')
-    ${polkit_cmd} /usr/bin/code
+    run_pkexec /usr/bin/nvim
     ;;
   '--opt4')
-    ${polkit_cmd} /usr/bin/yazi
-    ;;
-  '--opt5')
-    ${polkit_cmd} /usr/bin/nvim
+    run_pkexec /usr/bin/yazi
     ;;
   *)
     echo "Invalid option"
@@ -73,19 +69,16 @@ run_cmd() {
 # Actions
 chosen="$(run_rofi)"
 case ${chosen} in
-$option_1)
+"$option_1")
   run_cmd --opt1
   ;;
-$option_2)
+"$option_2")
   run_cmd --opt2
   ;;
-$option_3)
+"$option_3")
   run_cmd --opt3
   ;;
-$option_4)
+"$option_4")
   run_cmd --opt4
-  ;;
-$option_5)
-  run_cmd --opt5
   ;;
 esac
