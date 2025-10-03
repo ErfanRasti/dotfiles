@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Get player status (Playing/Paused/Stopped)
-player_status=$(playerctl status 2>/dev/null)
+player_status=$(playerctl -p spotify status 2>/dev/null)
 
 # If no player is running, exit gracefully
 if [ -z "$player_status" ]; then
@@ -9,7 +9,7 @@ if [ -z "$player_status" ]; then
 fi
 
 # Get player name (lowercase for consistency)
-player_name=$(playerctl metadata --format '{{lc(playerName)}}' 2>/dev/null)
+player_name=$(playerctl -p spotify metadata --format '{{lc(playerName)}}' 2>/dev/null)
 
 # Set default play/pause icons
 if [ "$player_status" = "Playing" ]; then
@@ -41,8 +41,8 @@ mpv)
 esac
 
 # Get song/video info
-title=$(playerctl metadata title 2>/dev/null)
-artist=$(playerctl metadata artist 2>/dev/null)
+title=$(playerctl -p spotify metadata title 2>/dev/null)
+artist=$(playerctl -p spotify metadata artist 2>/dev/null)
 
 # Format output (icon + play/pause + title - artist)
 if [ -n "$title" ]; then
