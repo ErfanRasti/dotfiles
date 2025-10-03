@@ -8,5 +8,15 @@
     "tooltip": true,
     "on-click": "pypr toggle btop",
     "on-click-right": "pypr toggle htop",
+    "hwmon-path": [
+      "/sys/class/hwmon/hwmon2/temp1_input",
+      "/sys/class/hwmon/hwmon2/temp2_input",
+      "/sys/class/hwmon/hwmon2/temp3_input",
+      "/sys/class/hwmon/hwmon2/temp4_input",
+      "/sys/class/hwmon/hwmon2/temp5_input",
+      "/sys/class/hwmon/hwmon2/temp6_input",
+      "/sys/class/hwmon/hwmon2/temp7_input",
+      "/sys/class/hwmon/hwmon2/temp8_input",
+    ],
   },
 }
