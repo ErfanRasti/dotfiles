@@ -1,15 +1,32 @@
 #!/usr/bin/env bash
 
 # Import Current Theme
-source "$HOME"/.config/rofi/applets/shared/theme.sh
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+. "$script_dir/../shared/theme.sh"
 theme="$type/$style"
 
 # Battery Info
 battery="$(acpi -b | cut -d',' -f1 | cut -d':' -f1)"
 status="$(acpi -b | cut -d',' -f1 | cut -d':' -f2 | tr -d ' ')"
-percentage="$(acpi -b | cut -d',' -f2 | tr -d ' ',\%)"
+percentage="$(acpi -b | cut -d',' -f2 | tr -d ' ',%)"
 time="$(acpi -b | cut -d',' -f3)"
-current_threshold=$(cat /sys/class/power_supply/BAT0/charge_control_end_threshold 2>/dev/null || echo "Unknown")
+
+# Define paths
+PATH0="/sys/class/power_supply/BAT0/charge_control_end_threshold"
+PATH1="/sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
+
+if [ -f $PATH1 ]; then
+  CURRENT_THRESHOLD=$(cat $PATH1)
+  if [ "$CURRENT_THRESHOLD" -eq 0 ]; then
+    CURRENT_THRESHOLD="Disabled"
+  elif [ "$CURRENT_THRESHOLD" -eq 1 ]; then
+    CURRENT_THRESHOLD="Enabled"
+  fi
+  MODE=1
+else
+  CURRENT_THRESHOLD=$(value=$(cat $PATH0 2>/dev/null) && echo "${value}%" || echo "Unknown")
+  MODE=0
+fi
 
 if [[ -z "$time" ]]; then
   time='Threshold Charged'
@@ -17,7 +34,7 @@ fi
 
 # Theme Elements
 prompt="$status"
-mesg="${battery}: ${percentage}%, ${time}, Threshold: ${current_threshold}"
+mesg="${battery}: ${percentage}%, ${time}, Threshold: ${CURRENT_THRESHOLD}"
 
 list_col='6'
 list_row='1'
@@ -76,9 +93,9 @@ rofi_cmd() {
     -dmenu \
     -p "$prompt" \
     -mesg "$mesg" \
-    ${active} ${urgent} \
+    "${active}" "${urgent}" \
     -markup-rows \
-    -theme ${theme}
+    -theme "${theme}"
 }
 
 # Pass variables to rofi dmenu
@@ -97,6 +114,10 @@ run_cmd() {
   elif [[ "$1" == '--opt4' ]]; then
     kitty pkexec powertop
   elif [[ "$1" == '--opt5' ]]; then
+    export PATH0
+    export PATH1
+    export CURRENT_THRESHOLD
+    export MODE
     exec ~/.config/rofi/applets/bin/battery_charge_threshold.sh
   elif [[ "$1" == '--opt6' ]]; then
     exec ~/.config/rofi/applets/bin/power_profile.sh
@@ -106,22 +127,22 @@ run_cmd() {
 # Actions
 chosen="$(run_rofi)"
 case ${chosen} in
-$option_1)
+"$option_1")
   run_cmd --opt1
   ;;
-$option_2)
+"$option_2")
   run_cmd --opt2
   ;;
-$option_3)
+"$option_3")
   run_cmd --opt3
   ;;
-$option_4)
+"$option_4")
   run_cmd --opt4
   ;;
-$option_5)
+"$option_5")
   run_cmd --opt5
   ;;
-$option_6)
+"$option_6")
   run_cmd --opt6
   ;;
 esac
