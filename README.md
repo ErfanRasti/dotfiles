@@ -1,50 +1,17 @@
-# dotfiles
+# ERS' dotfiles
 
-To use these `dotfiles`:
+<div align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=30&duration=3000&pause=1000&color=F73B49&center=true&multiline=true&random=true&width=435&lines=ERS'+Dotfiles" alt="Typing SVG" /></a>
+</div>
 
-1. Clone the repo recursively:
+<img width="1920" height="1080" alt="whole-system" src="https://github.com/user-attachments/assets/1be282e2-bc54-4777-aa9e-099131fe0080" />
 
-  ```sh
-  git clone --recurse-submodules https://github.com/ErfanRasti/dotfiles
-  ```
+## Installation
+To use these `dotfiles` use the `install.sh` script or copy and paste each section of the script to your terminal manually.
 
-2. Install pre-requirements:
-
-  ```sh
-  sudo pacman -S stow nvim zoxide yazi lazygit kitty ghostty fish fisher bat fzf fd tmux yq zsh-autosuggestions zsh-syntax-highlighting
-  paru -S zsh-theme-powerlevel10k zsh-autocomplete zsh-fast-syntax-highlighting ascii-image-converter
-  ```
-
-3. Run:
-
-  ```sh
-  stow */
-  ```
-
-  If you want to just sync a package use this instead:
-
-  ```sh
-  stow nvim/ tmux/
-  ```
-
-4. After opening `fish`, update `fisher` to get the plugins:
-
-  ```fish
-  fisher update
-  ```
-
-  Also I open `fish` using `bash`. To make it default:
-
-  ```sh
-  chsh -s $(which bash)
-  ```
-
-  To configure tide use `tide configure`.
-
-  For manual page completions run:
-
-  ```fish
-  fish_update_completions
-  ```
-
-  For more tools and info about `fish` check [this](https://github.com/ErfanRasti/arch-setup/blob/main/docs/09_Shell_and_Terminal/1_shell_and_terminal.md#fish).
+```sh
+pacman -S --needed git base-devel
+git clone --depth 1 --recurse-submodules https://github.com/ErfanRasti/dotfiles ~/dotfiles
+cd ~/dotfiles
+./install.sh  
+```
