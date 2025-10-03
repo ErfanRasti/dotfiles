@@ -123,7 +123,8 @@ sudo pacman -S \
   wev \
   acpi \
   npm \
-  alsa-utils
+  alsa-utils \
+  cava
 
 echo "✅ pacman packages installed successfully!"
 
@@ -152,12 +153,14 @@ paru -S \
   overskride-bin \
   clipse-bin clipse-gui \
   matugen-bin \
-  waypaper
+  waypaper \
+  python-pywalfox
 
 echo "✅ AUR packages installed successfully!"
 
 echo "------------------- flatpak packages -------------------"
 # flatpak packages
+flatpak update
 flatpak install flathub com.dec05eba.gpu_screen_recorder
 flatpak install flathub io.missioncenter.MissionCenter
 
@@ -182,13 +185,6 @@ waypaper --wallpaper ~/wallpapers/School/arseniy-chebynkin-school-enter2.jpg
 
 echo "✅ dotfiles installed successfully!"
 
-echo "------------------- fish configurations -------------------"
-fisher update
-chsh -s "$(which bash)"
-fish_update_completions
-
-echo "✅ fish configured successfully!"
-
 echo "------------------- enable services -------------------"
 systemctl --user enable ydotoold.service
 systemctl --user start ydotoold.service
@@ -198,3 +194,13 @@ systemctl --user start hypridle-runner.service
 
 systemctl --user enable hyprpolkitagent.service
 systemctl --user start hyprpolkitagent.service
+
+echo "✅ services enabled and started!"
+
+echo "------------------- fish configurations -------------------"
+fisher update
+chsh -s "$(which bash)"
+fish_update_completions
+tide configure
+
+echo "✅ fish configured successfully!"

@@ -22,4 +22,4 @@ setsid -f swaync >/dev/null 2>&1
 systemctl --user restart hyprpolkitagent
 
 # Apply spicetify
-spicetify apply
+# spicetify apply
