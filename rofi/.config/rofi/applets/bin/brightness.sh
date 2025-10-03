@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 # Import Current Theme
-source "$HOME"/.config/rofi/applets/shared/theme.sh
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+. "$script_dir/../shared/theme.sh"
 theme="$type/$style"
 
 # Brightness Info
@@ -27,9 +28,9 @@ list_row='1'
 win_width='550px'
 
 # Options
-option_1="󰛨"
+option_1="󱩎"
 option_2="󱠂"
-option_3="󱩎"
+option_3="󰛨"
 option_4="󱧣"
 
 # Rofi CMD
@@ -41,7 +42,7 @@ rofi_cmd() {
     -p "$prompt" \
     -mesg "$mesg" \
     -markup-rows \
-    -theme ${theme}
+    -theme "${theme}"
 }
 
 # Pass variables to rofi dmenu
@@ -52,29 +53,29 @@ run_rofi() {
 # Execute Command
 run_cmd() {
   if [[ "$1" == '--opt1' ]]; then
-    brightnessctl set 5%+
+    brightnessctl set 5%-
   elif [[ "$1" == '--opt2' ]]; then
     brightnessctl set 25%
   elif [[ "$1" == '--opt3' ]]; then
-    brightnessctl set 5%-
+    brightnessctl set 5%+
   elif [[ "$1" == '--opt4' ]]; then
-    env XDG_CURRENT_DESKTOP=GNOME gnome-control-center displays
+    better-control --display
   fi
 }
 
 # Actions
 chosen="$(run_rofi)"
 case ${chosen} in
-$option_1)
+"$option_1")
   run_cmd --opt1
   ;;
-$option_2)
+"$option_2")
   run_cmd --opt2
   ;;
-$option_3)
+"$option_3")
   run_cmd --opt3
   ;;
-$option_4)
+"$option_4")
   run_cmd --opt4
   ;;
 esac

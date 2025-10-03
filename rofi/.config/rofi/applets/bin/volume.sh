@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 # Import Current Theme
-source "$HOME"/.config/rofi/applets/shared/theme.sh
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+. "$script_dir/../shared/theme.sh"
 theme="$type/$style"
 
 # Volume Info
@@ -13,8 +14,7 @@ active=""
 urgent=""
 
 # Speaker Info
-amixer get Master | grep '\[on\]' &>/dev/null
-if [[ "$?" == 0 ]]; then
+if amixer get Master | grep '\[on\]'; then
   active="-a 1"
   stext='Unmute'
   sicon='󰜟'
@@ -25,8 +25,7 @@ else
 fi
 
 # Microphone Info
-amixer get Capture | grep '\[on\]' &>/dev/null
-if [[ "$?" == 0 ]]; then
+if amixer get Capture | grep '\[on\]'; then
   [ -n "$active" ] && active+=",3" || active="-a 3"
   mtext='Unmute'
   micon=''
@@ -45,7 +44,7 @@ list_row='1'
 win_width='670px'
 
 # Options
-layout=$(cat ${theme} | grep 'USE_ICON' | cut -d'=' -f2)
+layout=$(cat "${theme}" | grep 'USE_ICON' | cut -d'=' -f2)
 if [[ "$layout" == 'NO' ]]; then
   option_1=" Increase"
   option_2="$sicon $stext"
@@ -62,6 +61,7 @@ fi
 
 # Rofi CMD
 rofi_cmd() {
+  # shellcheck disable=SC2086
   rofi -theme-str "window {width: $win_width;}" \
     -theme-str "listview {columns: $list_col; lines: $list_row;}" \
     -theme-str 'textbox-prompt-colon {str: "";}' \
@@ -70,7 +70,7 @@ rofi_cmd() {
     -mesg "$mesg" \
     ${active} ${urgent} \
     -markup-rows \
-    -theme ${theme}
+    -theme "${theme}"
 }
 
 # Pass variables to rofi dmenu
@@ -96,19 +96,19 @@ run_cmd() {
 # Actions
 chosen="$(run_rofi)"
 case ${chosen} in
-$option_1)
+"$option_1")
   run_cmd --opt1
   ;;
-$option_2)
+"$option_2")
   run_cmd --opt2
   ;;
-$option_3)
+"$option_3")
   run_cmd --opt3
   ;;
-$option_4)
+"$option_4")
   run_cmd --opt4
   ;;
-$option_5)
+"$option_5")
   run_cmd --opt5
   ;;
 esac

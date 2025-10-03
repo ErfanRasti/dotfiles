@@ -85,7 +85,6 @@ sudo pacman -S \
   television \
   waybar \
   hyprpolkitagent \
-  mpc \
   hyprsunset \
   hyprland-qtutils \
   foot fzf chafa jq bat \
@@ -121,7 +120,10 @@ sudo pacman -S \
   power-profiles-daemon \
   inotify-tools \
   breeze-icons \
-  wev
+  wev \
+  acpi \
+  npm \
+  alsa-utils
 
 echo "✅ pacman packages installed successfully!"
 
@@ -172,7 +174,10 @@ echo "✅ hyprpm packages installed successfully!"
 echo "------------------- dotfiles -------------------"
 git clone --recurse-submodules https://github.com/ErfanRasti/dotfiles.git "$HOME/dotfiles"
 cd "$HOME/dotfiles/" || exit
+
+# shellcheck disable=SC2035
 stow */
+
 waypaper --wallpaper ~/wallpapers/School/arseniy-chebynkin-school-enter2.jpg
 
 echo "✅ dotfiles installed successfully!"
@@ -190,3 +195,6 @@ systemctl --user start ydotoold.service
 
 systemctl --user enable hypridle-runner.service
 systemctl --user start hypridle-runner.service
+
+systemctl --user enable hyprpolkitagent.service
+systemctl --user start hyprpolkitagent.service

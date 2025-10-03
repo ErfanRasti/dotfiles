@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
 # Import Current Theme
-source "$HOME"/.config/rofi/applets/shared/theme.sh
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+. "$script_dir/../shared/theme.sh"
 theme="$type/$style"
 
 # Theme Elements
 prompt='Screenshot'
-printf -v mesg " Save DIR: $(xdg-user-dir PICTURES)/Screenshots"
+printf -v mesg " Save DIR: %s/Screenshots" "$(xdg-user-dir PICTURES)"
 
 list_col='4'
 list_row='1'
