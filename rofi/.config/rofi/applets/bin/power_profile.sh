@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
 # Import Current Theme
-source "$HOME"/.config/rofi/applets/shared/theme.sh
-theme="${type}/${style}"
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+. "$script_dir/../shared/theme.sh"
+theme="$type/$style"
 
 # Battery Info
 charging_status="$(acpi -b | cut -d',' -f1 | cut -d':' -f2 | tr -d ' ')"
 current_profile="$(powerprofilesctl get)"
-percentage="$(acpi -b | cut -d',' -f2 | tr -d ' ',\%)"
+percentage="$(acpi -b | cut -d',' -f2 | tr -d ' ',%)"
 time="$(acpi -b | cut -d',' -f3)"
 
 if [[ -z "$time" ]]; then
@@ -71,13 +72,13 @@ run_cmd() {
 # Actions
 chosen="$(run_rofi)"
 case ${chosen} in
-$option_1)
+"$option_1")
   run_cmd --opt1
   ;;
-$option_2)
+"$option_2")
   run_cmd --opt2
   ;;
-$option_3)
+"$option_3")
   run_cmd --opt3
   ;;
 esac
