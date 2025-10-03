@@ -143,7 +143,7 @@
           "type": "toggle",
           "active": true,
           "command": "sh -c '~/.config/swaync/scripts/toggle_hypridle.sh'",
-          "update-command": "sh -c 'set +e;systemctl --user is-active --quiet hypridle-coffee.service && echo true || echo false'"
+          "update-command": "sh -c '~/.config/swaync/scripts/update_hypridle.sh'"
         }
       ]
     },
