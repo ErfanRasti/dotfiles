@@ -28,9 +28,9 @@ list_row='1'
 win_width='550px'
 
 # Options
-option_1="󰛨"
+option_1="󱩎"
 option_2="󱠂"
-option_3="󱩎"
+option_3="󰛨"
 option_4="󱧣"
 
 # Rofi CMD
@@ -53,11 +53,11 @@ run_rofi() {
 # Execute Command
 run_cmd() {
   if [[ "$1" == '--opt1' ]]; then
-    brightnessctl set 5%+
+    brightnessctl set 5%-
   elif [[ "$1" == '--opt2' ]]; then
     brightnessctl set 25%
   elif [[ "$1" == '--opt3' ]]; then
-    brightnessctl set 5%-
+    brightnessctl set 5%+
   elif [[ "$1" == '--opt4' ]]; then
     better-control --display
   fi
