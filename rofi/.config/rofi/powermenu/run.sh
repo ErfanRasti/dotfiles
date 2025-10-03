@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 ## Define variables
-style="~/.config/rofi/powermenu/style.rasi"
+style="$HOME/.config/rofi/powermenu/style.rasi"
 
 # CMDs
-lastlogin="$(last $USER | head -n1 | tr -s ' ' | cut -d' ' -f5,6,7)"
+lastlogin="$(last "$USER" | head -n1 | tr -s ' ' | cut -d' ' -f5,6,7)"
 uptime="$(uptime -p | sed -e 's/up //g')"
 host=$(hostname)
 
@@ -23,7 +23,7 @@ rofi_cmd() {
   rofi -dmenu \
     -p " $USER@$host" \
     -mesg $'󰍂 Last Login: '"$lastlogin"$'\n Uptime: '"$uptime" \
-    -theme ${style}
+    -theme "${style}"
 }
 
 # Confirmation CMD
@@ -36,7 +36,7 @@ confirm_cmd() {
     -dmenu \
     -p 'Confirmation' \
     -mesg 'Are you Sure?' \
-    -theme ${style}
+    -theme "${style}"
 }
 
 # Ask for confirmation
@@ -103,22 +103,22 @@ fi
 # Actions
 chosen="$(run_rofi)"
 case ${chosen} in
-$shutdown)
+"$shutdown")
   run_cmd --shutdown
   ;;
-$reboot)
+"$reboot")
   run_cmd --reboot
   ;;
-$hibernate)
+"$hibernate")
   run_cmd --hibernate
   ;;
-$lock)
+"$lock")
   hyprlock
   ;;
-$suspend)
+"$suspend")
   run_cmd --suspend
   ;;
-$logout)
+"$logout")
   run_cmd --logout
   ;;
 esac
