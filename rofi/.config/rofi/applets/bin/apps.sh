@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 # Import Current Theme
-source "$HOME"/.config/rofi/applets/shared/theme.sh
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+. "$script_dir/../shared/theme.sh"
 theme="$type/$style"
 
 # Theme Elements
@@ -35,7 +36,7 @@ rofi_cmd() {
     -p "$prompt" \
     -mesg "$mesg" \
     -markup-rows \
-    -theme ${theme}
+    -theme "${theme}"
 }
 
 # Pass variables to rofi dmenu
@@ -63,22 +64,22 @@ run_cmd() {
 # Actions
 chosen="$(run_rofi)"
 case ${chosen} in
-$option_1)
+"$option_1")
   run_cmd --opt1
   ;;
-$option_2)
+"$option_2")
   run_cmd --opt2
   ;;
-$option_3)
+"$option_3")
   run_cmd --opt3
   ;;
-$option_4)
+"$option_4")
   run_cmd --opt4
   ;;
-$option_5)
+"$option_5")
   run_cmd --opt5
   ;;
-$option_6)
+"$option_6")
   run_cmd --opt6
   ;;
 esac
