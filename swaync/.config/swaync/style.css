@@ -612,7 +612,14 @@
 }
 
 .widget-buttons-grid flowboxchild > button.toggle:hover {
-  /* style given to the active toggle button */
+  /* style given to the toggle button hover */
+  background: @primary_container;
+  color: @on_primary_container;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.widget-buttons-grid flowboxchild > button.toggle:hover:checked {
+  /* style given to the active toggle button hover */
   background: @tertiary;
   color: @on_tertiary;
   transition: opacity 0.15s ease-in-out;
