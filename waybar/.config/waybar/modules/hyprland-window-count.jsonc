@@ -4,6 +4,6 @@
     "format-empty": "",
     "format-fullscreen": "󱂬:{},󰊓",
     "separate-outputs": true,
-    "on-click": "better-control --display",
-  },
+    "on-click": "better-control --display"
+  }
 }

@@ -4,6 +4,6 @@
     "exec": "~/.config/waybar/scripts/camera_usage.sh",
     "restart-interval": 5,
     // "interval": 2,
-    "hide-empty-text": true,
-  },
+    "hide-empty-text": true
+  }
 }

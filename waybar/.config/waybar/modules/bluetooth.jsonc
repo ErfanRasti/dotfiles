@@ -16,6 +16,6 @@
     "on-click": "better-control --bluetooth",
     //turn off bluetooth on right click
     "on-click-right": "~/.config/waybar/scripts/toggle_bluetooth.sh",
-    "on-click-middle": "pypr toggle bluetooth",
-  },
+    "on-click-middle": "pypr toggle bluetooth"
+  }
 }

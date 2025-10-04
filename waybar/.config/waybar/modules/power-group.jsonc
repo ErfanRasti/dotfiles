@@ -5,34 +5,34 @@
       "transition-duration": 500,
       "children-class": "powermenu-drawer",
       "transition-left-to-right": true,
-      "click-to-reveal": false,
+      "click-to-reveal": false
     },
     "modules": [
       "custom/power", // First element is the "group leader" and won't ever be hidden
       "custom/lock",
       "custom/quit",
-      "custom/suspend",
-    ],
+      "custom/suspend"
+    ]
   },
   "custom/power": {
     "format": "",
     "tooltip": true,
     "tooltip-format": "Open power menu",
-    "on-click": "~/.config/rofi/powermenu/run.sh",
+    "on-click": "~/.config/rofi/powermenu/run.sh"
   },
   "custom/lock": {
     "format": "󰌾",
     "tooltip-format": "Lock the system",
-    "on-click": "~/.config/rofi/powermenu/run.sh lock",
+    "on-click": "~/.config/rofi/powermenu/run.sh lock"
   },
   "custom/quit": {
     "format": "󰍃",
     "tooltip-format": "Logout",
-    "on-click": "~/.config/rofi/powermenu/run.sh logout",
+    "on-click": "~/.config/rofi/powermenu/run.sh logout"
   },
   "custom/suspend": {
     "format": "󰤄",
     "tooltip-format": "Suspend the system",
-    "on-click": "~/.config/rofi/powermenu/run.sh suspend",
-  },
+    "on-click": "~/.config/rofi/powermenu/run.sh suspend"
+  }
 }

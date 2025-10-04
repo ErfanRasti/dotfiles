@@ -15,17 +15,17 @@
         // "days": "<span color='#cad3f5'><b>{}</b></span>",
         "weeks": "<span color='#8aadf4'><b>W{}</b></span>",
         "weekdays": "<span color='#8bd5ca'><b>{}</b></span>",
-        "today": "<span color='#ed8796'><b><u>{}</u></b></span>",
-      },
+        "today": "<span color='#ed8796'><b><u>{}</u></b></span>"
+      }
     },
     "actions": {
       "on-click-right": "mode",
       "on-click-forward": "tz_up",
       "on-click-backward": "tz_down",
       "on-scroll-up": "shift_down",
-      "on-scroll-down": "shift_up",
+      "on-scroll-down": "shift_up"
     },
     "smooth-scrolling-threshold": 3.0,
-    "on-click-middle": "gnome-calendar",
-  },
+    "on-click-middle": "gnome-calendar"
+  }
 }

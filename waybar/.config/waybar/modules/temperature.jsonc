@@ -16,7 +16,7 @@
       "/sys/class/hwmon/hwmon2/temp5_input",
       "/sys/class/hwmon/hwmon2/temp6_input",
       "/sys/class/hwmon/hwmon2/temp7_input",
-      "/sys/class/hwmon/hwmon2/temp8_input",
-    ],
-  },
+      "/sys/class/hwmon/hwmon2/temp8_input"
+    ]
+  }
 }
