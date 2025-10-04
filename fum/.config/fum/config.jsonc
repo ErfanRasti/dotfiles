@@ -1,0 +1,20 @@
+{
+  "players": ["spotify"],
+  "use_active_player": true,
+  "fps": 10,
+  "keybinds": {
+    "esc;q": "quit()",
+    "h": "prev()",
+    "l": "next()",
+    " ": "play_pause()"
+  },
+  "align": "center",
+  "direction": "vertical",
+  "flex": "start",
+  "width": 20,
+  "height": 20,
+  "border": false,
+  "padding": [0, 0],
+  "bg": "reset",
+  "fg": "reset"
+}
