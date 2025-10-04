@@ -34,7 +34,7 @@ max_size = "1920px 100%"
 [scratchpads.yazi]
 use = "_base"
 max_size = "1920px 100%"
-command = "[term_classed] yazi fish -c yazi"
+command = "[term_classed] yazi bash -c yazi"
 class = "yazi"
 size = "75% 60%"
 unfocus = "hide"
@@ -42,6 +42,15 @@ unfocus = "hide"
 # and you bump focus/move it slightly, Pyprland won’t immediately toggle it —
 # it waits until the change passes that threshold.
 hysteresis = 0.1
+
+
+[scratchpads.fum]
+use = "_base"
+animation = "fromRight"
+command = "[term_classed] fum bash -c fum"
+class = "fum"
+size = "200px 400px"
+position = "85% 5%"
 
 [scratchpads.btop]
 use = "_base"
