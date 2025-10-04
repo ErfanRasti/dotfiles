@@ -3,6 +3,6 @@
     "format": "{initialTitle}",
     "icon": true,
     "icon-size": 18,
-    "separate-outputs": false,
-  },
+    "separate-outputs": false
+  }
 }

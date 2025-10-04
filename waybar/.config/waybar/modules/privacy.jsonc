@@ -7,20 +7,20 @@
       {
         "type": "screenshare",
         "tooltip": true,
-        "tooltip-icon-size": 12,
+        "tooltip-icon-size": 12
       },
       {
         "type": "audio-out",
         "tooltip": true,
-        "tooltip-icon-size": 12,
+        "tooltip-icon-size": 12
       },
       {
         "type": "audio-in",
         "tooltip": true,
-        "tooltip-icon-size": 12,
-      },
+        "tooltip-icon-size": 12
+      }
     ],
     "ignore-monitor": false,
-    "expand": false,
-  },
+    "expand": false
+  }
 }
