@@ -154,7 +154,8 @@ paru -S \
   clipse-bin clipse-gui \
   matugen-bin \
   waypaper \
-  python-pywalfox
+  python-pywalfox \
+  fum-bin
 
 echo "✅ AUR packages installed successfully!"
 
