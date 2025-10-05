@@ -73,16 +73,12 @@ use = "_base"
 command = "env XDG_CURRENT_DESKTOP=GNOME nautilus --new-window ~"
 class = "org.gnome.Nautilus"
 size = "900px 600px"
-unfocus = "hide"
-hysteresis = 0.1
 
 [scratchpads.settings]
 use = "_base"
 command = "env XDG_CURRENT_DESKTOP=GNOME gnome-control-center"
 class = "org.gnome.Settings"
 size = "900px 600px"
-unfocus = "hide"
-hysteresis = 0.1
 
 [scratchpads.network]
 use = "_base"
