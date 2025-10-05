@@ -57,7 +57,7 @@ output_path = '~/.config/qt6ct/colors/matugen.conf'
 input_path = '~/.config/matugen/templates/gtk-colors.css'
 output_path = '~/.config/gtk-3.0/colors.css'
 # post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-{{mode}}'
-post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3;~/.config/gtk-3.0/scripts/generate_bookmarks.sh ~/.config/gtk-3.0/bookmarks-template'
+post_hook = '~/.config/matugen/scripts/gtk3_post_hook.sh'
 
 [templates.gtk4]
 input_path = '~/.config/matugen/templates/gtk-colors.css'
@@ -94,4 +94,4 @@ post_hook = 'pywalfox update'
 [templates.cava]
 input_path = '~/.config/matugen/templates/cava-colors.ini'
 output_path = '~/.config/cava/themes/matugen-theme'
-post_hook = "pkill -USR1 cava"
+post_hook = "pgrep -x cava >/dev/null && pkill -USR1 cava"
