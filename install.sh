@@ -165,6 +165,17 @@ flatpak update
 flatpak install flathub com.dec05eba.gpu_screen_recorder
 flatpak install flathub io.missioncenter.MissionCenter
 
+flatpak override --user \
+  --filesystem=xdg-config/gtk-2.0:ro \
+  --filesystem=xdg-config/gtk-3.0:ro \
+  --filesystem=xdg-config/gtk-4.0:ro \
+  --filesystem=~/.gtkrc-2.0:ro
+
+flatpak override --user \
+  --filesystem=xdg-config/qt5ct:ro \
+  --filesystem=xdg-config/qt6ct:ro \
+  --env=QT_QPA_PLATFORMTHEME=qt6ct
+
 echo "✅ flatpak packages installed successfully!"
 
 echo "------------------- hyprpm packages -------------------"
