@@ -124,7 +124,8 @@ sudo pacman -S \
   acpi \
   npm \
   alsa-utils \
-  cava
+  cava \
+  nemo
 
 echo "✅ pacman packages installed successfully!"
 

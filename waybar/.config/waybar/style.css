@@ -296,22 +296,22 @@ window#waybar.fullscreen #windowcount {
 }
 /*****----- custom camera usage -----*****/
 #custom-camera-usage {
-  background-color: @green;
-  color: @on_green;
+  background-color: @green_container;
+  color: @on_green_container;
 }
 
 /*****----- privacy -----*****/
 #privacy-item.screenshare {
-  background-color: @red_value;
-  color: white;
+  background-color: @red_container;
+  color: @on_red_container;
 }
 #privacy-item.audio-out {
-  background-color: @blue;
-  color: @on_blue;
+  background-color: @blue_container;
+  color: @on_blue_container;
 }
 #privacy-item.audio-in {
-  background-color: @orange;
-  color: @on_orange;
+  background-color: @orange_container;
+  color: @on_orange_container;
 }
 /*****----- bluetooth -----*****/
 #bluetooth.disabled {
