@@ -29,10 +29,10 @@ main.video_height 1080
 main.video_width 1920
 record.container mp4
 record.pause_unpause_recording_hotkey 0 0
-record.save_directory Videos
+record.save_directory Videos/Screencasts
 record.start_stop_recording_hotkey 0 0
 replay.container mp4
-replay.save_directory Videos
+replay.save_directory Videos/Screencasts
 replay.save_recording_hotkey 0 0
 replay.start_stop_recording_hotkey 0 0
 replay.time 30

@@ -29,14 +29,14 @@ record.record_options.video_bitrate 45000
 record.record_options.video_height 1080
 record.record_options.video_quality very_high
 record.record_options.video_width 1920
-record.save_directory Pictures/Screenshots
+record.save_directory Videos/Screencasts
 record.save_video_in_game_folder false
 record.show_recording_started_notifications true
 record.show_video_paused_notifications true
 record.show_video_saved_notifications true
 record.start_stop_hotkey 94 16
 replay.container mp4
-replay.record_options.advanced_view false
+replay.record_options.advanced_view true
 replay.record_options.application_audio_invert false
 replay.record_options.audio_codec opus
 replay.record_options.audio_track_item false [add_audio_track]
@@ -61,7 +61,7 @@ replay.replay_storage ram
 replay.restart_replay_on_save false
 replay.save_10_min_hotkey 97 16
 replay.save_1_min_hotkey 96 16
-replay.save_directory Videos
+replay.save_directory Videos/Screencasts
 replay.save_hotkey 95 16
 replay.save_video_in_game_folder false
 replay.show_replay_saved_notifications true
@@ -78,7 +78,7 @@ screenshot.image_width 1920
 screenshot.record_area_option eDP-1
 screenshot.record_cursor true
 screenshot.restore_portal_session true
-screenshot.save_directory Pictures
+screenshot.save_directory Pictures/Screenshots
 screenshot.save_screenshot_in_game_folder false
 screenshot.save_screenshot_to_clipboard false
 screenshot.show_screenshot_saved_notifications true
