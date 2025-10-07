@@ -753,6 +753,22 @@
   box-shadow: 0px 0px 3px alpha(@on_surface, 1);
 }
 
+.control-center trough {
+  background: linear-gradient(
+    0deg,
+    @primary_container 0%,
+    @tertiary_container 100%
+  );
+}
+
+.control-center trough highlight {
+  background: linear-gradient(0deg, @primary 0%, @tertiary 100%);
+}
+
+.control-center trough highlight:hover {
+  background: linear-gradient(0deg, @secondary 0%, @tertiary 100%);
+}
+
 /************** Inhibitors Widget **************/
 .widget-inhibitors > label {
   margin-right: 8px;
