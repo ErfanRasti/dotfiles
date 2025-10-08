@@ -63,10 +63,10 @@ post_hook = '~/.config/matugen/scripts/gtk3_post_hook.sh'
 input_path = '~/.config/matugen/templates/gtk-colors.css'
 output_path = '~/.config/gtk-4.0/colors.css'
 
-# [templates.kitty]
-# input_path = '~/.config/matugen/templates/kitty-colors.conf'
-# output_path = '~/.config/kitty/themes/matugen.conf'
-# post_hook = "kitty +kitten themes --reload-in=all matugen"
+[templates.kitty]
+input_path = '~/.config/matugen/templates/kitty-colors.conf'
+output_path = '~/.config/kitty/themes/matugen.conf'
+post_hook = "kitty +kitten themes --reload-in=all matugen"
 
 [templates.btop]
 input_path = '~/.config/matugen/templates/btop.theme'

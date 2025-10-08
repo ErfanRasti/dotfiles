@@ -18,6 +18,9 @@ if pgrep -x swaync >/dev/null; then
 fi
 setsid -f swaync >/dev/null 2>&1
 
+# Restart kitty
+# kitty +kitten themes --reload-in=all "Tokyo Night Moon"
+
 # Restart hyprpolkitagent
 systemctl --user restart hyprpolkitagent
 
