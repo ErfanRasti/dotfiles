@@ -1,3 +1,5 @@
+# See https://ghostty.org/docs/config/reference
+
 font-family = "CaskaydiaCove Nerd Font Mono"
 font-size = 12
 # theme = Sublette
@@ -6,11 +8,16 @@ minimum-contrast = 1
 window-theme = ghostty
 alpha-blending = linear-corrected
 
-shell-integration-features = no-cursor, sudo, title	
-cursor-style = block
+# shell-integration-features = no-cursor, sudo, title
+shell-integration-features = true
+# Note that shell integration will automatically set the cursor to a bar
+# at a prompt, regardless of cursor-style.
+
+# cursor-style = block
 cursor-style-blink = true
 cursor-click-to-move = true
-cursor-color = red
+cursor-color = #ff00cc
+adjust-cursor-thickness = 3
 cursor-opacity = 1
 keybind = ctrl+alt+l=goto_split:right
 
