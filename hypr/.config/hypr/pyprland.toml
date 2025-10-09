@@ -68,12 +68,6 @@ max_size = "1920px 100%"
 size = "80% 70%"
 close_on_hide = true
 
-[scratchpads.nautilus]
-use = "_base"
-command = "env XDG_CURRENT_DESKTOP=GNOME nautilus --new-window ~"
-class = "org.gnome.Nautilus"
-size = "900px 600px"
-
 [scratchpads.settings]
 use = "_base"
 command = "env XDG_CURRENT_DESKTOP=GNOME gnome-control-center"
