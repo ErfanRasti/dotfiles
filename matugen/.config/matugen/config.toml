@@ -1,10 +1,13 @@
 [config.custom_colors]
 red = { color = "#f13c40", blend = true }
 green = { color = "#41c257", blend = true }
+cyan = { color = "#0ebadc", blend = true }
 blue = { color = "#0e85f0", blend = true }
 yellow = { color = "#edc005", blend = true }
 orange = { color = "#fb8d2c", blend = true }
 purple = { color = "#bd30d4", blend = true }
+black = { color = "#000000", blend = true }
+white = { color = "#ffffff", blend = true }
 
 [config]
 
