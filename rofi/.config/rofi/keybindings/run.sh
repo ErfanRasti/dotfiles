@@ -123,7 +123,7 @@ awk \
     keymap["XF86AUDIONEXT"]        = "󰒭";
     keymap["XF86MONBRIGHTNESSUP"]   = "󰃠";
     keymap["XF86MONBRIGHTNESSDOWN"] = "󰃞";
-    keymap["XF86POWEROFF"] = "󰤄";
+    keymap["XF86POWEROFF"] = "⏻";
     keymap["XF86CALCULATOR"] = "";
 
     # Function keys

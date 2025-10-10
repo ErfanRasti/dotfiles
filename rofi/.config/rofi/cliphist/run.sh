@@ -2,9 +2,13 @@
 
 style="$HOME/.config/rofi/cliphist/style.rasi"
 
+systemctl --user set-environment CLIPHIST_PASTE=0
+
 case $1 in
 c)
-  CLIPHIST_PASTE=1 ~/.config/rofi/cliphist/cliphist_rofi_img.sh "$2"
+  systemctl --user set-environment CLIPHIST_PASTE=1
+
+  ~/.config/rofi/cliphist/cliphist_rofi_img.sh "$2"
   ;;
 d)
   if [ ! -z "$2" ]; then
@@ -27,7 +31,7 @@ w)
 *)
   rofi -config "$style" -show " clipboard"
 
-  if [[ -f "/tmp/cliphist-current" ]]; then
+  if [[ $(systemctl --user show-environment | grep '^CLIPHIST_PASTE=' | cut -d= -f2) == 1 ]]; then
     ydotool key 29:1 42:1 47:1 47:0 42:0 29:0
   fi
   ;;
