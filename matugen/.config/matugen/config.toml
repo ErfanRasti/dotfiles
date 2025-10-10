@@ -97,4 +97,4 @@ post_hook = 'pywalfox update'
 [templates.cava]
 input_path = '~/.config/matugen/templates/cava-colors.ini'
 output_path = '~/.config/cava/themes/matugen-theme'
-post_hook = "pgrep -x cava >/dev/null && pkill -USR1 cava"
+post_hook = "if pgrep -x cava >/dev/null; then pkill -USR1 cava; fi"
