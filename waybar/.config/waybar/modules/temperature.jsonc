@@ -1,8 +1,9 @@
 {
+  // See https://github.com/Alexays/Waybar/wiki/Module:-Temperature
   "temperature": {
     "critical-threshold": 70,
     "format": "{icon} {temperatureC}°C",
-    "format-critical": "<span color='#f53c3c'>{icon} {temperatureC}°C</span>",
+    "format-critical": "{icon} {temperatureC}°C",
     "format-icons": ["", "", "", "", "", ""],
     "interval": 5,
     "tooltip": true,

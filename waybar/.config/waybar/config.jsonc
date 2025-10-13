@@ -34,14 +34,14 @@
     "~/.config/waybar/modules/bluetooth.jsonc",
     "~/.config/waybar/modules/network.jsonc",
     "~/.config/waybar/modules/pulseaudio-group.jsonc",
-    "~/.config/waybar/modules/battery.jsonc",
+    "~/.config/waybar/modules/battery.jsonc"
   ],
   "modules-left": [
     "group/power-group",
     "custom/appmenu",
     "hyprland/workspaces",
     "hyprland/windowcount",
-    "hyprland/window",
+    "hyprland/window"
   ],
   "modules-center": ["custom/notification", "clock", "power-profiles-daemon"],
   "modules-right": [
@@ -58,6 +58,6 @@
     "privacy",
     "bluetooth",
     "network",
-    "battery",
-  ],
+    "battery"
+  ]
 }
