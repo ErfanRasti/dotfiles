@@ -1,10 +1,11 @@
 {
+  // See https://github.com/Alexays/Waybar/wiki/Module:-Bluetooth
   "bluetooth": {
     "format": " {status}",
     "format-disabled": " ",
     "format-on": "",
     "format-off": "󰂲",
-    "format-connected": " {num_connections}",
+    "format-connected": "󰂱 {num_connections}",
     "format-connected-battery": "{icon} {device_battery_percentage} {num_connections}",
     "format-no-controller": " ",
     "format-icons": ["󰥇", "󰤾", "󰤿", "󰥀", "󰥁", "󰥂", "󰥃", "󰥄", "󰥅", "󰥆", "󰥈"],
