@@ -32,11 +32,12 @@
   color: @on_tertiary;
   border-radius: 5px;
 }
-/**/
+
+/* make the bar more compact */
 /* button { */
-/*     box-shadow: inset 0 -3px transparent; */
-/*     border: none; */
-/*     border-radius: 0; */
+/*   box-shadow: inset 0 -3px transparent; */
+/*   border: none; */
+/*   border-radius: 0; */
 /* } */
 
 /*****----- waybar window -----*****/
@@ -181,10 +182,10 @@ window#waybar.fullscreen #windowcount {
 
 /*****----- power profiles daemon -----*****/
 #power-profiles-daemon.performance {
-  background-color: alpha(red, 0.3);
+  background-color: alpha(@red_value, 0.5);
 }
 #power-profiles-daemon.power-saver {
-  background-color: alpha(green, 0.3);
+  background-color: alpha(@green_value, 0.5);
 }
 
 /*****----- tray -----*****/
@@ -252,11 +253,12 @@ window#waybar.fullscreen #windowcount {
 
 #cpu.warning,
 #memory.warning {
-  color: @yellow;
+  color: @yellow_value;
 }
 #cpu.critical,
+#temperature.critical,
 #memory.critical {
-  color: @red;
+  color: @red_value;
 }
 
 /*****----- pulseaudio-slider -----*****/
@@ -294,51 +296,58 @@ window#waybar.fullscreen #windowcount {
 #pulseaudio-slider highlight:hover {
   background-color: @tertiary;
 }
+
+/*****----- pulseaudio -----*****/
+#pulseaudio.muted {
+  background-color: @red_value;
+  color: @white_value;
+}
+
 /*****----- custom camera usage -----*****/
 #custom-camera-usage {
-  background-color: @green_container;
-  color: @on_green_container;
+  background-color: @green_value;
+  color: @white_value;
 }
 
 /*****----- privacy -----*****/
 #privacy-item.screenshare {
-  background-color: @red_container;
-  color: @on_red_container;
+  background-color: @red_value;
+  color: @white_value;
 }
 #privacy-item.audio-out {
-  background-color: @blue_container;
-  color: @on_blue_container;
+  background-color: @blue_value;
+  color: @white_value;
 }
 #privacy-item.audio-in {
-  background-color: @orange_container;
-  color: @on_orange_container;
+  background-color: @orange_value;
+  color: @white_value;
 }
 /*****----- bluetooth -----*****/
 #bluetooth.disabled {
-  color: @red;
+  color: @red_value;
 }
 #bluetooth.no-controller {
-  color: @yellow;
+  color: @yellow_value;
 }
 #bluetooth.discovering {
-  color: @green;
+  color: @green_value;
 }
 #bluetooth.discoverable {
-  color: @orange;
+  color: @orange_value;
 }
 
 /*****----- network -----*****/
 #network.disconnected {
-  color: @yellow;
+  color: @yellow_value;
 }
 
 /*****----- battery -----*****/
 #battery.critical:not(.charging) {
-  color: @red;
+  color: @red_value;
 }
 #battery.warning:not(.charging) {
-  color: @yellow;
+  color: @yellow_value;
 }
 #battery.charging {
-  color: @green;
+  color: @green_value;
 }
