@@ -46,11 +46,9 @@ hysteresis = 0.1
 
 [scratchpads.fum]
 use = "_base"
-animation = "fromRight"
 command = "[term_classed] fum bash -c fum"
 class = "fum"
 size = "200px 400px"
-position = "85% 5%"
 
 [scratchpads.btop]
 use = "_base"
