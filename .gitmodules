@@ -1,6 +1,6 @@
-[submodule "nvim/.config/nvim"]
-	path = nvim/.config/nvim
+[submodule "dotfiles/nvim/.config/nvim"]
+	path = dotfiles/nvim/.config/nvim
 	url = https://github.com/ErfanRasti/nvim
-[submodule "tmux/.config/tmux"]
-	path = tmux/.config/tmux
+[submodule "dotfiles/tmux/.config/tmux"]
+	path = dotfiles/tmux/.config/tmux
 	url = https://github.com/ErfanRasti/tmux

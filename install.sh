@@ -192,7 +192,7 @@ echo "✅ hyprpm packages installed successfully!"
 
 echo "------------------- dotfiles -------------------"
 git clone --recurse-submodules https://github.com/ErfanRasti/dotfiles.git "$HOME/dotfiles"
-cd "$HOME/dotfiles/" || exit
+cd "$HOME/dotfiles/dotfiles/" || exit
 
 # shellcheck disable=SC2035
 stow */
@@ -204,6 +204,8 @@ echo "✅ dotfiles installed successfully!"
 echo "------------------- settings -------------------"
 gsettings set org.gnome.desktop.default-applications.terminal exec 'kitty'
 nautilus -q
+
+echo "✅ settings applied successfully!"
 
 echo "------------------- enable services -------------------"
 systemctl --user enable ydotoold.service
