@@ -1,6 +1,6 @@
-# ~/.local/share/systemd/user/hypridle.service
+# ~/.local/share/systemd/user/hypridle-runner.service
 [Unit]
-Description=Hyprland's idle daemon
+Description=Hyprland's idle runner daemon
 After=graphical-session.target
 PartOf=graphical-session.target
 ConditionEnvironment=WAYLAND_DISPLAY
