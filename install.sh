@@ -125,7 +125,8 @@ sudo pacman -S \
   npm \
   alsa-utils \
   cava \
-  nemo
+  zenity \
+  ttf-cascadia-code-nerd
 
 echo "✅ pacman packages installed successfully!"
 
@@ -156,7 +157,9 @@ paru -S \
   matugen-bin \
   waypaper \
   python-pywalfox \
-  fum-bin
+  fum-bin \
+  actions-for-nautilus-git nautilus-admin-gtk4 nautilus-checksums nautilus-image-converter nautilus-share \
+  flat-remix
 
 echo "✅ AUR packages installed successfully!"
 
@@ -165,6 +168,7 @@ echo "------------------- flatpak packages -------------------"
 flatpak update
 flatpak install flathub com.dec05eba.gpu_screen_recorder
 flatpak install flathub io.missioncenter.MissionCenter
+flatpak install flathub app.devsuite.Ptyxis
 
 flatpak override --user \
   --filesystem=xdg-config/gtk-2.0:ro \
@@ -180,7 +184,6 @@ flatpak override --user \
 echo "✅ flatpak packages installed successfully!"
 
 echo "------------------- hyprpm packages -------------------"
-# hyprpm
 hyprpm add https://github.com/hyprwm/hyprland-plugins
 hyprpm add https://github.com/KZDKM/Hyprspace
 hyprpm update
@@ -198,6 +201,10 @@ waypaper --wallpaper ~/wallpapers/School/arseniy-chebynkin-school-enter2.jpg
 
 echo "✅ dotfiles installed successfully!"
 
+echo "------------------- settings -------------------"
+gsettings set org.gnome.desktop.default-applications.terminal exec 'kitty'
+nautilus -q
+
 echo "------------------- enable services -------------------"
 systemctl --user enable ydotoold.service
 systemctl --user start ydotoold.service
@@ -214,6 +221,7 @@ echo "------------------- fish configurations -------------------"
 fisher update
 chsh -s "$(which bash)"
 fish_update_completions
-tide configure
+tide configure --auto --style=Lean --prompt_colors='True color' --show_time='24-hour format' --lean_prompt_height='One line' --prompt_spacing=Compact --icons='Many icons' --transient=No
+# tide configure
 
 echo "✅ fish configured successfully!"
