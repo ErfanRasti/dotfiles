@@ -208,14 +208,14 @@ nautilus -q
 echo "✅ settings applied successfully!"
 
 echo "------------------- enable services -------------------"
-systemctl --user enable ydotoold.service
-systemctl --user start ydotoold.service
+systemctl --user reenable ydotoold.service
+systemctl --user restart ydotoold.service
 
-systemctl --user enable hypridle-runner.service
-systemctl --user start hypridle-runner.service
+systemctl --user reenable hypridle-runner.service
+systemctl --user restart hypridle-runner.service
 
-systemctl --user enable hyprpolkitagent.service
-systemctl --user start hyprpolkitagent.service
+systemctl --user reenable hyprpolkitagent.service
+systemctl --user restart hyprpolkitagent.service
 
 echo "✅ services enabled and started!"
 
