@@ -1,0 +1,20 @@
+[org/gnome/Ptyxis]
+profile-uuids=['45d8ad51ad210213e1d4392b67750f7d']
+default-profile-uuid='45d8ad51ad210213e1d4392b67750f7d'
+use-system-font=false
+font-name='CaskaydiaCove Nerd Font Mono 12'
+window-size=(80, 24)
+cursor-blink-mode='system'
+text-blink-mode='always'
+
+[org/gnome/Ptyxis/Profiles/45d8ad51ad210213e1d4392b67750f7d]
+palette='Nightfly'
+label='default'
+bold-is-bright=true
+login-shell=true
+
+[org/gnome/Ptyxis/Shortcuts]
+move-next-tab='<Control>Tab'
+move-previous-tab='<Shift><Control>Tab'
+copy-clipboard='<Shift><Control>c'
+paste-clipboard='<Shift><Control>v'
