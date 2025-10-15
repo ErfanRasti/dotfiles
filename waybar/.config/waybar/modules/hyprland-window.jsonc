@@ -5,4 +5,5 @@
     "icon-size": 18,
     "separate-outputs": false
   }
+  // Note that icon theme inherits from org.gnome.desktop.interface icon-theme.
 }
