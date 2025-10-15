@@ -7,11 +7,20 @@
 <img width="1920" height="1080" alt="whole-system" src="https://github.com/user-attachments/assets/1be282e2-bc54-4777-aa9e-099131fe0080" />
 
 ## Installation
+
 To use these `dotfiles` use the `install.sh` script or copy and paste each section of the script to your terminal manually.
 
 ```sh
 pacman -S --needed git base-devel
 git clone --depth 1 --recurse-submodules https://github.com/ErfanRasti/dotfiles ~/dotfiles
 cd ~/dotfiles
-./install.sh  
+./install.sh
+```
+
+You can also just use one of the folders if you don't want to use
+all `dotfiles`, for example:
+
+```sh
+cd ~/dotfiles/dotfiles/
+stow nvim/
 ```
