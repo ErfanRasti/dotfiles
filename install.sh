@@ -126,7 +126,8 @@ sudo pacman -S \
   alsa-utils \
   cava \
   zenity \
-  ttf-cascadia-code-nerd
+  ttf-cascadia-code-nerd \
+  niri
 
 echo "✅ pacman packages installed successfully!"
 
@@ -159,7 +160,8 @@ paru -S \
   python-pywalfox \
   fum-bin \
   actions-for-nautilus-git nautilus-admin-gtk4 nautilus-checksums nautilus-image-converter nautilus-share \
-  flat-remix
+  flat-remix \
+  niriswitcher
 
 echo "✅ AUR packages installed successfully!"
 
