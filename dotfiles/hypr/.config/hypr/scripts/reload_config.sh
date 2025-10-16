@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Restore last wallpaper of waypaper
 waypaper --restore
