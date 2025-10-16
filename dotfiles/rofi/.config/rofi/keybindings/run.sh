@@ -4,6 +4,7 @@ set -euo pipefail
 # --- config ---------------------------------------------------------------
 
 FILE="${HOME}/.config/hypr/config/keybindings.conf"
+FILE2="${HOME}/.config/hypr/config/keybindings_hyprscrolling.conf"
 
 # Nerd Font modifier glyphs (can override via env)
 ALT_ICON="${ALT_ICON:-󰘵}"
@@ -66,6 +67,11 @@ fi
 
 if [[ ! -f "$FILE" ]]; then
   echo "Error: keybindings file not found at: $FILE" >&2
+  exit 1
+fi
+
+if [[ ! -f "$FILE2" ]]; then
+  echo "Error: keybindings file not found at: $FILE2" >&2
   exit 1
 fi
 
@@ -224,7 +230,7 @@ awk \
     # Two-line entry -> separated by SEP for rofi
     printf "%s\n  %s%s", head, comment, sep
   }
-' "$FILE" | {
+' <(cat "$FILE" "$FILE2") | {
 
   # Build rofi command with your theme only (no radius overrides)
   rofi_args=(
