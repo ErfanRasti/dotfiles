@@ -1,0 +1,50 @@
+{
+  // See https://github.com/Alexays/Waybar/wiki/Configuration
+  "layer": "top", // Make the bar appear at the top of another windows.
+  "position": "top",
+  "height": 12,
+  "mode": "dock",
+  "exclusive": true, // Option to request an exclusive zone from the compositor.
+  "passtrough": false, //  Pass any pointer events to the window under the bar.
+  "reload_style_on_change": true,
+  "margin-top": 0,
+  "margin-left": 1,
+  "margin-bottom": 0,
+  "margin-right": 1,
+  "spacing": 0,
+  "include": [
+    "~/.config/waybar/modules/power-group.jsonc",
+    "~/.config/waybar/modules/custom-appmenu.jsonc",
+    "~/.config/waybar/modules/custom-notification.jsonc",
+    "~/.config/waybar/modules/clock.jsonc",
+    "~/.config/waybar/modules/power-profiles-daemon.jsonc",
+    "~/.config/waybar/modules/tray.jsonc",
+    "~/.config/waybar/modules/custom-keyboard-state.jsonc",
+    "~/.config/waybar/modules/gamemode.jsonc",
+    "~/.config/waybar/modules/cpu.jsonc",
+    "~/.config/waybar/modules/temperature.jsonc",
+    "~/.config/waybar/modules/memory.jsonc",
+    "~/.config/waybar/modules/custom-camera-usage.jsonc",
+    "~/.config/waybar/modules/privacy.jsonc",
+    "~/.config/waybar/modules/bluetooth.jsonc",
+    "~/.config/waybar/modules/network.jsonc",
+    "~/.config/waybar/modules/pulseaudio-group.jsonc",
+    "~/.config/waybar/modules/battery.jsonc"
+  ],
+  "modules-left": ["group/power-group", "custom/appmenu"],
+  "modules-center": ["custom/notification", "clock", "power-profiles-daemon"],
+  "modules-right": [
+    "tray",
+    "custom/keyboard-state",
+    "gamemode",
+    "cpu",
+    "temperature",
+    "memory",
+    "group/pulseaudio-group",
+    "custom/camera-usage",
+    "privacy",
+    "bluetooth",
+    "network",
+    "battery"
+  ]
+}
