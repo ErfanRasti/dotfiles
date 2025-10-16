@@ -15,7 +15,7 @@
   "notification-2fa-action": true,
   "timeout": 10,
   "timeout-low": 5,
-  "timeout-critical": 0,
+  "timeout-critical": 15,
   "notification-window-width": 500,
   "notification-window-height": 500,
   "notification-window-preferred-output": "",
