@@ -111,6 +111,7 @@ awk \
     keymap["PAGEUP"] = "⇞"; keymap["PAGEDOWN"] = "⇟"; keymap["INSERT"] = "⌲";
     keymap["PRINT"] = "󰹑";
     keymap["CAPS"] = "󰘲"; keymap["CAPS_LOCK"] = "󰘲";
+    keymap["BACKSPACE"] = "󰁮";
 
     # Punctuation often used as keys
     keymap[","] = ","; keymap["."] = "."; keymap[";"] = ";"; keymap["/"] = "/";
