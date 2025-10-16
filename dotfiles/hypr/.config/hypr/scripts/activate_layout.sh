@@ -29,7 +29,7 @@ master)
   ;;
 scrolling)
   hyprctl reload
-  hyprctl keyword source ~/.config/hypr/config/keybindings_hyprscrolling.conf
+  hyprctl keyword source ~/.config/hypr/config/keybindings-hyprscrolling.conf
   hyprctl keyword general:layout scrolling
   notify-send -u critical -a "Hyprland" "  Hyprland scrolling layout activated"
   ;;

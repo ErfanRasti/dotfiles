@@ -4,7 +4,7 @@ set -euo pipefail
 # --- config ---------------------------------------------------------------
 
 FILE="${HOME}/.config/hypr/config/keybindings.conf"
-FILE2="${HOME}/.config/hypr/config/keybindings_hyprscrolling.conf"
+FILE2="${HOME}/.config/hypr/config/keybindings-hyprscrolling.conf"
 
 # Nerd Font modifier glyphs (can override via env)
 ALT_ICON="${ALT_ICON:-󰘵}"
