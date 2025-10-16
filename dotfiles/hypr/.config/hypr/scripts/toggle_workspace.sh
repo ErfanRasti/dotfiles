@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Set range variable in order to match the workspace (not working by id only)
 rid="w[tv1]s[false]"

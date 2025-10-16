@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Default wallpapers root used by -r when no path is provided
 DEFAULT_WALLPAPER_DIR="$HOME/wallpapers"

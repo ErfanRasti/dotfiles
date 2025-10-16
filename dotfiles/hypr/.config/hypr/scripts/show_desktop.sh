@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 # Toggle "show desktop" behavior in Hyprland:
 # - Hides all windows from the current workspace to special:desktop, saving their addresses and focus
 # - Restores them back later, returning focus to the previously active window if possible

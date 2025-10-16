@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Battery Info
 current_profile="$(powerprofilesctl get)"
