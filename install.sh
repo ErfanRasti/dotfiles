@@ -188,6 +188,9 @@ echo "✅ flatpak packages installed successfully!"
 echo "------------------- hyprpm packages -------------------"
 hyprpm add https://github.com/hyprwm/hyprland-plugins
 hyprpm add https://github.com/KZDKM/Hyprspace
+hyprpm add https://github.com/VirtCode/hypr-dynamic-cursors
+hyprpm enable hyprexpo
+hyprpm enable dynamic-cursors
 hyprpm update
 
 echo "✅ hyprpm packages installed successfully!"
