@@ -6,8 +6,8 @@ state=$(hyprctl getoption plugin:hyprbars:enabled | grep "int:" | awk '{print $2
 # Toggle it
 if [ "$state" -eq 1 ]; then
   hyprctl keyword plugin:hyprbars:enabled false
-  notify-send "Hyprbars Disabled"
+  notify-send -u critical -a "Hyprland" "   Hyprbars disabled"
 else
   hyprctl keyword plugin:hyprbars:enabled true
-  notify-send "Hyprbars Enabled"
+  notify-send -u critical -a "Hyprland" "   Hyprbars enabled"
 fi

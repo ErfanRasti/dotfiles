@@ -3,7 +3,7 @@
 # Battery Info
 current_profile="$(powerprofilesctl get)"
 status="$(acpi -b | cut -d',' -f1 | cut -d':' -f2 | tr -d ' ')"
-percentage="$(acpi -b | cut -d',' -f2 | tr -d ' ',\%)"
+percentage="$(acpi -b | cut -d',' -f2 | tr -d ' ',%)"
 time="$(acpi -b | awk -F',' '{print $3}' | sed -E 's/^ +//; s/([0-9]+):([0-9]+):[0-9]+/\1h \2m/')"
 
 if [[ -z "$time" ]]; then
