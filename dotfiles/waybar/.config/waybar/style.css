@@ -297,12 +297,6 @@ window#waybar.fullscreen #windowcount {
   background-color: @tertiary;
 }
 
-/*****----- pulseaudio -----*****/
-#pulseaudio.muted {
-  background-color: @red_value;
-  color: @white_value;
-}
-
 /*****----- custom camera usage -----*****/
 #custom-camera-usage {
   background-color: @green_value;
