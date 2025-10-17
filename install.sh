@@ -189,9 +189,16 @@ echo "------------------- hyprpm packages -------------------"
 hyprpm add https://github.com/hyprwm/hyprland-plugins
 hyprpm add https://github.com/KZDKM/Hyprspace
 hyprpm add https://github.com/VirtCode/hypr-dynamic-cursors
-hyprpm enable hyprexpo
-hyprpm enable dynamic-cursors
+hyprpm add https://github.com/zakk4223/hyprland-easymotion
+hyprpm add https://github.com/outfoxxed/hy3
 hyprpm update
+hyprpm enable hyprexpo
+hyprpm enable hyprscrolling
+hyprpm enable xtra-dispatchers
+hyprpm enable dynamic-cursors
+hyprpm enable hyprEasymotion
+hyprpm enable hy3
+hyprpm reload
 
 echo "✅ hyprpm packages installed successfully!"
 
