@@ -12,6 +12,12 @@ if pgrep -x waybar >/dev/null; then
 fi
 setsid -f waybar >/dev/null 2>&1
 
+# Restart ashell if running
+# if pgrep -x ashell >/dev/null; then
+#   pkill ashell
+# fi
+# setsid -f ashell >/dev/null 2>&1
+
 # Restart swaync
 if pgrep -x swaync >/dev/null; then
   pkill swaync
