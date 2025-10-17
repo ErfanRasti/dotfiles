@@ -1,8 +1,11 @@
 configuration {
+  // See https://man.archlinux.org/man/rofi-keys.5.en
   kb-row-up: "Up,k";
   kb-row-down: "Down,j";
   kb-row-left: "h";
   kb-row-right: "l";
   kb-cancel: "Escape,q";
   kb-accept-entry: "Control+m,Return,KP_Enter,space";
+  kb-row-first: "Home,g";
+  kb-row-last: "End,G";
 }
