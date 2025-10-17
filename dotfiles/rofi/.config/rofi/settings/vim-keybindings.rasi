@@ -1,4 +1,5 @@
 configuration {
+  // See https://man.archlinux.org/man/rofi-keys.5.en
   kb-mode-complete: "Control+Shift+l";
   kb-row-up: "Up,Control+k,Shift+Tab";
   kb-row-down: "Down,Control+j";
@@ -8,4 +9,6 @@ configuration {
   kb-remove-to-eol: "Control+Shift+e";
   kb-accept-entry: "Control+m,Return,KP_Enter";
   kb-cancel: "Escape,Control+q";
+  kb-row-first: "Home,Control+g";
+  kb-row-last: "End,Control+G";
 }
