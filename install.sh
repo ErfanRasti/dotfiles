@@ -161,7 +161,8 @@ paru -S \
   fum-bin \
   actions-for-nautilus-git nautilus-admin-gtk4 nautilus-checksums nautilus-image-converter nautilus-share \
   flat-remix \
-  niriswitcher
+  niriswitcher \
+  ashell
 
 echo "✅ AUR packages installed successfully!"
 
