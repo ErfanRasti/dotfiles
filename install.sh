@@ -127,7 +127,8 @@ sudo pacman -S \
   cava \
   zenity \
   ttf-cascadia-code-nerd \
-  niri
+  niri \
+  cmatrix
 
 echo "✅ pacman packages installed successfully!"
 
@@ -162,7 +163,8 @@ paru -S \
   actions-for-nautilus-git nautilus-admin-gtk4 nautilus-checksums nautilus-image-converter nautilus-share \
   flat-remix \
   niriswitcher \
-  ashell
+  ashell \
+  unimatrix-git pipes.sh
 
 echo "✅ AUR packages installed successfully!"
 
