@@ -1,7 +1,7 @@
 {
   "$schema": "/etc/xdg/swaync/configSchema.json",
   "ignore-gtk-theme": true,
-  "positionX": "left",
+  "positionX": "right",
   "positionY": "top",
   "layer": "overlay",
   "layer-shell": true,
@@ -16,7 +16,7 @@
   "timeout": 10,
   "timeout-low": 5,
   "timeout-critical": 15,
-  "notification-window-width": 500,
+  "notification-window-width": 400,
   "notification-window-height": 500,
   "notification-window-preferred-output": "",
   "keyboard-shortcuts": true,
