@@ -195,6 +195,7 @@ hyprpm add https://github.com/outfoxxed/hy3
 hyprpm update
 hyprpm enable hyprexpo
 hyprpm enable hyprscrolling
+hyprpm enable hyprfocus
 hyprpm enable xtra-dispatchers
 hyprpm enable dynamic-cursors
 hyprpm enable hyprEasymotion
