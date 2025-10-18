@@ -7,7 +7,7 @@ GenericName=Web Browser
 # Gnome and KDE 3 uses Comment.
 Comment=Access the Internet
 StartupWMClass=Google-chrome
-Exec=/usr/bin/google-chrome-stable --ozone-platform-hint=auto --enable-features=TouchpadOverscrollHistoryNavigation %U
+Exec=/usr/bin/google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform=wayland %U
 StartupNotify=true
 Terminal=false
 Icon=google-chrome
@@ -19,9 +19,9 @@ Actions=new-window;new-private-window;
 [Desktop Action new-window]
 Name=New Window
 StartupWMClass=Google-chrome
-Exec=/usr/bin/google-chrome-stable --ozone-platform-hint=auto --enable-features=TouchpadOverscrollHistoryNavigation
+Exec=/usr/bin/google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform=wayland
 
 [Desktop Action new-private-window]
 Name=New Incognito Window
 StartupWMClass=Google-chrome
-Exec=/usr/bin/google-chrome-stable --incognito --ozone-platform-hint=auto --enable-features=TouchpadOverscrollHistoryNavigation
+Exec=/usr/bin/google-chrome-stable --incognito --enable-features=UseOzonePlatform --ozone-platform=wayland
