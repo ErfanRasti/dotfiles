@@ -1,11 +1,16 @@
 [config.custom_colors]
 red = { color = "#f13c40", blend = true }
 green = { color = "#41c257", blend = true }
-cyan = { color = "#0ebadc", blend = true }
 blue = { color = "#0e85f0", blend = true }
+mint = { color = "#07c2ac", blend = true }
+teal = { color = "#02bbc5", blend = true }
+cyan = { color = "#03b9db", blend = true }
+indigo = { color = "#5b55e6", blend = true }
+purple = { color = "#bd30d4", blend = true }
+pink = { color = "#ed3053", blend = true }
 yellow = { color = "#edc005", blend = true }
 orange = { color = "#fb8d2c", blend = true }
-purple = { color = "#bd30d4", blend = true }
+brown = { color = "#a57d5a", blend = true }
 black = { color = "#000000", blend = true }
 white = { color = "#ffffff", blend = true }
 
