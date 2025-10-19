@@ -29,7 +29,7 @@
   "fit-to-screen": true,
   "relative-timestamps": true,
   "control-center-height": 500,
-  "control-center-width": 400,
+  "control-center-width": 300,
   "control-center-preferred-output": "",
   "layer-shell-cover-screen": true,
   "notification-inline-replies": false,
@@ -84,7 +84,7 @@
           "label": "",
           "type": "toggle",
           "active": true,
-          "command": "sh -c '~/.config/swaync/scripts/toggle_bluetooth.sh'",
+          "command": "sh -c '~/.config/swaync/scripts/toggle_wifi.sh'",
           "update-command": "sh -c 'set +e;[[ $(nmcli radio wifi) == \"enabled\" ]] && echo true || echo false'"
         },
         {
