@@ -316,6 +316,12 @@ window#waybar.fullscreen #windowcount {
   background-color: @orange_value;
   color: @white_value;
 }
+
+/*****----- idle inhibitor -----*****/
+#idle_inhibitor.activated {
+  color: @green_value;
+}
+
 /*****----- bluetooth -----*****/
 #bluetooth.disabled {
   color: @red_value;

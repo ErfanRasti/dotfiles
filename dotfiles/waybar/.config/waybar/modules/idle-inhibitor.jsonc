@@ -1,0 +1,12 @@
+{
+  // Prevents screen from going blank
+  // See https://github.com/Alexays/Waybar/wiki/Module:-Idle-Inhibitor
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰈈",
+      "deactivated": "󰈉"
+    },
+    "tooltip": true
+  }
+}
