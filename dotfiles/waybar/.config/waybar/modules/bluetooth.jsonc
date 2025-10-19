@@ -2,7 +2,7 @@
   // See https://github.com/Alexays/Waybar/wiki/Module:-Bluetooth
   "bluetooth": {
     "format": " {status}",
-    "format-disabled": " ",
+    "format-disabled": "󰂲",
     "format-on": "",
     "format-off": "󰂲",
     "format-connected": "󰂱 {num_connections}",
