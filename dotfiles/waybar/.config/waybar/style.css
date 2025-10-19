@@ -324,9 +324,13 @@ window#waybar.fullscreen #windowcount {
   color: @yellow_value;
 }
 #bluetooth.discovering {
-  color: @green_value;
+  color: @mint_value;
 }
 #bluetooth.discoverable {
+  color: @blue_value;
+}
+
+#bluetooth.pairable {
   color: @orange_value;
 }
 

@@ -4,7 +4,10 @@ set +e # disable immediate exit on error
 if [ "$(nmcli radio wifi)" = "enabled" ]; then
   { nmcli radio wifi off; } >/dev/null 2>&1 || :
 else
-  { nmcli radio wifi on; } >/dev/null 2>&1 || :
+  {
+    rfkill unblock wifi
+    nmcli radio wifi on
+  } >/dev/null 2>&1 || :
 fi
 
 exit 0
