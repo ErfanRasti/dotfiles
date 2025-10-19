@@ -442,7 +442,7 @@
   color: var(--text-color);
   border-radius: var(--border-radius);
   border: var(--border);
-  padding: 5px;
+  padding: 0px;
 }
 
 .control-center .control-center-list-placeholder {
@@ -533,6 +533,7 @@
 
 .widget-mpris {
   padding: 0;
+  margin: 0px 3px;
   /* The parent to all players */
   color: @secondary;
 }
@@ -684,6 +685,7 @@
 }
 
 .widget-volume {
+  margin: 0px 8px;
 }
 
 /* Each row app icon */
@@ -700,6 +702,7 @@
 
 /************** Backlight Widget **************/
 .widget-backlight {
+  margin: 0px 8px;
 }
 
 /************** Slider Widget **************/

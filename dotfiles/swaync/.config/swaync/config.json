@@ -29,7 +29,7 @@
   "fit-to-screen": true,
   "relative-timestamps": true,
   "control-center-height": 500,
-  "control-center-width": 300,
+  "control-center-width": 350,
   "control-center-preferred-output": "",
   "layer-shell-cover-screen": true,
   "notification-inline-replies": false,
