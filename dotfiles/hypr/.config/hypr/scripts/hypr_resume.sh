@@ -57,9 +57,15 @@ restore)
     wait_for_bt || echo "No Bluetooth adapter found"
     while read -r line; do
       case "$line" in
-      network:on) nmcli radio wifi on ;;
+      network:on)
+        rfkill unblock wifi
+        nmcli radio wifi on
+        ;;
       network:off) nmcli radio wifi off ;;
-      bluetooth:on) bluetoothctl power on ;;
+      bluetooth:on)
+        rfkill unblock bluetooth
+        bluetoothctl power on
+        ;;
       bluetooth:off) bluetoothctl power off ;;
       sink:on) pactl set-sink-mute @DEFAULT_SINK@ 0 ;;
       sink:off) pactl set-sink-mute @DEFAULT_SINK@ 1 ;;
