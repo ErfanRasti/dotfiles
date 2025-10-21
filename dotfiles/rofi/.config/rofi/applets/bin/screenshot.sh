@@ -49,19 +49,19 @@ file="Screenshot_${time}_${geometry}.png"
 shotnow() {
   pkill rofi
   sleep 0.2
-  hyprshot -m output -z -o "$dir" -f "$file"
+  ~/.config/hypr/scripts/hyprshot_notify.sh output
 }
 
 shotwin() {
   pkill rofi
   sleep 0.2
-  hyprshot -m window -z -o "$dir" -f "$file"
+  ~/.config/hypr/scripts/hyprshot_notify.sh window
 }
 
 shotarea() {
   pkill rofi
   sleep 0.2
-  hyprshot -m region -z -o "$dir" -f "$file"
+  ~/.config/hypr/scripts/hyprshot_notify.sh region
 }
 
 toggle_gpu_screen_recorder() {

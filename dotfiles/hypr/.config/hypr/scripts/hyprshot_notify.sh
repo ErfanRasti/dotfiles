@@ -45,7 +45,7 @@ ACTION=$(
 # Wait for button press from SwayNC
 case "$ACTION" in
 open_image)
-  eog "$FILE" &
+  loupe "$FILE" &
   disown
   ;;
 open_folder)
