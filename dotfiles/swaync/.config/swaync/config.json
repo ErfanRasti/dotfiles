@@ -44,11 +44,11 @@
     }
   },
   "widgets": [
-    "inhibitors",
     "buttons-grid",
     "volume",
     "backlight",
     "mpris",
+    "inhibitors",
     "title",
     "notifications",
     "dnd"
