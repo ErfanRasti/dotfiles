@@ -6,8 +6,8 @@ state=$(hyprctl getoption plugin:dynamic-cursors:enabled | grep "int:" | awk '{p
 # Toggle it
 if [ "$state" -eq 1 ]; then
   hyprctl keyword plugin:dynamic-cursors:enabled false
-  notify-send -u critical -a "Hyprland" "   Hypr-dynamic-cursors disabled"
+  notify-send -u critical -a "Hyprland" "   Dynamic-cursors Disabled" "Hypr-dynamic-cursors disabled"
 else
   hyprctl keyword plugin:dynamic-cursors:enabled true
-  notify-send -u critical -a "Hyprland" "  󰳽 Hypr-dynamic-cursors enabled"
+  notify-send -u critical -a "Hyprland" "  󰳽 Dynamic-cursors Enabled" "Hypr-dynamic-cursors enabled"
 fi
