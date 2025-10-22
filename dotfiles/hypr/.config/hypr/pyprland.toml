@@ -37,12 +37,6 @@ max_size = "1920px 100%"
 command = "[term_classed] yazi bash -c yazi"
 class = "yazi"
 size = "75% 60%"
-unfocus = "hide"
-# means 10% margin tolerance. For example, if the scratchpad is nearly hidden
-# and you bump focus/move it slightly, Pyprland won’t immediately toggle it —
-# it waits until the change passes that threshold.
-hysteresis = 0.1
-
 
 [scratchpads.fum]
 use = "_base"
@@ -100,6 +94,9 @@ command = "[term_classed] htop -e htop"
 class = "htop"
 size = "30% 80%"
 unfocus = "hide"
+# means 10% margin tolerance. For example, if the scratchpad is nearly hidden
+# and you bump focus/move it slightly, Pyprland won’t immediately toggle it —
+# it waits until the change passes that threshold.
 hysteresis = 0.1
 
 [scratchpads.gnome-system-monitor]
