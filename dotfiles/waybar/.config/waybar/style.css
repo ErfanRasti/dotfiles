@@ -167,6 +167,11 @@ window#waybar.floating #window {
   color: @on_secondary;
 }
 
+window#waybar.swallowing #window {
+  background-color: @error_container;
+  color: @on_error_container;
+}
+
 /*****----- window count -----*****/
 window#waybar.fullscreen #windowcount {
   background-color: @primary_container;
@@ -299,8 +304,8 @@ window#waybar.fullscreen #windowcount {
 
 /*****----- custom camera usage -----*****/
 #custom-camera-usage {
-  background-color: @green_value;
-  color: @white_value;
+  background-color: @green;
+  color: @on_green;
 }
 
 /*****----- privacy -----*****/
@@ -309,17 +314,17 @@ window#waybar.fullscreen #windowcount {
   color: @white_value;
 }
 #privacy-item.audio-out {
-  background-color: @blue_value;
-  color: @white_value;
+  background-color: @blue;
+  color: @on_blue;
 }
 #privacy-item.audio-in {
-  background-color: @orange_value;
-  color: @white_value;
+  background-color: @orange;
+  color: @on_orange;
 }
 
 /*****----- idle inhibitor -----*****/
 #idle_inhibitor.activated {
-  color: @green_value;
+  color: @green;
 }
 
 /*****----- bluetooth -----*****/
