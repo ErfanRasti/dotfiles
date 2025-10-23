@@ -59,7 +59,7 @@ run_cmd() {
   elif [[ "$1" == '--opt3' ]]; then
     brightnessctl set 5%+
   elif [[ "$1" == '--opt4' ]]; then
-    better-control --display
+    hyprctl dispatch plugin:xtd:moveorexec class:better_control.py,"better-control --display"
   fi
 }
 

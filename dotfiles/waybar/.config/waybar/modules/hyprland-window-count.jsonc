@@ -4,6 +4,6 @@
     "format-empty": "",
     "format-fullscreen": "󱂬:{} 󰊓",
     "separate-outputs": true,
-    "on-click": "better-control --display"
+    "on-click": "hyprctl dispatch plugin:xtd:moveorexec class:better_control.py,'better-control --display'"
   }
 }
