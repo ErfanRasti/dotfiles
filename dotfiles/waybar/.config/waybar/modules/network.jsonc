@@ -16,7 +16,7 @@
     "tooltip-format-disconnected": "No network",
     "tooltip-format-disabled": "Off",
     "interval": 2,
-    "on-click": "better-control --wifi",
+    "on-click": "hyprctl dispatch plugin:xtd:moveorexec class:better_control.py,'better-control --wifi'",
     "on-click-right": "~/.config/waybar/scripts/toggle_network.sh",
     "on-click-middle": "pypr toggle network"
   }
