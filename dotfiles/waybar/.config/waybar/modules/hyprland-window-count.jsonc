@@ -2,7 +2,7 @@
   "hyprland/windowcount": {
     "format": "󱂬:{}",
     "format-empty": "",
-    "format-fullscreen": "󱂬:{},󰊓",
+    "format-fullscreen": "󱂬:{} 󰊓",
     "separate-outputs": true,
     "on-click": "better-control --display"
   }
