@@ -91,8 +91,7 @@ output_path = '~/.config/zathura/zathurarc'
 [templates.spicetify]
 input_path = '~/.config/matugen/templates/spicetify.ini'
 output_path = '~/.config/spicetify/Themes/matugen/color.ini'
-post_hook = 'spicetify config current_theme matugen;spicetify config color_scheme matugen'
-# post_hook = 'spicetify config current_theme matugen;spicetify config color_scheme matugen;spicetify apply'
+post_hook = '~/.config/matugen/scripts/spiceitfy_theme_apply.sh'
 
 [templates.pywalfox]
 input_path = '~/.config/matugen/templates/pywalfox-colors.json'
