@@ -20,7 +20,8 @@ APP_CMD="$2"
 FOCUSED_CLASS=$(hyprctl activewindow -j | jq -r '.class' 2>/dev/null)
 
 # Get the class name without "class:" prefix if needed
-APP_CLASS_CLEAN=$(echo "$APP_CLASS" | sed -E 's/^class[:(]*\^?//; s/\$?\)*$//')
+# APP_CLASS_CLEAN=$(echo "$APP_CLASS" | sed -E 's/^class[:(]*\^?//; s/\$?\)*$//')
+APP_CLASS_CLEAN=$(echo "$APP_CLASS" | sed -E 's/^class:|\^|\$|\(|\)//g')
 
 # If the focused window matches, do nothing
 if [ "$FOCUSED_CLASS" = "$APP_CLASS_CLEAN" ]; then
