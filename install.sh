@@ -128,7 +128,8 @@ sudo pacman -S \
   zenity \
   ttf-cascadia-code-nerd \
   niri \
-  cmatrix
+  cmatrix \
+  kdeconnect
 
 echo "✅ pacman packages installed successfully!"
 
@@ -164,7 +165,8 @@ paru -S \
   flat-remix \
   niriswitcher \
   ashell \
-  unimatrix-git pipes.sh
+  unimatrix-git pipes.sh \
+  nitch
 
 echo "✅ AUR packages installed successfully!"
 
