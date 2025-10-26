@@ -1,10 +1,14 @@
 [mgr]
 show_hidden = true
+sort_by = "alphabetical"
+sort_dir_first = true
+sort_sensitive = true
+show_symlink = true
+linemode = "size_and_mtime"
+
 
 [opener]
 play = [
-  { run = 'vlc "$@"', orphan = true, desc="Open in VLC", for = "linux"},
+  { run = 'vlc "$@"', orphan = true, desc = "Open in VLC", for = "linux" },
 ]
-edit = [
-	{ run = '$EDITOR "$@"', block = true, for = "linux" },
-]
+edit = [{ run = '$EDITOR "$@"', block = true, for = "linux" }]
