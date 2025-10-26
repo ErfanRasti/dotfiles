@@ -13,12 +13,12 @@ list_col='6'
 list_row='1'
 
 # Options
-option_1=""
-option_2="󰍃"
-option_3="󰤄"
-option_4="󰒲"
-option_5="󰜉"
-option_6=""
+lock=""
+suspend="󰤄"
+logout="󰍃"
+hibernate="󰒲"
+reboot="󰜉"
+shutdown=""
 yes=''
 no=''
 
@@ -35,73 +35,85 @@ rofi_cmd() {
 
 # Pass variables to rofi dmenu
 run_rofi() {
-  echo -e "$option_1\n$option_2\n$option_3\n$option_4\n$option_5\n$option_6" | rofi_cmd
+  echo -e "$lock\n$suspend\n$logout\n$hibernate\n$reboot\n$shutdown" | rofi_cmd
 }
 
 # Confirmation CMD
 confirm_cmd() {
-  rofi -theme-str 'window {location: center; anchor: center; fullscreen: false; width: 350px;}' \
+  local action=$1
+  local icon=$2
+
+  rofi -theme-str 'window {location: center; anchor: center; fullscreen: false; width: 400px;}' \
     -theme-str 'mainbox {orientation: vertical; children: [ "message", "listview" ];}' \
     -theme-str 'listview {columns: 2; lines: 1;}' \
     -theme-str 'element-text {horizontal-align: 0.5;}' \
     -theme-str 'textbox {horizontal-align: 0.5;}' \
     -dmenu \
     -p 'Confirmation' \
-    -mesg 'Are you Sure?' \
+    -mesg "${icon} Are you sure you want to ${action}?" \
     -theme "${theme}"
 }
 
 # Ask for confirmation
 confirm_exit() {
-  echo -e "$yes\n$no" | confirm_cmd
-}
+  local action=$1
+  local icon=""
 
-# Confirm and execute
-confirm_run() {
-  selected="$(confirm_exit)"
-  if [[ "$selected" == "$yes" ]]; then
-    ${1} && ${2} && ${3}
-  else
-    exit
-  fi
+  case "$action" in
+  lock) icon="$lock" ;;
+  suspend) icon="$suspend" ;;
+  logout) icon="$logout" ;;
+  hibernate) icon="$hibernate" ;;
+  reboot) icon="$reboot" ;;
+  shutdown) icon="$shutdown" ;;
+  esac
+
+  echo -e "$yes\n$no" | confirm_cmd "$action" "$icon"
 }
 
 # Execute Command
 run_cmd() {
-  if [[ "$1" == '--opt1' ]]; then
-    hyprlock
-  elif [[ "$1" == '--opt2' ]]; then
-    confirm_run 'kill -9 -1'
-  elif [[ "$1" == '--opt3' ]]; then
-    confirm_run 'amixer set Master mute' 'systemctl suspend'
-  elif [[ "$1" == '--opt4' ]]; then
-    confirm_run 'systemctl hibernate'
-  elif [[ "$1" == '--opt5' ]]; then
-    confirm_run 'systemctl reboot'
-  elif [[ "$1" == '--opt6' ]]; then
-    confirm_run 'systemctl poweroff'
+  selected="$(confirm_exit "${1#--}")"
+  if [[ "$selected" == "$yes" ]]; then
+    if [[ "$1" == '--lock' ]]; then
+      hyprlock
+    elif [[ "$1" == '--suspend' ]]; then
+      amixer set Master mute
+      systemctl suspend
+    elif [[ "$1" == '--logout' ]]; then
+      kill -9 -1
+    elif [[ "$1" == '--hibernate' ]]; then
+      systemctl hibernate
+    elif [[ "$1" == '--reboot' ]]; then
+      systemctl reboot
+    elif [[ "$1" == '--shutdown' ]]; then
+      systemctl poweroff
+    fi
+  else
+    exit 0
   fi
+
 }
 
 # Actions
 chosen="$(run_rofi)"
 case ${chosen} in
-"$option_1")
-  run_cmd --opt1
+"$lock")
+  run_cmd --lock
   ;;
-"$option_2")
-  run_cmd --opt2
+"$suspend")
+  run_cmd --suspend
   ;;
-"$option_3")
-  run_cmd --opt3
+"$logout")
+  run_cmd --logout
   ;;
-"$option_4")
-  run_cmd --opt4
+"$hibernate")
+  run_cmd --hibernate
   ;;
-"$option_5")
-  run_cmd --opt5
+"$reboot")
+  run_cmd --reboot
   ;;
-"$option_6")
-  run_cmd --opt6
+"$shutdown")
+  run_cmd --shutdown
   ;;
 esac

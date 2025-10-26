@@ -9,12 +9,12 @@ uptime="$(uptime -p | sed -e 's/up //g')"
 host=$(hostname)
 
 # Options
-hibernate='󰒲'
-shutdown=''
-reboot='󰜉'
 lock=''
 suspend='󰤄'
 logout='󰍃'
+hibernate='󰒲'
+reboot='󰜉'
+shutdown=''
 yes=''
 no=''
 
@@ -26,44 +26,62 @@ rofi_cmd() {
     -theme "${style}"
 }
 
+# Pass variables to rofi dmenu
+run_rofi() {
+  echo -e "$lock\n$suspend\n$logout\n$hibernate\n$reboot\n$shutdown" | rofi_cmd
+}
+
 # Confirmation CMD
 confirm_cmd() {
-  rofi -theme-str 'window {location: center; anchor: center; fullscreen: false; width: 350px;}' \
+  local action=$1
+  local icon=$2
+  rofi -theme-str 'window {location: center; anchor: center; fullscreen: false; width: 400px;}' \
     -theme-str 'mainbox {children: [ "message", "listview" ];}' \
     -theme-str 'listview {columns: 2; lines: 1;}' \
     -theme-str 'element-text {horizontal-align: 0.5;}' \
     -theme-str 'textbox {horizontal-align: 0.5;}' \
     -dmenu \
     -p 'Confirmation' \
-    -mesg 'Are you Sure?' \
+    -mesg "${icon} Are you sure you want to ${action}?" \
     -theme "${style}"
 }
 
 # Ask for confirmation
 confirm_exit() {
-  echo -e "$yes\n$no" | confirm_cmd
-}
+  local action=$1
+  local icon=""
 
-# Pass variables to rofi dmenu
-run_rofi() {
-  echo -e "$lock\n$suspend\n$logout\n$hibernate\n$reboot\n$shutdown" | rofi_cmd
+  case "$action" in
+  lock) icon="$lock" ;;
+  suspend) icon="$suspend" ;;
+  logout) icon="$logout" ;;
+  hibernate) icon="$hibernate" ;;
+  reboot) icon="$reboot" ;;
+  shutdown) icon="$shutdown" ;;
+  esac
+
+  echo -e "$yes\n$no" | confirm_cmd "$action" "$icon"
 }
 
 # Execute Command
 run_cmd() {
-  selected="$(confirm_exit)"
+  if [[ $1 == '--lock' ]]; then
+    hyprlock
+    return
+  fi
+  selected="$(confirm_exit "${1#--}")"
   if [[ "$selected" == "$yes" ]]; then
-    if [[ $1 == '--shutdown' ]]; then
-      systemctl poweroff
-    elif [[ $1 == '--reboot' ]]; then
-      systemctl reboot
-    elif [[ $1 == '--hibernate' ]]; then
-      systemctl hibernate
-    elif [[ $1 == '--suspend' ]]; then
+    if [[ $1 == '--suspend' ]]; then
       amixer set Master mute
       systemctl suspend
     elif [[ $1 == '--logout' ]]; then
-      confirm_run 'kill -9 -1'
+      kill -9 -1
+    elif [[ $1 == '--hibernate' ]]; then
+      systemctl hibernate
+    elif [[ $1 == '--reboot' ]]; then
+      systemctl reboot
+    elif [[ $1 == '--shutdown' ]]; then
+      systemctl poweroff
     fi
   else
     exit 0
@@ -73,16 +91,8 @@ run_cmd() {
 # If called with arguments, skip menu
 if [[ -n "$1" ]]; then
   case "$1" in
-  shutdown)
-    run_cmd --shutdown
-    exit 0
-    ;;
-  reboot)
-    run_cmd --reboot
-    exit 0
-    ;;
-  hibernate)
-    run_cmd --hibernate
+  lock)
+    run_cmd --lock
     exit 0
     ;;
   suspend)
@@ -93,8 +103,16 @@ if [[ -n "$1" ]]; then
     run_cmd --logout
     exit 0
     ;;
-  lock)
-    hyprlock
+  hibernate)
+    run_cmd --hibernate
+    exit 0
+    ;;
+  reboot)
+    run_cmd --reboot
+    exit 0
+    ;;
+  shutdown)
+    run_cmd --shutdown
     exit 0
     ;;
   esac
@@ -113,7 +131,7 @@ case ${chosen} in
   run_cmd --hibernate
   ;;
 "$lock")
-  hyprlock
+  run_cmd --lock
   ;;
 "$suspend")
   run_cmd --suspend
