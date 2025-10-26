@@ -4,7 +4,7 @@
 theme=$(spicetify config current_theme)
 scheme=$(spicetify config color_scheme)
 
-spicetify update
+# spicetify update
 
 # If the matugen theme is not applied
 if [[ "$theme" != "matugen" || "$scheme" != "Base" ]]; then
