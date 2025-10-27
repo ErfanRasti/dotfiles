@@ -355,8 +355,8 @@ window#waybar.fullscreen #windowcount {
   color: @red_value;
 }
 #battery.warning:not(.charging) {
-  color: @yellow_value;
+  color: @yellow;
 }
 #battery.charging {
-  color: @green_value;
+  color: @green;
 }

@@ -34,9 +34,8 @@ sudo pacman -S \
   zsh-autosuggestions zsh-syntax-highlighting \
   fish pkgfile inetutils \
   nautilus-python python-dbus \
-  hyprland vim wget curl kitty \
+  hyprland vim wget curl \
   hyprland \
-  kitty \
   shfmt stylua \
   svn \
   git-delta \
