@@ -89,7 +89,7 @@ sudo pacman -S \
   foot fzf chafa jq bat \
   pixman \
   libpng \
-  wl-clipboard \
+  wl-clipboard wl-clip-persist \
   cpio cmake git meson gcc \
   mpv \
   hyprshot \
