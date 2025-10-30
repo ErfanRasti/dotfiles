@@ -165,7 +165,8 @@ paru -S \
   niriswitcher \
   ashell \
   unimatrix-git pipes.sh \
-  nitch
+  nitch \
+  hypr-dock
 
 echo "✅ AUR packages installed successfully!"
 
