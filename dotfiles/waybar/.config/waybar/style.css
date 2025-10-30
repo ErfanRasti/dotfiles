@@ -185,6 +185,10 @@ window#waybar.fullscreen #windowcount {
   color: @tertiary;
 }
 
+#clock {
+  font-size: 15px;
+}
+
 /*****----- power profiles daemon -----*****/
 #power-profiles-daemon.performance {
   background-color: alpha(@red_value, 0.5);

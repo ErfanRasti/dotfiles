@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set +e # disable immediate exit on error
 
+# Close the panel to prevent any interference
+swaync-client -cp
+
 if [[ $SWAYNC_TOGGLE_STATE == true ]]; then
   {
     sed -i 's/-m "light"/-m "dark"/' ~/.config/waypaper/config.ini
