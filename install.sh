@@ -240,7 +240,7 @@ echo "------------------- fish configurations -------------------"
 fisher update
 chsh -s "$(which bash)"
 fish_update_completions
-tide configure --auto --style=Lean --prompt_colors='True color' --show_time='24-hour format' --lean_prompt_height='One line' --prompt_spacing=Compact --icons='Many icons' --transient=No
+tide configure --auto --style=Lean --prompt_colors='16 colors' --show_time='24-hour format' --lean_prompt_height='One line' --prompt_spacing=Compact --icons='Many icons' --transient=No
 fisher install vitallium/tokyonight-fish
 fish_config theme save "TokyoNight Moon"
 # tide configure
