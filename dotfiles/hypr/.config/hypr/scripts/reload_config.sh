@@ -6,6 +6,9 @@ waypaper --restore
 # Restart pyprland if running
 pypr reload
 
+# Reload hyprpm state
+hyprpm reload
+
 # Restart waybar if running
 if pgrep -x waybar >/dev/null; then
   pkill waybar
