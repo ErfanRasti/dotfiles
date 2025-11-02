@@ -166,7 +166,8 @@ paru -S \
   ashell \
   unimatrix-git pipes.sh \
   nitch \
-  hypr-dock
+  hypr-dock \
+  bibata-cursor-theme-bin
 
 echo "✅ AUR packages installed successfully!"
 
