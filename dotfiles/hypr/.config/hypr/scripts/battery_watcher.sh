@@ -28,9 +28,11 @@ notify() {
   shift
   local title="$1"
   shift
-  local body="$*"
+  local body="$1"
+  shift
   # -u: normal|low|critical
-  notify-send -u "$urgency" -a "$NOTIFY_APP" "$title" "$body"
+  notify-send -u "$urgency" -a "$NOTIFY_APP" "$title" "$body" "$@"
+  # $@: passes all remaining arguments to notify-send
 }
 
 percent_to_icon() {
@@ -121,7 +123,10 @@ check_and_act() {
   if [[ "$state" != "$last_state" ]]; then
     if [[ "$state" == "charging" ]]; then
       if ((notified_charge == 0)); then
-        notify normal "$ICON_PLUG  Charging" "$ICON_BOLT Now at ${pct}%."
+        notify normal "$ICON_PLUG  Charging" \
+          "$ICON_BOLT Now at ${pct}%." --hint=boolean:suppress-sound:true
+        paplay /usr/share/sounds/freedesktop/stereo/power-plug.oga
+
         notified_charge=1
         notified_discharge=0
       fi
@@ -137,7 +142,10 @@ check_and_act() {
       notified_discharge=0
     elif [[ "$state" == "discharging" ]]; then
       if ((notified_discharge == 0)); then
-        notify normal "$(percent_to_icon "$ipct")  Discharging" "Battery at ${pct}%."
+        notify normal "$(percent_to_icon "$ipct")  Discharging" \
+          "Battery at ${pct}%." --hint=boolean:suppress-sound:true
+        paplay /usr/share/sounds/freedesktop/stereo/power-unplug.oga
+
         notified_discharge=1
         notified_charge=0
       fi
@@ -149,7 +157,9 @@ check_and_act() {
   # while charging, fire the disconnect reminder once when crossing threshold
   if [[ "$state" == "charging" && ipct -ge DISCONNECT_AT && notified_disconnect -eq 0 ]]; then
     notify normal "$ICON_PLUG  Battery high (${pct}%)" \
-      "Consider unplugging the charger."
+      "Consider unplugging the charger." --hint=boolean:suppress-sound:true
+    paplay /usr/share/sounds/ocean/stereo/dialog-warning.oga
+
     notified_disconnect=1
   fi
 
@@ -185,15 +195,18 @@ check_and_act() {
       case "$level" in
       low)
         notify "$urgency" "$(percent_to_icon "$ipct")  Low battery (${pct}%)" \
-          "Connect power soon."
+          "Connect power soon." --hint=boolean:suppress-sound:true
+        paplay /usr/share/sounds/ocean/stereo/dialog-warning.oga
         ;;
       critical)
         notify "$urgency" "$ICON_WARN  Critical battery (${pct}%)" \
-          "Please plug in now."
+          "Please plug in now." --hint=boolean:suppress-sound:true
+        paplay /usr/share/sounds/ocean/stereo/dialog-error.oga
         ;;
       danger)
         notify "$urgency" "$ICON_WARN  ${pct}% Battery — DANGER" \
-          "System will suspend at ${SUSPEND_AT}%."
+          "System will suspend at ${SUSPEND_AT}%." --hint=boolean:suppress-sound:true
+        paplay /usr/share/sounds/ocean/stereo/dialog-error-serious.oga
         ;;
       ok)
         # Crossing back upward while still discharging: optionally notify
