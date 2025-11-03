@@ -123,8 +123,8 @@ check_and_act() {
   if [[ "$state" != "$last_state" ]]; then
     if [[ "$state" == "charging" ]]; then
       if ((notified_charge == 0)); then
-        notify normal "$ICON_PLUG  Charging" \
-          "$ICON_BOLT Now at ${pct}%." --hint=boolean:suppress-sound:true
+        notify low "$ICON_PLUG  Charging" "$ICON_BOLT Now at ${pct}%." \
+          --hint=boolean:suppress-sound:true -h int:transient:1
         paplay /usr/share/sounds/freedesktop/stereo/power-plug.oga
 
         notified_charge=1
@@ -142,8 +142,8 @@ check_and_act() {
       notified_discharge=0
     elif [[ "$state" == "discharging" ]]; then
       if ((notified_discharge == 0)); then
-        notify normal "$(percent_to_icon "$ipct")  Discharging" \
-          "Battery at ${pct}%." --hint=boolean:suppress-sound:true
+        notify low "$(percent_to_icon "$ipct")  Discharging" "Battery at ${pct}%." \
+          --hint=boolean:suppress-sound:true -h int:transient:1
         paplay /usr/share/sounds/freedesktop/stereo/power-unplug.oga
 
         notified_discharge=1
