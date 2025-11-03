@@ -167,7 +167,8 @@ paru -S \
   unimatrix-git pipes.sh \
   nitch \
   hypr-dock \
-  bibata-cursor-theme-bin
+  bibata-cursor-theme-bin \
+  gitfetch-python
 
 echo "✅ AUR packages installed successfully!"
 
