@@ -4,6 +4,10 @@
 
 set +e # disable immediate exit on error
 
+if [[ "$SWAYNC_HINT_SUPPRESS_SOUND" == "true" ]]; then
+  exit 0
+fi
+
 SOUND="${HOME}/.config/swaync/sounds/Chord.wav"
 
 if [[ "$(swaync-client --get-dnd)" == "false" ]]; then
