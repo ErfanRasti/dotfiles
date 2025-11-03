@@ -115,3 +115,7 @@ output_path = '~/.config/ghostty/themes/Matugen'
 [templates.micro]
 input_path = '~/.config/matugen/templates/micro.micro'
 output_path = '~/.config/micro/colorschemes/matugen.micro'
+
+[templates.zed]
+input_path = '~/.config/matugen/templates/zed-colors.json'
+output_path = '~/.config/zed/themes/matugen.json'

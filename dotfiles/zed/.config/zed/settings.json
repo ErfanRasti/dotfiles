@@ -17,8 +17,9 @@
   "buffer_font_size": 14.0,
   "theme": {
     "mode": "system",
-    "light": "One Light",
-    "dark": "Tokyo Night"
-  },
-  "ui_scale": 0.9
+    // "light": "One Light",
+    // "dark": "Tokyo Night"
+    "light": "Matugen Light",
+    "dark": "Matugen Dark"
+  }
 }
