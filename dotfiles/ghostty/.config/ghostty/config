@@ -3,7 +3,8 @@
 font-family = "CaskaydiaCove Nerd Font Mono"
 font-size = 12
 # theme = Sublette
-theme = TokyoNight Night
+# theme = TokyoNight Night
+theme = Matugen
 minimum-contrast = 1
 window-theme = ghostty
 alpha-blending = linear-corrected
