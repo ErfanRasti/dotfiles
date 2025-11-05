@@ -36,7 +36,7 @@
     "tooltip-format": "{desc}, volume: {volume}%\nMicrophone: {format_source}",
     "on-click": "pypr toggle volume",
     "on-click-right": "swayosd-client --output-volume mute-toggle",
-    "on-click-middle": "swayosd-client --input-volume mute-toggle",
+    "on-click-middle": "swayosd-client --input-volume mute-toggle;pactl set-source-volume @DEFAULT_SOURCE@ 25%",
     "on-scroll-up": "swayosd-client --output-volume -1", // Reverese it for the touchpad behavior
     "on-scroll-down": "swayosd-client --output-volume +1", // Reverese it for the touchpad behavior
     "reverse-mouse-scrolling": true, // Logical behavior on mouse
