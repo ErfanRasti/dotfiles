@@ -113,7 +113,7 @@
           "label": "",
           "type": "toggle",
           "active": true,
-          "command": "swayosd-client --input-volume mute-toggle",
+          "command": "swayosd-client --input-volume mute-toggle;pactl set-source-volume @DEFAULT_SOURCE@ 25%",
           "update-command": "sh -c 'set +e;pactl get-source-mute @DEFAULT_SOURCE@ | grep -q \"no\" && echo true || echo false'"
         },
 
