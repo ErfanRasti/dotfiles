@@ -97,7 +97,7 @@ case "$MODE" in
   hyprctl reload
   disable_monitor "$EDP"
   echo "Switched to Mode 2: $EDP disabled, $HDMI enabled."
-  notify-send -u critical -a "Hyprland" " 󰍺 External Display Only" "Internal display ($EDP) disabled, external display ($HDMI) active."
+  notify-send -u critical -a "Hyprland" " 󰍺 External Display Only" "Internal display ($EDP) disabled, external display ($HDMI) enabled."
   ;;
 "2")
   hyprctl reload
@@ -109,7 +109,7 @@ case "$MODE" in
   hyprctl reload
   disable_monitor "$HDMI"
   echo "Switched to Mode 4: $EDP enabled, $HDMI disabled."
-  notify-send -u critical -a "Hyprland" " 󰍺 Laptop Display Only" "Internal display ($EDP) active, external display ($HDMI) disabled."
+  notify-send -u critical -a "Hyprland" " 󰍺 Laptop Display Only" "Internal display ($EDP) enabled, external display ($HDMI) disabled."
   ;;
 
 "4")
