@@ -168,7 +168,8 @@ paru -S \
   nitch \
   hypr-dock \
   bibata-cursor-theme-bin \
-  gitfetch-python
+  gitfetch-python \
+  wdisplays
 
 echo "✅ AUR packages installed successfully!"
 
