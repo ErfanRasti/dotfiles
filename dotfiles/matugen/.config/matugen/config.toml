@@ -21,7 +21,7 @@ version_check = false
 [templates.hyprland]
 input_path = '~/.config/matugen/templates/hyprland-colors.conf'
 output_path = '~/.config/hypr/config/colors.conf'
-post_hook = 'hyprctl reload'
+post_hook = 'if pgrep -x hyprland;then hyprctl reload;fi'
 
 # [config.wallpaper] # Blazing fast and beautiful
 # command = "hyprctl"
