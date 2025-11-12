@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 # Reload Spotify via Ctrl+Shift+R, then return to the previous window
 
+# if hyprland doesn't exist apply and exit
+if ! pgrep -x "Hyprland" >/dev/null 2>&1; then
+  # spicetify apply
+  exit 0
+fi
+
 theme=$(spicetify config current_theme)
 scheme=$(spicetify config color_scheme)
 
