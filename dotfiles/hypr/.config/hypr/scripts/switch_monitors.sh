@@ -124,14 +124,4 @@ case "$MODE" in
   ;;
 esac
 
-# Restart waybar if running
-if pgrep -x waybar >/dev/null; then
-  pkill waybar
-fi
-setsid -f waybar >/dev/null 2>&1
-
-# Restart swayosd
-if pgrep -x swayosd-server >/dev/null; then
-  pkill swayosd-server
-fi
-setsid -f swayosd-server >/dev/null 2>&1
+~/.config/hypr/scripts/reload_bar.sh
