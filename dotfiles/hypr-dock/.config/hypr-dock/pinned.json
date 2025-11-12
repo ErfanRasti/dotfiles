@@ -5,7 +5,7 @@
     "google-chrome",
     "code",
     "kitty",
-    "telegram",
-    "discord"
+    "org.telegram.desktop",
+    "spotify"
   ]
 }
