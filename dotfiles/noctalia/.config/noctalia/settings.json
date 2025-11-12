@@ -85,12 +85,19 @@
       ],
       "right": [
         {
+          "blacklist": [],
+          "colorizeIcons": false,
+          "drawerEnabled": true,
+          "id": "Tray",
+          "pinned": []
+        },
+        {
           "capsLockIcon": "letter-c",
           "id": "LockKeys",
           "numLockIcon": "letter-n",
           "scrollLockIcon": "letter-s",
           "showCapsLock": true,
-          "showNumLock": false,
+          "showNumLock": true,
           "showScrollLock": false
         },
         {
@@ -106,13 +113,6 @@
           "showMemoryUsage": true,
           "showNetworkStats": false,
           "usePrimaryColor": false
-        },
-        {
-          "blacklist": [],
-          "colorizeIcons": false,
-          "drawerEnabled": true,
-          "id": "Tray",
-          "pinned": []
         },
         {
           "displayMode": "onhover",
@@ -150,7 +150,7 @@
   },
   "brightness": {
     "brightnessStep": 5,
-    "enableDdcSupport": false,
+    "enableDdcSupport": true,
     "enforceMinimum": true
   },
   "colorSchemes": {
@@ -213,7 +213,7 @@
           "id": "KeepAwake"
         },
         {
-          "id": "DarkMode"
+          "id": "NightLight"
         }
       ]
     }
@@ -221,10 +221,10 @@
   "dock": {
     "backgroundOpacity": 0.6,
     "colorizeIcons": false,
-    "displayMode": "auto_hide",
+    "displayMode": "always_visible",
     "enabled": true,
     "floatingRatio": 0.03,
-    "monitors": ["eDP-1"],
+    "monitors": ["eDP-1", "HDMI-A-1"],
     "onlySameOutput": false,
     "pinnedApps": [
       "google-chrome",
@@ -350,7 +350,7 @@
   },
   "wallpaper": {
     "defaultWallpaper": "/etc/xdg/quickshell/noctalia-shell/Assets/Wallpaper/noctalia.png",
-    "directory": "~/wallpapers",
+    "directory": "~/dotfiles/dotfiles/wallpapers",
     "enableMultiMonitorDirectories": false,
     "enabled": true,
     "fillColor": "#000000",
@@ -359,7 +359,12 @@
       {
         "directory": "~/wallpapers/HimitsuGrandmaHouseInside",
         "name": "eDP-1",
-        "wallpaper": "~/Pictures/Wallpapers/Unsplash/andrei-r-popescu-HBsmzKuGyuI-unsplash.jpg"
+        "wallpaper": "~/dotfiles/dotfiles/wallpapers/wallpapers/CorpStreet/arseniy-chebynkin-corp-day.jpg"
+      },
+      {
+        "directory": "~/dotfiles/dotfiles/wallpapers",
+        "name": "HDMI-A-1",
+        "wallpaper": "~/dotfiles/dotfiles/wallpapers/wallpapers/CorpStreet/arseniy-chebynkin-corp-day.jpg"
       }
     ],
     "overviewEnabled": true,
