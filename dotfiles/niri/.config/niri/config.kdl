@@ -70,7 +70,7 @@ input {
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
 // Remember to uncomment the node by removing "/-"!
-/-output "eDP-1" {
+output "eDP-1" {
     // Uncomment this line to disable this output.
     // off
 
@@ -88,6 +88,7 @@ input {
     // Transform allows to rotate the output counter-clockwise, valid values are:
     // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
     transform "normal"
+    variable-refresh-rate
 
     // Position of the output in the global coordinate space.
     // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
@@ -114,7 +115,8 @@ layout {
     // - "always", the focused column will always be centered.
     // - "on-overflow", focusing a column will center it if it doesn't fit
     //   together with the previously focused column.
-    center-focused-column "never"
+    center-focused-column "on-overflow"
+    always-center-single-column
 
     // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
     preset-column-widths {
@@ -133,7 +135,7 @@ layout {
     // preset-window-heights { }
 
     // You can change the default width of the new windows.
-    default-column-width { proportion 0.5; }
+    default-column-width {}
     // If you leave the brackets empty, the windows themselves will decide their initial width.
     // default-column-width {}
 
@@ -154,7 +156,7 @@ layout {
         // off
 
         // How many logical pixels the ring extends out from the windows.
-        width 4
+        width 2
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -203,7 +205,7 @@ layout {
     // You can enable drop shadows for windows.
     shadow {
         // Uncomment the next line to enable shadows.
-        // on
+        on
 
         // By default, the shadow draws only around its window, and not behind it.
         // Uncomment this setting to make the shadow draw behind its window.
@@ -257,25 +259,25 @@ layout {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
+spawn-at-startup "qs" "-c" "noctalia-shell"
+// spawn-at-startup "dms" "run"
 spawn-sh-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-spawn-sh-at-startup "systemctl --user start hypridle-runner.service"
-spawn-sh-at-startup "waybar -c ~/.config/waybar/config-niri.jsonc"
-spawn-sh-at-startup "swaync"
-spawn-sh-at-startup "swayosd-server"
-spawn-sh-at-startup "swww-daemon"
-spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
-spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
-spawn-sh-at-startup "wl-clip-persist --clipboard regular"
+// spawn-sh-at-startup "waybar -c ~/.config/waybar/config-niri.jsonc"
+// spawn-sh-at-startup "swaync"
+// spawn-sh-at-startup "swayosd-server"
+// spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
+// spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
+// spawn-sh-at-startup "wl-clip-persist --clipboard regular"
 spawn-sh-at-startup "niriswitcher"
-spawn-sh-at-startup "udiskie"
-spawn-sh-at-startup "paplay /usr/share/sounds/ocean/stereo/desktop-login.oga"
+
+// spawn-sh-at-startup "paplay /usr/share/sounds/ocean/stereo/desktop-login.oga"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
 // Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
 // This option will also fix border/focus ring drawing behind some semitransparent windows.
 // After enabling or disabling this, you need to restart the apps for this to take effect.
-// prefer-no-csd
+prefer-no-csd
 
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.
@@ -333,7 +335,7 @@ window-rule {
 
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
-/-window-rule {
+window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
 }
@@ -357,10 +359,12 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
     Mod+return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
-    Alt+space {spawn "~/.config/hypr/scripts/toggle_rofi_launcher.sh";}
+    Alt+space {spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle";}
     Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "~/.config/hypr/scripts/toggle_rofi_launcher.sh"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
-    Mod+Alt+I hotkey-overlay-title="Open better-control" { spawn "better-control"; }
+    // Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
+    Mod+Alt+I hotkey-overlay-title="Open Noctalia settings" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "settings" "toggle"; }
+    Mod+I hotkey-overlay-title="Open GNOME settings" { spawn-sh "env XDG_CURRENT_DESKTOP=GNOME gnome-control-center"; }
+
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
@@ -368,10 +372,16 @@ binds {
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "swayosd-client --output-volume raise"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "swayosd-client --output-volume lower"; }
-    XF86AudioMute        allow-when-locked=true { spawn "swayosd-client --output-volume mute-toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn "swayosd-client --input-volume mute-toggle"; }
+
+    // Audio controls
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "increase"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "decrease"; }
+    XF86AudioMute allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
+
+    // Brightness controls
+    XF86MonBrightnessUp allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+
 
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
@@ -438,8 +448,8 @@ binds {
 
     Mod+Page_Down      { focus-workspace-down; }
     Mod+Page_Up        { focus-workspace-up; }
-    Mod+U              { focus-workspace-down; }
-    Mod+I              { focus-workspace-up; }
+    // Mod+U              { focus-workspace-down; }
+    // Mod+I              { focus-workspace-up; }
     Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
     Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
     Mod+Ctrl+U         { move-column-to-workspace-down; }
@@ -563,6 +573,7 @@ binds {
     // Move the focused window between the floating and the tiling layout.
     Mod+F       { toggle-window-floating; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+    Mod+Alt+W {spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle";}
 
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
@@ -605,8 +616,19 @@ binds {
     Alt+Grave repeat=false { spawn "niriswitcherctl" "show" "--workspace"; }
     Alt+Shift+Grave repeat=false { spawn "niriswitcherctl" "show" "--workspace"; }
 
-    Mod+V { spawn "~/.config/hypr/scripts/toggle_rofi_cliphist.sh"; }
     Mod+E { spawn "env XDG_CURRENT_DESKTOP=GNOME nautilus"; }
 
-    Ctrl+Shift+Escape { spawn "/usr/bin/btop"; }
+    Ctrl+Shift+Escape { spawn-sh "kitty -e btop"; }
+
+    Mod+V { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
+    // Mod+C { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "calculator"; }
+    // Mod+L { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
+
 }
+
+layer-rule {
+  match namespace="^noctalia-overview*"
+  place-within-backdrop true
+}
+
+// include "binds.kdl"
