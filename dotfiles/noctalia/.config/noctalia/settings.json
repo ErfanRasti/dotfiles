@@ -227,16 +227,16 @@
     "monitors": ["eDP-1", "HDMI-A-1"],
     "onlySameOutput": false,
     "pinnedApps": [
+      "yazi",
       "google-chrome",
-      "zen",
+      "firefox",
       "matlab",
       "code",
       "kitty",
-      "org.telegram.desktop",
       "spotify",
-      "hiddify"
+      "org.telegram.desktop"
     ],
-    "size": 0.8
+    "size": 0.6
   },
   "general": {
     "animationDisabled": false,
@@ -357,7 +357,7 @@
     "fillMode": "crop",
     "monitors": [
       {
-        "directory": "~/wallpapers/HimitsuGrandmaHouseInside",
+        "directory": "~/dotfiles/dotfiles/wallpapers/HimitsuGrandmaHouseInside",
         "name": "eDP-1",
         "wallpaper": "~/dotfiles/dotfiles/wallpapers/wallpapers/CorpStreet/arseniy-chebynkin-corp-day.jpg"
       },
