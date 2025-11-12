@@ -221,7 +221,7 @@
   "dock": {
     "backgroundOpacity": 0.6,
     "colorizeIcons": false,
-    "displayMode": "always_visible",
+    "displayMode": "exclusive",
     "enabled": true,
     "floatingRatio": 0.03,
     "monitors": ["eDP-1", "HDMI-A-1"],
@@ -350,21 +350,21 @@
   },
   "wallpaper": {
     "defaultWallpaper": "/etc/xdg/quickshell/noctalia-shell/Assets/Wallpaper/noctalia.png",
-    "directory": "~/dotfiles/dotfiles/wallpapers",
+    "directory": "~/dotfiles/dotfiles/wallpapers/wallpapers",
     "enableMultiMonitorDirectories": false,
     "enabled": true,
     "fillColor": "#000000",
     "fillMode": "crop",
     "monitors": [
       {
-        "directory": "~/dotfiles/dotfiles/wallpapers/HimitsuGrandmaHouseInside",
+        "directory": "dotfiles/dotfiles/wallpapers/HimitsuGrandmaHouseInside",
         "name": "eDP-1",
-        "wallpaper": "~/dotfiles/dotfiles/wallpapers/wallpapers/CorpStreet/arseniy-chebynkin-corp-day.jpg"
+        "wallpaper": "dotfiles/dotfiles/wallpapers/wallpapers/KobayashiHall/arseniy-chebynkin-corpin2.jpg"
       },
       {
         "directory": "~/dotfiles/dotfiles/wallpapers",
         "name": "HDMI-A-1",
-        "wallpaper": "~/dotfiles/dotfiles/wallpapers/wallpapers/CorpStreet/arseniy-chebynkin-corp-day.jpg"
+        "wallpaper": "~/dotfiles/dotfiles/wallpapers/wallpapers/HimitsuHouse/0.png"
       }
     ],
     "overviewEnabled": true,
