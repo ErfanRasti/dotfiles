@@ -16,9 +16,6 @@ input {
             layout "us,ir"
             options "grp:win_space_toggle"
         }
-
-        // Enable numlock on startup, omitting this setting disables it.
-        numlock
     }
 
     // Next sections include libinput settings.
@@ -63,6 +60,12 @@ input {
     // focus-follows-mouse max-scroll-amount="0%"
     focus-follows-mouse
 }
+
+cursor {
+    xcursor-theme "Bibata-Modern-Classic"
+    xcursor-size 20
+}
+
 
 // You can configure outputs by their name, which you can find
 // by running `niri msg outputs` while inside a niri instance.
@@ -270,7 +273,7 @@ spawn-sh-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 // spawn-sh-at-startup "wl-clip-persist --clipboard regular"
 spawn-sh-at-startup "niriswitcher"
 
-// spawn-sh-at-startup "paplay /usr/share/sounds/ocean/stereo/desktop-login.oga"
+spawn-sh-at-startup "paplay /usr/share/sounds/ocean/stereo/desktop-login.oga"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -374,8 +377,8 @@ binds {
     // The allow-when-locked=true property makes them work even when the session is locked.
 
     // Audio controls
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "increase"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "decrease"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase;paplay /usr/share/sounds/ocean/stereo/audio-volume-change.oga"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume decrease;paplay /usr/share/sounds/ocean/stereo/audio-volume-change.oga"; }
     XF86AudioMute allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
 
     // Brightness controls
@@ -580,6 +583,7 @@ binds {
     // rather than stacked on top of each other.
     Mod+W { toggle-column-tabbed-display; }
 
+    Mod+Escape {spawn-sh "qs -c noctalia-shell ipc call lockScreen lock";}
     // Actions to switch layouts.
     // Note: if you uncomment these, make sure you do NOT have
     // a matching layout switch hotkey configured in xkb options above.
@@ -600,7 +604,7 @@ binds {
     //
     // The allow-inhibiting=false property can be applied to other binds as well,
     // which ensures niri always processes them, even when an inhibitor is active.
-    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    // Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
     Mod+Shift+Q { quit; }
