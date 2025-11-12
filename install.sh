@@ -169,7 +169,8 @@ paru -S \
   hypr-dock \
   bibata-cursor-theme-bin \
   gitfetch-python \
-  wdisplays
+  wdisplays \
+  noctalia-shell wlsunset
 
 echo "✅ AUR packages installed successfully!"
 
