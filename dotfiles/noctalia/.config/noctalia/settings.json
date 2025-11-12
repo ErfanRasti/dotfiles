@@ -68,10 +68,9 @@
           "id": "DarkMode"
         },
         {
-          "characterCount": 2,
-          "hideUnoccupied": false,
-          "id": "Workspace",
-          "labelMode": "index"
+          "id": "TaskbarGrouped",
+          "showNumbersOnlyWhenOccupied": false,
+          "showWorkspaceNumbers": true
         },
         {
           "colorizeIcons": false,
@@ -228,6 +227,7 @@
     "onlySameOutput": false,
     "pinnedApps": [
       "yazi",
+      "zen",
       "google-chrome",
       "firefox",
       "matlab",
@@ -244,11 +244,11 @@
     "avatarImage": "~/Pictures/MyImages/ERS.jpg",
     "compactLockScreen": false,
     "dimDesktop": false,
-    "enableShadows": true,
+    "enableShadows": false,
     "forceBlackScreenCorners": false,
     "language": "",
     "lockOnSuspend": true,
-    "radiusRatio": 1,
+    "radiusRatio": 0.5,
     "scaleRatio": 1,
     "screenRadiusRatio": 1,
     "shadowDirection": "bottom_right",
@@ -287,6 +287,7 @@
   "notifications": {
     "backgroundOpacity": 1,
     "criticalUrgencyDuration": 15,
+    "enableKeyboardLayoutToast": true,
     "enabled": true,
     "location": "top",
     "lowUrgencyDuration": 3,
@@ -359,7 +360,7 @@
       {
         "directory": "dotfiles/dotfiles/wallpapers/HimitsuGrandmaHouseInside",
         "name": "eDP-1",
-        "wallpaper": "dotfiles/dotfiles/wallpapers/wallpapers/KobayashiHall/arseniy-chebynkin-corpin2.jpg"
+        "wallpaper": "~/dotfiles/dotfiles/wallpapers/wallpapers/WaterFront/Riverside_1.jpg"
       },
       {
         "directory": "~/dotfiles/dotfiles/wallpapers",

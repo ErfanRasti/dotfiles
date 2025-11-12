@@ -14,6 +14,7 @@ input {
 
             // For example:
             layout "us,ir"
+            variant ",winkeys"
             options "grp:win_space_toggle"
         }
     }
@@ -541,7 +542,7 @@ binds {
     // Consume one window from the right to the bottom of the focused column.
     Mod+Comma  { consume-window-into-column; }
     // Expel the bottom window from the focused column to the right.
-    Mod+Period { expel-window-from-column; }
+    // Mod+Period { expel-window-from-column; }
 
     // Mod+R { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-window-height; }
@@ -625,6 +626,7 @@ binds {
     Ctrl+Shift+Escape { spawn-sh "kitty -e btop"; }
 
     Mod+V { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
+    Mod+Period { spawn "~/.config/rofi/emoji/run.sh"; }
     Mod+R { spawn-sh "~/.config/niri/scripts/reload_config.sh"; }
     // Mod+C { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "calculator"; }
     // Mod+L { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
