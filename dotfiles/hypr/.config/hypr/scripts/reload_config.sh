@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+AUTOSTART_FILE="$HOME/.config/hypr/config/autostart.conf"
+
 # Restore last wallpaper of waypaper
 waypaper --restore
 
@@ -9,26 +11,39 @@ pypr reload
 # Reload hyprpm state
 hyprpm reload
 
-# Restart waybar if running
-if pgrep -x waybar >/dev/null; then
-  pkill waybar
-fi
-setsid -f waybar >/dev/null 2>&1
-
-# Restart ashell if running
-# if pgrep -x ashell >/dev/null; then
-#   pkill ashell
-# fi
-# setsid -f ashell >/dev/null 2>&1
+# Reload bar
+~/.config/hypr/scripts/reload_bar.sh
 
 # Restart swaync
-if pgrep -x swaync >/dev/null; then
-  pkill swaync
+if grep -q "^exec-once = swaync" "$AUTOSTART_FILE"; then
+
+  if pgrep -x swaync >/dev/null; then
+    pkill swaync
+  fi
+  setsid -f swaync >/dev/null 2>&1
 fi
-setsid -f swaync >/dev/null 2>&1
+
+# Restart swayosd
+if grep -q "^exec-once = swayosd" "$AUTOSTART_FILE"; then
+  if pgrep -x swayosd-server >/dev/null 2>&1; then
+    pkill swayosd-server
+  fi
+  setsid -f swayosd-server >/dev/null 2>&1
+fi
+
+# Restart hypr-dock
+if grep -q "^exec-once = hypr-dock" "$AUTOSTART_FILE"; then
+  if pgrep -x hypr-dock >/dev/null 2>&1; then
+    pkill hypr-dock
+  fi
+  setsid -f hypr-dock >/dev/null 2>&1
+fi
 
 # Restart kitty
 # kitty +kitten themes --reload-in=all "Tokyo Night Moon"
 
 # Restart hyprpolkitagent
 systemctl --user restart hyprpolkitagent
+
+# Restart xdg-desktop-portal-hyprland
+systemctl --user restart xdg-desktop-portal-hyprland
