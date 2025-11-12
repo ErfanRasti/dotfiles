@@ -42,12 +42,12 @@ output_path = '~/.config/waybar/colors.css'
 [templates.swaync]
 input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/swaync/colors.css'
-post_hook = 'swaync-client -rs'
+post_hook = 'if pgrep -x swaync >/dev/null 2>&1;then swaync-client -rs;fi'
 
 [templates.swayosd]
 input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/swayosd/colors.css'
-post_hook = 'pkill swayosd-server;setsid -f swayosd-server >/dev/null 2>&1'
+post_hook = 'if pgrep -x swayosd-server >/dev/null 2>&1;then pkill swayosd-server;setsid -f swayosd-server >/dev/null 2>&1;fi'
 
 [templates.rofi]
 input_path = '~/.config/matugen/templates/rofi-colors.rasi'
