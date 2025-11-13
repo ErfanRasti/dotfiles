@@ -66,7 +66,13 @@ cursor {
     xcursor-theme "Bibata-Modern-Classic"
     xcursor-size 20
 }
-
+environment {
+  XDG_CURRENT_DESKTOP "niri"
+  QT_QPA_PLATFORM "wayland"
+  ELECTRON_OZONE_PLATFORM_HINT "auto"
+  QT_QPA_PLATFORMTHEME "gtk3"
+  QT_QPA_PLATFORMTHEME_QT6 "gtk3"
+}
 
 // You can configure outputs by their name, which you can find
 // by running `niri msg outputs` while inside a niri instance.
@@ -263,15 +269,13 @@ layout {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "qs" "-c" "noctalia-shell"
-// spawn-at-startup "dms" "run"
 spawn-sh-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-// spawn-sh-at-startup "waybar -c ~/.config/waybar/config-niri.jsonc"
-// spawn-sh-at-startup "swaync"
-// spawn-sh-at-startup "swayosd-server"
-// spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
-// spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
-// spawn-sh-at-startup "wl-clip-persist --clipboard regular"
+spawn-at-startup "dms" "run"
+// spawn-at-startup "qs" "-c" "noctalia-shell"
+// spawn-sh-at-startup "vicinae server"
+spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
+spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
+spawn-sh-at-startup "wl-clip-persist --clipboard regular"
 spawn-sh-at-startup "niriswitcher"
 
 spawn-sh-at-startup "paplay /usr/share/sounds/ocean/stereo/desktop-login.oga"
@@ -363,10 +367,13 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
     Mod+return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
-    Alt+space {spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle";}
+    // Alt+space {spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle";}
+    Alt+space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+    // Alt+space repeat=false { spawn "vicinae" "toggle"; }
     Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "~/.config/hypr/scripts/toggle_rofi_launcher.sh"; }
     // Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
-    Mod+Alt+I hotkey-overlay-title="Open Noctalia settings" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "settings" "toggle"; }
+    // Mod+Comma hotkey-overlay-title="Open Noctalia settings" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "settings" "toggle"; }
+    Mod+Comma hotkey-overlay-title="Settings" { spawn "dms" "ipc" "call" "settings" "toggle"; }
     Mod+I hotkey-overlay-title="Open GNOME settings" { spawn-sh "env XDG_CURRENT_DESKTOP=GNOME gnome-control-center"; }
 
 
@@ -378,14 +385,36 @@ binds {
     // The allow-when-locked=true property makes them work even when the session is locked.
 
     // Audio controls
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase;paplay /usr/share/sounds/ocean/stereo/audio-volume-change.oga"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume decrease;paplay /usr/share/sounds/ocean/stereo/audio-volume-change.oga"; }
-    XF86AudioMute allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
-
+    // XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase;paplay /usr/share/sounds/ocean/stereo/audio-volume-change.oga"; }
+    // XF86AudioLowerVolume allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume decrease;paplay /usr/share/sounds/ocean/stereo/audio-volume-change.oga"; }
+    // XF86AudioMute allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
+    
     // Brightness controls
-    XF86MonBrightnessUp allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+    // XF86MonBrightnessUp allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
+    // XF86MonBrightnessDown allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
 
+    
+    // Audio
+    XF86AudioRaiseVolume allow-when-locked=true {
+        spawn "dms" "ipc" "call" "audio" "increment" "3";
+    }
+    XF86AudioLowerVolume allow-when-locked=true {
+        spawn "dms" "ipc" "call" "audio" "decrement" "3";
+    }
+    XF86AudioMute allow-when-locked=true {
+        spawn "dms" "ipc" "call" "audio" "mute";
+    }
+    XF86AudioMicMute allow-when-locked=true {
+        spawn "dms" "ipc" "call" "audio" "micmute";
+    }
+    
+    // BL
+    XF86MonBrightnessUp allow-when-locked=true {
+       spawn "dms" "ipc" "call" "brightness" "increment" "5" "backlight:intel_backlight";
+    }
+    XF86MonBrightnessDown allow-when-locked=true {
+       spawn "dms" "ipc" "call" "brightness" "decrement" "5" "backlight:intel_backlight";
+    } 
 
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
@@ -540,7 +569,7 @@ binds {
     Mod+BracketRight { consume-or-expel-window-right; }
 
     // Consume one window from the right to the bottom of the focused column.
-    Mod+Comma  { consume-window-into-column; }
+    // Mod+Comma  { consume-window-into-column; }
     // Expel the bottom window from the focused column to the right.
     // Mod+Period { expel-window-from-column; }
 
@@ -577,7 +606,8 @@ binds {
     // Move the focused window between the floating and the tiling layout.
     Mod+F       { toggle-window-floating; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
-    Mod+Alt+W {spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle";}
+    // Mod+Alt+W {spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle";}
+    Mod+Alt+W {spawn-sh "dms ipc call dash toggle wallpaper";}
 
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
@@ -621,21 +651,36 @@ binds {
     Alt+Grave repeat=false { spawn "niriswitcherctl" "show" "--workspace"; }
     Alt+Shift+Grave repeat=false { spawn "niriswitcherctl" "show" "--workspace"; }
 
-    Mod+E { spawn "env XDG_CURRENT_DESKTOP=GNOME nautilus"; }
+    Mod+E { spawn-sh "~/.config/niri/scripts/toggle_app.sh 'org.gnome.Nautilus' 'env XDG_CURRENT_DESKTOP=GNOME nautilus'"; }
+    Mod+Alt+E { spawn-sh "~/.config/niri/scripts/toggle_app.sh 'yazi' 'kitty --override confirm_os_window_close=0 --class yazi bash -c yazi'"; }
+    Ctrl+Shift+Escape { spawn-sh "~/.config/niri/scripts/toggle_app.sh 'btop' 'kitty --override confirm_os_window_close=0 --class btop -e btop'"; }
+    Ctrl+Alt+Delete hotkey-overlay-title="Task Manager" { spawn "dms" "ipc" "call" "processlist" "toggle";}
+    Mod+S { spawn-sh "dms ipc call control-center toggle"; }
 
-    Ctrl+Shift+Escape { spawn-sh "kitty -e btop"; }
 
-    Mod+V { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
+    // Mod+V { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
+    Mod+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
     Mod+Period { spawn "~/.config/rofi/emoji/run.sh"; }
-    Mod+R { spawn-sh "~/.config/niri/scripts/reload_config.sh"; }
+    Mod+R { spawn "~/.config/niri/scripts/reload_config.sh"; }
     // Mod+C { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "calculator"; }
     // Mod+L { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
 
 }
-
 layer-rule {
-  match namespace="^noctalia-overview*"
-  place-within-backdrop true
+    match namespace="dms:blurwallpaper"
+    place-within-backdrop true
 }
+// layer-rule {
+//   match namespace="^noctalia-overview*"
+//   place-within-backdrop true
+// }
 
-// include "binds.kdl"
+workspace "scratchpad"
+window-rule {
+    match app-id="org.gnome.Nautilus"
+    match app-id="yazi"
+    match app-id="btop"
+    default-column-width { proportion 0.6; }
+    default-window-height { proportion 0.7; }
+    open-floating true
+}
