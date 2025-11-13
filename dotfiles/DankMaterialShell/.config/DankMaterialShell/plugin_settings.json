@@ -1,0 +1,11 @@
+{
+  "dankBatteryAlerts": {
+    "enabled": true
+  },
+  "emojiLauncher": {
+    "enabled": true,
+    "noTrigger": false,
+    "trigger": ":"
+  }
+}
+
