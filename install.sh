@@ -170,7 +170,8 @@ paru -S \
   bibata-cursor-theme-bin \
   gitfetch-python \
   wdisplays \
-  noctalia-shell wlsunset
+  noctalia-shell wlsunset \
+  dms-shell-bin qt6-multimedia
 
 echo "✅ AUR packages installed successfully!"
 
