@@ -13,13 +13,56 @@
 
 set -euo pipefail
 
-if [ "$#" -ne 2 ]; then
-  echo "Usage: $0 <window_class> <command>" >&2
+# Initialize variables
+APP_ID=""
+APP_CMD=""
+TITLE=""
+
+# Parse command-line arguments
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+  -c | --class)
+    APP_ID="$2"
+    shift 2
+    ;;
+  -t | --title)
+    TITLE="$2"
+    shift 2
+    ;;
+  -h | --help)
+    echo "Usage: $0 [OPTIONS] <command>"
+    echo "Toggle an app between a scratch workspace and the current workspace in niri."
+    echo
+    echo "Options:"
+    echo "  -c, --class    Set the window class for the app (required)"
+    echo "  -t, --title    Set the window title for extra check (optional)"
+    echo "  -h, --help     Show this help message and exit"
+    exit 0
+    ;;
+  *)
+    if [ -z "$APP_CMD" ]; then
+      APP_CMD="$1"
+    else
+      echo "Error: Unexpected argument $1" >&2
+      exit 1
+    fi
+    shift
+    ;;
+  esac
+done
+
+# Check that the class is provided
+if [ -z "$APP_ID" ]; then
+  echo "Error: --class <window_class> is required" >&2
   exit 1
 fi
 
-APP_ID="$1"
-APP_CMD="$2"
+# If no command is provided, show error
+if [ -z "$APP_CMD" ]; then
+  echo "Error: Command to spawn is required" >&2
+  exit 1
+fi
+
 SCRATCH_WS_NAME="scratchpad"
 
 # --- Get workspace info (current + scratch) ---
@@ -54,19 +97,27 @@ FOCUSED_ID="$(echo "$FOCUSED_JSON" | jq -r '.id // empty')"
 # --- If focused window already matches -> hide it to scratch ---
 
 if [ -n "$FOCUSED_APP_ID" ] && [ "$FOCUSED_APP_ID" = "$APP_ID" ]; then
-  # Move focused window to "scratch" without following it.
-  niri msg action move-window-to-workspace --window-id "$FOCUSED_ID" "$SCRATCH_WS_NAME" --focus=false
-  exit 0
-fi
+  if [ -n "$TITLE" ]; then
+    FOCUSED_TITLE="$(niri msg -j windows | jq -r --arg id "$FOCUSED_ID" 'map(select(.id == ($id | tonumber))) | .[0].title // empty')"
 
+    if [[ "$FOCUSED_TITLE" == "$TITLE" ]]; then
+      # Title doesn't match, skip hiding the window
+      niri msg action move-window-to-workspace --window-id "$FOCUSED_ID" "$SCRATCH_WS_NAME" --focus=false
+      exit 0
+    fi
+  else
+    niri msg action move-window-to-workspace --window-id "$FOCUSED_ID" "$SCRATCH_WS_NAME" --focus=false
+    exit 0
+  fi
+fi
 # --- Otherwise, show existing window or launch new one ---
 
 WINDOWS_JSON="$(niri msg -j windows)"
 
-# Prefer a window on the scratch workspace.
+# Prefer a window on the scratch workspace with the matching class and title (if provided).
 SCRATCH_WIN_JSON="$(
-  echo "$WINDOWS_JSON" | jq --arg app "$APP_ID" --argjson wsid "$SCRATCH_WS_ID" '
-    map(select(.app_id == $app and .workspace_id == $wsid)) | first
+  echo "$WINDOWS_JSON" | jq --arg app "$APP_ID" --argjson wsid "$SCRATCH_WS_ID" --arg title "$TITLE" '
+    map(select(.app_id == $app and .workspace_id == $wsid and (.title | contains($title // "")))) | first
   '
 )"
 
@@ -87,8 +138,8 @@ else
   fi
 fi
 
-if [ -z "${WIN_ID:-}" ]; then
-  # No existing window -> spawn new instance.
+if [ -z "${WIN_ID:-}" ] || { [ -n "$TITLE" ] && [ "$SCRATCH_WIN_JSON" = "null" ]; }; then
+  # No existing window with matching class and title -> spawn new instance.
   niri msg action spawn -- sh -c "$APP_CMD"
   exit 0
 fi

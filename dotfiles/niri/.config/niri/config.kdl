@@ -652,8 +652,9 @@ binds {
     Alt+Shift+Grave repeat=false { spawn "niriswitcherctl" "show" "--workspace"; }
 
     Mod+E { spawn-sh "~/.config/niri/scripts/toggle_app.sh 'org.gnome.Nautilus' 'env XDG_CURRENT_DESKTOP=GNOME nautilus'"; }
-    Mod+Alt+E { spawn-sh "~/.config/niri/scripts/toggle_app.sh 'yazi' 'kitty --override confirm_os_window_close=0 --class yazi bash -c yazi'"; }
-    Ctrl+Shift+Escape { spawn-sh "~/.config/niri/scripts/toggle_app.sh 'btop' 'kitty --override confirm_os_window_close=0 --class btop -e btop'"; }
+    Mod+Alt+E { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'yazi' 'kitty --override confirm_os_window_close=0 --class yazi bash -c yazi'"; }
+    Ctrl+Shift+Escape { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'btop' 'kitty --override confirm_os_window_close=0 --class btop -e btop'"; }
+    Mod+Grave { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'kitty' -t 'kitty-dropterm' 'kitty --class kitty --title kitty-dropterm'"; }
     // Ctrl+Alt+Delete hotkey-overlay-title="Task Manager" { spawn "dms" "ipc" "call" "processlist" "toggle";}
     // Mod+S { spawn-sh "dms ipc call control-center toggle"; }
     // Mod+S { spawn-sh "dms ipc call control-center toggle"; }
@@ -680,6 +681,7 @@ layer-rule {
 workspace "scratchpad"
 window-rule {
     match app-id="org.gnome.Nautilus"
+    match title="kitty-dropterm"
     match app-id="yazi"
     match app-id="btop"
     default-column-width { proportion 0.6; }
