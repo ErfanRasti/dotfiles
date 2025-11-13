@@ -119,3 +119,8 @@ output_path = '~/.config/micro/colorschemes/matugen.micro'
 [templates.zed]
 input_path = '~/.config/matugen/templates/zed-colors.json'
 output_path = '~/.config/zed/themes/matugen.json'
+
+[templates.vicinae]
+input_path = '~/.config/matugen/templates/vicinae.ini'
+output_path = '~/.local/share/vicinae/themes/matugen.toml'
+post_hook = "if pgrep -x vicinae >/dev/null; then vicinae server & disown; fi"
