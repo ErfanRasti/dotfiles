@@ -2,6 +2,10 @@
 
 CONFIG=${HYPRIDLE_CONFIG:-~/.config/hypr/hypridle.conf}
 
+if pgrep -x "dms"; then
+  exit 0
+fi
+
 if pgrep -fx "qs -c noctalia-shell"; then
   CONFIG="$HOME/.config/hypr/hypride-noctalia.conf"
 fi
