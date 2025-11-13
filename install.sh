@@ -1,5 +1,37 @@
 #!/usr/bin/env bash
 
+help() {
+  echo "Usage: $0 [OPTION]"
+  echo
+  echo "Options:"
+  echo "  (no arguments)        Continue without enabling niri-shells installation"
+  echo "  -ns, --niri-shells    Enable niri-shells installation flag"
+  echo "  -h,  --help           Show this help message"
+}
+
+NIRI_SHELLS=false
+case "$1" in
+"")
+  # No argument passed → do nothing
+  ;;
+
+-h | --help)
+  help
+  exit 0
+  ;;
+
+-ns | --niri-shells)
+  NIRI_SHELLS=true
+  ;;
+
+*)
+  echo "Error: Unknown option '$1'"
+  echo
+  help
+  exit 1
+  ;;
+esac
+
 echo "------------------- paru installation -------------------"
 
 # Check if paru is installed
@@ -169,9 +201,13 @@ paru -S \
   hypr-dock \
   bibata-cursor-theme-bin \
   gitfetch-python \
-  wdisplays \
+  wdisplays
+
+echo "!!!!!!!!!!!!!! niri-shells installation"
+$NIRI_SHELLS && paru -S \
   noctalia-shell wlsunset \
-  dms-shell-bin qt6-multimedia
+  dms-shell-bin qt6-multimedia \
+  vicinae-bin
 
 echo "✅ AUR packages installed successfully!"
 
