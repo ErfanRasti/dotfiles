@@ -1,6 +1,5 @@
 {
   "appLauncher": {
-    "backgroundOpacity": 1,
     "customLaunchPrefix": "",
     "customLaunchPrefixEnabled": false,
     "enableClipboardHistory": true,
@@ -50,8 +49,8 @@
         },
         {
           "customFont": "",
-          "formatHorizontal": "HH:mm ddd, MMM dd",
-          "formatVertical": "HH mm - dd MM",
+          "formatHorizontal": "HH:mm:ss | ddd, MMM dd",
+          "formatVertical": "HH mm ss - dd MM",
           "id": "Clock",
           "useCustomFont": false,
           "usePrimaryColor": true
@@ -213,6 +212,9 @@
         },
         {
           "id": "NightLight"
+        },
+        {
+          "id": "ScreenRecorder"
         }
       ]
     }
@@ -279,7 +281,7 @@
     "autoSchedule": true,
     "dayTemp": "6500",
     "enabled": true,
-    "forced": false,
+    "forced": true,
     "manualSunrise": "06:30",
     "manualSunset": "18:30",
     "nightTemp": "4500"
@@ -289,7 +291,7 @@
     "criticalUrgencyDuration": 15,
     "enableKeyboardLayoutToast": true,
     "enabled": true,
-    "location": "top",
+    "location": "top_right",
     "lowUrgencyDuration": 3,
     "monitors": [],
     "normalUrgencyDuration": 8,
@@ -314,7 +316,35 @@
     "videoCodec": "h264",
     "videoSource": "portal"
   },
-  "settingsVersion": 21,
+  "sessionMenu": {
+    "countdownDuration": 10000,
+    "enableCountdown": true,
+    "position": "center",
+    "powerOptions": [
+      {
+        "action": "lock",
+        "enabled": true
+      },
+      {
+        "action": "suspend",
+        "enabled": true
+      },
+      {
+        "action": "reboot",
+        "enabled": true
+      },
+      {
+        "action": "logout",
+        "enabled": true
+      },
+      {
+        "action": "shutdown",
+        "enabled": true
+      }
+    ],
+    "showHeader": true
+  },
+  "settingsVersion": 22,
   "setupCompleted": true,
   "templates": {
     "alacritty": false,
@@ -345,22 +375,24 @@
     "fontDefaultScale": 1,
     "fontFixed": "CaskaydiaCove Nerd Font Mono",
     "fontFixedScale": 1,
+    "panelBackgroundOpacity": 1,
     "panelsAttachedToBar": true,
     "settingsPanelAttachToBar": true,
     "tooltipsEnabled": true
   },
   "wallpaper": {
     "defaultWallpaper": "/etc/xdg/quickshell/noctalia-shell/Assets/Wallpaper/noctalia.png",
-    "directory": "~/dotfiles/dotfiles/wallpapers/wallpapers",
+    "directory": "~/Pictures/Wallpapers/Unsplash",
     "enableMultiMonitorDirectories": false,
     "enabled": true,
     "fillColor": "#000000",
     "fillMode": "crop",
+    "hideWallpaperFilenames": false,
     "monitors": [
       {
-        "directory": "~/dotfiles/dotfiles/wallpapers/HimitsuGrandmaHouseInside",
+        "directory": "~/dotfiles/dotfiles/wallpapers",
         "name": "eDP-1",
-        "wallpaper": "~/dotfiles/dotfiles/wallpapers/wallpapers/CatherineRoom/arseniy-chebynkin-katrin3.jpg"
+        "wallpaper": "~/dotfiles/dotfiles/wallpapers/wallpapers/HimitsuHouse/0.png"
       },
       {
         "directory": "~/dotfiles/dotfiles/wallpapers",
@@ -370,7 +402,7 @@
     ],
     "overviewEnabled": true,
     "panelPosition": "bottom_center",
-    "randomEnabled": true,
+    "randomEnabled": false,
     "randomIntervalSec": 300,
     "recursiveSearch": true,
     "setWallpaperOnAllMonitors": true,

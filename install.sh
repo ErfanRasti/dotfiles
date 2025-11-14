@@ -187,7 +187,7 @@ paru -S \
   rofi-tools-bin \
   pwvucontrol \
   overskride-bin \
-  clipse-bin clipse-gui \
+  clipse-bin \
   matugen-bin \
   waypaper \
   python-pywalfox \
