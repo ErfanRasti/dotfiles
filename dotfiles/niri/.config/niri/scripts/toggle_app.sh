@@ -114,37 +114,37 @@ fi
 
 WINDOWS_JSON="$(niri msg -j windows)"
 
-# Prefer a window on the scratch workspace with the matching class and title (if provided).
-SCRATCH_WIN_JSON="$(
-  echo "$WINDOWS_JSON" | jq --arg app "$APP_ID" --argjson wsid "$SCRATCH_WS_ID" --arg title "$TITLE" '
-    map(select(.app_id == $app and .workspace_id == $wsid and (.title | contains($title // "")))) | first
-  '
-)"
-
-WIN_ID=""
-
-if [ "$SCRATCH_WIN_JSON" != "null" ] && [ -n "$SCRATCH_WIN_JSON" ]; then
-  WIN_ID="$(echo "$SCRATCH_WIN_JSON" | jq -r '.id')"
+# If title is provided, search for a window matching the app class and title across all workspaces
+if [ -n "$TITLE" ]; then
+  WIN_JSON="$(
+    echo "$WINDOWS_JSON" | jq --arg app "$APP_ID" --arg title "$TITLE" '
+      map(select(.app_id == $app and (.title | contains($title)))) | first
+    '
+  )"
 else
-  # Fallback: any window with this app-id.
-  OTHER_WIN_JSON="$(
+  # If no title is provided, just match by class across all workspaces
+  WIN_JSON="$(
     echo "$WINDOWS_JSON" | jq --arg app "$APP_ID" '
       map(select(.app_id == $app)) | first
     '
   )"
-
-  if [ "$OTHER_WIN_JSON" != "null" ] && [ -n "$OTHER_WIN_JSON" ]; then
-    WIN_ID="$(echo "$OTHER_WIN_JSON" | jq -r '.id')"
-  fi
 fi
 
-if [ -z "${WIN_ID:-}" ] || { [ -n "$TITLE" ] && [ "$SCRATCH_WIN_JSON" = "null" ]; }; then
-  # No existing window with matching class and title -> spawn new instance.
+WIN_ID=""
+echo $WIN_JSON
+
+if [ "$WIN_JSON" != "null" ] && [ -n "$WIN_JSON" ]; then
+  WIN_ID="$(echo "$WIN_JSON" | jq -r '.id')"
+fi
+
+# If no matching window is found, spawn a new one.
+if [ -z "$WIN_ID" ]; then
+  echo "I'M READY TO LAUNCH"
   niri msg action spawn -- sh -c "$APP_CMD"
   exit 0
 fi
 
-# Bring window to current workspace, make it floating, focus it.
+# Bring window to the current workspace and focus it.
 niri msg action move-window-to-workspace --window-id "$WIN_ID" "$CURRENT_WS_REF" --focus=false
 # niri msg action move-window-to-floating --id "$WIN_ID"
 niri msg action focus-window --id "$WIN_ID"
