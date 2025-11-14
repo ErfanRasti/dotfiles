@@ -66,12 +66,17 @@ cursor {
     xcursor-theme "Bibata-Modern-Classic"
     xcursor-size 20
 }
+
 environment {
+  XCURSOR_THEME "Bibata-Modern-Classic"
+  XCURSOR_SIZE "20"
+  GDK_SCALE "1.0"
   XDG_CURRENT_DESKTOP "niri"
+  TERMINAL "kitty"
   QT_QPA_PLATFORM "wayland"
   ELECTRON_OZONE_PLATFORM_HINT "auto"
-  QT_QPA_PLATFORMTHEME "gtk3"
-  QT_QPA_PLATFORMTHEME_QT6 "gtk3"
+  QT_QPA_PLATFORMTHEME "qt6ct"
+  QT_QPA_PLATFORMTHEME_QT "qt6ct"
 }
 
 // You can configure outputs by their name, which you can find
@@ -358,7 +363,6 @@ binds {
     //
     // Most actions that you can bind here can also be invoked programmatically with
     // `niri msg action do-something`.
-    Mod+N {spawn-sh "qs -c noctalia-shell ipc call notifications toggleHistory";}
 
     // Mod-Shift-/, which is usually the same as Mod-?,
     // shows a list of important hotkeys.
@@ -416,51 +420,48 @@ binds {
     //    spawn "dms" "ipc" "call" "brightness" "decrement" "5" "backlight:intel_backlight";
     // } 
 
-    // Open/close the Overview: a zoomed-out view of workspaces and windows.
-    // You can also move the mouse into the top-left hot corner,
-    // or do a four-finger swipe up on a touchpad.
     Mod+O repeat=false { toggle-overview; }
-
     Mod+Q { close-window; }
-
-    Mod+Left  { focus-column-left; }
-    Mod+Down  { focus-window-down; }
-    Mod+Up    { focus-window-up; }
+    
+    // focus binds
     Mod+Right { focus-column-right; }
-    Mod+H     { focus-column-left; }
+    Mod+Left  { focus-column-left; }
+    Mod+Up    { focus-window-up; }
+    Mod+Down  { focus-window-down; }
+
     Mod+L     { focus-column-right; }
-    // Mod+J     { focus-window-down; }
-    // Mod+K     { focus-window-up; }
-
-    Mod+Ctrl+Left  { move-column-left; }
-    Mod+Ctrl+Down  { move-window-down; }
-    Mod+Ctrl+Up    { move-window-up; }
-    Mod+Ctrl+Right { move-column-right; }
-    Mod+Ctrl+H     { move-column-left; }
-    Mod+Ctrl+L     { move-column-right; }
-    // Mod+Ctrl+J     { move-window-down; }
-    // Mod+Ctrl+K     { move-window-up; }
-
-    // Alternative commands that move across workspaces when reaching
-    // the first or last window in a column.
-    Mod+J     { focus-window-or-workspace-down; }
+    Mod+H     { focus-column-left; }
     Mod+K     { focus-window-or-workspace-up; }
-    Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
+    Mod+J     { focus-window-or-workspace-down; }
+
+    // column move binds
+    Mod+Ctrl+Right { move-column-right; }
+    Mod+Ctrl+Left  { move-column-left; }
+    Mod+Ctrl+Up    { move-window-up; }
+    Mod+Ctrl+Down  { move-window-down; }
+
+    Mod+Ctrl+L     { move-column-right; }
+    Mod+Ctrl+H     { move-column-left; }
     Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
+    Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
+
 
     Mod+Home { focus-column-first; }
     Mod+End  { focus-column-last; }
     Mod+Ctrl+Home { move-column-to-first; }
     Mod+Ctrl+End  { move-column-to-last; }
 
-    Mod+Shift+Left  { focus-monitor-left; }
-    Mod+Shift+Down  { focus-monitor-down; }
-    Mod+Shift+Up    { focus-monitor-up; }
+    // Monitor focus binds
+
     Mod+Shift+Right { focus-monitor-right; }
-    Mod+Shift+H     { focus-monitor-left; }
-    Mod+Shift+J     { focus-monitor-down; }
-    Mod+Shift+K     { focus-monitor-up; }
+    Mod+Shift+Left  { focus-monitor-left; }
+    Mod+Shift+Up    { focus-monitor-up; }
+    Mod+Shift+Down  { focus-monitor-down; }
+
     Mod+Shift+L     { focus-monitor-right; }
+    Mod+Shift+H     { focus-monitor-left; }
+    Mod+Shift+K     { focus-monitor-up; }
+    Mod+Shift+J     { focus-monitor-down; }
 
     Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
     Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
@@ -471,26 +472,12 @@ binds {
     Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
     Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
 
-    // Alternatively, there are commands to move just a single window:
-    // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
-    // ...
-
-    // And you can also move a whole workspace to another monitor:
-    // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
-    // ...
 
     Mod+Page_Down      { focus-workspace-down; }
     Mod+Page_Up        { focus-workspace-up; }
-    // Mod+U              { focus-workspace-down; }
-    // Mod+I              { focus-workspace-up; }
     Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
     Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
-    Mod+Ctrl+U         { move-column-to-workspace-down; }
-    Mod+Ctrl+I         { move-column-to-workspace-up; }
 
-    // Alternatively, there are commands to move just a single window:
-    // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
-    // ...
 
     Mod+Shift+Page_Down { move-workspace-down; }
     Mod+Shift+Page_Up   { move-workspace-up; }
@@ -505,13 +492,9 @@ binds {
     // You can set a cooldown on any bind, but it's most useful for the wheel.
     Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
     Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+
     Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
     Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
-
-    Mod+WheelScrollRight      { focus-column-right; }
-    Mod+WheelScrollLeft       { focus-column-left; }
-    Mod+Ctrl+WheelScrollRight { move-column-right; }
-    Mod+Ctrl+WheelScrollLeft  { move-column-left; }
 
     // Usually scrolling up and down with Shift in applications results in
     // horizontal scrolling; these binds replicate that.
@@ -520,14 +503,19 @@ binds {
     Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
     Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
 
+    Mod+WheelScrollRight      { focus-column-right; }
+    Mod+WheelScrollLeft       { focus-column-left; }
+    Mod+Ctrl+WheelScrollRight { move-column-right; }
+    Mod+Ctrl+WheelScrollLeft  { move-column-left; }
+
     // Similarly, you can bind touchpad scroll "ticks".
     // Touchpad scrolling is continuous, so for these binds it is split into
     // discrete intervals.
     // These binds are also affected by touchpad's natural-scroll, so these
     // example binds are "inverted", since we have natural-scroll enabled for
     // touchpads by default.
-    // Mod+TouchpadScrollDown { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+"; }
-    // Mod+TouchpadScrollUp   { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"; }
+    Mod+TouchpadScrollDown { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+"; }
+    Mod+TouchpadScrollUp   { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"; }
 
     // You can refer to workspaces by index. However, keep in mind that
     // niri is a dynamic workspace system, so these commands are kind of
@@ -560,7 +548,7 @@ binds {
     // Mod+Ctrl+1 { move-window-to-workspace 1; }
 
     // Switches focus between the current and the previous workspace.
-    // Mod+Tab { focus-workspace-previous; }
+    Mod+P { focus-workspace-previous; }
 
     // The following binds move the focused window in and out of a column.
     // If the window is alone, they will consume it into the nearby column to the side.
@@ -573,7 +561,7 @@ binds {
     // Expel the bottom window from the focused column to the right.
     // Mod+Period { expel-window-from-column; }
 
-    // Mod+R { switch-preset-column-width; }
+    Mod+Alt+R { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
     Mod+M { maximize-column; }
@@ -605,14 +593,17 @@ binds {
 
     // Move the focused window between the floating and the tiling layout.
     Mod+F       { toggle-window-floating; }
-    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+    Mod+Tab { switch-focus-between-floating-and-tiling; }
+    Mod+Shift+Tab { switch-focus-between-floating-and-tiling; }
+    Mod+N {spawn-sh "qs -c noctalia-shell ipc call notifications toggleHistory";}
+
     Mod+Alt+W {spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle";}
     // Mod+Alt+W {spawn-sh "dms ipc call dash toggle wallpaper";}
 
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
     // rather than stacked on top of each other.
-    Mod+W { toggle-column-tabbed-display; }
+    Mod+G { toggle-column-tabbed-display; }
 
     Mod+Escape {spawn-sh "qs -c noctalia-shell ipc call lockScreen lock";}
     // Actions to switch layouts.
@@ -687,4 +678,9 @@ window-rule {
     default-column-width { proportion 0.6; }
     default-window-height { proportion 0.7; }
     open-floating true
+}
+
+window-rule {
+  match app-id=r#"MATLAB"#
+  open-maximized true
 }
