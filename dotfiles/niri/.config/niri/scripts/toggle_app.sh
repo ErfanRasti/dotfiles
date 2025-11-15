@@ -131,7 +131,6 @@ else
 fi
 
 WIN_ID=""
-echo $WIN_JSON
 
 if [ "$WIN_JSON" != "null" ] && [ -n "$WIN_JSON" ]; then
   WIN_ID="$(echo "$WIN_JSON" | jq -r '.id')"
