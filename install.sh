@@ -276,6 +276,9 @@ systemctl --user restart hypridle-runner.service
 systemctl --user reenable hyprpolkitagent.service
 systemctl --user restart hyprpolkitagent.service
 
+systemctl --user reenable gpu-screen-recorder-ui.service
+systemctl --user restart gpu-screen-recorder-ui.service
+
 echo "✅ services enabled and started!"
 
 echo "------------------- fish configurations -------------------"
