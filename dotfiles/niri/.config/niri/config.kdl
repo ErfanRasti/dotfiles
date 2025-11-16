@@ -682,6 +682,11 @@ window-rule {
 }
 
 window-rule {
-  match app-id=r#"MATLAB"#
+  match app-id=r#"^MATLAB.*"#
+  // r#" ... "# is a raw string literal.
+  // ^ → start of the string
+  // MATLAB → must begin with the word “MATLAB”
+  // .* → anything may follow (any characters, 0 or more)
+
   open-maximized true
 }
