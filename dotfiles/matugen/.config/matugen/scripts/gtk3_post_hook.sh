@@ -10,4 +10,6 @@ else
   gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3
 fi
 
+gsettings set org.gnome.desktop.interface icon-theme "Adwaita"
+
 ~/.config/gtk-3.0/scripts/generate_bookmarks.sh ~/.config/gtk-3.0/bookmarks-template
