@@ -6,8 +6,10 @@ gsettings set org.gnome.desktop.interface gtk-theme ""
 
 if grep -q '^post_command.*dark' ~/.config/waypaper/config.ini; then
   gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark
+  gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 else
   gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3
+  gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
 fi
 
 gsettings set org.gnome.desktop.interface icon-theme "Adwaita"

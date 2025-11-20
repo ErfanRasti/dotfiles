@@ -3,6 +3,8 @@
 CONFIG=${HYPRIDLE_CONFIG:-~/.config/hypr/hypridle.conf}
 
 if pgrep -x "dms"; then
+  systemctl --user stop swaync
+  systemctl --user disable swaync
   exit 0
 fi
 

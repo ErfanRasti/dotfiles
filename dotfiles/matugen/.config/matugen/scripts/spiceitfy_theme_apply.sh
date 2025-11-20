@@ -3,6 +3,8 @@
 
 # if hyprland doesn't exist apply and exit
 if ! pgrep -x "Hyprland" >/dev/null 2>&1; then
+  spicetify config current_theme matugen color_scheme Base
+  spicetify refresh -s
   # spicetify apply
   exit 0
 fi

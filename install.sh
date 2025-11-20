@@ -60,7 +60,7 @@ sudo pacman -S \
   bluez-utils \
   noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra \
   dconf \
-  wayland gnome \
+  wayland gnome polkit-gnome \
   gdm \
   egl-wayland \
   zsh-autosuggestions zsh-syntax-highlighting \
