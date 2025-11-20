@@ -4,7 +4,13 @@ set +e # ignore the script if it raises an error
 
 gsettings set org.gnome.desktop.interface gtk-theme ""
 
-if grep -q '^post_command.*dark' ~/.config/waypaper/config.ini; then
+noctalia_running=false
+pgrep -fx 'qs -c noctalia-shell' >/dev/null && noctalia_running=true
+
+if { $noctalia_running &&
+  jq -e '.colorSchemes.darkMode' ~/.config/noctalia/settings.json >/dev/null; } ||
+  { ! $noctalia_running >/dev/null &&
+    grep -q '^post_command.*dark' ~/.config/waypaper/config.ini; }; then
   gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark
   gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 else
