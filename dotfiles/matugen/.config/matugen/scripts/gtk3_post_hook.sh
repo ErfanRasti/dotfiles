@@ -6,10 +6,12 @@ gsettings set org.gnome.desktop.interface gtk-theme ""
 
 noctalia_running=false
 pgrep -fx 'qs -c noctalia-shell' >/dev/null && noctalia_running=true
+dms_running=false
+pgrep -x 'dms' >/dev/null && dms_running=true
 
-if { $noctalia_running &&
-  jq -e '.colorSchemes.darkMode' ~/.config/noctalia/settings.json >/dev/null; } ||
-  { ! $noctalia_running >/dev/null &&
+if { $noctalia_running && jq -e '.colorSchemes.darkMode' ~/.config/noctalia/settings.json >/dev/null; } ||
+  { $dms_running && ! jq -e '.isLightMode' ~/.local/state/DankMaterialShell/session.json >/dev/null; } ||
+  { ! $noctalia_running >/dev/null && ! $dms_running >/dev/null &&
     grep -q '^post_command.*dark' ~/.config/waypaper/config.ini; }; then
   gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark
   gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
