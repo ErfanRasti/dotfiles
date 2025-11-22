@@ -1,5 +1,3 @@
-
-spawn-at-startup "qs" "-c" "noctalia-shell"
 binds {
 
     Alt+space {spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle";}
@@ -24,6 +22,8 @@ binds {
     // Mod+C { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "calculator"; }
     // Mod+L { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
 }
+
+spawn-at-startup "qs" "-c" "noctalia-shell"
 layer-rule {
   match namespace="^noctalia-overview*"
   place-within-backdrop true
