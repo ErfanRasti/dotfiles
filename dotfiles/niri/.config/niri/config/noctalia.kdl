@@ -1,0 +1,30 @@
+
+spawn-at-startup "qs" "-c" "noctalia-shell"
+binds {
+
+    Alt+space {spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle";}
+    Mod+Comma hotkey-overlay-title="Open Noctalia settings" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "settings" "toggle"; }
+
+    // Audio controls
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase;paplay /usr/share/sounds/ocean/stereo/audio-volume-change.oga"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume decrease;paplay /usr/share/sounds/ocean/stereo/audio-volume-change.oga"; }
+    XF86AudioMute allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
+    
+    // Brightness controls
+    XF86MonBrightnessUp allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+
+
+    Mod+N {spawn-sh "qs -c noctalia-shell ipc call notifications toggleHistory";}
+    Mod+Alt+W {spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle";}
+    Mod+Escape {spawn-sh "qs -c noctalia-shell ipc call lockScreen lock";}
+    Mod+S { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
+    Mod+V { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
+    Mod+Period { spawn "~/.config/rofi/emoji/run.sh"; }
+    // Mod+C { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "calculator"; }
+    // Mod+L { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
+}
+layer-rule {
+  match namespace="^noctalia-overview*"
+  place-within-backdrop true
+}
