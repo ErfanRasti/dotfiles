@@ -6,7 +6,7 @@ Name=Microsoft Edge
 GenericName=Web Browser
 # Gnome and KDE 3 uses Comment.
 Comment=Access the Internet
-Exec=/usr/bin/microsoft-edge-stable --enable-features=UseOzonePlatform --ozone-platform=wayland %U
+Exec=/usr/bin/microsoft-edge-stable --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=TouchpadOverscrollHistoryNavigation %U
 startupNotify=true
 Terminal=false
 Icon=microsoft-edge
@@ -17,9 +17,9 @@ Actions=new-window;new-private-window;
 
 [Desktop Action new-window]
 Name=New Window
-Exec=/usr/bin/microsoft-edge-stable --enable-features=UseOzonePlatform --ozone-platform=wayland
+Exec=/usr/bin/microsoft-edge-stable --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=TouchpadOverscrollHistoryNavigation
 
 
 [Desktop Action new-private-window]
 Name=New InPrivate Window
-Exec=/usr/bin/microsoft-edge-stable --inprivate --enable-features=UseOzonePlatform --ozone-platform=wayland
+Exec=/usr/bin/microsoft-edge-stable --inprivate --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=TouchpadOverscrollHistoryNavigation
