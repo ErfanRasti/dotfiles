@@ -36,9 +36,14 @@
   "showNotificationButton": true,
   "showBattery": true,
   "showControlCenterButton": true,
+  "showCapsLockIndicator": true,
   "controlCenterShowNetworkIcon": true,
   "controlCenterShowBluetoothIcon": true,
   "controlCenterShowAudioIcon": true,
+  "showPrivacyButton": true,
+  "privacyShowMicIcon": false,
+  "privacyShowCameraIcon": false,
+  "privacyShowScreenShareIcon": false,
   "controlCenterWidgets": [
     {
       "id": "brightnessSlider",
@@ -105,6 +110,11 @@
       "id": "inputVolumeSlider",
       "enabled": true,
       "width": 50
+    },
+    {
+      "id": "idleInhibitor",
+      "enabled": true,
+      "width": 25
     }
   ],
   "showWorkspaceIndex": false,
@@ -126,14 +136,40 @@
   "lockDateFormat": "ddd MMM d",
   "mediaSize": 1,
   "dankBarLeftWidgets": [
-    "launcherButton",
-    "workspaceSwitcher",
-    "focusedWindow"
+    {
+      "id": "launcherButton",
+      "enabled": true
+    },
+    {
+      "id": "systemUpdate",
+      "enabled": true
+    },
+    {
+      "id": "workspaceSwitcher",
+      "enabled": true
+    },
+    {
+      "id": "focusedWindow",
+      "enabled": true
+    }
   ],
   "dankBarCenterWidgets": [
-    "music",
-    "clock",
-    "weather",
+    {
+      "id": "music",
+      "enabled": false
+    },
+    {
+      "id": "dankPomodoroTimer",
+      "enabled": true
+    },
+    {
+      "id": "clock",
+      "enabled": true
+    },
+    {
+      "id": "weather",
+      "enabled": true
+    },
     {
       "id": "notificationButton",
       "enabled": true
@@ -142,6 +178,10 @@
   "dankBarRightWidgets": [
     {
       "id": "systemTray",
+      "enabled": true
+    },
+    {
+      "id": "capsLockIndicator",
       "enabled": true
     },
     {
@@ -162,9 +202,7 @@
     },
     {
       "id": "memUsage",
-      "enabled": true,
-      "showSwap": false,
-      "minimumWidth": true
+      "enabled": true
     },
     {
       "id": "controlCenterButton",
@@ -179,11 +217,12 @@
   "appLauncherViewMode": "grid",
   "spotlightModalViewMode": "list",
   "sortAppsAlphabetically": false,
+  "appLauncherGridColumns": 4,
   "weatherLocation": "New York, NY",
   "weatherCoordinates": "40.7128,-74.0060",
   "useAutoLocation": true,
   "weatherEnabled": true,
-  "networkPreference": "auto",
+  "networkPreference": "wifi",
   "vpnLastConnected": "",
   "iconTheme": "System Default",
   "launcherLogoMode": "os",
@@ -222,21 +261,28 @@
   "loginctlLockIntegration": true,
   "launchPrefix": "",
   "brightnessDevicePins": {},
+  "wifiNetworkPins": {
+    "preferredWifi": "ERS"
+  },
+  "audioInputDevicePins": {},
+  "audioOutputDevicePins": {},
   "gtkThemingEnabled": false,
   "qtThemingEnabled": false,
   "syncModeWithPortal": false,
+  "terminalsAlwaysDark": false,
   "showDock": true,
-  "dockAutoHide": true,
+  "dockAutoHide": false,
   "dockGroupByApp": true,
   "dockOpenOnOverview": true,
-  "dockPosition": 2,
-  "dockSpacing": 4,
-  "dockBottomGap": -14,
-  "dockMargin": 1,
-  "dockIconSize": 32,
-  "dockIndicatorStyle": "circle",
+  "dockPosition": 1,
+  "dockSpacing": 5,
+  "dockBottomGap": -12,
+  "dockMargin": 0,
+  "dockIconSize": 28,
+  "dockIndicatorStyle": "line",
   "notificationOverlayEnabled": true,
   "dankBarAutoHide": false,
+  "dankBarAutoHideDelay": 250,
   "dankBarOpenOnOverview": true,
   "dankBarVisible": true,
   "dankBarSpacing": 0,
@@ -264,7 +310,24 @@
   "notificationTimeoutCritical": 0,
   "notificationPopupPosition": 0,
   "osdAlwaysShowValue": true,
+  "osdPosition": 4,
+  "osdVolumeEnabled": true,
+  "osdBrightnessEnabled": true,
+  "osdIdleInhibitorEnabled": true,
+  "osdMicMuteEnabled": true,
+  "osdCapsLockEnabled": true,
+  "osdPowerProfileEnabled": true,
   "powerActionConfirm": true,
+  "powerMenuActions": [
+    "reboot",
+    "logout",
+    "poweroff",
+    "lock",
+    "suspend",
+    "restart"
+  ],
+  "powerMenuDefaultAction": "suspend",
+  "powerMenuGridLayout": false,
   "customPowerActionLock": "",
   "customPowerActionLogout": "",
   "customPowerActionSuspend": "",
@@ -274,6 +337,7 @@
   "updaterUseCustomCommand": false,
   "updaterCustomCommand": "",
   "updaterTerminalAdditionalParams": "",
+  "displayNameMode": "system",
   "screenPreferences": {},
   "showOnLastDisplay": {},
   "configVersion": 1
