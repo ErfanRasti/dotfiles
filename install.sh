@@ -194,7 +194,6 @@ paru -S \
   fum-bin \
   actions-for-nautilus-git nautilus-admin-gtk4 nautilus-checksums nautilus-image-converter nautilus-share \
   flat-remix \
-  niriswitcher \
   ashell \
   unimatrix-git pipes.sh \
   nitch \

@@ -18,6 +18,7 @@ binds {
   Ctrl+Alt+Delete hotkey-overlay-title="Task Manager" { spawn "dms" "ipc" "call" "processlist" "toggle";}
   Mod+S { spawn-sh "dms ipc call control-center toggle"; }
   Mod+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
+  Mod+Escape { spawn "dms" "ipc" "call" "lock" "lock"; }
 
 }
 

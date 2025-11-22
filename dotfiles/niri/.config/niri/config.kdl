@@ -280,7 +280,6 @@ spawn-sh-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
 spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
 spawn-sh-at-startup "wl-clip-persist --clipboard regular"
-spawn-sh-at-startup "niriswitcher"
 
 spawn-sh-at-startup "paplay /usr/share/sounds/ocean/stereo/desktop-login.oga"
 
@@ -626,8 +625,7 @@ binds {
   Ctrl+Alt+Delete hotkey-overlay-title="Task Manager" { spawn "dms" "ipc" "call" "processlist" "toggle";}
   Mod+S { spawn-sh "dms ipc call control-center toggle"; }
   Mod+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
-
-
+  Mod+Escape { spawn "dms" "ipc" "call" "lock" "lock"; }
 }
 spawn-at-startup "dms" "run"
 layer-rule {
