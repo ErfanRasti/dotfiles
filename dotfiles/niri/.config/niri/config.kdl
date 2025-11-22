@@ -58,8 +58,8 @@ input {
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    // focus-follows-mouse max-scroll-amount="0%"
-    focus-follows-mouse
+    focus-follows-mouse max-scroll-amount="10%"
+    // focus-follows-mouse
 }
 
 cursor {
@@ -641,7 +641,7 @@ window-rule {
     match app-id="yazi"
     match app-id="btop"
     default-column-width { proportion 0.6; }
-    default-window-height { proportion 0.7; }
+    // default-window-height { proportion 0.7; }
     // open-floating true
 }
 

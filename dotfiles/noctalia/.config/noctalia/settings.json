@@ -12,6 +12,7 @@
     },
     "audio": {
         "cavaFrameRate": 60,
+        "externalMixer": "pwvucontrol || pavucontrol",
         "mprisBlacklist": [
         ],
         "preferredPlayer": "",
@@ -22,6 +23,7 @@
     },
     "bar": {
         "backgroundOpacity": 0,
+        "capsuleOpacity": 1,
         "density": "compact",
         "exclusive": true,
         "floating": false,
@@ -35,20 +37,21 @@
         "widgets": {
             "center": [
                 {
+                    "hideWhenZero": true,
+                    "id": "NotificationHistory",
+                    "showUnreadBadge": true
+                },
+                {
                     "hideMode": "hidden",
                     "hideWhenIdle": false,
                     "id": "MediaMini",
                     "maxWidth": 145,
                     "scrollingMode": "hover",
-                    "showAlbumArt": false,
-                    "showVisualizer": false,
+                    "showAlbumArt": true,
+                    "showArtistFirst": true,
+                    "showVisualizer": true,
                     "useFixedWidth": false,
                     "visualizerType": "linear"
-                },
-                {
-                    "hideWhenZero": true,
-                    "id": "NotificationHistory",
-                    "showUnreadBadge": true
                 },
                 {
                     "customFont": "",
@@ -64,13 +67,18 @@
             ],
             "left": [
                 {
+                    "colorName": "error",
                     "id": "SessionMenu"
                 },
                 {
                     "id": "DarkMode"
                 },
                 {
+                    "characterCount": 2,
+                    "colorizeIcons": false,
+                    "hideUnoccupied": false,
                     "id": "TaskbarGrouped",
+                    "labelMode": "index+name",
                     "showNumbersOnlyWhenOccupied": false,
                     "showWorkspaceNumbers": true
                 },
@@ -78,7 +86,7 @@
                     "colorizeIcons": false,
                     "hideMode": "hidden",
                     "id": "ActiveWindow",
-                    "maxWidth": 145,
+                    "maxWidth": 160,
                     "scrollingMode": "hover",
                     "showIcon": true,
                     "useFixedWidth": false
@@ -108,6 +116,7 @@
                     "id": "KeyboardLayout"
                 },
                 {
+                    "diskPath": "/",
                     "id": "SystemMonitor",
                     "showCpuTemp": true,
                     "showCpuUsage": true,
@@ -148,13 +157,13 @@
             ]
         }
     },
-    "battery": {
-        "chargingMode": 2
-    },
     "brightness": {
         "brightnessStep": 5,
         "enableDdcSupport": true,
         "enforceMinimum": true
+    },
+    "changelog": {
+        "lastSeenVersion": ""
     },
     "colorSchemes": {
         "darkMode": true,
@@ -162,9 +171,9 @@
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "matugenSchemeType": "scheme-tonal-spot",
-        "predefinedScheme": "Noctalia (default)",
+        "predefinedScheme": "Eldritch",
         "schedulingMode": "off",
-        "useWallpaperColors": true
+        "useWallpaperColors": false
     },
     "controlCenter": {
         "cards": [
@@ -244,16 +253,19 @@
             "code",
             "kitty",
             "spotify",
-            "org.telegram.desktop"
+            "org.telegram.desktop",
+            "microsoft-edge",
+            "dev.mufeed.Wordbook"
         ],
         "size": 0.45
     },
     "general": {
+        "allowPanelsOnScreenWithoutBar": true,
         "animationDisabled": false,
         "animationSpeed": 1.5000000000000002,
         "avatarImage": "~/Pictures/MyImages/ERS.jpg",
         "compactLockScreen": false,
-        "dimDesktop": false,
+        "dimmerOpacity": 0,
         "enableShadows": true,
         "forceBlackScreenCorners": false,
         "language": "",
@@ -272,15 +284,16 @@
         "wallpaperChange": ""
     },
     "location": {
-        "analogClockInCalendar": false,
+        "analogClockInCalendar": true,
         "firstDayOfWeek": -1,
         "name": "Rasht",
         "showCalendarEvents": true,
         "showCalendarWeather": true,
-        "showWeekNumberInCalendar": false,
+        "showWeekNumberInCalendar": true,
         "use12hourFormat": false,
         "useFahrenheit": false,
-        "weatherEnabled": true
+        "weatherEnabled": true,
+        "weatherShowEffects": true
     },
     "network": {
         "wifiEnabled": true
@@ -309,8 +322,9 @@
     },
     "osd": {
         "autoHideMs": 2000,
+        "backgroundOpacity": 1,
         "enabled": true,
-        "location": "bottom_center",
+        "location": "top",
         "monitors": [
         ],
         "overlayLayer": true
@@ -329,43 +343,60 @@
     "sessionMenu": {
         "countdownDuration": 10000,
         "enableCountdown": true,
-        "position": "center",
+        "position": "top_left",
         "powerOptions": [
             {
                 "action": "lock",
+                "countdownEnabled": true,
                 "enabled": true
             },
             {
                 "action": "suspend",
+                "countdownEnabled": true,
                 "enabled": true
             },
             {
                 "action": "reboot",
+                "countdownEnabled": true,
                 "enabled": true
             },
             {
                 "action": "logout",
+                "countdownEnabled": true,
                 "enabled": true
             },
             {
                 "action": "shutdown",
+                "countdownEnabled": true,
+                "enabled": true
+            },
+            {
+                "action": "hibernate",
+                "countdownEnabled": true,
                 "enabled": true
             }
         ],
         "showHeader": true
     },
-    "settingsVersion": 22,
+    "settingsVersion": 23,
     "setupCompleted": true,
+    "systemMonitor": {
+        "cpuCriticalThreshold": 90,
+        "cpuWarningThreshold": 80,
+        "criticalColor": "",
+        "diskCriticalThreshold": 90,
+        "diskWarningThreshold": 80,
+        "memCriticalThreshold": 90,
+        "memWarningThreshold": 80,
+        "tempCriticalThreshold": 90,
+        "tempWarningThreshold": 80,
+        "useCustomColors": false,
+        "warningColor": ""
+    },
     "templates": {
         "alacritty": false,
         "code": false,
         "discord": false,
-        "discord_armcord": false,
-        "discord_dorion": false,
-        "discord_equibop": false,
-        "discord_lightcord": false,
-        "discord_vesktop": false,
-        "discord_webcord": false,
         "enableUserTemplates": true,
         "foot": false,
         "fuzzel": false,
@@ -402,12 +433,12 @@
             {
                 "directory": "/home/user/dotfiles/dotfiles/wallpapers",
                 "name": "eDP-1",
-                "wallpaper": "/home/user/Pictures/Wallpapers/Unsplash/colin-watts-K_Cdv-B-09M-unsplash.jpg"
+                "wallpaper": "/home/user/Pictures/Wallpapers/Unsplash/andrei-r-popescu-HBsmzKuGyuI-unsplash.jpg"
             },
             {
                 "directory": "/home/user/dotfiles/dotfiles/wallpapers",
                 "name": "HDMI-A-1",
-                "wallpaper": "/home/user/Pictures/Wallpapers/Unsplash/marek-piwnicki-pzbm-wp8fa0-unsplash.jpg"
+                "wallpaper": "/home/user/Pictures/Wallpapers/Unsplash/marek-piwnicki-Dc_I4PGIL2Q-unsplash.jpg"
             }
         ],
         "overviewEnabled": true,
@@ -418,6 +449,15 @@
         "setWallpaperOnAllMonitors": true,
         "transitionDuration": 1500,
         "transitionEdgeSmoothness": 0.05,
-        "transitionType": "random"
+        "transitionType": "random",
+        "useWallhaven": true,
+        "wallhavenCategories": "111",
+        "wallhavenOrder": "desc",
+        "wallhavenPurity": "100",
+        "wallhavenQuery": "",
+        "wallhavenResolutionHeight": "",
+        "wallhavenResolutionMode": "atleast",
+        "wallhavenResolutionWidth": "",
+        "wallhavenSorting": "date_added"
     }
 }
