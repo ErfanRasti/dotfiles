@@ -594,18 +594,13 @@ binds {
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
 
-   // Niri switcher
-    Alt+Tab repeat=false { spawn "niriswitcherctl" "show" "--window"; }
-    Alt+Shift+Tab repeat=false { spawn "niriswitcherctl" "show" "--window"; }
-    Alt+Grave repeat=false { spawn "niriswitcherctl" "show" "--workspace"; }
-    Alt+Shift+Grave repeat=false { spawn "niriswitcherctl" "show" "--workspace"; }
+  Mod+E { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'org.gnome.Nautilus' 'env XDG_CURRENT_DESKTOP=GNOME nautilus'"; }
+  Mod+Alt+E { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'yazi' 'kitty --override confirm_os_window_close=0 --class yazi bash -c yazi'"; }
+  Ctrl+Shift+Escape { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'btop' 'kitty --override confirm_os_window_close=0 --class btop -e btop'"; }
+  Mod+Grave { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'kitty' -t 'kitty-dropterm' 'kitty --class kitty --title kitty-dropterm'"; }
+  Mod+Period { spawn "~/.config/rofi/emoji/run.sh"; }
 
-    Mod+E { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'org.gnome.Nautilus' 'env XDG_CURRENT_DESKTOP=GNOME nautilus'"; }
-    Mod+Alt+E { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'yazi' 'kitty --override confirm_os_window_close=0 --class yazi bash -c yazi'"; }
-    Ctrl+Shift+Escape { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'btop' 'kitty --override confirm_os_window_close=0 --class btop -e btop'"; }
-    Mod+Grave { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'kitty' -t 'kitty-dropterm' 'kitty --class kitty --title kitty-dropterm'"; }
-
-    Mod+R { spawn "~/.config/niri/scripts/reload_config.sh"; }
+  Mod+R { spawn "~/.config/niri/scripts/reload_config.sh"; }
 
   Alt+space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
   Mod+Comma hotkey-overlay-title="Settings" { spawn "dms" "ipc" "call" "settings" "toggle"; }
