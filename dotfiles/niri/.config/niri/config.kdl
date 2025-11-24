@@ -280,6 +280,7 @@ spawn-sh-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
 spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
 spawn-sh-at-startup "wl-clip-persist --clipboard regular"
+spawn-sh-at-startup "systemctl --user start hypridle-runner.service"
 
 spawn-sh-at-startup "paplay /usr/share/sounds/ocean/stereo/desktop-login.oga"
 
@@ -598,31 +599,43 @@ binds {
   Mod+Alt+E { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'yazi' 'kitty --override confirm_os_window_close=0 --class yazi bash -c yazi'"; }
   Ctrl+Shift+Escape { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'btop' 'kitty --override confirm_os_window_close=0 --class btop -e btop'"; }
   Mod+Grave { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'kitty' -t 'kitty-dropterm' 'kitty --class kitty --title kitty-dropterm'"; }
-  Mod+Period { spawn "~/.config/rofi/emoji/run.sh"; }
+  // Mod+Period { spawn "~/.config/rofi/emoji/run.sh"; }
 
   Mod+R { spawn "~/.config/niri/scripts/reload_config.sh"; }
 
-  Alt+space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
-  Mod+Comma hotkey-overlay-title="Settings" { spawn "dms" "ipc" "call" "settings" "toggle"; }
+    Alt+space {spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle";}
+    Mod+Comma hotkey-overlay-title="Open Noctalia settings" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "settings" "toggle"; }
 
-  // Audio
-  XF86AudioRaiseVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "increment" "3"; }
-  XF86AudioLowerVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "decrement" "3"; }
-  XF86AudioMute allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "mute"; }
-  XF86AudioMicMute allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "micmute"; }
-  
-  // BL
-  XF86MonBrightnessUp allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "increment" "5" "backlight:intel_backlight"; }
-  XF86MonBrightnessDown allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "decrement" "5" "backlight:intel_backlight"; }
+    // Audio controls
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase;paplay /usr/share/sounds/ocean/stereo/audio-volume-change.oga"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume decrease;paplay /usr/share/sounds/ocean/stereo/audio-volume-change.oga"; }
+    XF86AudioMute allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
+    
+    // Brightness controls
+    XF86MonBrightnessUp allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
 
 
-  Mod+Alt+W {spawn-sh "dms ipc call dash toggle wallpaper";}
-  Ctrl+Alt+Delete hotkey-overlay-title="Task Manager" { spawn "dms" "ipc" "call" "processlist" "toggle";}
-  Mod+S { spawn-sh "dms ipc call control-center toggle"; }
-  Mod+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
-  Mod+Escape { spawn "dms" "ipc" "call" "lock" "lock"; }
+    Mod+N {spawn-sh "qs -c noctalia-shell ipc call notifications toggleHistory";}
+    Mod+Alt+W {spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle";}
+    Mod+Escape {spawn-sh "qs -c noctalia-shell ipc call lockScreen lock";}
+    Mod+S { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
+    Mod+V { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
+    Mod+Period { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "emoji"; }
+    Alt+F4 { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
+    // Mod+C { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "calculator"; }
+    // Mod+L { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
+
 }
-spawn-at-startup "dms" "run"
+
+spawn-at-startup "qs" "-c" "noctalia-shell"
+layer-rule {
+  match namespace="^noctalia-overview*"
+  place-within-backdrop true
+}
+
+
+// spawn-at-startup "dms" "run"
 layer-rule {
     match namespace="dms:blurwallpaper"
     place-within-backdrop true

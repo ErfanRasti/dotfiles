@@ -2,13 +2,15 @@
     "appLauncher": {
         "customLaunchPrefix": "",
         "customLaunchPrefixEnabled": false,
+        "enableClipPreview": true,
         "enableClipboardHistory": true,
         "pinnedExecs": [
         ],
         "position": "bottom_center",
         "sortByMostUsed": true,
         "terminalCommand": "kitty -e",
-        "useApp2Unit": false
+        "useApp2Unit": false,
+        "viewMode": "list"
     },
     "audio": {
         "cavaFrameRate": 60,
@@ -49,6 +51,7 @@
                     "scrollingMode": "hover",
                     "showAlbumArt": true,
                     "showArtistFirst": true,
+                    "showProgressRing": true,
                     "showVisualizer": true,
                     "useFixedWidth": false,
                     "visualizerType": "linear"
@@ -74,13 +77,11 @@
                     "id": "DarkMode"
                 },
                 {
-                    "characterCount": 2,
                     "colorizeIcons": false,
                     "hideUnoccupied": false,
                     "id": "TaskbarGrouped",
                     "labelMode": "index+name",
-                    "showNumbersOnlyWhenOccupied": false,
-                    "showWorkspaceNumbers": true
+                    "showLabelsOnlyWhenOccupied": true
                 },
                 {
                     "colorizeIcons": false,
@@ -173,7 +174,7 @@
         "matugenSchemeType": "scheme-tonal-spot",
         "predefinedScheme": "Eldritch",
         "schedulingMode": "off",
-        "useWallpaperColors": false
+        "useWallpaperColors": true
     },
     "controlCenter": {
         "cards": [
@@ -257,6 +258,7 @@
             "microsoft-edge",
             "dev.mufeed.Wordbook"
         ],
+        "radiusRatio": 0.6,
         "size": 0.45
     },
     "general": {
@@ -276,6 +278,7 @@
         "shadowDirection": "bottom_right",
         "shadowOffsetX": 2,
         "shadowOffsetY": 3,
+        "showHibernateOnLockScreen": false,
         "showScreenCorners": false
     },
     "hooks": {
@@ -301,7 +304,7 @@
     "nightLight": {
         "autoSchedule": true,
         "dayTemp": "6500",
-        "enabled": false,
+        "enabled": true,
         "forced": false,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
@@ -383,7 +386,7 @@
     "systemMonitor": {
         "cpuCriticalThreshold": 90,
         "cpuWarningThreshold": 80,
-        "criticalColor": "",
+        "criticalColor": "#ffb4ab",
         "diskCriticalThreshold": 90,
         "diskWarningThreshold": 80,
         "memCriticalThreshold": 90,
@@ -391,10 +394,11 @@
         "tempCriticalThreshold": 90,
         "tempWarningThreshold": 80,
         "useCustomColors": false,
-        "warningColor": ""
+        "warningColor": "#a0cfcd"
     },
     "templates": {
         "alacritty": false,
+        "cava": false,
         "code": false,
         "discord": false,
         "enableUserTemplates": true,
@@ -407,6 +411,7 @@
         "pywalfox": false,
         "qt": false,
         "spicetify": false,
+        "telegram": false,
         "vicinae": false,
         "walker": false,
         "wezterm": false
@@ -450,7 +455,7 @@
         "transitionDuration": 1500,
         "transitionEdgeSmoothness": 0.05,
         "transitionType": "random",
-        "useWallhaven": true,
+        "useWallhaven": false,
         "wallhavenCategories": "111",
         "wallhavenOrder": "desc",
         "wallhavenPurity": "100",

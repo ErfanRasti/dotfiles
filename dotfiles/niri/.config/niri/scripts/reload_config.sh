@@ -15,3 +15,11 @@ if grep -q '^spawn-at-startup "dms" "run"' "$CONFIG_FILE"; then
   fi
   dms run
 fi
+
+systemctl --user restart hypridle-runner.service
+
+if pgrep -f 'polkit-gnome-authentication-agent-1'; then
+  pkill -f 'polkit-gnome-authentication-agent-1'
+fi
+
+sh -c "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & disown"

@@ -264,12 +264,13 @@
   "wifiNetworkPins": {
     "preferredWifi": "ERS"
   },
+  "bluetoothDevicePins": {},
   "audioInputDevicePins": {},
   "audioOutputDevicePins": {},
   "gtkThemingEnabled": false,
   "qtThemingEnabled": false,
-  "syncModeWithPortal": false,
-  "terminalsAlwaysDark": false,
+  "syncModeWithPortal": true,
+  "terminalsAlwaysDark": true,
   "showDock": true,
   "dockAutoHide": false,
   "dockGroupByApp": true,
