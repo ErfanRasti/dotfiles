@@ -18,5 +18,10 @@ use = "yazi-rs/plugins:smart-enter"
 rev = "eaf6920"
 hash = "56fdabc96fc1f4d53c96eb884b02a5be"
 
+[[plugin.deps]]
+use = "grappas/wl-clipboard"
+rev = "e9a38e4"
+hash = "6b8e5d6b09626facec713923d3ddb54b"
+
 [flavor]
 deps = []
