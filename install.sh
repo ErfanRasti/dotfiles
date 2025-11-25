@@ -80,7 +80,7 @@ sudo pacman -S \
   yq fd \
   glow \
   lazydocker \
-  yazi dragon \
+  yazi ouch dragon \
   zellij \
   git stow \
   trash-cli \
@@ -296,5 +296,6 @@ ya pkg add ndtoan96/ouch
 ya pkg add yazi-rs/plugins:smart-enter
 ya pkg add grappas/wl-clipboard
 ya pkg add MasouShizuka/projects
+ya pkg add yazi-rs/plugins:diff
 
 echo "✅ fish configured successfully!"

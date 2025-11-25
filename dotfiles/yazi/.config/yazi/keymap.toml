@@ -63,36 +63,48 @@ desc = "Rename bookmark by fzf"
 
 # projects
 [[mgr.prepend_keymap]]
-on = [ "P", "s" ]
+on = ["P", "s"]
 run = "plugin projects save"
 desc = "Save current project"
 
 [[mgr.prepend_keymap]]
-on = [ "P", "l" ]
+on = ["P", "l"]
 run = "plugin projects load"
 desc = "Load project"
 
 [[mgr.prepend_keymap]]
-on = [ "P", "P" ]
+on = ["P", "P"]
 run = "plugin projects load_last"
 desc = "Load last project"
 
 [[mgr.prepend_keymap]]
-on = [ "P", "d" ]
+on = ["P", "d"]
 run = "plugin projects delete"
 desc = "Delete project"
 
 [[mgr.prepend_keymap]]
-on = [ "P", "D" ]
+on = ["P", "D"]
 run = "plugin projects delete_all"
 desc = "Delete all projects"
 
 [[mgr.prepend_keymap]]
-on = [ "P", "m" ]
+on = ["P", "m"]
 run = "plugin projects 'merge current'"
 desc = "Merge current tab to other projects"
 
 [[mgr.prepend_keymap]]
-on = [ "P", "M" ]
+on = ["P", "M"]
 run = "plugin projects 'merge all'"
 desc = "Merge current project to other projects"
+
+# ouch
+[[mgr.prepend_keymap]]
+on = ["C"]
+run = "plugin ouch"
+desc = "Compress with ouch"
+
+# diff
+[[mgr.prepend_keymap]]
+on = "<C-d>"
+run = "plugin diff"
+desc = "Diff the selected with the hovered file"

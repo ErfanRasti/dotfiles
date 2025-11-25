@@ -28,5 +28,10 @@ use = "MasouShizuka/projects"
 rev = "a5e33db"
 hash = "3de26efded35814ba3e55e28f1c389a4"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:diff"
+rev = "eaf6920"
+hash = "82376c3381ae915fd799d40f4dd4c6cd"
+
 [flavor]
 deps = []
