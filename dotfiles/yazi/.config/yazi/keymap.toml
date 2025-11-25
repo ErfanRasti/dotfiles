@@ -1,37 +1,62 @@
+# toggle-pane
 [[mgr.prepend_keymap]]
 on = "T"
 run = "plugin toggle-pane max-preview"
 desc = "Maximize or restore the preview pane"
 
-[[mgr.prepend_keymap]]
-on = ["b", "b"]
-run = "plugin bookmarks save"
-desc = "Save current position as a bookmark"
-
-[[mgr.prepend_keymap]]
-on = ["'"]
-run = "plugin bookmarks jump"
-desc = "Jump to a bookmark"
-
-[[mgr.prepend_keymap]]
-on = ["b", "d"]
-run = "plugin bookmarks delete"
-desc = "Delete a bookmark"
-
-[[mgr.prepend_keymap]]
-on = ["b", "D"]
-run = "plugin bookmarks delete_all"
-desc = "Delete all bookmarks"
-
+# smart-enter
 [[mgr.prepend_keymap]]
 on = "l"
 run = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
+# wl-clipboard
 [[mgr.prepend_keymap]]
 on = "<C-y>"
 run = ["plugin wl-clipboard"]
 
+# confirm-quit
 [[mgr.prepend_keymap]]
 on = "q"
 run = "plugin confirm-quit"
+
+# yamb
+[[mgr.prepend_keymap]]
+on = ["b", "a"]
+run = "plugin yamb save"
+desc = "Add bookmark"
+
+[[mgr.prepend_keymap]]
+on = ["b", "g"]
+run = "plugin yamb jump_by_key"
+desc = "Jump bookmark by key"
+
+[[mgr.prepend_keymap]]
+on = ["b", "G"]
+run = "plugin yamb jump_by_fzf"
+desc = "Jump bookmark by fzf"
+
+[[mgr.prepend_keymap]]
+on = ["b", "d"]
+run = "plugin yamb delete_by_key"
+desc = "Delete bookmark by key"
+
+[[mgr.prepend_keymap]]
+on = ["b", "D"]
+run = "plugin yamb delete_by_fzf"
+desc = "Delete bookmark by fzf"
+
+[[mgr.prepend_keymap]]
+on = ["b", "A"]
+run = "plugin yamb delete_all"
+desc = "Delete all bookmarks"
+
+[[mgr.prepend_keymap]]
+on = ["b", "r"]
+run = "plugin yamb rename_by_key"
+desc = "Rename bookmark by key"
+
+[[mgr.prepend_keymap]]
+on = ["b", "R"]
+run = "plugin yamb rename_by_fzf"
+desc = "Rename bookmark by fzf"

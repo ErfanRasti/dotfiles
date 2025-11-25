@@ -4,11 +4,6 @@ rev = "eaf6920"
 hash = "8a7c58225816a163a6e8730c0adafbc8"
 
 [[plugin.deps]]
-use = "dedukun/bookmarks"
-rev = "9ef1254"
-hash = "92fbb5483657fa7976cdf4e0104e18e0"
-
-[[plugin.deps]]
 use = "ndtoan96/ouch"
 rev = "41d68cd"
 hash = "c7790dd555aee4adf4d125e200ea8611"
@@ -22,6 +17,11 @@ hash = "56fdabc96fc1f4d53c96eb884b02a5be"
 use = "grappas/wl-clipboard"
 rev = "e9a38e4"
 hash = "6b8e5d6b09626facec713923d3ddb54b"
+
+[[plugin.deps]]
+use = "h-hg/yamb"
+rev = "22af003"
+hash = "7cc42012a7c2099f80064d228feb8d44"
 
 [flavor]
 deps = []
