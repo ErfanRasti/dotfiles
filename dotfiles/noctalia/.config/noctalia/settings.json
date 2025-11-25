@@ -19,7 +19,7 @@
         ],
         "preferredPlayer": "",
         "visualizerQuality": "high",
-        "visualizerType": "linear",
+        "visualizerType": "wave",
         "volumeOverdrive": true,
         "volumeStep": 5
     },
@@ -54,7 +54,7 @@
                     "showProgressRing": true,
                     "showVisualizer": true,
                     "useFixedWidth": false,
-                    "visualizerType": "linear"
+                    "visualizerType": "wave"
                 },
                 {
                     "customFont": "",
@@ -63,6 +63,12 @@
                     "id": "Clock",
                     "useCustomFont": false,
                     "usePrimaryColor": true
+                },
+                {
+                    "colorName": "primary",
+                    "hideWhenIdle": true,
+                    "id": "AudioVisualizer",
+                    "width": 50
                 },
                 {
                     "id": "PowerProfile"
@@ -75,6 +81,9 @@
                 },
                 {
                     "id": "DarkMode"
+                },
+                {
+                    "id": "NoctaliaPerformance"
                 },
                 {
                     "colorizeIcons": false,
@@ -167,7 +176,7 @@
         "lastSeenVersion": ""
     },
     "colorSchemes": {
-        "darkMode": true,
+        "darkMode": false,
         "generateTemplatesForPredefined": true,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
@@ -256,7 +265,8 @@
             "spotify",
             "org.telegram.desktop",
             "microsoft-edge",
-            "dev.mufeed.Wordbook"
+            "dev.mufeed.Wordbook",
+            "org.gnome.Software"
         ],
         "radiusRatio": 0.6,
         "size": 0.45
@@ -305,7 +315,7 @@
         "autoSchedule": true,
         "dayTemp": "6500",
         "enabled": true,
-        "forced": false,
+        "forced": true,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "nightTemp": "4500"
