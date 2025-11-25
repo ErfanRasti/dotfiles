@@ -43,5 +43,10 @@ use = "yazi-rs/plugins:vcs-files"
 rev = "eaf6920"
 hash = "4ee57085277d616acfa0ef1fef37dc00"
 
+[[plugin.deps]]
+use = "boydaihungst/mediainfo"
+rev = "1099409"
+hash = "77e78e16578e8f5a37475c04d8324619"
+
 [flavor]
 deps = []

@@ -80,7 +80,7 @@ sudo pacman -S \
   yq fd \
   glow \
   lazydocker \
-  yazi ouch dragon \
+  yazi ouch dragon mediainfo \
   zellij \
   git stow \
   trash-cli \
@@ -299,5 +299,6 @@ ya pkg add MasouShizuka/projects
 ya pkg add yazi-rs/plugins:diff
 ya pkg add yazi-rs/plugins:zoom
 ya pkg add yazi-rs/plugins:vcs-files
+ya pkg add boydaihungst/mediainfo
 
 echo "✅ fish configured successfully!"
