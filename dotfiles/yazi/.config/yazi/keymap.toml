@@ -4,7 +4,7 @@ run = "plugin toggle-pane max-preview"
 desc = "Maximize or restore the preview pane"
 
 [[mgr.prepend_keymap]]
-on = ["b"]
+on = ["b", "b"]
 run = "plugin bookmarks save"
 desc = "Save current position as a bookmark"
 
