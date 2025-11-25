@@ -291,9 +291,10 @@ fish_config theme save "TokyoNight Moon"
 
 echo "------------------- yazi plugins -------------------"
 ya pkg add yazi-rs/plugins:toggle-pane
-ya pkg add dedukun/bookmarks
+ya pack -a h-hg/yamb
 ya pkg add ndtoan96/ouch
 ya pkg add yazi-rs/plugins:smart-enter
 ya pkg add grappas/wl-clipboard
+ya pkg add MasouShizuka/projects
 
 echo "✅ fish configured successfully!"
