@@ -297,5 +297,7 @@ ya pkg add yazi-rs/plugins:smart-enter
 ya pkg add grappas/wl-clipboard
 ya pkg add MasouShizuka/projects
 ya pkg add yazi-rs/plugins:diff
+ya pkg add yazi-rs/plugins:zoom
+ya pkg add yazi-rs/plugins:vcs-files
 
 echo "✅ fish configured successfully!"

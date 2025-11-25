@@ -108,3 +108,20 @@ desc = "Compress with ouch"
 on = "<C-d>"
 run = "plugin diff"
 desc = "Diff the selected with the hovered file"
+
+# zoom
+[[mgr.prepend_keymap]]
+on = "+"
+run = "plugin zoom 1"
+desc = "Zoom in hovered file"
+
+[[mgr.prepend_keymap]]
+on = "-"
+run = "plugin zoom -1"
+desc = "Zoom out hovered file"
+
+# vcs-files
+[[mgr.prepend_keymap]]
+on = ["g", "c"]
+run = "plugin vcs-files"
+desc = "Show Git file changes"
