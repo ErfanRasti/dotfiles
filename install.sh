@@ -80,7 +80,7 @@ sudo pacman -S \
   yq fd \
   glow \
   lazydocker \
-  yazi \
+  yazi dragon \
   zellij \
   git stow \
   trash-cli \

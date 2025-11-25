@@ -6,9 +6,13 @@ sort_sensitive = true
 show_symlink = true
 linemode = "size_and_mtime"
 
-
+# https://yazi-rs.github.io/docs/tips/
 [opener]
 play = [
   { run = 'vlc "$@"', orphan = true, desc = "Open in VLC", for = "linux" },
 ]
 edit = [{ run = '$EDITOR "$@"', block = true, for = "linux" }]
+
+[[mgr.prepend_keymap]]
+on = "<C-n>"
+run = 'shell -- dragon -x -i -T "$0"'
