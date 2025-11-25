@@ -293,5 +293,6 @@ echo "------------------- yazi plugins -------------------"
 ya pkg add yazi-rs/plugins:toggle-pane
 ya pkg add dedukun/bookmarks
 ya pkg add ndtoan96/ouch
+ya pkg add yazi-rs/plugins:smart-enter
 
 echo "✅ fish configured successfully!"
