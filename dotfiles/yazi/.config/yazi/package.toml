@@ -3,5 +3,15 @@ use = "yazi-rs/plugins:toggle-pane"
 rev = "eaf6920"
 hash = "8a7c58225816a163a6e8730c0adafbc8"
 
+[[plugin.deps]]
+use = "dedukun/bookmarks"
+rev = "9ef1254"
+hash = "92fbb5483657fa7976cdf4e0104e18e0"
+
+[[plugin.deps]]
+use = "ndtoan96/ouch"
+rev = "41d68cd"
+hash = "c7790dd555aee4adf4d125e200ea8611"
+
 [flavor]
 deps = []

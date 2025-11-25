@@ -289,4 +289,9 @@ fisher install vitallium/tokyonight-fish
 fish_config theme save "TokyoNight Moon"
 # tide configure
 
+echo "------------------- yazi plugins -------------------"
+ya pkg add yazi-rs/plugins:toggle-pane
+ya pkg add dedukun/bookmarks
+ya pkg add ndtoan96/ouch
+
 echo "✅ fish configured successfully!"
