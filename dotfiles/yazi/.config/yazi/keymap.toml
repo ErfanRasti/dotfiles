@@ -10,10 +10,14 @@ on = "l"
 run = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
-# wl-clipboard
+# clipboard-copy
 [[mgr.prepend_keymap]]
-on = "<C-y>"
-run = ["plugin wl-clipboard"]
+on = "y"
+run = [
+  'shell -- for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list',
+  "yank",
+]
+desc = "Copy to system clipboard"
 
 # confirm-quit
 [[mgr.prepend_keymap]]
