@@ -125,3 +125,8 @@ desc = "Zoom out hovered file"
 on = ["g", "c"]
 run = "plugin vcs-files"
 desc = "Show Git file changes"
+
+# Mount
+[[mgr.prepend_keymap]]
+on = "M"
+run = "plugin mount"

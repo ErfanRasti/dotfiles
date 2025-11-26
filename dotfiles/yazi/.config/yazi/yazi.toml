@@ -11,7 +11,10 @@ linemode = "size_and_mtime"
 play = [
   { run = 'vlc "$@"', orphan = true, desc = "Open in VLC", for = "linux" },
 ]
-edit = [{ run = '$EDITOR "$@"', block = true, for = "linux" }]
+edit = [
+  { run = 'kitty --class nvim fish -c "$EDITOR "$@""', orphan = true, for = "linux" },
+]
+
 
 [[mgr.prepend_keymap]]
 on = "<C-n>"
@@ -49,3 +52,5 @@ prepend_previewers = [
 # https://yazi-rs.github.io/docs/configuration/yazi#tasks
 [tasks]
 image_alloc = 1073741824 # = 1024*1024*1024 = 1024MB
+
+

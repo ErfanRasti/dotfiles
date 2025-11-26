@@ -300,5 +300,6 @@ ya pkg add yazi-rs/plugins:diff
 ya pkg add yazi-rs/plugins:zoom
 ya pkg add yazi-rs/plugins:vcs-files
 ya pkg add boydaihungst/mediainfo
+ya pkg add yazi-rs/plugins:mount
 
 echo "✅ fish configured successfully!"

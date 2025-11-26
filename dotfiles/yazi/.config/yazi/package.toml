@@ -48,5 +48,10 @@ use = "boydaihungst/mediainfo"
 rev = "1099409"
 hash = "77e78e16578e8f5a37475c04d8324619"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:mount"
+rev = "eaf6920"
+hash = "4fccaaf10c36dc2466e2438a386ff017"
+
 [flavor]
 deps = []
