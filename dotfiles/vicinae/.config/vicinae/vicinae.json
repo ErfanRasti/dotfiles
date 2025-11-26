@@ -1,5 +1,6 @@
 {
     "closeOnFocusLoss": false,
+    "considerPreedit": false,
     "faviconService": "twenty",
     "font": {
         "normal": "CaskaydiaCove NF",
