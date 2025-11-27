@@ -24,7 +24,7 @@
         "volumeStep": 5
     },
     "bar": {
-        "backgroundOpacity": 0,
+        "backgroundOpacity": 1,
         "capsuleOpacity": 1,
         "density": "compact",
         "exclusive": true,
@@ -278,7 +278,7 @@
         "avatarImage": "~/Pictures/MyImages/ERS.jpg",
         "compactLockScreen": false,
         "dimmerOpacity": 0,
-        "enableShadows": true,
+        "enableShadows": false,
         "forceBlackScreenCorners": false,
         "language": "",
         "lockOnSuspend": true,
@@ -315,7 +315,7 @@
         "autoSchedule": true,
         "dayTemp": "6500",
         "enabled": true,
-        "forced": true,
+        "forced": false,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "nightTemp": "4500"
