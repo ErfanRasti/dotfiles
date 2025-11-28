@@ -21,6 +21,7 @@ Status:children_add(function(self)
 	end
 end, 3300, Status.LEFT)
 
+-- yamb plugin
 -- You can configure your bookmarks by lua language
 local bookmarks = {}
 
@@ -59,6 +60,7 @@ require("yamb"):setup({
 		or (os.getenv("HOME") .. "/.config/yazi/bookmark"),
 })
 
+-- projects plugin
 require("projects"):setup({
 	save = {
 		method = "yazi", -- yazi | lua
@@ -105,4 +107,9 @@ require("projects"):setup({
 		timeout = 3,
 		level = "info",
 	},
+})
+
+-- session plugin
+require("session"):setup({
+	sync_yanked = true,
 })

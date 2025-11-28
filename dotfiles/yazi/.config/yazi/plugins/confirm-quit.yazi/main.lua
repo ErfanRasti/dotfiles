@@ -3,9 +3,9 @@ local count = ya.sync(function()
 end)
 
 local function entry()
-	if count() < 2 then
-		return ya.emit("quit", {})
-	end
+	-- if count() < 2 then
+	-- 	return ya.emit("quit", {})
+	-- end
 
 	local yes = ya.confirm({
 		pos = { "center", w = 60, h = 10 },
