@@ -95,7 +95,7 @@ output "eDP-1" {
     // for the resolution.
     // If the mode is omitted altogether or is invalid, niri will pick one automatically.
     // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-    mode "1920x1080@120.030"
+    // mode "1920x1080@120.030"
 
     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
     scale 1.25
@@ -168,7 +168,7 @@ layout {
     // You can change how the focus ring looks.
     focus-ring {
         // Uncomment this line to disable the focus ring.
-        // off
+        off
 
         // How many logical pixels the ring extends out from the windows.
         width 2
@@ -179,10 +179,12 @@ layout {
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
         // Color of the ring on the active monitor.
-        active-color "#7f88c8"
+        // active-color "#7f88c8"
+         active-gradient from="#f00f" to="#0f05" angle=135 in="oklch longer hue"
 
         // Color of the ring on inactive monitors.
-        inactive-color "#505050"
+        // inactive-color "#505050"
+         inactive-gradient from="#9009" to="#0900" angle=135 in="oklch longer hue"
 
         // You can also use gradients. They take precedence over solid colors.
         // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
@@ -204,11 +206,15 @@ layout {
     border {
         // The settings are the same as for the focus ring.
         // If you enable the border, you probably want to disable the focus ring.
-        off
+        // off
 
-        width 4
-        active-color "#ffc87f"
-        inactive-color "#505050"
+        width 2
+        // active-color "#ffc87f"
+                 active-gradient from="#f00f" to="#0f05" angle=135 in="oklch longer hue"
+
+                inactive-gradient from="#9009" to="#0900" angle=135 in="oklch longer hue" relative-to="workspace-view"
+
+        // inactive-color "#505050"
 
         // Color of the border around windows that request your attention.
         urgent-color "#9b0000"
@@ -528,6 +534,7 @@ binds {
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
     Mod+M { maximize-column; }
+    Mod+Shift+M { maximize-window-to-edges; }
     Mod+Shift+F { fullscreen-window; }
 
     // Expand the focused column to space not taken up by other fully visible columns.
@@ -598,41 +605,36 @@ binds {
   Mod+Alt+E { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'yazi' 'kitty --override confirm_os_window_close=0 --class yazi bash -c yazi'"; }
   Ctrl+Shift+Escape { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'btop' 'kitty --override confirm_os_window_close=0 --class btop -e btop'"; }
   Mod+Grave { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'kitty' -t 'kitty-dropterm' 'kitty --class kitty --title kitty-dropterm'"; }
+  Mod+Alt+B { spawn "~/.config/rofi/applets/bin/battery.sh"; }
   // Mod+Period { spawn "~/.config/rofi/emoji/run.sh"; }
 
   Mod+R { spawn "~/.config/niri/scripts/reload_config.sh"; }
 
-    Alt+space {spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle";}
-    Mod+Comma hotkey-overlay-title="Open Noctalia settings" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "settings" "toggle"; }
-
-    // Audio controls
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase;paplay /usr/share/sounds/ocean/stereo/audio-volume-change.oga"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume decrease;paplay /usr/share/sounds/ocean/stereo/audio-volume-change.oga"; }
-    XF86AudioMute allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
-    
-    // Brightness controls
-    XF86MonBrightnessUp allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
-
-
-    Mod+N {spawn-sh "qs -c noctalia-shell ipc call notifications toggleHistory";}
-    Mod+Alt+W {spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle";}
-    Mod+Escape {spawn-sh "qs -c noctalia-shell ipc call lockScreen lock";}
-    Mod+S { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
-    Mod+V { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
-    Mod+Period { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "emoji"; }
-    Alt+F4 { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
-    // Mod+C { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "calculator"; }
-    // Mod+L { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
-
 }
+recent-windows {
+    debounce-ms 750
 
-spawn-at-startup "qs" "-c" "noctalia-shell"
-layer-rule {
-  match namespace="^noctalia-overview*"
-  place-within-backdrop true
+    open-delay-ms 150
+
+    highlight {
+        active-color "#7f88c8ff"
+        urgent-color "#ff9999ff"
+        padding 20
+        corner-radius 10
+    }
+
+    previews {
+        max-height 320
+        max-scale 0.5
+    }
+
+    binds {
+        Alt+Tab         { next-window; }
+        Alt+Shift+Tab   { previous-window; }
+        Alt+grave       { next-window     filter="app-id"; }
+        Alt+Shift+grave { previous-window filter="app-id"; }
+    }
 }
-
 
 // spawn-at-startup "dms" "run"
 layer-rule {
@@ -665,3 +667,11 @@ window-rule {
 
   open-maximized true
 }
+
+window-rule {
+    match app-id=r#"^org\.telegram\.desktop$"#
+
+    block-out-from "screencast"
+}
+
+include "config/dms.kdl"

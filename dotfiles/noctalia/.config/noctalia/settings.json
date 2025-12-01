@@ -24,7 +24,7 @@
         "volumeStep": 5
     },
     "bar": {
-        "backgroundOpacity": 1,
+        "backgroundOpacity": 0,
         "capsuleOpacity": 1,
         "density": "compact",
         "exclusive": true,

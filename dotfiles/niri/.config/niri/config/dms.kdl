@@ -19,6 +19,7 @@ binds {
   Mod+S { spawn-sh "dms ipc call control-center toggle"; }
   Mod+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
   Mod+Escape { spawn "dms" "ipc" "call" "lock" "lock"; }
+  Alt+F4 { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
 
 }
 

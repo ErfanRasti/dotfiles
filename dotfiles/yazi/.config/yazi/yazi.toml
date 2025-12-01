@@ -13,6 +13,7 @@ play = [
 ]
 edit = [
   { run = 'kitty --class nvim fish -c "$EDITOR "$@""', orphan = true, for = "linux" },
+  { run = 'gnome-text-editor "$@"', orphan = true, for = "linux" },
 ]
 
 
