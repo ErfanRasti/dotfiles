@@ -271,7 +271,7 @@ layout {
         // top 64
         // bottom 64
     }
-    background-color "transparent"
+    // background-color "transparent"
 }
 
 // Add lines like this to spawn processes at startup.
@@ -618,6 +618,7 @@ recent-windows {
 
     highlight {
         active-color "#7f88c8ff"
+
         urgent-color "#ff9999ff"
         padding 20
         corner-radius 10
@@ -675,3 +676,4 @@ window-rule {
 }
 
 include "config/dms.kdl"
+include "config/colors.kdl"
