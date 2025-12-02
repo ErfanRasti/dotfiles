@@ -1,0 +1,36 @@
+layout {
+
+    background-color "{{colors.primary.default.hex}}"
+    focus-ring {
+        active-gradient from="{{colors.primary.default.hex}}" to="{{colors.tertiary.default.hex}}" angle=135 in="oklch longer hue"
+        inactive-gradient from="{{colors.secondary_container.default.hex}}" to="{{colors.tertiary_container.default.hex}}" angle=135 in="oklch longer hue" relative-to="workspace-view"
+        urgent-gradient from="{{colors.error.default.hex}}" to="{{colors.error_container.default.hex}}" angle=135 in="oklch longer hue"
+    }
+
+    border {
+        active-gradient from="{{colors.primary.default.hex}}" to="{{colors.tertiary.default.hex}}" angle=135 in="oklch longer hue"
+        inactive-gradient from="{{colors.secondary_container.default.hex}}" to="{{colors.tertiary_container.default.hex}}" angle=135 in="oklch longer hue" relative-to="workspace-view"
+        urgent-gradient from="{{colors.error.default.hex}}" to="{{colors.error_container.default.hex}}" angle=135 in="oklch longer hue"
+    }
+
+    shadow {
+        color "{{colors.shadow.default.hex}}70"
+    }
+
+    tab-indicator {
+        active-gradient from="{{colors.primary.default.hex}}" to="{{colors.tertiary.default.hex}}" angle=135 in="oklch longer hue"
+        inactive-gradient from="{{colors.secondary_container.default.hex}}" to="{{colors.tertiary_container.default.hex}}" angle=135 in="oklch longer hue" relative-to="workspace-view"
+        urgent-gradient from="{{colors.error.default.hex}}" to="{{colors.error_container.default.hex}}" angle=135 in="oklch longer hue"
+    }
+
+    insert-hint {
+        gradient from="{{colors.primary_container.default.hex}}" to="{{colors.tertiary_container.default.hex}}" angle=135 in="oklch longer hue"
+    }
+}
+
+recent-windows {
+    highlight {
+        active-color   "{{colors.primary.default.hex}}"
+        urgent-color   "{{colors.error.default.hex}}"
+    }
+}
