@@ -33,6 +33,14 @@ window-rule {
     // block-out-from "screencast"
 }
 
+// Block out mako notifications from screencasts.
+// Check https://yalter.github.io/niri/Screencasting.html#block-out-windows
+layer-rule {
+    match namespace="^notifications$"
+
+    block-out-from "screencast"
+}
+
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
@@ -57,13 +65,13 @@ window-rule {
 }
 
 window-rule {
-  match app-id=r#"^MATLAB.*"#
-  // r#" ... "# is a raw string literal.
-  // ^ → start of the string
-  // MATLAB → must begin with the word “MATLAB”
-  // .* → anything may follow (any characters, 0 or more)
+    match app-id=r#"^MATLAB.*"#
+    // r#" ... "# is a raw string literal.
+    // ^ → start of the string
+    // MATLAB → must begin with the word “MATLAB”
+    // .* → anything may follow (any characters, 0 or more)
 
-  open-maximized true
+    open-maximized true
 }
 
 window-rule {

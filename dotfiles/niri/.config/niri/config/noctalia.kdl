@@ -25,7 +25,8 @@ binds {
 }
 
 spawn-at-startup "qs" "-c" "noctalia-shell"
+
 layer-rule {
-  match namespace="^noctalia-overview*"
-  place-within-backdrop true
+    match namespace="^noctalia-overview*"
+    place-within-backdrop true
 }

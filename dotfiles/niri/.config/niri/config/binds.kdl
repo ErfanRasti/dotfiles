@@ -29,10 +29,9 @@ binds {
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
 
-    
     Mod+O repeat=false { toggle-overview; }
     Mod+Q { close-window; }
-    
+
     // focus binds
     Mod+Right { focus-column-right; }
     Mod+Left  { focus-column-left; }
@@ -174,6 +173,8 @@ binds {
     Mod+Alt+R { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
+
+    // Check https://yalter.github.io/niri/Fullscreen-and-Maximize.html
     Mod+M { maximize-column; }
     Mod+Shift+M { maximize-window-to-edges; }
     Mod+Shift+F { fullscreen-window; }
@@ -250,5 +251,4 @@ binds {
   // Mod+Period { spawn "~/.config/rofi/emoji/run.sh"; }
 
   Mod+R { spawn "~/.config/niri/scripts/reload_config.sh"; }
-
 }

@@ -61,11 +61,11 @@ layout {
 
         // Color of the ring on the active monitor.
         // active-color "#7f88c8"
-         active-gradient from="#f00f" to="#0f05" angle=135 in="oklch longer hue"
+        active-gradient from="#f00f" to="#0f05" angle=135 in="oklch longer hue"
 
         // Color of the ring on inactive monitors.
         // inactive-color "#505050"
-         inactive-gradient from="#9009" to="#0900" angle=135 in="oklch longer hue"
+        inactive-gradient from="#9009" to="#0900" angle=135 in="oklch longer hue"
 
         // You can also use gradients. They take precedence over solid colors.
         // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
@@ -91,11 +91,10 @@ layout {
 
         width 2
         // active-color "#ffc87f"
-                 active-gradient from="#f00f" to="#0f05" angle=135 in="oklch longer hue"
-
-                inactive-gradient from="#9009" to="#0900" angle=135 in="oklch longer hue" relative-to="workspace-view"
+        active-gradient from="#f00f" to="#0f05" angle=135 in="oklch longer hue"
 
         // inactive-color "#505050"
+        inactive-gradient from="#9009" to="#0900" angle=135 in="oklch longer hue" relative-to="workspace-view"
 
         // Color of the border around windows that request your attention.
         urgent-color "#9b0000"
@@ -139,6 +138,13 @@ layout {
 
         // You can also change the shadow color and opacity.
         color "#0007"
+    }
+
+    // Check https://yalter.github.io/niri/Configuration%3A-Layout.html#insert-hint
+    insert-hint {
+        // off
+        // color "#ffc87f80"
+        // gradient from="#ffbb6680" to="#ffc88080" angle=45 relative-to="workspace-view"
     }
 
     // Struts shrink the area occupied by windows, similarly to layer-shell panels.

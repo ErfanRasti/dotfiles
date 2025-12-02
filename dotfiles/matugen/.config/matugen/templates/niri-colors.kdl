@@ -24,7 +24,7 @@ layout {
     }
 
     insert-hint {
-        gradient from="{{colors.primary_container.default.hex}}" to="{{colors.tertiary_container.default.hex}}" angle=135 in="oklch longer hue"
+        gradient from="{{colors.primary_container.default.hex}}80" to="{{colors.tertiary_container.default.hex}}80" angle=135 in="oklch longer hue"
     }
 }
 

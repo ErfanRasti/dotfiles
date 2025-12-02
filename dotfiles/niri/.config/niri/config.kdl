@@ -3,6 +3,7 @@
 // Check the wiki for a full description of the configuration:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
 
+// Check https://yalter.github.io/niri/Configuration%3A-Include.html
 include "config/input.kdl"
 include "config/outputs.kdl"
 include "config/envvars.kdl"
