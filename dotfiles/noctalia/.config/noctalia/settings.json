@@ -33,7 +33,7 @@
         "marginVertical": 0,
         "monitors": [
         ],
-        "outerCorners": true,
+        "outerCorners": false,
         "position": "top",
         "showCapsule": true,
         "widgets": {
@@ -153,13 +153,16 @@
                     "id": "WiFi"
                 },
                 {
+                    "deviceNativePath": "",
                     "displayMode": "alwaysShow",
                     "id": "Battery",
                     "warningThreshold": 30
                 },
                 {
                     "colorizeDistroLogo": true,
+                    "colorizeSystemIcon": "none",
                     "customIconPath": "",
+                    "enableColorization": false,
                     "icon": "niri",
                     "id": "ControlCenter",
                     "useDistroLogo": false
@@ -171,6 +174,34 @@
         "brightnessStep": 5,
         "enableDdcSupport": true,
         "enforceMinimum": true
+    },
+    "calendar": {
+        "cards": [
+            {
+                "enabled": false,
+                "id": "calendar-header-card"
+            },
+            {
+                "enabled": false,
+                "id": "calendar-month-card"
+            },
+            {
+                "enabled": true,
+                "id": "calendar-header-card"
+            },
+            {
+                "enabled": true,
+                "id": "calendar-month-card"
+            },
+            {
+                "enabled": true,
+                "id": "timer-card"
+            },
+            {
+                "enabled": true,
+                "id": "weather-card"
+            }
+        ]
     },
     "changelog": {
         "lastSeenVersion": ""
@@ -268,7 +299,6 @@
             "dev.mufeed.Wordbook",
             "org.gnome.Software"
         ],
-        "radiusRatio": 0.6,
         "size": 0.45
     },
     "general": {
@@ -315,7 +345,7 @@
         "autoSchedule": true,
         "dayTemp": "6500",
         "enabled": true,
-        "forced": false,
+        "forced": true,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "nightTemp": "4500"
@@ -337,6 +367,11 @@
         "autoHideMs": 2000,
         "backgroundOpacity": 1,
         "enabled": true,
+        "enabledTypes": [
+            0,
+            1,
+            2
+        ],
         "location": "top",
         "monitors": [
         ],
@@ -391,17 +426,21 @@
         ],
         "showHeader": true
     },
-    "settingsVersion": 23,
-    "setupCompleted": true,
+    "settingsVersion": 26,
     "systemMonitor": {
         "cpuCriticalThreshold": 90,
+        "cpuPollingInterval": 3000,
         "cpuWarningThreshold": 80,
         "criticalColor": "#ffb4ab",
         "diskCriticalThreshold": 90,
+        "diskPollingInterval": 3000,
         "diskWarningThreshold": 80,
         "memCriticalThreshold": 90,
+        "memPollingInterval": 3000,
         "memWarningThreshold": 80,
+        "networkPollingInterval": 3000,
         "tempCriticalThreshold": 90,
+        "tempPollingInterval": 3000,
         "tempWarningThreshold": 80,
         "useCustomColors": false,
         "warningColor": "#a0cfcd"
@@ -411,6 +450,7 @@
         "cava": false,
         "code": false,
         "discord": false,
+        "emacs": false,
         "enableUserTemplates": true,
         "foot": false,
         "fuzzel": false,
@@ -418,6 +458,7 @@
         "gtk": false,
         "kcolorscheme": false,
         "kitty": false,
+        "niri": false,
         "pywalfox": false,
         "qt": false,
         "spicetify": false,
@@ -437,24 +478,13 @@
         "tooltipsEnabled": true
     },
     "wallpaper": {
-        "defaultWallpaper": "/etc/xdg/quickshell/noctalia-shell/Assets/Wallpaper/noctalia.png",
         "directory": "~/Pictures/Wallpapers/Unsplash",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "fillColor": "#000000",
         "fillMode": "crop",
         "hideWallpaperFilenames": false,
-        "monitors": [
-            {
-                "directory": "/home/user/dotfiles/dotfiles/wallpapers",
-                "name": "eDP-1",
-                "wallpaper": "/home/user/Pictures/Wallpapers/Unsplash/andrei-r-popescu-HBsmzKuGyuI-unsplash.jpg"
-            },
-            {
-                "directory": "/home/user/dotfiles/dotfiles/wallpapers",
-                "name": "HDMI-A-1",
-                "wallpaper": "/home/user/Pictures/Wallpapers/Unsplash/marek-piwnicki-Dc_I4PGIL2Q-unsplash.jpg"
-            }
+        "monitorDirectories": [
         ],
         "overviewEnabled": true,
         "panelPosition": "bottom_center",
