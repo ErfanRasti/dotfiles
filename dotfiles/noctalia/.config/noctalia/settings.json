@@ -308,7 +308,7 @@
         "avatarImage": "~/Pictures/MyImages/ERS.jpg",
         "compactLockScreen": false,
         "dimmerOpacity": 0,
-        "enableShadows": false,
+        "enableShadows": true,
         "forceBlackScreenCorners": false,
         "language": "",
         "lockOnSuspend": true,
