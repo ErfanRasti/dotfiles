@@ -5,6 +5,7 @@ main.notification_speed normal
 main.show_hide_hotkey 26 16
 main.software_encoding_warning_shown false
 main.tint_color amd
+main.wayland_warning_shown true
 record.container mp4
 record.pause_unpause_hotkey 92 16
 record.record_options.advanced_view true
@@ -25,15 +26,14 @@ record.record_options.record_area_option eDP-1
 record.record_options.record_area_width 1920
 record.record_options.record_cursor true
 record.record_options.restore_portal_session true
+record.record_options.show_notifications true
+record.record_options.use_led_indicator false
 record.record_options.video_bitrate 45000
 record.record_options.video_height 1080
 record.record_options.video_quality very_high
 record.record_options.video_width 1920
 record.save_directory Videos/Screencasts
 record.save_video_in_game_folder false
-record.show_recording_started_notifications true
-record.show_video_paused_notifications true
-record.show_video_saved_notifications true
 record.start_stop_hotkey 94 16
 replay.container mp4
 replay.record_options.advanced_view true
@@ -53,6 +53,8 @@ replay.record_options.record_area_option eDP-1
 replay.record_options.record_area_width 1920
 replay.record_options.record_cursor true
 replay.record_options.restore_portal_session true
+replay.record_options.show_notifications true
+replay.record_options.use_led_indicator false
 replay.record_options.video_bitrate 45000
 replay.record_options.video_height 1080
 replay.record_options.video_quality custom
@@ -64,9 +66,6 @@ replay.save_1_min_hotkey 96 16
 replay.save_directory Videos/Screencasts
 replay.save_hotkey 95 16
 replay.save_video_in_game_folder false
-replay.show_replay_saved_notifications true
-replay.show_replay_started_notifications true
-replay.show_replay_stopped_notifications true
 replay.start_stop_hotkey 95 17
 replay.time 60
 replay.turn_on_replay_automatically_mode dont_turn_on_automatically
@@ -81,10 +80,11 @@ screenshot.restore_portal_session true
 screenshot.save_directory Pictures/Screenshots
 screenshot.save_screenshot_in_game_folder false
 screenshot.save_screenshot_to_clipboard false
-screenshot.show_screenshot_saved_notifications true
+screenshot.show_notifications true
 screenshot.take_screenshot_hotkey 86 16
 screenshot.take_screenshot_region_hotkey 102 20
 screenshot.take_screenshot_window_hotkey 102 5
+screenshot.use_led_indicator false
 streaming.custom.container flv
 streaming.custom.key 
 streaming.custom.url 
@@ -105,14 +105,14 @@ streaming.record_options.record_area_option eDP-1
 streaming.record_options.record_area_width 0
 streaming.record_options.record_cursor true
 streaming.record_options.restore_portal_session true
+streaming.record_options.show_notifications true
+streaming.record_options.use_led_indicator false
 streaming.record_options.video_bitrate 15000
 streaming.record_options.video_height 0
 streaming.record_options.video_quality custom
 streaming.record_options.video_width 0
 streaming.rumble.key 
 streaming.service twitch
-streaming.show_streaming_started_notifications true
-streaming.show_streaming_stopped_notifications true
 streaming.start_stop_hotkey 93 16
 streaming.twitch.key 
 streaming.youtube.key 

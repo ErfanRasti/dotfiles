@@ -1,6 +1,6 @@
 layout {
 
-    background-color "{{colors.primary.default.hex}}"
+    // background-color "{{colors.primary.default.hex}}"
     focus-ring {
         active-gradient from="{{colors.primary.default.hex}}" to="{{colors.tertiary.default.hex}}" angle=135 in="oklch longer hue"
         inactive-gradient from="{{colors.secondary_container.default.hex}}" to="{{colors.tertiary_container.default.hex}}" angle=135 in="oklch longer hue" relative-to="workspace-view"
@@ -32,5 +32,28 @@ recent-windows {
     highlight {
         active-color   "{{colors.primary.default.hex}}"
         urgent-color   "{{colors.error.default.hex}}"
+    }
+}
+
+// Indicate screencasted windows with error colors.
+window-rule {
+    match is-window-cast-target=true
+
+    focus-ring {
+        active-color "{{colors.error.default.hex}}"
+        inactive-color "{{colors.error_container.default.hex}}"
+    }
+
+    border {
+        inactive-color "{{colors.error_container.default.hex}}"
+    }
+
+    shadow {
+        color "{{colors.error_container.default.hex}}70"
+    }
+
+    tab-indicator {
+        active-color "{{colors.error.default.hex}}"
+        inactive-color "{{colors.error_container.default.hex}}"
     }
 }
