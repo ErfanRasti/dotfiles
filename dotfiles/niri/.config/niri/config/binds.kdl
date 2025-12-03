@@ -19,7 +19,7 @@ binds {
     // Alt+space repeat=false { spawn "vicinae" "toggle"; }
     Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "~/.config/hypr/scripts/toggle_rofi_launcher.sh"; }
     // Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
-    Mod+I hotkey-overlay-title="Open GNOME settings" { spawn-sh "env XDG_CURRENT_DESKTOP=GNOME gnome-control-center"; }
+    Mod+I hotkey-overlay-title="Open GNOME settings" { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'org.gnome.Settings' 'env XDG_CURRENT_DESKTOP=GNOME gnome-control-center'"; }
 
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.

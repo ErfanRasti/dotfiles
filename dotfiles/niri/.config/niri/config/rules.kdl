@@ -79,3 +79,25 @@ window-rule {
 
     block-out-from "screencast"
 }
+
+window-rule {
+    match app-id="gsr-ui"
+    opacity 0.8
+    open-maximized-to-edges true
+    draw-border-with-background false
+}
+
+window-rule {
+    match app-id="showmethekey-gtk"
+    default-column-width { fixed 200; }
+    default-window-height { fixed 50; }
+    default-floating-position x=5 y=0 relative-to="bottom-right"
+    open-floating true
+    open-focused false
+}
+window-rule {
+    match is-active=true is-focused=false
+    baba-is-float true
+}
+
+
