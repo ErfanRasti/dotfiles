@@ -183,7 +183,6 @@ paru -S \
   libinput-gestures \
   better-control-git \
   pyprland \
-  flat-remix \
   rofi-tools-bin \
   pwvucontrol \
   overskride-bin \

@@ -1,5 +1,5 @@
 main.config_file_version 2
-main.hotkeys_enable_option enable_hotkeys
+main.hotkeys_enable_option enable_hotkeys_no_grab
 main.joystick_hotkeys_enable_option disable_hotkeys
 main.notification_speed normal
 main.show_hide_hotkey 26 16
