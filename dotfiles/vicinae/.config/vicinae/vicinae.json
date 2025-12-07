@@ -1,7 +1,7 @@
 {
     "closeOnFocusLoss": false,
     "considerPreedit": false,
-    "faviconService": "twenty",
+    "faviconService": "google",
     "font": {
         "normal": "CaskaydiaCove NF",
         "size": 10.5
@@ -18,7 +18,7 @@
     },
     "window": {
         "csd": true,
-        "opacity": 0.98,
+        "opacity": 0.8,
         "rounding": 10
     }
 }
