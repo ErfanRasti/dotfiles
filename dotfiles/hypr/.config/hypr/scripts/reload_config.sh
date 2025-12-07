@@ -32,11 +32,8 @@ if grep -q "^exec-once = swayosd" "$AUTOSTART_FILE"; then
 fi
 
 # Restart vicinae
-if grep -q "^exec-once = vicinae server" "$AUTOSTART_FILE"; then
-  if pgrep -x vicinae >/dev/null 2>&1; then
-    pkill vicinae
-  fi
-  setsid -f vicinae server >/dev/null 2>&1
+if grep -q "^exec-once = systemctl --user start vicinae.service" "$AUTOSTART_FILE"; then
+  systemctl --user restart vicinae.service
 fi
 
 # Restart hypr-dock
