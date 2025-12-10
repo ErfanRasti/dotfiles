@@ -45,6 +45,7 @@ layer-rule {
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
     geometry-corner-radius 12
+    open-maximized-to-edges false
     clip-to-geometry true
 }
 
