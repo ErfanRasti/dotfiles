@@ -7,6 +7,7 @@
         "pinnedExecs": [
         ],
         "position": "bottom_center",
+        "showCategories": true,
         "sortByMostUsed": true,
         "terminalCommand": "kitty -e",
         "useApp2Unit": false,
@@ -120,6 +121,9 @@
                     "id": "KeyboardLayout"
                 },
                 {
+                    "id": "plugin:privacy-indicator"
+                },
+                {
                     "diskPath": "/",
                     "id": "SystemMonitor",
                     "showCpuTemp": true,
@@ -150,6 +154,8 @@
                     "deviceNativePath": "",
                     "displayMode": "alwaysShow",
                     "id": "Battery",
+                    "showNoctaliaPerformance": false,
+                    "showPowerProfiles": false,
                     "warningThreshold": 30
                 },
                 {
@@ -196,9 +202,6 @@
                 "id": "weather-card"
             }
         ]
-    },
-    "changelog": {
-        "lastSeenVersion": ""
     },
     "colorSchemes": {
         "darkMode": true,
@@ -271,9 +274,11 @@
     "dock": {
         "backgroundOpacity": 0.6,
         "colorizeIcons": false,
+        "deadOpacity": 0.6,
         "displayMode": "exclusive",
         "enabled": true,
         "floatingRatio": 0,
+        "inactiveIndicators": false,
         "monitors": [
             "eDP-1",
             "HDMI-A-1"
@@ -293,6 +298,7 @@
             "dev.mufeed.Wordbook",
             "org.gnome.Software"
         ],
+        "pinnedStatic": false,
         "size": 0.45
     },
     "general": {
@@ -300,10 +306,12 @@
         "animationDisabled": false,
         "animationSpeed": 1.5000000000000002,
         "avatarImage": "~/Pictures/MyImages/ERS.jpg",
+        "boxRadiusRatio": 1,
         "compactLockScreen": false,
         "dimmerOpacity": 0,
         "enableShadows": true,
         "forceBlackScreenCorners": false,
+        "iRadiusRatio": 1,
         "language": "",
         "lockOnSuspend": true,
         "radiusRatio": 0.5,
@@ -313,7 +321,8 @@
         "shadowOffsetX": 2,
         "shadowOffsetY": 3,
         "showHibernateOnLockScreen": false,
-        "showScreenCorners": false
+        "showScreenCorners": false,
+        "showSessionButtonsOnLockScreen": true
     },
     "hooks": {
         "darkModeChange": "",
@@ -338,8 +347,8 @@
     "nightLight": {
         "autoSchedule": true,
         "dayTemp": "6500",
-        "enabled": true,
-        "forced": true,
+        "enabled": false,
+        "forced": false,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "nightTemp": "4500"
@@ -349,13 +358,22 @@
         "criticalUrgencyDuration": 15,
         "enableKeyboardLayoutToast": true,
         "enabled": true,
-        "location": "top_right",
+        "location": "top",
         "lowUrgencyDuration": 3,
         "monitors": [
         ],
         "normalUrgencyDuration": 8,
         "overlayLayer": true,
-        "respectExpireTimeout": false
+        "respectExpireTimeout": false,
+        "sounds": {
+            "criticalSoundFile": "",
+            "enabled": false,
+            "excludedApps": "discord,firefox,chrome,chromium,edge",
+            "lowSoundFile": "",
+            "normalSoundFile": "",
+            "separateSounds": false,
+            "volume": 0.5
+        }
     },
     "osd": {
         "autoHideMs": 2000,
