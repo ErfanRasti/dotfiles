@@ -125,7 +125,7 @@
   "showWorkspacePadding": false,
   "workspaceScrolling": false,
   "showWorkspaceApps": true,
-  "maxWorkspaceIcons": 3,
+  "maxWorkspaceIcons": 100,
   "workspacesPerMonitor": true,
   "showOccupiedWorkspacesOnly": false,
   "dwlShowAllTags": false,
