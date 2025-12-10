@@ -40,8 +40,8 @@
   "controlCenterShowBluetoothIcon": true,
   "controlCenterShowAudioIcon": true,
   "controlCenterShowVpnIcon": true,
-  "controlCenterShowBrightnessIcon": false,
-  "controlCenterShowMicIcon": false,
+  "controlCenterShowBrightnessIcon": true,
+  "controlCenterShowMicIcon": true,
   "controlCenterShowBatteryIcon": false,
   "controlCenterShowPrinterIcon": false,
   "showPrivacyButton": true,
@@ -207,7 +207,7 @@
   "gtkThemingEnabled": false,
   "qtThemingEnabled": false,
   "syncModeWithPortal": true,
-  "terminalsAlwaysDark": true,
+  "terminalsAlwaysDark": false,
   "showDock": true,
   "dockAutoHide": true,
   "dockGroupByApp": true,
@@ -299,7 +299,8 @@
       "centerWidgets": [
         {
           "id": "music",
-          "enabled": false
+          "enabled": true,
+          "mediaSize": 0
         },
         {
           "id": "dankPomodoroTimer",

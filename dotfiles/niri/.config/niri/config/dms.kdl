@@ -13,6 +13,8 @@ binds {
     XF86MonBrightnessDown allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "decrement" "5" "backlight:intel_backlight"; }
 
 
+    Mod+N { spawn "dms" "ipc" "call" "notifications" "toggle"; }
+    Mod+B { spawn "dms" "ipc" "call" "dock" "toggleAutoHide"; }
     Mod+Alt+W {spawn-sh "dms ipc call dash toggle wallpaper";}
     Ctrl+Alt+Delete hotkey-overlay-title="Task Manager" { spawn "dms" "ipc" "call" "processlist" "toggle";}
     Mod+S { spawn-sh "dms ipc call control-center toggle"; }
