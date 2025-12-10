@@ -65,12 +65,6 @@
                     "usePrimaryColor": true
                 },
                 {
-                    "colorName": "primary",
-                    "hideWhenIdle": true,
-                    "id": "AudioVisualizer",
-                    "width": 50
-                },
-                {
                     "id": "PowerProfile"
                 }
             ],

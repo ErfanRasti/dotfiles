@@ -4,11 +4,10 @@
   "matugenScheme": "scheme-tonal-spot",
   "runUserMatugenTemplates": true,
   "matugenTargetMonitor": "",
-  "dankBarTransparency": 0,
-  "dankBarWidgetTransparency": 1,
   "popupTransparency": 1,
   "dockTransparency": 0.8,
   "widgetBackgroundColor": "s",
+  "widgetColorMode": "default",
   "cornerRadius": 12,
   "use24HourClock": true,
   "showSeconds": true,
@@ -40,6 +39,11 @@
   "controlCenterShowNetworkIcon": true,
   "controlCenterShowBluetoothIcon": true,
   "controlCenterShowAudioIcon": true,
+  "controlCenterShowVpnIcon": true,
+  "controlCenterShowBrightnessIcon": false,
+  "controlCenterShowMicIcon": false,
+  "controlCenterShowBatteryIcon": false,
+  "controlCenterShowPrinterIcon": false,
   "showPrivacyButton": true,
   "privacyShowMicIcon": false,
   "privacyShowCameraIcon": false,
@@ -117,107 +121,38 @@
       "width": 25
     }
   ],
-  "showWorkspaceIndex": false,
+  "showWorkspaceIndex": true,
   "showWorkspacePadding": false,
   "workspaceScrolling": false,
-  "showWorkspaceApps": false,
+  "showWorkspaceApps": true,
   "maxWorkspaceIcons": 3,
   "workspacesPerMonitor": true,
+  "showOccupiedWorkspacesOnly": false,
   "dwlShowAllTags": false,
-  "workspaceNameIcons": {},
+  "workspaceNameIcons": {
+    "scratchpad": {
+      "type": "icon",
+      "value": "developer_board"
+    }
+  },
   "waveProgressEnabled": true,
+  "scrollTitleEnabled": true,
   "clockCompactMode": false,
   "focusedWindowCompactMode": true,
   "runningAppsCompactMode": true,
   "keyboardLayoutNameCompactMode": false,
   "runningAppsCurrentWorkspace": false,
   "runningAppsGroupByApp": true,
+  "centeringMode": "index",
   "clockDateFormat": "ddd MMM d",
   "lockDateFormat": "ddd MMM d",
   "mediaSize": 1,
-  "dankBarLeftWidgets": [
-    {
-      "id": "launcherButton",
-      "enabled": true
-    },
-    {
-      "id": "systemUpdate",
-      "enabled": true
-    },
-    {
-      "id": "workspaceSwitcher",
-      "enabled": true
-    },
-    {
-      "id": "focusedWindow",
-      "enabled": true
-    }
-  ],
-  "dankBarCenterWidgets": [
-    {
-      "id": "music",
-      "enabled": false
-    },
-    {
-      "id": "dankPomodoroTimer",
-      "enabled": true
-    },
-    {
-      "id": "clock",
-      "enabled": true
-    },
-    {
-      "id": "weather",
-      "enabled": true
-    },
-    {
-      "id": "notificationButton",
-      "enabled": true
-    }
-  ],
-  "dankBarRightWidgets": [
-    {
-      "id": "systemTray",
-      "enabled": true
-    },
-    {
-      "id": "capsLockIndicator",
-      "enabled": true
-    },
-    {
-      "id": "keyboard_layout_name",
-      "enabled": true
-    },
-    {
-      "id": "privacyIndicator",
-      "enabled": true
-    },
-    {
-      "id": "cpuUsage",
-      "enabled": true
-    },
-    {
-      "id": "cpuTemp",
-      "enabled": true
-    },
-    {
-      "id": "memUsage",
-      "enabled": true
-    },
-    {
-      "id": "controlCenterButton",
-      "enabled": true
-    },
-    {
-      "id": "battery",
-      "enabled": true
-    }
-  ],
-  "dankBarWidgetOrder": [],
   "appLauncherViewMode": "grid",
   "spotlightModalViewMode": "list",
   "sortAppsAlphabetically": false,
   "appLauncherGridColumns": 4,
+  "spotlightCloseNiriOverview": true,
+  "niriOverviewOverlayEnabled": true,
   "weatherLocation": "New York, NY",
   "weatherCoordinates": "40.7128,-74.0060",
   "useAutoLocation": true,
@@ -236,7 +171,6 @@
   "monoFontFamily": "CaskaydiaCove Nerd Font Mono",
   "fontWeight": 700,
   "fontScale": 1,
-  "dankBarFontScale": 1,
   "notepadUseMonospace": true,
   "notepadFontFamily": "",
   "notepadFontSize": 14,
@@ -252,13 +186,16 @@
   "acLockTimeout": 120,
   "acSuspendTimeout": 1200,
   "acSuspendBehavior": 0,
+  "acProfileName": "",
   "batteryMonitorTimeout": 180,
   "batteryLockTimeout": 120,
   "batterySuspendTimeout": 600,
   "batterySuspendBehavior": 0,
+  "batteryProfileName": "0",
   "lockBeforeSuspend": true,
-  "preventIdleForMedia": false,
   "loginctlLockIntegration": true,
+  "fadeToLockEnabled": true,
+  "fadeToLockGracePeriod": 5,
   "launchPrefix": "",
   "brightnessDevicePins": {},
   "wifiNetworkPins": {
@@ -272,39 +209,26 @@
   "syncModeWithPortal": true,
   "terminalsAlwaysDark": true,
   "showDock": true,
-  "dockAutoHide": false,
+  "dockAutoHide": true,
   "dockGroupByApp": true,
   "dockOpenOnOverview": true,
-  "dockPosition": 1,
+  "dockPosition": 2,
   "dockSpacing": 5,
   "dockBottomGap": -12,
   "dockMargin": 0,
   "dockIconSize": 28,
   "dockIndicatorStyle": "line",
+  "dockBorderEnabled": false,
+  "dockBorderColor": "surfaceText",
+  "dockBorderOpacity": 1,
+  "dockBorderThickness": 1,
   "notificationOverlayEnabled": true,
-  "dankBarAutoHide": false,
-  "dankBarAutoHideDelay": 250,
-  "dankBarOpenOnOverview": true,
-  "dankBarVisible": true,
-  "dankBarSpacing": 0,
-  "dankBarBottomGap": 0,
-  "dankBarInnerPadding": -2,
-  "dankBarPosition": 0,
-  "dankBarSquareCorners": false,
-  "dankBarNoBackground": false,
-  "dankBarGothCornersEnabled": false,
-  "dankBarGothCornerRadiusOverride": false,
-  "dankBarGothCornerRadiusValue": 12,
-  "dankBarBorderEnabled": false,
-  "dankBarBorderColor": "surfaceText",
-  "dankBarBorderOpacity": 1,
-  "dankBarBorderThickness": 1,
-  "popupGapsAuto": true,
-  "popupGapsManual": 4,
   "modalDarkenBackground": false,
   "lockScreenShowPowerActions": true,
   "enableFprint": false,
   "maxFprintTries": 3,
+  "lockScreenActiveMonitor": "all",
+  "lockScreenInactiveColor": "#000000",
   "hideBrightnessSlider": false,
   "notificationTimeoutLow": 5000,
   "notificationTimeoutNormal": 5000,
@@ -313,12 +237,15 @@
   "osdAlwaysShowValue": true,
   "osdPosition": 4,
   "osdVolumeEnabled": true,
+  "osdMediaVolumeEnabled": true,
   "osdBrightnessEnabled": true,
   "osdIdleInhibitorEnabled": true,
   "osdMicMuteEnabled": true,
   "osdCapsLockEnabled": true,
   "osdPowerProfileEnabled": true,
+  "osdAudioOutputEnabled": true,
   "powerActionConfirm": true,
+  "powerActionHoldDuration": 0.5,
   "powerMenuActions": [
     "reboot",
     "logout",
@@ -341,5 +268,117 @@
   "displayNameMode": "system",
   "screenPreferences": {},
   "showOnLastDisplay": {},
-  "configVersion": 1
+  "barConfigs": [
+    {
+      "id": "default",
+      "name": "Main Bar",
+      "enabled": true,
+      "position": 0,
+      "screenPreferences": [
+        "all"
+      ],
+      "showOnLastDisplay": true,
+      "leftWidgets": [
+        {
+          "id": "launcherButton",
+          "enabled": true
+        },
+        {
+          "id": "systemUpdate",
+          "enabled": true
+        },
+        {
+          "id": "workspaceSwitcher",
+          "enabled": true
+        },
+        {
+          "id": "focusedWindow",
+          "enabled": true
+        }
+      ],
+      "centerWidgets": [
+        {
+          "id": "music",
+          "enabled": false
+        },
+        {
+          "id": "dankPomodoroTimer",
+          "enabled": true
+        },
+        {
+          "id": "clock",
+          "enabled": true
+        },
+        {
+          "id": "weather",
+          "enabled": true
+        },
+        {
+          "id": "notificationButton",
+          "enabled": true
+        }
+      ],
+      "rightWidgets": [
+        {
+          "id": "systemTray",
+          "enabled": true
+        },
+        {
+          "id": "capsLockIndicator",
+          "enabled": true
+        },
+        {
+          "id": "keyboard_layout_name",
+          "enabled": true
+        },
+        {
+          "id": "privacyIndicator",
+          "enabled": true
+        },
+        {
+          "id": "cpuUsage",
+          "enabled": true
+        },
+        {
+          "id": "cpuTemp",
+          "enabled": true
+        },
+        {
+          "id": "memUsage",
+          "enabled": true
+        },
+        {
+          "id": "controlCenterButton",
+          "enabled": true
+        },
+        {
+          "id": "battery",
+          "enabled": true
+        }
+      ],
+      "spacing": 0,
+      "innerPadding": -4,
+      "bottomGap": -5,
+      "transparency": 0,
+      "widgetTransparency": 1,
+      "squareCorners": false,
+      "noBackground": false,
+      "gothCornersEnabled": false,
+      "gothCornerRadiusOverride": false,
+      "gothCornerRadiusValue": 12,
+      "borderEnabled": false,
+      "borderColor": "surfaceText",
+      "borderOpacity": 1,
+      "borderThickness": 1,
+      "fontScale": 1,
+      "autoHide": false,
+      "autoHideDelay": 250,
+      "openOnOverview": true,
+      "visible": true,
+      "popupGapsAuto": true,
+      "popupGapsManual": 0,
+      "widgetOutlineEnabled": false
+    }
+  ],
+  "configVersion": 2
 }
