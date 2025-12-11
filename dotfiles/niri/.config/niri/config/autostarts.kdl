@@ -6,11 +6,11 @@
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-sh-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 // spawn-sh-at-startup "systemctl --user start vicinae.service"
-spawn-sh-at-startup "systemctl --user stop swaync.service"
 spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
 spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
 spawn-sh-at-startup "wl-clip-persist --clipboard regular"
-spawn-sh-at-startup "systemctl --user start hypridle-runner.service"
+spawn-sh-at-startup "systemctl --user stop swaync.service"
+spawn-at-startup "~/.config/niri/scripts/swayidle_ruuner.sh"
 
 spawn-sh-at-startup "paplay /usr/share/sounds/ocean/stereo/desktop-login.oga"
 

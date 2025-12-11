@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 CONFIG_FILE="$HOME/.config/niri/config.kdl"
 
 if grep -q '^include "config/noctalia.kdl"' "$CONFIG_FILE"; then
@@ -11,12 +12,17 @@ fi
 if grep -q '^include "config/dms.kdl"' "$CONFIG_FILE"; then
   if pgrep -x "dms"; then
     dms restart
-    exit 0
+  else
+    dms run
   fi
-  dms run
 fi
 
-systemctl --user restart hypridle-runner.service
+if pgrep -x "swayidle"; then
+  pkill -x swayidle
+fi
+
+"$HOME"/.config/niri/scripts/swayidle_ruuner.sh &
+disown
 
 if pgrep -f 'polkit-gnome-authentication-agent-1'; then
   pkill -f 'polkit-gnome-authentication-agent-1'

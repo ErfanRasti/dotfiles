@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# This script sets the swayidle for Niri
+# This script runs the swayidle for Niri
 # Check https://man.archlinux.org/man/extra/swayidle/swayidle.1.en
 
 lock_cmd='hyprlock'

@@ -78,7 +78,7 @@ window-rule {
     // MATLAB → must begin with the word “MATLAB”
     // .* → anything may follow (any characters, 0 or more)
 
-    open-maximized true
+    open-maximized-to-edges true
 }
 
 window-rule {
