@@ -117,6 +117,12 @@ window-rule {
     default-floating-position x=2 y=2 relative-to="bottom-right"
     open-floating true
     open-focused false
+    border {
+      off
+    }
+    focus-ring {
+      off
+    }
 }
 
 // window-rule {
