@@ -158,7 +158,7 @@ sudo pacman -S \
   cava \
   zenity \
   ttf-cascadia-code-nerd \
-  niri xwayland-satellite \
+  niri xwayland-satellite swayidle \
   cmatrix \
   kdeconnect
 
