@@ -204,7 +204,7 @@ paru -S \
 echo "!!!!!!!!!!!!!! niri-shells installation"
 $NIRI_SHELLS && paru -S \
   noctalia-shell wlsunset \
-  dms-shell-git dsearch qt6-multimedia \
+  dms-shell-bin dsearch qt6-multimedia \
   vicinae-bin
 
 echo "✅ AUR packages installed successfully!"

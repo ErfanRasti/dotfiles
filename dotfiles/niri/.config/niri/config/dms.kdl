@@ -20,6 +20,7 @@ binds {
     Mod+S { spawn-sh "dms ipc call control-center toggle"; }
     Mod+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
     Mod+Escape { spawn "dms" "ipc" "call" "lock" "lock"; }
+    Mod+Period { spawn "dms" "ipc" "call" "spotlight" "toggleQuery" ":"; }
     Alt+F4 { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
 }
 spawn-at-startup "dms" "run"
