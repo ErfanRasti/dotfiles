@@ -98,10 +98,27 @@ window-rule {
     match app-id="showmethekey-gtk"
     default-column-width { fixed 200; }
     default-window-height { fixed 50; }
-    default-floating-position x=5 y=0 relative-to="bottom-right"
+    default-floating-position x=2 y=2 relative-to="bottom-right"
     open-floating true
     open-focused false
 }
+
+window-rule {
+    match title=r#"^Meet - [^-]+-[^-]+-[^-]+$"# app-id="google-chrome"
+    default-floating-position x=2 y=2 relative-to="bottom-right"
+    default-column-width { fixed 200; }
+    default-window-height { fixed 400; }
+    open-floating true
+    open-focused false
+}
+
+window-rule {
+    match title="meet.google.com is sharing your screen."
+    default-floating-position x=2 y=2 relative-to="bottom-right"
+    open-floating true
+    open-focused false
+}
+
 // window-rule {
 //     match is-active=true is-focused=false
 //     baba-is-float true
