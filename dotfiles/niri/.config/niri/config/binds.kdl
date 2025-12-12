@@ -247,8 +247,16 @@ binds {
   Mod+Alt+E { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'yazi' 'kitty --override confirm_os_window_close=0 --class yazi bash -c yazi'"; }
   Ctrl+Shift+Escape { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'btop' 'kitty --override confirm_os_window_close=0 --class btop -e btop'"; }
   Mod+Grave { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'kitty' -t 'kitty-dropterm' 'kitty --class kitty --title kitty-dropterm'"; }
-  Mod+Alt+B { spawn "~/.config/rofi/applets/bin/battery.sh"; }
-  // Mod+Period { spawn "~/.config/rofi/emoji/run.sh"; }
+
+  Mod+Alt+A hotkey-overlay-title="Open rofi favourite apps" { spawn "~/.config/rofi/applets/bin/apps.sh"; }
+  Mod+Alt+Q hotkey-overlay-title="Open rofi quicklinks" { spawn "~/.config/rofi/applets/bin/quicklinks.sh"; }
+  Mod+Alt+B hotkey-overlay-title="Open rofi battery menu" { spawn "~/.config/rofi/applets/bin/battery.sh"; }
+  Mod+Alt+V hotkey-overlay-title="Open rofi volume control" { spawn "~/.config/rofi/applets/bin/volume.sh"; }
+  Mod+Ctrl+B hotkey-overlay-title="Open rofi brightness control" { spawn "~/.config/rofi/applets/bin/brightness.sh"; }
+  Mod+Ctrl+P hotkey-overlay-title="Open rofi player control" { spawn "~/.config/rofi/applets/bin/player.sh"; }
+  Mod+Shift+Escape hotkey-overlay-title="Open rofi powermenu" { spawn "~/.config/rofi/powermenu/run.sh"; }
+  Mod+Alt+P hotkey-overlay-title="Open rofi powermenu" { spawn "~/.config/rofi/applets/bin/powermenu.sh"; }
+  Mod+Period hotkey-overlay-title="Open rofi emoji panel" { spawn "~/.config/rofi/emoji/run.sh"; }
 
   Mod+R { spawn "~/.config/niri/scripts/reload_config.sh"; }
 }

@@ -15,13 +15,21 @@ binds {
 
     Mod+N { spawn "dms" "ipc" "call" "notifications" "toggle"; }
     Mod+B { spawn "dms" "ipc" "call" "dock" "toggleAutoHide"; }
-    Mod+Alt+W {spawn-sh "dms ipc call dash toggle wallpaper";}
-    Ctrl+Alt+Delete hotkey-overlay-title="Task Manager" { spawn "dms" "ipc" "call" "processlist" "toggle";}
-    Mod+S { spawn-sh "dms ipc call control-center toggle"; }
+    Mod+Alt+W {spawn "dms" "ipc" "call" "dash" "toggle" "wallpaper";}
+    Mod+S { spawn "dms" "ipc" "call" "control-center" "toggle"; }
     Mod+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
     Mod+Escape { spawn "dms" "ipc" "call" "lock" "lock"; }
     Mod+Period { spawn "dms" "ipc" "call" "spotlight" "toggleQuery" ":"; }
     Alt+F4 { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
+    Mod+Slash { spawn "dms" "ipc" "call" "keybinds" "toggle" "niri"; }
+
+    Print { spawn "dms" "screenshot"; }
+    Shift+Print { spawn "dms" "screenshot" "full"; }
+
+    Mod+Shift+Ctrl+P { spawn "dms" "color" "pick" "-a"; }
+
+    Ctrl+Alt+Delete hotkey-overlay-title="Task Manager" { spawn "dms" "ipc" "call" "processlist" "toggle";}
+    Ctrl+Shift+F1 { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'dgop-kitty' 'kitty --override confirm_os_window_close=0 --class dgop-kitty -e dgop'"; }
 }
 spawn-at-startup "dms" "run"
 spawn-at-startup "dsearch" "serve"

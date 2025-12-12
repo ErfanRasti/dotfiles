@@ -47,6 +47,8 @@ window-rule {
     geometry-corner-radius 12
     open-maximized-to-edges false
     clip-to-geometry true
+    tiled-state true
+    // draw-border-with-background false
 }
 
 window-rule {
@@ -54,6 +56,7 @@ window-rule {
     match title="kitty-dropterm"
     match app-id="yazi"
     match app-id="btop"
+    match title="dgop-kitty"
     default-column-width { proportion 0.6; }
     // default-window-height { proportion 0.7; }
     // open-floating true
@@ -81,11 +84,11 @@ window-rule {
     open-maximized-to-edges true
 }
 
-window-rule {
-    match app-id=r#"^org\.telegram\.desktop$"#
-
-    block-out-from "screencast"
-}
+// window-rule {
+//     match app-id=r#"^org\.telegram\.desktop$"#
+//
+//     block-out-from "screencast"
+// }
 
 window-rule {
     match app-id="gsr-ui"
