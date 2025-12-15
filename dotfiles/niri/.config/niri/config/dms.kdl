@@ -29,7 +29,7 @@ binds {
     Mod+Shift+Ctrl+P { spawn "dms" "color" "pick" "-a"; }
 
     Ctrl+Alt+Delete hotkey-overlay-title="Task Manager" { spawn "dms" "ipc" "call" "processlist" "toggle";}
-    Ctrl+Shift+F1 { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'dgop-kitty' 'kitty --override confirm_os_window_close=0 --class dgop-kitty -e dgop'"; }
+    Ctrl+Shift+F1 { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'kitty' -t 'dgop' 'kitty --override confirm_os_window_close=0 --class kitty --title 'dgop' -e dgop'"; }
 }
 spawn-at-startup "dms" "run"
 spawn-at-startup "dsearch" "serve"
