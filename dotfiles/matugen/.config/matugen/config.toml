@@ -1,3 +1,7 @@
+[config]
+
+version_check = false
+
 [config.custom_colors]
 red = { color = "#f13c40", blend = true }
 green = { color = "#41c257", blend = true }
@@ -14,9 +18,6 @@ brown = { color = "#a57d5a", blend = true }
 black = { color = "#000000", blend = true }
 white = { color = "#ffffff", blend = true }
 
-[config]
-
-version_check = false
 
 [templates.niri]
 input_path = '~/.config/matugen/templates/niri-colors.kdl'
@@ -78,6 +79,7 @@ output_path = '~/.config/gtk-4.0/colors.css'
 [templates.kitty]
 input_path = '~/.config/matugen/templates/kitty-colors.conf'
 output_path = '~/.config/kitty/themes/matugen.conf'
+# post_hook = "kitty @ load-config"
 post_hook = "kitty +kitten themes --reload-in=all matugen"
 
 [templates.btop]
