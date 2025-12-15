@@ -132,7 +132,7 @@
   "workspaceNameIcons": {
     "scratchpad": {
       "type": "icon",
-      "value": "developer_board"
+      "value": "integration_instructions"
     }
   },
   "waveProgressEnabled": true,
@@ -153,9 +153,9 @@
   "appLauncherGridColumns": 4,
   "spotlightCloseNiriOverview": true,
   "niriOverviewOverlayEnabled": true,
-  "weatherLocation": "New York, NY",
-  "weatherCoordinates": "40.7128,-74.0060",
-  "useAutoLocation": true,
+  "weatherLocation": "",
+  "weatherCoordinates": "",
+  "useAutoLocation": false,
   "weatherEnabled": true,
   "networkPreference": "wifi",
   "vpnLastConnected": "",

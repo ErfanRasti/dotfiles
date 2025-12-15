@@ -11,6 +11,7 @@ spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
 spawn-sh-at-startup "wl-clip-persist --clipboard regular"
 spawn-sh-at-startup "systemctl --user stop swaync.service"
 spawn-at-startup "~/.config/niri/scripts/swayidle_ruuner.sh"
+spawn-at-startup "~/.config/hypr/scripts/battery_watcher.sh"
 
 spawn-sh-at-startup "paplay /usr/share/sounds/ocean/stereo/desktop-login.oga"
 
