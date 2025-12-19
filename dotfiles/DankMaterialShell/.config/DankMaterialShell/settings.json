@@ -209,7 +209,7 @@
   "syncModeWithPortal": true,
   "terminalsAlwaysDark": false,
   "showDock": true,
-  "dockAutoHide": true,
+  "dockAutoHide": false,
   "dockGroupByApp": true,
   "dockOpenOnOverview": true,
   "dockPosition": 2,
@@ -230,7 +230,7 @@
   "lockScreenActiveMonitor": "all",
   "lockScreenInactiveColor": "#000000",
   "hideBrightnessSlider": false,
-  "notificationTimeoutLow": 5000,
+  "notificationTimeoutLow": 3000,
   "notificationTimeoutNormal": 5000,
   "notificationTimeoutCritical": 0,
   "notificationPopupPosition": 0,
@@ -274,9 +274,7 @@
       "name": "Main Bar",
       "enabled": true,
       "position": 0,
-      "screenPreferences": [
-        "all"
-      ],
+      "screenPreferences": ["all"],
       "showOnLastDisplay": true,
       "leftWidgets": [
         {
@@ -383,3 +381,4 @@
   ],
   "configVersion": 2
 }
+
