@@ -7,7 +7,13 @@
         }
     ],
     "states": {
+        "mangowc-layout-switcher": {
+            "enabled": true
+        },
         "privacy-indicator": {
+            "enabled": true
+        },
+        "update-count": {
             "enabled": true
         }
     },

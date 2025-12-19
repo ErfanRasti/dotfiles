@@ -203,7 +203,7 @@ paru -S \
 
 echo "!!!!!!!!!!!!!! niri-shells installation"
 $NIRI_SHELLS && paru -S \
-  noctalia-shell wlsunset \
+  noctalia-shell wlsunset gum \
   dms-shell-bin dsearch qt6-multimedia \
   vicinae-bin
 

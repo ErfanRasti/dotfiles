@@ -2,6 +2,7 @@
 
 CONFIG_FILE="$HOME/.config/niri/config.kdl"
 
+# Restart noctalia
 if grep -q '^include "config/noctalia.kdl"' "$CONFIG_FILE"; then
   if pgrep -fx "qs -c noctalia-shell"; then
     pkill -fx "qs -c noctalia-shell"
@@ -9,6 +10,7 @@ if grep -q '^include "config/noctalia.kdl"' "$CONFIG_FILE"; then
   qs -c noctalia-shell
 fi
 
+# Restart dms
 if grep -q '^include "config/dms.kdl"' "$CONFIG_FILE"; then
   if pgrep -x "dms"; then
     dms restart
@@ -17,6 +19,7 @@ if grep -q '^include "config/dms.kdl"' "$CONFIG_FILE"; then
   fi
 fi
 
+# Restart swayidle
 if pgrep -x "swayidle"; then
   pkill -x swayidle
 fi
@@ -24,6 +27,7 @@ fi
 "$HOME"/.config/niri/scripts/swayidle_ruuner.sh &
 disown
 
+# Restart gnome-polkit
 if pgrep -f 'polkit-gnome-authentication-agent-1'; then
   pkill -f 'polkit-gnome-authentication-agent-1'
 fi
