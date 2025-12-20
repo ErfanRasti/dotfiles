@@ -28,7 +28,26 @@ binds {
 
 spawn-at-startup "qs" "-c" "noctalia-shell"
 
+// Set the overview wallpaper on the backdrop.
+// layer-rule {
+//   match namespace="^noctalia-overview*"
+//   place-within-backdrop true
+// }
+
+// Set the regular wallpaper on the backdrop.
 layer-rule {
-    match namespace="^noctalia-overview*"
-    place-within-backdrop true
+  match namespace="^noctalia-wallpaper*"
+  place-within-backdrop true
+}
+
+// Set transparent workspace background color so you see the backdrop at all times.
+layout {
+  background-color "transparent"
+}
+
+// Optionally, disable the workspace shadows in the overview.
+overview {
+  workspace-shadow {
+    off
+  }
 }

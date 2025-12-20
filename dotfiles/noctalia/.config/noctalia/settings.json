@@ -568,7 +568,7 @@
         "hideWallpaperFilenames": false,
         "monitorDirectories": [
         ],
-        "overviewEnabled": true,
+        "overviewEnabled": false,
         "panelPosition": "bottom_center",
         "randomEnabled": false,
         "randomIntervalSec": 300,
