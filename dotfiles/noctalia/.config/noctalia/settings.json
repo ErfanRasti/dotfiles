@@ -285,7 +285,7 @@
     "desktopWidgets": {
         "editMode": false,
         "enabled": true,
-        "gridSnap": false,
+        "gridSnap": true,
         "monitorWidgets": [
             {
                 "name": "eDP-1",
@@ -297,15 +297,15 @@
                         "showBackground": false,
                         "visualizerType": "mirrored",
                         "visualizerVisibility": "with-background",
-                        "x": 1220.83984375,
-                        "y": 776.7695312499999
+                        "x": 24,
+                        "y": 408
                     },
                     {
                         "id": "Weather",
                         "scale": 1.2707943531852854,
                         "showBackground": false,
-                        "x": 41.3359375,
-                        "y": 301.9921875
+                        "x": 24,
+                        "y": 288
                     },
                     {
                         "clockStyle": "digital",
@@ -316,8 +316,8 @@
                         "showBackground": false,
                         "useCustomFont": true,
                         "usePrimaryColor": false,
-                        "x": 48.01953125,
-                        "y": 57.1484375
+                        "x": 24,
+                        "y": 48
                     }
                 ]
             }
@@ -403,7 +403,7 @@
         "autoSchedule": true,
         "dayTemp": "6500",
         "enabled": true,
-        "forced": true,
+        "forced": false,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "nightTemp": "4500"
@@ -570,7 +570,7 @@
         ],
         "overviewEnabled": true,
         "panelPosition": "bottom_center",
-        "randomEnabled": true,
+        "randomEnabled": false,
         "randomIntervalSec": 300,
         "recursiveSearch": true,
         "setWallpaperOnAllMonitors": true,
