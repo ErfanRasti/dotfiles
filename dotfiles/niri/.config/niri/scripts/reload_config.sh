@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 
 CONFIG_FILE="$HOME/.config/niri/config.kdl"
+CONFIG_AUTOSTART_FILE="$HOME/.config/niri/config/autostarts.kdl"
 
 # Restart noctalia
 if grep -q '^include "config/noctalia.kdl"' "$CONFIG_FILE"; then
   if pgrep -fx "qs -c noctalia-shell"; then
     pkill -fx "qs -c noctalia-shell"
   fi
-  qs -c noctalia-shell
+  qs -c noctalia-shell &
+  disown
 fi
 
 # Restart dms
@@ -28,8 +30,15 @@ fi
 disown
 
 # Restart gnome-polkit
-if pgrep -f 'polkit-gnome-authentication-agent-1'; then
-  pkill -f 'polkit-gnome-authentication-agent-1'
+if grep -q '^spawn-sh-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"' "$CONFIG_AUTOSTART_FILE"; then
+  if pgrep -f 'polkit-gnome-authentication-agent-1'; then
+    pkill -f 'polkit-gnome-authentication-agent-1'
+  fi
+
+  sh -c "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & disown"
 fi
 
-sh -c "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & disown"
+# Restart hyprpolkit
+if grep -q '^spawn-sh-at-startup "systemctl --user start hyprpolkitagent.service"' "$CONFIG_AUTOSTART_FILE"; then
+  systemctl --user restart hyprpolkitagent.service
+fi

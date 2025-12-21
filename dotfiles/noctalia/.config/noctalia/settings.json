@@ -294,28 +294,28 @@
                         "hideMode": "idle",
                         "id": "MediaPlayer",
                         "scale": 0.9232393992815642,
-                        "showBackground": false,
+                        "showBackground": true,
                         "visualizerType": "mirrored",
                         "visualizerVisibility": "with-background",
-                        "x": 24,
-                        "y": 408
-                    },
-                    {
-                        "id": "Weather",
-                        "scale": 1.2707943531852854,
-                        "showBackground": false,
                         "x": 24,
                         "y": 288
                     },
                     {
-                        "clockStyle": "digital",
+                        "id": "Weather",
+                        "scale": 1.2707943531852854,
+                        "showBackground": true,
+                        "x": 24,
+                        "y": 168
+                    },
+                    {
+                        "clockStyle": "minimal",
                         "customFont": "CaskaydiaCove Nerd Font Propo",
-                        "format": "HH:mm\\nd MMMM yyyy",
+                        "format": "HH:mm:ss \\n ddd, d MMM yyyy",
                         "id": "Clock",
                         "scale": 1.4698918356248336,
-                        "showBackground": false,
+                        "showBackground": true,
                         "useCustomFont": true,
-                        "usePrimaryColor": false,
+                        "usePrimaryColor": true,
                         "x": 24,
                         "y": 48
                     }
@@ -403,7 +403,7 @@
         "autoSchedule": true,
         "dayTemp": "6500",
         "enabled": true,
-        "forced": false,
+        "forced": true,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "nightTemp": "4500"
