@@ -4,6 +4,7 @@
         "customLaunchPrefixEnabled": false,
         "enableClipPreview": true,
         "enableClipboardHistory": true,
+        "iconMode": "tabler",
         "pinnedExecs": [
         ],
         "position": "bottom_center",
@@ -19,7 +20,6 @@
         "mprisBlacklist": [
         ],
         "preferredPlayer": "",
-        "visualizerQuality": "high",
         "visualizerType": "wave",
         "volumeOverdrive": true,
         "volumeStep": 5
@@ -283,7 +283,6 @@
         }
     },
     "desktopWidgets": {
-        "editMode": false,
         "enabled": true,
         "gridSnap": true,
         "monitorWidgets": [
@@ -318,6 +317,35 @@
                         "usePrimaryColor": true,
                         "x": 24,
                         "y": 48
+                    },
+                    {
+                        "defaultSettings": {
+                            "completedCount": 0,
+                            "count": 0,
+                            "showBackground": true,
+                            "showCompleted": true,
+                            "todos": [
+                            ]
+                        },
+                        "id": "plugin:todo",
+                        "showBackground": true,
+                        "x": 1200,
+                        "y": 48
+                    },
+                    {
+                        "defaultSettings": {
+                            "barWidth": 0.6,
+                            "bloomIntensity": 0.5,
+                            "ringOpacity": 0.8,
+                            "rotationSpeed": 0.5,
+                            "sensitivity": 1.5,
+                            "showBars": true,
+                            "showRings": true
+                        },
+                        "id": "plugin:fancy-audiovisualizer",
+                        "showBackground": true,
+                        "x": 1200,
+                        "y": 528
                     }
                 ]
             }
@@ -328,7 +356,7 @@
         "backgroundOpacity": 0.6,
         "colorizeIcons": false,
         "deadOpacity": 0.6,
-        "displayMode": "exclusive",
+        "displayMode": "auto_hide",
         "enabled": false,
         "floatingRatio": 0,
         "inactiveIndicators": false,
@@ -380,6 +408,8 @@
     "hooks": {
         "darkModeChange": "",
         "enabled": false,
+        "performanceModeDisabled": "",
+        "performanceModeEnabled": "",
         "screenLock": "",
         "screenUnlock": "",
         "wallpaperChange": ""
@@ -535,6 +565,7 @@
         "fuzzel": false,
         "ghostty": false,
         "gtk": false,
+        "hyprland": false,
         "kcolorscheme": false,
         "kitty": false,
         "mango": false,
@@ -550,6 +581,8 @@
         "zed": false
     },
     "ui": {
+        "bluetoothDetailsViewMode": "grid",
+        "bluetoothHideUnnamedDevices": false,
         "fontDefault": "CaskaydiaCove Nerd Font Propo",
         "fontDefaultScale": 1,
         "fontFixed": "CaskaydiaCove Nerd Font Mono",
@@ -557,7 +590,8 @@
         "panelBackgroundOpacity": 1,
         "panelsAttachedToBar": true,
         "settingsPanelMode": "attached",
-        "tooltipsEnabled": true
+        "tooltipsEnabled": true,
+        "wifiDetailsViewMode": "grid"
     },
     "wallpaper": {
         "directory": "~/Pictures/Wallpapers/Unsplash",
@@ -582,6 +616,7 @@
         "wallhavenOrder": "desc",
         "wallhavenPurity": "100",
         "wallhavenQuery": "",
+        "wallhavenRatios": "",
         "wallhavenResolutionHeight": "",
         "wallhavenResolutionMode": "atleast",
         "wallhavenResolutionWidth": "",

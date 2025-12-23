@@ -7,11 +7,14 @@
         }
     ],
     "states": {
+        "fancy-audiovisualizer": {
+            "enabled": true
+        },
         "privacy-indicator": {
             "enabled": true
         },
         "todo": {
-            "enabled": false
+            "enabled": true
         },
         "update-count": {
             "enabled": true
