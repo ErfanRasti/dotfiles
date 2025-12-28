@@ -1,22 +1,22 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "eaf6920"
+rev = "7ca66b4"
 hash = "8a7c58225816a163a6e8730c0adafbc8"
 
 [[plugin.deps]]
 use = "ndtoan96/ouch"
-rev = "41d68cd"
-hash = "c7790dd555aee4adf4d125e200ea8611"
+rev = "cfb9140"
+hash = "b5067143415bd2d46c0dfa57319ddcef"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "eaf6920"
+rev = "7ca66b4"
 hash = "56fdabc96fc1f4d53c96eb884b02a5be"
 
 [[plugin.deps]]
 use = "h-hg/yamb"
-rev = "22af003"
-hash = "7cc42012a7c2099f80064d228feb8d44"
+rev = "5f2e22e"
+hash = "699fe07e0d2d1b4af8dafb84168eeb04"
 
 [[plugin.deps]]
 use = "MasouShizuka/projects"
@@ -25,17 +25,17 @@ hash = "3de26efded35814ba3e55e28f1c389a4"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:diff"
-rev = "eaf6920"
+rev = "7ca66b4"
 hash = "82376c3381ae915fd799d40f4dd4c6cd"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:zoom"
-rev = "eaf6920"
+rev = "7ca66b4"
 hash = "9dee2bf990ea941ccf67df74bca45468"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:vcs-files"
-rev = "eaf6920"
+rev = "7ca66b4"
 hash = "4ee57085277d616acfa0ef1fef37dc00"
 
 [[plugin.deps]]
