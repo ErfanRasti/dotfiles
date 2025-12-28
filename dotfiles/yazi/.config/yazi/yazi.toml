@@ -16,6 +16,14 @@ edit = [
   { run = 'gnome-text-editor "$@"', orphan = true, for = "linux" },
 ]
 
+# bulk-rename activation
+[[opener.bulk-rename]]
+run = 'nvim "$@"'
+block = true
+
+[[open.prepend_rules]]
+name = "bulk-rename.txt"
+use = "bulk-rename"
 
 [[mgr.prepend_keymap]]
 on = "<C-n>"

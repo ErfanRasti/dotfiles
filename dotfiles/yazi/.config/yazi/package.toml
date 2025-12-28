@@ -14,11 +14,6 @@ rev = "7ca66b4"
 hash = "56fdabc96fc1f4d53c96eb884b02a5be"
 
 [[plugin.deps]]
-use = "h-hg/yamb"
-rev = "5f2e22e"
-hash = "699fe07e0d2d1b4af8dafb84168eeb04"
-
-[[plugin.deps]]
 use = "MasouShizuka/projects"
 rev = "a5e33db"
 hash = "3de26efded35814ba3e55e28f1c389a4"
@@ -47,6 +42,11 @@ hash = "77e78e16578e8f5a37475c04d8324619"
 use = "yazi-rs/plugins:mount"
 rev = "eaf6920"
 hash = "4fccaaf10c36dc2466e2438a386ff017"
+
+[[plugin.deps]]
+use = "h-hg/yamb"
+rev = "5f2e22e"
+hash = "699fe07e0d2d1b4af8dafb84168eeb04"
 
 [flavor]
 deps = []
