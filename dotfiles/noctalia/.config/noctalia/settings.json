@@ -160,6 +160,7 @@
                 {
                     "deviceNativePath": "",
                     "displayMode": "alwaysShow",
+                    "hideIfNotDetected": true,
                     "id": "Battery",
                     "showNoctaliaPerformance": false,
                     "showPowerProfiles": false,
@@ -215,7 +216,7 @@
         "generateTemplatesForPredefined": true,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
-        "matugenSchemeType": "scheme-tonal-spot",
+        "matugenSchemeType": "scheme-fruit-salad",
         "predefinedScheme": "Eldritch",
         "schedulingMode": "off",
         "useWallpaperColors": true
@@ -331,21 +332,6 @@
                         "showBackground": true,
                         "x": 1200,
                         "y": 48
-                    },
-                    {
-                        "defaultSettings": {
-                            "barWidth": 0.6,
-                            "bloomIntensity": 0.5,
-                            "ringOpacity": 0.8,
-                            "rotationSpeed": 0.5,
-                            "sensitivity": 1.5,
-                            "showBars": true,
-                            "showRings": true
-                        },
-                        "id": "plugin:fancy-audiovisualizer",
-                        "showBackground": true,
-                        "x": 1200,
-                        "y": 528
                     }
                 ]
             }
@@ -430,7 +416,7 @@
         "wifiEnabled": true
     },
     "nightLight": {
-        "autoSchedule": true,
+        "autoSchedule": false,
         "dayTemp": "6500",
         "enabled": true,
         "forced": true,
@@ -531,7 +517,7 @@
         ],
         "showHeader": true
     },
-    "settingsVersion": 31,
+    "settingsVersion": 32,
     "systemMonitor": {
         "cpuCriticalThreshold": 90,
         "cpuPollingInterval": 2500,
@@ -540,7 +526,7 @@
         "diskCriticalThreshold": 90,
         "diskPollingInterval": 3000,
         "diskWarningThreshold": 80,
-        "enableNvidiaGpu": false,
+        "enableDgpuMonitoring": false,
         "gpuCriticalThreshold": 90,
         "gpuPollingInterval": 3000,
         "gpuWarningThreshold": 80,
@@ -565,6 +551,7 @@
         "fuzzel": false,
         "ghostty": false,
         "gtk": false,
+        "helix": false,
         "hyprland": false,
         "kcolorscheme": false,
         "kitty": false,
@@ -602,7 +589,7 @@
         "hideWallpaperFilenames": false,
         "monitorDirectories": [
         ],
-        "overviewEnabled": false,
+        "overviewEnabled": true,
         "panelPosition": "bottom_center",
         "randomEnabled": false,
         "randomIntervalSec": 300,
