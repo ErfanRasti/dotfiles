@@ -144,7 +144,7 @@
                     "id": "plugin:privacy-indicator"
                 },
                 {
-                    "compactMode": true,
+                    "compactMode": false,
                     "diskPath": "/",
                     "id": "SystemMonitor",
                     "showCpuTemp": true,
