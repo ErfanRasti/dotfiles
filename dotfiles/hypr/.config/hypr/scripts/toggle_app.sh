@@ -2,9 +2,9 @@
 
 # This script toggles app between special:scratchpad and current workspace
 # Handles inputs like:
-#   class:org.gnome.Nautilus
-#   class:(org.gnome.Nautilus)
-#   class:^(org.gnome.SystemMonitor)$
+#   org.gnome.Nautilus
+#   (org.gnome.Nautilus)
+#   ^(org.gnome.SystemMonitor)$
 
 # ./focus_or_launch.sh "class:org.gnome.Nautilus" "nautilus"
 
@@ -21,11 +21,12 @@ FOCUSED_CLASS=$(hyprctl activewindow -j | jq -r '.class' 2>/dev/null)
 
 # Get the class name without "class:" prefix if needed
 # APP_CLASS_CLEAN=$(echo "$APP_CLASS" | sed -E 's/^class[:(]*\^?//; s/\$?\)*$//')
-APP_CLASS_CLEAN=$(echo "$APP_CLASS" | sed -E 's/^class:|\^|\$|\(|\)//g')
+# APP_CLASS_CLEAN=$(echo "$APP_CLASS" | sed -E 's/^|\^|\$|\(|\)//g')
+APP_CLASS_CLEAN=$(echo "$APP_CLASS" | sed -E 's/[()^$]//g')
 
 # If the focused window matches, do nothing
 if [ "$FOCUSED_CLASS" = "$APP_CLASS_CLEAN" ]; then
-  hyprctl dispatch movetoworkspacesilent special:scratchpad,"$APP_CLASS"
+  hyprctl dispatch movetoworkspacesilent special:scratchpad,"class:$APP_CLASS"
 else
-  hyprctl dispatch plugin:xtd:moveorexec "$APP_CLASS","$APP_CMD"
+  hyprctl dispatch plugin:xtd:moveorexec "class:$APP_CLASS,$APP_CMD"
 fi
