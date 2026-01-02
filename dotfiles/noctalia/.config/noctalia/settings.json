@@ -26,7 +26,7 @@
     },
     "bar": {
         "backgroundOpacity": 0,
-        "capsuleOpacity": 1,
+        "capsuleOpacity": 0.5,
         "density": "compact",
         "exclusive": true,
         "floating": false,
@@ -232,7 +232,7 @@
         "generateTemplatesForPredefined": true,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
-        "matugenSchemeType": "scheme-rainbow",
+        "matugenSchemeType": "scheme-fruit-salad",
         "predefinedScheme": "Eldritch",
         "schedulingMode": "off",
         "useWallpaperColors": true
@@ -353,22 +353,6 @@
                         "showBackground": true,
                         "x": 1200,
                         "y": 48
-                    },
-                    {
-                        "defaultSettings": {
-                            "barWidth": 0.6,
-                            "bloomIntensity": 0.5,
-                            "ringOpacity": 0.8,
-                            "rotationSpeed": 0.5,
-                            "sensitivity": 1.5,
-                            "showBars": true,
-                            "showRings": true
-                        },
-                        "id": "plugin:fancy-audiovisualizer",
-                        "scale": 1,
-                        "showBackground": true,
-                        "x": 1200,
-                        "y": 528
                     }
                 ]
             }
@@ -462,7 +446,7 @@
         "nightTemp": "4500"
     },
     "notifications": {
-        "backgroundOpacity": 1,
+        "backgroundOpacity": 0.6,
         "criticalUrgencyDuration": 15,
         "enableKeyboardLayoutToast": true,
         "enabled": true,
@@ -490,7 +474,7 @@
     },
     "osd": {
         "autoHideMs": 2000,
-        "backgroundOpacity": 1,
+        "backgroundOpacity": 0.5,
         "enabled": true,
         "enabledTypes": [
             0,
@@ -619,7 +603,7 @@
         "fontDefaultScale": 1,
         "fontFixed": "CaskaydiaCove Nerd Font Mono",
         "fontFixedScale": 1,
-        "panelBackgroundOpacity": 1,
+        "panelBackgroundOpacity": 0.6099999999999999,
         "panelsAttachedToBar": true,
         "settingsPanelMode": "attached",
         "tooltipsEnabled": true,
