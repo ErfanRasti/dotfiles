@@ -9,7 +9,7 @@ help() {
   echo "  -h,  --help           Show this help message"
 }
 
-NIRI_SHELLS=false
+SHELLS=false
 case "$1" in
 "")
   # No argument passed → do nothing
@@ -21,7 +21,7 @@ case "$1" in
   ;;
 
 -ns | --niri-shells)
-  NIRI_SHELLS=true
+  SHELLS=true
   ;;
 
 *)
@@ -202,7 +202,7 @@ paru -S \
   wdisplays
 
 echo "!!!!!!!!!!!!!! niri-shells installation"
-$NIRI_SHELLS && paru -S \
+$SHELLS && paru -S \
   noctalia-shell wlsunset gum \
   dms-shell-bin dsearch qt6-multimedia \
   vicinae-bin
@@ -237,6 +237,7 @@ hyprpm add https://github.com/zakk4223/hyprland-easymotion
 hyprpm add https://github.com/outfoxxed/hy3
 hyprpm update
 hyprpm enable hyprexpo
+hyprpm enable hyprbars
 hyprpm enable hyprscrolling
 hyprpm enable hyprfocus
 hyprpm enable xtra-dispatchers
