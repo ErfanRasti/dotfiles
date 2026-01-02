@@ -22,6 +22,10 @@ replace_packages() {
   systemctl --user stop vicinae.service
   systemctl --user stop hypridle-runner.service
   systemctl --user stop hyprsunset.service
+
+  if pgrep -x "swayidle"; then
+    pkill -x swayidle
+  fi
   ~/.config/hypr/scripts/swayidle_ruuner.sh &
   disown
 }
@@ -32,6 +36,7 @@ pkill qs
 
 if ! grep -q "^source = ~/.config/hypr/config/noctalia.conf" "$CONFIG_FILE" &&
   ! grep -q "^source = ~/.config/hypr/config/dms.conf" "$CONFIG_FILE"; then
+  pkill swayidle
 
   # Restart swaync
   if grep -q "^exec-once = swaync" "$AUTOSTART_FILE"; then
