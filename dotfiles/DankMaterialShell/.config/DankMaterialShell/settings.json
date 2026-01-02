@@ -274,7 +274,9 @@
       "name": "Main Bar",
       "enabled": true,
       "position": 0,
-      "screenPreferences": ["all"],
+      "screenPreferences": [
+        "all"
+      ],
       "showOnLastDisplay": true,
       "leftWidgets": [
         {
@@ -357,7 +359,7 @@
       ],
       "spacing": 0,
       "innerPadding": -4,
-      "bottomGap": 0,
+      "bottomGap": -4,
       "transparency": 0,
       "widgetTransparency": 1,
       "squareCorners": false,
@@ -381,4 +383,3 @@
   ],
   "configVersion": 2
 }
-
