@@ -48,7 +48,9 @@ window-rule {
     open-maximized-to-edges false
     clip-to-geometry true
     tiled-state true
-    // draw-border-with-background false
+    // https://www.reddit.com/r/niri/comments/1p2zo0q/focus_ring_causes_a_tint_of_that_colour_to_appear/
+    // This will draw border color to the windows (if they are transparent)
+    draw-border-with-background false
 }
 
 window-rule {
