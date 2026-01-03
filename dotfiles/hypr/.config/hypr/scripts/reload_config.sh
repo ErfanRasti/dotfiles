@@ -32,7 +32,8 @@ replace_packages() {
 
 # Reload bar
 pkill qs
-~/.config/hypr/scripts/reload_bar.sh
+~/.config/hypr/scripts/reload_bar.sh &
+disown
 
 if ! grep -q "^source = ~/.config/hypr/config/noctalia.conf" "$CONFIG_FILE" &&
   ! grep -q "^source = ~/.config/hypr/config/dms.conf" "$CONFIG_FILE"; then

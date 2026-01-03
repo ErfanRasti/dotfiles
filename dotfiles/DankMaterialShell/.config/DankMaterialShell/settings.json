@@ -232,7 +232,7 @@
   "hideBrightnessSlider": false,
   "notificationTimeoutLow": 3000,
   "notificationTimeoutNormal": 5000,
-  "notificationTimeoutCritical": 0,
+  "notificationTimeoutCritical": 10000,
   "notificationPopupPosition": 0,
   "osdAlwaysShowValue": true,
   "osdPosition": 4,
