@@ -318,17 +318,17 @@
                         "visualizerType": "wave",
                         "visualizerVisibility": "with-background",
                         "x": 24,
-                        "y": 288
+                        "y": 408
                     },
                     {
                         "id": "Weather",
                         "scale": 1.2707943531852854,
                         "showBackground": true,
                         "x": 24,
-                        "y": 168
+                        "y": 288
                     },
                     {
-                        "clockStyle": "minimal",
+                        "clockStyle": "analog",
                         "customFont": "CaskaydiaCove Nerd Font Propo",
                         "format": "HH:mm:ss \\n ddd, d MMM yyyy",
                         "id": "Clock",
