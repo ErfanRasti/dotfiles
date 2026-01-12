@@ -45,12 +45,12 @@ layer-rule {
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
     geometry-corner-radius 12
-    open-maximized-to-edges false
+    // open-maximized-to-edges false
     clip-to-geometry true
     tiled-state true
     // https://www.reddit.com/r/niri/comments/1p2zo0q/focus_ring_causes_a_tint_of_that_colour_to_appear/
     // This will draw border color to the windows (if they are transparent)
-    draw-border-with-background false
+    // draw-border-with-background false
 }
 
 window-rule {

@@ -235,7 +235,7 @@
         "generateTemplatesForPredefined": true,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
-        "matugenSchemeType": "scheme-fruit-salad",
+        "matugenSchemeType": "scheme-tonal-spot",
         "predefinedScheme": "Eldritch",
         "schedulingMode": "off",
         "useWallpaperColors": true
@@ -455,7 +455,7 @@
         "nightTemp": "4500"
     },
     "notifications": {
-        "backgroundOpacity": 0.6,
+        "backgroundOpacity": 1,
         "criticalUrgencyDuration": 15,
         "enableKeyboardLayoutToast": true,
         "enabled": true,
@@ -483,7 +483,7 @@
     },
     "osd": {
         "autoHideMs": 2000,
-        "backgroundOpacity": 0.5,
+        "backgroundOpacity": 1,
         "enabled": true,
         "enabledTypes": [
             0,
@@ -619,7 +619,7 @@
         "tooltipsEnabled": true
     },
     "wallpaper": {
-        "directory": "~/Pictures/Wallpapers/Unsplash",
+        "directory": "/home/user/wallpapers",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "fillColor": "#000000",
