@@ -99,11 +99,6 @@ input_path = '~/.config/matugen/templates/spicetify.ini'
 output_path = '~/.config/spicetify/Themes/matugen/color.ini'
 # post_hook = '~/.config/matugen/scripts/spiceitfy_theme_apply.sh'
 
-[templates.pywalfox]
-input_path = '~/.config/matugen/templates/pywalfox-colors.json'
-output_path = '~/.cache/wal/colors.json'
-post_hook = 'pywalfox update'
-
 [templates.cava]
 input_path = '~/.config/matugen/templates/cava-colors.ini'
 output_path = '~/.config/cava/themes/matugen-theme'
@@ -121,6 +116,11 @@ output_path = '~/.config/ghostty/themes/Matugen'
 [templates.micro]
 input_path = '~/.config/matugen/templates/micro.micro'
 output_path = '~/.config/micro/colorschemes/matugen.micro'
+
+[templates.pywalfox]
+input_path = '~/.config/matugen/templates/pywalfox-colors.json'
+output_path = '~/.cache/wal/colors.json'
+post_hook = 'pywalfox update'
 
 [templates.zed]
 input_path = '~/.config/matugen/templates/zed-colors.json'

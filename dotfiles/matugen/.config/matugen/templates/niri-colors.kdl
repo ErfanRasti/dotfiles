@@ -2,14 +2,14 @@ layout {
 
     // background-color "{{colors.primary.default.hex}}"
     focus-ring {
-        active-gradient from="{{colors.primary.default.hex}}" to="{{colors.tertiary.default.hex}}" angle=135
-        inactive-gradient from="{{colors.secondary_container.default.hex}}" to="{{colors.tertiary_container.default.hex}}" angle=135 relative-to="workspace-view"
+        active-gradient from="{{colors.primary.default.hex}}" to="{{colors.tertiary.default.hex}}" angle=135 in="oklch longer hue"
+        inactive-gradient from="{{colors.secondary_container.default.hex}}" to="{{colors.tertiary_container.default.hex}}" angle=135 relative-to="workspace-view" in="oklch longer hue"
         urgent-gradient from="{{colors.error.default.hex}}" to="{{colors.error_container.default.hex}}" angle=135
     }
 
     border {
-        active-gradient from="{{colors.primary.default.hex}}" to="{{colors.tertiary.default.hex}}" angle=135
-        inactive-gradient from="{{colors.secondary_container.default.hex}}" to="{{colors.tertiary_container.default.hex}}" angle=135 relative-to="workspace-view"
+        active-gradient from="{{colors.primary.default.hex}}" to="{{colors.tertiary.default.hex}}" angle=135 in="oklch longer hue"
+        inactive-gradient from="{{colors.secondary_container.default.hex}}" to="{{colors.tertiary_container.default.hex}}" angle=135 relative-to="workspace-view" in="oklch longer hue"
         urgent-gradient from="{{colors.error.default.hex}}" to="{{colors.error_container.default.hex}}" angle=135
     }
 
