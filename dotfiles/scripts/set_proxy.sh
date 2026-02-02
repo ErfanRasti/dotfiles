@@ -9,11 +9,13 @@ apply_gnome_proxy() {
     proxy_host=$(gsettings get org.gnome.system.proxy.http host | tr -d "'")
     local proxy_port
     proxy_port=$(gsettings get org.gnome.system.proxy.http port)
+    local url="socks5h://$proxy_host:$proxy_port"
 
-    export http_proxy="http://$proxy_host:$proxy_port"
-    export https_proxy="http://$proxy_host:$proxy_port"
-    export ftp_proxy="http://$proxy_host:$proxy_port"
-    export socks_proxy="http://$proxy_host:$proxy_port"
+    export ALL_PROXY="$url"
+    export http_proxy="$url"
+    export https_proxy="$url"
+    export ftp_proxy="$url"
+    export socks_proxy="$url"
     export no_proxy="localhost,127.0.0.1"
     # export no_proxy="localhost,  127.0.0.0/8,  ::1"
   elif [[ "$proxy_mode" == "'none'" ]]; then
