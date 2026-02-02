@@ -1,6 +1,9 @@
 cursor {
     xcursor-theme "Bibata-Modern-Classic"
     xcursor-size 20
+
+    hide-when-typing
+    // hide-after-inactive-ms 1000
 }
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
