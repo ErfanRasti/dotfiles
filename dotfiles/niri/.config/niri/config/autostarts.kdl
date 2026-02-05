@@ -10,11 +10,11 @@ spawn-sh-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
 spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
 spawn-sh-at-startup "wl-clip-persist --clipboard regular"
-spawn-sh-at-startup "systemctl --user stop swaync.service"
 spawn-at-startup "~/.config/niri/scripts/swayidle_ruuner.sh"
 spawn-at-startup "~/.config/hypr/scripts/battery_watcher.sh"
 spawn-sh-at-startup "~/.config/hypr/scripts/hypr_resume.sh restore"
 
 spawn-sh-at-startup "paplay /usr/share/sounds/ocean/stereo/desktop-login.oga"
+spawn-sh-at-startup "systemctl --user stop swaync.service;pkill swaync"
 
 

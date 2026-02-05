@@ -196,12 +196,12 @@
       "type": "regex"
     }
   ],
-  "centeringMode": "index",
+  "centeringMode": "geometric",
   "clockDateFormat": "ddd MMM d",
   "lockDateFormat": "ddd MMM d",
   "mediaSize": 1,
   "appLauncherViewMode": "grid",
-  "spotlightModalViewMode": "grid",
+  "spotlightModalViewMode": "list",
   "sortAppsAlphabetically": false,
   "appLauncherGridColumns": 4,
   "spotlightCloseNiriOverview": true,
@@ -269,9 +269,11 @@
   "launchPrefix": "",
   "brightnessDevicePins": {},
   "wifiNetworkPins": {
-    "preferredWifi": "ERS"
+    "preferredWifi": []
   },
-  "bluetoothDevicePins": {},
+  "bluetoothDevicePins": {
+    "preferredDevice": []
+  },
   "audioInputDevicePins": {},
   "audioOutputDevicePins": {},
   "gtkThemingEnabled": false,
@@ -382,9 +384,7 @@
       "name": "Main Bar",
       "enabled": true,
       "position": 0,
-      "screenPreferences": [
-        "all"
-      ],
+      "screenPreferences": ["all"],
       "showOnLastDisplay": true,
       "leftWidgets": [
         {
@@ -487,7 +487,8 @@
       "visible": true,
       "popupGapsAuto": true,
       "popupGapsManual": 0,
-      "widgetOutlineEnabled": false
+      "widgetOutlineEnabled": false,
+      "shadowColorMode": "text"
     }
   ],
   "desktopClockEnabled": false,
@@ -514,9 +515,7 @@
   "desktopClockY": -1,
   "desktopClockWidth": 280,
   "desktopClockHeight": 180,
-  "desktopClockDisplayPreferences": [
-    "all"
-  ],
+  "desktopClockDisplayPreferences": ["all"],
   "systemMonitorEnabled": false,
   "systemMonitorShowHeader": true,
   "systemMonitorTransparency": 0.8,
@@ -553,9 +552,7 @@
   "systemMonitorY": -1,
   "systemMonitorWidth": 320,
   "systemMonitorHeight": 480,
-  "systemMonitorDisplayPreferences": [
-    "all"
-  ],
+  "systemMonitorDisplayPreferences": ["all"],
   "systemMonitorVariants": [],
   "desktopWidgetPositions": {},
   "desktopWidgetGridSettings": {},
@@ -573,9 +570,7 @@
         "showDate": true,
         "showAnalogNumbers": false,
         "showAnalogSeconds": true,
-        "displayPreferences": [
-          "all"
-        ]
+        "displayPreferences": ["all"]
       },
       "positions": {
         "eDP-1": {
@@ -595,3 +590,4 @@
   },
   "configVersion": 5
 }
+
