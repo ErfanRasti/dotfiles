@@ -1,20 +1,26 @@
 * {
-    primary: {{colors.primary.default.hex}}ee;
+    // primary: {{colors.primary.default.hex}}ee;
+    primary: {{colors.primary.default.hex}};
     primary-fixed: {{colors.primary_fixed.default.hex}};
     primary-fixed-dim: {{colors.primary_fixed_dim.default.hex}};
-    on-primary: {{colors.on_primary.default.hex}}ee;
+    // on-primary: {{colors.on_primary.default.hex}}ee;
+    on-primary: {{colors.on_primary.default.hex}};
     on-primary-fixed: {{colors.on_primary_fixed.default.hex}};
     on-primary-fixed-variant: {{colors.on_primary_fixed_variant.default.hex}};
     primary-container: {{colors.primary_container.default.hex}};
     on-primary-container: {{colors.on_primary_container.default.hex}};
-    secondary: {{colors.secondary.default.hex}}bb;
+    // secondary: {{colors.secondary.default.hex}}bb;
+    secondary: {{colors.secondary.default.hex}};
     secondary-fixed: {{colors.secondary_fixed.default.hex}};
     secondary-fixed-dim: {{colors.secondary_fixed_dim.default.hex}};
-    on-secondary: {{colors.on_secondary.default.hex}}bb;
+    // on-secondary: {{colors.on_secondary.default.hex}}bb;
+    on-secondary: {{colors.on_secondary.default.hex}};
     on-secondary-fixed: {{colors.on_secondary_fixed.default.hex}};
     on-secondary-fixed-variant: {{colors.on_secondary_fixed_variant.default.hex}};
-    secondary-container: {{colors.secondary_container.default.hex}}bb;
-    on-secondary-container: {{colors.on_secondary_container.default.hex}}bb;
+    // secondary-container: {{colors.secondary_container.default.hex}}bb;
+    secondary-container: {{colors.secondary_container.default.hex}};
+    // on-secondary-container: {{colors.on_secondary_container.default.hex}}bb;
+    on-secondary-container: {{colors.on_secondary_container.default.hex}};
     tertiary: {{colors.tertiary.default.hex}};
     tertiary-fixed: {{colors.tertiary_fixed.default.hex}};
     tertiary-fixed-dim: {{colors.tertiary_fixed_dim.default.hex}};
@@ -22,13 +28,20 @@
     on-tertiary-fixed: {{colors.on_tertiary_fixed.default.hex}};
     on-tertiary-fixed-variant: {{colors.on_tertiary_fixed_variant.default.hex}};
     tertiary-container: {{colors.tertiary_container.default.hex}}99;
-    on-tertiary-container: {{colors.on_tertiary_container.default.hex}}bb;
-    error: {{colors.error.default.hex}}bb;
-    on-error: {{colors.on_error.default.hex}}bb;
-    error-container: {{colors.error_container.default.hex}}cc;
-    on-error-container: {{colors.on_error_container.default.hex}}cc;
+    // on-tertiary-container: {{colors.on_tertiary_container.default.hex}}bb;
+    on-tertiary-container: {{colors.on_tertiary_container.default.hex}};
+    // error: {{colors.error.default.hex}}bb;
+    // on-error: {{colors.on_error.default.hex}}bb;
+    // error-container: {{colors.error_container.default.hex}}cc;
+    // on-error-container: {{colors.on_error_container.default.hex}}cc;
+    // surface-tint: {{colors.surface_tint.default.hex}};
+    // surface: {{colors.surface.default.hex}}99;  /* 60% opacity */
+    error: {{colors.error.default.hex}};
+    on-error: {{colors.on_error.default.hex}};
+    error-container: {{colors.error_container.default.hex}};
+    on-error-container: {{colors.on_error_container.default.hex}};
     surface-tint: {{colors.surface_tint.default.hex}};
-    surface: {{colors.surface.default.hex}}99;  /* 60% opacity */
+    surface: {{colors.surface.default.hex}};  /* 60% opacity */
     on-surface: {{colors.on_surface.default.hex}};
     on-surface-variant: {{colors.on_surface_variant.default.hex}};
     outline: {{colors.outline.default.hex}};
@@ -36,15 +49,24 @@
     shadow: {{colors.shadow.default.hex}};
     scrim: {{colors.scrim.default.hex}};
     inverse-surface: {{colors.inverse_surface.default.hex}};
-    inverse-on-surface: {{colors.inverse_on_surface.default.hex}}bb;
+    // inverse-on-surface: {{colors.inverse_on_surface.default.hex}}bb;
+    inverse-on-surface: {{colors.inverse_on_surface.default.hex}};
     inverse-primary: {{colors.inverse_primary.default.hex}};
-    surface-dim: {{colors.surface_dim.default.hex}}99;  /* 60% opacity */
-    surface-bright: {{colors.surface_bright.default.hex}}99;  /* 60% opacity */
-    surface-container-lowest: {{colors.surface_container_lowest.default.hex}}bb;  /* 70% opacity */
-    surface-container-low: {{colors.surface_container_low.default.hex}}bb;  /* 70% opacity */
-    surface-container: {{colors.surface_container.default.hex}}bb;  /* 70% opacity */
-    surface-container-high: {{colors.surface_container_high.default.hex}}bb;  /* 70% opacity */
-    surface-container-highest: {{colors.surface_container_highest.default.hex}}bb;  /* 70% opacity */
+    // surface-dim: {{colors.surface_dim.default.hex}}99;  /* 60% opacity */
+    // surface-bright: {{colors.surface_bright.default.hex}}99;  /* 60% opacity */
+    // surface-container-lowest: {{colors.surface_container_lowest.default.hex}}bb;  /* 70% opacity */
+    // surface-container-low: {{colors.surface_container_low.default.hex}}bb;  /* 70% opacity */
+    // surface-container: {{colors.surface_container.default.hex}}bb;  /* 70% opacity */
+    // surface-container-high: {{colors.surface_container_high.default.hex}}bb;  /* 70% opacity */
+    // surface-container-highest: {{colors.surface_container_highest.default.hex}}bb;  /* 70% opacity */
+    surface-dim: {{colors.surface_dim.default.hex}};  /* 60% opacity */
+    surface-bright: {{colors.surface_bright.default.hex}};  /* 60% opacity */
+    surface-container-lowest: {{colors.surface_container_lowest.default.hex}};  /* 70% opacity */
+    surface-container-low: {{colors.surface_container_low.default.hex}};  /* 70% opacity */
+    surface-container: {{colors.surface_container.default.hex}};  /* 70% opacity */
+    surface-container-high: {{colors.surface_container_high.default.hex}};  /* 70% opacity */
+    surface-container-highest: {{colors.surface_container_highest.default.hex}};  /* 70% opacity */
+
     wallpaper-image-width: url("{{image}}", width);
     wallpaper-image-height: url("{{image}}", height);
 }
