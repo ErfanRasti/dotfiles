@@ -36,7 +36,7 @@
     "bar": {
         "autoHideDelay": 500,
         "autoShowDelay": 150,
-        "backgroundOpacity": 0,
+        "backgroundOpacity": 1,
         "barType": "simple",
         "capsuleOpacity": 1,
         "density": "compact",
@@ -49,7 +49,7 @@
         "marginVertical": 0,
         "monitors": [
         ],
-        "outerCorners": false,
+        "outerCorners": true,
         "position": "top",
         "screenOverrides": [
         ],
@@ -84,13 +84,13 @@
                     "visualizerType": "wave"
                 },
                 {
+                    "clockColor": "none",
                     "customFont": "",
                     "formatHorizontal": "HH:mm:ss | ddd, MMM dd",
                     "formatVertical": "HH mm ss - dd MM",
                     "id": "Clock",
                     "tooltipFormat": "HH:mm ddd, MMM dd",
-                    "useCustomFont": false,
-                    "usePrimaryColor": true
+                    "useCustomFont": false
                 },
                 {
                     "id": "PowerProfile"
@@ -123,6 +123,7 @@
                     "id": "Workspace",
                     "labelMode": "index+name",
                     "occupiedColor": "secondary",
+                    "pillSize": 0.6,
                     "reverseScroll": false,
                     "showApplications": true,
                     "showBadge": true,
@@ -179,8 +180,9 @@
                     "showCpuFreq": false,
                     "showCpuTemp": true,
                     "showCpuUsage": true,
-                    "showDiskAsFree": false,
+                    "showDiskAvailable": false,
                     "showDiskUsage": false,
+                    "showDiskUsageAsPercent": false,
                     "showGpuTemp": false,
                     "showLoadAverage": false,
                     "showMemoryAsPercent": false,
@@ -209,14 +211,13 @@
                     "id": "Bluetooth"
                 },
                 {
-                    "deviceNativePath": "",
-                    "displayMode": "alwaysShow",
+                    "deviceNativePath": "__default__",
+                    "displayMode": "graphic",
                     "hideIfIdle": false,
                     "hideIfNotDetected": true,
                     "id": "Battery",
                     "showNoctaliaPerformance": true,
-                    "showPowerProfiles": true,
-                    "warningThreshold": 30
+                    "showPowerProfiles": true
                 },
                 {
                     "colorizeDistroLogo": true,
@@ -393,8 +394,8 @@
         "backgroundOpacity": 0.6,
         "colorizeIcons": false,
         "deadOpacity": 0.5000000000000002,
-        "displayMode": "exclusive",
-        "enabled": false,
+        "displayMode": "auto_hide",
+        "enabled": true,
         "floatingRatio": 0.20000000000000007,
         "inactiveIndicators": false,
         "monitors": [
@@ -422,10 +423,10 @@
     },
     "general": {
         "allowPanelsOnScreenWithoutBar": true,
-        "allowPasswordWithFprintd": false,
+        "allowPasswordWithFprintd": true,
         "animationDisabled": false,
         "animationSpeed": 1.6,
-        "autoStartAuth": false,
+        "autoStartAuth": true,
         "avatarImage": "~/Pictures/MyImages/ERS.jpg",
         "boxRadiusRatio": 1,
         "compactLockScreen": false,
@@ -493,6 +494,8 @@
     },
     "notifications": {
         "backgroundOpacity": 1,
+        "batteryCriticalThreshold": 5,
+        "batteryWarningThreshold": 20,
         "criticalUrgencyDuration": 15,
         "enableKeyboardLayoutToast": true,
         "enableMediaToast": false,
@@ -581,12 +584,14 @@
         "showHeader": true,
         "showNumberLabels": true
     },
-    "settingsVersion": 46,
+    "settingsVersion": 47,
     "systemMonitor": {
         "cpuCriticalThreshold": 90,
-        "cpuPollingInterval": 2500,
+        "cpuPollingInterval": 3000,
         "cpuWarningThreshold": 80,
         "criticalColor": "#ffb4ab",
+        "diskAvailCriticalThreshold": 10,
+        "diskAvailWarningThreshold": 20,
         "diskCriticalThreshold": 90,
         "diskPollingInterval": 3000,
         "diskWarningThreshold": 80,
@@ -603,7 +608,6 @@
         "swapCriticalThreshold": 90,
         "swapWarningThreshold": 80,
         "tempCriticalThreshold": 90,
-        "tempPollingInterval": 2750,
         "tempWarningThreshold": 80,
         "useCustomColors": false,
         "warningColor": "#a0cfcd"
