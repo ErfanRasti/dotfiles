@@ -259,4 +259,6 @@ binds {
   Mod+Period hotkey-overlay-title="Open rofi emoji panel" { spawn "~/.config/rofi/emoji/run.sh"; }
 
   Mod+R { spawn "~/.config/niri/scripts/reload_config.sh"; }
+
+  Caps_Lock {spawn-sh "paplay /usr/share/sounds/ocean/stereo/bell.oga";}
 }

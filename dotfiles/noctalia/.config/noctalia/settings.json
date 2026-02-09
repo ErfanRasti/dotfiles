@@ -12,6 +12,7 @@
         "enableWindowsSearch": true,
         "iconMode": "tabler",
         "ignoreMouseInput": false,
+        "overviewLayer": false,
         "pinnedApps": [
         ],
         "position": "bottom_center",
@@ -29,7 +30,7 @@
         ],
         "preferredPlayer": "",
         "visualizerType": "wave",
-        "volumeFeedback": false,
+        "volumeFeedback": true,
         "volumeOverdrive": true,
         "volumeStep": 5
     },
@@ -454,9 +455,20 @@
         "enableShadows": false,
         "forceBlackScreenCorners": false,
         "iRadiusRatio": 1,
+        "keybinds": {
+            "keyDown": "Down",
+            "keyEnter": "Return",
+            "keyEscape": "Esc",
+            "keyLeft": "Left",
+            "keyRight": "Right",
+            "keyUp": "Up"
+        },
         "language": "",
         "lockOnSuspend": true,
+        "lockScreenAnimations": false,
         "lockScreenCountdownDuration": 10000,
+        "lockScreenMonitors": [
+        ],
         "radiusRatio": 0.5,
         "scaleRatio": 1,
         "screenRadiusRatio": 1,
@@ -506,7 +518,7 @@
         "autoSchedule": false,
         "dayTemp": "6500",
         "enabled": true,
-        "forced": true,
+        "forced": false,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "nightTemp": "4500"
@@ -666,7 +678,7 @@
         "wifiDetailsViewMode": "grid"
     },
     "wallpaper": {
-        "automationEnabled": false,
+        "automationEnabled": true,
         "directory": "/home/user/Pictures/Wallpapers/Unsplash",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
@@ -677,7 +689,7 @@
         ],
         "overviewEnabled": true,
         "panelPosition": "bottom_center",
-        "randomIntervalSec": 300,
+        "randomIntervalSec": 600,
         "setWallpaperOnAllMonitors": true,
         "showHiddenFiles": false,
         "solidColor": "#1a1a2e",
@@ -687,7 +699,7 @@
         "transitionType": "random",
         "useSolidColor": false,
         "useWallhaven": false,
-        "viewMode": "recursive",
+        "viewMode": "browse",
         "wallhavenApiKey": "",
         "wallhavenCategories": "111",
         "wallhavenOrder": "desc",
