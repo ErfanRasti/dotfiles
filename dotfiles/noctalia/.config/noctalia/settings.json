@@ -6,8 +6,10 @@
         "clipboardWrapText": true,
         "customLaunchPrefix": "",
         "customLaunchPrefixEnabled": false,
+        "density": "default",
         "enableClipPreview": true,
         "enableClipboardHistory": true,
+        "enableSessionSearch": true,
         "enableSettingsSearch": true,
         "enableWindowsSearch": true,
         "iconMode": "tabler",
@@ -200,7 +202,8 @@
                     "showNetworkStats": false,
                     "showSwapUsage": false,
                     "textColor": "tertiary",
-                    "useMonospaceFont": true
+                    "useMonospaceFont": true,
+                    "usePadding": true
                 },
                 {
                     "displayMode": "onhover",
@@ -409,7 +412,7 @@
     },
     "dock": {
         "animationSpeed": 1,
-        "backgroundOpacity": 0.6,
+        "backgroundOpacity": 0.8,
         "colorizeIcons": false,
         "deadOpacity": 0.5000000000000002,
         "displayMode": "auto_hide",
@@ -436,7 +439,7 @@
             "org.gnome.Software"
         ],
         "pinnedStatic": true,
-        "position": "left",
+        "position": "right",
         "size": 0.6
     },
     "general": {
@@ -456,19 +459,42 @@
         "forceBlackScreenCorners": false,
         "iRadiusRatio": 1,
         "keybinds": {
-            "keyDown": "Down",
-            "keyEnter": "Return",
-            "keyEscape": "Esc",
-            "keyLeft": "Left",
-            "keyRight": "Right",
-            "keyUp": "Up"
+            "keyDown": [
+                "Down",
+                "Ctrl+J"
+            ],
+            "keyEnter": [
+                "Return",
+                " "
+            ],
+            "keyEscape": [
+                "Esc",
+                "Ctrl+Q"
+            ],
+            "keyLeft": [
+                "Left",
+                "Ctrl+H"
+            ],
+            "keyRemove": [
+                "Del"
+            ],
+            "keyRight": [
+                "Right",
+                "Ctrl+L"
+            ],
+            "keyUp": [
+                "Up",
+                "Ctrl+K"
+            ]
         },
         "language": "",
         "lockOnSuspend": true,
-        "lockScreenAnimations": false,
+        "lockScreenAnimations": true,
+        "lockScreenBlur": 0,
         "lockScreenCountdownDuration": 10000,
         "lockScreenMonitors": [
         ],
+        "lockScreenTint": 0,
         "radiusRatio": 0.5,
         "scaleRatio": 1,
         "screenRadiusRatio": 1,
@@ -483,13 +509,13 @@
     },
     "hooks": {
         "darkModeChange": "",
-        "enabled": false,
+        "enabled": true,
         "performanceModeDisabled": "",
         "performanceModeEnabled": "",
         "screenLock": "",
         "screenUnlock": "",
-        "session": "",
-        "startup": "",
+        "session": "paplay \"/usr/share/sounds/ocean/stereo/desktop-logout.oga\"",
+        "startup": "pkill swaync;notify-send 'Noctalia Loaded'",
         "wallpaperChange": ""
     },
     "location": {
@@ -518,7 +544,7 @@
         "autoSchedule": false,
         "dayTemp": "6500",
         "enabled": true,
-        "forced": false,
+        "forced": true,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "nightTemp": "4500"
@@ -526,6 +552,7 @@
     "notifications": {
         "backgroundOpacity": 1,
         "criticalUrgencyDuration": 15,
+        "density": "default",
         "enableBatteryToast": true,
         "enableKeyboardLayoutToast": true,
         "enableMediaToast": false,
@@ -568,7 +595,7 @@
         "overlayLayer": true
     },
     "plugins": {
-        "autoUpdate": false
+        "autoUpdate": true
     },
     "sessionMenu": {
         "countdownDuration": 10000,
@@ -582,48 +609,47 @@
                 "command": "",
                 "countdownEnabled": true,
                 "enabled": true,
-                "keybind": ""
+                "keybind": "1"
             },
             {
                 "action": "suspend",
                 "command": "",
                 "countdownEnabled": true,
                 "enabled": true,
-                "keybind": ""
+                "keybind": "2"
             },
             {
                 "action": "reboot",
                 "command": "",
                 "countdownEnabled": true,
                 "enabled": true,
-                "keybind": ""
+                "keybind": "4"
             },
             {
                 "action": "logout",
                 "command": "",
                 "countdownEnabled": true,
                 "enabled": true,
-                "keybind": ""
+                "keybind": "5"
             },
             {
                 "action": "shutdown",
                 "command": "",
                 "countdownEnabled": true,
                 "enabled": true,
-                "keybind": ""
+                "keybind": "6"
             },
             {
                 "action": "hibernate",
                 "command": "",
                 "countdownEnabled": true,
                 "enabled": true,
-                "keybind": ""
+                "keybind": "3"
             }
         ],
-        "showHeader": true,
-        "showNumberLabels": true
+        "showHeader": true
     },
-    "settingsVersion": 49,
+    "settingsVersion": 53,
     "systemMonitor": {
         "batteryCriticalThreshold": 5,
         "batteryWarningThreshold": 20,
@@ -678,20 +704,77 @@
         "wifiDetailsViewMode": "grid"
     },
     "wallpaper": {
-        "automationEnabled": true,
-        "directory": "/home/user/Pictures/Wallpapers/Unsplash",
+        "automationEnabled": false,
+        "directory": "~/Pictures/Wallpapers/Unsplash",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
+        "favorites": [
+            {
+                "colorScheme": "Eldritch",
+                "darkMode": false,
+                "generationMethod": "tonal-spot",
+                "paletteColors": [
+                    "#00639b",
+                    "#51606f",
+                    "#68587a",
+                    "#ba1a1a"
+                ],
+                "path": "/home/user/Pictures/Wallpapers/Unsplash/hu-chen--ibpQdaorT8-unsplash.jpg",
+                "useWallpaperColors": true
+            },
+            {
+                "colorScheme": "Eldritch",
+                "darkMode": true,
+                "generationMethod": "tonal-spot",
+                "paletteColors": [
+                    "#dbb8ff",
+                    "#d0c1da",
+                    "#f2b7bf",
+                    "#ffb4ab"
+                ],
+                "path": "/home/user/Pictures/Wallpapers/Unsplash/adam-borkowski-yQTiLD7PSOo-unsplash.jpg",
+                "useWallpaperColors": true
+            },
+            {
+                "colorScheme": "Eldritch",
+                "darkMode": true,
+                "generationMethod": "tonal-spot",
+                "paletteColors": [
+                    "#ffb2bb",
+                    "#e5bdc0",
+                    "#e9bf8f",
+                    "#ffb4ab"
+                ],
+                "path": "/home/user/Pictures/Wallpapers/Unsplash/alexey-demidov-wcfUinlKuAc-unsplash.jpg",
+                "useWallpaperColors": true
+            },
+            {
+                "colorScheme": "Eldritch",
+                "darkMode": true,
+                "generationMethod": "tonal-spot",
+                "paletteColors": [
+                    "#d7c950",
+                    "#cec7a3",
+                    "#a6d0b8",
+                    "#ffb4ab"
+                ],
+                "path": "/home/user/Pictures/Wallpapers/Unsplash/karsten-winegeart-CwHiGEfWgRo-unsplash.jpg",
+                "useWallpaperColors": true
+            }
+        ],
         "fillColor": "#000000",
         "fillMode": "crop",
         "hideWallpaperFilenames": false,
         "monitorDirectories": [
         ],
+        "overviewBlur": 1,
         "overviewEnabled": true,
+        "overviewTint": 0.1,
         "panelPosition": "bottom_center",
         "randomIntervalSec": 600,
         "setWallpaperOnAllMonitors": true,
-        "showHiddenFiles": false,
+        "showHiddenFiles": true,
+        "skipStartupTransition": false,
         "solidColor": "#1a1a2e",
         "sortOrder": "name",
         "transitionDuration": 1500,

@@ -260,5 +260,5 @@ binds {
 
   Mod+R { spawn "~/.config/niri/scripts/reload_config.sh"; }
 
-  Caps_Lock {spawn-sh "paplay /usr/share/sounds/ocean/stereo/bell.oga";}
+//  Caps_Lock {spawn-sh "paplay /usr/share/sounds/ocean/stereo/bell.oga";}
 }
