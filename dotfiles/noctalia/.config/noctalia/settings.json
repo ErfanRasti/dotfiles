@@ -85,7 +85,7 @@
                     "showArtistFirst": true,
                     "showProgressRing": true,
                     "showVisualizer": true,
-                    "textColor": "none",
+                    "textColor": "secondary",
                     "useFixedWidth": false,
                     "visualizerType": "wave"
                 },
@@ -176,13 +176,6 @@
                     "id": "KeyboardLayout",
                     "showIcon": true,
                     "textColor": "none"
-                },
-                {
-                    "defaultSettings": {
-                        "hideInactive": false,
-                        "removeMargins": false
-                    },
-                    "id": "plugin:privacy-indicator"
                 },
                 {
                     "compactMode": false,
@@ -533,10 +526,12 @@
         "weatherShowEffects": true
     },
     "network": {
+        "airplaneModeEnabled": false,
         "bluetoothDetailsViewMode": "grid",
-        "bluetoothHideUnnamedDevices": false,
+        "bluetoothHideUnnamedDevices": true,
         "bluetoothRssiPollIntervalMs": 10000,
         "bluetoothRssiPollingEnabled": true,
+        "disableDiscoverability": false,
         "wifiDetailsViewMode": "grid",
         "wifiEnabled": true
     },
@@ -645,33 +640,35 @@
                 "countdownEnabled": true,
                 "enabled": true,
                 "keybind": "3"
+            },
+            {
+                "action": "rebootToUefi",
+                "command": "",
+                "countdownEnabled": true,
+                "enabled": true,
+                "keybind": ""
             }
         ],
-        "showHeader": true
+        "showHeader": true,
+        "showKeybinds": true
     },
     "settingsVersion": 53,
     "systemMonitor": {
         "batteryCriticalThreshold": 5,
         "batteryWarningThreshold": 20,
         "cpuCriticalThreshold": 90,
-        "cpuPollingInterval": 3000,
         "cpuWarningThreshold": 80,
         "criticalColor": "#ffb4ab",
         "diskAvailCriticalThreshold": 10,
         "diskAvailWarningThreshold": 20,
         "diskCriticalThreshold": 90,
-        "diskPollingInterval": 3000,
         "diskWarningThreshold": 80,
         "enableDgpuMonitoring": false,
         "externalMonitor": "resources || missioncenter || jdsystemmonitor || corestats || system-monitoring-center || gnome-system-monitor || plasma-systemmonitor || mate-system-monitor || ukui-system-monitor || deepin-system-monitor || pantheon-system-monitor",
         "gpuCriticalThreshold": 90,
-        "gpuPollingInterval": 3000,
         "gpuWarningThreshold": 80,
-        "loadAvgPollingInterval": 3000,
         "memCriticalThreshold": 90,
-        "memPollingInterval": 3000,
         "memWarningThreshold": 80,
-        "networkPollingInterval": 5000,
         "swapCriticalThreshold": 90,
         "swapWarningThreshold": 80,
         "tempCriticalThreshold": 90,
@@ -709,58 +706,6 @@
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "favorites": [
-            {
-                "colorScheme": "Eldritch",
-                "darkMode": false,
-                "generationMethod": "tonal-spot",
-                "paletteColors": [
-                    "#00639b",
-                    "#51606f",
-                    "#68587a",
-                    "#ba1a1a"
-                ],
-                "path": "/home/user/Pictures/Wallpapers/Unsplash/hu-chen--ibpQdaorT8-unsplash.jpg",
-                "useWallpaperColors": true
-            },
-            {
-                "colorScheme": "Eldritch",
-                "darkMode": true,
-                "generationMethod": "tonal-spot",
-                "paletteColors": [
-                    "#dbb8ff",
-                    "#d0c1da",
-                    "#f2b7bf",
-                    "#ffb4ab"
-                ],
-                "path": "/home/user/Pictures/Wallpapers/Unsplash/adam-borkowski-yQTiLD7PSOo-unsplash.jpg",
-                "useWallpaperColors": true
-            },
-            {
-                "colorScheme": "Eldritch",
-                "darkMode": true,
-                "generationMethod": "tonal-spot",
-                "paletteColors": [
-                    "#ffb2bb",
-                    "#e5bdc0",
-                    "#e9bf8f",
-                    "#ffb4ab"
-                ],
-                "path": "/home/user/Pictures/Wallpapers/Unsplash/alexey-demidov-wcfUinlKuAc-unsplash.jpg",
-                "useWallpaperColors": true
-            },
-            {
-                "colorScheme": "Eldritch",
-                "darkMode": true,
-                "generationMethod": "tonal-spot",
-                "paletteColors": [
-                    "#d7c950",
-                    "#cec7a3",
-                    "#a6d0b8",
-                    "#ffb4ab"
-                ],
-                "path": "/home/user/Pictures/Wallpapers/Unsplash/karsten-winegeart-CwHiGEfWgRo-unsplash.jpg",
-                "useWallpaperColors": true
-            }
         ],
         "fillColor": "#000000",
         "fillMode": "crop",
