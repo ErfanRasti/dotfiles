@@ -39,6 +39,15 @@ if ! grep -q "^source = ~/.config/hypr/config/noctalia.conf" "$CONFIG_FILE" &&
   ! grep -q "^source = ~/.config/hypr/config/dms.conf" "$CONFIG_FILE"; then
   pkill swayidle
 
+  # Restart swww
+  if grep -q "^exec-once = swww-daemon" "$AUTOSTART_FILE"; then
+
+    if pgrep -x swww-daemon >/dev/null; then
+      pkill -x swww-daemon
+    fi
+    setsid -f swww-daemon >/dev/null 2>&1
+  fi
+
   # Restart swaync
   if grep -q "^exec-once = swaync" "$AUTOSTART_FILE"; then
 
