@@ -4,8 +4,8 @@ set -euo pipefail
 # --- config ---------------------------------------------------------------
 
 FILE="${HOME}/.config/hypr/config/keybindings.conf"
-FILE2="${HOME}/.config/hypr/config/keybindings-hyprscrolling.conf"
-FILE3="${HOME}/.config/hypr/config/keybindings-hy3.conf"
+FILE2="${HOME}/.config/hypr/config/hyprscrolling.conf"
+FILE3="${HOME}/.config/hypr/config/hy3.conf"
 FILE4="${HOME}/.config/hypr/config/noctalia.conf"
 FILE5="${HOME}/.config/hypr/config/dms.conf"
 
@@ -124,12 +124,11 @@ awk \
     # Navigation / editing
     keymap["RETURN"] = "󰌑"; keymap["ENTER"] = "󰌑";
     keymap["ESC"] = "󱊷"; keymap["ESCAPE"] = "󱊷";
-    keymap["TAB"] = "⇥"; keymap["BACKSPACE"] = "⌫"; keymap["DELETE"] = "⌦";
+    keymap["TAB"] = "⇥"; keymap["BACKSPACE"] = "󰁮"; keymap["DELETE"] = "󰹾";
     keymap["SPACE"] = "␣"; keymap["HOME"] = "⤒"; keymap["END"] = "⤓";
     keymap["PAGEUP"] = "⇞"; keymap["PAGEDOWN"] = "⇟"; keymap["INSERT"] = "⌲";
     keymap["PRINT"] = "󰹑";
     keymap["CAPS"] = "󰘲"; keymap["CAPS_LOCK"] = "󰘲";
-    keymap["BACKSPACE"] = "󰁮";
 
     # Punctuation often used as keys
     keymap[","] = ","; keymap["."] = "."; keymap[";"] = ";"; keymap["/"] = "/";
