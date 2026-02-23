@@ -532,7 +532,7 @@
         }
       ],
       "spacing": 0,
-      "innerPadding": -4,
+      "innerPadding": -5,
       "bottomGap": -4,
       "transparency": 0,
       "widgetTransparency": 1,
@@ -553,8 +553,9 @@
       "popupGapsAuto": true,
       "popupGapsManual": 0,
       "widgetOutlineEnabled": false,
-      "shadowColorMode": "text",
-      "clickThrough": true
+      "shadowColorMode": "surface",
+      "clickThrough": true,
+      "shadowIntensity": 0
     }
   ],
   "desktopClockEnabled": false,
@@ -625,7 +626,11 @@
   ],
   "systemMonitorVariants": [],
   "desktopWidgetPositions": {},
-  "desktopWidgetGridSettings": {},
+  "desktopWidgetGridSettings": {
+    "eDP-1": {
+      "enabled": true
+    }
+  },
   "desktopWidgetInstances": [
     {
       "id": "dw_1769261461890_oyyufyhml",
@@ -633,12 +638,12 @@
       "name": "Desktop Clock",
       "enabled": true,
       "config": {
-        "style": "stacked",
+        "style": "analog",
         "transparency": 0.8,
         "colorMode": "primary",
         "customColor": "#ffffff",
         "showDate": true,
-        "showAnalogNumbers": false,
+        "showAnalogNumbers": true,
         "showAnalogSeconds": true,
         "displayPreferences": [
           "all"
@@ -657,10 +662,10 @@
           "y": 49.76953125
         },
         "_synced": {
-          "x": 0.02326202392578125,
-          "y": 0.0627712673611111,
-          "width": 200,
-          "height": 200
+          "x": 0.026041666666666668,
+          "y": 0.046296296296296294,
+          "width": 219.96484375,
+          "height": 219.96484375
         }
       }
     },
@@ -697,13 +702,49 @@
         "eDP-1": {
           "width": 320,
           "height": 480,
-          "x": 1151.7109375,
-          "y": 377.234375
+          "x": 1160,
+          "y": 360
+        }
+      }
+    },
+    {
+      "id": "dw_1771865794678_n82d8apmr",
+      "widgetType": "dankDesktopWeather",
+      "name": "Dank Desktop Weather",
+      "enabled": true,
+      "config": {
+        "displayPreferences": [
+          "all"
+        ],
+        "showOnOverlay": false,
+        "syncPositionAcrossScreens": false,
+        "showHourlyForecast": true,
+        "showPressure": true,
+        "viewMode": "forecast"
+      },
+      "positions": {
+        "eDP-1": {
+          "width": 280,
+          "height": 320,
+          "x": 40,
+          "y": 520
+        },
+        "_synced": {
+          "x": 0.4348958333333333,
+          "y": 0.38425925925925924,
+          "width": 200,
+          "height": 200
         }
       }
     }
   ],
-  "desktopWidgetGroups": [],
+  "desktopWidgetGroups": [
+    {
+      "id": "dwg_1771866121166_bqybl08vg",
+      "name": "dsaf",
+      "collapsed": false
+    }
+  ],
   "builtInPluginSettings": {
     "dms_settings_search": {
       "trigger": "?"

@@ -419,7 +419,7 @@
     },
     "dock": {
         "animationSpeed": 1,
-        "backgroundOpacity": 0.8,
+        "backgroundOpacity": 0.5,
         "colorizeIcons": false,
         "deadOpacity": 0.5000000000000002,
         "displayMode": "auto_hide",
