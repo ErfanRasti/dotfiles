@@ -199,7 +199,8 @@ paru -S \
   hypr-dock \
   bibata-cursor-theme-bin \
   gitfetch-python \
-  wdisplays
+  wdisplays \
+  app2unit
 
 echo "!!!!!!!!!!!!!! niri-shells installation"
 $SHELLS && paru -S \

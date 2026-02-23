@@ -23,7 +23,7 @@
         "showIconBackground": true,
         "sortByMostUsed": true,
         "terminalCommand": "kitty -e",
-        "useApp2Unit": false,
+        "useApp2Unit": true,
         "viewMode": "list"
     },
     "audio": {
@@ -796,6 +796,19 @@
                     "#ffb4ab"
                 ],
                 "path": "~/Pictures/Wallpapers/Unsplash/alexey-demidov-wcfUinlKuAc-unsplash.jpg",
+                "useWallpaperColors": true
+            },
+            {
+                "colorScheme": "Eldritch",
+                "darkMode": true,
+                "generationMethod": "tonal-spot",
+                "paletteColors": [
+                    "#b0c6ff",
+                    "#c0c6dc",
+                    "#e0bbdd",
+                    "#ffb4ab"
+                ],
+                "path": "/home/user/Pictures/Wallpapers/Unsplash/adam-borkowski-S6hq3SYNvFk-unsplash.jpg",
                 "useWallpaperColors": true
             }
         ],
