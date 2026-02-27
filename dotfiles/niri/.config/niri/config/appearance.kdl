@@ -1,3 +1,5 @@
+// Apearance settings
+
 // Animation settings.
 // The wiki explains how to configure individual animations:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
@@ -7,4 +9,12 @@ animations {
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
     // slowdown 3.0
+}
+
+blur {
+    // off
+    passes 3
+    offset 3
+    noise 0.02
+    saturation 1.5
 }
