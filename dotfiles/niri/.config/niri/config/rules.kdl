@@ -50,8 +50,19 @@ window-rule {
     tiled-state true
     // https://www.reddit.com/r/niri/comments/1p2zo0q/focus_ring_causes_a_tint_of_that_colour_to_appear/
     // This will draw border color to the windows (if they are transparent)
-    // draw-border-with-background false
+    draw-border-with-background false
+
+    opacity 0.9
+    background-effect {
+        blur true
+    }
 }
+
+window-rule {
+  match is-focused=false
+  opacity 0.8
+}
+
 
 window-rule {
     match app-id="org.gnome.Nautilus"
@@ -136,4 +147,21 @@ window-rule {
 //     baba-is-float true
 // }
 
+// layer-rue {
+//     match namespace="noctalia-bar-content-eDP-1"
+//       // exclude namespace="noctalia-wallpaper-eDP-1"
+//     // exclude namespace="noctalia-background-eDP-1"
+//     // exclude namespace="noctalia-image-cache-renderer"
+//     background-effect {
+//         blur true
+//     }
+// }
 
+layer-rule {
+  match namespace="rofi"
+    // I've set the corner radius one pixel more to avoid pixelated corners
+    geometry-corner-radius 16
+    background-effect {
+        blur true
+    }
+}
