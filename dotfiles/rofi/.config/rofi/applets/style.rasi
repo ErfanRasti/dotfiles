@@ -24,7 +24,7 @@ window {
     margin:                     0px;
     padding:                    0px;
     border:                     0px;
-    border-radius:              20px;
+    border-radius:              15px;
     border-color:               transparent;
     cursor:                     "default";
     background-color:           transparent;

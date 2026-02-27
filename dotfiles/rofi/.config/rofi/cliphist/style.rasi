@@ -26,7 +26,7 @@ window {
     location:                    northeast;
     anchor:                      northeast;
     fullscreen:                  false;
-    border-radius:               12px;
+    border-radius:               15px;
     background-color:            transparent; /* Semi-transparent background */
 }
 
