@@ -66,8 +66,8 @@ sudo pacman -S \
   zsh-autosuggestions zsh-syntax-highlighting \
   fish pkgfile inetutils \
   nautilus-python python-dbus \
-  hyprland vim wget curl \
-  hyprland \
+  vim wget curl \
+  hyprland hyprland-guiutils \
   shfmt stylua \
   svn \
   git-delta \
@@ -106,7 +106,7 @@ sudo pacman -S \
   rofi \
   hyprpaper \
   hyprsunset hyprpicker \
-  bash zsh fish nvim tmux flatpak zoxide lazygit kitty ghostty \
+  bash zsh fish nvim bash-language-server tmux flatpak zoxide lazygit kitty ghostty \
   xdg-desktop-portal-hyprland \
   feh \
   papirus-icon-theme \
@@ -117,7 +117,6 @@ sudo pacman -S \
   waybar \
   hyprpolkitagent \
   hyprsunset \
-  hyprland-qtutils \
   foot fzf chafa jq bat \
   pixman \
   libpng \
@@ -160,7 +159,9 @@ sudo pacman -S \
   ttf-cascadia-code-nerd \
   niri xwayland-satellite swayidle \
   cmatrix \
-  kdeconnect
+  kdeconnect \
+  ocean-sound-theme \
+  pavucontrol blueman
 
 echo "✅ pacman packages installed successfully!"
 
@@ -199,12 +200,12 @@ paru -S \
   hypr-dock \
   bibata-cursor-theme-bin \
   gitfetch-python \
-  wdisplays \
-  app2unit
+  wdisplays
 
 echo "!!!!!!!!!!!!!! niri-shells installation"
+git submodule update --init --recursive
 $SHELLS && paru -S \
-  noctalia-shell wlsunset gum \
+  noctalia-shell wlsunset gum app2unit \
   dms-shell-bin dsearch qt6-multimedia \
   vicinae-bin
 
@@ -282,13 +283,19 @@ systemctl --user restart gpu-screen-recorder-ui.service
 echo "✅ services enabled and started!"
 
 echo "------------------- fish configurations -------------------"
-fisher update
 chsh -s "$(which bash)"
 fish_update_completions
+
+rm ~/.config/fish/functions/fish_prompt.fish
+
+fisher install IlanCosman/tide@v6
+# tide configure
 tide configure --auto --style=Lean --prompt_colors='16 colors' --show_time='24-hour format' --lean_prompt_height='One line' --prompt_spacing=Compact --icons='Many icons' --transient=No
+
 fisher install vitallium/tokyonight-fish
 fish_config theme save "TokyoNight Moon"
-# tide configure
+
+fisher update
 
 echo "------------------- yazi plugins -------------------"
 ya pkg add yazi-rs/plugins:toggle-pane
@@ -304,3 +311,9 @@ ya pkg add boydaihungst/mediainfo
 ya pkg add yazi-rs/plugins:mount
 
 echo "✅ fish configured successfully!"
+
+echo "------------------- tmux plugins -------------------"
+git clone https://github.com/tmux-plugins/tpm ~/dotfiles/dotfiles/tmux/.config/tmux/plugins/tpm
+git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/dotfiles/dotfiles/tmux/.config/tmux/plugins/tmux
+
+echo "✅ tmux configured successfully!"
