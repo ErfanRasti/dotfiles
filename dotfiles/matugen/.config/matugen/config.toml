@@ -97,7 +97,7 @@ output_path = '~/.config/zathura/zathurarc'
 [templates.spicetify]
 input_path = '~/.config/matugen/templates/spicetify.ini'
 output_path = '~/.config/spicetify/Themes/matugen/color.ini'
-# post_hook = '~/.config/matugen/scripts/spiceitfy_theme_apply.sh'
+# post_hook = '~/.config/matugen/scripts/spicetify_theme_apply.sh'
 
 [templates.cava]
 input_path = '~/.config/matugen/templates/cava-colors.ini'
