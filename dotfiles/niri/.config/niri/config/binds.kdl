@@ -96,6 +96,10 @@ binds {
     Mod+Shift+Page_Up   { move-workspace-up; }
     Mod+Shift+U         { move-workspace-down; }
     Mod+Shift+I         { move-workspace-up; }
+    Mod+Alt+J           { move-workspace-down; }
+    Mod+Alt+K           { move-workspace-up; }
+    Mod+Alt+Down           { move-workspace-down; }
+    Mod+Alt+Up           { move-workspace-up; }
 
     // You can bind mouse wheel scroll ticks using the following syntax.
     // These binds will change direction based on the natural-scroll setting.
@@ -178,6 +182,12 @@ binds {
     // If the window is already in a column, they will expel it out.
     Mod+BracketLeft  { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
+
+    Mod+Alt+H { consume-or-expel-window-left; }
+    Mod+Alt+L { consume-or-expel-window-right; }
+    Mod+Alt+Left { consume-or-expel-window-left; }
+    Mod+Alt+Right { consume-or-expel-window-right; }
+
 
     // Consume one window from the right to the bottom of the focused column.
     // Mod+Comma  { consume-window-into-column; }
