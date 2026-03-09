@@ -7,9 +7,9 @@
   "runUserMatugenTemplates": true,
   "matugenTargetMonitor": "",
   "popupTransparency": 1,
-  "dockTransparency": 0.3,
+  "dockTransparency": 0.5,
   "widgetBackgroundColor": "s",
-  "widgetColorMode": "default",
+  "widgetColorMode": "colorful",
   "controlCenterTileColorMode": "primary",
   "buttonColorMode": "primary",
   "cornerRadius": 12,
@@ -534,7 +534,7 @@
       "spacing": 0,
       "innerPadding": -5,
       "bottomGap": -4,
-      "transparency": 0,
+      "transparency": 0.8,
       "widgetTransparency": 1,
       "squareCorners": false,
       "noBackground": false,
@@ -639,7 +639,7 @@
       "enabled": true,
       "config": {
         "style": "analog",
-        "transparency": 0.8,
+        "transparency": 0.5,
         "colorMode": "primary",
         "customColor": "#ffffff",
         "showDate": true,
@@ -676,13 +676,13 @@
       "enabled": true,
       "config": {
         "showHeader": true,
-        "transparency": 0.8,
+        "transparency": 0.5,
         "colorMode": "primary",
         "customColor": "#ffffff",
         "showCpu": true,
         "showCpuGraph": true,
         "showCpuTemp": true,
-        "showGpuTemp": false,
+        "showGpuTemp": true,
         "gpuPciId": "",
         "showMemory": true,
         "showMemoryGraph": true,
@@ -702,8 +702,8 @@
         "eDP-1": {
           "width": 320,
           "height": 480,
-          "x": 1160,
-          "y": 360
+          "x": 1680,
+          "y": 760
         }
       }
     },
@@ -738,13 +738,7 @@
       }
     }
   ],
-  "desktopWidgetGroups": [
-    {
-      "id": "dwg_1771866121166_bqybl08vg",
-      "name": "dsaf",
-      "collapsed": false
-    }
-  ],
+  "desktopWidgetGroups": [],
   "builtInPluginSettings": {
     "dms_settings_search": {
       "trigger": "?"
