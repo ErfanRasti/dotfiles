@@ -147,15 +147,14 @@ window-rule {
 //     baba-is-float true
 // }
 
-// layer-rue {
-//     match namespace="noctalia-bar-content-eDP-1"
-//       // exclude namespace="noctalia-wallpaper-eDP-1"
-//     // exclude namespace="noctalia-background-eDP-1"
-//     // exclude namespace="noctalia-image-cache-renderer"
-//     background-effect {
-//         blur true
-//     }
-// }
+layer-rule {
+    match namespace="dms:bar"
+    match namespace="dms:desktop-widget:*"
+    geometry-corner-radius 12
+    background-effect {
+        blur true
+    }
+}
 
 layer-rule {
   match namespace="rofi"
