@@ -9,7 +9,7 @@ apply_gnome_proxy() {
     proxy_host=$(gsettings get org.gnome.system.proxy.http host | tr -d "'")
     local proxy_port
     proxy_port=$(gsettings get org.gnome.system.proxy.http port)
-    local url="socks5h://$proxy_host:$proxy_port"
+    local url="http://$proxy_host:$proxy_port"
 
     export ALL_PROXY="$url"
     export http_proxy="$url"
