@@ -1,1 +1,5 @@
-workspace "scratchpad"
+workspace "Scratchpad"
+workspace "Entertainment"
+workspace "Main"
+workspace "Web"
+workspace "Extra"
