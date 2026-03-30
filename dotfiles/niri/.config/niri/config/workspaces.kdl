@@ -1,5 +1,9 @@
 workspace "Scratchpad"
-workspace "Entertainment"
+workspace "Entertainment" {
+  layout {
+    center-focused-column "always"
+  }
+}
 workspace "Main"
 workspace "Web"
 workspace "Extra"

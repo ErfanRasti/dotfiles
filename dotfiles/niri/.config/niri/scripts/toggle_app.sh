@@ -6,7 +6,7 @@
 #   toggle_app.sh "class:org.gnome.Nautilus" "nautilus"
 #
 # Semantics (similar to your Hyprland script):
-#   - If the focused window has this class/app-id -> send it to workspace "scratchpad" (hide it).
+#   - If the focused window has this class/app-id -> send it to workspace "Scratchpad" (hide it).
 #   - Else:
 #       - If a window with that class exists (prefer one on "scratch") -> bring it to current workspace & focus.
 #       - Else -> spawn the given command.
@@ -63,7 +63,7 @@ if [ -z "$APP_CMD" ]; then
   exit 1
 fi
 
-SCRATCH_WS_NAME="scratchpad"
+SCRATCH_WS_NAME="Scratchpad"
 
 # --- Get workspace info (current + scratch) ---
 

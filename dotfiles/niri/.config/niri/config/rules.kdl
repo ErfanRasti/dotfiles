@@ -52,17 +52,23 @@ window-rule {
     // This will draw border color to the windows (if they are transparent)
     draw-border-with-background false
 
-    opacity 0.9
     background-effect {
         blur true
     }
 }
 
+// HINT: Find window names by `niri msg windows`
+
+window-rule {
+  exclude title="Noctalia" app-id="dev.noctalia.noctalia-qs"
+  opacity 0.9
+}
+
 window-rule {
   match is-focused=false
   opacity 0.8
-}
 
+}
 
 window-rule {
     match app-id="org.gnome.Nautilus"
@@ -86,6 +92,23 @@ window-rule {
     match app-id="org.telegram.desktop"
     match app-id="hiddify"
     default-column-width { proportion 0.15; }
+    open-on-workspace "Entertainment"
+}
+
+window-rule {
+    match app-id="spotify"
+    default-column-width { proportion 0.5; }
+    open-on-workspace "Entertainment"
+}
+
+window-rule {
+    match app-id="google-chrome"
+    match app-id="microsoft-edge"
+    match app-id="zen" title="Zen Browser"
+    match app-id="firefox" title="Mozilla Firefox"
+    open-maximized-to-edges true
+
+    open-on-workspace "Web"
 }
 
 window-rule {
