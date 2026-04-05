@@ -34,7 +34,7 @@
         "spectrumFrameRate": 60,
         "spectrumMirrored": true,
         "visualizerType": "wave",
-        "volumeFeedback": true,
+        "volumeFeedback": false,
         "volumeFeedbackSoundFile": "/usr/share/sounds/ocean/stereo/audio-volume-change.oga",
         "volumeOverdrive": true,
         "volumeStep": 5
@@ -183,6 +183,7 @@
                     "maxWidth": 160,
                     "scrollingMode": "hover",
                     "showIcon": true,
+                    "showText": true,
                     "textColor": "none",
                     "useFixedWidth": false
                 }
@@ -331,12 +332,13 @@
     },
     "colorSchemes": {
         "darkMode": true,
-        "generationMethod": "fruit-salad",
+        "generationMethod": "tonal-spot",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "eDP-1",
         "predefinedScheme": "Eldritch",
         "schedulingMode": "off",
+        "syncGsettings": true,
         "useWallpaperColors": true
     },
     "controlCenter": {
@@ -485,7 +487,7 @@
         "deadOpacity": 0.5,
         "displayMode": "auto_hide",
         "dockType": "attached",
-        "enabled": false,
+        "enabled": true,
         "floatingRatio": 0.20000000000000007,
         "groupApps": true,
         "groupClickAction": "list",
@@ -592,6 +594,7 @@
         "showHibernateOnLockScreen": true,
         "showScreenCorners": false,
         "showSessionButtonsOnLockScreen": true,
+        "smoothScrollEnabled": true,
         "telemetryEnabled": true
     },
     "hooks": {
@@ -622,6 +625,7 @@
     },
     "location": {
         "analogClockInCalendar": true,
+        "autoLocate": false,
         "firstDayOfWeek": -1,
         "hideWeatherCityName": false,
         "hideWeatherTimezone": false,
@@ -632,10 +636,10 @@
         "use12hourFormat": false,
         "useFahrenheit": false,
         "weatherEnabled": true,
-        "weatherShowEffects": true
+        "weatherShowEffects": true,
+        "weatherTaliaMascotAlways": false
     },
     "network": {
-        "airplaneModeEnabled": false,
         "bluetoothAutoConnect": true,
         "bluetoothDetailsViewMode": "grid",
         "bluetoothHideUnnamedDevices": false,
@@ -869,6 +873,7 @@
                 "useWallpaperColors": true
             },
             {
+                "appearance": "dark",
                 "colorScheme": "Eldritch",
                 "darkMode": true,
                 "generationMethod": "tonal-spot",
@@ -971,11 +976,39 @@
                 ],
                 "path": "~/Pictures/Wallpapers/Unsplash/christopher-rusev-EI44Y4jz7Yc-unsplash.jpg",
                 "useWallpaperColors": true
+            },
+            {
+                "colorScheme": "Eldritch",
+                "darkMode": true,
+                "generationMethod": "fruit-salad",
+                "paletteColors": [
+                    "#ffb2be",
+                    "#ffb2be",
+                    "#ffb77d",
+                    "#ffb4ab"
+                ],
+                "path": "/home/user/Pictures/Wallpapers/Unsplash/andreas-dress-g1sFedxPfdw-unsplash.jpg",
+                "useWallpaperColors": true
+            },
+            {
+                "appearance": "dark",
+                "colorScheme": "Eldritch",
+                "darkMode": true,
+                "generationMethod": "tonal-spot",
+                "paletteColors": [
+                    "#85cfff",
+                    "#b6c9d8",
+                    "#cdc0e9",
+                    "#ffb4ab"
+                ],
+                "path": "/home/user/Pictures/Wallpapers/Unsplash/federico-di-dio-photography-gBC_oFh_lQM-unsplash.jpg",
+                "useWallpaperColors": true
             }
         ],
         "fillColor": "#000000",
         "fillMode": "crop",
         "hideWallpaperFilenames": false,
+        "linkLightAndDarkWallpapers": true,
         "monitorDirectories": [
         ],
         "overviewBlur": 1,

@@ -106,12 +106,8 @@ window-rule {
 
 window-rule {
     match app-id="spotify"
+    match app-id="uget-gtk"
     default-column-width { proportion 0.5; }
-    open-on-workspace "Entertainment"
-}
-
-window-rule {
-    match app-id="vlc"
     open-on-workspace "Entertainment"
 }
 

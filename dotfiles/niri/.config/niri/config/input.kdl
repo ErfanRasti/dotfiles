@@ -18,13 +18,20 @@ input {
     // Omitting settings disables them, or leaves them at their default values.
     touchpad {
         // off
+        // Tap‑to‑click: When enabled, touching the touchpad briefly acts like a mouse click.
         tap
+        // Disable While Typing.
         dwt
+        // This disables the touchpad while the TrackPoint (the small pointing stick on ThinkPads, etc.) is being used.
         // dwtp
+        // Tap‑dragging lets you move windows/files like this
         // drag false
         // drag-lock
         natural-scroll
         accel-speed 0.4
+        // accel-profile: Controls the acceleration algorithm.
+        // adaptive: Pointer speed increases when you move your finger faster.
+        // flat: No acceleration. Movement is 1:1 linear.
         // accel-profile "flat"
         // scroll-method "two-finger"
         // disabled-on-external-mouse

@@ -161,7 +161,7 @@ sudo pacman -S \
   cmatrix \
   kdeconnect \
   ocean-sound-theme \
-  pavucontrol blueman
+  pavucontrol
 
 echo "✅ pacman packages installed successfully!"
 
