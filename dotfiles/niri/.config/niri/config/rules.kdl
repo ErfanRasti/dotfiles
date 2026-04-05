@@ -41,6 +41,9 @@ layer-rule {
     block-out-from "screencast"
 }
 
+
+// HINT: Find window names by `niri msg windows`
+//////////////////////////////////////////////////////////////////// All windows
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
@@ -57,8 +60,7 @@ window-rule {
     }
 }
 
-// HINT: Find window names by `niri msg windows`
-
+//////////////////////////////////////////////////////////////////// Opacity
 window-rule {
   exclude title="Noctalia" app-id="dev.noctalia.noctalia-qs"
   opacity 0.9
@@ -89,6 +91,13 @@ window-rule {
 }
 
 window-rule {
+    match app-id="org.gnome.Settings"
+    match app-id="io.github.kaii_lb.Overskride"
+    default-column-width { proportion 0.5; }
+    open-on-workspace "Scratchpad"
+}
+
+window-rule {
     match app-id="org.telegram.desktop"
     match app-id="hiddify"
     default-column-width { proportion 0.15; }
@@ -102,6 +111,11 @@ window-rule {
 }
 
 window-rule {
+    match app-id="vlc"
+    open-on-workspace "Entertainment"
+}
+
+window-rule {
     match app-id="google-chrome"
     match app-id="microsoft-edge"
     match app-id="zen" title="Zen Browser"
@@ -109,6 +123,12 @@ window-rule {
     open-maximized-to-edges true
 
     open-on-workspace "Web"
+}
+
+window-rule {
+  match app-id="kitty"
+  
+  open-on-workspace "Main"
 }
 
 window-rule {

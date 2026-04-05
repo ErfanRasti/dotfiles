@@ -270,7 +270,7 @@ binds {
   Mod+E { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'org.gnome.Nautilus' 'env XDG_CURRENT_DESKTOP=GNOME nautilus'"; }
   Mod+Alt+E { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'yazi' 'kitty --override confirm_os_window_close=0 --class yazi bash -c yazi'"; }
   Ctrl+Shift+Escape { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'btop' 'kitty --override confirm_os_window_close=0 --class btop -e btop'"; }
-  Mod+Grave { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'kitty' -t 'kitty-dropterm' 'kitty --class kitty --title kitty-dropterm'"; }
+  Mod+Grave { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'kitty-dropterm' -t 'kitty-dropterm' 'kitty --class kitty-dropterm --title kitty-dropterm'"; }
 
   Mod+Alt+A hotkey-overlay-title="Open rofi favourite apps" { spawn "~/.config/rofi/applets/bin/apps.sh"; }
   Mod+Alt+Q hotkey-overlay-title="Open rofi quicklinks" { spawn "~/.config/rofi/applets/bin/quicklinks.sh"; }
