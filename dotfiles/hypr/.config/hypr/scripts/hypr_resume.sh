@@ -27,7 +27,10 @@ save)
 
   # Save bluetooth state
   # if bluetoothctl show | grep -qF "Powered: yes"; then
-  if busctl get-property org.bluez /org/bluez/hci0 org.bluez.Adapter1 Powered | grep -q true; then
+
+  ADAPTER=$(busctl tree org.bluez | grep -o '/org/bluez/hci[0-9]*' | head -n1)
+
+  if [ -n "$ADAPTER" ] && busctl get-property org.bluez "$ADAPTER" org.bluez.Adapter1 Powered | grep -q true; then
     echo "bluetooth:on" >>"$STATE_FILE"
   else
     echo "bluetooth:off" >>"$STATE_FILE"
