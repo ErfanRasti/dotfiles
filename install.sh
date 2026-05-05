@@ -161,7 +161,8 @@ sudo pacman -S \
   cmatrix \
   kdeconnect \
   ocean-sound-theme \
-  pavucontrol
+  pavucontrol \
+  vlc amberol
 
 echo "✅ pacman packages installed successfully!"
 
@@ -200,14 +201,17 @@ paru -S \
   hypr-dock \
   bibata-cursor-theme-bin \
   gitfetch-python \
-  wdisplays
+  wdisplays \
+  gapless \
+  dragon-drop
 
 echo "!!!!!!!!!!!!!! niri-shells installation"
 git submodule update --init --recursive
 $SHELLS && paru -S \
   noctalia-shell wlsunset gum app2unit \
-  dms-shell-bin dsearch qt6-multimedia \
+  dsearch qt6-multimedia \
   vicinae-bin
+$SHELLS && sudo pacman -S dms-shell-niri dms-shell-hyprland
 
 echo "✅ AUR packages installed successfully!"
 
