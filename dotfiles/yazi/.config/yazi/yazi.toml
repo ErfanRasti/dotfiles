@@ -12,8 +12,11 @@ play = [
   { run = 'vlc --one-instance "$@"', orphan = true, desc = "Open in VLC", for = "linux" },
 ]
 edit = [
-  { run = 'kitty --class nvim fish -c "$EDITOR "$@""', orphan = true, for = "linux" },
+  { run = 'kitty --class nvim fish -c "$EDITOR "$@""', orphan = true, desc = "Open in NeoVim", for = "linux" },
   { run = 'gnome-text-editor "$@"', orphan = true, for = "linux" },
+]
+amberol = [
+  { run = 'amberol "$@"', orphan = true, desc = "Play in Amberol", for = "linux" },
 ]
 
 # bulk-rename activation
@@ -25,16 +28,9 @@ block = true
 name = "bulk-rename.txt"
 use = "bulk-rename"
 
-[[mgr.prepend_keymap]]
-on = "<C-n>"
-run = 'shell -- dragon -x -i -T "$0"'
-
-[[mgr.prepend_keymap]]
-on = "y"
-run = [
-  'shell -- for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list',
-  "yank",
-]
+[[open.prepend_rules]]
+mime = "audio/*"
+use = "amberol"
 
 [plugin]
 prepend_preloaders = [
