@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # battery-watcher.sh — Wayland-friendly, UPower event loop, minimal CPU
 
+SCRIPT_NAME="$(basename "$0")"
+
 # ---- Config (edit if you like) ----
 LOW=30
 CRIT=15
@@ -227,15 +229,17 @@ check_and_act() {
   fi
 }
 
-# ---- Initial check & a quiet settle timer to avoid startup storm ----
-check_and_act
+if ! pgrep -x "$SCRIPT_NAME" >/dev/null; then
+  # ---- Initial check & a quiet settle timer to avoid startup storm ----
+  check_and_act
 
-# ---- Event loop (Wayland-friendly): UPower DBus monitor ----
-# This blocks and only wakes on power events; extremely low CPU use.
-# We watch for any change on our battery path and then run check_and_act.
-upower --monitor 2>/dev/null | while IFS= read -r line; do
-  # Only react to our battery device or line_power (plug/unplug)
-  if [[ "$line" == *"$BATTERY_PATH"* || (-n "$LINE_PATH" && "$line" == *"$LINE_PATH"*) ]]; then
-    check_and_act
-  fi
-done
+  # ---- Event loop (Wayland-friendly): UPower DBus monitor ----
+  # This blocks and only wakes on power events; extremely low CPU use.
+  # We watch for any change on our battery path and then run check_and_act.
+  upower --monitor 2>/dev/null | while IFS= read -r line; do
+    # Only react to our battery device or line_power (plug/unplug)
+    if [[ "$line" == *"$BATTERY_PATH"* || (-n "$LINE_PATH" && "$line" == *"$LINE_PATH"*) ]]; then
+      check_and_act
+    fi
+  done
+fi
