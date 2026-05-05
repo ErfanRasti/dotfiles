@@ -33,26 +33,28 @@ binds {
     Mod+Q { close-window; }
 
     // focus binds
-    Mod+Right { focus-column-right; }
-    Mod+Left  { focus-column-left; }
+    Mod+Right { focus-column-or-monitor-right; }
+    Mod+Left  { focus-column-or-monitor-left; }
     Mod+Up    { focus-window-or-workspace-up; }
     Mod+Down  { focus-window-or-workspace-down; }
 
-    Mod+L     { focus-column-right; }
-    Mod+H     { focus-column-left; }
+    Mod+L     { focus-column-or-monitor-right; }
+    Mod+H     { focus-column-or-monitor-left; }
     Mod+K     { focus-window-or-workspace-up; }
     Mod+J     { focus-window-or-workspace-down; }
 
     // column move binds
-    Mod+Ctrl+Right { move-column-right; }
-    Mod+Ctrl+Left  { move-column-left; }
+    Mod+Ctrl+Right { move-column-right-or-to-monitor-right; }
+    Mod+Ctrl+Left  { move-column-left-or-to-monitor-left; }
     Mod+Ctrl+Up     { move-window-up-or-to-workspace-up; }
     Mod+Ctrl+Down     { move-window-down-or-to-workspace-down; }
+    // Mod+Ctrl+Right { move-column-right; }
+    // Mod+Ctrl+Left  { move-column-left; }
     // Mod+Ctrl+Up    { move-window-up; }
     // Mod+Ctrl+Down  { move-window-down; }
 
-    Mod+Ctrl+L     { move-column-right; }
-    Mod+Ctrl+H     { move-column-left; }
+    Mod+Ctrl+L { move-column-right-or-to-monitor-right; }
+    Mod+Ctrl+H  { move-column-left-or-to-monitor-left; }
     Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
     Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
 
@@ -85,6 +87,15 @@ binds {
     Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
     Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
 
+    Mod+Shift+ALT+Left  { move-workspace-to-monitor-left; }
+    Mod+Shift+Alt+Down  { move-workspace-to-monitor-down; }
+    Mod+Shift+Alt+Up    { move-workspace-to-monitor-up; }
+    Mod+Shift+Alt+Right { move-workspace-to-monitor-right; }
+
+    Mod+Shift+Alt+H     { move-workspace-to-monitor-left; }
+    Mod+Shift+Alt+J     { move-workspace-to-monitor-down; }
+    Mod+Shift+Alt+K     { move-workspace-to-monitor-up; }
+    Mod+Shift+Alt+L     { move-workspace-to-monitor-right; }
 
     Mod+Page_Down      { focus-workspace-down; }
     Mod+Page_Up        { focus-workspace-up; }
@@ -98,8 +109,8 @@ binds {
     Mod+Shift+I         { move-workspace-up; }
     Mod+Alt+J           { move-workspace-down; }
     Mod+Alt+K           { move-workspace-up; }
-    Mod+Alt+Down           { move-workspace-down; }
-    Mod+Alt+Up           { move-workspace-up; }
+    Mod+Alt+Down        { move-workspace-down; }
+    Mod+Alt+Up          { move-workspace-up; }
 
     // You can bind mouse wheel scroll ticks using the following syntax.
     // These binds will change direction based on the natural-scroll setting.
@@ -131,8 +142,16 @@ binds {
     // These binds are also affected by touchpad's natural-scroll, so these
     // example binds are "inverted", since we have natural-scroll enabled for
     // touchpads by default.
-    Mod+TouchpadScrollDown { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+"; }
-    Mod+TouchpadScrollUp   { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"; }
+    Mod+TouchpadScrollDown { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+"; }
+    Mod+TouchpadScrollUp   { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-"; }
+    Mod+TouchpadScrollLeft { spawn "brightnessctl" "-d" "intel_backlight" "s" "5%+"; }
+    Mod+TouchpadScrollRight { spawn "brightnessctl" "-d" "intel_backlight" "s" "5%-"; }
+
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-"; }
+
+    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "-d" "intel_backlight" "s" "5%+"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "-d" "intel_backlight" "s" "5%-"; }
 
     // You can refer to workspaces by index. However, keep in mind that
     // niri is a dynamic workspace system, so these commands are kind of
@@ -208,6 +227,7 @@ binds {
     Mod+Ctrl+F { expand-column-to-available-width; }
 
     Mod+C { center-column; }
+    Mod+Shift+C { spawn "~/.config/niri/scripts/toggle_center_focus.sh"; }
 
     // Center all fully visible columns on screen.
     Mod+Ctrl+C { center-visible-columns; }
@@ -275,7 +295,7 @@ binds {
   Mod+Alt+A hotkey-overlay-title="Open rofi favourite apps" { spawn "~/.config/rofi/applets/bin/apps.sh"; }
   Mod+Alt+Q hotkey-overlay-title="Open rofi quicklinks" { spawn "~/.config/rofi/applets/bin/quicklinks.sh"; }
   Mod+Alt+B hotkey-overlay-title="Open rofi battery menu" { spawn "~/.config/rofi/applets/bin/battery.sh"; }
-  Mod+Alt+V hotkey-overlay-title="Open rofi volume control" { spawn "~/.config/rofi/applets/bin/volume.sh"; }
+  Mod+Ctrl+V hotkey-overlay-title="Open rofi volume control" { spawn "~/.config/rofi/applets/bin/volume.sh"; }
   Mod+Ctrl+B hotkey-overlay-title="Open rofi brightness control" { spawn "~/.config/rofi/applets/bin/brightness.sh"; }
   Mod+Ctrl+P hotkey-overlay-title="Open rofi player control" { spawn "~/.config/rofi/applets/bin/player.sh"; }
   Mod+Shift+Escape hotkey-overlay-title="Open rofi powermenu" { spawn "~/.config/rofi/powermenu/run.sh"; }
