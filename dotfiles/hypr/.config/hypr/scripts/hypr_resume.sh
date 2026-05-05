@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # File to save state
-STATE_FILE="$HOME/.cache/hypridle-devices.state"
+STATE_FILE="$HOME/.cache/devices.state"
 
 # Wait until a Bluetooth adapter exists (max 5s)
 wait_for_bt() {
