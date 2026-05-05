@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-theme="$HOME/.config/rofi/applets/style-battery-threshold.rasi"
+theme="$HOME/.config/rofi/applets/styles/style-battery-threshold.rasi"
 
 # Build the placeholder text first
 PLACEHOLDER="Set Threshold \n(Current: $CURRENT_THRESHOLD)"

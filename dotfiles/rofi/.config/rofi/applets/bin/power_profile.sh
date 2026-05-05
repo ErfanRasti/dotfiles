@@ -3,7 +3,6 @@
 # Import Current Theme
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 . "$script_dir/../shared/theme.sh"
-theme="$type/$style"
 
 # Battery Info
 charging_status="$(acpi -b | cut -d',' -f1 | cut -d':' -f2 | tr -d ' ')"

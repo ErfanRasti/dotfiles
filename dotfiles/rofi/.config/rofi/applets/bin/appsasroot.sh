@@ -3,7 +3,6 @@
 # Import Current Theme
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 . "$script_dir/../shared/theme.sh"
-theme="$type/$style"
 
 # Theme Elements
 prompt='Applications as root'
