@@ -73,3 +73,8 @@ function y
     end
     rm -f -- "$tmp"
 end
+
+# Import the envvars from ~/set_proxy.sh
+for line in (bash -c "source ~/set_proxy.sh >/dev/null 2>&1; env | grep -i _proxy")
+    set -gx (string split "=" $line)[1] (string split "=" $line)[2]
+end
