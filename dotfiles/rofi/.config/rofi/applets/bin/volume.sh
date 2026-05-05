@@ -1,114 +1,118 @@
 #!/usr/bin/env bash
 
-# Import Current Theme
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+modi_script="$0 --modi"
+
+# Import Current Theme
 . "$script_dir/../shared/theme.sh"
-theme="$type/$style"
 
-# Volume Info
-mixer="$(amixer info Master | grep 'Mixer name' | cut -d':' -f2 | tr -d \',' ')"
-speaker="$(amixer get Master | tail -n1 | awk -F ' ' '{print $5}' | tr -d '[]')"
-mic="$(amixer get Capture | tail -n1 | awk -F ' ' '{print $5}' | tr -d '[]')"
+run_rofi_modi() {
 
-active=""
-urgent=""
+  get_info() {
+    speaker_device=$(wpctl inspect @DEFAULT_AUDIO_SINK@ | awk -F'"' '/device.profile.description/ {print $2}')
+    speaker_vol=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{printf "%d%%", $2*100}')
+    mic_device=$(wpctl inspect @DEFAULT_AUDIO_SOURCE@ | awk -F'"' '/device.profile.description/ {print $2}')
+    mic_vol=$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | awk '{printf "%d%%", $2*100}')
 
-# Speaker Info
-if amixer get Master | grep '\[on\]'; then
-  active="-a 1"
-  stext='Unmute'
-  sicon='󰜟'
-else
-  urgent="-u 1"
-  stext='Mute'
-  sicon='󰓄'
-fi
+    speaker_on=1
+    stext='Unmute'
+    sicon='󰜟'
 
-# Microphone Info
-if amixer get Capture | grep '\[on\]'; then
-  [ -n "$active" ] && active+=",3" || active="-a 3"
-  mtext='Unmute'
-  micon=''
-else
-  [ -n "$urgent" ] && urgent+=",3" || urgent="-u 3"
-  mtext='Mute'
-  micon=''
-fi
+    mic_on=1
+    mtext='Unmute'
+    micon=''
 
-# Theme Elements
-prompt="S:$stext, M:$mtext"
-mesg="$mixer - Speaker: $speaker, Mic: $mic"
+    if wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q MUTED; then
+      speaker_on=0
+      stext='Mute'
+      sicon='󰓄'
+    fi
 
-list_col='5'
-list_row='1'
-win_width='670px'
+    if wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -q MUTED; then
+      mic_on=0
+      mtext='Mute'
+      micon=''
+    fi
 
-# Options
-layout=$(cat "${theme}" | grep 'USE_ICON' | cut -d'=' -f2)
-if [[ "$layout" == 'NO' ]]; then
-  option_1=" Increase"
-  option_2="$sicon $stext"
-  option_3=" Decrese"
-  option_4="$micon $mtext"
-  option_5=" Settings"
-else
-  option_1="󰝝"
-  option_2="$sicon"
-  option_3="󰝞"
-  option_4="$micon"
-  option_5="󰓃"
-fi
+    prompt="S:$stext, M:$mtext"
+    mesg="Speaker: $speaker_device $speaker_vol, Mic: $mic_device $mic_vol"
 
-# Rofi CMD
+    option_1="󰝝"
+    option_2="󰝞"
+    option_3="$sicon"
+    option_4="$micon"
+    option_5="󰓃"
+  }
+
+  run_cmd() {
+    case "$1" in
+    opt1) wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ >/dev/null ;;
+    opt2) wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05- >/dev/null ;;
+    opt3) wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle >/dev/null ;;
+    opt4) wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle >/dev/null ;;
+    opt5)
+      pwvucontrol >/dev/null 2>&1 &
+      disown
+      ;;
+    esac
+  }
+
+  print_menu() {
+    get_info
+
+    printf '\0prompt\x1f%s\n' "$prompt"
+    printf '\0message\x1f%s\n' "$mesg"
+    printf '\0markup-rows\x1ftrue\n'
+    printf '\0keep-selection\x1ftrue\n'
+    printf '\0keep-filter\x1ftrue\n'
+
+    # rows
+    printf '%s\0info\x1fopt1\n' "$option_1"
+    printf '%s\0info\x1fopt2\n' "$option_2"
+
+    if [[ "$speaker_on" -eq 1 ]]; then
+      printf '%s\0info\x1fopt3\x1factive\x1ftrue\n' "$option_3"
+    else
+      printf '%s\0info\x1fopt3\x1furgent\x1ftrue\n' "$option_3"
+    fi
+
+    if [[ "$mic_on" -eq 1 ]]; then
+      printf '%s\0info\x1fopt4\x1factive\x1ftrue\n' "$option_4"
+    else
+      printf '%s\0info\x1fopt4\x1furgent\x1ftrue\n' "$option_4"
+    fi
+
+    printf '%s\0info\x1fopt5\n' "$option_5"
+  }
+
+  # https://man.archlinux.org/man/rofi-script.5.en
+  case "$ROFI_RETV" in
+  0) ;;
+  1) run_cmd "$ROFI_INFO" ;;
+  esac
+
+  print_menu
+}
+
 rofi_cmd() {
-  # shellcheck disable=SC2086
-  rofi -theme-str "window {width: $win_width;}" \
-    -theme-str "listview {columns: $list_col; lines: $list_row;}" \
-    -theme-str 'textbox-prompt-colon {str: "";}' \
-    -dmenu \
-    -p "$prompt" \
-    -mesg "$mesg" \
-    ${active} ${urgent} \
-    -markup-rows \
+  list_col='5'
+  list_row='1'
+  win_width='670px'
+
+  rofi \
+    -show volume \
+    -modi "volume:${modi_script}" \
+    -theme-str "window { width: $win_width; }" \
+    -theme-str "listview { columns: $list_col; lines: $list_row; }" \
+    -theme-str 'textbox-prompt-colon { str: ""; }' \
     -theme "${theme}"
 }
 
-# Pass variables to rofi dmenu
-run_rofi() {
-  echo -e "$option_1\n$option_2\n$option_3\n$option_4\n$option_5" | rofi_cmd
-}
-
-# Execute Command
-run_cmd() {
-  if [[ "$1" == '--opt1' ]]; then
-    amixer -Mq set Master,0 5%+ unmute
-  elif [[ "$1" == '--opt2' ]]; then
-    amixer set Master toggle
-  elif [[ "$1" == '--opt3' ]]; then
-    amixer -Mq set Master,0 5%- unmute
-  elif [[ "$1" == '--opt4' ]]; then
-    amixer set Capture toggle
-  elif [[ "$1" == '--opt5' ]]; then
-    pavucontrol
-  fi
-}
-
-# Actions
-chosen="$(run_rofi)"
-case ${chosen} in
-"$option_1")
-  run_cmd --opt1
-  ;;
-"$option_2")
-  run_cmd --opt2
-  ;;
-"$option_3")
-  run_cmd --opt3
-  ;;
-"$option_4")
-  run_cmd --opt4
-  ;;
-"$option_5")
-  run_cmd --opt5
-  ;;
-esac
+if [[ -z "$1" ]]; then
+  rofi_cmd
+elif [[ "$1" == "--modi" ]]; then
+  run_rofi_modi
+else
+  echo "Error: unknown argument '$1'" >&2
+  exit 1
+fi
