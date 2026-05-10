@@ -1,5 +1,4 @@
-fish_*
-fish_variables
+fish_variables*
 completions
 conf.d
 _*
