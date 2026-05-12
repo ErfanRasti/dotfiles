@@ -167,9 +167,6 @@ set -o vi
 
 ZVM_SYSTEM_CLIPBOARD_ENABLED=true
 
-# Alias nvim-kickstart
-# alias nvim-kickstart='NVIM_APPNAME="nvim-kickstart" nvim'
-
 # Accept suggestion with Ctrl+Space (Vim-like: <C-Space>)
 bindkey '^ ' autosuggest-accept
 
@@ -197,6 +194,9 @@ zle -N fzf-cd-widget
 # Bind the widget to ctrl+e
 bindkey '^F' fzf-cd-widget
 
+# Add/remove sudo to beginning of command line
+bindkey -M viins '^[s' sudo-command-line
+bindkey -M vicmd '^[s' sudo-command-line
 
 # update-all alias
 alias update-all="exec ~/update-all.sh"

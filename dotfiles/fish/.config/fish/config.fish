@@ -13,6 +13,7 @@
 fish_vi_key_bindings
 
 # To activate sudope reliably:
+# https://fishshell.com/docs/current/language.html#envvar-fish_escape_delay_ms
 set -gx fish_escape_delay_ms 200
 
 if status is-interactive
