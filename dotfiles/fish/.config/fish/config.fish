@@ -1,3 +1,8 @@
+##### source
+# `source ~/.config/fish/config.fish` to apply changes here.
+# The config is appended an the previous keybindings stays.
+# Restart terminal for full fresh reload.
+
 # stratup tmux
 # if command -q tmux && set -q DISPLAY && ! set -q TMUX
 #     exec tmux new-session -A -s $USER >/dev/null 2>&1
@@ -7,25 +12,37 @@
 # Enable Vim mode key bindings
 fish_vi_key_bindings
 
-# Define a custom function that runs the cd command with fzf
-# function fzf-cd-widget
-#     set -l selected_dir (ls -A | fzf --height 50% --layout=reverse)
-#     if test -n "$selected_dir"
-#         cd -- "$selected_dir"
-#     end
-#     # Clear the prompt and accept the line
-#     commandline -f repaint
-#     commandline -f execute
-# end
+# To activate sudope reliably:
+set -gx fish_escape_delay_ms 200
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
-    # function fish_user_key_bindings
+    # function fish_user_key_bindingssudope_sequence
     # Accept suggestion with Ctrl+Space
     bind -M insert ctrl-space accept-autosuggestion
-    # bind -M insert ctrl-f fzf-cd-widget
-    # bind -M default ctrl-f fzf-cd-widget
-    #
+
+    # Define a custom function that runs the cd command with fzf
+    function fzf-cd-widget
+        set -l selected_dir (ls -A | fzf --height 50% --layout=reverse)
+        if test -n "$selected_dir"
+            cd -- "$selected_dir"
+        end
+        # Clear the prompt and accept the line
+        commandline -f repaint
+        commandline -f execute
+    end
+
+    bind -M insert ctrl-f fzf-cd-widget
+    bind -M default ctrl-f fzf-cd-widget
+
+    # This great plugin hands a lot: https://github.com/PatrickF1/fzf.fish
+    # Ctrl+Alt+F: Search Directory
+    # Ctrl+Alt+L: Search Git Log
+    # Ctrl+Alt+S: Search Git Status
+    # Ctrl+H: Search History
+    # Ctrl+V: Search Variables
+    # fzf_configure_bindings --help for more info
+
     # Clipboard managing in vi mode
     bind -M visual y fish_clipboard_copy
     # bind -M default yy fish_clipboard_copy
@@ -33,7 +50,16 @@ if status is-interactive
     bind p fish_clipboard_paste
 
     # Or use Ctrl+E
-    # bind ctrl-e 'commandline -f accept-autosuggestion;commandline -f execute'
+    bind -M insert ctrl-e 'commandline -f accept-autosuggestion;commandline -f execute'
+
+    # sudope binds
+    # The default bind is ESC+ESC
+    # remove sudope defaults here ~/.config/fish/conf.d/plugin-sudope.fish
+    # bind -M insert alt-w sudope
+
+    # Also alt+s is the built in sudo prefixifer.
+    # https://fishshell.com/docs/current/faq.html#why-doesn-t-history-substitution-etc-work
+
 end
 
 # Set default editor
@@ -75,6 +101,4 @@ function y
 end
 
 # Import the envvars from ~/set_proxy.sh
-for line in (bash -c "source ~/set_proxy.sh >/dev/null 2>&1; env | grep -i _proxy")
-    set -gx (string split "=" $line)[1] (string split "=" $line)[2]
-end
+bass "source ~/set_proxy.sh ''"

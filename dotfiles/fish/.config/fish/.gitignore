@@ -1,4 +1,7 @@
 fish_variables*
+functions/fish_*
+functions/sudope*
+functions/bass*
 completions
 conf.d
 _*
