@@ -118,6 +118,10 @@ output_path = '~/.config/ghostty/themes/Matugen'
 input_path = '~/.config/matugen/templates/micro.micro'
 output_path = '~/.config/micro/colorschemes/matugen.micro'
 
+[templates.obs]
+input_path = '~/.config/matugen/templates/obs-colors.obt'
+output_path = '~/.config/obs-studio/themes/matugen.obt'
+
 [templates.pywalfox]
 input_path = '~/.config/matugen/templates/pywalfox-colors.json'
 output_path = '~/.cache/wal/colors.json'
