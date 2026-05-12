@@ -232,6 +232,9 @@ binds {
     // Center all fully visible columns on screen.
     Mod+Ctrl+C { center-visible-columns; }
 
+    Mod+W { spawn "~/.config/niri/scripts/toggle_app.sh"; }
+    Mod+Shift+W {focus-workspace "Scratchpad";}
+
     // Finer width adjustments.
     // This command can also:
     // * set width in pixels: "1000"

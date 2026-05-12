@@ -135,8 +135,8 @@ window-rule {
 }
 
 window-rule {
-  match app-id="kitty"
-  
+  match app-id=r#"^kitty$"#
+ 
   open-on-workspace "Main"
 }
 
