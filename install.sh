@@ -80,7 +80,7 @@ sudo pacman -S \
   yq fd \
   glow \
   lazydocker \
-  yazi ouch dragon mediainfo \
+  yazi ouch mediainfo \
   zellij \
   git stow \
   trash-cli \
@@ -203,7 +203,7 @@ paru -S \
   gitfetch-python \
   wdisplays \
   gapless \
-  dragon-drop
+  ripdrag
 
 echo "!!!!!!!!!!!!!! niri-shells installation"
 git submodule update --init --recursive
@@ -298,6 +298,9 @@ tide configure --auto --style=Lean --prompt_colors='16 colors' --show_time='24-h
 
 fisher install vitallium/tokyonight-fish
 fish_config theme save "TokyoNight Moon"
+
+fisher install PatrickF1/fzf.fish
+fisher install edc/bass
 
 fisher update
 
