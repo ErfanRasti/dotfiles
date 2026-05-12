@@ -17,6 +17,7 @@ run_rofi_modi() {
     # Theme Elements
     status="$(playerctl -p "$current_player" status)"
     mesg=$("$HOME"/.config/hypr/scripts/song_detail.sh)
+    prompt="${current_player^}"
 
     # Options
     if [[ ${status} == "Playing" ]]; then
@@ -59,6 +60,7 @@ run_rofi_modi() {
   print_menu() {
     get_info
 
+    printf '\0prompt\x1f%s\n' "$prompt"
     printf '\0message\x1f%s\n' "$mesg"
     printf '\0markup-rows\x1ftrue\n'
     printf '\0keep-selection\x1ftrue\n'
