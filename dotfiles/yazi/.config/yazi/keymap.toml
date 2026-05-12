@@ -1,3 +1,17 @@
+# Press F1 to search in keybindings
+
+# Drag and drop
+# https://github.com/sxyazi/yazi/discussions/2153
+[[mgr.prepend_keymap]]
+on = "<C-y>"
+run = 'shell -- ripdrag --icon-size 64 --and-exit --all "$@"'
+desc = "Drag and drop out of the yazi"
+
+[[mgr.prepend_keymap]]
+on = "<C-v>"
+run = 'shell -- ripdrag --target --icon-size 64 --and-exit --all --no-click "$@" | while read filepath; do cp -nR "$filepath" .; done'
+desc = "Drag and drop isnide the yazi"
+
 # toggle-pane
 [[mgr.prepend_keymap]]
 on = "T"
@@ -9,6 +23,12 @@ desc = "Maximize or restore the preview pane"
 on = "l"
 run = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
+
+# Open selected files
+[[mgr.prepend_keymap]]
+on = "<C-l>"
+run = "open"
+desc = "Open selected files"
 
 # clipboard-copy
 [[mgr.prepend_keymap]]

@@ -25,7 +25,7 @@ run = 'nvim "$@"'
 block = true
 
 [[open.prepend_rules]]
-name = "bulk-rename.txt"
+url = "bulk-rename.txt"
 use = "bulk-rename"
 
 [[open.prepend_rules]]
