@@ -2,30 +2,35 @@
 
 # Import Current Theme
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-. "$script_dir/../shared/theme.sh"
+. "$script_dir/shared/theme.sh"
 
 # Theme Elements
-prompt='Quick Links'
-mesg="Using '$(xdg-settings get default-web-browser)' as web browser"
+prompt='Applications'
+mesg="Installed Packages : $(pacman -Q | wc -l) (pacman)"
 
-list_col='3'
-list_row='2'
+list_col='6'
+list_row='1'
 
-efonts="CaskaydiaCove Mono Nerd Font Propo 28"
+# CMDs (add your apps here)
+term_cmd='kitty'
+file_cmd='nautilus'
+text_cmd='code'
+web_cmd='zen-browser'
+music_cmd='spotify'
+setting_cmd='env XDG_CURRENT_DESKTOP=gnome gnome-control-center'
 
 # Options
-option_1=""
-option_2=""
-option_3=""
-option_4=""
-option_5=""
-option_6=""
+option_1=""
+option_2="󰉋"
+option_3=""
+option_4=""
+option_5=""
+option_6=""
 
 # Rofi CMD
 rofi_cmd() {
   rofi -theme-str "listview {columns: $list_col; lines: $list_row;}" \
-    -theme-str 'textbox-prompt-colon {str: "";}' \
-    -theme-str "element-text {font: \"$efonts\";}" \
+    -theme-str 'textbox-prompt-colon {str: "";}' \
     -dmenu \
     -p "$prompt" \
     -mesg "$mesg" \
@@ -41,17 +46,17 @@ run_rofi() {
 # Execute Command
 run_cmd() {
   if [[ "$1" == '--opt1' ]]; then
-    xdg-open 'https://www.google.com/'
+    ${term_cmd}
   elif [[ "$1" == '--opt2' ]]; then
-    xdg-open 'https://mail.google.com/'
+    ${file_cmd}
   elif [[ "$1" == '--opt3' ]]; then
-    xdg-open 'https://www.youtube.com/'
+    ${text_cmd}
   elif [[ "$1" == '--opt4' ]]; then
-    xdg-open 'https://www.github.com/'
+    ${web_cmd}
   elif [[ "$1" == '--opt5' ]]; then
-    xdg-open 'https://www.reddit.com/'
+    ${music_cmd}
   elif [[ "$1" == '--opt6' ]]; then
-    xdg-open 'https://www.twitter.com/'
+    ${setting_cmd}
   fi
 }
 

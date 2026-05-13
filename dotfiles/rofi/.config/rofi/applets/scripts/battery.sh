@@ -2,7 +2,7 @@
 
 # Import Current Theme
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-. "$script_dir/../shared/theme.sh"
+. "$script_dir/shared/theme.sh"
 
 # Battery Info
 battery="$(acpi -b | cut -d',' -f1 | cut -d':' -f1)"
@@ -117,9 +117,9 @@ run_cmd() {
     export PATH1
     export CURRENT_THRESHOLD
     export MODE
-    exec ~/.config/rofi/applets/bin/battery_charge_threshold.sh
+    exec ~/.config/rofi/applets/scripts/battery_charge_threshold.sh
   elif [[ "$1" == '--opt6' ]]; then
-    exec ~/.config/rofi/applets/bin/power_profile.sh
+    exec ~/.config/rofi/applets/scripts/power_profile.sh
   fi
 }
 

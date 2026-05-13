@@ -4,7 +4,7 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 modi_script="$0 --modi"
 
 # Import Current Theme
-. "$script_dir/../shared/theme.sh"
+. "$script_dir/shared/theme.sh"
 
 run_rofi_modi() {
 

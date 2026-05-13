@@ -10,7 +10,7 @@ region) MODE="region" ;;
 output) MODE="output" ;;
 window) MODE="window" ;;
 *)
-  ~/.config/rofi/applets/bin/screenshot.sh && exit 0
+  ~/.config/rofi/applets/scripts/screenshot.sh && exit 0
   ;;
 esac
 

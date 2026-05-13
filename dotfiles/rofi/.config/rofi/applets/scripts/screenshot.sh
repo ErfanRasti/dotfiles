@@ -2,7 +2,7 @@
 
 # Import Current Theme
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-. "$script_dir/../shared/theme.sh"
+. "$script_dir/shared/theme.sh"
 
 # Theme Elements
 prompt='Screenshot'

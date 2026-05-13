@@ -4,7 +4,19 @@
     "format-alt": "{icon} {time}",
     "format-charging": "󰂄 {capacity}%",
     "format-plugged": " {capacity}%",
-    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "format-icons": [
+      "󰂎",
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹"
+    ],
     "format-time": "{H}h {M}min",
     "interval": 2,
     "states": {
@@ -14,7 +26,7 @@
     "tooltip": true,
     "tooltip-format": "{timeTo}\nPower usage: {power} watts\nCycles: {cycles}\nHealth: {health}",
     // "on-click-right": "hyprctl dispatch plugin:xtd:moveorexec class:better_control.py,'better-control --battery'",
-    "on-click-right": "~/.config/rofi/applets/bin/battery.sh",
+    "on-click-right": "~/.config/rofi/applets/scripts/battery.sh",
     "on-click-middle": "pypr toggle settings;env XDG_CURRENT_DESKTOP=GNOME gnome-control-center power"
   }
 }
