@@ -135,8 +135,9 @@ window-rule {
 }
 
 window-rule {
-  match app-id=r#"^kitty$"#
- 
+  // match app-id=r#"kitty"# title=r#"kitty"#
+  match app-id="kitty-main"
+
   open-on-workspace "Main"
 }
 
@@ -164,8 +165,7 @@ window-rule {
 }
 
 window-rule {
-    match title="Floating Window - Show Me The Key"
-    match app-id="one.alynx.showmethekey"
+    match app-id="one.alynx.showmethekey" title="Floating Window - Show Me The Key"
     default-column-width { fixed 200; }
     default-window-height { fixed 50; }
     default-floating-position x=2 y=2 relative-to="bottom-right"

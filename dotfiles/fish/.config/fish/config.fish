@@ -21,6 +21,7 @@ if status is-interactive
     # function fish_user_key_bindingssudope_sequence
     # Accept suggestion with Ctrl+Space
     bind -M insert ctrl-space accept-autosuggestion
+    bind -M default ctrl-space accept-autosuggestion
 
     # Define a custom function that runs the cd command with fzf
     function fzf-cd-widget

@@ -14,7 +14,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
+    Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn-sh "kitty --app-id kitty-main"; }
     Mod+return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
     // Alt+space repeat=false { spawn "vicinae" "toggle"; }
     Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "~/.config/hypr/scripts/toggle_rofi_launcher.sh"; }
