@@ -309,6 +309,20 @@
                     "textColor": "none"
                 },
                 {
+                    "defaultSettings": {
+                        "activateOnLeftClick": false,
+                        "defaultScope": "partial",
+                        "durations": [
+                            30,
+                            60,
+                            120,
+                            240,
+                            480
+                        ],
+                        "includeUnlimited": true,
+                        "quickExtendMinutes": 30,
+                        "showRemainingText": true
+                    },
                     "id": "plugin:keep-awake-plus"
                 },
                 {

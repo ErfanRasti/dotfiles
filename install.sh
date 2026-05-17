@@ -162,7 +162,8 @@ sudo pacman -S \
   kdeconnect \
   ocean-sound-theme \
   pavucontrol \
-  vlc amberol
+  vlc amberol \
+  openrgb
 
 echo "✅ pacman packages installed successfully!"
 
