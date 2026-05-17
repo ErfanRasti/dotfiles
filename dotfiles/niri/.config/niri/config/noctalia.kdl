@@ -16,9 +16,9 @@ binds {
     XF86MonBrightnessDown allow-when-locked=true { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
 
 
-    Mod+N {spawn-sh "qs -c noctalia-shell ipc call notifications toggleHistory";}
-    Mod+Alt+W {spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle";}
-    Mod+Escape {spawn-sh "qs -c noctalia-shell ipc call lockScreen lock";}
+    Mod+N { spawn-sh "qs -c noctalia-shell ipc call notifications toggleHistory";}
+    Mod+Alt+W { spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle";}
+    Mod+Escape { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock";}
     Mod+S { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
     Mod+V { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
     Mod+B { spawn-sh "qs -c noctalia-shell ipc call dock toggle"; }
@@ -26,7 +26,9 @@ binds {
     Mod+ALT+Period { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "plugin:kaomoji" "toggle"; }
     Mod+Slash { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "plugin:keybind-cheatsheet" "toggle"; }
     Mod+Ctrl+Alt+Shift+K { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "plugin:show-keys" "toggle"; }
-    Mod+Shift+N {spawn-sh "qs -c noctalia-shell ipc call plugin:sticky-notes toggle";}
+    Mod+Shift+N { spawn-sh "qs -c noctalia-shell ipc call plugin:sticky-notes toggle"; }
+    Mod+CTRL+SHIFT+S {spawn-sh "qs -c noctalia-shell ipc call plugin:screen-toolkit toggle"; }
+    Mod+CTRL+SHIFT+C {spawn-sh "~/.config/noctalia/plugins/keep-awake-plus/scripts/system-awake"; }
     Alt+F4 { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
     // Mod+C { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "calculator"; }
     // Mod+L { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }

@@ -47,3 +47,9 @@ recent-windows {
         Alt+Shift+grave { previous-window filter="app-id"; }
     }
 }
+
+// hotkey-overlay menu related settings
+hotkey-overlay {
+    skip-at-startup
+    // hide-not-bound
+}
