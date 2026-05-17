@@ -229,7 +229,6 @@
                     "hidePassive": false,
                     "id": "Tray",
                     "pinned": [
-                        "Telegram Desktop"
                     ]
                 },
                 {
@@ -654,7 +653,7 @@
     },
     "idle": {
         "customCommands": "[]",
-        "enabled": true,
+        "enabled": false,
         "fadeDuration": 2,
         "lockCommand": "",
         "lockTimeout": 5,
