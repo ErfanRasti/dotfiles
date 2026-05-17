@@ -201,14 +201,14 @@ paru -S \
   hypr-dock \
   bibata-cursor-theme-bin \
   gitfetch-python \
-  wdisplays \
+  wdisplays monique \
   gapless \
   ripdrag
 
 echo "!!!!!!!!!!!!!! niri-shells installation"
 git submodule update --init --recursive
 $SHELLS && paru -S \
-  noctalia-shell wlsunset gum app2unit \
+  noctalia-shell wlsunset ddcutil gum app2unit \
   dsearch qt6-multimedia \
   vicinae-bin
 $SHELLS && sudo pacman -S dms-shell-niri dms-shell-hyprland
@@ -322,5 +322,7 @@ echo "✅ fish configured successfully!"
 echo "------------------- tmux plugins -------------------"
 git clone https://github.com/tmux-plugins/tpm ~/dotfiles/dotfiles/tmux/.config/tmux/plugins/tpm
 git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/dotfiles/dotfiles/tmux/.config/tmux/plugins/tmux
+
+~/.config/tmux/plugins/tpm/bin/install_plugins
 
 echo "✅ tmux configured successfully!"
