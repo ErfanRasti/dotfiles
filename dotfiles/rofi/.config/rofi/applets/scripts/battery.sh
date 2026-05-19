@@ -5,10 +5,10 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 . "$script_dir/shared/theme.sh"
 
 # Battery Info
-battery="$(acpi -b | cut -d',' -f1 | cut -d':' -f1)"
-status="$(acpi -b | cut -d',' -f1 | cut -d':' -f2 | tr -d ' ')"
-percentage="$(acpi -b | cut -d',' -f2 | tr -d ' ',%)"
-time="$(acpi -b | cut -d',' -f3)"
+battery="$(acpi -b | head -n 1 | cut -d':' -f1 | tr -d ' ')"
+status="$(acpi -b | awk -F'[,:]' 'NR==1 {gsub(/ /, "", $2); print $2}')"
+percentage="$(acpi -b | head -n 1 | cut -d',' -f2 | tr -d ' %')"
+time="$(acpi -b | head -n 1 | cut -d',' -f3 | xargs)"
 
 # Define paths
 PATH0="/sys/class/power_supply/BAT0/charge_control_end_threshold"
