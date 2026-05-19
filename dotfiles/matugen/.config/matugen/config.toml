@@ -82,6 +82,11 @@ output_path = '~/.config/kitty/themes/matugen.conf'
 # post_hook = "sh -c 'kitty @ load-config'"
 post_hook = "kitty +kitten themes --reload-in=all matugen"
 
+[templates.tmux]
+input_path = '~/.config/matugen/templates/tmux-colors.conf'
+output_path = '~/.config/tmux/matugen.conf'
+post_hook = 'tmux source-file ~/.config/tmux/matugen.conf'
+
 [templates.btop]
 input_path = '~/.config/matugen/templates/btop.theme'
 output_path = '~/.config/btop/themes/matugen.theme'
@@ -90,15 +95,25 @@ output_path = '~/.config/btop/themes/matugen.theme'
 input_path = '~/.config/matugen/templates/yazi-theme.toml'
 output_path = '~/.config/yazi/theme.toml'
 
+[templates.television]
+input_path = '~/.config/matugen/templates/television.toml'
+output_path = '~/.config/television/themes/matugen.toml'
+
+[template.zellij]
+input_path = '~/.config/matugen/templates/zellij-theme.kdl.tera'
+output_path = '~/.config/zellij/themes/matugen.kdl'
+# Add this line to get hot-reloading. Without it, the new theme will only
+# appear on next start
+post_hook = 'touch ~/.config/zellij/config.kdl'
+
 [templates.zathura]
 input_path = '~/.config/matugen/templates/zathura-colors'
 output_path = '~/.config/zathura/zathurarc'
 
 [templates.spicetify]
 input_path = '~/.config/matugen/templates/spicetify.ini'
-output_path = '~/.config/spicetify/Themes/matugen/color.ini'
-post_hook = 'spicetify refresh'
-# post_hook = '~/.config/matugen/scripts/spicetify_theme_apply.sh'
+output_path = '~/.config/spicetify/Themes/Sleek/color.ini'
+post_hook = 'spicetify watch -s 2>&1 | sed "/Reloaded Spotify/q"'
 
 [templates.cava]
 input_path = '~/.config/matugen/templates/cava-colors.ini'
