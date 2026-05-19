@@ -542,7 +542,7 @@
         "deadOpacity": 0.5,
         "displayMode": "exclusive",
         "dockType": "floating",
-        "enabled": true,
+        "enabled": false,
         "floatingRatio": 0.20000000000000007,
         "groupApps": true,
         "groupClickAction": "list",
@@ -903,6 +903,7 @@
                 "useWallpaperColors": true
             },
             {
+                "appearance": "dark",
                 "colorScheme": "Eldritch",
                 "darkMode": true,
                 "generationMethod": "tonal-spot",

@@ -36,8 +36,8 @@ apply_gnome_proxy() {
     # per-proxy variables
     set_proxy_var http http_proxy
     set_proxy_var http HTTP_PROXY
-    set_proxy_var https https_proxy
-    set_proxy_var https HTTPS_PROXY
+    set_proxy_var http https_proxy
+    set_proxy_var http HTTPS_PROXY
     set_proxy_var ftp ftp_proxy
     set_proxy_var ftp FTP_PROXY
     set_proxy_var socks socks_proxy
