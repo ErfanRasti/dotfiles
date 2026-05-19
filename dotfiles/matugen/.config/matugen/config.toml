@@ -69,12 +69,12 @@ output_path = '~/.config/qt6ct/colors/matugen.conf'
 [templates.gtk3]
 input_path = '~/.config/matugen/templates/gtk-colors.css'
 output_path = '~/.config/gtk-3.0/colors.css'
-# post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-{{mode}}'
-post_hook = '~/.config/matugen/scripts/gtk3_post_hook.sh'
+post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-{{mode}}'
 
 [templates.gtk4]
 input_path = '~/.config/matugen/templates/gtk-colors.css'
 output_path = '~/.config/gtk-4.0/colors.css'
+post_hook = '~/.config/matugen/scripts/gtk_themes_reload.sh'
 
 [templates.kitty]
 input_path = '~/.config/matugen/templates/kitty-colors.conf'
@@ -99,7 +99,7 @@ output_path = '~/.config/yazi/theme.toml'
 input_path = '~/.config/matugen/templates/television.toml'
 output_path = '~/.config/television/themes/matugen.toml'
 
-[template.zellij]
+[templates.zellij]
 input_path = '~/.config/matugen/templates/zellij-theme.kdl.tera'
 output_path = '~/.config/zellij/themes/matugen.kdl'
 # Add this line to get hot-reloading. Without it, the new theme will only

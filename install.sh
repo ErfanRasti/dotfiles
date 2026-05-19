@@ -55,6 +55,7 @@ sudo pacman -Syu
 sudo pacman -S \
   linux-headers \
   linux-firmware \
+  gnome-circle \
   base-devel \
   bluez \
   bluez-utils \
