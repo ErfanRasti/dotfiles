@@ -85,21 +85,18 @@ window-rule {
 ////////////////////////////////////////////////////////////////////
 
 window-rule {
-    match app-id="org.gnome.Nautilus"
     match title="kitty-dropterm"
-    match app-id="yazi"
     match app-id="btop"
     match app-id="vlc"
     match title="dgop-kitty"
-    default-column-width { proportion 0.5; }
-    // default-window-height { proportion 0.7; }
+    default-window-height { proportion 0.6; }
     // open-floating true
 }
 
 window-rule {
-    match app-id="org.gnome.Nautilus" title="Open Files"
-    match app-id="org.gnome.Nautilus" title="Choose a default destination"
-    default-window-height { proportion 0.7; }
+    match app-id="org.gnome.Nautilus"
+    match app-id="yazi"
+    default-column-width { proportion 0.5; }
 }
 
 window-rule {
@@ -128,10 +125,21 @@ window-rule {
     match app-id="google-chrome"
     match app-id="microsoft-edge"
     match app-id="zen" title="Zen Browser"
+    exclude title="File Upload" app-id="zen"
     match app-id="firefox" title="Mozilla Firefox"
     open-maximized-to-edges true
 
     open-on-workspace "Web"
+}
+
+window-rule {
+    match app-id="org.gnome.Nautilus" title="Open Files"
+    match app-id="org.gnome.Nautilus" title="Choose a default destination"
+    match title="File Upload" app-id="zen"
+    default-window-height { proportion 0.7; }
+    default-column-width { proportion 0.7; }
+
+    open-floating true
 }
 
 window-rule {
@@ -151,11 +159,11 @@ window-rule {
     open-maximized-to-edges true
 }
 
-// window-rule {
-//     match app-id=r#"^org\.telegram\.desktop$"#
-//
-//     block-out-from "screencast"
-// }
+window-rule {
+    match app-id=r#"^org\.telegram\.desktop$"#
+
+    block-out-from "screencast"
+}
 
 window-rule {
     match app-id="gsr-ui"
@@ -217,3 +225,5 @@ layer-rule {
         blur true
     }
 }
+
+
