@@ -102,5 +102,5 @@ function y
     rm -f -- "$tmp"
 end
 
-# Import the envvars from ~/set_proxy.sh
+# Import the envvars from ~/set_proxy
 bass "source ~/set-proxy ''"

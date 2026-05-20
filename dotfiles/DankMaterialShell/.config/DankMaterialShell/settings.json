@@ -6,7 +6,7 @@
   "matugenScheme": "scheme-tonal-spot",
   "runUserMatugenTemplates": true,
   "matugenTargetMonitor": "",
-  "popupTransparency": 1,
+  "popupTransparency": 0.6,
   "dockTransparency": 0.5,
   "widgetBackgroundColor": "s",
   "widgetColorMode": "colorful",
@@ -36,10 +36,10 @@
   "modalAnimationSpeed": 1,
   "modalCustomAnimationDuration": 150,
   "enableRippleEffects": true,
-  "blurEnabled": false,
+  "blurEnabled": true,
   "blurForegroundLayers": true,
   "blurLayerOutlineOpacity": 0.12,
-  "blurBorderColor": "outline",
+  "blurBorderColor": "primary",
   "blurBorderCustomColor": "#ffffff",
   "blurBorderOpacity": 0.35,
   "wallpaperFillMode": "Fill",
@@ -237,12 +237,6 @@
   "greeterEnableFprint": false,
   "greeterEnableU2f": false,
   "greeterWallpaperPath": "",
-  "greeterUse24HourClock": true,
-  "greeterShowSeconds": false,
-  "greeterPadHours12Hour": false,
-  "greeterLockDateFormat": "",
-  "greeterFontFamily": "",
-  "greeterWallpaperFillMode": "",
   "mediaSize": 1,
   "appLauncherViewMode": "grid",
   "spotlightModalViewMode": "list",
@@ -337,6 +331,10 @@
   "qtThemingEnabled": false,
   "syncModeWithPortal": true,
   "terminalsAlwaysDark": false,
+  "muxType": "tmux",
+  "muxUseCustomCommand": false,
+  "muxCustomCommand": "",
+  "muxSessionFilter": "",
   "runDmsMatugenTemplates": false,
   "matugenTemplateGtk": true,
   "matugenTemplateNiri": true,
@@ -361,7 +359,7 @@
   "matugenTemplateEmacs": true,
   "matugenTemplateZed": true,
   "showDock": true,
-  "dockAutoHide": false,
+  "dockAutoHide": true,
   "dockSmartAutoHide": true,
   "dockGroupByApp": true,
   "dockOpenOnOverview": true,
@@ -388,7 +386,7 @@
   "dockShowOverflowBadge": true,
   "notificationOverlayEnabled": true,
   "notificationPopupShadowEnabled": true,
-  "notificationPopupPrivacyMode": false,
+  "notificationPopupPrivacyMode": true,
   "modalDarkenBackground": false,
   "lockScreenShowPowerActions": true,
   "lockScreenShowSystemIcons": true,
@@ -411,7 +409,7 @@
   "notificationTimeoutNormal": 5000,
   "notificationTimeoutCritical": 10000,
   "notificationCompactMode": true,
-  "notificationPopupPosition": 0,
+  "notificationPopupPosition": 3,
   "notificationAnimationSpeed": 1,
   "notificationCustomAnimationDuration": 400,
   "notificationHistoryEnabled": true,
@@ -450,7 +448,7 @@
   "customPowerActionHibernate": "",
   "customPowerActionReboot": "",
   "customPowerActionPowerOff": "",
-  "updaterHideWidget": false,
+  "updaterHideWidget": true,
   "updaterUseCustomCommand": false,
   "updaterCustomCommand": "",
   "updaterTerminalAdditionalParams": "",
@@ -489,7 +487,8 @@
         },
         {
           "id": "focusedWindow",
-          "enabled": true
+          "enabled": true,
+          "focusedWindowCompactMode": true
         }
       ],
       "centerWidgets": [
@@ -555,10 +554,10 @@
         }
       ],
       "spacing": 0,
-      "innerPadding": -5,
-      "bottomGap": -4,
-      "transparency": 0.8,
-      "widgetTransparency": 1,
+      "innerPadding": -8,
+      "bottomGap": 0,
+      "transparency": 0.5,
+      "widgetTransparency": 0.8,
       "squareCorners": false,
       "noBackground": false,
       "gothCornersEnabled": false,
@@ -568,7 +567,7 @@
       "borderColor": "surfaceText",
       "borderOpacity": 1,
       "borderThickness": 1,
-      "fontScale": 1,
+      "fontScale": 0.9,
       "autoHide": false,
       "autoHideDelay": 250,
       "openOnOverview": true,
@@ -576,9 +575,14 @@
       "popupGapsAuto": true,
       "popupGapsManual": 0,
       "widgetOutlineEnabled": false,
-      "shadowColorMode": "surface",
+      "shadowColorMode": "secondary",
       "clickThrough": true,
-      "shadowIntensity": 0
+      "shadowIntensity": 20,
+      "widgetPadding": 5,
+      "iconScale": 0.9,
+      "removeWidgetPadding": false,
+      "shadowOpacity": 50,
+      "maximizeDetection": true
     }
   ],
   "desktopClockEnabled": false,
@@ -662,7 +666,7 @@
       "enabled": true,
       "config": {
         "style": "analog",
-        "transparency": 0.5,
+        "transparency": 0.6,
         "colorMode": "primary",
         "customColor": "#ffffff",
         "showDate": true,
@@ -675,7 +679,8 @@
         "syncPositionAcrossScreens": true,
         "clickThrough": false,
         "showOnOverview": false,
-        "showOnOverlay": false
+        "showOnOverlay": false,
+        "showOnOverviewOnly": false
       },
       "positions": {
         "eDP-1": {
@@ -685,10 +690,10 @@
           "y": 49.76953125
         },
         "_synced": {
-          "x": 0.026041666666666668,
-          "y": 0.046296296296296294,
-          "width": 219.96484375,
-          "height": 219.96484375
+          "x": 0.02556610107421875,
+          "y": 0.05760362413194445,
+          "width": 200,
+          "height": 200
         }
       }
     },
@@ -699,7 +704,7 @@
       "enabled": true,
       "config": {
         "showHeader": true,
-        "transparency": 0.5,
+        "transparency": 0.7,
         "colorMode": "primary",
         "customColor": "#ffffff",
         "showCpu": true,
@@ -719,14 +724,24 @@
         "graphInterval": 60,
         "displayPreferences": [
           "all"
-        ]
+        ],
+        "syncPositionAcrossScreens": true,
+        "clickThrough": false,
+        "showOnOverlay": false,
+        "showOnOverview": false
       },
       "positions": {
         "eDP-1": {
           "width": 320,
           "height": 480,
-          "x": 1680,
-          "y": 760
+          "x": 1216,
+          "y": 384
+        },
+        "_synced": {
+          "x": 0.7916666666666666,
+          "y": 0.4444444444444444,
+          "width": 320,
+          "height": 480
         }
       }
     },
@@ -743,7 +758,8 @@
         "syncPositionAcrossScreens": false,
         "showHourlyForecast": true,
         "showPressure": true,
-        "viewMode": "forecast"
+        "viewMode": "forecast",
+        "showOnOverview": false
       },
       "positions": {
         "eDP-1": {
@@ -767,7 +783,7 @@
       "trigger": "?"
     }
   },
-  "clipboardEnterToPaste": false,
+  "clipboardEnterToPaste": true,
   "launcherPluginVisibility": {},
   "launcherPluginOrder": [],
   "configVersion": 5

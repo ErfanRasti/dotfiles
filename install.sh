@@ -209,11 +209,11 @@ paru -S \
 
 echo "!!!!!!!!!!!!!! niri-shells installation"
 git submodule update --init --recursive
+$SHELLS && sudo pacman -S dms-shell-niri dms-shell-hyprland
 $SHELLS && paru -S \
   noctalia-shell wlsunset ddcutil gum app2unit \
-  dsearch qt6-multimedia \
+  dsearch-bin qt6-multimedia \
   vicinae-bin
-$SHELLS && sudo pacman -S dms-shell-niri dms-shell-hyprland
 
 echo "✅ AUR packages installed successfully!"
 
