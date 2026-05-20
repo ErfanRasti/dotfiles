@@ -160,7 +160,7 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # setup proxy
 # Get GNOME proxy settings and apply them
-source ~/set_proxy.sh
+source ~/set-proxy
 
 # Enables vim-style command-line editing in zsh
 set -o vi

@@ -103,4 +103,4 @@ function y
 end
 
 # Import the envvars from ~/set_proxy.sh
-bass "source ~/set_proxy.sh ''"
+bass "source ~/set-proxy ''"

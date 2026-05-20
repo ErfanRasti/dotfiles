@@ -106,7 +106,7 @@ window-rule {
     match app-id="org.gnome.Settings"
     match app-id="io.github.kaii_lb.Overskride"
     default-column-width { proportion 0.5; }
-    open-on-workspace "Scratchpad"
+    // open-on-workspace "Scratchpad"
 }
 
 window-rule {
