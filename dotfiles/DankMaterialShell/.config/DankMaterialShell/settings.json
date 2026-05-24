@@ -7,7 +7,7 @@
   "runUserMatugenTemplates": true,
   "matugenTargetMonitor": "",
   "popupTransparency": 0.6,
-  "dockTransparency": 0.5,
+  "dockTransparency": 0.4,
   "widgetBackgroundColor": "s",
   "widgetColorMode": "colorful",
   "controlCenterTileColorMode": "primary",
@@ -311,7 +311,7 @@
   "batterySuspendBehavior": 0,
   "batteryProfileName": "",
   "batteryChargeLimit": 100,
-  "lockBeforeSuspend": false,
+  "lockBeforeSuspend": true,
   "loginctlLockIntegration": true,
   "fadeToLockEnabled": true,
   "fadeToLockGracePeriod": 5,
@@ -364,8 +364,8 @@
   "dockGroupByApp": true,
   "dockOpenOnOverview": true,
   "dockPosition": 3,
-  "dockSpacing": 5,
-  "dockBottomGap": -12,
+  "dockSpacing": 8,
+  "dockBottomGap": 0,
   "dockMargin": 0,
   "dockIconSize": 28,
   "dockIndicatorStyle": "line",
@@ -423,7 +423,7 @@
   "osdPosition": 4,
   "osdVolumeEnabled": true,
   "osdMediaVolumeEnabled": true,
-  "osdMediaPlaybackEnabled": true,
+  "osdMediaPlaybackEnabled": false,
   "osdBrightnessEnabled": true,
   "osdIdleInhibitorEnabled": true,
   "osdMicMuteEnabled": true,
@@ -546,7 +546,11 @@
         },
         {
           "id": "controlCenterButton",
-          "enabled": true
+          "enabled": true,
+          "showAudioIcon": true,
+          "showAudioPercent": false,
+          "showBatteryIcon": false,
+          "showPrinterIcon": true
         },
         {
           "id": "battery",
@@ -557,12 +561,12 @@
       "innerPadding": -8,
       "bottomGap": 0,
       "transparency": 0.5,
-      "widgetTransparency": 0.8,
-      "squareCorners": false,
+      "widgetTransparency": 0.7,
+      "squareCorners": true,
       "noBackground": false,
-      "gothCornersEnabled": false,
-      "gothCornerRadiusOverride": false,
-      "gothCornerRadiusValue": 12,
+      "gothCornersEnabled": true,
+      "gothCornerRadiusOverride": true,
+      "gothCornerRadiusValue": 10,
       "borderEnabled": false,
       "borderColor": "surfaceText",
       "borderOpacity": 1,
@@ -738,8 +742,8 @@
           "y": 384
         },
         "_synced": {
-          "x": 0.7916666666666666,
-          "y": 0.4444444444444444,
+          "x": 0.7552083333333334,
+          "y": 0.4166666666666667,
           "width": 320,
           "height": 480
         }
@@ -783,7 +787,7 @@
       "trigger": "?"
     }
   },
-  "clipboardEnterToPaste": true,
+  "clipboardEnterToPaste": false,
   "launcherPluginVisibility": {},
   "launcherPluginOrder": [],
   "configVersion": 5
