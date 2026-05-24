@@ -42,10 +42,10 @@
     "bar": {
         "autoHideDelay": 500,
         "autoShowDelay": 150,
-        "backgroundOpacity": 0.5,
+        "backgroundOpacity": 0.5099999999999999,
         "barType": "simple",
         "capsuleColorKey": "none",
-        "capsuleOpacity": 0.8,
+        "capsuleOpacity": 0.6,
         "contentPadding": 0,
         "density": "compact",
         "displayMode": "always_visible",
@@ -442,10 +442,42 @@
             ],
             "right": [
                 {
-                    "id": "WallpaperSelector"
+                    "defaultSettings": {
+                        "colorHistory": [
+                        ],
+                        "detectedRecorder": "",
+                        "filenameFormat": "",
+                        "gifMaxSeconds": 30,
+                        "installedLangs": [
+                            "eng"
+                        ],
+                        "paletteColors": [
+                        ],
+                        "recordCopyToClipboard": false,
+                        "recordSkipConfirmation": false,
+                        "screenshotPath": "",
+                        "selectedOcrLang": "eng",
+                        "transAvailable": false,
+                        "videoPath": ""
+                    },
+                    "id": "plugin:screen-toolkit"
                 },
                 {
-                    "id": "KeepAwake"
+                    "defaultSettings": {
+                        "activateOnLeftClick": false,
+                        "defaultScope": "partial",
+                        "durations": [
+                            30,
+                            60,
+                            120,
+                            240,
+                            480
+                        ],
+                        "includeUnlimited": true,
+                        "quickExtendMinutes": 30,
+                        "showRemainingText": true
+                    },
+                    "id": "plugin:keep-awake-plus"
                 },
                 {
                     "id": "NightLight"
@@ -467,20 +499,6 @@
             {
                 "name": "eDP-1",
                 "widgets": [
-                    {
-                        "hideMode": "hidden",
-                        "id": "MediaPlayer",
-                        "roundedCorners": true,
-                        "scale": 1,
-                        "showAlbumArt": true,
-                        "showBackground": true,
-                        "showButtons": true,
-                        "showVisualizer": true,
-                        "visualizerType": "wave",
-                        "visualizerVisibility": "with-background",
-                        "x": 1600,
-                        "y": 1152
-                    },
                     {
                         "id": "Weather",
                         "scale": 1.2707943531852854,
@@ -506,6 +524,9 @@
                             "completedCount": 0,
                             "count": 0,
                             "current_page_id": 0,
+                            "exportEmptySections": false,
+                            "exportFormat": "markdown",
+                            "exportPath": "~/Documents",
                             "isExpanded": false,
                             "pages": [
                                 {
@@ -525,10 +546,22 @@
                             "useCustomColors": false
                         },
                         "id": "plugin:todo",
-                        "scale": 1,
                         "showBackground": true,
-                        "x": 1696,
-                        "y": 64
+                        "x": 1200,
+                        "y": 48
+                    },
+                    {
+                        "hideMode": "visible",
+                        "id": "MediaPlayer",
+                        "roundedCorners": true,
+                        "scale": 0.7940919784576048,
+                        "showAlbumArt": true,
+                        "showBackground": true,
+                        "showButtons": true,
+                        "showVisualizer": true,
+                        "visualizerType": "linear",
+                        "x": 1176,
+                        "y": 768
                     }
                 ]
             }
@@ -709,7 +742,7 @@
         "autoSchedule": false,
         "dayTemp": "6500",
         "enabled": true,
-        "forced": false,
+        "forced": true,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "nightTemp": "4500"
@@ -719,7 +752,7 @@
         "disableWallpaper": true
     },
     "notifications": {
-        "backgroundOpacity": 1,
+        "backgroundOpacity": 0.8,
         "clearDismissed": true,
         "criticalUrgencyDuration": 15,
         "density": "compact",
@@ -741,11 +774,11 @@
             "normal": true
         },
         "sounds": {
-            "criticalSoundFile": "",
+            "criticalSoundFile": "/usr/share/sounds/freedesktop/stereo/message.oga",
             "enabled": true,
             "excludedApps": "discord,firefox,chrome,chromium,edge",
-            "lowSoundFile": "",
-            "normalSoundFile": "",
+            "lowSoundFile": "/usr/share/sounds/freedesktop/stereo/message.oga",
+            "normalSoundFile": "/usr/share/sounds/freedesktop/stereo/message.oga",
             "separateSounds": false,
             "volume": 1
         }
