@@ -1,0 +1,23 @@
+
+[Unit]
+Description=Ollama Service
+Wants=network-online.target
+After=network.target network-online.target
+
+[Service]
+# Ensure you create this directory or point it to where you want models stored
+# e.g., /home/youruser/.local/share/ollama
+Environment="OLLAMA_MODELS=%h/.ollama/models"
+Environment="HOME=%h"
+
+ExecStart=/usr/bin/ollama serve
+Restart=on-failure
+RestartSec=3
+RestartPreventExitStatus=1
+Type=simple
+PrivateTmp=yes
+ProtectSystem=full
+
+[Install]
+WantedBy=default.target
+
