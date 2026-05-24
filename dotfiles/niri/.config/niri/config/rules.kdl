@@ -47,7 +47,7 @@ layer-rule {
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
-    geometry-corner-radius 12
+    geometry-corner-radius 10
     open-maximized-to-edges false
     clip-to-geometry true
     tiled-state true
@@ -85,61 +85,62 @@ window-rule {
 ////////////////////////////////////////////////////////////////////
 
 window-rule {
-    match title="kitty-dropterm"
-    match app-id="btop"
     match app-id="vlc"
-    match title="dgop-kitty"
-    default-window-height { proportion 0.6; }
-    // open-floating true
+    default-column-width { proportion 0.6; }
 }
 
 window-rule {
-    match app-id="org.gnome.Nautilus"
-    match app-id="yazi"
-    default-column-width { proportion 0.5; }
+  match title="kitty-dropterm"
+  match app-id="btop"
+  match title="dgop-kitty"
+  match app-id="org.gnome.Nautilus"
+  match app-id="yazi"
+  default-column-width { proportion 0.6; }
+  default-window-height { proportion 0.7; }
+  open-floating true
 }
 
 window-rule {
-    match app-id="org.gnome.Settings"
-    match app-id="io.github.kaii_lb.Overskride"
-    default-column-width { proportion 0.5; }
-    // open-on-workspace "Scratchpad"
+  match app-id="org.gnome.Settings"
+  match app-id="io.github.kaii_lb.Overskride"
+  default-column-width { proportion 0.5; }
+  // open-on-workspace "Scratchpad"
 }
 
 window-rule {
-    match app-id="org.telegram.desktop"
-    match app-id="hiddify"
-    match app-id="v2rayN"
-    default-column-width { proportion 0.15; }
-    open-on-workspace "Entertainment"
+  match app-id="org.telegram.desktop"
+  match app-id="hiddify"
+  match app-id="v2rayN"
+  default-column-width { proportion 0.15; }
+  open-on-workspace "Entertainment"
 }
 
 window-rule {
-    match app-id="spotify"
-    match app-id="uget-gtk"
-    default-column-width { proportion 0.65; }
-    open-on-workspace "Entertainment"
+  match app-id="spotify"
+  match app-id="uget-gtk"
+  default-column-width { proportion 0.65; }
+  open-on-workspace "Entertainment"
 }
 
 window-rule {
-    match app-id="google-chrome"
-    match app-id="microsoft-edge"
-    match app-id="zen" title="Zen Browser"
-    exclude title="File Upload" app-id="zen"
-    match app-id="firefox" title="Mozilla Firefox"
-    open-maximized-to-edges true
+  match app-id="google-chrome"
+  match app-id="microsoft-edge"
+  match app-id="zen" title="Zen Browser"
+  exclude title="File Upload" app-id="zen"
+  match app-id="firefox" title="Mozilla Firefox"
+  open-maximized-to-edges true
 
-    open-on-workspace "Web"
+  open-on-workspace "Web"
 }
 
 window-rule {
-    match app-id="org.gnome.Nautilus" title="Open Files"
-    match app-id="org.gnome.Nautilus" title="Choose a default destination"
-    match title="File Upload" app-id="zen"
-    default-window-height { proportion 0.7; }
-    default-column-width { proportion 0.7; }
+  match app-id="org.gnome.Nautilus" title="Open Files"
+  match app-id="org.gnome.Nautilus" title="Choose a default destination"
+  match title="File Upload" app-id="zen"
+  default-window-height { proportion 0.7; }
+  default-column-width { proportion 0.7; }
 
-    open-floating true
+  open-floating true
 }
 
 window-rule {
