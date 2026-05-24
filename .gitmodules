@@ -4,3 +4,6 @@
 [submodule "dotfiles/tmux/.config/tmux"]
 	path = dotfiles/tmux/.config/tmux
 	url = https://github.com/ErfanRasti/tmux
+[submodule "dotfiles/wallpapers/wallpapers"]
+	path = dotfiles/wallpapers/wallpapers
+	url = https://github.com/ErfanRasti/wallpapers
