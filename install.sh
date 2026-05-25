@@ -107,7 +107,7 @@ sudo pacman -S \
   rofi \
   hyprpaper \
   hyprsunset hyprpicker \
-  bash zsh fish nvim bash-language-server tmux flatpak zoxide lazygit kitty ghostty \
+  bash zsh fish nvim lolcat bash-language-server tmux flatpak zoxide lazygit kitty ghostty \
   xdg-desktop-portal-hyprland \
   feh \
   papirus-icon-theme \
@@ -121,7 +121,7 @@ sudo pacman -S \
   foot fzf chafa jq bat \
   pixman \
   libpng \
-  wl-clipboard wl-clip-persist \
+  wl-clipboard wl-clip-persist wtype \
   cpio cmake git meson gcc \
   mpv \
   hyprshot \
@@ -164,7 +164,9 @@ sudo pacman -S \
   ocean-sound-theme \
   pavucontrol \
   vlc amberol \
-  openrgb
+  openrgb \
+  podman ollama \
+  figlet
 
 echo "✅ pacman packages installed successfully!"
 
@@ -205,7 +207,8 @@ paru -S \
   gitfetch-python \
   wdisplays monique \
   gapless \
-  ripdrag
+  ripdrag \
+  figlet-fonts-extra
 
 echo "!!!!!!!!!!!!!! niri-shells installation"
 git submodule update --init --recursive
@@ -238,20 +241,26 @@ flatpak override --user \
 echo "✅ flatpak packages installed successfully!"
 
 echo "------------------- hyprpm packages -------------------"
-hyprpm add https://github.com/hyprwm/hyprland-plugins
-hyprpm add https://github.com/KZDKM/Hyprspace
-hyprpm add https://github.com/VirtCode/hypr-dynamic-cursors
-hyprpm add https://github.com/zakk4223/hyprland-easymotion
-hyprpm add https://github.com/outfoxxed/hy3
 hyprpm update
-hyprpm enable hyprexpo
+hyprpm add https://github.com/hyprwm/hyprland-plugins
+#hyprpm enable hyprexpo
 hyprpm enable hyprbars
 hyprpm enable hyprscrolling
-hyprpm enable hyprfocus
 hyprpm enable xtra-dispatchers
+hyprpm enable hyprfocus
+
+hyprpm add https://github.com/gfhdhytghd/hymission
+hyprpm enable hymission
+
+hyprpm add https://github.com/VirtCode/hypr-dynamic-cursors
 hyprpm enable dynamic-cursors
+
+hyprpm add https://github.com/zakk4223/hyprland-easymotion
 hyprpm enable hyprEasymotion
+
+hyprpm add https://github.com/outfoxxed/hy3
 hyprpm enable hy3
+
 hyprpm reload
 
 echo "✅ hyprpm packages installed successfully!"
@@ -262,6 +271,11 @@ cd "$HOME/dotfiles/dotfiles/" || exit
 
 # shellcheck disable=SC2035
 stow */
+
+# or
+# stow --adopt -v */
+# git restore .
+# or
 
 waypaper --wallpaper ~/wallpapers/School/arseniy-chebynkin-school-enter2.jpg
 
@@ -318,6 +332,8 @@ ya pkg add yazi-rs/plugins:zoom
 ya pkg add yazi-rs/plugins:vcs-files
 ya pkg add boydaihungst/mediainfo
 ya pkg add yazi-rs/plugins:mount
+ya pkg add XYenon/clipboard
+ya pkg add TD-Sky/sudo
 
 echo "✅ fish configured successfully!"
 
