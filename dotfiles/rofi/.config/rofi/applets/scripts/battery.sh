@@ -119,6 +119,10 @@ run_cmd() {
     export MODE
     exec ~/.config/rofi/applets/scripts/battery_charge_threshold.sh
   elif [[ "$1" == '--opt6' ]]; then
+    export battery
+    export status
+    export percentage
+    export time
     exec ~/.config/rofi/applets/scripts/power_profile.sh
   fi
 }

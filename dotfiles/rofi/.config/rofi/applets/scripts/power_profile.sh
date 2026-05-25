@@ -5,10 +5,7 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 . "$script_dir/shared/theme.sh"
 
 # Battery Info
-charging_status="$(acpi -b | cut -d',' -f1 | cut -d':' -f2 | tr -d ' ')"
 current_profile="$(powerprofilesctl get)"
-percentage="$(acpi -b | cut -d',' -f2 | tr -d ' ',%)"
-time="$(acpi -b | cut -d',' -f3)"
 
 if [[ -z "$time" ]]; then
   time=' Fully Charged'
@@ -16,7 +13,7 @@ fi
 
 # Theme Elements
 prompt="$current_profile"
-mesg="${charging_status}, ${percentage}%, ${time}"
+mesg="${status}, ${percentage}%, ${time}"
 
 list_col='3'
 list_row='1'
