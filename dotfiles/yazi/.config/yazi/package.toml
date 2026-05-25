@@ -48,5 +48,15 @@ use = "h-hg/yamb"
 rev = "5f2e22e"
 hash = "699fe07e0d2d1b4af8dafb84168eeb04"
 
+[[plugin.deps]]
+use = "XYenon/clipboard"
+rev = "a125df0"
+hash = "691eaf677ba5eaecc978972ab8177157"
+
+[[plugin.deps]]
+use = "TD-Sky/sudo"
+rev = "afd61ce"
+hash = "d390cd2d8b996939a695411b446f58d0"
+
 [flavor]
 deps = []
