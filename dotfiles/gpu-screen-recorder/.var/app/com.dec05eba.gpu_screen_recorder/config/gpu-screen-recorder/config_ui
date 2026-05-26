@@ -1,6 +1,7 @@
 main.config_file_version 2
 main.hotkeys_enable_option enable_hotkeys_no_grab
 main.joystick_hotkeys_enable_option disable_hotkeys
+main.language 
 main.notification_speed normal
 main.show_hide_hotkey 26 16
 main.software_encoding_warning_shown false
@@ -19,6 +20,7 @@ record.record_options.codec auto
 record.record_options.color_range limited
 record.record_options.fps 60
 record.record_options.framerate_mode auto
+record.record_options.low_power_mode false
 record.record_options.merge_audio_tracks true
 record.record_options.overclock false
 record.record_options.record_area_height 1080
@@ -32,9 +34,21 @@ record.record_options.video_bitrate 45000
 record.record_options.video_height 1080
 record.record_options.video_quality very_high
 record.record_options.video_width 1920
+record.record_options.webcam_camera_fps 0
+record.record_options.webcam_camera_height 0
+record.record_options.webcam_camera_width 0
+record.record_options.webcam_flip_horizontally false
+record.record_options.webcam_height 30
+record.record_options.webcam_source 
+record.record_options.webcam_video_format auto
+record.record_options.webcam_width 30
+record.record_options.webcam_x 0
+record.record_options.webcam_y 0
 record.save_directory Videos/Screencasts
 record.save_video_in_game_folder false
 record.start_stop_hotkey 94 16
+record.start_stop_region_hotkey 94 4
+record.start_stop_window_hotkey 94 1
 replay.container mp4
 replay.record_options.advanced_view true
 replay.record_options.application_audio_invert false
@@ -46,6 +60,7 @@ replay.record_options.codec auto
 replay.record_options.color_range limited
 replay.record_options.fps 60
 replay.record_options.framerate_mode vfr
+replay.record_options.low_power_mode false
 replay.record_options.merge_audio_tracks true
 replay.record_options.overclock false
 replay.record_options.record_area_height 1080
@@ -59,6 +74,16 @@ replay.record_options.video_bitrate 45000
 replay.record_options.video_height 1080
 replay.record_options.video_quality custom
 replay.record_options.video_width 1920
+replay.record_options.webcam_camera_fps 0
+replay.record_options.webcam_camera_height 0
+replay.record_options.webcam_camera_width 0
+replay.record_options.webcam_flip_horizontally false
+replay.record_options.webcam_height 30
+replay.record_options.webcam_source 
+replay.record_options.webcam_video_format auto
+replay.record_options.webcam_width 30
+replay.record_options.webcam_x 0
+replay.record_options.webcam_y 0
 replay.replay_storage ram
 replay.restart_replay_on_save false
 replay.save_10_min_hotkey 97 16
@@ -70,6 +95,7 @@ replay.start_stop_hotkey 95 17
 replay.time 60
 replay.turn_on_replay_automatically_mode dont_turn_on_automatically
 screenshot.change_image_resolution false
+screenshot.custom_script 
 screenshot.image_format jpg
 screenshot.image_height 1080
 screenshot.image_quality very_high
@@ -80,6 +106,7 @@ screenshot.restore_portal_session true
 screenshot.save_directory Pictures/Screenshots
 screenshot.save_screenshot_in_game_folder false
 screenshot.save_screenshot_to_clipboard false
+screenshot.save_screenshot_to_disk true
 screenshot.show_notifications true
 screenshot.take_screenshot_hotkey 86 16
 screenshot.take_screenshot_region_hotkey 102 20
@@ -88,6 +115,8 @@ screenshot.use_led_indicator false
 streaming.custom.container flv
 streaming.custom.key 
 streaming.custom.url 
+streaming.kick.key 
+streaming.kick.url 
 streaming.record_options.advanced_view false
 streaming.record_options.application_audio_invert false
 streaming.record_options.audio_codec opus
@@ -98,6 +127,7 @@ streaming.record_options.codec auto
 streaming.record_options.color_range limited
 streaming.record_options.fps 60
 streaming.record_options.framerate_mode vfr
+streaming.record_options.low_power_mode false
 streaming.record_options.merge_audio_tracks true
 streaming.record_options.overclock false
 streaming.record_options.record_area_height 0
@@ -111,6 +141,16 @@ streaming.record_options.video_bitrate 15000
 streaming.record_options.video_height 0
 streaming.record_options.video_quality custom
 streaming.record_options.video_width 0
+streaming.record_options.webcam_camera_fps 0
+streaming.record_options.webcam_camera_height 0
+streaming.record_options.webcam_camera_width 0
+streaming.record_options.webcam_flip_horizontally false
+streaming.record_options.webcam_height 30
+streaming.record_options.webcam_source 
+streaming.record_options.webcam_video_format auto
+streaming.record_options.webcam_width 30
+streaming.record_options.webcam_x 0
+streaming.record_options.webcam_y 0
 streaming.rumble.key 
 streaming.service twitch
 streaming.start_stop_hotkey 93 16
