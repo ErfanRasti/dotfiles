@@ -1,0 +1,20 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (local)",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      },
+      "models": {
+        "qwen3:14b": { "name": "Qwen3 14B" },
+        "deepseek-r1:14b": { "name": "DeepSeek R1 14B" },
+        "gpt-oss:20b": { "name": "GPT-OSS 20B" },
+        "qwen2.5-coder:7b": { "name": "Qwen 2.5 Coder 7B" },
+        "gemma3:4b": { "name": "Gemma3 4B" },
+        "deepseek-coder:6.7b": { "name": "DeepSeek Coder 6.7B" }
+      }
+    }
+  }
+}

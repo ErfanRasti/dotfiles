@@ -165,7 +165,7 @@ sudo pacman -S \
   pavucontrol \
   vlc amberol \
   openrgb \
-  podman ollama \
+  podman ollama opencode \
   figlet
 
 echo "✅ pacman packages installed successfully!"
