@@ -5,11 +5,7 @@ find_non_tun_default() {
 }
 
 find_tun_device() {
-  if ip link show tun1 >/dev/null 2>&1; then
-    echo "tun1"
-  elif ip link show tun0 >/dev/null 2>&1; then
-    echo "tun0"
-  fi
+  openvpn3 sessions-list 2>/dev/null | grep -oP 'Device: \Ktun\d+'
 }
 
 disconnect_tun() {
@@ -129,7 +125,6 @@ main() {
 
   CONFIGS_PATH="$HOME/programs/openvpn"
   INTERFACE="$(find_non_tun_default)"
-  TUN_DEVICE="$(find_tun_device)"
   COUNTRY_CODE=$(cat "$CONFIGS_PATH/country_code" | tr -d '[:space:]')
 
   GATEWAY_V4=$(ip route show default | grep -v 'dev tun' | awk '/default via / {print $3}' | head -1)
@@ -155,6 +150,7 @@ main() {
     connect_openvpn3
 
     echo "Switching default route to tun..."
+    TUN_DEVICE="$(find_tun_device)"
     connect_tun
 
     if [[ "$2" == "--bypass" ]]; then
