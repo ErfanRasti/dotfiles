@@ -168,6 +168,7 @@ window-rule {
 
 window-rule {
     match app-id=r#"^org\.telegram\.desktop$"#
+    match app-id="v2rayN"
 
     block-out-from "screencast"
 }
@@ -199,6 +200,7 @@ window-rule {
 
 window-rule {
     match title="meet.google.com is sharing your screen."
+    match title="web.bale.ai is sharing your screen."
     default-floating-position x=2 y=2 relative-to="bottom-right"
     open-floating true
     open-focused false
