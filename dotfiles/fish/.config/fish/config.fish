@@ -102,6 +102,9 @@ function y
     rm -f -- "$tmp"
 end
 
+# Set EDITOR
+export EDITOR=nvim
+
 # Import the envvars from ~/set_proxy
 bass "source ~/set-proxy ''"
 

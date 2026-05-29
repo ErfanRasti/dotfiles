@@ -158,10 +158,6 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-# setup proxy
-# Get GNOME proxy settings and apply them
-source ~/set-proxy
-
 # Enables vim-style command-line editing in zsh
 set -o vi
 
@@ -211,5 +207,14 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+# Set EDITOR
+export EDITOR=nvim
+
+
 # Add `~/.local/bin` to path
 export PATH=~/.local/bin:$PATH
+
+# setup proxy
+# Get GNOME proxy settings and apply them
+source ~/set-proxy
+
