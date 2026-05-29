@@ -1,28 +1,6 @@
 #!/usr/bin/env bash
 # battery-watcher.sh — Wayland-friendly, UPower event loop, minimal CPU
 
-SCRIPT_NAME="$(basename "$0")"
-
-# ---- Config (edit if you like) ----
-LOW=30
-CRIT=15
-DANGER=5
-SUSPEND_AT=2                 # suspend when discharging at/below this %
-PPD_LO_THRESH=20             # set power-saver at/under this %
-DISCONNECT_AT=85             # disconnect power at/above this %
-NOTIFY_APP="Battery Watcher" # notification app-name
-
-# Nerd Font glyphs (Font Awesome in Nerd Fonts)
-ICON_BAT0="" # empty
-ICON_BAT1=""
-ICON_BAT2=""
-ICON_BAT3=""
-ICON_BAT4="" # full
-ICON_PLUG=""
-ICON_BOLT=""
-ICON_WARN=""
-ICON_OK=""
-
 # ---- Helpers ----
 notify() {
   # Use glyphs in title; icon hint left generic for compatibility with Wayland notifiers
@@ -228,8 +206,37 @@ check_and_act() {
     fi
   fi
 }
+main() {
 
-if ! pgrep -x "$SCRIPT_NAME" >/dev/null; then
+  if pgrep -f "$SCRIPT_NAME" | grep -qv "^$$\$"; then
+    # pgrep -f — finds PIDs whose full command line contains battery_watcher.sh
+    # grep -qv "^$$\$" — excludes the current script's PID ($$)
+    # If any other PIDs remain (another instance is running), it exits immediately
+    exit 0
+  fi
+
+  SCRIPT_NAME="$(basename "$0")"
+
+  # ---- Config (edit if you like) ----
+  LOW=30
+  CRIT=15
+  DANGER=5
+  SUSPEND_AT=2                 # suspend when discharging at/below this %
+  PPD_LO_THRESH=20             # set power-saver at/under this %
+  DISCONNECT_AT=85             # disconnect power at/above this %
+  NOTIFY_APP="Battery Watcher" # notification app-name
+
+  # Nerd Font glyphs (Font Awesome in Nerd Fonts)
+  ICON_BAT0="" # empty
+  ICON_BAT1=""
+  ICON_BAT2=""
+  ICON_BAT3=""
+  ICON_BAT4="" # full
+  ICON_PLUG=""
+  ICON_BOLT=""
+  ICON_WARN=""
+  ICON_OK=""
+
   # ---- Initial check & a quiet settle timer to avoid startup storm ----
   check_and_act
 
@@ -242,4 +249,6 @@ if ! pgrep -x "$SCRIPT_NAME" >/dev/null; then
       check_and_act
     fi
   done
-fi
+}
+
+main "$@"
