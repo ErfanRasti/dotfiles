@@ -106,7 +106,7 @@ end
 export EDITOR=nvim
 
 # Import the envvars from ~/set_proxy
-bass "source ~/set-proxy ''"
+# bass "source ~/set-proxy ''"
 
 # Ascii art
 figlet -t -c -f ANSI\ Shadow I use Arch btw. | lolcat

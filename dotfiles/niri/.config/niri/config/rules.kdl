@@ -85,8 +85,9 @@ window-rule {
 ////////////////////////////////////////////////////////////////////
 
 window-rule {
-    match app-id="vlc"
-    default-column-width { proportion 0.6; }
+  match app-id="vlc"
+  default-column-width { proportion 0.6; }
+  default-window-height { proportion 1.0; }
 }
 
 window-rule {
