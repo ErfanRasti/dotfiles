@@ -1,0 +1,12 @@
+[Unit]
+Description=Powertop tunings
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/powertop --auto-tune
+
+ExecStartPost=/bin/sh -c '/usr/local/lib/post_powertop.sh'
+
+[Install]
+WantedBy=multi-user.target sleep.target
