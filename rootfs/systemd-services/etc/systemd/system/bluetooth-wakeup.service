@@ -1,0 +1,15 @@
+[Unit]
+Description=Awake system using the usb device
+# Make sure this runs after powertop, and that powertop is started if we are.
+After=powertop.service
+Requires=powertop.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/lib/enable_usb_wakeup.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+
+ 
