@@ -15,8 +15,8 @@ edit = [
   { run = 'kitty --class nvim fish -c "$EDITOR "$@""', orphan = true, desc = "Open in NeoVim", for = "linux" },
   { run = 'gnome-text-editor "$@"', orphan = true, for = "linux" },
 ]
-amberol = [
-  { run = 'amberol "$@"', orphan = true, desc = "Play in Amberol", for = "linux" },
+gapless = [
+  { run = 'gapless "$@"', orphan = true, desc = "Play in Gapless", for = "linux" },
 ]
 
 # bulk-rename activation
@@ -30,7 +30,7 @@ use = "bulk-rename"
 
 [[open.prepend_rules]]
 mime = "audio/*"
-use = "amberol"
+use = "gapless"
 
 [plugin]
 prepend_preloaders = [
