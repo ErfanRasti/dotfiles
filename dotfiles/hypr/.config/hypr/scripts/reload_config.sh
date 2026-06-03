@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-CONFIG_FILE="$HOME/.config/hypr/hyprland.conf"
-AUTOSTART_FILE="$HOME/.config/hypr/config/autostart.conf"
+CONFIG_FILE="$HOME/.config/hypr/hyprland.lua"
+CONFIG_AUTOSTART_FILE="$HOME/.config/hypr/config/autostart.lua"
 
 # Restore last wallpaper of waypaper
-waypaper --restore
+# waypaper --restore
 
 # Restart pyprland if running
 pypr reload
@@ -32,15 +32,21 @@ replace_packages() {
 
 # Reload bar
 pkill qs
+export CONFIG_FILE
+export CONFIG_AUTOSTART_FILE
 ~/.config/hypr/scripts/reload_bar.sh &
 disown
 
-if ! grep -q "^source = ~/.config/hypr/config/noctalia.conf" "$CONFIG_FILE" &&
-  ! grep -q "^source = ~/.config/hypr/config/dms.conf" "$CONFIG_FILE"; then
+if ! grep -q '^require("config\.noctalia")' "$CONFIG_FILE" &&
+  ! grep -q '^require("config\.dms")' "$CONFIG_FILE"; then
   pkill swayidle
 
+  # \s = any whitespace character (spaces, tabs, newlines, carriage returns, form feeds)
+  # \+ = one or more of the preceding character (same as {1,})
+  # So \s\+ = one or more whitespace characters
+
   # Restart swww
-  if grep -q "^exec-once = swww-daemon" "$AUTOSTART_FILE"; then
+  if grep -q '^\s\+hl\.exec_cmd("swww-daemon")' "$CONFIG_AUTOSTART_FILE"; then
 
     if pgrep -x swww-daemon >/dev/null; then
       pkill -x swww-daemon
@@ -48,8 +54,17 @@ if ! grep -q "^source = ~/.config/hypr/config/noctalia.conf" "$CONFIG_FILE" &&
     setsid -f swww-daemon >/dev/null 2>&1
   fi
 
+  # Restart hyprpaper
+  if grep -q '^\s\+hl\.exec_cmd("hyprpaper")' "$CONFIG_AUTOSTART_FILE"; then
+
+    if pgrep -x hyprpaper >/dev/null; then
+      pkill -x hyprpaper
+    fi
+    setsid -f hyprpaper >/dev/null 2>&1
+  fi
+
   # Restart swaync
-  if grep -q "^exec-once = swaync" "$AUTOSTART_FILE"; then
+  if grep -q '^\s\+hl\.exec_cmd("swaync")' "$CONFIG_AUTOSTART_FILE"; then
 
     if pgrep -x swaync >/dev/null; then
       pkill swaync
@@ -58,7 +73,7 @@ if ! grep -q "^source = ~/.config/hypr/config/noctalia.conf" "$CONFIG_FILE" &&
   fi
 
   # Restart swayosd
-  if grep -q "^exec-once = swayosd" "$AUTOSTART_FILE"; then
+  if grep -q '^\s\+hl\.exec_cmd("swayosd")' "$CONFIG_AUTOSTART_FILE"; then
     if pgrep -x swayosd-server >/dev/null 2>&1; then
       pkill swayosd-server
     fi
@@ -66,12 +81,12 @@ if ! grep -q "^source = ~/.config/hypr/config/noctalia.conf" "$CONFIG_FILE" &&
   fi
 
   # Restart vicinae
-  if grep -q "^exec-once = systemctl --user start vicinae.service" "$AUTOSTART_FILE"; then
+  if grep -q '^\s\+hl\.exec_cmd("systemctl --user start vicinae\.service")' "$CONFIG_AUTOSTART_FILE"; then
     systemctl --user restart vicinae.service
   fi
 
   # Restart hypr-dock
-  if grep -q "^exec-once = hypr-dock" "$AUTOSTART_FILE"; then
+  if grep -q '^\s\+hl\.exec_cmd("hypr-dock")' "$CONFIG_AUTOSTART_FILE"; then
     if pgrep -x hypr-dock >/dev/null 2>&1; then
       pkill hypr-dock
     fi
