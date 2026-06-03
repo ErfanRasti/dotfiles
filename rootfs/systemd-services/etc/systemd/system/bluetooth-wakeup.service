@@ -6,10 +6,9 @@ Requires=powertop.service
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/lib/enable_usb_wakeup.sh
+ExecStart=/usr/local/lib/bluetooth_wakeup.sh
 RemainAfterExit=yes
 
 [Install]
 WantedBy=multi-user.target
 
- 
