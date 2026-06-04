@@ -17,6 +17,7 @@ binds {
 
 
     Mod+N { spawn-sh "qs -c noctalia-shell ipc call notifications toggleHistory";}
+    Mod+Alt+N { spawn-sh "qs -c noctalia-shell ipc call notifications toggleDND"; }
     Mod+Alt+W { spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle";}
     Mod+Escape { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock";}
     Mod+S { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }

@@ -161,5 +161,12 @@ layout {
         // bottom 64
     }
     background-color "transparent"
+
+    // See https://github.com/niri-wm/niri/wiki/Configuration:-Layout#tab-indicator
+    tab-indicator {
+      // Set place-within-column to put the tab indicator "within" the column, rather than outside.
+      // This will include it in column sizing and avoid overlaying adjacent columns.
+      place-within-column
+    }
 }
 
