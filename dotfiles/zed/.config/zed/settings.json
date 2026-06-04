@@ -7,9 +7,22 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "project_panel": {
+    "dock": "left"
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
   "agent_ui_font_size": 14.0,
   "buffer_font_family": "CaskaydiaCove Nerd Font Propo",
   "agent": {
+    "dock": "right",
     "play_sound_when_agent_done": true
   },
   "vim_mode": true,
