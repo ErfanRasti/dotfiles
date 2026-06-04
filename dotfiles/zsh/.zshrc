@@ -172,6 +172,9 @@ bindkey '^ ' autosuggest-accept
 # Activate zoxide
 eval "$(zoxide init zsh)"
 
+# Set up fzf key bindings and fuzzy completion
+export FZF_DEFAULT_OPTS='--height 40% --popup bottom,50% --layout reverse --border'
+source <(fzf --zsh --layout reverse --height 80%)
 
 # Define a custom widget that runs the cd command with fzf
 fzf-cd-widget() {
@@ -188,7 +191,7 @@ fzf-cd-widget() {
 zle -N fzf-cd-widget
 
 # Bind the widget to ctrl+e
-bindkey '^F' fzf-cd-widget
+# bindkey '^E' fzf-cd-widget
 
 # Add/remove sudo to beginning of command line
 bindkey -M viins '^[s' sudo-command-line
@@ -217,4 +220,5 @@ export PATH=~/.local/bin:$PATH
 # setup proxy
 # Get GNOME proxy settings and apply them
 source ~/set-proxy
+
 

@@ -110,3 +110,6 @@ export EDITOR=nvim
 
 # Ascii art
 figlet -t -c -f ANSI\ Shadow I use Arch btw. | lolcat
+
+# Add path for fabric
+fish_add_path ~/.local/bin
