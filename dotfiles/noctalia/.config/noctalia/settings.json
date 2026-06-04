@@ -588,7 +588,7 @@
         "deadOpacity": 0.5,
         "displayMode": "exclusive",
         "dockType": "floating",
-        "enabled": false,
+        "enabled": true,
         "floatingRatio": 0.20000000000000007,
         "groupApps": true,
         "groupClickAction": "list",
@@ -752,13 +752,13 @@
         "wifiDetailsViewMode": "grid"
     },
     "nightLight": {
-        "autoSchedule": false,
-        "dayTemp": "6500",
+        "autoSchedule": true,
+        "dayTemp": "5000",
         "enabled": true,
         "forced": true,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
-        "nightTemp": "4500"
+        "nightTemp": "3500"
     },
     "noctaliaPerformance": {
         "disableDesktopWidgets": true,
