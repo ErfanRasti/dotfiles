@@ -57,10 +57,7 @@ sudo bash -c "echo # Swap partition >> /etc/fstab"
 sudo bash -c "echo /swap/swapfile none swap defaults,pri=60 0 0 >> /etc/fstab"
 
 ########################################################################################### hibernation setup
-#!/bin/bash
-
 # Hibernate Setup Script for BTRFS Swapfile
-# Run with: sudo ./setup_hibernate.sh
 
 # Step 1: Create the hibernation image size config
 echo "Creating /etc/tmpfiles.d/hibernation_image_size.conf..."
@@ -73,7 +70,7 @@ EOF
 # Step 2: Add resume hook to mkinitcpio.conf
 echo "Adding resume hook to /etc/mkinitcpio.conf..."
 sudo cp /etc/mkinitcpio.conf /etc/mkinitcpio.conf.backup
-sudo sed -i '/filesystems.*fsck/ s/\(filesystems\) \(fsck\)/\1 resume \2/' /etc/mkinitcpio.conf
+sudo sed -i '/HOOKS=/ s/\(filesystems\) \(fsck\)/\1 resume \2/' /etc/mkinitcpio.conf
 
 # Step 3: Regenerate initramfs
 echo "Regenerating initramfs..."
@@ -94,3 +91,24 @@ cat /sys/power/resume_offset
 
 # Step 7: Reboot
 echo "Setup complete! Rebooting the system."
+
+########################################################################################### plymouth setup
+# Plymouth Setup Script
+
+# Step 1: Install Plymouth
+echo "Installing Plymouth..."
+sudo pacman -S plymouth
+
+# Step 2: Add plymouth to mkinitcpio.conf
+echo "Adding plymouth hook to /etc/mkinitcpio.conf..."
+sudo cp /etc/mkinitcpio.conf /etc/mkinitcpio.conf.plymouth.backup
+
+# Add plymouth before encrypt (adjust the pattern if you use sd-encrypt)
+sudo sed -i '/HOOKS=/ s/\(block\) \(encrypt\)/\1 plymouth \2/' /etc/mkinitcpio.conf
+
+# Step 3: Regenerate initramfs
+echo "Regenerating initramfs..."
+sudo mkinitcpio -P
+
+echo "Plymouth setup complete!"
+echo "Make sure you have 'quiet splash' in your boot entries."
