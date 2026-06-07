@@ -64,6 +64,7 @@ sudo bash -c "echo /swap/swapfile none swap defaults,pri=60 0 0 >> /etc/fstab"
 
 # Step 1: Create the hibernation image size config
 echo "Creating /etc/tmpfiles.d/hibernation_image_size.conf..."
+sudo rm -f /etc/tmpfiles.d/hibernation_image_size.conf
 sudo cat <<EOF | sudo tee /etc/tmpfiles.d/hibernation_image_size.conf >/dev/null
 #    Path                   Mode UID  GID  Age Argument
 w    /sys/power/image_size  -    -    -    -   0
@@ -72,7 +73,7 @@ EOF
 # Step 2: Add resume hook to mkinitcpio.conf
 echo "Adding resume hook to /etc/mkinitcpio.conf..."
 sudo cp /etc/mkinitcpio.conf /etc/mkinitcpio.conf.backup
-sudo sed -i 's/HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)/HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems resume fsck)/' /etc/mkinitcpio.conf
+sudo sed -i '/filesystems.*fsck/ s/\(filesystems\) \(fsck\)/\1 resume \2/' /etc/mkinitcpio.conf
 
 # Step 3: Regenerate initramfs
 echo "Regenerating initramfs..."
