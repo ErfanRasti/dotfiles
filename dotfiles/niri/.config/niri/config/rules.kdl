@@ -130,7 +130,7 @@ window-rule {
 }
 
 window-rule {
-  match app-id="google-chrome" title="^Google Chrome$"
+  match app-id="google-chrome" title="^*Google Chrome$"
   match app-id="microsoft-edge"
   match app-id="zen" title="Zen Browser"
   exclude title="File Upload" app-id="zen"

@@ -277,19 +277,6 @@ stow */
 # git restore .
 # or
 
-# root files
-cd "$HOME/dotfiles/rootfs/" || exit
-
-# shellcheck disable=SC2035
-sudo stow */
-sudo systemctl daemon-reload
-sudo systemctl enable --now powertop.service
-sudo systemctl enable --now bluetooth-wakeup.service
-# sudo find . -type f -exec install -D {} /{}
-
-# Return to the previous dotfiles path
-cd "$HOME/dotfiles/dotfiles/" || exit
-
 waypaper --wallpaper ~/wallpapers/School/arseniy-chebynkin-school-enter2.jpg
 
 echo "✅ dotfiles installed successfully!"

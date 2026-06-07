@@ -16,10 +16,10 @@
         "enableWindowsSearch": true,
         "iconMode": "tabler",
         "ignoreMouseInput": false,
-        "overviewLayer": false,
+        "overviewLayer": true,
         "pinnedApps": [
         ],
-        "position": "bottom_center",
+        "position": "center",
         "screenshotAnnotationTool": "",
         "showCategories": true,
         "showIconBackground": true,
