@@ -145,6 +145,11 @@ auto_hide_monitor() {
       exit 0
     fi
 
+    # Check if the tracked window is no longer floating
+    if niri msg -j windows | jq -e --argjson id "$tracked_id" '.[] | select(.id == $id) | .is_floating == false' >/dev/null 2>&1; then
+      exit 0
+    fi
+
     # A regular window (non-null id) gained focus and it isn't ours — hide ours
     new_focus=$(echo "$line" | jq -r '.WindowFocusChanged.id // empty' 2>/dev/null)
     if [[ -n "$new_focus" && "$new_focus" != "$tracked_id" ]]; then
