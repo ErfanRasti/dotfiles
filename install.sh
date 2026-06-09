@@ -107,7 +107,7 @@ sudo pacman -S \
   rofi \
   hyprpaper \
   hyprsunset hyprpicker \
-  bash zsh fish nvim lolcat bash-language-server tmux flatpak zoxide lazygit kitty ghostty \
+  bash zsh fish nvim starship lolcat bash-language-server tmux flatpak zoxide lazygit kitty ghostty \
   xdg-desktop-portal-hyprland \
   feh \
   papirus-icon-theme \

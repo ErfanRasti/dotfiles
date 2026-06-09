@@ -133,6 +133,10 @@ output_path = '~/.config/ghostty/themes/Matugen'
 input_path = '~/.config/matugen/templates/micro.micro'
 output_path = '~/.config/micro/colorschemes/matugen.micro'
 
+[templates.starship]
+input_path = '~/.config/matugen/templates/starship-colors.toml'
+output_path = '~/.config/starship.toml'
+
 [templates.obs]
 input_path = '~/.config/matugen/templates/obs-colors.obt'
 output_path = '~/.config/obs-studio/themes/matugen.obt'
