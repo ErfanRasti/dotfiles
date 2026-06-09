@@ -37,8 +37,8 @@ run_rofi_modi() {
     prompt="S:$stext, M:$mtext"
     mesg="Speaker: $speaker_device $speaker_vol, Mic: $mic_device $mic_vol"
 
-    option_1="󰝝"
-    option_2="󰝞"
+    option_1="󰝞"
+    option_2="󰝝"
     option_3="$sicon"
     option_4="$micon"
     option_5="󰓃"
@@ -46,8 +46,8 @@ run_rofi_modi() {
 
   run_cmd() {
     case "$1" in
-    opt1) wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ >/dev/null ;;
-    opt2) wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05- >/dev/null ;;
+    opt1) wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05- >/dev/null ;;
+    opt2) wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ >/dev/null ;;
     opt3) wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle >/dev/null ;;
     opt4) wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle >/dev/null ;;
     opt5)

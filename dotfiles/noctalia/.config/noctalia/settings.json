@@ -560,8 +560,8 @@
                         },
                         "id": "plugin:todo",
                         "showBackground": true,
-                        "x": 1200,
-                        "y": 48
+                        "x": 1728,
+                        "y": 64
                     },
                     {
                         "hideMode": "visible",
@@ -573,8 +573,8 @@
                         "showButtons": true,
                         "showVisualizer": true,
                         "visualizerType": "linear",
-                        "x": 1176,
-                        "y": 768
+                        "x": 1696,
+                        "y": 1184
                     }
                 ]
             }

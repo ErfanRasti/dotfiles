@@ -29,16 +29,16 @@ run_rofi_modi() {
 
     # Options
     option_1="󱩎"
-    option_2="󱠂"
-    option_3="󰛨"
+    option_2="󰛨"
+    option_3="󱠂"
     option_4="󱧣"
   }
 
   run_cmd() {
     case "$1" in
     opt1) brightnessctl -d intel_backlight s 5%- >/dev/null ;;
-    opt2) brightnessctl -d intel_backlight s 25% >/dev/null ;;
-    opt3) brightnessctl -d intel_backlight s 5%+ >/dev/null ;;
+    opt2) brightnessctl -d intel_backlight s 5%+ >/dev/null ;;
+    opt3) brightnessctl -d intel_backlight s 25% >/dev/null ;;
     opt4)
       env XDG_CURRENT_DESKTOP=GNOME gnome-control-center display >/dev/null 2>&1 &
       disown
