@@ -159,3 +159,8 @@ post_hook = 'spicetify watch -s 2>&1 | sed "/Reloaded Spotify/q"'
 input_path = '~/.config/matugen/templates/vicinae.ini'
 output_path = '~/.local/share/vicinae/themes/matugen.toml'
 post_hook = "if pgrep -x vicinae >/dev/null; then systemctl --user restart vicinae.service; fi"
+
+[templates.mango]
+input_path = '~/.config/matugen/templates/mango.conf'
+output_path = '~/.config/mango/config/colors.conf'
+post_hook = 'mmsg -d reload_config'
