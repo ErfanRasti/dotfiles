@@ -7,6 +7,11 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 1000
+    }
+  },
   "project_panel": {
     "dock": "left"
   },
@@ -23,7 +28,7 @@
   "buffer_font_family": "CaskaydiaCove Nerd Font Propo",
   "agent": {
     "dock": "right",
-    "play_sound_when_agent_done": true
+    "play_sound_when_agent_done": "always"
   },
   "vim_mode": true,
   "ui_font_size": 18,
