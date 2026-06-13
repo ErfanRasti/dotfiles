@@ -208,7 +208,8 @@ paru -S \
   wdisplays monique \
   gapless \
   ripdrag \
-  figlet-fonts-extra
+  figlet-fonts-extra \
+  mangowm
 
 echo "!!!!!!!!!!!!!! niri-shells installation"
 git submodule update --init --recursive

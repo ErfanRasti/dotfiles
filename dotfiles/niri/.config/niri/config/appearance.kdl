@@ -63,8 +63,8 @@ animations {
 
 blur {
     // off
-    passes 4
-    offset 3
+    passes 2
+    offset 5
     noise 0.02
     saturation 1.5
 }
