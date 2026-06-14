@@ -72,7 +72,7 @@ hl.on("hyprland.start", function()
 	-- hl.exec_cmd("clipse -listen")
 
 	-- Battery notify
-	hl.exec_cmd("~/.config/hypr/scripts/battery_watcher.sh")
+	hl.exec_cmd("~/scripts/battery_watcher.sh")
 
 	-- Welcome sound
 	hl.exec_cmd("paplay /usr/share/sounds/ocean/stereo/desktop-login.oga")
