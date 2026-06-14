@@ -162,7 +162,7 @@
   "showWorkspaceApps": true,
   "workspaceDragReorder": true,
   "maxWorkspaceIcons": 100,
-  "workspaceAppIconSizeOffset": 0,
+  "workspaceAppIconSizeOffset": 1,
   "groupWorkspaceApps": true,
   "workspaceFollowFocus": false,
   "showOccupiedWorkspacesOnly": false,
@@ -179,6 +179,26 @@
     "scratchpad": {
       "type": "icon",
       "value": "integration_instructions"
+    },
+    "Scratchpad": {
+      "type": "icon",
+      "value": "integration_instructions"
+    },
+    "Entertainment": {
+      "type": "icon",
+      "value": "sports_esports"
+    },
+    "Main": {
+      "type": "icon",
+      "value": "data_object"
+    },
+    "Web": {
+      "type": "icon",
+      "value": "laptop"
+    },
+    "Extra": {
+      "type": "icon",
+      "value": "add"
     }
   },
   "waveProgressEnabled": true,
