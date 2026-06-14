@@ -23,11 +23,12 @@ replace_packages() {
   systemctl --user stop hypridle-runner.service
   systemctl --user stop hyprsunset.service
 
-  # if pgrep -x "swayidle"; then
-  #   pkill -x swayidle
-  # fi
-  # ~/scripts/swayidle_runner.sh &
-  # disown
+  if pgrep -x "swayidle"; then
+    pkill -x swayidle
+  fi
+
+  "$HOME"/.config/hypr/scripts/swayidle_runner.sh &
+  disown
 }
 
 # Reload bar

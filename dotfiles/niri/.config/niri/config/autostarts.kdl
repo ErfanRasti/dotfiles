@@ -11,7 +11,7 @@ spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
 spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
 spawn-sh-at-startup "echo 'Xft.dpi: 125' | xrdb -merge" // Set scaling for xorg apps
 spawn-sh-at-startup "wl-clip-persist --clipboard regular"
-spawn-at-startup "~/scripts/swayidle_runner.sh"
+spawn-at-startup "~/.config/niri/scripts/swayidle_runner.sh"
 spawn-at-startup "~/.config/hypr/scripts/battery_watcher.sh"
 spawn-sh-at-startup "~/scripts/system_resume.sh restore"
 
