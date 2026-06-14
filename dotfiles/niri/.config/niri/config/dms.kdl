@@ -1,35 +1,35 @@
 binds {
-    Alt+space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+    Alt+space hotkey-overlay-title="Toggle spotlight" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
     Mod+Comma hotkey-overlay-title="Settings" { spawn "dms" "ipc" "call" "settings" "toggle"; }
 
     // Audio
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "increment" "5"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "decrement" "5"; }
-    XF86AudioMute allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "mute"; }
-    XF86AudioMicMute allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "micmute"; }
+    XF86AudioRaiseVolume allow-when-locked=true hotkey-overlay-title="Volume up" { spawn "dms" "ipc" "call" "audio" "increment" "5"; }
+    XF86AudioLowerVolume allow-when-locked=true hotkey-overlay-title="Volume down" { spawn "dms" "ipc" "call" "audio" "decrement" "5"; }
+    XF86AudioMute allow-when-locked=true hotkey-overlay-title="Mute audio" { spawn "dms" "ipc" "call" "audio" "mute"; }
+    XF86AudioMicMute allow-when-locked=true hotkey-overlay-title="Mute microphone" { spawn "dms" "ipc" "call" "audio" "micmute"; }
 
     // BL
-    XF86MonBrightnessUp allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "increment" "5" "backlight:intel_backlight"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "decrement" "5" "backlight:intel_backlight"; }
+    XF86MonBrightnessUp allow-when-locked=true hotkey-overlay-title="Brightness up" { spawn "dms" "ipc" "call" "brightness" "increment" "5" "backlight:intel_backlight"; }
+    XF86MonBrightnessDown allow-when-locked=true hotkey-overlay-title="Brightness down" { spawn "dms" "ipc" "call" "brightness" "decrement" "5" "backlight:intel_backlight"; }
 
 
-    Mod+N { spawn "dms" "ipc" "call" "notifications" "toggle"; }
-    Mod+B { spawn "dms" "ipc" "call" "dock" "toggleAutoHide"; }
-    Mod+Alt+W {spawn "dms" "ipc" "call" "dash" "toggle" "wallpaper";}
-    Mod+S { spawn "dms" "ipc" "call" "control-center" "toggle"; }
-    Mod+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
-    Mod+Escape { spawn "dms" "ipc" "call" "lock" "lock"; }
-    Mod+Period { spawn "dms" "ipc" "call" "spotlight" "toggleQuery" ":"; }
-    Alt+F4 { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
-    Mod+Slash { spawn "dms" "ipc" "call" "keybinds" "toggle" "niri"; }
+    Mod+N hotkey-overlay-title="Toggle notifications" { spawn "dms" "ipc" "call" "notifications" "toggle"; }
+    Mod+B hotkey-overlay-title="Toggle dock auto-hide" { spawn "dms" "ipc" "call" "dock" "toggleAutoHide"; }
+    Mod+Alt+W hotkey-overlay-title="Toggle wallpaper" {spawn "dms" "ipc" "call" "dash" "toggle" "wallpaper";}
+    Mod+S hotkey-overlay-title="Toggle control center" { spawn "dms" "ipc" "call" "control-center" "toggle"; }
+    Mod+V hotkey-overlay-title="Toggle clipboard manager" { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
+    Mod+Escape hotkey-overlay-title="Lock screen" { spawn "dms" "ipc" "call" "lock" "lock"; }
+    Mod+Period hotkey-overlay-title="Search emoji" { spawn "dms" "ipc" "call" "spotlight" "toggleQuery" ":"; }
+    Alt+F4 hotkey-overlay-title="Toggle power menu" { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
+    Mod+Slash hotkey-overlay-title="Toggle keybind cheatsheet" { spawn "dms" "ipc" "call" "keybinds" "toggle" "niri"; }
 
-    Print { spawn "dms" "screenshot"; }
-    Shift+Print { spawn "dms" "screenshot" "full"; }
+    Print hotkey-overlay-title="Screenshot area" { spawn "dms" "screenshot"; }
+    Shift+Print hotkey-overlay-title="Screenshot full" { spawn "dms" "screenshot" "full"; }
 
-    Mod+Shift+Ctrl+P { spawn "dms" "color" "pick" "-a"; }
+    Mod+Shift+Ctrl+P hotkey-overlay-title="Pick color" { spawn "dms" "color" "pick" "-a"; }
 
     Ctrl+Alt+Delete hotkey-overlay-title="Task Manager" { spawn "dms" "ipc" "call" "processlist" "toggle";}
-    Ctrl+Shift+F1 { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'kitty' -t 'dgop' 'kitty --override confirm_os_window_close=0 --class kitty --title 'dgop' -e dgop'"; }
+    Ctrl+Shift+F1 hotkey-overlay-title="Open dgop terminal" { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'kitty' -t 'dgop' 'kitty --override confirm_os_window_close=0 --class kitty --title 'dgop' -e dgop'"; }
 }
 spawn-at-startup "dms" "run"
 spawn-at-startup "dsearch" "serve"
@@ -38,4 +38,3 @@ layer-rule {
     match namespace="dms:blurwallpaper"
     place-within-backdrop true
 }
-
