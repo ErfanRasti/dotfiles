@@ -1005,6 +1005,7 @@
                 "useWallpaperColors": true
             },
             {
+                "appearance": "dark",
                 "colorScheme": "Eldritch",
                 "darkMode": true,
                 "generationMethod": "tonal-spot",

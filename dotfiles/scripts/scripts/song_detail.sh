@@ -7,51 +7,18 @@ COVER_BLUR="${COVER_BASE}-blur.png" # blurred square cover
 COVER_INFO="${COVER_BASE}.inf"      # stores last artUrl to avoid needless writes
 
 # Optional: command to run after cover updates (leave empty to disable)
-POST_UPDATE_CMD="pkill -USR2 hyprlock" # e.g. POST_UPDATE_CMD="pkill -USR2 hyprlock"
+#POST_UPDATE_CMD="pkill -USR2 hyprlock" # e.g. POST_UPDATE_CMD="pkill -USR2 hyprlock"
 # Optional: set to 0 to skip blurred generation
 GENERATE_BLUR=0
 # Optional: pixel size for square output (both simple and blurred)
 COVER_SIZE="512x512"
 
 # --- Prefer the player that is actually Playing ---
-LAST_PLAYER_FILE="/tmp/mpris-last-player"
+# Find the current player
+~/scripts/current_player.sh
 
-# Find the active player (prefer one that's Playing)
-players=$(playerctl -l 2>/dev/null)
-
-# If no players, exit
-
-if [ -z "$players" ]; then
-  # ensure a cover exists even with no players
-  rm -f $COVER_IMG $COVER_BLUR $COVER_INFO
-  exit 0
-fi
-
-current_player=""
-player_status=""
-
-# Prefer the player that is actually Playing
-for p in $players; do
-  st=$(playerctl -p "$p" status 2>/dev/null)
-  if [ "$st" = "Playing" ]; then
-    current_player="$p"
-    player_status="$st"
-    # Save the active player for future reference
-    echo "$p" >"$LAST_PLAYER_FILE"
-    break
-  fi
-done
-
-# --- If none are Playing, use last used player or first available ---
-if [ -z "$current_player" ]; then
-  last_player=$(cat "$LAST_PLAYER_FILE" 2>/dev/null)
-  if echo "$players" | grep -qx "$last_player"; then
-    current_player="$last_player"
-  else
-    current_player=$(echo "$players" | head -n1)
-  fi
-  player_status=$(playerctl -p "$current_player" status 2>/dev/null)
-fi
+current_player=$(cat "/tmp/last_player" 2>/dev/null)
+player_status=$(playerctl -p "$current_player" status 2>/dev/null)
 
 # Set default status icons (play / pause / stop)
 case "$player_status" in
@@ -69,11 +36,8 @@ Stopped)
   ;;
 esac
 
-# Get player name (lowercase for consistency)
-player_name=$(playerctl -p "$current_player" metadata --format '{{lc(playerName)}}' 2>/dev/null)
-
 # Choose player-specific icon
-case $player_name in
+case $current_player in
 spotify)
   player_icon="" # Spotify
   ;;
@@ -195,10 +159,6 @@ case "$mode" in
   exit 0
   ;;
 --player)
-  echo "$player_name"
-  exit 0
-  ;;
---player-real-name)
   echo "$current_player"
   exit 0
   ;;

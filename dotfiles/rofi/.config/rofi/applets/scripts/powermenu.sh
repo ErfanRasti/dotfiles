@@ -75,7 +75,7 @@ run_cmd() {
   selected="$(confirm_exit "${1#--}")"
   if [[ "$selected" == "$yes" ]]; then
     if [[ "$1" == '--lock' ]]; then
-      hyprlock
+      loginctl lock-session
     elif [[ "$1" == '--suspend' ]]; then
       amixer set Master mute
       systemctl suspend

@@ -66,7 +66,7 @@ confirm_exit() {
 # Execute Command
 run_cmd() {
   if [[ $1 == '--lock' ]]; then
-    hyprlock
+    loginctl lock-session
     return
   fi
   selected="$(confirm_exit "${1#--}")"

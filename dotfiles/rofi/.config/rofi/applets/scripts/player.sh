@@ -9,14 +9,12 @@ modi_script="$0 --modi"
 run_rofi_modi() {
 
   get_info() {
-    # Find the current player
-    ~/.config/rofi/applets/scripts/current_player.sh
-
-    current_player=$(cat "/tmp/last_player" 2>/dev/null)
 
     # Theme Elements
-    status="$(playerctl -p "$current_player" status)"
+    # ~/scripts/current_player.sh will be executed inside song_detail.sh
     mesg=$("$HOME"/scripts/song_detail.sh)
+    current_player=$(cat "/tmp/last_player" 2>/dev/null)
+    status="$(playerctl -p "$current_player" status)"
     prompt="${current_player^}"
 
     # Options
