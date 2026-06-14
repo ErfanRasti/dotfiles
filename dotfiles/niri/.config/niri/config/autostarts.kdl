@@ -9,6 +9,7 @@ spawn-sh-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 // spawn-sh-at-startup "systemctl --user start vicinae.service"
 spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
 spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
+spawn-sh-at-startup "echo 'Xft.dpi: 125' | xrdb -merge" // Set scaling for xorg apps
 spawn-sh-at-startup "wl-clip-persist --clipboard regular"
 spawn-at-startup "~/.config/niri/scripts/swayidle_ruuner.sh"
 spawn-at-startup "~/.config/hypr/scripts/battery_watcher.sh"
