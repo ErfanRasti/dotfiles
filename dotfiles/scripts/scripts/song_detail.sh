@@ -120,7 +120,6 @@ Options:
   --status            Show playback status (Playing/Paused/Stopped)
   --status-icon       Show playback status icon (Playing/Paused/Stopped)
   --player            Show the current player's name
-  --player-real-name  Show the current player's real name
   --player-icon       Show the current player's icon
   --cover-path        Show the cover path of the current player
   --cover-blur-path   Show the blurred cover path of the current player
