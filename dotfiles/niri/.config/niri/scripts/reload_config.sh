@@ -27,12 +27,12 @@ if grep -q '^include "config/dms.kdl"' "$CONFIG_FILE"; then
 fi
 
 # Restart swayidle
-if pgrep -x "swayidle"; then
-  pkill -x swayidle
-fi
-
-"$HOME"/.config/niri/scripts/swayidle_ruuner.sh &
-disown
+# if pgrep -x "swayidle"; then
+#   pkill -x swayidle
+# fi
+#
+# "$HOME"/scripts/swayidle_runner.sh &
+# disown
 
 # Restart gnome-polkit
 if grep -q '^spawn-sh-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"' "$CONFIG_AUTOSTART_FILE"; then

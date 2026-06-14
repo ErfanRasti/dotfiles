@@ -54,7 +54,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("swayosd-server")
 
 	-- Restore device states
-	hl.exec_cmd("~/.config/hypr/scripts/hypr_resume.sh restore")
+	hl.exec_cmd("~/scripts/system_resume.sh restore")
 
 	-- udiskie
 	hl.exec_cmd("udiskie")
@@ -88,6 +88,6 @@ end)
 
 hl.on("hyprland.shutdown", function()
 	hl.exec_cmd('kill -9 "$(cat /tmp/.hyprland-systemd-inhibit)"')
-	hl.exec_cmd("~/.config/hypr/scripts/hypr_resume.sh save")
+	hl.exec_cmd("~/scripts/system_resume.sh save")
 	hl.exec_cmd("paplay /usr/share/sounds/ocean/stereo/desktop-logout.oga")
 end)

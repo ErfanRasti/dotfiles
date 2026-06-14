@@ -478,7 +478,7 @@ hl.bind(
 
 -- Rofi menues
 hl.bind(
-	mainMod .. " + ALT + P",
+	mainMod .. " + CTRL + P",
 	hl.dsp.exec_cmd("~/.config/rofi/applets/scripts/powermenu.sh"),
 	{ description = "Open rofi powermenu" }
 )
@@ -493,22 +493,22 @@ hl.bind(
 	{ description = "Open rofi quicklinks" }
 )
 hl.bind(
-	mainMod .. " + ALT + B",
+	mainMod .. " + CTRL + B",
 	hl.dsp.exec_cmd("~/.config/rofi/applets/scripts/battery.sh"),
 	{ description = "Open rofi battery menu" }
 )
 hl.bind(
-	mainMod .. " + CTRL + V",
+	mainMod .. " + ALT + V",
 	hl.dsp.exec_cmd("~/.config/rofi/applets/scripts/volume.sh"),
 	{ description = "Open rofi volume control" }
 )
 hl.bind(
-	mainMod .. " + CTRL + B",
+	mainMod .. " + ALT + B",
 	hl.dsp.exec_cmd("~/.config/rofi/applets/scripts/brightness.sh"),
 	{ description = "Open rofi brightness control" }
 )
 hl.bind(
-	mainMod .. " + CTRL + P",
+	mainMod .. " + ALT + P",
 	hl.dsp.exec_cmd("~/.config/rofi/applets/scripts/player.sh"),
 	{ description = "Open rofi player control" }
 )

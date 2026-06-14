@@ -16,7 +16,7 @@ run_rofi_modi() {
 
     # Theme Elements
     status="$(playerctl -p "$current_player" status)"
-    mesg=$("$HOME"/.config/hypr/scripts/song_detail.sh)
+    mesg=$("$HOME"/scripts/song_detail.sh)
     prompt="${current_player^}"
 
     # Options
