@@ -16,7 +16,10 @@ edit = [
   { run = 'gnome-text-editor "$@"', orphan = true, for = "linux" },
 ]
 gapless = [
-  { run = 'g4music "$@"', orphan = true, desc = "Play in Gapless", for = "linux" },
+  { run = 'com.github.neithern.g4music "$@"', orphan = true, desc = "Play in Gapless", for = "linux" },
+]
+nocturne = [
+  { run = 'com.jeffser.Nocturne "$@"', orphan = true, desc = "Play in Nocturne", for = "linux" },
 ]
 amberol = [
   { run = 'amberol "$@"', orphan = true, desc = "Play in Amberol", for = "linux" },

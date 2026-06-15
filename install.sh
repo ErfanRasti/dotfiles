@@ -227,6 +227,8 @@ flatpak update
 flatpak install flathub com.dec05eba.gpu_screen_recorder
 flatpak install flathub io.missioncenter.MissionCenter
 flatpak install flathub app.devsuite.Ptyxis
+flatpak install flathub com.github.neithern.g4music
+flatpak install flathub com.jeffser.Nocturne
 
 flatpak override --user \
   --filesystem=xdg-config/gtk-2.0:ro \
