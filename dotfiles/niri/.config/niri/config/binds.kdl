@@ -306,7 +306,11 @@ binds {
   Mod+Ctrl+P hotkey-overlay-title="Open rofi powermenu" { spawn "~/.config/rofi/applets/scripts/powermenu.sh"; }
   Mod+Period hotkey-overlay-title="Open rofi emoji panel" { spawn "~/.config/rofi/emoji/run.sh"; }
 
-  Mod+Alt+Ctrl+P hotkey-overlay-title="Open fum music client" {spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'kitty' -t fum 'kitty --title fum fum'"; }
+  // Mod+Alt+Ctrl+P hotkey-overlay-title="Open fum music client" {spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'kitty' -t fum 'kitty --title fum fum'"; }
+  // Mod+Alt+Ctrl+C hotkey-overlay-title="Open cava audio visualizer" {spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'kitty' -t cava 'kitty --title cava cava'"; }
+  Mod+Alt+Ctrl+P hotkey-overlay-title="Open fum music client" {spawn-sh "kitty --title fum fum"; }
+  Mod+Alt+Ctrl+C hotkey-overlay-title="Open cava audio visualizer" {spawn-sh "kitty --title cava cava"; }
+
 
   Mod+R hotkey-overlay-title="Reload config" { spawn "~/.config/niri/scripts/reload_config.sh"; }
 

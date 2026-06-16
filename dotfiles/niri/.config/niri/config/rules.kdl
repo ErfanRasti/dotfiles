@@ -86,6 +86,7 @@ window-rule {
 
 window-rule {
   match app-id="vlc"
+  match app-id="kitty"
   default-column-width { proportion 0.6; }
   default-window-height { proportion 1.0; }
 }
@@ -106,8 +107,18 @@ window-rule {
   match title="fum" app-id="kitty"
   default-column-width { proportion 0.15; }
   default-window-height { proportion 0.5; }
+  default-floating-position x=2 y=2 relative-to="top-right"
+  open-floating true
+  // open-on-workspace "Scratchpad"
+}
+
+window-rule {
+  match title="cava" app-id="kitty"
+  default-column-width { proportion 0.3; }
+  default-window-height { proportion 0.2; }
   default-floating-position x=2 y=2 relative-to="bottom-right"
   open-floating true
+  // open-on-workspace "Scratchpad"
 }
 
 window-rule {
