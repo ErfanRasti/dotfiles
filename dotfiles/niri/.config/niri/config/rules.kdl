@@ -103,6 +103,14 @@ window-rule {
 }
 
 window-rule {
+  match title="fum" app-id="kitty"
+  default-column-width { proportion 0.15; }
+  default-window-height { proportion 0.5; }
+  default-floating-position x=2 y=2 relative-to="bottom-right"
+  open-floating true
+}
+
+window-rule {
   match app-id="io.github.kaii_lb.Overskride"
   default-column-width { proportion 0.5; }
   // open-on-workspace "Scratchpad"
