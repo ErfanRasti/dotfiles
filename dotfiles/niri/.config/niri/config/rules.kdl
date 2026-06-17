@@ -130,13 +130,13 @@ window-rule {
 window-rule {
   match app-id="org.telegram.desktop"
   match app-id="hiddify"
-  match app-id="v2rayN"
   default-column-width { proportion 0.15; }
   open-on-workspace "Entertainment"
 }
 
 window-rule {
   match app-id="spotify"
+  match app-id="v2rayN"
   match app-id="uget-gtk"
   default-column-width { proportion 0.65; }
   open-on-workspace "Entertainment"
