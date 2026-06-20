@@ -53,7 +53,6 @@ save)
   # Save input and output volumes
   echo "sinkvol:$(pactl get-sink-volume @DEFAULT_SINK@ | awk 'NR==1 {print $5}')" >>"$STATE_FILE"
   echo "sourcevol:$(pactl get-source-volume @DEFAULT_SOURCE@ | awk 'NR==1 {print $5}')" >>"$STATE_FILE"
-
   ;;
 
 restore)

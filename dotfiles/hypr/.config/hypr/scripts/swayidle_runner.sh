@@ -15,8 +15,8 @@ fi
 
 swayidle -w \
   lock "$lock_cmd" \
-  before-sleep 'loginctl lock-session;~/.config/hypr/scripts/hypr_resume.sh save' \
-  after-resume 'niri msg action power-on-monitors;~/.config/hypr/scripts/hypr_resume.sh restore' \
+  before-sleep 'loginctl lock-session;~/scripts/system_resume.sh save' \
+  after-resume 'niri msg action power-on-monitors;~/scripts/system_resume.sh restore' \
   timeout 150 'brightnessctl -s set 5%' resume 'brightnessctl -r' \
   timeout 160 'brightnessctl -sd asus::kbd_backlight set 0' resume 'brightnessctl -rd asus::kbd_backlight' \
   timeout 300 'loginctl lock-session' \
