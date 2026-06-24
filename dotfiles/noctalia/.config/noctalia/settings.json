@@ -516,7 +516,7 @@
                         "id": "Weather",
                         "scale": 1.2707943531852854,
                         "showBackground": true,
-                        "x": 48,
+                        "x": 32,
                         "y": 288
                     },
                     {
@@ -525,12 +525,12 @@
                         "format": "HH:mm:ss \\n ddd, d MMM yyyy",
                         "id": "Clock",
                         "roundedCorners": true,
-                        "scale": 1.4698918356248336,
+                        "scale": 1.5315611223486292,
                         "showBackground": true,
                         "useCustomFont": true,
                         "usePrimaryColor": true,
-                        "x": 48,
-                        "y": 48
+                        "x": 32,
+                        "y": 32
                     },
                     {
                         "defaultSettings": {
@@ -559,9 +559,10 @@
                             "useCustomColors": false
                         },
                         "id": "plugin:todo",
+                        "scale": 1.14434922025316,
                         "showBackground": true,
-                        "x": 1728,
-                        "y": 64
+                        "x": 32,
+                        "y": 416
                     },
                     {
                         "hideMode": "visible",
@@ -573,7 +574,7 @@
                         "showButtons": true,
                         "showVisualizer": true,
                         "visualizerType": "linear",
-                        "x": 1696,
+                        "x": 320,
                         "y": 1184
                     },
                     {
@@ -583,8 +584,8 @@
                         },
                         "id": "plugin:calendar-widget",
                         "showBackground": true,
-                        "x": 1200,
-                        "y": 192
+                        "x": 32,
+                        "y": 960
                     }
                 ]
             }
@@ -598,7 +599,7 @@
         "deadOpacity": 0.5,
         "displayMode": "exclusive",
         "dockType": "floating",
-        "enabled": false,
+        "enabled": true,
         "floatingRatio": 0.20000000000000007,
         "groupApps": true,
         "groupClickAction": "list",
