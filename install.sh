@@ -315,8 +315,9 @@ fisher install IlanCosman/tide@v6
 # tide configure
 tide configure --auto --style=Lean --prompt_colors='16 colors' --show_time='24-hour format' --lean_prompt_height='One line' --prompt_spacing=Compact --icons='Many icons' --transient=No
 
-fisher install vitallium/tokyonight-fish
-fish_config theme save "TokyoNight Moon"
+# fisher install vitallium/tokyonight-fish
+# fish_config theme save "TokyoNight Moon"
+fish_config theme save dracula
 
 fisher install PatrickF1/fzf.fish
 fisher install edc/bass

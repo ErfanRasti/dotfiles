@@ -2,14 +2,17 @@
 # Install the rootfs files which needs `sudo`
 
 ########################################################################################### root stow
-# install-rootfs.sh — stow system-level files from rootfs/
+# install-rootfs.sh — copy system-level files from rootfs/
 
 # root files
 cd "$HOME/dotfiles/rootfs/" || exit
 
-# shellcheck disable=SC2035
-sudo stow */
+for d in ~/dotfiles/rootfs/*/; do
+  sudo rsync -av "$d" /
+done
+
 sudo systemctl daemon-reload
+sudo systemctl enable bluetooth-enable.service
 sudo systemctl enable --now powertop.service
 sudo systemctl enable --now bluetooth-wakeup.service
 # sudo find . -type f -exec install -D {} /{}
