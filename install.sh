@@ -166,7 +166,8 @@ sudo pacman -S \
   vlc amberol \
   openrgb \
   podman ollama opencode \
-  figlet
+  figlet \
+  gpu-screen-recorder-ui
 
 echo "✅ pacman packages installed successfully!"
 
@@ -224,7 +225,6 @@ echo "✅ AUR packages installed successfully!"
 echo "------------------- flatpak packages -------------------"
 # flatpak packages
 flatpak update
-flatpak install flathub com.dec05eba.gpu_screen_recorder
 flatpak install flathub io.missioncenter.MissionCenter
 flatpak install flathub app.devsuite.Ptyxis
 flatpak install flathub com.github.neithern.g4music
