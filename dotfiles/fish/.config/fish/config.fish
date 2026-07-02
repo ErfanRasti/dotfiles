@@ -65,7 +65,7 @@ if status is-interactive
 end
 
 # Set default editor
-# export EDITOR=nvim
+export EDITOR=nvim
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -101,9 +101,6 @@ function y
     end
     rm -f -- "$tmp"
 end
-
-# Set EDITOR
-export EDITOR=nvim
 
 # Import the envvars from ~/set_proxy
 # bass "source ~/set-proxy ''"

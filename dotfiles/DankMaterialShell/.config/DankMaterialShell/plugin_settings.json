@@ -11,5 +11,10 @@
     "enabled": true,
     "autoStartBreaks": false,
     "autoStartPomodoros": false
+  },
+  "dankKDEConnect": {
+    "enabled": true,
+    "selectedDeviceId": ""
   }
 }
+

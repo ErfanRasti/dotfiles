@@ -153,6 +153,11 @@
       "id": "idleInhibitor",
       "enabled": true,
       "width": 25
+    },
+    {
+      "id": "plugin_dankKDEConnect",
+      "enabled": true,
+      "width": 50
     }
   ],
   "showWorkspaceIndex": true,
@@ -272,7 +277,7 @@
   },
   "appDrawerSectionViewModes": {},
   "niriOverviewOverlayEnabled": true,
-  "dankLauncherV2Size": "compact",
+  "dankLauncherV2Size": "medium",
   "dankLauncherV2BorderEnabled": false,
   "dankLauncherV2BorderThickness": 2,
   "dankLauncherV2BorderColor": "primary",
@@ -379,23 +384,23 @@
   "matugenTemplateEmacs": true,
   "matugenTemplateZed": true,
   "showDock": true,
-  "dockAutoHide": true,
-  "dockSmartAutoHide": true,
+  "dockAutoHide": false,
+  "dockSmartAutoHide": false,
   "dockGroupByApp": true,
   "dockOpenOnOverview": true,
-  "dockPosition": 3,
+  "dockPosition": 1,
   "dockSpacing": 8,
-  "dockBottomGap": 0,
+  "dockBottomGap": -18,
   "dockMargin": 0,
-  "dockIconSize": 28,
-  "dockIndicatorStyle": "line",
+  "dockIconSize": 30,
+  "dockIndicatorStyle": "circle",
   "dockBorderEnabled": false,
   "dockBorderColor": "surfaceText",
   "dockBorderOpacity": 1,
   "dockBorderThickness": 1,
   "dockIsolateDisplays": false,
   "dockLauncherEnabled": true,
-  "dockLauncherLogoMode": "os",
+  "dockLauncherLogoMode": "apps",
   "dockLauncherLogoCustomPath": "~/Pictures/MyImages/ERS_pure_logo.png",
   "dockLauncherLogoColorOverride": "primary",
   "dockLauncherLogoSizeOffset": 0,
@@ -591,7 +596,7 @@
       "borderColor": "surfaceText",
       "borderOpacity": 1,
       "borderThickness": 1,
-      "fontScale": 0.9,
+      "fontScale": 1,
       "autoHide": false,
       "autoHideDelay": 250,
       "openOnOverview": true,
@@ -603,7 +608,7 @@
       "clickThrough": true,
       "shadowIntensity": 20,
       "widgetPadding": 5,
-      "iconScale": 0.9,
+      "iconScale": 1,
       "removeWidgetPadding": false,
       "shadowOpacity": 50,
       "maximizeDetection": true
@@ -779,7 +784,7 @@
           "all"
         ],
         "showOnOverlay": false,
-        "syncPositionAcrossScreens": false,
+        "syncPositionAcrossScreens": true,
         "showHourlyForecast": true,
         "showPressure": true,
         "viewMode": "forecast",
@@ -793,10 +798,10 @@
           "y": 520
         },
         "_synced": {
-          "x": 0.4348958333333333,
-          "y": 0.38425925925925924,
-          "width": 200,
-          "height": 200
+          "x": 0.01953125,
+          "y": 0.25,
+          "width": 280,
+          "height": 320
         }
       }
     }
