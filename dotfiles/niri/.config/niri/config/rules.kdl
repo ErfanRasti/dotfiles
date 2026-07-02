@@ -230,15 +230,6 @@ window-rule {
 //     baba-is-float true
 // }
 
-// layer-rule {
-//     match namespace="dms:bar"
-//     match namespace="dms:desktop-widget:*"
-//     geometry-corner-radius 12
-//     background-effect {
-//         blur true
-//     }
-// }
-
 layer-rule {
   match namespace="rofi"
     // I've set the corner radius one pixel more to avoid pixelated corners
@@ -254,5 +245,4 @@ layer-rule {
         blur true
     }
 }
-
 

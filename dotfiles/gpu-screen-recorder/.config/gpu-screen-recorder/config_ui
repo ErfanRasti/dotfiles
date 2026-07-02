@@ -1,15 +1,15 @@
 main.config_file_version 2
-main.hotkeys_enable_option enable_hotkeys
+main.hotkeys_enable_option enable_hotkeys_no_grab
 main.joystick_hotkeys_enable_option disable_hotkeys
 main.language 
 main.notification_speed normal
 main.show_hide_hotkey 26 16
 main.software_encoding_warning_shown false
-main.tint_color intel
+main.tint_color nvidia
 main.wayland_warning_shown true
 record.container mp4
 record.pause_unpause_hotkey 92 16
-record.record_options.advanced_view false
+record.record_options.advanced_view true
 record.record_options.audio_codec opus
 record.record_options.change_video_resolution false
 record.record_options.codec auto
