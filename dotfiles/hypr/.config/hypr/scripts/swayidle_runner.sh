@@ -8,7 +8,7 @@ lock_cmd='hyprlock'
 CONFIG_FILE="$HOME/.config/hypr/hyprland.conf"
 
 if grep -q "^source = ~/.config/hypr/config/noctalia.conf" "$CONFIG_FILE"; then
-  lock_cmd='qs -c noctalia-shell ipc call lockScreen lock'
+  lock_cmd='noctalia-shell ipc call lockScreen lock'
 elif grep -q "^source = ~/.config/hypr/config/dms.conf" "$CONFIG_FILE"; then
   lock_cmd='dms ipc call lock lock'
 fi

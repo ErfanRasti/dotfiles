@@ -2,10 +2,10 @@
 
 # Restart noctalia
 if grep -q '^require("config\.noctalia")' "$CONFIG_FILE"; then
-  if pgrep -fx "qs -c noctalia-shell"; then
-    pkill -fx "qs -c noctalia-shell"
+  if pgrep -f "noctalia-shell"; then
+    pkill -f "noctalia-shell"
   fi
-  qs -c noctalia-shell &
+  noctalia-shell &
   disown
 
 # Restart dms
