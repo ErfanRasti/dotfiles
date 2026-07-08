@@ -106,7 +106,11 @@ end
 # bass "source ~/set-proxy ''"
 
 # Ascii art
-figlet -t -c -f ANSI\ Shadow I use Arch btw. | lolcat
+# figlet -t -c -f ANSI\ Shadow I use Arch btw. | lolcat
+# figlet -t -c -f ANSI\ Shadow I use NixOS btw. | lolcat
 
 # Add path for fabric
 fish_add_path ~/.local/bin
+
+# Add Nix to path
+# fish_add_path ~/.nix-profile/bin
