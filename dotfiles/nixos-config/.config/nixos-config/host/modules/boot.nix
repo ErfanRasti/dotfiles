@@ -1,6 +1,6 @@
 {
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = false;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
   boot.extraModprobeConfig = ''
@@ -30,4 +30,9 @@
   boot.loader.timeout = 4;
 
   # boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];
+
+  # Secure Boot
+  boot.loader.limine.secureBoot.enable = true;
+  boot.loader.limine.enable = true;
+  boot.loader.limine.resolution = "1920x1080x64";
 }

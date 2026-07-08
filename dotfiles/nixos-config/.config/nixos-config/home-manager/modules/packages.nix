@@ -51,9 +51,8 @@
     television
 
     # Menus
-    rofi
-    rofi-calc
     vicinae
+    (rofi.override { plugins = [ rofi-calc ]; })
 
     # Controllers
     brightnessctl
@@ -202,6 +201,7 @@
 
     # LaTeX
     pandoc
+    texlive
 
     # Tools
     showmethekey
