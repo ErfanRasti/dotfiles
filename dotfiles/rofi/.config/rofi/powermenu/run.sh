@@ -5,7 +5,8 @@ style="$HOME/.config/rofi/powermenu/style.rasi"
 
 # CMDs
 lastlogin="$(last "$USER" | head -n1 | tr -s ' ' | cut -d' ' -f5,6,7)"
-uptime="$(uptime -p | sed -e 's/up //g')"
+uptime="$(uptime | sed 's/.*up //; s/,.*//; s/  */ /g; s/^ *//; s/ *$//')"
+
 host=$(hostname)
 
 # Options

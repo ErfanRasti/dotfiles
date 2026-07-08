@@ -6,7 +6,7 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Theme Elements
 prompt="$(hostname)"
-mesg="Uptime : $(uptime -p | sed -e 's/up //g')"
+mesg="Uptime: $(uptime | sed 's/.*up //; s/,.*//; s/  */ /g; s/^ *//; s/ *$//')"
 
 list_col='6'
 list_row='1'
