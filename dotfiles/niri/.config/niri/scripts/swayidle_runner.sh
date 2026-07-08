@@ -8,7 +8,7 @@ lock_cmd='hyprlock'
 CONFIG_FILE="$HOME/.config/niri/config.kdl"
 
 if grep -q '^include "config/noctalia.kdl"' "$CONFIG_FILE"; then
-  lock_cmd='qs -c noctalia-shell ipc call lockScreen lock'
+  lock_cmd='noctalia-shell ipc call lockScreen lock'
 elif grep -q '^include "config/dms.kdl"' "$CONFIG_FILE"; then
   lock_cmd='dms ipc call lock lock'
 fi

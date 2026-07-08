@@ -27,14 +27,14 @@ hl.unbind("ALT + F4")
 -- Launcher
 hl.bind(
 	"ALT + SPACE",
-	hl.dsp.exec_cmd("qs -c noctalia-shell ipc call launcher toggle"),
+	hl.dsp.exec_cmd("noctalia-shell ipc call launcher toggle"),
 	{ description = "[SHELL:noctalia] Toggle app launcher" }
 )
 
 -- Shell settings
 hl.bind(
 	mainMod .. " + COMMA",
-	hl.dsp.exec_cmd("qs -c noctalia-shell ipc call settings toggle"),
+	hl.dsp.exec_cmd("noctalia-shell ipc call settings toggle"),
 	{ description = "[SHELL:noctalia] Toggle shell settings" }
 )
 
@@ -43,25 +43,25 @@ hl.bind(
 hl.bind(
 	"XF86AudioRaiseVolume",
 	hl.dsp.exec_cmd(
-		'sh -lc "qs -c noctalia-shell ipc call volume increase; paplay /usr/share/sounds/ocean/stereo/audio-volume-change.oga"'
+		'sh -lc "noctalia-shell ipc call volume increase; paplay /usr/share/sounds/ocean/stereo/audio-volume-change.oga"'
 	),
 	{ locked = true, repeating = true, description = "[SHELL:noctalia] Increase volume with feedback sound" }
 )
 hl.bind(
 	"XF86AudioLowerVolume",
 	hl.dsp.exec_cmd(
-		'sh -lc "qs -c noctalia-shell ipc call volume decrease; paplay /usr/share/sounds/ocean/stereo/audio-volume-change.oga"'
+		'sh -lc "noctalia-shell ipc call volume decrease; paplay /usr/share/sounds/ocean/stereo/audio-volume-change.oga"'
 	),
 	{ locked = true, repeating = true, description = "[SHELL:noctalia] Decrease volume with feedback sound" }
 )
 hl.bind(
 	"XF86AudioMute",
-	hl.dsp.exec_cmd("qs -c noctalia-shell ipc call volume muteOutput"),
+	hl.dsp.exec_cmd("noctalia-shell ipc call volume muteOutput"),
 	{ locked = true, repeating = true, description = "[SHELL:noctalia] Toggle output mute" }
 )
 hl.bind(
 	"XF86AudioMicMute",
-	hl.dsp.exec_cmd("qs -c noctalia-shell ipc call volume muteInput"),
+	hl.dsp.exec_cmd("noctalia-shell ipc call volume muteInput"),
 	{ locked = true, repeating = true, description = "[SHELL:noctalia] Toggle microphone mute" }
 )
 
@@ -69,49 +69,49 @@ hl.bind(
 -- e at the end: allows the binding to repeat while you hold the key down
 hl.bind(
 	"XF86MonBrightnessUp",
-	hl.dsp.exec_cmd("qs -c noctalia-shell ipc call brightness increase"),
+	hl.dsp.exec_cmd("noctalia-shell ipc call brightness increase"),
 	{ locked = true, repeating = true, description = "[SHELL:noctalia] Increase screen brightness" }
 )
 hl.bind(
 	"XF86MonBrightnessDown",
-	hl.dsp.exec_cmd("qs -c noctalia-shell ipc call brightness decrease"),
+	hl.dsp.exec_cmd("noctalia-shell ipc call brightness decrease"),
 	{ locked = true, repeating = true, description = "[SHELL:noctalia] Decrease screen brightness" }
 )
 
 -- Noctalia panels
 hl.bind(
 	mainMod .. " + N",
-	hl.dsp.exec_cmd('sh -lc "qs -c noctalia-shell ipc call notifications toggleHistory"'),
+	hl.dsp.exec_cmd('sh -lc "noctalia-shell ipc call notifications toggleHistory"'),
 	{ description = "[SHELL:noctalia] Toggle notification history" }
 )
 hl.bind(
 	mainMod .. " + ALT + W",
-	hl.dsp.exec_cmd('sh -lc "qs -c noctalia-shell ipc call wallpaper toggle"'),
+	hl.dsp.exec_cmd('sh -lc "noctalia-shell ipc call wallpaper toggle"'),
 	{ description = "[SHELL:noctalia] Toggle wallpaper panel" }
 )
 hl.bind(
 	mainMod .. " + ESCAPE",
-	hl.dsp.exec_cmd('sh -lc "qs -c noctalia-shell ipc call lockScreen lock"'),
+	hl.dsp.exec_cmd('sh -lc "noctalia-shell ipc call lockScreen lock"'),
 	{ description = "[SHELL:noctalia] Lock the session" }
 )
 hl.bind(
 	mainMod .. " + A",
-	hl.dsp.exec_cmd('sh -lc "qs -c noctalia-shell ipc call controlCenter toggle"'),
+	hl.dsp.exec_cmd('sh -lc "noctalia-shell ipc call controlCenter toggle"'),
 	{ description = "[SHELL:noctalia] Toggle control center" }
 )
 hl.bind(
 	mainMod .. " + V",
-	hl.dsp.exec_cmd("qs -c noctalia-shell ipc call launcher clipboard"),
+	hl.dsp.exec_cmd("noctalia-shell ipc call launcher clipboard"),
 	{ description = "[SHELL:noctalia] Open clipboard launcher" }
 )
 hl.bind(
 	mainMod .. " + PERIOD",
-	hl.dsp.exec_cmd("qs -c noctalia-shell ipc call launcher emoji"),
+	hl.dsp.exec_cmd("noctalia-shell ipc call launcher emoji"),
 	{ description = "[SHELL:noctalia] Open emoji picker" }
 )
 hl.bind(
 	"ALT + F4",
-	hl.dsp.exec_cmd("qs -c noctalia-shell ipc call sessionMenu toggle"),
+	hl.dsp.exec_cmd("noctalia-shell ipc call sessionMenu toggle"),
 	{ description = "[SHELL:noctalia] Toggle session menu" }
 )
 
