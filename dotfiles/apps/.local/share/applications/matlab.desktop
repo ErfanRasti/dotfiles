@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Terminal=false
+MimeType=text/x-matlab
+Exec=matlab -desktop -useStartupFolderPref
+Name=MATLAB
+# Icon=/usr/share/icons/matlab/matlab.svg
+Icon=matlab
+Categories=Development;Math;Science
+Comment=Scientific computing environment
+StartupNotify=true
+StartupWMClass=MATLAB R2024a
