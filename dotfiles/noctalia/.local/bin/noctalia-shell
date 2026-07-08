@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Remove our own directory from PATH to avoid finding ourselves
+SELF_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PATH=${PATH//:$SELF_DIR:/:}
+PATH=${PATH#$SELF_DIR:}
+PATH=${PATH%:$SELF_DIR}
+
+if command -v noctalia-shell &>/dev/null; then
+    exec noctalia-shell "$@"
+fi
+
+exec qs -c noctalia-shell "$@"

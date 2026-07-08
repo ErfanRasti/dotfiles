@@ -35,7 +35,7 @@
         "spectrumMirrored": true,
         "visualizerType": "wave",
         "volumeFeedback": true,
-        "volumeFeedbackSoundFile": "/usr/share/sounds/ocean/stereo/audio-volume-change.oga",
+        "volumeFeedbackSoundFile": "~/.nix-profile/share/sounds/ocean/stereo/audio-volume-change.oga",
         "volumeOverdrive": true,
         "volumeStep": 5
     },
@@ -157,34 +157,12 @@
                 },
                 {
                     "defaultSettings": {
-                        "aurCmd": "paru -Qua 2>/dev/null",
-                        "aurHomepageCmd": "LC_ALL=C paru -Si {id} 2>/dev/null | awk '/^URL/ {print $3}'",
-                        "boldText": true,
-                        "boldVer": true,
-                        "boldVerDesktop": true,
-                        "boldVerPanel": true,
-                        "closeButton": true,
-                        "closeOnSettings": false,
-                        "customIconPath": "",
-                        "desktopTip": true,
-                        "enableColorization": false,
-                        "flatpak": true,
-                        "hideOnEmpty": false,
-                        "hoverTip": true,
-                        "iconColor": "none",
-                        "iconName": "arrow-big-down-lines",
-                        "noctalia": true,
-                        "panelContext": true,
-                        "panelTooltip": true,
-                        "refreshInterval": 120,
-                        "refreshTimer": true,
-                        "systemCmd": "checkupdates 2>/dev/null",
-                        "toast": true,
-                        "tooltip": true,
-                        "updateCmd": "ghostty -e bash -c 'echo \"Updating System...\";paru; flatpak update; read -n 1 -p \"Press any key to exit...\"'",
-                        "useDistroLogo": false
+                        "currentIconName": "world-download",
+                        "hideOnZero": false,
+                        "updateIntervalMinutes": 30,
+                        "updateTerminalCommand": "foot -e"
                     },
-                    "id": "plugin:arch-updater"
+                    "id": "plugin:update-count"
                 },
                 {
                     "characterCount": 2,
@@ -718,7 +696,7 @@
         "performanceModeEnabled": "",
         "screenLock": "",
         "screenUnlock": "",
-        "session": "paplay \"/usr/share/sounds/ocean/stereo/desktop-logout.oga\"",
+        "session": "paplay \"~/.nix-profile/share/sounds/ocean/stereo/desktop-logout.oga\"",
         "startup": "pkill swaync;notify-send 'Noctalia Loaded'",
         "wallpaperChange": ""
     },
@@ -798,11 +776,11 @@
             "normal": true
         },
         "sounds": {
-            "criticalSoundFile": "/usr/share/sounds/freedesktop/stereo/message.oga",
+            "criticalSoundFile": "/run/current-system/sw/share/sounds/freedesktop/stereo/message.oga",
             "enabled": true,
             "excludedApps": "discord,firefox,chrome,chromium,edge",
-            "lowSoundFile": "/usr/share/sounds/freedesktop/stereo/message.oga",
-            "normalSoundFile": "/usr/share/sounds/freedesktop/stereo/message.oga",
+            "lowSoundFile": "/run/current-system/sw/share/sounds/freedesktop/stereo/message.oga",
+            "normalSoundFile": "/run/current-system/sw/share/sounds/freedesktop/stereo/message.oga",
             "separateSounds": false,
             "volume": 1
         }
@@ -993,10 +971,10 @@
                 "darkMode": true,
                 "generationMethod": "tonal-spot",
                 "paletteColors": [
-                    "#ffb1c1",
-                    "#e4bdc3",
-                    "#ecbe91",
-                    "#ffb4ab"
+                    "#9a4059",
+                    "#75565c",
+                    "#7a5732",
+                    "#ba1a1a"
                 ],
                 "path": "~/Pictures/Wallpapers/Unsplash/jr-korpa-SFT9G3pAxLY-unsplash.jpg",
                 "useWallpaperColors": true
