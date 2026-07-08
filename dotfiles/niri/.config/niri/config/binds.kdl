@@ -294,6 +294,10 @@ binds {
   Mod+E hotkey-overlay-title="Open file manager" { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'org.gnome.Nautilus' 'env XDG_CURRENT_DESKTOP=GNOME nautilus'"; }
   Mod+Alt+E hotkey-overlay-title="Open yazi file manager" { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'yazi' 'kitty --override confirm_os_window_close=0 --class yazi bash -c yazi'"; }
   Ctrl+Shift+Escape hotkey-overlay-title="Open btop" { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'btop' 'kitty --override confirm_os_window_close=0 --class btop -e btop'"; }
+  Ctrl+Shift+F1 hotkey-overlay-title="Open nvtop" { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'nvtop' 'kitty --override confirm_os_window_close=0 --class nvtop -e nvtop'"; }
+  Ctrl+Shift+F2 hotkey-overlay-title="Open gnome-system-monitor" { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'org.gnome.SystemMonitor' 'gnome-system-monitor'"; }
+  Ctrl+Shift+F3 hotkey-overlay-title="Open mission-center" { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'io.missioncenter.MissionCenter' 'missioncenter'"; }
+  Ctrl+Shift+F4 hotkey-overlay-title="Open htop" { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'htop' 'kitty --override confirm_os_window_close=0 --class htop -e htop'"; }
   Mod+Grave hotkey-overlay-title="Toggle dropdown terminal" { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'kitty-dropterm' -t 'kitty-dropterm' 'kitty --class kitty-dropterm --title kitty-dropterm'"; }
 
   Mod+Alt+A hotkey-overlay-title="Open rofi favourite apps" { spawn "~/.config/rofi/applets/scripts/apps.sh"; }
