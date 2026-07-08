@@ -5,7 +5,7 @@ startup_command = "ls"
 
 [[session]]
 name = "configure"
-windows = [ " arch-setup", " dotfiles" ]
+windows = [" arch-setup", " dotfiles", "󱜙 opencode"]
 
 [[window]]
 path = "~/projects/arch-setup/"
@@ -16,3 +16,8 @@ startup_script = "nvim"
 path = "~/dotfiles/"
 name = " dotfiles"
 startup_script = "nvim"
+
+[[window]]
+path = "~/dotfiles/"
+name = "󱜙 opencode"
+startup_script = "opencode"
