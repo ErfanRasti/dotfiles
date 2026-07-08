@@ -32,7 +32,7 @@
   # After changing this to take effect: `sudo systemctl restart var-lib-swapfile.swap`
   swapDevices = [
     {
-      device = "/var/lib/swapfile";
+      device = "/swap/swapfile";
       size = 32 * 1024; # 32 GB
       priority = 20;
     }

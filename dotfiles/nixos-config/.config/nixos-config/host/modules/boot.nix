@@ -1,7 +1,7 @@
 {
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = false;
+  boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
   boot.extraModprobeConfig = ''
     options rtl8723be ant_sel=2 ips=0 fwlps=0
