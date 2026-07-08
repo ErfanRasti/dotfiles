@@ -150,6 +150,7 @@
     # System monitor
     btop
     htop
+    nvtopPackages.full
     mission-center
 
     # Stores
@@ -198,6 +199,9 @@
     impression
     gparted
     gptfdisk # use it as gdisk
+
+    # LaTeX
+    pandoc
 
     # Tools
     showmethekey
