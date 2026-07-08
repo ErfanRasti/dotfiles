@@ -4,9 +4,11 @@
   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=30&duration=3000&pause=1000&color=F73B49&center=true&multiline=true&random=true&width=435&lines=ERS'+Dotfiles" alt="Typing SVG" /></a>
 </div>
 
+<img width="2560" height="1600" alt="whole-system-niri" src="https://github.com/user-attachments/assets/e112a7c6-74c2-48d4-8783-a739b2d90842" />
 <img width="1920" height="1080" alt="whole-system" src="https://github.com/user-attachments/assets/1be282e2-bc54-4777-aa9e-099131fe0080" />
 
 ## Installation
+For Nix users follow the `dotfiles/nixos-config/` and install the OS using it.
 
 To use these `dotfiles` use the `install.sh` script or copy and paste each section of the script to your terminal manually.
 
