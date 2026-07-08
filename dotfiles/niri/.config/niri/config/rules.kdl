@@ -94,6 +94,10 @@ window-rule {
 window-rule {
   match title="kitty-dropterm"
   match app-id="btop"
+  match app-id="htop"
+  match app-id="nvtop"
+  match app-id="io.missioncenter.MissionCenter"
+  match app-id="org.gnome.SystemMonitor"
   match title="dgop-kitty"
   match app-id="org.gnome.Nautilus"
   match app-id="yazi"
