@@ -32,9 +32,7 @@ in
 
   systemd.services.powertop.serviceConfig.ExecStartPost = [ "${postPowertop}" ];
 
-  # Suspend first then hibernate when closing the lid
   services.logind.settings.Login.LidSwitch = "suspend";
-  # Hibernate on power button pressed
   services.logind.settings.Login.PowerKey = "suspend";
   services.logind.settings.Login.PowerKeyLongPress = "poweroff";
 }

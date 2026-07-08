@@ -716,11 +716,10 @@
     },
     "location": {
         "analogClockInCalendar": true,
-        "autoLocate": false,
+        "autoLocate": true,
         "firstDayOfWeek": -1,
-        "hideWeatherCityName": false,
+        "hideWeatherCityName": true,
         "hideWeatherTimezone": false,
-        "name": "Rasht",
         "showCalendarEvents": true,
         "showCalendarWeather": true,
         "showWeekNumberInCalendar": true,
@@ -920,7 +919,7 @@
     },
     "wallpaper": {
         "automationEnabled": false,
-        "directory": "~/Pictures/Wallpapers/Unsplash",
+        "directory": "~/wallpapers",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "favorites": [
