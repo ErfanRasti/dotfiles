@@ -176,14 +176,32 @@ window-rule {
   open-on-workspace "Main"
 }
 
+
 window-rule {
-    match app-id=r#"^MATLAB.*"#
+  match app-id=r#"^MATLAB.*"#
+  exclude title="MATLAB" app-id="MATLAB R2024a"
     // r#" ... "# is a raw string literal.
     // ^ → start of the string
     // MATLAB → must begin with the word “MATLAB”
     // .* → anything may follow (any characters, 0 or more)
 
     open-maximized-to-edges true
+}
+
+window-rule {
+  match title="MATLAB" app-id="MATLAB R2024a"
+  exclude title="MATLAB R2024a" app-id="MATLAB R2024a"
+  default-column-width { fixed 400; }
+  default-window-height { fixed 400; }
+
+  open-floating true
+}
+
+window-rule {
+  match title="Authenticate" app-id="polkit-gnome-authentication-agent-1"
+  default-column-width { proportion 0.3; }
+  default-window-height { proportion 0.2; }
+  open-floating true
 }
 
 window-rule {
