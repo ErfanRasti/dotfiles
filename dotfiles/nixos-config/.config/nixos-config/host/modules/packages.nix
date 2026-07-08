@@ -26,6 +26,7 @@
     neovim
     tmux
     wget
+    sbctl
 
   ];
 
