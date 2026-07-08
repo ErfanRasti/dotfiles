@@ -103,7 +103,7 @@ function y
 end
 
 # Import the envvars from ~/set_proxy
-# bass "source ~/set-proxy ''"
+# bass "source set-proxy ''"
 
 # Ascii art
 # figlet -t -c -f ANSI\ Shadow I use Arch btw. | lolcat
@@ -114,3 +114,10 @@ fish_add_path ~/.local/bin
 
 # Add Nix to path
 # fish_add_path ~/.nix-profile/bin
+
+# NixOS Aliases
+## The following aliases will update the system too.
+alias rebuild "sudo nixos-rebuild switch --flake path:$HOME/dotfiles/dotfiles/nixos-config/.config/nixos-config/"
+alias hms "home-manager switch --flake path:$HOME/dotfiles/dotfiles/nixos-config/.config/nixos-config/"
+alias nixclean "sudo nix-collect-garbage -d"
+# Check previous generations using: `nixos-rebuild list-generations`
