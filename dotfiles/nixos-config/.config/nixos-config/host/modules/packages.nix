@@ -27,7 +27,6 @@
     tmux
     wget
     pkgs.sbctl
-
   ];
 
   # To check the current nix-ld modules: l /run/current-system/sw/share/nix-ld/lib/

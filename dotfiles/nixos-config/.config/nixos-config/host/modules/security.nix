@@ -74,4 +74,10 @@
   # Any service without a profile will be blocked from starting
   systemd.services."*".serviceConfig.AppArmorProfile = true;
 
+  # Enable sshd using
+  # services.openssh = {
+  #   enable = true;
+  #   openFirewall = true;
+  # };
+
 }
