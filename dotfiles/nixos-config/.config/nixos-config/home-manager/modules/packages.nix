@@ -201,6 +201,7 @@
     # Offices
     onlyoffice-desktopeditors
     libreoffice
+    zathura
 
     # Windows
     winboat
