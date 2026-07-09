@@ -48,15 +48,21 @@
 
   # Make nix-daemon inherit proxy settings from the environment
   # This will pick up http_proxy, https_proxy, etc. from your shell
-  # systemd.services.nix-daemon.environment = {
-  #   # Use built-in environment variable passthrough
-  #   http_proxy = builtins.getEnv "http_proxy";
-  #   https_proxy = builtins.getEnv "https_proxy";
-  #   HTTP_PROXY = builtins.getEnv "HTTP_PROXY";
-  #   HTTPS_PROXY = builtins.getEnv "HTTPS_PROXY";
-  #   no_proxy = builtins.getEnv "no_proxy";
-  #   NO_PROXY = builtins.getEnv "NO_PROXY";
-  # };
-  networking.proxy.default = builtins.getEnv "http_proxy";
+  systemd.services.nix-daemon.environment = {
+    # Use built-in environment variable passthrough
+
+    # http_proxy = builtins.getEnv "http_proxy";
+    # https_proxy = builtins.getEnv "https_proxy";
+    # HTTP_PROXY = builtins.getEnv "HTTP_PROXY";
+    # HTTPS_PROXY = builtins.getEnv "HTTPS_PROXY";
+    # no_proxy = builtins.getEnv "no_proxy";
+    # NO_PROXY = builtins.getEnv "NO_PROXY";
+
+    # Explicit mentioning
+    http_proxy = "http://127.0.0.1:22222";
+    https_proxy = "http://127.0.0.1:22222";
+
+  };
+  # networking.proxy.default = builtins.getEnv "http_proxy";
 
 }
