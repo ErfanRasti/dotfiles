@@ -17,6 +17,7 @@ fi
 # Restart dms
 if grep -q '^include "config/dms.kdl"' "$CONFIG_FILE"; then
   pkill -x qs
+  pkill -f dms
   pkill -x dsearch
   dsearch serve
   if pgrep -x "dms"; then

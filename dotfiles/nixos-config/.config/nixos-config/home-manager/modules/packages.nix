@@ -27,7 +27,21 @@
     zoxide
     ripgrep
     ripdrag
-    figlet
+
+    (pkgs.runCommand "figlet-with-fonts"
+      {
+        nativeBuildInputs = [ pkgs.makeWrapper ];
+      }
+      ''
+        mkdir -p $out/bin $out/share/figlet
+        ln -s ${figlet}/share/figlet/* $out/share/figlet/
+        for f in ${inputs.figlet-fonts}/*.flf ${inputs.figlet-fonts}/*.flc; do
+          [ -f "$f" ] && ln -sf "$f" $out/share/figlet/
+        done
+        makeWrapper ${figlet}/bin/figlet $out/bin/figlet \
+          --set FIGLET_FONTDIR "$out/share/figlet"
+      ''
+    )
     lolcat
     stow
     lazygit
@@ -97,7 +111,7 @@
     ollama
 
     # Browsers
-    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.zen-browser.packages.${stdenv.hostPlatform.system}.default
     google-chrome
     microsoft-edge
     firefox
@@ -133,7 +147,11 @@
     nerd-fonts.fira-code
     noto-fonts
     vazirmatn
-    pkgs.figlet
+    noto-fonts-cjk-sans
+    noto-fonts-color-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
 
     # Music
     spotify
@@ -155,7 +173,7 @@
     # Stores
     flatpak
     gnome-software
-    # inputs.nix-software-center.packages.${pkgs.stdenv.hostPlatform.system}.nix-software-center
+    # inputs.nix-software-center.packages.${stdenv.hostPlatform.system}.nix-software-center
 
     # Dictionaries
     wordbook
@@ -163,7 +181,9 @@
     # Container managers
     docker
     podman
+    podman-compose
     podman-desktop
+    fuse-overlayfs
 
     # Sounds
     kdePackages.ocean-sound-theme
@@ -211,14 +231,7 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
 
   # https://wiki.nixos.org/wiki/Polkit
   services.polkit-gnome.enable = true;
-
-  # Include figlet fonts in home directory
-  home.file.".local/share/figlet".source = inputs.figlet-fonts;
 }
