@@ -201,7 +201,7 @@
 
     # LaTeX
     pandoc
-    texlive
+    texliveFull
 
     # Tools
     showmethekey
