@@ -1,6 +1,6 @@
-{
+{ lib, ... }: {
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = false;
+  # boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
   boot.extraModprobeConfig = ''
@@ -32,7 +32,15 @@
   # boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];
 
   # Secure Boot
-  boot.loader.limine.secureBoot.enable = true;
-  boot.loader.limine.enable = true;
-  boot.loader.limine.resolution = "1920x1080x64";
+  # See https://nix-community.github.io/lanzaboote/getting-started/prepare-your-system.html
+  # Lanzaboote currently replaces the systemd-boot module.
+  # This setting is usually set to true in configuration.nix
+  # generated at installation time. So we force it to false
+  # for now.
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+  };
 }
