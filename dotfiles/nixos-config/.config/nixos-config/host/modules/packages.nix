@@ -14,7 +14,7 @@
   programs.niri.enable = true;
 
   environment.systemPackages = with pkgs; [
-    # System maangement
+    # System management
     pciutils
     usbutils
     config.hardware.nvidia.package.bin
@@ -26,7 +26,8 @@
     neovim
     tmux
     wget
-    pkgs.sbctl
+    sbctl
+    wl-clipboard # for waydroid copy and paste
   ];
 
   # To check the current nix-ld modules: l /run/current-system/sw/share/nix-ld/lib/
@@ -61,4 +62,11 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+  services.hardware.openrgb.enable = true;
+
+  # Waydroid
+  virtualisation.waydroid.enable = true;
+  # Newer kernel versions may need
+  # virtualisation.waydroid.package = pkgs.waydroid-nftables;
+
 }
