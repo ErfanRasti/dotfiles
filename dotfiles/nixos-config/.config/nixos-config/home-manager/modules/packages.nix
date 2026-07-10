@@ -45,6 +45,7 @@
     lolcat
     stow
     lazygit
+    lazydocker
     trash-cli
     jq
     zellij
@@ -52,6 +53,10 @@
     cava
     dwt1-shell-color-scripts
     ggh
+    ascii-image-converter
+
+    # Dev Tools
+    github-desktop
 
     # Terminals
     kitty
@@ -122,7 +127,6 @@
 
     # Android Tools
     android-tools
-    waydroid
 
     # Editors
     neovim
@@ -138,6 +142,25 @@
     # Social Media
     telegram-desktop
     discord
+    teams-for-linux
+
+    # Camera
+    cheese
+
+    # Image Editors
+    gimp
+    imagemagick
+
+    # Video Editors
+    kdePackages.kdenlive
+    ffmpeg
+    v4l-utils
+
+    # Nautilus
+    nautilus
+    sushi
+    nautilus-open-any-terminal
+    code-nautilus
 
     # Nix
     nix-prefetch-git
@@ -155,7 +178,7 @@
 
     # Music
     spotify
-    spicetify-cli
+    #spicetify-cli
     amberol
     fum
     gapless
@@ -171,7 +194,7 @@
     mission-center
 
     # Stores
-    flatpak
+    flatpak # use it with flatpak --user ...
     gnome-software
     # inputs.nix-software-center.packages.${stdenv.hostPlatform.system}.nix-software-center
 
@@ -180,6 +203,7 @@
 
     # Container managers
     docker
+    docker-compose
     podman
     podman-compose
     podman-desktop
