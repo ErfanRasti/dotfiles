@@ -35,7 +35,7 @@
         "spectrumMirrored": true,
         "visualizerType": "wave",
         "volumeFeedback": true,
-        "volumeFeedbackSoundFile": "~/.nix-profile/share/sounds/ocean/stereo/audio-volume-change.oga",
+        "volumeFeedbackSoundFile": "/run/current-system/sw/share/sounds/ocean/stereo/audio-volume-change.oga",
         "volumeOverdrive": true,
         "volumeStep": 5
     },
@@ -696,7 +696,7 @@
         "performanceModeEnabled": "",
         "screenLock": "",
         "screenUnlock": "",
-        "session": "paplay \"~/.nix-profile/share/sounds/ocean/stereo/desktop-logout.oga\"",
+        "session": "paplay \"/run/current-system/sw/share/sounds/ocean/stereo/desktop-logout.oga\"",
         "startup": "pkill swaync;notify-send 'Noctalia Loaded'",
         "wallpaperChange": ""
     },
