@@ -132,6 +132,7 @@
     neovim
     emacs
     vscode
+    jetbrains.pycharm
 
     # Clipboard managers
     wtype
@@ -175,6 +176,7 @@
     liberation_ttf
     fira-code
     fira-code-symbols
+    libertinus
 
     # Music
     spotify
@@ -209,10 +211,6 @@
     podman-desktop
     fuse-overlayfs
 
-    # Sounds
-    kdePackages.ocean-sound-theme
-    sound-theme-freedesktop
-
     # X Apps
     xwayland-satellite
     xeyes
@@ -234,6 +232,7 @@
     gcc
     python3
     matlab
+    lua
     luarocks
 
     # Power Management tools

@@ -3,6 +3,8 @@
     isNormalUser = true;
     extraGroups = [
       "wheel"
+      "networkmanager"
+      "audio"
       "video"
     ];
     # packages = with pkgs; [

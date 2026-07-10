@@ -28,9 +28,11 @@ in
   powerManagement.enable = true;
   services.thermald.enable = true;
   services.power-profiles-daemon.enable = true;
-  powerManagement.powertop.enable = true;
 
+  powerManagement.powertop.enable = true;
   systemd.services.powertop.serviceConfig.ExecStartPost = [ "${postPowertop}" ];
+
+  services.upower.enable = true;
 
   services.logind.settings.Login.LidSwitch = "suspend";
   services.logind.settings.Login.PowerKey = "suspend";

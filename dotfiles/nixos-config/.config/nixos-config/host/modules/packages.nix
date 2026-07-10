@@ -28,6 +28,10 @@
     wget
     sbctl
     wl-clipboard # for waydroid copy and paste
+
+    # Sounds
+    sound-theme-freedesktop
+    kdePackages.ocean-sound-theme # ocean sound theme
   ];
 
   # To check the current nix-ld modules: l /run/current-system/sw/share/nix-ld/lib/
