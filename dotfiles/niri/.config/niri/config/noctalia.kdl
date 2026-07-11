@@ -1,45 +1,51 @@
 binds {
 
-    Alt+space hotkey-overlay-title="Toggle launcher" {spawn "noctalia-shell" "ipc" "call" "launcher" "toggle";}
-    Mod+Comma hotkey-overlay-title="Open Noctalia settings" { spawn "noctalia-shell" "ipc" "call" "settings" "toggle"; }
+    Alt+space hotkey-overlay-title="Toggle launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
+    Mod+Comma hotkey-overlay-title="Open Noctalia settings" { spawn-sh "noctalia msg settings-toggle"; }
 
     // Audio controls
-    XF86AudioRaiseVolume allow-when-locked=true hotkey-overlay-title="Volume up" { spawn-sh "noctalia-shell ipc call volume increase"; }
-    XF86AudioLowerVolume allow-when-locked=true hotkey-overlay-title="Volume down" { spawn-sh "noctalia-shell ipc call volume decrease"; }
+    XF86AudioRaiseVolume allow-when-locked=true hotkey-overlay-title="Volume up" { spawn-sh "noctalia msg volume-up"; }
+    XF86AudioLowerVolume allow-when-locked=true hotkey-overlay-title="Volume down" { spawn-sh "noctalia msg volume-down"; }
 
-    XF86AudioMute allow-when-locked=true hotkey-overlay-title="Mute audio" { spawn "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
-    XF86AudioMicMute allow-when-locked=true hotkey-overlay-title="Mute microphone" { spawn "noctalia-shell" "ipc" "call" "volume" "muteInput"; }
- 
+    XF86AudioMute allow-when-locked=true hotkey-overlay-title="Mute audio" { spawn-sh "noctalia msg volume-mute"; }
+    XF86AudioMicMute allow-when-locked=true hotkey-overlay-title="Mute microphone" { spawn-sh "noctalia msg mic-mute"; }
+
 
     // Brightness controls
-    XF86MonBrightnessUp allow-when-locked=true hotkey-overlay-title="Brightness up" { spawn "noctalia-shell" "ipc" "call" "brightness" "increase"; }
-    XF86MonBrightnessDown allow-when-locked=true hotkey-overlay-title="Brightness down" { spawn "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+    XF86MonBrightnessUp allow-when-locked=true hotkey-overlay-title="Brightness up" { spawn-sh "noctalia msg brightness-up"; }
+    XF86MonBrightnessDown allow-when-locked=true hotkey-overlay-title="Brightness down" { spawn-sh "noctalia msg brightness-down"; }
 
 
-    Mod+N hotkey-overlay-title="Toggle notification history" { spawn-sh "noctalia-shell ipc call notifications toggleHistory";}
-    Mod+Alt+N hotkey-overlay-title="Toggle DND" { spawn-sh "noctalia-shell ipc call notifications toggleDND"; }
-    Mod+Alt+W hotkey-overlay-title="Toggle wallpaper" { spawn-sh "noctalia-shell ipc call wallpaper toggle";}
-    Mod+Escape hotkey-overlay-title="Lock screen" { spawn-sh "noctalia-shell ipc call lockScreen lock";}
-    Mod+S hotkey-overlay-title="Toggle control center" { spawn-sh "noctalia-shell ipc call controlCenter toggle"; }
-    Mod+V hotkey-overlay-title="Open clipboard" { spawn "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
-    Mod+B hotkey-overlay-title="Toggle dock" { spawn-sh "noctalia-shell ipc call dock toggle"; }
+    Mod+N hotkey-overlay-title="Toggle notification history" { spawn-sh "noctalia msg notification-dnd-toggle";}
+    Mod+Alt+N hotkey-overlay-title="Toggle DND" { spawn-sh "noctalia msg notification-dnd-toggle"; }
+    Mod+Alt+W hotkey-overlay-title="Toggle wallpaper" { spawn-sh "noctalia msg panel-toggle wallpaper";}
+    Mod+Escape hotkey-overlay-title="Lock screen" { spawn-sh "noctalia msg session lock";}
+    Mod+S hotkey-overlay-title="Toggle control center" { spawn-sh "noctalia msg panel-toggle control-center"; }
+    Mod+V hotkey-overlay-title="Open clipboard" { spawn-sh "noctalia msg panel-toggle clipboard"; }
+    Mod+B hotkey-overlay-title="Toggle dock" { spawn-sh "noctalia msg dock-toggle"; }
     Mod+Period hotkey-overlay-title="Open emoji picker" { spawn "noctalia-shell" "ipc" "call" "launcher" "emoji"; }
-    Mod+ALT+Period hotkey-overlay-title="Toggle kaomoji" { spawn "noctalia-shell" "ipc" "call" "plugin:kaomoji" "toggle"; }
-    Mod+Slash hotkey-overlay-title="Toggle keybind cheatsheet" { spawn "noctalia-shell" "ipc" "call" "plugin:keybind-cheatsheet" "toggle"; }
-    Mod+Ctrl+Alt+Shift+K hotkey-overlay-title="Toggle show keys" { spawn "noctalia-shell" "ipc" "call" "plugin:show-keys" "toggle"; }
-    Mod+Shift+N hotkey-overlay-title="Toggle sticky notes" { spawn-sh "noctalia-shell ipc call plugin:sticky-notes toggle"; }
-    Mod+CTRL+SHIFT+S hotkey-overlay-title="Toggle screen toolkit" {spawn-sh "noctalia-shell ipc call plugin:screen-toolkit toggle"; }
+    Mod+ALT+Period hotkey-overlay-title="Toggle kaomoji" { spawn-sh "noctalia msg panel-toggle plugin:kaomoji"; }
+    Mod+Slash hotkey-overlay-title="Toggle keybind cheatsheet" { spawn-sh "noctalia msg panel-toggle plugin:keybind-cheatsheet"; }
+    Mod+Ctrl+Alt+Shift+K hotkey-overlay-title="Toggle show keys" { spawn-sh "noctalia msg panel-toggle plugin:show-keys"; }
+    Mod+Shift+N hotkey-overlay-title="Toggle sticky notes" { spawn-sh "noctalia msg panel-toggle plugin:sticky-notes"; }
+    Mod+CTRL+SHIFT+S hotkey-overlay-title="Toggle screen toolkit" { spawn-sh "noctalia msg panel-toggle plugin:screen-toolkit"; }
     Mod+CTRL+SHIFT+C hotkey-overlay-title="Toggle system awake" {spawn-sh "~/.config/noctalia/plugins/keep-awake-plus/scripts/system-awake"; }
-    Alt+F4 hotkey-overlay-title="Toggle session menu" { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
+    Alt+F4 hotkey-overlay-title="Toggle session menu" { spawn-sh "noctalia msg panel-toggle session"; }
     // Mod+C { spawn "noctalia-shell" "ipc" "call" "launcher" "calculator"; }
     // Mod+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
+
+    Print hotkey-overlay-title="Screenshot" { spawn-sh "noctalia msg screenshot-region"; }
+    Shift+Print hotkey-overlay-title="Screenshot screen" { spawn-sh "noctalia msg screenshot-fullscreen"; }
+    Mod+Print hotkey-overlay-title="Screenshot window" { screenshot-window; }
+
+
 }
 
-spawn-at-startup "noctalia-shell"
+spawn-at-startup "noctalia"
 
 // Set the overview wallpaper on the backdrop.
 layer-rule {
-  match namespace="^noctalia-overview*"
+  match namespace="^noctalia-backdrop*"
   place-within-backdrop true
 }
 
