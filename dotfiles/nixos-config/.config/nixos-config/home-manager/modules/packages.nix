@@ -67,6 +67,7 @@
 
     # File managers
     yazi
+    mediainfo # for yazi plugin
     television
 
     # Menus
@@ -78,6 +79,7 @@
     playerctl
 
     # Shells
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
     noctalia-shell
     dms-shell
     ashell
@@ -93,9 +95,10 @@
     libsForQt5.qt5ct
     qt6Packages.qt6ct
     desktop-file-utils
+    gnome-tweaks
 
     # Sway tools
-    swaynotificationcenter
+    # swaynotificationcenter
     swayidle
     swayosd
     libnotify
@@ -132,7 +135,6 @@
     neovim
     emacs
     vscode
-    jetbrains.pycharm
 
     # Clipboard managers
     wtype
@@ -154,7 +156,6 @@
 
     # Video Editors
     kdePackages.kdenlive
-    ffmpeg
     v4l-utils
 
     # Nautilus
@@ -179,8 +180,7 @@
     libertinus
 
     # Music
-    spotify
-    #spicetify-cli
+    # spotify - installed via spicetify-nix
     amberol
     fum
     gapless
@@ -188,6 +188,7 @@
     # Videos
     vlc
     mpv
+    ffmpeg-full
 
     # System monitor
     btop
@@ -250,6 +251,15 @@
     # Tools
     showmethekey
 
+    # Polkits
+    polkit
+
+    # Thumbnails
+    # https://wiki.nixos.org/wiki/Thumbnails
+    ffmpegthumbnailer
+    gdk-pixbuf
+    libheif
+    libheif.out
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -258,4 +268,5 @@
 
   # https://wiki.nixos.org/wiki/Polkit
   services.polkit-gnome.enable = true;
+
 }

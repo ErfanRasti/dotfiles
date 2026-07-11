@@ -41,6 +41,11 @@
       # Optional but recommended to limit the size of your system closure.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    noctalia.url = "github:noctalia-dev/noctalia/cachix";
+
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+
     # nix-software-center.url = "github:snowfallorg/nix-software-center";
   };
 

@@ -1,7 +1,9 @@
-{
+{ inputs, ... }: {
   imports = [
-    ./packages.nix # Home packages, programs, unfree
-    ./themes.nix # Themes settings
-    ./desktop-entries.nix # Desktop entries
+    ./packages.nix
+    ./themes.nix
+    ./desktop-entries.nix
+    inputs.spicetify-nix.homeManagerModules.default
+    ./spicetify.nix
   ];
 }
