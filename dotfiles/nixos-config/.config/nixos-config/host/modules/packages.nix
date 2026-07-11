@@ -73,4 +73,5 @@
   # Newer kernel versions may need
   # virtualisation.waydroid.package = pkgs.waydroid-nftables;
 
+  environment.pathsToLink = [ "share/thumbnailers" ];
 }
