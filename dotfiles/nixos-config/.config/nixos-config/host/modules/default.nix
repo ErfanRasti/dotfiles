@@ -12,6 +12,7 @@
     ./users.nix # User accounts
     ./system.nix # System state version
     ./packages.nix # System packages, programs, unfree
+    ./theme.nix # Theme
     ./swap.nix # Swap partition
     ./power.nix # Poewr management
     ./fonts.nix # Font packages

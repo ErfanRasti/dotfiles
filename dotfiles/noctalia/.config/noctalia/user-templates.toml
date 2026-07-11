@@ -1,1 +1,172 @@
-../../../matugen/.config/matugen/config.toml
+[theme.templates]
+enable_builtin_templates = true
+enable_community_templates = true
+builtin_ids = []
+community_ids = []
+
+[theme.templates.custom_colors]
+red = { color = "#f13c40", blend = true }
+green = { color = "#41c257", blend = true }
+blue = { color = "#0e85f0", blend = true }
+mint = { color = "#07c2ac", blend = true }
+teal = { color = "#02bbc5", blend = true }
+cyan = { color = "#03b9db", blend = true }
+indigo = { color = "#5b55e6", blend = true }
+purple = { color = "#bd30d4", blend = true }
+pink = { color = "#ed3053", blend = true }
+yellow = { color = "#edc005", blend = true }
+orange = { color = "#fb8d2c", blend = true }
+brown = { color = "#a57d5a", blend = true }
+black = { color = "#000000", blend = true }
+white = { color = "#ffffff", blend = true }
+
+
+[theme.templates.user.niri]
+input_path = '~/.config/matugen/templates/niri-colors.kdl'
+output_path = '~/.config/niri/config/colors.kdl'
+
+[theme.templates.user.hyprland]
+input_path = '~/.config/matugen/templates/hyprland-colors.lua'
+output_path = '~/.config/hypr/config/colors.lua'
+post_hook = 'if pgrep -x hyprland;then hyprctl reload;fi'
+
+[theme.templates.user.hyprlock]
+input_path = '~/.config/matugen/templates/hyprland-colors.conf'
+output_path = '~/.config/hypr/config/colors.conf'
+
+
+# [theme.templates.user.wallpaper] # Blazing fast and beautiful
+# command = "hyprctl"
+# arguments = ["hyprpaper", "reload", ","]
+# set = false
+
+# [theme.templates.user.wallpaper] # Animated nad nice llok
+# command = "swww"
+# arguments = ["img", "--transition-type", "center"]
+# set = false
+
+[theme.templates.user.waybar]
+input_path = '~/.config/matugen/templates/colors.css'
+output_path = '~/.config/waybar/colors.css'
+# `post_hook` is not needed because waybar handles it using `reload_style_on_change`
+# post_hook = 'pkill waybar;setsid -f waybar >/dev/null 2>&1'
+
+[theme.templates.user.swaync]
+input_path = '~/.config/matugen/templates/colors.css'
+output_path = '~/.config/swaync/colors.css'
+post_hook = 'if pgrep -x swaync >/dev/null 2>&1;then swaync-client -rs;fi'
+
+[theme.templates.user.swayosd]
+input_path = '~/.config/matugen/templates/colors.css'
+output_path = '~/.config/swayosd/colors.css'
+post_hook = 'if pgrep -x swayosd-server >/dev/null 2>&1;then pkill swayosd-server;setsid -f swayosd-server >/dev/null 2>&1;fi'
+
+[theme.templates.user.rofi]
+input_path = '~/.config/matugen/templates/rofi-colors.rasi'
+output_path = '~/.config/rofi/settings/colors.rasi'
+
+[theme.templates.user.qt5ct]
+input_path = '~/.config/matugen/templates/qtct-colors.conf'
+output_path = '~/.config/qt5ct/colors/matugen.conf'
+
+[theme.templates.user.qt6ct]
+input_path = '~/.config/matugen/templates/qtct-colors.conf'
+output_path = '~/.config/qt6ct/colors/matugen.conf'
+
+[theme.templates.user.gtk3]
+input_path = '~/.config/matugen/templates/gtk-colors.css'
+output_path = '~/.config/gtk-3.0/colors.css'
+post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-{{mode}}'
+
+[theme.templates.user.gtk4]
+input_path = '~/.config/matugen/templates/gtk-colors.css'
+output_path = '~/.config/gtk-4.0/colors.css'
+post_hook = '~/.config/matugen/scripts/gtk_themes_reload.sh'
+
+# [theme.templates.user.kitty]
+# input_path = '~/.config/matugen/templates/kitty-colors.conf'
+# output_path = '~/.config/kitty/themes/matugen.conf'
+# post_hook = "sh -c 'kitty @ load-config'"
+# post_hook = "kitty +kitten themes --reload-in=all matugen"
+
+[theme.templates.user.opencode]
+input_path = '~/.config/matugen/templates/opencode-colors.json'
+output_path = '~/.config/opencode/themes/matugen.json'
+
+# [theme.templates.user.tmux]
+# input_path = '~/.config/matugen/templates/tmux-colors.conf'
+# output_path = '~/.config/tmux/matugen.conf'
+# post_hook = 'tmux source-file ~/.config/tmux/matugen.conf'
+
+[theme.templates.user.btop]
+input_path = '~/.config/matugen/templates/btop.theme'
+output_path = '~/.config/btop/themes/matugen.theme'
+
+[theme.templates.user.yazi]
+input_path = '~/.config/matugen/templates/yazi-theme.toml'
+output_path = '~/.config/yazi/theme.toml'
+
+[theme.templates.user.television]
+input_path = '~/.config/matugen/templates/television.toml'
+output_path = '~/.config/television/themes/matugen.toml'
+
+[theme.templates.user.zellij]
+input_path = '~/.config/matugen/templates/zellij-theme.kdl.tera'
+output_path = '~/.config/zellij/themes/matugen.kdl'
+# Add this line to get hot-reloading. Without it, the new theme will only
+# appear on next start
+post_hook = 'touch ~/.config/zellij/config.kdl'
+
+[theme.templates.user.zathura]
+input_path = '~/.config/matugen/templates/zathura-colors'
+output_path = '~/.config/zathura/zathurarc'
+
+[theme.templates.user.cava]
+input_path = '~/.config/matugen/templates/cava-colors.ini'
+output_path = '~/.config/cava/themes/matugen-theme'
+post_hook = "if pgrep -x cava >/dev/null; then pkill -USR1 cava; fi"
+
+[theme.templates.user.ashell]
+input_path = '~/.config/matugen/templates/ashell-colors.ini'
+output_path = '~/.config/ashell/config.toml'
+
+[theme.templates.user.ghostty]
+input_path = '~/.config/matugen/templates/ghostty'
+output_path = '~/.config/ghostty/themes/Matugen'
+# post_hook = 'pkill -SIGUSR2 ghostty'
+
+[theme.templates.user.micro]
+input_path = '~/.config/matugen/templates/micro.micro'
+output_path = '~/.config/micro/colorschemes/matugen.micro'
+
+[theme.templates.user.starship]
+input_path = '~/.config/matugen/templates/starship-colors.toml'
+output_path = '~/.config/starship.toml'
+
+[theme.templates.user.obs]
+input_path = '~/.config/matugen/templates/obs-colors.obt'
+output_path = '~/.config/obs-studio/themes/matugen.obt'
+
+[theme.templates.user.pywalfox]
+input_path = '~/.config/matugen/templates/pywalfox-colors.json'
+output_path = '~/.cache/wal/colors.json'
+post_hook = 'pywalfox update'
+
+[theme.templates.user.zed]
+input_path = '~/.config/matugen/templates/zed-colors.json'
+output_path = '~/.config/zed/themes/matugen.json'
+
+[theme.templates.user.spicetify]
+input_path = '~/.config/matugen/templates/spicetify.ini'
+output_path = '~/.config/spicetify/Themes/Sleek/matugen.ini'
+post_hook = 'spicetify watch -s 2>&1 | sed "/Reloaded Spotify/q"'
+
+[theme.templates.user.vicinae]
+input_path = '~/.config/matugen/templates/vicinae.ini'
+output_path = '~/.local/share/vicinae/themes/matugen.toml'
+post_hook = "if pgrep -x vicinae >/dev/null; then systemctl --user restart vicinae.service; fi"
+
+[theme.templates.user.mango]
+input_path = '~/.config/matugen/templates/mango.conf'
+output_path = '~/.config/mango/config/colors.conf'
+post_hook = 'mmsg -d reload_config'
