@@ -5,7 +5,7 @@
     ./kernel.nix # Kernel packages (needed by nvidia)
     ./inputs.nix # Touchpad etc (lowest priority)
     ./networks.nix # Networking, hostname, firewall
-    ./nvidia.nix # GPU drivers (depends on boot.kernelPackages)
+    ./graphics.nix # GPU drivers (depends on boot.kernelPackages)
     ./services.nix # Desktop, display manager, xserver
     ./audio.nix # Audio hardware
     ./security.nix # Sudo, security policies
