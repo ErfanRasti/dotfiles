@@ -7,10 +7,10 @@ CONFIG_AUTOSTART_FILE="$HOME/.config/niri/config/autostarts.kdl"
 if grep -q '^include "config/noctalia.kdl"' "$CONFIG_FILE"; then
   pkill -x dms
   pkill -x dsearch
-  if pgrep -f "noctalia-shell"; then
-    pkill -f "noctalia-shell"
+  if pgrep -f "noctalia"; then
+    pkill -f "noctalia"
   fi
-  noctalia-shell &
+  noctalia &
   disown
 fi
 
