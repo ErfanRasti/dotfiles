@@ -247,6 +247,14 @@ window-rule {
     }
 }
 
+window-rule {
+  match app-id="com.vixalien.sticky"
+  open-floating true
+  default-column-width { fixed 400; }
+  default-window-height { fixed 400; }
+  default-floating-position x=2 y=2 relative-to="top-right"
+}
+
 // window-rule {
 //     match is-active=true is-focused=false
 //     baba-is-float true
@@ -267,4 +275,5 @@ layer-rule {
         blur true
     }
 }
+
 
