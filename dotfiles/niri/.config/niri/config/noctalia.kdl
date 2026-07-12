@@ -23,7 +23,7 @@ binds {
     Mod+S hotkey-overlay-title="Toggle control center" { spawn-sh "noctalia msg panel-toggle control-center"; }
     Mod+V hotkey-overlay-title="Open clipboard" { spawn-sh "noctalia msg panel-toggle clipboard"; }
     Mod+B hotkey-overlay-title="Toggle dock" { spawn-sh "noctalia msg dock-toggle"; }
-    Mod+Period hotkey-overlay-title="Open emoji picker" { spawn "noctalia-shell" "ipc" "call" "launcher" "emoji"; }
+    Mod+Period hotkey-overlay-title="Open emoji picker" { spawn-sh "noctalia msg panel-toggle launcher /emo"; }
     Mod+ALT+Period hotkey-overlay-title="Toggle kaomoji" { spawn-sh "noctalia msg panel-toggle plugin:kaomoji"; }
     Mod+Slash hotkey-overlay-title="Toggle keybind cheatsheet" { spawn-sh "noctalia msg panel-toggle plugin:keybind-cheatsheet"; }
     Mod+Ctrl+Alt+Shift+K hotkey-overlay-title="Toggle show keys" { spawn-sh "noctalia msg panel-toggle plugin:show-keys"; }

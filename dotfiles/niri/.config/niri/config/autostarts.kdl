@@ -4,16 +4,15 @@
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-sh-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-// spawn-sh-at-startup "systemctl --user start hyprpolkitagent.service"
-// spawn-sh-at-startup "systemctl --user start vicinae.service"
+//spawn-sh-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+//spawn-sh-at-startup "systemctl --user start vicinae.service"
 spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
 spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
 spawn-sh-at-startup "echo 'Xft.dpi: 125' | xrdb -merge" // Set scaling for xorg apps
-spawn-sh-at-startup "wl-clip-persist --clipboard regular"
+spawn-sh-at-startup "wl-clip-persist --clipboard regular" // Keep Wayland clipboard even after programs close
 spawn-at-startup "~/.config/niri/scripts/swayidle_runner.sh"
 spawn-at-startup "~/scripts/battery_watcher.sh"
 spawn-sh-at-startup "~/scripts/system_resume.sh restore"
 
-spawn-sh-at-startup "paplay /usr/share/sounds/ocean/stereo/desktop-login.oga"
-spawn-sh-at-startup "systemctl --user stop swaync.service;pkill swaync"
+spawn-sh-at-startup "paplay ~/.nix-profile/share/sounds/ocean/stereo/desktop-login.oga"
+//spawn-sh-at-startup "systemctl --user stop swaync.service;pkill swaync"
