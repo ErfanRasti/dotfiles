@@ -80,4 +80,6 @@
   #   openFirewall = true;
   # };
 
+  # polkit status
+  security.polkit.enable = true;
 }
