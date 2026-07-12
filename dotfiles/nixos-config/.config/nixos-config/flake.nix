@@ -46,6 +46,8 @@
 
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
 
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+
     # nix-software-center.url = "github:snowfallorg/nix-software-center";
   };
 
