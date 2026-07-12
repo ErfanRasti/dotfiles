@@ -73,6 +73,7 @@
     # Menus
     vicinae
     (rofi.override { plugins = [ rofi-calc ]; })
+    rofimoji
 
     # Controllers
     brightnessctl
@@ -168,16 +169,23 @@
     nix-prefetch-git
 
     # Fonts
+    font-awesome
     nerd-fonts.caskaydia-cove
     nerd-fonts.fira-code
+    nerd-fonts.symbols-only
     noto-fonts
-    vazirmatn
     noto-fonts-cjk-sans
     noto-fonts-color-emoji
     liberation_ttf
     fira-code
     fira-code-symbols
     libertinus
+
+    vazirmatn
+    ir-standard-fonts
+    behdad-fonts
+    gandom-fonts
+    nahid-fonts
 
     # Music
     # spotify - installed via spicetify-nix
@@ -186,7 +194,6 @@
     gapless
 
     # Videos
-    vlc
     mpv
     ffmpeg-full
 
@@ -197,7 +204,7 @@
     mission-center
 
     # Stores
-    flatpak # use it with flatpak --user ...
+    # flatpak # use it with flatpak --user ...
     gnome-software
     # inputs.nix-software-center.packages.${stdenv.hostPlatform.system}.nix-software-center
 
@@ -219,6 +226,7 @@
 
     # Icons & Cursors
     bibata-cursors
+    papirus-icon-theme
     flat-remix-icon-theme
 
     # Offices
@@ -252,7 +260,8 @@
     showmethekey
 
     # Polkits
-    polkit
+    # shouldn't be here and should be activated using host configs to create /run/wrappers/bin/pkexec
+    #polkit
 
     # Thumbnails
     # https://wiki.nixos.org/wiki/Thumbnails
@@ -260,6 +269,17 @@
     gdk-pixbuf
     libheif
     libheif.out
+
+    # Sounds
+    sound-theme-freedesktop
+    kdePackages.ocean-sound-theme # ocean sound theme
+
+    # Download managers
+    yt-dlp
+
+    # note apps
+    sticky-notes
+
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
