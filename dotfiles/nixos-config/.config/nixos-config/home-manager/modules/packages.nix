@@ -287,6 +287,6 @@
   # programs.mtr.enable = true;
 
   # https://wiki.nixos.org/wiki/Polkit
-  services.polkit-gnome.enable = true;
+  # services.polkit-gnome.enable = true;
 
 }

@@ -28,10 +28,8 @@
     wget
     sbctl
     wl-clipboard # for waydroid copy and paste
+    wl-clip-persist # Keep Wayland clipboard even after programs close
 
-    # Sounds
-    sound-theme-freedesktop
-    kdePackages.ocean-sound-theme # ocean sound theme
   ];
 
   # To check the current nix-ld modules: l /run/current-system/sw/share/nix-ld/lib/
