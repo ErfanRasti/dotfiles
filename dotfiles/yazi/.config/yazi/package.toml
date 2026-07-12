@@ -34,11 +34,6 @@ rev = "7ca66b4"
 hash = "4ee57085277d616acfa0ef1fef37dc00"
 
 [[plugin.deps]]
-use = "boydaihungst/mediainfo"
-rev = "1099409"
-hash = "77e78e16578e8f5a37475c04d8324619"
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:mount"
 rev = "eaf6920"
 hash = "4fccaaf10c36dc2466e2438a386ff017"
@@ -57,6 +52,11 @@ hash = "691eaf677ba5eaecc978972ab8177157"
 use = "TD-Sky/sudo"
 rev = "afd61ce"
 hash = "d390cd2d8b996939a695411b446f58d0"
+
+[[plugin.deps]]
+use = "boydaihungst/mediainfo"
+rev = "a6d30a1"
+hash = "7d4dd1afcb7ecbd3609c29a82d6dbc5c"
 
 [flavor]
 deps = []
