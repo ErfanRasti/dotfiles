@@ -102,9 +102,9 @@ output_path = '~/.config/opencode/themes/matugen.json'
 input_path = '~/.config/matugen/templates/btop.theme'
 output_path = '~/.config/btop/themes/matugen.theme'
 
-[theme.templates.user.yazi]
-input_path = '~/.config/matugen/templates/yazi-theme.toml'
-output_path = '~/.config/yazi/theme.toml'
+# [theme.templates.user.yazi]
+# input_path = '~/.config/matugen/templates/yazi-theme.toml'
+# output_path = '~/.config/yazi/theme.toml'
 
 [theme.templates.user.television]
 input_path = '~/.config/matugen/templates/television.toml'

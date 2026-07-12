@@ -204,7 +204,8 @@
     mission-center
 
     # Stores
-    # flatpak # use it with flatpak --user ...
+    flatpak # use it with flatpak --user ...
+
     gnome-software
     # inputs.nix-software-center.packages.${stdenv.hostPlatform.system}.nix-software-center
 
@@ -289,4 +290,11 @@
   # https://wiki.nixos.org/wiki/Polkit
   # services.polkit-gnome.enable = true;
 
+  services.flatpak = {
+    packages = [
+      "com.dec05eba.gpu_screen_recorder"
+      "org.videolan.VLC"
+      "org.gnome.Snapshot"
+    ];
+  };
 }
