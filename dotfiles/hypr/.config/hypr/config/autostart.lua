@@ -75,7 +75,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("~/scripts/battery_watcher.sh")
 
 	-- Welcome sound
-	hl.exec_cmd("paplay /usr/share/sounds/ocean/stereo/desktop-login.oga")
+	hl.exec_cmd("paplay ~/.nix-profile/share/sounds/ocean/stereo/desktop-login.oga")
 
 	-- KDEConnect
 	hl.exec_cmd("/usr/bin/kdeconnectd &")
@@ -83,11 +83,11 @@ hl.on("hyprland.start", function()
 	-- ydotool
 	hl.exec_cmd("systemctl --user start ydotoold.service")
 
-	-- hl.exec_cmd("paplay /usr/share/sounds/ocean/stereo/completion-rotation.oga")
+	-- hl.exec_cmd("paplay ~/.nix-profile/share/sounds/ocean/stereo/completion-rotation.oga")
 end)
 
 hl.on("hyprland.shutdown", function()
 	hl.exec_cmd('kill -9 "$(cat /tmp/.hyprland-systemd-inhibit)"')
 	hl.exec_cmd("~/scripts/system_resume.sh save")
-	hl.exec_cmd("paplay /usr/share/sounds/ocean/stereo/desktop-logout.oga")
+	hl.exec_cmd("paplay ~/.nix-profile/share/sounds/ocean/stereo/desktop-logout.oga")
 end)

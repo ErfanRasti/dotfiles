@@ -43,14 +43,14 @@ hl.bind(
 hl.bind(
 	"XF86AudioRaiseVolume",
 	hl.dsp.exec_cmd(
-		'sh -lc "noctalia-shell ipc call volume increase; paplay /usr/share/sounds/ocean/stereo/audio-volume-change.oga"'
+		'sh -lc "noctalia-shell ipc call volume increase; paplay ~/.nix-profile/share/sounds/ocean/stereo/audio-volume-change.oga"'
 	),
 	{ locked = true, repeating = true, description = "[SHELL:noctalia] Increase volume with feedback sound" }
 )
 hl.bind(
 	"XF86AudioLowerVolume",
 	hl.dsp.exec_cmd(
-		'sh -lc "noctalia-shell ipc call volume decrease; paplay /usr/share/sounds/ocean/stereo/audio-volume-change.oga"'
+		'sh -lc "noctalia-shell ipc call volume decrease; paplay ~/.nix-profile/share/sounds/ocean/stereo/audio-volume-change.oga"'
 	),
 	{ locked = true, repeating = true, description = "[SHELL:noctalia] Decrease volume with feedback sound" }
 )
