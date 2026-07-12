@@ -3,9 +3,9 @@ config_version = 1
 [audio]
 enable_overdrive = true
 enable_sounds = true
-notification_sound = "/run/current-system/sw/share/sounds/freedesktop/stereo/message.oga"
-sound_volume = 100
-volume_change_sound = "/run/current-system/sw/share/sounds/ocean/stereo/audio-volume-change.oga"
+notification_sound = "~/.nix-profile/share/sounds/freedesktop/stereo/message.oga"
+sound_volume = 1.0
+volume_change_sound = "~/.nix-profile/share/sounds/ocean/stereo/audio-volume-change.oga"
 
 [backdrop]
 enabled = true
@@ -30,12 +30,12 @@ end = [
 ]
 font_weight = 700
 icon_color = "tertiary"
-margin_ends = 0
+margin_ends = 250
 padding = 2
-panel_overlap = 2
+panel_overlap = 0
 scale = 0.9
 start = ["session", "workspaces", "active_window"]
-thickness = 22
+thickness = 24
 widget_spacing = 2
 
 [[bar.default.capsule_group]]
@@ -85,6 +85,14 @@ id = "g6"
 members = ["clock", "spacer_2", "weather"]
 opacity = 0.6
 padding = 5.0
+
+[[bar.default.capsule_group]]
+enabled = true
+fill = "surface_variant"
+id = "g7"
+members = ["media"]
+opacity = 0.6
+padding = 4.0
 
 [brightness]
 sync_all_monitors = true
@@ -337,9 +345,6 @@ mode = "dark"
 source = "wallpaper"
 wallpaper_scheme = "m3-tonal-spot"
 
-[theme.templates]
-community_ids = ["telegram"]
-
 [wallpaper]
 directory = "~/wallpapers"
 directory_dark = "~/wallpapers"
@@ -352,11 +357,14 @@ max_length = 120
 min_length = 0
 title_scroll = "on_hover"
 
+[widget.battery]
+display_mode = "graphic"
+
 [widget.clock]
-format = "%H:%m:%S | %a, %b %d"
+format = "%H:%M:%S | %a, %b %d"
 
 [widget.input_volume]
-show_label = false
+show_label = true
 
 [widget.keyboard_layout.custom_labels]
 "Persian (Windows)" = "PER"
@@ -366,13 +374,13 @@ hide_when_off = true
 
 [widget.media]
 hide_when_no_media = true
-title_scroll = "always"
+title_scroll = "on_hover"
 
 [widget.network]
 show_label = false
 
 [widget.output_volume]
-show_label = false
+show_label = true
 
 [widget.privacy]
 active_color = "secondary"
@@ -401,4 +409,22 @@ match_adjacent_spacing = true
 [widget.workspaces]
 capsule = true
 display = "name"
-minimal = true
+minimal = false
+
+[[control_center.shortcuts]]
+type = "wifi"
+
+[[control_center.shortcuts]]
+type = "bluetooth"
+
+[[control_center.shortcuts]]
+type = "caffeine"
+
+[[control_center.shortcuts]]
+type = "nightlight"
+
+[[control_center.shortcuts]]
+type = "notification"
+
+[[control_center.shortcuts]]
+type = "dark_mode"

@@ -2,7 +2,7 @@
 enable_builtin_templates = true
 enable_community_templates = true
 builtin_ids = []
-community_ids = []
+community_ids = ["telegram"]
 
 [theme.templates.custom_colors]
 red = { color = "#f13c40", blend = true }
