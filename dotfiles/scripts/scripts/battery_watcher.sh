@@ -105,7 +105,7 @@ check_and_act() {
       if ((notified_charge == 0)); then
         notify low "$ICON_PLUG  Charging" "$ICON_BOLT Now at ${pct}%." \
           --hint=boolean:suppress-sound:true -h int:transient:1
-        paplay /usr/share/sounds/freedesktop/stereo/power-plug.oga
+        paplay ~/.nix-profile/share/sounds/freedesktop/stereo/power-plug.oga
 
         notified_charge=1
         notified_discharge=0
@@ -124,7 +124,7 @@ check_and_act() {
       if ((notified_discharge == 0)); then
         notify low "$(percent_to_icon "$ipct")  Discharging" "Battery at ${pct}%." \
           --hint=boolean:suppress-sound:true -h int:transient:1
-        paplay /usr/share/sounds/freedesktop/stereo/power-unplug.oga
+        paplay ~/.nix-profile/share/sounds/freedesktop/stereo/power-unplug.oga
 
         notified_discharge=1
         notified_charge=0
@@ -138,7 +138,7 @@ check_and_act() {
   if [[ "$state" == "charging" && ipct -ge DISCONNECT_AT && notified_disconnect -eq 0 ]]; then
     notify normal "$ICON_PLUG  Battery high (${pct}%)" \
       "Consider unplugging the charger." --hint=boolean:suppress-sound:true
-    paplay /usr/share/sounds/ocean/stereo/dialog-warning.oga
+    paplay ~/.nix-profile/share/sounds/ocean/stereo/dialog-warning.oga
 
     notified_disconnect=1
   fi
@@ -176,17 +176,17 @@ check_and_act() {
       low)
         notify "$urgency" "$(percent_to_icon "$ipct")  Low battery (${pct}%)" \
           "Connect power soon." --hint=boolean:suppress-sound:true
-        paplay /usr/share/sounds/ocean/stereo/dialog-warning.oga
+        paplay ~/.nix-profile/share/sounds/ocean/stereo/dialog-warning.oga
         ;;
       critical)
         notify "$urgency" "$ICON_WARN  Critical battery (${pct}%)" \
           "Please plug in now." --hint=boolean:suppress-sound:true
-        paplay /usr/share/sounds/ocean/stereo/dialog-error.oga
+        paplay ~/.nix-profile/share/sounds/ocean/stereo/dialog-error.oga
         ;;
       danger)
         notify "$urgency" "$ICON_WARN  ${pct}% Battery — DANGER" \
           "System will suspend at ${SUSPEND_AT}%." --hint=boolean:suppress-sound:true
-        paplay /usr/share/sounds/ocean/stereo/dialog-error-serious.oga
+        paplay ~/.nix-profile/share/sounds/ocean/stereo/dialog-error-serious.oga
         ;;
       ok)
         # Crossing back upward while still discharging: optionally notify
@@ -208,14 +208,14 @@ check_and_act() {
 }
 main() {
 
+  SCRIPT_NAME="$(basename "$0")"
+
   if pgrep -f "$SCRIPT_NAME" | grep -qv "^$$\$"; then
     # pgrep -f — finds PIDs whose full command line contains battery_watcher.sh
     # grep -qv "^$$\$" — excludes the current script's PID ($$)
     # If any other PIDs remain (another instance is running), it exits immediately
     exit 0
   fi
-
-  SCRIPT_NAME="$(basename "$0")"
 
   # ---- Config (edit if you like) ----
   LOW=30

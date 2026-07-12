@@ -554,14 +554,14 @@ hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t -sw"), { descriptio
 hl.bind(
 	"XF86AudioRaiseVolume",
 	hl.dsp.exec_cmd(
-		"pactl set-sink-mute @DEFAULT_SINK@ 0;swayosd-client --output-volume raise;paplay /usr/share/sounds/ocean/stereo/audio-volume-change.oga"
+		"pactl set-sink-mute @DEFAULT_SINK@ 0;swayosd-client --output-volume raise;paplay ~/.nix-profile/share/sounds/ocean/stereo/audio-volume-change.oga"
 	),
 	{ locked = true, repeating = true, description = "Raise the volume" }
 )
 hl.bind(
 	"XF86AudioLowerVolume",
 	hl.dsp.exec_cmd(
-		"swayosd-client --output-volume lower;paplay /usr/share/sounds/ocean/stereo/audio-volume-change.oga"
+		"swayosd-client --output-volume lower;paplay ~/.nix-profile/share/sounds/ocean/stereo/audio-volume-change.oga"
 	),
 	{ locked = true, repeating = true, description = "Lower the volume" }
 )
@@ -589,7 +589,7 @@ hl.bind(
 -- Capslock key
 hl.bind(
 	"CAPS + Caps_Lock",
-	hl.dsp.exec_cmd("swayosd-client --caps-lock;paplay /usr/share/sounds/freedesktop/stereo/dialog-warning.oga"),
+	hl.dsp.exec_cmd("swayosd-client --caps-lock;paplay ~/.nix-profile/share/sounds/freedesktop/stereo/dialog-warning.oga"),
 	{ description = "Caps-Lock" }
 )
 hl.bind("MOD2 + Num_Lock", hl.dsp.exec_cmd("swayosd-client --num-lock"), { description = "Num-Lock" })
