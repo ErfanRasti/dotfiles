@@ -10,8 +10,14 @@ if grep -q '^include "config/noctalia.kdl"' "$CONFIG_FILE"; then
   if pgrep -f "noctalia"; then
     pkill -f "noctalia"
   fi
+  # noctalia has its own polkit
+  systemctl --user stop polkit-gnome.service
+
   noctalia &
   disown
+else
+  # polkit-gnome restart
+  systemctl --user restart polkit-gnome.service
 fi
 
 # Restart dms
@@ -36,7 +42,6 @@ fi
 disown
 
 # Restart gnome-polkit
-systemctl --user restart polkit-gnome.service
 # if grep -q '^spawn-sh-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"' "$CONFIG_AUTOSTART_FILE"; then
 #   if pgrep -f 'polkit-gnome-authentication-agent-1'; then
 #     pkill -f 'polkit-gnome-authentication-agent-1'
@@ -44,8 +49,3 @@ systemctl --user restart polkit-gnome.service
 #
 #   sh -c "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & disown"
 # fi
-
-# Restart hyprpolkit
-if grep -q '^spawn-sh-at-startup "systemctl --user start hyprpolkitagent.service"' "$CONFIG_AUTOSTART_FILE"; then
-  systemctl --user restart hyprpolkitagent.service
-fi

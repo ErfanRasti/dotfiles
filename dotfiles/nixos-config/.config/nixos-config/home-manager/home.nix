@@ -3,11 +3,13 @@ flake-overlays:
   stateVersion,
   username,
   pkgs,
+  inputs,
   ...
 }:
 {
   imports = [
     ./modules
+    inputs.spicetify-nix.homeManagerModules.default
   ];
 
   home = {
