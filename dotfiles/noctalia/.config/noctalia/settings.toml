@@ -30,7 +30,7 @@ end = [
 ]
 font_weight = 700
 icon_color = "tertiary"
-margin_ends = 250
+margin_ends = 0
 padding = 2
 panel_overlap = 0
 scale = 0.9
@@ -164,9 +164,9 @@ hide_when_no_media = true
 [dock]
 auto_hide = true
 background_opacity = 0.6
-cross_axis_padding = 5
+cross_axis_padding = 2
 enabled = true
-icon_size = 30
+icon_size = 36
 item_spacing = 0
 launcher_icon = "apps"
 launcher_position = "end"

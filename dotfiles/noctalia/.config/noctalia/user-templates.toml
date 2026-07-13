@@ -83,28 +83,28 @@ input_path = '~/.config/matugen/templates/gtk-colors.css'
 output_path = '~/.config/gtk-4.0/colors.css'
 post_hook = '~/.config/matugen/scripts/gtk_themes_reload.sh'
 
-# [theme.templates.user.kitty]
-# input_path = '~/.config/matugen/templates/kitty-colors.conf'
-# output_path = '~/.config/kitty/themes/matugen.conf'
+[theme.templates.user.kitty]
+input_path = '~/.config/matugen/templates/kitty-colors.conf'
+output_path = '~/.config/kitty/themes/matugen.conf'
 # post_hook = "sh -c 'kitty @ load-config'"
-# post_hook = "kitty +kitten themes --reload-in=all matugen"
+post_hook = "kitty +kitten themes --reload-in=all matugen"
 
 [theme.templates.user.opencode]
 input_path = '~/.config/matugen/templates/opencode-colors.json'
 output_path = '~/.config/opencode/themes/matugen.json'
 
-# [theme.templates.user.tmux]
-# input_path = '~/.config/matugen/templates/tmux-colors.conf'
-# output_path = '~/.config/tmux/matugen.conf'
-# post_hook = 'tmux source-file ~/.config/tmux/matugen.conf'
+[theme.templates.user.tmux]
+input_path = '~/.config/matugen/templates/tmux-colors.conf'
+output_path = '~/.config/tmux/matugen.conf'
+post_hook = 'tmux source-file ~/.config/tmux/matugen.conf'
 
 [theme.templates.user.btop]
 input_path = '~/.config/matugen/templates/btop.theme'
 output_path = '~/.config/btop/themes/matugen.theme'
 
-# [theme.templates.user.yazi]
-# input_path = '~/.config/matugen/templates/yazi-theme.toml'
-# output_path = '~/.config/yazi/theme.toml'
+[theme.templates.user.yazi]
+input_path = '~/.config/matugen/templates/yazi-theme.toml'
+output_path = '~/.config/yazi/theme.toml'
 
 [theme.templates.user.television]
 input_path = '~/.config/matugen/templates/television.toml'
