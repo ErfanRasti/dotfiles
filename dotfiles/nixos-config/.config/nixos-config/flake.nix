@@ -48,6 +48,11 @@
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
+    gsr-ui-nix = {
+      url = "github:rPlakama/gsr-ui-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # nix-software-center.url = "github:snowfallorg/nix-software-center";
   };
 
@@ -81,6 +86,7 @@
 
         modules = [
           ./host/configuration.nix
+          inputs.gsr-ui-nix.nixosModules.default
           inputs.lanzaboote.nixosModules.lanzaboote
 
         ];

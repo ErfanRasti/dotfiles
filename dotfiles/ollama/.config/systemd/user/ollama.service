@@ -10,7 +10,7 @@ After=network.target network-online.target
 Environment="OLLAMA_MODELS=%h/.ollama/models"
 Environment="HOME=%h"
 
-ExecStart=/usr/bin/ollama serve
+ExecStart=%h/.nix-profile/bin/ollama serve
 Restart=on-failure
 RestartSec=3
 RestartPreventExitStatus=1
