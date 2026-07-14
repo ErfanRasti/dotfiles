@@ -21,7 +21,8 @@ color = "primary"
 contact_shadow = true
 end = [
   "tray",
-  "group:g3",
+  "lock_keys",
+  "keyboard_layout",
   "group:g2",
   "group:g4",
   "group:g1",
@@ -51,14 +52,6 @@ enabled = true
 fill = "surface_variant"
 id = "g2"
 members = ["cpu", "spacer_4", "temp", "spacer_5", "ram"]
-opacity = 0.6
-padding = 4.0
-
-[[bar.default.capsule_group]]
-enabled = true
-fill = "surface_variant"
-id = "g3"
-members = ["lock_keys", "spacer_3", "keyboard_layout"]
 opacity = 0.6
 padding = 4.0
 
@@ -181,6 +174,7 @@ pinned = [
   "kitty",
   "spotify",
   "telegram",
+  "microsoft-edge",
 ]
 reserve_space = false
 show_dots = true
@@ -387,10 +381,6 @@ active_color = "secondary"
 hide_inactive = true
 
 [widget.spacer_2]
-length = 10
-type = "spacer"
-
-[widget.spacer_3]
 length = 10
 type = "spacer"
 

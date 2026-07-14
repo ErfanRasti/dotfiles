@@ -81,13 +81,14 @@ post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings s
 [theme.templates.user.gtk4]
 input_path = '~/.config/matugen/templates/gtk-colors.css'
 output_path = '~/.config/gtk-4.0/colors.css'
-post_hook = '~/.config/matugen/scripts/gtk_themes_reload.sh'
+# post_hook = 'gsettings set org.gnome.desktop.interface color-scheme prefer-{{mode}};~/.config/matugen/scripts/gtk_themes_reload.sh'
+post_hook = 'gsettings set org.gnome.desktop.interface color-scheme prefer-{{mode}}'
 
-[theme.templates.user.kitty]
-input_path = '~/.config/matugen/templates/kitty-colors.conf'
-output_path = '~/.config/kitty/themes/matugen.conf'
-# post_hook = "sh -c 'kitty @ load-config'"
-post_hook = "kitty +kitten themes --reload-in=all matugen"
+# [theme.templates.user.kitty]
+# input_path = '~/.config/matugen/templates/kitty-colors.conf'
+# output_path = '~/.config/kitty/themes/matugen.conf'
+# # post_hook = "sh -c 'kitty @ load-config'"
+# post_hook = "kitty +kitten themes --reload-in=all matugen"
 
 [theme.templates.user.opencode]
 input_path = '~/.config/matugen/templates/opencode-colors.json'
