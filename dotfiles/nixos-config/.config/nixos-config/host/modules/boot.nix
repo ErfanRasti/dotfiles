@@ -20,6 +20,11 @@
       "quiet" # reduces kernel log verbosity (equivalent to loglevel=3).
       "rd.udev.log_level=3" # limits udev (device manager) messages in the initrd to errors only.
       "rd.systemd.show_status=auto" # shows systemd status in initrd only on slow/broken consoles (suppresses the usual boot splash output).
+      "rd.systemd.device_timeout=5" # reduce device probe timeout from 90s to 5s
+    ];
+    blacklistedKernelModules = [
+      "serial8250" # no serial ports on this laptop, saves ~30s of device probing
+      "iTCO_wdt" # Intel watchdog not needed
     ];
   };
 
