@@ -59,8 +59,8 @@
     # NO_PROXY = builtins.getEnv "NO_PROXY";
 
     # Explicit mentioning
-    http_proxy = "http://127.0.0.1:22222";
-    https_proxy = "http://127.0.0.1:22222";
+    # http_proxy = "http://127.0.0.1:22222";
+    # https_proxy = "http://127.0.0.1:22222";
 
   };
   # networking.proxy.default = builtins.getEnv "http_proxy";

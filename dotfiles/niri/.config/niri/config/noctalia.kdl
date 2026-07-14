@@ -16,7 +16,7 @@ binds {
     XF86MonBrightnessDown allow-when-locked=true hotkey-overlay-title="Brightness down" { spawn-sh "noctalia msg brightness-down"; }
 
 
-    Mod+N hotkey-overlay-title="Toggle notification history" { spawn-sh "noctalia msg notification-dnd-toggle";}
+    Mod+N hotkey-overlay-title="Toggle notification history" { spawn-sh "noctalia msg panel-toggle control-center notifications";}
     Mod+Alt+N hotkey-overlay-title="Toggle DND" { spawn-sh "noctalia msg notification-dnd-toggle"; }
     Mod+Alt+W hotkey-overlay-title="Toggle wallpaper" { spawn-sh "noctalia msg panel-toggle wallpaper";}
     Mod+Escape hotkey-overlay-title="Lock screen" { spawn-sh "noctalia msg session lock";}
