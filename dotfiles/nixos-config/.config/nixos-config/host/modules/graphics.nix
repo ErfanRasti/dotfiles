@@ -29,6 +29,7 @@
 
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "iHD"; # Prefer the modern iHD backend
+    __EGL_VENDOR_LIBRARY_FILENAMES = "/run/opengl-driver/share/glvnd/egl_vendor.d/50_mesa.json"; # prevent unnecessary processes under nvidia-smi
     # VDPAU_DRIVER = "va_gl";      # Only if using libvdpau-va-gl
   };
 
@@ -125,5 +126,4 @@
       echo "INFO: To use different bus IDs, set nvidiaBusId and intelBusId parameters"
       echo "INFO: Find your bus IDs by running: lspci | grep -E 'VGA|3D'"
     '';
-
 }
