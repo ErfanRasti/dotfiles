@@ -195,6 +195,7 @@
 
     # Videos
     mpv
+    vlc
     ffmpeg-full
 
     # System monitor
@@ -280,7 +281,6 @@
 
     # note apps
     sticky-notes
-
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -291,10 +291,29 @@
   # services.polkit-gnome.enable = true;
 
   services.flatpak = {
+    enable = true;
     packages = [
       "org.videolan.VLC"
       "org.gnome.Snapshot"
+      "com.github.tchx84.Flatseal"
+      "se.sjoerd.Graphs"
     ];
+    overrides = {
+      global = {
+        Context = {
+          filesystems = [
+            "xdg-config/gtk-2.0:ro"
+            "xdg-config/gtk-3.0:ro"
+            "xdg-config/gtk-4.0:ro"
+            "~/.gtkrc-2.0:ro"
+            "xdg-config/qt5ct:ro"
+            "xdg-config/qt6ct:ro"
+          ];
+        };
+        Environment = {
+          QT_QPA_PLATFORMTHEME = "qt6ct";
+        };
+      };
+    };
   };
-
 }

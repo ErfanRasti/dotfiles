@@ -79,7 +79,8 @@ post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings s
 [templates.gtk4]
 input_path = '~/.config/matugen/templates/gtk-colors.css'
 output_path = '~/.config/gtk-4.0/colors.css'
-post_hook = '~/.config/matugen/scripts/gtk_themes_reload.sh'
+# post_hook = 'gsettings set org.gnome.desktop.interface color-scheme prefer-{{mode}};~/.config/matugen/scripts/gtk_themes_reload.sh'
+post_hook = 'gsettings set org.gnome.desktop.interface color-scheme prefer-{{mode}}'
 
 # [templates.kitty]
 # input_path = '~/.config/matugen/templates/kitty-colors.conf'
@@ -168,3 +169,4 @@ post_hook = "if pgrep -x vicinae >/dev/null; then systemctl --user restart vicin
 input_path = '~/.config/matugen/templates/mango.conf'
 output_path = '~/.config/mango/config/colors.conf'
 post_hook = 'mmsg -d reload_config'
+
