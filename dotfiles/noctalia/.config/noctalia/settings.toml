@@ -8,15 +8,21 @@ sound_volume = 1.0
 volume_change_sound = "~/.nix-profile/share/sounds/ocean/stereo/audio-volume-change.oga"
 
 [backdrop]
-enabled = true
 
+enabled = true
 [bar.default]
 background_opacity = 0.5
 capsule = true
 capsule_opacity = 0.6
 capsule_padding = 4.0
 capsule_thickness = 0.85
-center = ["notifications", "media", "group:g6", "power_profile"]
+center = [
+  "notifications",
+  "media",
+  "group:g6",
+  "audio_visualizer",
+  "power_profile",
+]
 color = "primary"
 contact_shadow = true
 end = [
@@ -103,6 +109,10 @@ widget_order = [
   "desktop-widget-0000000000000002",
   "desktop-widget-0000000000000003",
   "desktop-widget-0000000000000004",
+  "desktop-widget-0000000000000005",
+  "desktop-widget-0000000000000006",
+  "desktop-widget-0000000000000007",
+  "desktop-widget-0000000000000008",
 ]
 
 [desktop_widgets.grid]
@@ -111,48 +121,101 @@ major_interval = 4
 visible = true
 
 [desktop_widgets.widget.desktop-widget-0000000000000001]
-box_height = 96.0
-box_width = 176.0
-cx = 168.0
-cy = 156.0
+box_height = 100.0
+box_width = 200.0
+cx = 160.0
+cy = 160.0
 output = "eDP-1"
 rotation = 0.0
 type = "clock"
 
 [desktop_widgets.widget.desktop-widget-0000000000000002]
-box_height = 96.0
-box_width = 192.0
-cx = 368.0
-cy = 156.0
+box_height = 40.0
+box_width = 200.0
+cx = 160.0
+cy = 235.0
+output = "eDP-1"
+rotation = 0.0
+type = "clock"
+
+[desktop_widgets.widget.desktop-widget-0000000000000002.settings]
+format = "{:%a, %b %d}"
+
+
+[desktop_widgets.widget.desktop-widget-0000000000000003]
+box_height = 100.0
+box_width = 200.0
+cx = 370.0
+cy = 160.0
 output = "eDP-1"
 rotation = 0.0
 type = "weather"
 
-[desktop_widgets.widget.desktop-widget-0000000000000003]
-box_height = 0.0
-box_width = 0.0
-cx = 1888.0
-cy = 1166.0
-output = "eDP-1"
-rotation = 0.0
-type = "sysmon"
-
-[desktop_widgets.widget.desktop-widget-0000000000000003.settings]
-display = "graph"
-stat = "cpu_usage"
-stat2 = "cpu_temp"
-
 [desktop_widgets.widget.desktop-widget-0000000000000004]
-box_height = 112.0
-box_width = 320.0
-cx = 224.0
-cy = 1152.0
+box_height = 150.0
+box_width = 300.0
+cx = 200.0
+cy = 1120.0
 output = "eDP-1"
 rotation = 0.0
 type = "media_player"
 
 [desktop_widgets.widget.desktop-widget-0000000000000004.settings]
 hide_when_no_media = true
+
+[desktop_widgets.widget.desktop-widget-0000000000000005]
+box_height = 120.0
+box_width = 200.0
+cx = 1900.0
+cy = 900.0
+output = "eDP-1"
+rotation = 0.0
+type = "sysmon"
+
+[desktop_widgets.widget.desktop-widget-0000000000000005.settings]
+display = "graph"
+stat = "cpu_usage"
+stat2 = "cpu_temp"
+
+
+[desktop_widgets.widget.desktop-widget-0000000000000006]
+box_height = 120.0
+box_width = 200.0
+cx = 1900.0
+cy = 1025.0
+output = "eDP-1"
+rotation = 0.0
+type = "sysmon"
+
+[desktop_widgets.widget.desktop-widget-0000000000000006.settings]
+stat = "ram_pct"
+stat2 = "swap_pct"
+
+[desktop_widgets.widget.desktop-widget-0000000000000007]
+box_height = 120.0
+box_width = 200.0
+cx = 1900.0
+cy = 1150.0
+output = "eDP-1"
+rotation = 0.0
+type = "sysmon"
+
+[desktop_widgets.widget.desktop-widget-0000000000000007.settings]
+stat = "net_rx"
+stat2 = "net_tx"
+
+[desktop_widgets.widget.desktop-widget-0000000000000008]
+box_height = 300.0
+box_width = 300.0
+cx = 1850.0
+cy = 200.0
+output = "eDP-1"
+rotation = 0.0
+type = "fancy_audio_visualizer"
+
+[desktop_widgets.widget.desktop-widget-0000000000000008.settings]
+background = true
+visualization_mode = "wave_rings"
 
 [dock]
 auto_hide = true
@@ -418,3 +481,4 @@ type = "notification"
 
 [[control_center.shortcuts]]
 type = "dark_mode"
+
