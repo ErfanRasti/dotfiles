@@ -28,8 +28,8 @@
     freeSwapThreshold = 20; # ...and free swap also below 10%
 
     # Harder kill thresholds (SIGKILL)
-    freeMemKillThreshold = 5; # Force kill with SIGKILL below 5% free RAM
-    freeSwapKillThreshold = 5; # Force kill with SIGKILL below 5% free swap
+    freeMemKillThreshold = 10; # Force kill with SIGKILL below 5% free RAM
+    freeSwapKillThreshold = 10; # Force kill with SIGKILL below 5% free swap
 
     # Extra command-line arguments (most important for desktop UX)
     extraArgs = [

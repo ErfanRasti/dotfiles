@@ -281,6 +281,9 @@
 
     # note apps
     sticky-notes
+
+    # System check
+    stress
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

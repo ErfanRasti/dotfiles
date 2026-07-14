@@ -25,6 +25,8 @@
     blacklistedKernelModules = [
       "serial8250" # no serial ports on this laptop, saves ~30s of device probing
       "iTCO_wdt" # Intel watchdog not needed
+      "xe" # redundant with i915 on Tiger Lake, saves ~4.5 MB slab
+      "ahci" # no SATA drives (both are NVMe), saves ~0.5 MB slab
     ];
   };
 
