@@ -252,18 +252,19 @@ up = ["Up", "Ctrl+k"]
 [location]
 auto_locate = true
 
+
 [lockscreen_widgets]
 enabled = true
 schema_version = 2
 widget_order = [
   "lockscreen-login-box@eDP-1",
-  "lockscreen-widget-0000000000000004",
-  "lockscreen-widget-0000000000000005",
-  "lockscreen-widget-0000000000000007",
+  "lockscreen-widget-0000000000000001",
+  "lockscreen-widget-0000000000000002",
+  "lockscreen-widget-0000000000000003",
 ]
 
 [lockscreen_widgets.grid]
-cell_size = 8
+cell_size = 16
 major_interval = 4
 visible = true
 
@@ -271,46 +272,51 @@ visible = true
 box_height = 70.0
 box_width = 400.0
 cx = 1024.0
-cy = 1011.0
+cy = 1161.0
 output = "eDP-1"
 rotation = 0.0
 type = "login_box"
 
 [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+background_color = "surface_variant"
+background_opacity = 0.88
+background_radius = 12.0
+input_opacity = 1.0
+input_radius = 6.0
 show_caps_lock = true
 show_keyboard_layout = true
 show_login_button = true
 show_password_hint = true
 
-[lockscreen_widgets.widget.lockscreen-widget-0000000000000004]
-box_height = 0.0
-box_width = 0.0
-cx = 1024.0
-cy = 458.0
+[lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+box_height = 100.0
+box_width = 200.0
+cx = 920.0
+cy = 160.0
 output = "eDP-1"
 rotation = 0.0
-type = "media_player"
+type = "clock"
 
-[lockscreen_widgets.widget.lockscreen-widget-0000000000000004.settings]
-hide_when_no_media = true
-
-[lockscreen_widgets.widget.lockscreen-widget-0000000000000005]
-box_height = 96.0
-box_width = 144.0
-cx = 1272.0
-cy = 288.0
+[lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
+box_height = 100.0
+box_width = 200.0
+cx = 1136.0
+cy = 160.0
 output = "eDP-1"
 rotation = 0.0
 type = "weather"
 
-[lockscreen_widgets.widget.lockscreen-widget-0000000000000007]
-box_height = 176.0
-box_width = 304.0
-cx = 1024.0
-cy = 264.0
+[lockscreen_widgets.widget.lockscreen-widget-0000000000000003]
+box_height = 150.0
+box_width = 300.0
+cx = 200.0
+cy = 1120.0
 output = "eDP-1"
 rotation = 0.0
-type = "clock"
+type = "media_player"
+
+[lockscreen_widgets.widget.lockscreen-widget-0000000000000003.settings]
+hide_when_no_media = true
 
 [nightlight]
 enabled = true
