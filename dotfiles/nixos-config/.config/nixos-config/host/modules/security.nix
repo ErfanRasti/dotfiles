@@ -72,7 +72,7 @@
 
   # Enable AppArmor confinement for systemd services by default
   # Any service without a profile will be blocked from starting
-  systemd.services."*".serviceConfig.AppArmorProfile = true;
+  #systemd.services."*".serviceConfig.AppArmorProfile = true;
 
   # Enable sshd using
   # services.openssh = {

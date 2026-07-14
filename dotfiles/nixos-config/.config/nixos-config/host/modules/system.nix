@@ -4,6 +4,13 @@
   # accidentally delete configuration.nix.
   # system.copySystemConfiguration = true;
 
+  # Prepend Flatpak user exports to XDG_DATA_DIRS so launchers (rofi, GNOME Shell)
+  # discover desktop entries from ~/.local/share/flatpak/exports/share/applications.
+  # Placed in extraInit so it runs after the auto-generated XDG_DATA_DIRS.
+  environment.extraInit = ''
+    export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share''${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}"
+  '';
+
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #
