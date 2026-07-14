@@ -271,6 +271,8 @@
     gdk-pixbuf
     libheif
     libheif.out
+    webp-pixbuf-loader
+    f3d
 
     # Sounds
     sound-theme-freedesktop
