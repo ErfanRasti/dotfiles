@@ -139,8 +139,9 @@ window-rule {
 }
 
 window-rule {
-  match app-id="spotify"
+  match app-id="Spotify"
   match app-id="v2rayN"
+  match app-id="Throne"
   match app-id="uget-gtk"
   default-column-width { proportion 0.65; }
   open-on-workspace "Entertainment"
@@ -211,6 +212,7 @@ window-rule {
 window-rule {
     match app-id=r#"^org\.telegram\.desktop$"#
     match app-id="v2rayN"
+    match app-id="Throne"
 
     block-out-from "screencast"
 }

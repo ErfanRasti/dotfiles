@@ -37,4 +37,14 @@ in
   services.logind.settings.Login.LidSwitch = "suspend";
   services.logind.settings.Login.PowerKey = "suspend";
   services.logind.settings.Login.PowerKeyLongPress = "poweroff";
+
+  # PCIe Active State Power Management — lets PCIe devices enter low-power idle
+  boot.kernelParams = [
+    "pcie_aspm=force"
+  ];
+
+  # GPU power saving
+  boot.extraModprobeConfig = ''
+    options i915 enable_fbc=1 enable_psr=1 enable_dc=3
+  '';
 }

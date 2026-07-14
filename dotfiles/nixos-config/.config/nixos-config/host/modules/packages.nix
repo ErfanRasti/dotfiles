@@ -79,4 +79,9 @@
     enable = true;
     ui.enable = true;
   };
+
+  programs.throne = {
+    enable = true;
+    tunMode.enable = true;
+  };
 }
