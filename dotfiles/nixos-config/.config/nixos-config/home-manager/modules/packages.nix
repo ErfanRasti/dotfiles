@@ -95,6 +95,8 @@
     qt6.qtbase
     libsForQt5.qt5ct
     qt6Packages.qt6ct
+    flatpak-xdg-utils
+    xdg-desktop-portal
     desktop-file-utils
     gnome-tweaks
 
@@ -272,7 +274,6 @@
     libheif
     libheif.out
     webp-pixbuf-loader
-    f3d
 
     # Sounds
     sound-theme-freedesktop
