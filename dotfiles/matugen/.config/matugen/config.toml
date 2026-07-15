@@ -82,20 +82,20 @@ output_path = '~/.config/gtk-4.0/colors.css'
 # post_hook = 'gsettings set org.gnome.desktop.interface color-scheme prefer-{{mode}};~/.config/matugen/scripts/gtk_themes_reload.sh'
 post_hook = 'gsettings set org.gnome.desktop.interface color-scheme prefer-{{mode}}'
 
-# [templates.kitty]
-# input_path = '~/.config/matugen/templates/kitty-colors.conf'
-# output_path = '~/.config/kitty/themes/matugen.conf'
-# # post_hook = "sh -c 'kitty @ load-config'"
-# post_hook = "kitty +kitten themes --reload-in=all matugen"
+[templates.kitty]
+input_path = '~/.config/matugen/templates/kitty-colors.conf'
+output_path = '~/.config/kitty/themes/matugen.conf'
+# post_hook = "sh -c 'kitty @ load-config'"
+post_hook = "kitty +kitten themes --reload-in=all matugen"
 
 [templates.opencode]
 input_path = '~/.config/matugen/templates/opencode-colors.json'
 output_path = '~/.config/opencode/themes/matugen.json'
 
-# [templates.tmux]
-# input_path = '~/.config/matugen/templates/tmux-colors.conf'
-# output_path = '~/.config/tmux/matugen.conf'
-# post_hook = 'tmux source-file ~/.config/tmux/matugen.conf'
+[templates.tmux]
+input_path = '~/.config/matugen/templates/tmux-colors.conf'
+output_path = '~/.config/tmux/matugen.conf'
+post_hook = 'tmux source-file ~/.config/tmux/matugen.conf'
 
 [templates.btop]
 input_path = '~/.config/matugen/templates/btop.theme'
@@ -169,4 +169,3 @@ post_hook = "if pgrep -x vicinae >/dev/null; then systemctl --user restart vicin
 input_path = '~/.config/matugen/templates/mango.conf'
 output_path = '~/.config/mango/config/colors.conf'
 post_hook = 'mmsg -d reload_config'
-

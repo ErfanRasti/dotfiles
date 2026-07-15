@@ -409,9 +409,9 @@ source = "wallpaper"
 wallpaper_scheme = "m3-tonal-spot"
 
 [wallpaper]
-directory = "~/wallpapers"
-directory_dark = "~/wallpapers"
-directory_light = "~/wallpapers"
+directory = "~/Pictures/Wallpapers/Unsplash"
+directory_dark = "~/Pictures/Wallpapers/Unsplash"
+directory_light = "~/Pictures/Wallpapers/Unsplash/"
 fill_color = "primary"
 transition_on_startup = true
 
@@ -487,4 +487,3 @@ type = "notification"
 
 [[control_center.shortcuts]]
 type = "dark_mode"
-
