@@ -299,8 +299,6 @@
   services.flatpak = {
     enable = true;
     packages = [
-      "org.videolan.VLC"
-      "org.gnome.Snapshot"
       "com.github.tchx84.Flatseal"
       "se.sjoerd.Graphs"
     ];
