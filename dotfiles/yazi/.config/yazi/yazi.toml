@@ -9,14 +9,14 @@ linemode = "size_and_mtime"
 # https://yazi-rs.github.io/docs/tips/
 [opener]
 play = [
-  { run = 'vlc --one-instance "$@"', orphan = true, desc = "Open in VLC", for = "linux" },
+  { run = 'mpv "$@"', orphan = true, desc = "Open in VLC", for = "linux" },
 ]
 edit = [
   { run = 'kitty --class nvim fish -c "$EDITOR "$@""', orphan = true, desc = "Open in NeoVim", for = "linux" },
   { run = 'gnome-text-editor "$@"', orphan = true, for = "linux" },
 ]
 gapless = [
-  { run = 'com.github.neithern.g4music "$@"', orphan = true, desc = "Play in Gapless", for = "linux" },
+  { run = 'g4music "$@"', orphan = true, desc = "Play in Gapless", for = "linux" },
 ]
 nocturne = [
   { run = 'com.jeffser.Nocturne "$@"', orphan = true, desc = "Play in Nocturne", for = "linux" },
