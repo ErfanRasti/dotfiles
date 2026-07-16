@@ -1,4 +1,9 @@
-{ pkgs, inputs, ... }: {
+{
+  pkgs,
+  inputs,
+  ...
+}:
+{
   # programs.firefox.enable = false;
   # programs.google-chrome.enable = true;
   nixpkgs.config.allowUnfree = true;
@@ -212,9 +217,9 @@
 
     # Stores
     flatpak # use it with flatpak --user ...
-
     gnome-software
-    # inputs.nix-software-center.packages.${stdenv.hostPlatform.system}.nix-software-center
+    inputs.nix-software-center.packages.${stdenv.hostPlatform.system}.nix-software-center
+    inputs.app-manager.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # Dictionaries
     wordbook

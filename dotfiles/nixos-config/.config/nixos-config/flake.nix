@@ -53,7 +53,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # nix-software-center.url = "github:snowfallorg/nix-software-center";
+    nix-software-center.url = "github:snowfallorg/nix-software-center";
+
+    app-manager.url = "github:kem-a/AppManager";
   };
 
   outputs =
