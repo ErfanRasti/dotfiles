@@ -83,6 +83,7 @@
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
     noctalia-shell
     dms-shell
+    quickshell
     ashell
 
     # Themes
