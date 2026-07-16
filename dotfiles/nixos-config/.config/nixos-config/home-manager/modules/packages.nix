@@ -74,6 +74,8 @@
     vicinae
     (rofi.override { plugins = [ rofi-calc ]; })
     rofimoji
+    dsearch
+    # dcal dms calendar
 
     # Controllers
     brightnessctl
@@ -206,6 +208,7 @@
     htop
     nvtopPackages.full
     mission-center
+    dgop
 
     # Stores
     flatpak # use it with flatpak --user ...
