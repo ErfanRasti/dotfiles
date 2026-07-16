@@ -400,7 +400,7 @@
   "dockBorderThickness": 1,
   "dockIsolateDisplays": false,
   "dockLauncherEnabled": true,
-  "dockLauncherLogoMode": "apps",
+  "dockLauncherLogoMode": "os",
   "dockLauncherLogoCustomPath": "~/Pictures/MyImages/ERS_pure_logo.png",
   "dockLauncherLogoColorOverride": "primary",
   "dockLauncherLogoSizeOffset": 0,

@@ -238,6 +238,7 @@ pinned = [
   "spotify",
   "telegram",
   "microsoft-edge",
+  "wordbook",
 ]
 reserve_space = false
 show_dots = true
