@@ -165,6 +165,10 @@ input_path = '~/.config/matugen/templates/vicinae.ini'
 output_path = '~/.local/share/vicinae/themes/matugen.toml'
 post_hook = "if pgrep -x vicinae >/dev/null; then systemctl --user restart vicinae.service; fi"
 
+[templates.dgop]
+input_path = '~/.config/matugen/templates/dgop-colors.json'
+output_path = '~/.config/dgop/colors.json'
+
 [templates.mango]
 input_path = '~/.config/matugen/templates/mango.conf'
 output_path = '~/.config/mango/config/colors.conf'
