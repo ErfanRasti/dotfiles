@@ -86,6 +86,7 @@ window-rule {
 
 window-rule {
   match app-id="vlc"
+  match app-id="mpv"
   match app-id="kitty"
   default-column-width { proportion 0.6; }
   default-window-height { proportion 1.0; }
