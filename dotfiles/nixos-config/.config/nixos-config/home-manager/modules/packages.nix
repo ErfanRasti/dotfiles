@@ -4,6 +4,12 @@
   ...
 }:
 {
+
+  imports = [
+    inputs.spicetify-nix.homeManagerModules.default
+    inputs.nix-flatpak.homeManagerModules.nix-flatpak
+  ];
+
   # programs.firefox.enable = false;
   # programs.google-chrome.enable = true;
   nixpkgs.config.allowUnfree = true;
@@ -21,6 +27,7 @@
     zsh-vi-mode
     zsh-autocomplete
     zsh-powerlevel10k
+    fd
     fzf
     git
     github-cli
@@ -32,7 +39,7 @@
     zoxide
     ripgrep
     ripdrag
-
+    file
     (pkgs.runCommand "figlet-with-fonts"
       {
         nativeBuildInputs = [ pkgs.makeWrapper ];
@@ -59,6 +66,9 @@
     dwt1-shell-color-scripts
     ggh
     ascii-image-converter
+    rPackages.treesitter
+    unzip
+    unrar
 
     # Dev Tools
     github-desktop
@@ -177,6 +187,7 @@
 
     # Nix
     nix-prefetch-git
+    nil
 
     # Fonts
     font-awesome
@@ -250,12 +261,15 @@
     # Windows
     winboat
 
-    # Languages
+    #Languages
     gcc
     python3
     matlab
     lua
+    lua5
     luarocks
+    nodejs
+    sqlite
 
     # Power Management tools
     acpi
@@ -290,6 +304,7 @@
 
     # Download managers
     yt-dlp
+    uget
 
     # note apps
     sticky-notes
