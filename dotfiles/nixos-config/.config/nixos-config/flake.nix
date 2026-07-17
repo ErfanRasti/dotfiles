@@ -67,9 +67,6 @@
       username = identity.username;
       hostname = identity.hostname;
       stateVersion = "26.05";
-      flake-overlays = [
-        inputs.nix-matlab.overlay
-      ];
     in
     {
 
@@ -102,7 +99,7 @@
         };
 
         modules = [
-          (import ./home-manager/home.nix flake-overlays)
+          (import ./home-manager/home.nix)
         ];
       };
     };

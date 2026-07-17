@@ -30,6 +30,8 @@
     fd
     fzf
     git
+    jujutsu
+    lazyjj
     github-cli
     pre-commit
     tmux
