@@ -6,6 +6,7 @@
     ./inputs.nix # Touchpad etc (lowest priority)
     ./networks.nix # Networking, hostname, firewall
     ./graphics.nix # GPU drivers (depends on boot.kernelPackages)
+    ./hardware.nix # Hardware peripherals (Bluetooth, USB, etc.)
     ./services.nix # Desktop, display manager, xserver
     ./audio.nix # Audio hardware
     ./security.nix # Sudo, security policies
