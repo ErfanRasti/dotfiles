@@ -1,4 +1,3 @@
-flake-overlays:
 {
   stateVersion,
   username,
@@ -30,6 +29,6 @@ flake-overlays:
           ]);
       });
     })
-  ]
-  ++ flake-overlays;
+    inputs.nix-matlab.overlay
+  ];
 }
