@@ -9,8 +9,6 @@ flake-overlays:
 {
   imports = [
     ./modules
-    inputs.spicetify-nix.homeManagerModules.default
-    inputs.nix-flatpak.homeManagerModules.nix-flatpak
   ];
 
   home = {
