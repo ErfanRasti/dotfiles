@@ -72,7 +72,10 @@ restore)
       bluetooth:off) bluetoothctl power off ;;
       sink:on) pactl set-sink-mute @DEFAULT_SINK@ 0 ;;
       sink:off) pactl set-sink-mute @DEFAULT_SINK@ 1 ;;
-      source:on) pactl set-source-mute @DEFAULT_SOURCE@ 0 ;;
+      source:on)
+        pactl set-source-mute @DEFAULT_SOURCE@ 0
+        pactl set-source-volume @DEFAULT_SOURCE@ 30%
+        ;;
       source:off) pactl set-source-mute @DEFAULT_SOURCE@ 1 ;;
       sinkvol:*) pactl set-sink-volume @DEFAULT_SINK@ "${line#sinkvol:}" ;;
       sourcevol:*) pactl set-source-volume @DEFAULT_SOURCE@ "${line#sourcevol:}" ;;
