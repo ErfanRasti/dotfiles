@@ -176,6 +176,7 @@
     # Image Editors
     gimp
     imagemagick
+    gnome-frog
 
     # Video Editors
     kdePackages.kdenlive
@@ -313,6 +314,18 @@
 
     # System check
     stress
+
+    # Audio control
+    pavucontrol
+    audacity
+    gnome-sound-recorder
+
+    # Screen recorder
+    obs-studio
+
+    # Graph tools
+    gnome-graphs
+
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -326,7 +339,6 @@
     enable = true;
     packages = [
       "com.github.tchx84.Flatseal"
-      "se.sjoerd.Graphs"
     ];
     overrides = {
       global = {
