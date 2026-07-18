@@ -301,6 +301,7 @@ binds {
   Mod+Grave hotkey-overlay-title="Toggle dropdown terminal" { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'kitty-dropterm' -t 'kitty-dropterm' 'kitty --class kitty-dropterm --title kitty-dropterm'"; }
 
   Mod+Alt+A hotkey-overlay-title="Open rofi favourite apps" { spawn "~/.config/rofi/applets/scripts/apps.sh"; }
+  Mod+Alt+Shift+A hotkey-overlay-title="Open rofi apps as root" { spawn "~/.config/rofi/applets/scripts/appsasroot.sh"; }
   Mod+Alt+Q hotkey-overlay-title="Open rofi quicklinks" { spawn "~/.config/rofi/applets/scripts/quicklinks.sh"; }
   Mod+Ctrl+B hotkey-overlay-title="Open rofi battery menu" { spawn "~/.config/rofi/applets/scripts/battery.sh"; }
   Mod+Alt+V hotkey-overlay-title="Open rofi volume control" { spawn "~/.config/rofi/applets/scripts/volume.sh"; }

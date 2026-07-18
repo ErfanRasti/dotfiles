@@ -6,7 +6,7 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Theme Elements
 prompt='Applications'
-mesg="Installed Packages : $(pacman -Q | wc -l) (pacman)"
+mesg="Installed Packages: $(flatpak list --app 4>/dev/null | wc -l) (flatpak)"
 
 list_col='6'
 list_row='1'

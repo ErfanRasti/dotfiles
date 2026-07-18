@@ -37,7 +37,7 @@ run_rofi() {
 }
 
 run_pkexec() {
-  pkexec env XDG_RUNTIME_DIR="$XDG_RUNTIME_DIR" WAYLAND_DISPLAY="$WAYLAND_DISPLAY" "$1"
+  pkexec env XDG_RUNTIME_DIR="$XDG_RUNTIME_DIR" WAYLAND_DISPLAY="$WAYLAND_DISPLAY" "$@"
 }
 
 # Execute Command
@@ -47,16 +47,16 @@ run_cmd() {
   case "$1" in
   '--opt1')
 
-    run_pkexec /usr/bin/ghostty
+    run_pkexec ghostty
     ;;
   '--opt2')
     nautilus admin:///root/
     ;;
   '--opt3')
-    run_pkexec /usr/bin/nvim
+    run_pkexec kitty -c nvim
     ;;
   '--opt4')
-    run_pkexec /usr/bin/yazi
+    run_pkexec kitty -c yazi
     ;;
   *)
     echo "Invalid option"
