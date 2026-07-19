@@ -109,10 +109,10 @@ widget_order = [
   "desktop-widget-0000000000000002",
   "desktop-widget-0000000000000003",
   "desktop-widget-0000000000000004",
-  "desktop-widget-0000000000000005",
-  "desktop-widget-0000000000000006",
-  "desktop-widget-0000000000000007",
-  "desktop-widget-0000000000000008",
+  # "desktop-widget-0000000000000005",
+  # "desktop-widget-0000000000000006",
+  # "desktop-widget-0000000000000007",
+  # "desktop-widget-0000000000000008",
 ]
 
 [desktop_widgets.grid]

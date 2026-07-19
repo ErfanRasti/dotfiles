@@ -12,6 +12,7 @@
   ];
 
   # Intel Graphics
+  hardware.intel-gpu-tools.enable = true;
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [

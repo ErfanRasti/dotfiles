@@ -25,6 +25,9 @@ nocturne = [
 amberol = [
   { run = 'amberol "$@"', orphan = true, desc = "Play in Amberol", for = "linux" },
 ]
+decibels = [
+  { run = 'org.gnome.Decibels "$@"', orphan = true, desc = "Play in Decibels", for = "linux" },
+]
 
 # bulk-rename activation
 [[opener.bulk-rename]]
@@ -37,7 +40,7 @@ use = "bulk-rename"
 
 [[open.prepend_rules]]
 mime = "audio/*"
-use = "amberol"
+use = "decibels"
 
 [[open.prepend_rules]]
 mime = "video/*"

@@ -1,4 +1,5 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
+
 let
   postPowertop = pkgs.writeShellScript "post-powertop" ''
     log() { echo "[usb-bt-wakeup] $*"; }
@@ -26,8 +27,9 @@ let
 in
 {
   powerManagement.enable = true;
+  powerManagement.cpuFreqGovernor = "schedutil";
+
   services.thermald.enable = true;
-  services.power-profiles-daemon.enable = true;
 
   powerManagement.powertop.enable = true;
   systemd.services.powertop.serviceConfig.ExecStartPost = [ "${postPowertop}" ];
@@ -47,4 +49,53 @@ in
   boot.extraModprobeConfig = ''
     options i915 enable_fbc=1 enable_psr=1 enable_dc=3
   '';
+
+  services.power-profiles-daemon.enable = false;
+
+  # services.auto-cpufreq.enable = true;
+  # services.auto-cpufreq.settings = {
+  #   battery = {
+  #     governor = "powersave";
+  #     turbo = "never";
+  #   };
+  #   charger = {
+  #     governor = "balanced";
+  #     turbo = "auto";
+  #   };
+  # };
+
+  services.tlp = {
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      CPU_SCALING_GOVERNOR_ON_AC = "balanced";
+
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "balanced";
+
+      CPU_MIN_PERF_ON_BAT = 0;
+      CPU_MAX_PERF_ON_BAT = 30;
+      CPU_MIN_PERF_ON_AC = 0;
+      CPU_MAX_PERF_ON_AC = 100;
+
+      TLP_DEFAULT_MODE = "BAT";
+      TLP_PERSISTENT_DEFAULT = 1;
+    };
+  };
+
+  # Power saving modes for hard disks
+  services.udev.extraRules =
+    let
+      mkRule = as: lib.concatStringsSep ", " as;
+      mkRules = rs: lib.concatStringsSep "\n" rs;
+    in
+    mkRules ([
+      (mkRule [
+        ''ACTION=="add|change"''
+        ''SUBSYSTEM=="block"''
+        ''KERNEL=="sd[a-z]"''
+        ''ATTR{queue/rotational}=="1"''
+        ''RUN+="${pkgs.hdparm}/bin/hdparm -B 90 -S 41 /dev/%k"''
+      ])
+    ]);
 }
