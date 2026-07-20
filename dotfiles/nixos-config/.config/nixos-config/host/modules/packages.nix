@@ -49,6 +49,11 @@
       libice
       libsm
 
+      # graphics
+      vulkan-tools
+      mesa-demos
+      mesa
+
       ## Uncomment if you want to use the libraries provided by default in the steam distribution
       ## but this is quite far from being exhaustive
       ## https://github.com/NixOS/nixpkgs/issues/354513
