@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   inputs,
   ...
 }:
@@ -13,6 +14,9 @@
   # programs.firefox.enable = false;
   # programs.google-chrome.enable = true;
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-40.10.5"
+  ];
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   home.packages = with pkgs; [
@@ -61,7 +65,8 @@
     lazygit
     lazydocker
     trash-cli
-    jq yq
+    jq
+    yq
     zellij
     cmatrix
     cava
@@ -334,6 +339,11 @@
 
   # https://wiki.nixos.org/wiki/Polkit
   # services.polkit-gnome.enable = true;
+
+  home.activation.pywalfox = lib.mkAfter ''
+    ~/.nix-profile/bin/pywalfox install
+    ~/.nix-profile/bin/pywalfox update
+  '';
 
   services.flatpak = {
     enable = true;
