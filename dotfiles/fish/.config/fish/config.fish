@@ -118,6 +118,7 @@ fish_add_path ~/.local/bin
 # NixOS Aliases
 ## The following aliases will update the system too.
 alias rebuild "sudo nixos-rebuild switch --flake path:$HOME/dotfiles/dotfiles/nixos-config/.config/nixos-config/"
+alias ur "sudo nixos-rebuild switch --flake path:$HOME/dotfiles/dotfiles/nixos-config/.config/nixos-config/ --upgrade"
 alias rebuild-boot "sudo nixos-rebuild boot --flake path:$HOME/dotfiles/dotfiles/nixos-config/.config/nixos-config/"
 alias hms "home-manager switch --flake path:$HOME/dotfiles/dotfiles/nixos-config/.config/nixos-config/"
 alias nixclear "sudo nix-collect-garbage -d && nix-collect-garbage -d && rebuild-boot"
