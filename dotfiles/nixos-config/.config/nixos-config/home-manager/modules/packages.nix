@@ -61,7 +61,7 @@
     lazygit
     lazydocker
     trash-cli
-    jq
+    jq yq
     zellij
     cmatrix
     cava

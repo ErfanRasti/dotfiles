@@ -21,44 +21,54 @@ imports = [
   boot.extraModulePackages = [ ];
 
   # Run 'sudo blkid' to find your disk UUIDs
-  # boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/REPLACE-ME";
+  boot.initrd.luks.devices."root" = {
+    device = "/dev/disk/by-uuid/REPLACE-ME",
+        # Passes TRIM/discard commands through LUKS to the underlying SSD.
+    # Improves SSD performance and longevity by allowing the drive to manage
+    # unused blocks. Minor security tradeoff: an attacker with raw disk access
+    # could infer which blocks are in use vs free, leaking filesystem patterns.
+    allowDiscards = true;
+    # Uses direct I/O for crypto operations instead of kernel workqueues.
+    # Faster on CPUs with AES-NI (most modern Intel/AMD). No security impact —
+    # same encryption, same key derivation, just a more efficient dispatch path.
+    bypassWorkqueues = true;
+  };
 
-  # fileSystems."/boot" = {
-  #   device = "/dev/disk/by-uuid/REPLACE-ME";
-  #   fsType = "vfat";
-  #   options = [ "fmask=0022" "dmask=0022" ];
-  # };
-
-  # fileSystems."/" = {
-  #   device = "/dev/mapper/root";
-  #   fsType = "btrfs";
-  #   options = [ "subvol=@" ];
-  # };
-  # fileSystems."/home" = {
-  #   device = "/dev/mapper/root";
-  #   fsType = "btrfs";
-  #   options = [ "subvol=@home" ];
-  # };
-  # fileSystems."/nix" = {
-  #   device = "/dev/mapper/root";
-  #   fsType = "btrfs";
-  #   options = [ "subvol=@nix" ];
-  # };
-  # fileSystems."/var" = {
-  #   device = "/dev/mapper/root";
-  #   fsType = "btrfs";
-  #   options = [ "subvol=@var" ];
-  # };
-  # fileSystems."/var/log" = {
-  #   device = "/dev/mapper/root";
-  #   fsType = "btrfs";
-  #   options = [ "subvol=@log" ];
-  # };
-  # fileSystems."/swap" = {
-  #   device = "/dev/mapper/root";
-  #   fsType = "btrfs";
-  #   options = [ "subvol=@swap" ];
-  # };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/REPLACE-ME";
+    fsType = "vfat";
+    options = [ "fmask=0022" "dmask=0022" ];
+  };
+  fileSystems."/" = {
+    device = "/dev/mapper/root";
+    fsType = "btrfs";
+    options = [ "subvol=@" ];
+  };
+  fileSystems."/home" = {
+    device = "/dev/mapper/root";
+    fsType = "btrfs";
+    options = [ "subvol=@home" ];
+  };
+  fileSystems."/nix" = {
+    device = "/dev/mapper/root";
+    fsType = "btrfs";
+    options = [ "subvol=@nix" ];
+  };
+  fileSystems."/var" = {
+    device = "/dev/mapper/root";
+    fsType = "btrfs";
+    options = [ "subvol=@var" ];
+  };
+  fileSystems."/var/log" = {
+    device = "/dev/mapper/root";
+    fsType = "btrfs";
+    options = [ "subvol=@log" ];
+  };
+  fileSystems."/swap" = {
+    device = "/dev/mapper/root";
+    fsType = "btrfs";
+    options = [ "subvol=@swap" ];
+  };
 
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
