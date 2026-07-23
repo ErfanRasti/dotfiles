@@ -7,3 +7,15 @@ repos:
         language: system
         pass_filenames: true
         types: [text]
+      - id: sync-hardware-example
+        name: Sync hardware-configuration.nix → .example
+        entry: bash hooks/scripts/sync_hardware_example.sh
+        language: system
+        files: 'hardware-configuration\.nix$'
+        exclude: '\.example\.nix$'
+      - id: sync-matugen-noctalia
+        name: Sync matugen ↔ noctalia configs
+        entry: python3 hooks/scripts/sync_matugen_noctalia.py
+        language: system
+        files: '(config\.toml|user-templates\.toml)$'
+        pass_filenames: true

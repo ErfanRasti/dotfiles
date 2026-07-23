@@ -16,7 +16,11 @@ imports = [
   ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
+
+  # Load TPM modules early in initrd to reduce the ~27s TPM device probe
+  # timeout observed in systemd-analyze blame.
+  boot.initrd.kernelModules = [ "tpm_tis" "tpm_crb" ];
+
   boot.kernelModules = [ "kvm-intel" ]; # Change to "kvm-amd" for AMD
   boot.extraModulePackages = [ ];
 

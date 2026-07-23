@@ -33,12 +33,12 @@ input_path = '~/.config/matugen/templates/hyprland-colors.conf'
 output_path = '~/.config/hypr/config/colors.conf'
 
 
-# [config.wallpaper] # Blazing fast and beautiful
+# [templates.wallpaper] # Blazing fast and beautiful
 # command = "hyprctl"
 # arguments = ["hyprpaper", "reload", ","]
 # set = false
 
-# [config.wallpaper] # Animated nad nice llok
+# [templates.wallpaper] # Animated nad nice llok
 # command = "swww"
 # arguments = ["img", "--transition-type", "center"]
 # set = false
@@ -157,7 +157,7 @@ output_path = '~/.config/zed/themes/matugen.json'
 
 [templates.spicetify]
 input_path = '~/.config/matugen/templates/spicetify.ini'
-output_path = '~/.config/spicetify/Themes/Sleek/color.ini'
+output_path = '~/.config/spicetify/Themes/Sleek/matugen.ini'
 post_hook = 'spicetify watch -s 2>&1 | sed "/Reloaded Spotify/q"'
 
 [templates.vicinae]
