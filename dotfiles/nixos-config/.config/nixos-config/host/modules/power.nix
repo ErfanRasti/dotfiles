@@ -50,7 +50,7 @@ in
     options i915 enable_fbc=1 enable_psr=1 enable_dc=3
   '';
 
-  services.power-profiles-daemon.enable = false;
+  services.power-profiles-daemon.enable = true;
 
   # services.auto-cpufreq.enable = true;
   # services.auto-cpufreq.settings = {
@@ -64,24 +64,24 @@ in
   #   };
   # };
 
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      CPU_SCALING_GOVERNOR_ON_AC = "balanced";
-
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-      CPU_ENERGY_PERF_POLICY_ON_AC = "balanced";
-
-      CPU_MIN_PERF_ON_BAT = 0;
-      CPU_MAX_PERF_ON_BAT = 30;
-      CPU_MIN_PERF_ON_AC = 0;
-      CPU_MAX_PERF_ON_AC = 100;
-
-      TLP_DEFAULT_MODE = "BAT";
-      TLP_PERSISTENT_DEFAULT = 1;
-    };
-  };
+  # services.tlp = {
+  #   enable = true;
+  #   settings = {
+  #     CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+  #     CPU_SCALING_GOVERNOR_ON_AC = "balanced";
+  #
+  #     CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+  #     CPU_ENERGY_PERF_POLICY_ON_AC = "balanced";
+  #
+  #     CPU_MIN_PERF_ON_BAT = 0;
+  #     CPU_MAX_PERF_ON_BAT = 30;
+  #     CPU_MIN_PERF_ON_AC = 0;
+  #     CPU_MAX_PERF_ON_AC = 100;
+  #
+  #     TLP_DEFAULT_MODE = "BAT";
+  #     TLP_PERSISTENT_DEFAULT = 1;
+  #   };
+  # };
 
   # Power saving modes for hard disks
   services.udev.extraRules =
