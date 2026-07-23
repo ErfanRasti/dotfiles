@@ -1,6 +1,13 @@
 { lib, ... }: {
+  # Profile your boot to find the actual bottleneck
+  # Run this after a boot to see where time is spent:
+  # systemd-analyze
+  # systemd-analyze blame
+  # systemd-analyze critical-chain
+
   # Use the systemd-boot EFI boot loader.
   # boot.loader.systemd-boot.enable = true;
+
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
   boot.extraModprobeConfig = ''
@@ -21,12 +28,6 @@
       "rd.udev.log_level=3" # limits udev (device manager) messages in the initrd to errors only.
       "rd.systemd.show_status=auto" # shows systemd status in initrd only on slow/broken consoles (suppresses the usual boot splash output).
       "rd.systemd.device_timeout=5" # reduce device probe timeout from 90s to 5s
-    ];
-    blacklistedKernelModules = [
-      "serial8250" # no serial ports on this laptop, saves ~30s of device probing
-      "iTCO_wdt" # Intel watchdog not needed
-      "xe" # redundant with i915 on Tiger Lake, saves ~4.5 MB slab
-      "ahci" # no SATA drives (both are NVMe), saves ~0.5 MB slab
     ];
   };
 
@@ -49,5 +50,7 @@
   boot.lanzaboote = {
     enable = true;
     pkiBundle = "/var/lib/sbctl";
+    autoGenerateKeys.enable = true;
+    autoEnrollKeys.enable = true;
   };
 }
