@@ -10,6 +10,7 @@
   "popupTransparency": 0.6,
   "dockTransparency": 0.4,
   "widgetBackgroundColor": "s",
+  "widgetBackgroundCustomColor": "#6750A4",
   "widgetBackgroundCustomStrength": 0.5,
   "widgetColorMode": "colorful",
   "controlCenterTileColorMode": "primary",
@@ -655,7 +656,9 @@
       "name": "Main Bar",
       "enabled": true,
       "position": 0,
-      "screenPreferences": ["all"],
+      "screenPreferences": [
+        "all"
+      ],
       "showOnLastDisplay": true,
       "leftWidgets": [
         {
@@ -798,7 +801,9 @@
   "desktopClockY": -1,
   "desktopClockWidth": 280,
   "desktopClockHeight": 180,
-  "desktopClockDisplayPreferences": ["all"],
+  "desktopClockDisplayPreferences": [
+    "all"
+  ],
   "systemMonitorEnabled": false,
   "systemMonitorShowHeader": true,
   "systemMonitorTransparency": 0.8,
@@ -835,7 +840,9 @@
   "systemMonitorY": -1,
   "systemMonitorWidth": 320,
   "systemMonitorHeight": 480,
-  "systemMonitorDisplayPreferences": ["all"],
+  "systemMonitorDisplayPreferences": [
+    "all"
+  ],
   "systemMonitorVariants": [],
   "desktopWidgetPositions": {},
   "desktopWidgetGridSettings": {
@@ -857,7 +864,9 @@
         "showDate": true,
         "showAnalogNumbers": true,
         "showAnalogSeconds": true,
-        "displayPreferences": ["all"],
+        "displayPreferences": [
+          "all"
+        ],
         "showDigitalSeconds": false,
         "syncPositionAcrossScreens": true,
         "clickThrough": false,
@@ -905,7 +914,9 @@
         "topProcessSortBy": "cpu",
         "layoutMode": "auto",
         "graphInterval": 60,
-        "displayPreferences": ["all"],
+        "displayPreferences": [
+          "all"
+        ],
         "syncPositionAcrossScreens": true,
         "clickThrough": false,
         "showOnOverlay": false,
@@ -919,8 +930,8 @@
           "y": 384
         },
         "_synced": {
-          "x": 0.7916666666666666,
-          "y": 0.4444444444444444,
+          "x": 0.78125,
+          "y": 0.046296296296296294,
           "width": 320,
           "height": 480
         }
@@ -932,7 +943,9 @@
       "name": "Dank Desktop Weather",
       "enabled": true,
       "config": {
-        "displayPreferences": ["all"],
+        "displayPreferences": [
+          "all"
+        ],
         "showOnOverlay": false,
         "syncPositionAcrossScreens": true,
         "showHourlyForecast": true,
@@ -948,8 +961,8 @@
           "y": 520
         },
         "_synced": {
-          "x": 0.01953125,
-          "y": 0.25,
+          "x": 0.026041666666666668,
+          "y": 0.32407407407407407,
           "width": 280,
           "height": 320
         }
@@ -969,7 +982,11 @@
   "clipboardEnterToPaste": false,
   "clipboardRememberTypeFilter": false,
   "clipboardTypeFilter": "all",
-  "clipboardVisibleEntryActions": ["pin", "edit", "delete"],
+  "clipboardVisibleEntryActions": [
+    "pin",
+    "edit",
+    "delete"
+  ],
   "launcherPluginVisibility": {},
   "launcherPluginOrder": [],
   "frameEnabled": false,
@@ -977,7 +994,9 @@
   "frameRounding": 23,
   "frameColor": "",
   "frameOpacity": 1,
-  "frameScreenPreferences": ["all"],
+  "frameScreenPreferences": [
+    "all"
+  ],
   "frameBarSize": 40,
   "frameShowOnOverview": false,
   "frameBlurEnabled": true,
