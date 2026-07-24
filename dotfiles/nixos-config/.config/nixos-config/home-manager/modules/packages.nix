@@ -291,6 +291,10 @@
     pandoc
     texliveFull
 
+    # PDF tools
+    poppler-utils
+    ghostscript
+
     # Tools
     showmethekey
 
