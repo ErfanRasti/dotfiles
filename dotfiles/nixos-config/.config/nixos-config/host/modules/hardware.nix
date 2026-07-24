@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
 {
   # Enable Bluetooth
@@ -12,4 +12,8 @@
   services.udev.extraRules = lib.concatStringsSep "\n" [
     ''SUBSYSTEM=="usb", ATTR{idVendor}=="8087", ATTR{idProduct}=="0aaa", ATTR{authorized}="0"''
   ];
+
+  # Bluetooth driver for TP-LINK Bluetooth dongle
+  hardware.firmware = [ pkgs.rtl8761b-firmware ];
+
 }

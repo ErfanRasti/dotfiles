@@ -31,6 +31,11 @@
     wl-clipboard # for waydroid copy and paste
     wl-clip-persist # Keep Wayland clipboard even after programs close
 
+    # graphics
+    vulkan-tools
+    mesa-demos
+    mesa
+
   ];
 
   # To check the current nix-ld modules: l /run/current-system/sw/share/nix-ld/lib/
@@ -48,11 +53,6 @@
       libxrender
       libice
       libsm
-
-      # graphics
-      vulkan-tools
-      mesa-demos
-      mesa
 
       ## Uncomment if you want to use the libraries provided by default in the steam distribution
       ## but this is quite far from being exhaustive
