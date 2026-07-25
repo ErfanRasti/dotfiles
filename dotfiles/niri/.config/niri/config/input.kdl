@@ -8,7 +8,7 @@ input {
             // For more information, see xkeyboard-config(7).
 
             // For example:
-            layout "us,ir"
+            layout "us,ir,fr"
             variant ",winkeys"
             options "grp:win_space_toggle"
         }
