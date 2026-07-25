@@ -18,7 +18,6 @@ brown = { color = "#a57d5a", blend = true }
 black = { color = "#000000", blend = true }
 white = { color = "#ffffff", blend = true }
 
-
 [templates.niri]
 input_path = '~/.config/matugen/templates/niri-colors.kdl'
 output_path = '~/.config/niri/config/colors.kdl'
@@ -31,7 +30,6 @@ post_hook = 'if pgrep -x hyprland;then hyprctl reload;fi'
 [templates.hyprlock]
 input_path = '~/.config/matugen/templates/hyprland-colors.conf'
 output_path = '~/.config/hypr/config/colors.conf'
-
 
 # [templates.wallpaper] # Blazing fast and beautiful
 # command = "hyprctl"

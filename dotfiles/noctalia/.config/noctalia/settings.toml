@@ -123,8 +123,8 @@ visible = true
 [desktop_widgets.widget.desktop-widget-0000000000000001]
 box_height = 100.0
 box_width = 200.0
-cx = 160.0
-cy = 160.0
+cx = 120.0
+cy = 120.0
 output = "eDP-1"
 rotation = 0.0
 type = "clock"
@@ -132,8 +132,8 @@ type = "clock"
 [desktop_widgets.widget.desktop-widget-0000000000000002]
 box_height = 40.0
 box_width = 200.0
-cx = 160.0
-cy = 235.0
+cx = 120.0
+cy = 200.0
 output = "eDP-1"
 rotation = 0.0
 type = "clock"
@@ -145,8 +145,8 @@ format = "{:%a, %b %d}"
 [desktop_widgets.widget.desktop-widget-0000000000000003]
 box_height = 100.0
 box_width = 200.0
-cx = 370.0
-cy = 160.0
+cx = 340.0
+cy = 120.0
 output = "eDP-1"
 rotation = 0.0
 type = "weather"
@@ -155,7 +155,7 @@ type = "weather"
 box_height = 150.0
 box_width = 300.0
 cx = 200.0
-cy = 1120.0
+cy = 750.0
 output = "eDP-1"
 rotation = 0.0
 type = "media_player"
@@ -166,8 +166,8 @@ hide_when_no_media = true
 [desktop_widgets.widget.desktop-widget-0000000000000005]
 box_height = 120.0
 box_width = 200.0
-cx = 1900.0
-cy = 900.0
+cx = 1350.0
+cy = 525.0
 output = "eDP-1"
 rotation = 0.0
 type = "sysmon"
@@ -181,8 +181,8 @@ stat2 = "cpu_temp"
 [desktop_widgets.widget.desktop-widget-0000000000000006]
 box_height = 120.0
 box_width = 200.0
-cx = 1900.0
-cy = 1025.0
+cx = 1350.0
+cy = 650.0
 output = "eDP-1"
 rotation = 0.0
 type = "sysmon"
@@ -194,8 +194,8 @@ stat2 = "swap_pct"
 [desktop_widgets.widget.desktop-widget-0000000000000007]
 box_height = 120.0
 box_width = 200.0
-cx = 1900.0
-cy = 1150.0
+cx = 1350.0
+cy = 775.0
 output = "eDP-1"
 rotation = 0.0
 type = "sysmon"
@@ -207,7 +207,7 @@ stat2 = "net_tx"
 [desktop_widgets.widget.desktop-widget-0000000000000008]
 box_height = 300.0
 box_width = 300.0
-cx = 1850.0
+cx = 1300.0
 cy = 200.0
 output = "eDP-1"
 rotation = 0.0
@@ -218,7 +218,8 @@ background = true
 visualization_mode = "wave_rings"
 
 [dock]
-auto_hide = true
+auto_hide = false
+smart_auto_hide = true
 background_opacity = 0.6
 cross_axis_padding = 2
 enabled = true
@@ -242,6 +243,7 @@ pinned = [
 ]
 reserve_space = false
 show_dots = true
+position = "right"
 
 [keybinds]
 cancel = ["Escape", "Ctrl+q"]
@@ -272,8 +274,8 @@ visible = true
 [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
 box_height = 70.0
 box_width = 400.0
-cx = 1024.0
-cy = 1161.0
+cx = 250.0
+cy = 600.0
 output = "eDP-1"
 rotation = 0.0
 type = "login_box"
@@ -292,7 +294,7 @@ show_password_hint = true
 [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
 box_height = 100.0
 box_width = 200.0
-cx = 920.0
+cx = 150.0
 cy = 160.0
 output = "eDP-1"
 rotation = 0.0
@@ -301,8 +303,8 @@ type = "clock"
 [lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
 box_height = 100.0
 box_width = 200.0
-cx = 1136.0
-cy = 160.0
+cx = 150.0
+cy = 280.0
 output = "eDP-1"
 rotation = 0.0
 type = "weather"
@@ -311,7 +313,7 @@ type = "weather"
 box_height = 150.0
 box_width = 300.0
 cx = 200.0
-cy = 1120.0
+cy = 750.0
 output = "eDP-1"
 rotation = 0.0
 type = "media_player"

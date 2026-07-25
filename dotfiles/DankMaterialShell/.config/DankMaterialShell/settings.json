@@ -52,7 +52,7 @@
   "m3ElevationIntensity": 12,
   "m3ElevationOpacity": 30,
   "m3ElevationColorMode": "default",
-  "m3ElevationLightDirection": "top",
+  "m3ElevationLightDirection": "autoBar",
   "m3ElevationCustomColor": "#000000",
   "modalElevationEnabled": true,
   "popoutElevationEnabled": true,
@@ -486,30 +486,30 @@
   "muxUseCustomCommand": false,
   "muxCustomCommand": "",
   "muxSessionFilter": "",
-  "runDmsMatugenTemplates": false,
-  "matugenTemplateGtk": true,
-  "matugenTemplateNiri": true,
-  "matugenTemplateHyprland": true,
-  "matugenTemplateMangowc": true,
-  "matugenTemplateQt5ct": true,
-  "matugenTemplateQt6ct": true,
-  "matugenTemplateFirefox": true,
-  "matugenTemplatePywalfox": true,
+  "runDmsMatugenTemplates": true,
+  "matugenTemplateGtk": false,
+  "matugenTemplateNiri": false,
+  "matugenTemplateHyprland": false,
+  "matugenTemplateMangowc": false,
+  "matugenTemplateQt5ct": false,
+  "matugenTemplateQt6ct": false,
+  "matugenTemplateFirefox": false,
+  "matugenTemplatePywalfox": false,
   "matugenTemplateZenBrowser": true,
-  "matugenTemplateVesktop": true,
-  "matugenTemplateVencord": true,
-  "matugenTemplateEquibop": true,
+  "matugenTemplateVesktop": false,
+  "matugenTemplateVencord": false,
+  "matugenTemplateEquibop": false,
   "matugenTemplateGhostty": true,
-  "matugenTemplateKitty": true,
-  "matugenTemplateFoot": true,
-  "matugenTemplateAlacritty": true,
+  "matugenTemplateKitty": false,
+  "matugenTemplateFoot": false,
+  "matugenTemplateAlacritty": false,
   "matugenTemplateNeovim": true,
-  "matugenTemplateWezterm": true,
-  "matugenTemplateDgop": true,
-  "matugenTemplateKcolorscheme": true,
+  "matugenTemplateWezterm": false,
+  "matugenTemplateDgop": false,
+  "matugenTemplateKcolorscheme": false,
   "matugenTemplateVscode": true,
   "matugenTemplateEmacs": true,
-  "matugenTemplateZed": true,
+  "matugenTemplateZed": false,
   "matugenTemplateNeovimSettings": {
     "dark": {
       "baseTheme": "github_dark",
@@ -667,7 +667,8 @@
         },
         {
           "id": "systemUpdate",
-          "enabled": true
+          "enabled": true,
+          "hideWhenIdle": true
         },
         {
           "id": "workspaceSwitcher",
@@ -676,18 +677,14 @@
         {
           "id": "focusedWindow",
           "enabled": true,
+          "focusedWindowSize": 0,
           "focusedWindowCompactMode": true
         }
       ],
       "centerWidgets": [
         {
-          "id": "music",
-          "enabled": true,
-          "mediaSize": 0
-        },
-        {
           "id": "dankPomodoroTimer",
-          "enabled": true
+          "enabled": false
         },
         {
           "id": "clock",
@@ -696,6 +693,11 @@
         {
           "id": "weather",
           "enabled": true
+        },
+        {
+          "id": "music",
+          "enabled": true,
+          "mediaSize": 0
         },
         {
           "id": "notificationButton",
@@ -978,8 +980,8 @@
       "trigger": "cb"
     }
   },
-  "clipboardClickToPaste": false,
-  "clipboardEnterToPaste": false,
+  "clipboardClickToPaste": true,
+  "clipboardEnterToPaste": true,
   "clipboardRememberTypeFilter": false,
   "clipboardTypeFilter": "all",
   "clipboardVisibleEntryActions": [
