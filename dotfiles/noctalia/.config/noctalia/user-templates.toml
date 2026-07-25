@@ -1,8 +1,8 @@
 [theme.templates]
 enable_builtin_templates = true
 enable_community_templates = true
-builtin_ids = []
-community_ids = ["telegram"]
+builtin_ids = ["emacs"]
+community_ids = ["neovim", "vscode", "telegram", "obs"]
 
 [theme.templates.custom_colors]
 red = { color = "#f13c40", blend = true }
@@ -20,7 +20,6 @@ brown = { color = "#a57d5a", blend = true }
 black = { color = "#000000", blend = true }
 white = { color = "#ffffff", blend = true }
 
-
 [theme.templates.user.niri]
 input_path = '~/.config/matugen/templates/niri-colors.kdl'
 output_path = '~/.config/niri/config/colors.kdl'
@@ -33,7 +32,6 @@ post_hook = 'if pgrep -x hyprland;then hyprctl reload;fi'
 [theme.templates.user.hyprlock]
 input_path = '~/.config/matugen/templates/hyprland-colors.conf'
 output_path = '~/.config/hypr/config/colors.conf'
-
 
 # [theme.templates.user.wallpaper] # Blazing fast and beautiful
 # command = "hyprctl"
