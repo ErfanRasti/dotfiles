@@ -8,8 +8,8 @@ sound_volume = 1.0
 volume_change_sound = "~/.nix-profile/share/sounds/ocean/stereo/audio-volume-change.oga"
 
 [backdrop]
-
 enabled = true
+
 [bar.default]
 background_opacity = 0.5
 capsule = true
@@ -18,9 +18,9 @@ capsule_padding = 4.0
 capsule_thickness = 0.85
 center = [
   "notifications",
-  "media",
+  # "media",
   "group:g6",
-  "audio_visualizer",
+  # "audio_visualizer",
   "power_profile",
 ]
 color = "primary"
