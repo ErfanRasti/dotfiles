@@ -140,7 +140,7 @@ window-rule {
 }
 
 window-rule {
-  match app-id="Spotify"
+  match app-id="spotify"
   match app-id="v2rayN"
   match app-id="Throne"
   match app-id="uget-gtk"
