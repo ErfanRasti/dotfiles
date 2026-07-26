@@ -5,6 +5,7 @@ startup_command = "ls"
 
 [[session]]
 name = "configure"
+path = "~/dotfiles"
 windows = [" arch-setup", " dotfiles", "󱜙 opencode"]
 
 [[window]]

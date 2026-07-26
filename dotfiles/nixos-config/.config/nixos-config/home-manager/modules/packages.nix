@@ -222,6 +222,9 @@
     fum
     gapless
 
+    # Radio
+    shortwave
+
     # Videos
     mpv
     vlc
@@ -260,6 +263,8 @@
     bibata-cursors
     papirus-icon-theme
     flat-remix-icon-theme
+    iconic
+    icon-library
 
     # Offices
     onlyoffice-desktopeditors
@@ -353,6 +358,10 @@
     enable = true;
     packages = [
       "com.github.tchx84.Flatseal"
+      "io.github.flattool.Warehouse"
+      "org.videolan.VLC"
+      "org.cvfosammmm.Lemma"
+      "io.github.giantpinkrobots.flatsweep"
     ];
     overrides = {
       global = {
