@@ -1,4 +1,4 @@
-{
+{ username, ... }: {
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -7,6 +7,7 @@
   # https://nixos.wiki/wiki/Storage_optimization
   nix.optimise.automatic = true;
   nix.optimise.dates = [ "03:45" ]; # Optional; allows customizing optimisation schedule
+  nix.settings.trusted-users = [ "${username}" ];
 
   # Garbage Collection
   nix.gc = {
