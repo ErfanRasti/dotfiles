@@ -1,0 +1,5 @@
+.plugins.lock
+herdr-*
+herdr.sock
+session.json
+release-notes.json
