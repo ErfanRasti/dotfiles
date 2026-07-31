@@ -10,11 +10,12 @@
   nix.settings.trusted-users = [ "${username}" ];
 
   # Garbage Collection
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
-  };
+  # `programs.nh.clean.enable` and `nix.gc.automatic` conflict
+  # nix.gc = {
+  #   automatic = true;
+  #   dates = "weekly";
+  #   options = "--delete-older-than 7d";
+  # };
 
   # Nix evaluator GC tuning — forces Boehm GC to release memory back to OS
   # Without this, freed heap memory stays as "used" (saves ~2-3 GB during eval)

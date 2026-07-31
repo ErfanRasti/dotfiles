@@ -382,12 +382,4 @@
       };
     };
   };
-
-  programs.nh = {
-    enable = true;
-    clean.enable = true; # Better automatic GC
-    clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "path:$HOME/dotfiles/dotfiles/nixos-config/.config/nixos-config"; # Sets NH_FLAKE
-  };
-
 }
