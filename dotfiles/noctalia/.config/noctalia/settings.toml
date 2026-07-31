@@ -12,6 +12,7 @@ enabled = true
 
 [bar.default]
 background_opacity = 0.5
+# position = "bottom"
 capsule = true
 capsule_opacity = 0.6
 capsule_padding = 4.0
@@ -219,7 +220,7 @@ visualization_mode = "wave_rings"
 
 [dock]
 auto_hide = false
-smart_auto_hide = true
+smart_auto_hide = false
 background_opacity = 0.6
 cross_axis_padding = 2
 enabled = true
@@ -241,9 +242,9 @@ pinned = [
   "microsoft-edge",
   "wordbook",
 ]
-reserve_space = false
+reserve_space = true
 show_dots = true
-position = "right"
+position = "bottom"
 
 [keybinds]
 cancel = ["Escape", "Ctrl+q"]
@@ -272,10 +273,10 @@ major_interval = 4
 visible = true
 
 [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
-box_height = 70.0
-box_width = 400.0
-cx = 250.0
-cy = 600.0
+box_height = 200.0
+box_width = 800.0
+cx = 450.0
+cy = 500.0
 output = "eDP-1"
 rotation = 0.0
 type = "login_box"
@@ -289,7 +290,6 @@ input_radius = 6.0
 show_caps_lock = true
 show_keyboard_layout = true
 show_login_button = true
-show_password_hint = true
 
 [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
 box_height = 100.0
@@ -341,8 +341,6 @@ password_style = "random"
 polkit_agent = true
 screen_time_enabled = true
 
-[shell.launcher]
-session_search = true
 
 [shell.panel]
 clipboard_placement = "attached"
@@ -471,7 +469,7 @@ match_adjacent_spacing = true
 [widget.workspaces]
 capsule = true
 display = "name"
-minimal = false
+style = "regular"
 
 [[control_center.shortcuts]]
 type = "wifi"
