@@ -9,8 +9,10 @@ import re
 import sys
 from pathlib import Path
 
-MATUGEN = Path.home() / ".config/matugen/config.toml"
-NOCTALIA = Path.home() / ".config/noctalia/user-templates.toml"
+REPO_ROOT = Path(__file__).resolve().parents[2]
+
+MATUGEN = REPO_ROOT / "dotfiles/matugen/.config/matugen/config.toml"
+NOCTALIA = REPO_ROOT / "dotfiles/noctalia/.config/noctalia/user-templates.toml"
 
 
 def extract_block(text: str, section: str) -> tuple[str, str]:

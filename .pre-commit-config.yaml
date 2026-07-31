@@ -17,5 +17,5 @@ repos:
         name: Sync matugen ↔ noctalia configs
         entry: python3 hooks/scripts/sync_matugen_noctalia.py
         language: system
-        files: '(config\.toml|user-templates\.toml)$'
+        files: 'dotfiles/(matugen/.*config\.toml|noctalia/.*user-templates\.toml)$'
         pass_filenames: true
