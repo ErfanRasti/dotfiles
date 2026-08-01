@@ -341,6 +341,10 @@
     # Graph tools
     gnome-graphs
 
+    # GNOME
+    gnome-extension-manager
+    gnome-extensions-cli
+
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
