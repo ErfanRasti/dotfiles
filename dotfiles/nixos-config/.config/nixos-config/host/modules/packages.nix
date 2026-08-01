@@ -53,6 +53,27 @@
       libxrender
       libice
       libsm
+      libudev0-shim
+
+      # MATLAB installation libraries
+      pam
+      alsa-lib
+      atk
+      at-spi2-atk
+      at-spi2-core
+      cups
+      libdrm
+      gdk-pixbuf
+      gtk2
+      nspr
+      nss
+      libGL
+      libgbm
+      libxrandr
+      libXcomposite
+      libXdamage
+      libXfixes
+      libudev0-shim
 
       ## Uncomment if you want to use the libraries provided by default in the steam distribution
       ## but this is quite far from being exhaustive
