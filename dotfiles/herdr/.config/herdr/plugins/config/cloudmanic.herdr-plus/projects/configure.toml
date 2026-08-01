@@ -1,0 +1,16 @@
+name = "configure"
+description = "Configure the system"
+working_dir = "~/dotfiles"           # ~ and $VARS expand
+
+[[tabs]]
+name = " arch-setup"
+command = "cd ~/projects/arch-setup/; nvim"
+
+[[tabs]]
+path = ""
+name = " dotfiles"
+command = "cd ~/dotfiles/;nvim"
+
+[[tabs]]
+name = "󱜙 opencode"
+command = "cd ~/dotfiles/;opencode"
