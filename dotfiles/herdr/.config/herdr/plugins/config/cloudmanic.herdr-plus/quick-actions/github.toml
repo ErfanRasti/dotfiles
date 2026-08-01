@@ -1,0 +1,9 @@
+# A plain command action: selecting it runs `command` immediately.
+# This is the simplest possible action — just a name, a description, and a
+# command. `type` defaults to "command" when omitted.
+
+name = "GitHub"
+description = "Open https://github.com"
+# {{opener}} expands to your OS's default open command (open / xdg-open /
+# Start-Process), so the same action works on macOS, Linux, and Windows.
+command = "{{opener}} https://github.com"

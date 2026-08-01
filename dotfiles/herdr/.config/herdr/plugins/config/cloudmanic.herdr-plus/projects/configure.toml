@@ -14,3 +14,8 @@ command = "cd ~/dotfiles/;nvim"
 [[tabs]]
 name = "󱜙 opencode"
 command = "cd ~/dotfiles/;opencode"
+
+[[tabs]]
+name = " extra"
+
+
