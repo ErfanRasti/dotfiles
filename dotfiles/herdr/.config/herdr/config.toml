@@ -10,6 +10,20 @@ delivery = "system"
 name = "tokyo-night"
 auto_switch = true
 
+[keys]
+focus_pane_left = ["prefix+h", "ctrl+alt+h"]
+focus_pane_down = ["prefix+j", "ctrl+alt+j"]
+focus_pane_up = ["prefix+k", "ctrl+alt+k"]
+focus_pane_right = ["prefix+l", "ctrl+alt+l"]
+previous_tab = ["prefix+p", "ctrl+alt+["]
+next_tab = ["prefix+n", "ctrl+alt+]"]
+new_tab = ["prefix+c", "ctrl+alt+c"]
+split_vertical = ["prefix+v", "ctrl+alt+d"]
+split_horizontal = ["prefix+minus", "ctrl+alt+shift+d"]
+zoom = ["prefix+z", "ctrl+alt+z"]
+navigate_workspace_up = "k"
+navigate_workspace_down = "j"
+
 [[keys.command]]
 key = "prefix+f"
 type = "plugin_action"
@@ -33,6 +47,19 @@ key = "prefix+a"
 type = "plugin_action"
 command = "cloudmanic.herdr-plus.quick-actions"
 description = "herdr-plus: quick actions"
+
+[[keys.command]]
+key = "prefix+shift+q"
+type = "shell"
+command = "herdr server stop"
+description = "stop herdr completely (end all sessions)"
+
+[[keys.command]]
+key = "prefix+ctrl+q"
+type = "shell"
+command = "herdr server stop;rm ~/.config/herdr/session.json"
+description = "stop herdr and remove all workspaces"
+
 
 [experimental]
 kitty_graphics = true
