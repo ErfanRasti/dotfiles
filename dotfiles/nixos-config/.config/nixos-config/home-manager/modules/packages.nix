@@ -355,8 +355,21 @@
   # services.polkit-gnome.enable = true;
 
   home.activation.pywalfox = lib.mkAfter ''
-    ~/.nix-profile/bin/pywalfox install
-    ~/.nix-profile/bin/pywalfox update
+    ${lib.getExe pkgs.pywalfox-native} install
+    ${lib.getExe pkgs.pywalfox-native} update
+  '';
+  home.activation.herdrPlugins = lib.hm.dag.entryAfter [ "writeBoundary" "installPackages" ] ''
+    export PATH="${
+      lib.makeBinPath [
+        pkgs.git
+        pkgs.curl
+        pkgs.gnutar
+        pkgs.gzip
+        pkgs.gawk
+      ]
+    }:$PATH"
+    run ${lib.getExe pkgs.herdr} plugin install cloudmanic/herdr-plus --yes
+    run ${lib.getExe pkgs.herdr} plugin install smarzban/herdr-file-viewer --yes
   '';
 
   services.flatpak = {
