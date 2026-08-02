@@ -12,6 +12,7 @@
     ./security.nix # Sudo, security policies
     ./users.nix # User accounts
     ./system.nix # System state version
+    ./envvars.nix # Environment variables
     ./packages.nix # System packages, programs, unfree
     ./theme.nix # Theme
     ./swap.nix # Swap partition
