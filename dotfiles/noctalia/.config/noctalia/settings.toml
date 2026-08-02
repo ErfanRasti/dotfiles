@@ -327,6 +327,7 @@ enabled = true
 [notification]
 background_opacity = 0.7
 position = "bottom_right"
+layer = "overlay"
 
 [osd]
 background_opacity = 0.6
@@ -344,7 +345,7 @@ screen_time_enabled = true
 
 [shell.panel]
 clipboard_placement = "attached"
-launcher_placement = "attached"
+launcher_placement = "floating"
 open_near_click_control_center = true
 open_near_click_launcher = true
 polkit_placement = "attached"
@@ -468,7 +469,8 @@ match_adjacent_spacing = true
 
 [widget.workspaces]
 capsule = true
-display = "name"
+show_labels = true
+label_source = "name"
 style = "regular"
 
 [[control_center.shortcuts]]
