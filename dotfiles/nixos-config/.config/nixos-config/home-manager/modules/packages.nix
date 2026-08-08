@@ -2,6 +2,8 @@
   pkgs,
   lib,
   inputs,
+  config,
+  system,
   ...
 }:
 {
@@ -370,6 +372,27 @@
     }:$PATH"
     run ${lib.getExe pkgs.herdr} plugin install cloudmanic/herdr-plus --yes
     run ${lib.getExe pkgs.herdr} plugin install smarzban/herdr-file-viewer --yes
+  '';
+  home.activation.installXrayCore = lib.hm.dag.entryAfter [ "writeBoundary" "installPackages" ] ''
+    set -euo pipefail
+    case "${system}" in
+      x86_64-linux) xrayAsset="Xray-linux-64.zip" ;;
+      aarch64-linux) xrayAsset="Xray-linux-arm64-v8a.zip" ;;
+      *) echo "Unsupported system: ${system}" >&2; exit 1 ;;
+    esac
+    binDir="${config.home.homeDirectory}/.local/share/v2rayN/bin/xray"
+    mkdir -p "$binDir"
+    version="$(${lib.getExe pkgs.curl} -fsSL https://api.github.com/repos/xtls/xray-core/releases/latest | ${lib.getExe pkgs.jq} -r .tag_name)"
+    if [[ -f "$binDir/xray" && -f "$binDir/.version" && "$(<"$binDir/.version")" == "$version" ]]; then
+      exit 0
+    fi
+    tmpDir="$(mktemp -d)"
+    trap 'rm -rf "$tmpDir"' EXIT
+    ${lib.getExe pkgs.curl} -fsSLo "$tmpDir/xray.zip" \
+      "https://github.com/xtls/xray-core/releases/download/$version/$xrayAsset"
+    ${lib.getExe pkgs.unzip} -oq "$tmpDir/xray.zip" -d "$binDir"
+    chmod +x "$binDir/xray"
+    echo "$version" > "$binDir/.version"
   '';
 
   services.flatpak = {
