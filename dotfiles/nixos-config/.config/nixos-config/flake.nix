@@ -95,7 +95,7 @@
         pkgs = nixpkgs.legacyPackages.${system};
 
         extraSpecialArgs = {
-          inherit inputs username stateVersion;
+          inherit inputs username stateVersion system;
         };
 
         modules = [
