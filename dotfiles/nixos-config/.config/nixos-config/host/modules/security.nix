@@ -82,4 +82,18 @@
 
   # polkit status
   security.polkit.enable = true;
+
+  # howdy
+  security.pam.howdy.enable = true;
+  services.howdy = {
+    enable = true;
+    settings = {
+      core = {
+        # no_confirmation = true;
+        # workaround = "input";
+      };
+    };
+  };
+  services.howdy.control = "sufficient";
+  # services.linux-enable-ir-emitter.enable = true;
 }

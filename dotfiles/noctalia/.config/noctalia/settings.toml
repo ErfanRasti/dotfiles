@@ -238,9 +238,9 @@ pinned = [
   "code",
   "kitty",
   "spotify",
-  "telegram",
+  "org.telegram.desktop",
   "microsoft-edge",
-  "wordbook",
+  "dev.mufeed.Wordbook",
 ]
 reserve_space = true
 show_dots = true
