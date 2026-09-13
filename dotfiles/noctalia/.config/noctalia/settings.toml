@@ -431,7 +431,7 @@ format = "%H:%M:%S | %a, %b %d"
 [widget.input_volume]
 show_label = true
 
-[widget.keyboard_layout.custom_labels]
+[shell.keyboard_layout.custom_labels]
 "Persian (Windows)" = "PER"
 
 [widget.lock_keys]
