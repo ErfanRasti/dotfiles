@@ -107,7 +107,7 @@
     playerctl
 
     # Shells
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    noctalia
     noctalia-shell
     dms-shell
     quickshell
@@ -172,6 +172,11 @@
 
     # Network & Proxy
     v2rayn
+    networkmanagerapplet
+    # speedtest
+    speedtest-cli
+    geteduroam-cli
+    geteduroam
 
     # Social Media
     telegram-desktop
@@ -180,6 +185,15 @@
 
     # Camera
     cheese
+
+    # Video/Audio data composition framework tools like "gst-inspect", "gst-launch" ...
+    gst_all_1.gstreamer
+    # Common plugins like "filesrc" to combine within e.g. gst-launch
+    gst_all_1.gst-plugins-base
+    # Specialized plugins separated by quality
+    gst_all_1.gst-plugins-good
+    # Plugins to reuse ffmpeg to play almost every video format
+    gst_all_1.gst-libav
 
     # Image Editors
     gimp
@@ -286,6 +300,7 @@
     luarocks
     nodejs
     sqlite
+    jdk17
 
     # Power Management tools
     acpi

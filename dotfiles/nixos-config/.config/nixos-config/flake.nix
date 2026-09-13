@@ -42,8 +42,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    noctalia.url = "github:noctalia-dev/noctalia/cachix";
-
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
@@ -85,7 +83,6 @@
 
         modules = [
           ./host/configuration.nix
-          inputs.gsr-ui-nix.nixosModules.default
           inputs.lanzaboote.nixosModules.lanzaboote
 
         ];
@@ -95,7 +92,12 @@
         pkgs = nixpkgs.legacyPackages.${system};
 
         extraSpecialArgs = {
-          inherit inputs username stateVersion system;
+          inherit
+            inputs
+            username
+            stateVersion
+            system
+            ;
         };
 
         modules = [
