@@ -36,6 +36,9 @@
     mesa-demos
     mesa
 
+    # power management tools
+    powertop
+
   ];
 
   # To check the current nix-ld modules: l /run/current-system/sw/share/nix-ld/lib/
