@@ -148,6 +148,7 @@
     # AI Tools
     opencode
     ollama
+    codex
 
     # Browsers
     inputs.zen-browser.packages.${stdenv.hostPlatform.system}.default
@@ -209,6 +210,7 @@
     sushi
     nautilus-open-any-terminal
     code-nautilus
+    rclone
 
     # Nix
     nix-prefetch-git
