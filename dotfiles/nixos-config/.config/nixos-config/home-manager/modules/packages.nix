@@ -377,6 +377,12 @@
     ${lib.getExe pkgs.pywalfox-native} install
     ${lib.getExe pkgs.pywalfox-native} update
   '';
+
+  home.activation.rclone = lib.mkAfter ''
+    mkdir -p ~/GoogleDrive/
+    ${lib.getExe pkgs.rclone} mount "Google Drive": ~/GoogleDrive --daemon
+  '';
+
   home.activation.herdrPlugins = lib.hm.dag.entryAfter [ "writeBoundary" "installPackages" ] ''
     export PATH="${
       lib.makeBinPath [
