@@ -23,4 +23,7 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # GNOME
+  services.gnome.gnome-online-accounts.enable = true;
+
 }
