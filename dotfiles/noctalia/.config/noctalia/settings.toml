@@ -259,6 +259,7 @@ auto_locate = true
 
 [lockscreen_widgets]
 enabled = true
+remember_last_region = true
 schema_version = 2
 widget_order = [
   "lockscreen-login-box@eDP-1",
@@ -322,6 +323,7 @@ type = "media_player"
 hide_when_no_media = true
 
 [nightlight]
+force = true
 enabled = true
 
 [notification]
