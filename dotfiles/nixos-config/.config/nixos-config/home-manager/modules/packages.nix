@@ -240,6 +240,7 @@
     amberol
     fum
     gapless
+    spotifast
 
     # Radio
     shortwave
@@ -363,6 +364,10 @@
     # GNOME
     gnome-extension-manager
     gnome-extensions-cli
+
+    # iOS Tools
+    usbmuxd
+    iloader
 
   ];
 
