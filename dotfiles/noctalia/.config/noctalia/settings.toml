@@ -357,6 +357,10 @@ transparency_mode = "glass"
 [shell.screenshot]
 confirm_region = true
 directory = "~/Pictures/Screenshots"
+annotate = true
+remember_last_region = true
+show_cursor = true
+
 
 [[shell.session.actions]]
 action = "lock"

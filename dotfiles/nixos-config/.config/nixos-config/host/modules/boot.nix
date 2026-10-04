@@ -11,7 +11,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
   boot.extraModprobeConfig = ''
-    options rtl8723be ant_sel=2 ips=0 fwlps=0
+    options rtl8723be ant_sel=2 ips=0 fwlps=0 swlps=0
   '';
 
   # https://wiki.nixos.org/wiki/Plymouth
