@@ -240,7 +240,7 @@
     amberol
     fum
     gapless
-    spotifast
+    # spotifast
 
     # Radio
     shortwave
@@ -374,6 +374,9 @@
     # iOS Tools
     usbmuxd
     iloader
+
+    # USB
+    ntfs3g
 
   ];
 
