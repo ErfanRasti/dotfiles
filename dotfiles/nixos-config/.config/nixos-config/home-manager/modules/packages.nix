@@ -108,7 +108,7 @@
 
     # Shells
     noctalia
-    noctalia-shell
+    # noctalia-shell
     dms-shell
     quickshell
     ashell
@@ -304,6 +304,12 @@
     nodejs
     sqlite
     jdk17
+    # Remember to run: nix-store --add-fixed sha256 ~/programs/wolfram/Wolfram_15.0.1.sh
+    # nix profile remove mathematica   # use the name shown by the list
+    (mathematica.override {
+      version = "15.0.1"; # the version you downloaded
+      webdoc = false; # true if you took the smaller web-docs installer
+    })
 
     # Power Management tools
     acpi
