@@ -41,9 +41,11 @@ icon_color = "tertiary"
 margin_ends = 0
 padding = 2
 panel_overlap = 0
-scale = 0.9
+# scale = 0.9
+scale = 1.0
 start = ["session", "workspaces", "active_window"]
-thickness = 24
+# thickness = 24
+thickness = 28
 widget_spacing = 2
 
 [[bar.default.capsule_group]]
@@ -344,6 +346,11 @@ password_style = "random"
 polkit_agent = true
 screen_time_enabled = true
 
+[shell.window_switcher]
+mru = true
+
+[shell.launcher]
+show_app_actions = true
 
 [shell.panel]
 clipboard_placement = "attached"
@@ -478,6 +485,17 @@ capsule = true
 show_labels = true
 label_source = "name"
 style = "regular"
+
+[widget.taskbar]
+capsule_radius = "auto"
+group_by_workspace = true
+icon_scale = 1.5
+scale = 1.0
+font_scale = 1.2
+show_workspace_label = true
+
+[widget.control-center]
+glyph = "niri"
 
 [[control_center.shortcuts]]
 type = "wifi"
