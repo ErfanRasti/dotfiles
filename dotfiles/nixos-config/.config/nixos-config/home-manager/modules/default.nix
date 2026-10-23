@@ -5,5 +5,6 @@
     ./desktop-entries.nix
     ./spicetify.nix
     ./gnome-extensions.nix
+    ./comsol.nix
   ];
 }

@@ -54,6 +54,9 @@
     nix-software-center.url = "github:snowfallorg/nix-software-center";
 
     app-manager.url = "github:kem-a/AppManager";
+
+    # claude
+    claude-desktop.url = "github:k3d3/claude-desktop-linux-flake";
   };
 
   outputs =
