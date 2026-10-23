@@ -142,13 +142,12 @@
     hyprsunset
     hyprpicker
 
-    # Audio
-    pulseaudio
-
     # AI Tools
     opencode
     ollama
     codex
+    claude-code
+    inputs.claude-desktop.packages.${stdenv.hostPlatform.system}.claude-desktop
 
     # Browsers
     inputs.zen-browser.packages.${stdenv.hostPlatform.system}.default
@@ -237,10 +236,16 @@
 
     # Music
     # spotify - installed via spicetify-nix
-    amberol
+    # amberol
     fum
     gapless
     # spotifast
+
+    # Audio control
+    pulseaudio
+    pavucontrol
+    # audacity
+    gnome-sound-recorder
 
     # Radio
     shortwave
@@ -355,11 +360,6 @@
 
     # System check
     stress
-
-    # Audio control
-    pavucontrol
-    audacity
-    gnome-sound-recorder
 
     # Screen recorder
     obs-studio
