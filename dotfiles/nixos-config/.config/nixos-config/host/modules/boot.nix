@@ -22,7 +22,6 @@
   # Enable "Silent boot"
   boot = {
     consoleLogLevel = 3; # only kernel messages with log level ≥3 (KERN_ERR and above) appear on the console.
-    initrd.verbose = false; # suppresses verbose output from the initial ramdisk (initrd) phase.
     kernelParams = [
       "quiet" # reduces kernel log verbosity (equivalent to loglevel=3).
       "rd.udev.log_level=3" # limits udev (device manager) messages in the initrd to errors only.
