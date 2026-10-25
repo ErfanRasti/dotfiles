@@ -99,7 +99,7 @@
     vicinae
     (rofi.override { plugins = [ rofi-calc ]; })
     rofimoji
-    dsearch
+    dux-search
     # dcal dms calendar
 
     # Controllers
@@ -109,7 +109,7 @@
     # Shells
     noctalia
     # noctalia-shell
-    dms-shell
+    dux-shell
     quickshell
     ashell
 
@@ -199,7 +199,19 @@
     # Image Editors
     gimp
     imagemagick
-    gnome-frog
+    # posthog is marked broken only because its tests fail with mcp >= 2
+    (gnome-frog.override {
+      python3Packages = python3Packages.overrideScope (
+        _: prev: {
+          posthog = prev.posthog.overridePythonAttrs (old: {
+            doCheck = false;
+            meta = old.meta // {
+              broken = false;
+            };
+          });
+        }
+      );
+    })
 
     # Video Editors
     kdePackages.kdenlive

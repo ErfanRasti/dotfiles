@@ -84,24 +84,36 @@
       };
     };
   };
-xdg.desktopEntries.code = {
-  name = "Visual Studio Code";
-  comment = "Code Editing. Redefined.";
-  genericName = "Text Editor";
-  exec = "code --enable-features=UseOzonePlatform --ozone-platform=wayland %F";
-  icon = "visual-studio-code";
-  type = "Application";
-  startupNotify = false;
-  categories = [ "TextEditor" "Development" "IDE" ];
-  mimeType = [ "application/x-code-workspace" ];
+  xdg.desktopEntries.code = {
+    name = "Visual Studio Code";
+    comment = "Code Editing. Redefined.";
+    genericName = "Text Editor";
+    exec = "code --enable-features=UseOzonePlatform --ozone-platform=wayland %F";
+    icon = "visual-studio-code";
+    type = "Application";
+    startupNotify = false;
+    categories = [
+      "TextEditor"
+      "Development"
+      "IDE"
+    ];
+    mimeType = [ "application/x-code-workspace" ];
 
-  actions = {
-    "new-empty-window" = {
-      name = "New Empty Window";
-      exec = "code --new-window --enable-features=UseOzonePlatform --ozone-platform=wayland %F";
-      icon = "visual-studio-code";
+    actions = {
+      "new-empty-window" = {
+        name = "New Empty Window";
+        exec = "code --new-window --enable-features=UseOzonePlatform --ozone-platform=wayland %F";
+        icon = "visual-studio-code";
+      };
     };
   };
-};
+  xdg.desktopEntries.whatsapp = {
+    name = "WhatsApp";
+    exec = "chromium --app=https://web.whatsapp.com";
+    icon = "whatsapp";
+    categories = [
+      "Network"
+      "Chat"
+    ];
+  };
 }
-
