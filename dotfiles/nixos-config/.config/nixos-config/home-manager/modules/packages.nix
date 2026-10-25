@@ -152,6 +152,7 @@
     # Browsers
     inputs.zen-browser.packages.${stdenv.hostPlatform.system}.default
     google-chrome
+    chromium
     microsoft-edge
     firefox
 
