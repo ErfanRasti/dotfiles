@@ -93,6 +93,9 @@ in
     name = "COMSOL Multiphysics";
     exec = "comsol";
     icon = "${config.home.homeDirectory}/.local/comsol/bin/glnxa64/comsol.png";
+    # COMSOL's GUI is SWT, so its windows report app ID "SWT" (not "comsol").
+    # Shells like noctalia match app IDs against StartupWMClass to find the icon.
+    settings.StartupWMClass = "SWT";
     terminal = false;
     categories = [
       "Science"
