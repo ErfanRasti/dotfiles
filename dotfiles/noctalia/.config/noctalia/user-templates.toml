@@ -155,10 +155,11 @@ post_hook = 'pywalfox update'
 input_path = '~/.config/matugen/templates/zed-colors.json'
 output_path = '~/.config/zed/themes/matugen.json'
 
+# spicetify-reload (spicetify.nix) applies the colors and reloads the open Spotify
 [theme.templates.user.spicetify]
-input_path = '~/.config/matugen/templates/spicetify.ini'
-output_path = '~/.config/spicetify/Themes/Sleek/color.ini'
-post_hook = 'spicetify watch -s 2>&1 | sed "/Reloaded Spotify/q"'
+input_path = '~/.config/matugen/templates/spicetify-comfy.ini'
+output_path = '~/.config/spicetify/Themes/Comfy/color.ini'
+post_hook = 'spicetify-reload'
 
 [theme.templates.user.vicinae]
 input_path = '~/.config/matugen/templates/vicinae.ini'
