@@ -423,6 +423,9 @@ mode = "dark"
 source = "wallpaper"
 wallpaper_scheme = "m3-tonal-spot"
 
+[theme.templates]
+community_ids = ["telegram", "neovim", "vscode", "obs"]
+
 [wallpaper]
 directory = "~/Pictures/Wallpapers/"
 directory_dark = "~/Pictures/Wallpapers/"

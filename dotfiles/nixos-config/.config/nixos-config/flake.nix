@@ -35,14 +35,22 @@
       flake = false; # Since it's not a flake itself
     };
 
+    # Spicetify theme and extensions (see home-manager/modules/spicetify.nix)
+    spicetify-comfy = {
+      url = "github:Comfy-Themes/Spicetify";
+      flake = false;
+    };
+    spicetify-adblock = {
+      url = "github:rxri/spicetify-extensions";
+      flake = false;
+    };
+
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.1.0";
 
       # Optional but recommended to limit the size of your system closure.
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 

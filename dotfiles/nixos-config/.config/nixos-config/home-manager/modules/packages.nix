@@ -9,7 +9,6 @@
 {
 
   imports = [
-    inputs.spicetify-nix.homeManagerModules.default
     inputs.nix-flatpak.homeManagerModules.nix-flatpak
   ];
 
@@ -248,11 +247,10 @@
     nahid-fonts
 
     # Music
-    # spotify - installed via spicetify-nix
+    # spotify - installed via flatpak
     # amberol
     fum
     gapless
-    # spotifast
 
     # Audio control
     pulseaudio
@@ -273,7 +271,7 @@
     htop
     nvtopPackages.full
     mission-center
-    dgop
+    dux-gop
 
     # Stores
     flatpak # use it with flatpak --user ...
@@ -453,6 +451,7 @@
       "org.videolan.VLC"
       "org.cvfosammmm.Lemma"
       "io.github.giantpinkrobots.flatsweep"
+      "com.spotify.Client"
     ];
     overrides = {
       global = {
