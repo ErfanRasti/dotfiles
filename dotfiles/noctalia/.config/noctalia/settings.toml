@@ -43,7 +43,7 @@ padding = 2
 panel_overlap = 0
 # scale = 0.9
 scale = 1.0
-start = ["session", "workspaces", "active_window"]
+start = ["session", "taskbar", "active_window"]
 # thickness = 24
 thickness = 28
 widget_spacing = 2
@@ -239,7 +239,7 @@ pinned = [
   "matlab",
   "code",
   "kitty",
-  "spotify",
+  "com.spotify.Client",
   "org.telegram.desktop",
   "microsoft-edge",
   "dev.mufeed.Wordbook",

@@ -134,8 +134,10 @@ window-rule {
 
 window-rule {
   match app-id="org.telegram.desktop"
+  match app-id="chrome-web.whatsapp.com__-Default"
   match app-id="hiddify"
-  default-column-width { proportion 0.15; }
+  // default-column-width { proportion 0.15; }
+  default-column-width { proportion 0.55; }
   open-on-workspace "Entertainment"
 }
 
@@ -212,6 +214,7 @@ window-rule {
 
 window-rule {
     match app-id=r#"^org\.telegram\.desktop$"#
+    match app-id="chrome-web.whatsapp.com__-Default"
     match app-id="v2rayN"
     match app-id="Throne"
 
