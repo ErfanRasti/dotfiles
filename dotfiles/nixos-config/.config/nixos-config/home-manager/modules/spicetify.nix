@@ -23,14 +23,10 @@ let
     ];
     text = ''
       spicetify -q refresh || spicetify -q apply --no-restart
-      # 9222 from spotify-flags.conf, 8088 is Spotify's own port when devtools are enabled
-      for port in 9222 8088; do
-        ws=$(curl -sf "http://127.0.0.1:$port/json/list" |
-          jq -r '[.[] | select(.type == "page")][0].webSocketDebuggerUrl // empty') || continue
-        [ -n "$ws" ] || continue
-        echo '{"id":1,"method":"Page.reload"}' | websocat -n1 "$ws" >/dev/null
-        exit 0
-      done
+      ws=$(curl -sf "http://127.0.0.1:9222/json/list" |
+        jq -r '[.[] | select(.type == "page")][0].webSocketDebuggerUrl // empty') || exit 0
+      [ -n "$ws" ] || exit 0
+      echo '{"id":1,"method":"Page.reload"}' | websocat -n1 "$ws" >/dev/null
     '';
   };
 
@@ -49,14 +45,16 @@ in
     spicetify-reload
   ];
 
-  # Extra flags read by the Flatpak's own launcher. Copied rather than linked:
-  # the sandbox can't follow a symlink into /nix/store, so the flags got ignored.
+  # Extra flags read by the Flatpak's own launcher, inside its sandbox. Copied rather
+  # than linked: the sandbox can't see /nix/store, so a symlink gets the flags ignored.
   home.activation.spotifyFlags = lib.hm.dag.entryBetween [ "reloadSystemd" ] [ "linkGeneration" ] ''
     flags="$HOME/.var/app/com.spotify.Client/config/spotify-flags.conf"
     run rm -f "$flags"
     run install -Dm644 ${spotifyFlags} "$flags"
   '';
 
+  # Only spicetify reads these, outside the sandbox, so store symlinks are fine here:
+  # `apply`/`refresh` copies them into the Flatpak's own files (spotify_path).
   home.file = {
     # Comfy theme; color.ini is left out so matugen/Noctalia can write it
     ".config/spicetify/Themes/Comfy/user.css".source = "${comfy}/Comfy/user.css";
