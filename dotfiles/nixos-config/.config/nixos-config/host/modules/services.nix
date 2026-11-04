@@ -1,4 +1,4 @@
-{
+{ username, ... }: {
   # Enable the X11 windowing system.
   services.xserver.enable = false;
 
@@ -25,5 +25,8 @@
 
   # GNOME
   services.gnome.gnome-online-accounts.enable = true;
+
+  services.nordvpn.enable = true;
+  users.users.${username}.extraGroups = [ "nordvpn" ];
 
 }
