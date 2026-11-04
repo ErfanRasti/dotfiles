@@ -416,10 +416,19 @@
         pkgs.gnutar
         pkgs.gzip
         pkgs.gawk
+        pkgs.go
       ]
     }:$PATH"
-    run ${lib.getExe pkgs.herdr} plugin install cloudmanic/herdr-plus --yes
-    run ${lib.getExe pkgs.herdr} plugin install smarzban/herdr-file-viewer --yes
+    herdr=${lib.getExe pkgs.herdr}
+    installed="$($herdr plugin list --json 2>/dev/null || true)"
+    # Only install missing plugins: reinstalling on every switch hits GitHub's
+    # rate limit (403) and a network failure shouldn't abort activation.
+    for spec in cloudmanic/herdr-plus:cloudmanic.herdr-plus smarzban/herdr-file-viewer:herdr-file-viewer; do
+      if ! grep -q "\"plugin_id\":\"''${spec#*:}\"" <<<"$installed"; then
+        run $herdr plugin install "''${spec%%:*}" --yes \
+          || warnEcho "herdr: failed to install ''${spec%%:*}, skipping"
+      fi
+    done
   '';
   home.activation.installXrayCore = lib.hm.dag.entryAfter [ "writeBoundary" "installPackages" ] ''
     set -euo pipefail
