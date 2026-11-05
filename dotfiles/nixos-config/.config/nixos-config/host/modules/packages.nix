@@ -13,6 +13,7 @@
   # Enable Wayland compositors for display manager session entries
   programs.hyprland.enable = true;
   programs.niri.enable = true;
+  programs.umbriel.enable = true;
 
   environment.systemPackages = with pkgs; [
     # System management
@@ -67,7 +68,6 @@
       cups
       libdrm
       gdk-pixbuf
-      gtk2
       nspr
       nss
       libGL
