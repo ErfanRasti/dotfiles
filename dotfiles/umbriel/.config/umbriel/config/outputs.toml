@@ -1,0 +1,16 @@
+# Outputs. Run `umbriel outputs` inside a session to list names and modes.
+# https://docs.noctalia.dev/umbriel/outputs/
+
+[output.eDP-1]
+# enabled = false
+# mode = "1920x1080@120.030"
+scale = 1.25
+transform = "normal"
+vrr = "always"            # niri: variable-refresh-rate
+position = [0, 0]
+focus_at_startup = true
+
+# Remove the laptop panel from the desktop while the lid is closed.
+# [events]
+# lid_close = "umbriel msg output-disable eDP-1"
+# lid_open = "umbriel msg output-enable eDP-1"

@@ -1,0 +1,68 @@
+# Noctalia shell integration (niri: config/noctalia.kdl).
+# https://docs.noctalia.dev/noctalia/compositor-settings/umbriel
+#
+# NOTE: TOML can't repeat a [keybinds] key across files reliably, so keep these
+# chords out of config/binds.toml.
+
+[keybinds]
+"Alt+space" = { action = "spawn noctalia msg panel-toggle launcher", repeat = false }
+# Tap Super alone to open the launcher. It only fires when Super is pressed and released by
+# itself, so Mod+<key> shortcuts and Super+Space (keyboard layout) are unaffected.
+"Mod" = { action = "spawn noctalia msg panel-toggle launcher", repeat = false }
+"Mod+Comma" = { action = "spawn noctalia msg settings-toggle", repeat = false }
+
+# Audio / media (work while locked)
+"XF86AudioRaiseVolume" = { action = "spawn noctalia msg volume-up", allow_when_locked = true }
+"XF86AudioLowerVolume" = { action = "spawn noctalia msg volume-down", allow_when_locked = true }
+"XF86AudioMute" = { action = "spawn noctalia msg volume-mute", allow_when_locked = true, repeat = false }
+"XF86AudioMicMute" = { action = "spawn noctalia msg mic-mute", allow_when_locked = true, repeat = false }
+"XF86AudioPlay" = { action = "spawn noctalia msg media toggle", allow_when_locked = true, repeat = false }
+"XF86AudioNext" = { action = "spawn noctalia msg media next", allow_when_locked = true }
+"XF86AudioPrev" = { action = "spawn noctalia msg media previous", allow_when_locked = true }
+
+# Brightness
+"XF86MonBrightnessUp" = { action = "spawn noctalia msg brightness-up", allow_when_locked = true }
+"XF86MonBrightnessDown" = { action = "spawn noctalia msg brightness-down", allow_when_locked = true }
+
+# Panels & plugins
+"Mod+N" = { action = "spawn noctalia msg panel-toggle control-center notifications", repeat = false }
+"Mod+Alt+N" = { action = "spawn noctalia msg notification-dnd-toggle", repeat = false }
+"Mod+Alt+W" = { action = "spawn noctalia msg panel-toggle wallpaper", repeat = false }
+"Mod+Escape" = { action = "spawn noctalia msg session lock", repeat = false }
+"Mod+S" = { action = "spawn noctalia msg panel-toggle control-center", repeat = false }
+"Mod+V" = { action = "spawn noctalia msg panel-toggle clipboard", repeat = false }
+"Mod+B" = { action = "spawn noctalia msg dock-toggle", repeat = false }
+"Mod+Period" = { action = "spawn noctalia msg panel-toggle launcher /emo", repeat = false }
+"Mod+Alt+Period" = { action = "spawn noctalia msg panel-toggle plugin:kaomoji", repeat = false }
+"Mod+Slash" = { action = "spawn noctalia msg panel-toggle plugin:keybind-cheatsheet", repeat = false }
+"Mod+Ctrl+Alt+Shift+K" = { action = "spawn noctalia msg panel-toggle plugin:show-keys", repeat = false }
+"Mod+Shift+N" = { action = "spawn noctalia msg panel-toggle plugin:sticky-notes", repeat = false }
+"Mod+Ctrl+Shift+S" = { action = "spawn noctalia msg panel-toggle plugin:screen-toolkit", repeat = false }
+"Mod+Ctrl+Shift+C" = { action = "spawn ~/.config/noctalia/plugins/keep-awake-plus/scripts/system-awake", repeat = false }
+"Alt+F4" = { action = "spawn noctalia msg panel-toggle session", repeat = false }
+
+# Screenshots
+"Print" = { action = "spawn noctalia msg screenshot-region", repeat = false }
+"Shift+Print" = { action = "spawn noctalia msg screenshot-fullscreen", repeat = false }
+
+# The shell itself is started from config/autostarts.toml ("noctalia").
+
+# ---------------------------------------------------------------- layer rules
+[[layer_rule]]
+match.namespace = "^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd|desktop-widget-[^\"]*)$"
+blur = true
+blur_ignore_alpha = 0.5
+blur_popups = true
+
+# (Panels/dock/notifications use the cheap cached wallpaper blur too, not live "x-ray" blur.)
+
+# Noctalia settings window & umbriel share picker float.
+[[window_rule]]
+match.app_id = "^dev.noctalia.Noctalia$"
+default_floating = true
+default_floating_size_px = { width = 1020, height = 900 }
+
+[[window_rule]]
+match.app_id = "^dev.noctalia.UmbrielSharePicker$"
+default_floating = true
+default_floating_size_px = { width = 800, height = 600 }

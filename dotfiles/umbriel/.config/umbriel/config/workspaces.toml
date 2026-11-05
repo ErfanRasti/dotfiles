@@ -1,0 +1,26 @@
+# Named workspaces (niri: config/workspaces.kdl).
+# https://docs.noctalia.dev/umbriel/workspaces-overview/
+#
+# niri's "Scratchpad" workspace is replaced by umbriel's default scratchpad
+# (Mod+W / Mod+Shift+W; see the "Scratchpad" sections of binds.toml and rules.toml).
+
+[workspaces]
+back_and_forth = true        # pressing Mod+<current> jumps back to the previous one
+empty_above = false
+
+# The workspace list itself lives in config/workspaces.defaults.toml (tracked defaults).
+# umbriel loads config/workspaces.state.toml, a copy that scripts/set_layout.py keeps up to
+# date with each workspace's current layout, so layouts survive config reloads and restarts.
+# (Runtime-only layout changes are reset by any config reload, e.g. the stacking title bars.)
+
+# ---------------------------------------------------------------- overview
+[overview]
+zoom = 0.5
+background_blur = true
+workspace_wallpaper = true
+
+# Hot corner: top-left opens the overview (niri default behaviour).
+[hot_corners.top_left]
+enabled = true
+delay_ms = 500
+action = "overview-open"

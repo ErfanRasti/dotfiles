@@ -64,7 +64,7 @@ user_pref(
 user_pref("browser.tabs.groups.enabled", true);
 user_pref("browser.tabs.groups.arc-style", false);
 user_pref("browser.tabs.allow_transparent_browser", true);
-user_pref("browser.tabs.inTitlebar", 1);
+user_pref("browser.tabs.inTitlebar", 0); // use the compositor title bar instead of in-toolbar window controls
 
 // ============ Zen behavior & layout ============
 user_pref("zen.urlbar.behavior", "float");
