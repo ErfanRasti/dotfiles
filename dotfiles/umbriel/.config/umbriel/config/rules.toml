@@ -1,0 +1,202 @@
+# Window rules, layer rules and scratchpads (niri: config/rules.kdl).
+# https://docs.noctalia.dev/umbriel/window-rules/
+# Rules combine in order; later values override earlier ones.
+# HINT: find app ids / titles with `umbriel windows`.
+
+# ================================================================ All windows
+[[window_rule]]
+blur = true
+opacity = 0.9                 # niri: opacity 0.9 (focused and unfocused)
+default_maximize_to_edges = false
+
+# Keep noctalia windows fully opaque (niri: exclude title="Noctalia").
+[[window_rule]]
+match.app_id = ["^dev\\.noctalia\\..*$"]
+opacity = 1.0
+
+# ================================================================ Scratchpad
+# umbriel's single default scratchpad (no named ones): Mod+W stores/restores the focused
+# window, Mod+Shift+W shows/hides it. App shortcuts (yazi, btop, ...) use
+# scripts/toggle_app.sh: they open the app as a normal floating window, and the same shortcut
+# on that window puts it into the scratchpad / brings it back.
+
+# Utility apps always open floating (niri: 0.65 x 0.7).
+[[window_rule]]
+match.app_id = [
+  "^kitty-dropterm$", "^btop$", "^htop$", "^nvtop$", "^yazi$",
+  "^io\\.missioncenter\\.MissionCenter$", "^org\\.gnome\\.SystemMonitor$",
+  "^org\\.gnome\\.Nautilus$", "^org\\.gnome\\.Settings$",
+]
+default_floating = true
+default_floating_size = { width = 0.65, height = 0.7 }
+
+# ================================================================ Sizes
+[[window_rule]]
+match.app_id = ["^vlc$", "^mpv$", "^kitty$"]
+default_scrolling_extent = 0.6
+
+[[window_rule]]
+match.app_id = "^io\\.github\\.kaii_lb\\.Overskride$"
+default_scrolling_extent = 0.5
+
+# ================================================================ Floating widgets
+[[window_rule]]
+match.app_id = "^kitty$"
+match.title = "^fum$"
+default_floating = true
+default_floating_size = { width = 0.15, height = 0.5 }
+default_position = { x = 2, y = 2, anchor = "top_right" }
+
+[[window_rule]]
+match.app_id = "^kitty$"
+match.title = "^cava$"
+default_floating = true
+default_floating_size = { width = 0.3, height = 0.2 }
+default_position = { x = 2, y = 2, anchor = "bottom_right" }
+
+[[window_rule]]
+match.app_id = "^com\\.vixalien\\.sticky$"
+default_floating = true
+default_floating_size_px = { width = 400, height = 400 }
+default_position = { x = 2, y = 2, anchor = "top_right" }
+
+[[window_rule]]
+match.app_id = "^one\\.alynx\\.showmethekey$"
+match.title = "^Floating Window - Show Me The Key$"
+default_floating = true
+default_floating_size_px = { width = 200, height = 50 }
+default_position = { x = 2, y = 2, anchor = "bottom_right" }
+default_focused = false
+default_pinned = true
+
+[[window_rule]]
+match.title = "^(Picture-in-Picture|Picture in picture)$"
+default_floating = true
+default_maximize = false
+default_position = { x = 20, y = 20, anchor = "bottom_right" }
+
+[[window_rule]]
+match.title = "^notificationtoasts_.+_desktop"
+default_position = { x = 0, y = 0, anchor = "bottom_right" }
+default_focused = false
+default_pinned = true
+
+# ================================================================ Dialogs
+[[window_rule]]
+match.app_id = "^org\\.gnome\\.Nautilus$"
+match.title = ["^Open Files$", "^Choose a default destination$"]
+default_floating = true
+default_floating_size = { width = 0.7, height = 0.7 }
+
+[[window_rule]]
+match.app_id = "^zen$"
+match.title = "^File Upload$"
+default_floating = true
+default_floating_size = { width = 0.7, height = 0.7 }
+
+[[window_rule]]
+match.app_id = "^polkit-gnome-authentication-agent-1$"
+match.title = "^Authenticate$"
+default_floating = true
+default_floating_size = { width = 0.3, height = 0.2 }
+
+# ================================================================ Video calls / screen share
+[[window_rule]]
+match.app_id = "^google-chrome$"
+match.title = "^Meet - .*$"
+default_floating = true
+default_floating_size = { width = 0.1, height = 0.25 }
+default_position = { x = 2, y = 2, anchor = "bottom_right" }
+default_focused = false
+
+[[window_rule]]
+match.title = ["^meet\\.google\\.com is sharing your screen\\.$", "^web\\.bale\\.ai is sharing your screen\\.$"]
+default_floating = true
+default_position = { x = 2, y = 2, anchor = "bottom_right" }
+default_focused = false
+border_width = 0
+
+# ================================================================ Workspaces
+[[window_rule]]
+match.app_id = ["^org\\.telegram\\.desktop$", "^chrome-web\\.whatsapp\\.com__-Default$", "^hiddify$"]
+default_scrolling_extent = 0.55
+default_workspace = "Entertainment"
+
+[[window_rule]]
+match.app_id = ["^spotify$", "^v2rayN$", "^Throne$"]
+default_scrolling_extent = 0.65
+default_workspace = "Entertainment"
+
+[[window_rule]]
+match.app_id = "^uget-gtk$"
+default_scrolling_extent = 0.65
+default_workspace = "Web"
+
+[[window_rule]]
+match.app_id = "^kitty-main$"
+default_workspace = "Main"
+
+# Browsers: maximized to edges on "Web".
+[[window_rule]]
+match.app_id = ["^google-chrome$", "^microsoft-edge$", "^zen$", "^firefox$"]
+match.title = [".*Google Chrome$", ".*Microsoft.*Edge$", ".*Zen Browser$", ".*Mozilla Firefox$"]
+default_maximize_to_edges = true
+default_workspace = "Web"
+
+# ================================================================ MATLAB
+[[window_rule]]
+match.app_id = "^MATLAB.*"
+default_maximize_to_edges = true
+
+# MATLAB splash ("MATLAB" title) floats small.
+[[window_rule]]
+match.app_id = "^MATLAB R2024a$"
+match.title = "^MATLAB$"
+default_maximize_to_edges = false
+default_floating = true
+default_floating_size_px = { width = 400, height = 400 }
+
+# ================================================================ Privacy
+# niri: block-out-from "screencast". Umbriel's block_capture also hides them from screenshots.
+[[window_rule]]
+match.app_id = ["^org\\.telegram\\.desktop$", "^chrome-web\\.whatsapp\\.com__-Default$", "^v2rayN$", "^Throne$"]
+block_capture = true
+
+# ================================================================ Misc
+# Keep compositor shortcuts while a VM window is focused.
+[[window_rule]]
+match.app_id = "^virt-manager$"
+allow_shortcuts_inhibit = false
+
+# ================================================================ Layer rules
+# Only blur where the surface is actually drawn: transparent rounded corners stay clear
+# (otherwise the square blur region shows wallpaper at the corners).
+[[layer_rule]]
+match.namespace = "^rofi$"
+blur = true
+blur_ignore_alpha = 0.3
+blur_popups = true
+
+[[layer_rule]]
+match.namespace = "^gsr-ui$"
+blur = true
+blur_ignore_alpha = 0.3
+
+# ================================================================ Title bars (stacking)
+# Title bars are FORCED on every window while the focused workspace uses the stacking layout
+# (scripts/set_layout.py + scripts/stacking_watch.py -> config/titlebar.toml), even for apps
+# that draw their own header bar. Scratchpad windows always get one; small widgets never do.
+
+# Scratchpad windows always get a title bar, whatever the workspace layout.
+[[window_rule]]
+match.is_scratchpad = true
+title_bar = "forced"
+
+[[window_rule]]
+match.title = ["^fum$", "^cava$", "^Floating Window - Show Me The Key$", "^Meet - .*$",
+               "^(Picture-in-Picture|Picture in picture)$", ".* is sharing your screen\\.$"]
+title_bar = "off"
+
+[[window_rule]]
+match.app_id = ["^com\\.vixalien\\.sticky$", "^dev\\.noctalia\\..*$"]
+title_bar = "off"

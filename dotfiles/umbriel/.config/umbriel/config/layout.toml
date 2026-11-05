@@ -1,0 +1,52 @@
+# Layout settings.
+# https://docs.noctalia.dev/umbriel/layout/
+#
+# Umbriel has four layout modes. Switch the active workspace at runtime with:
+#   Mod+F1 scrolling | Mod+F2 stacking | Mod+F3 dwindle | Mod+F4 master | Mod+F5 cycle
+#   (Mod+Shift+F1..F5: the same for all workspaces)
+# (see the "Layouts" section of config/binds.toml)
+
+[layout]
+mode = "scrolling"                       # default for new workspaces (niri-like)
+gap = 2                                  # niri: gaps 2
+extent_presets = [0.33333, 0.5, 0.66667] # niri: preset-column-widths
+client_maximize = "column"
+
+# Struts shrink the usable area, like outer gaps.
+[layout.struts]
+# left = 64
+# right = 64
+# top = 64
+# bottom = 64
+
+# ---------------------------------------------------------------- scrolling (niri)
+[layout.scrolling]
+# niri: center-focused-column "on-overflow" (toggle with Mod+Shift+C)
+center_focused = "on_overflow"
+# niri: always-center-single-column
+center_underfull_strip = true
+center_on_overview_select = true
+# niri: default-column-width {} -> leave unset so apps pick their own width.
+# default_extent_fraction = 0.5
+
+# ---------------------------------------------------------------- dwindle (hyprland-like)
+[layout.dwindle]
+preserve_split = true          # keep a split's direction after toggling it (Mod+Alt+T)
+new_toward_cursor = false
+
+# ---------------------------------------------------------------- master
+[layout.master]
+position = "left"              # "left", "right", or "center"
+default_width_fraction = 0.55
+new_becomes_master = false
+new_on_top = true
+
+# ---------------------------------------------------------------- stacking (floating desktop)
+[layout.stacking]
+drop_zones = true              # drag to edges/corners to tile halves/quarters
+
+# ---------------------------------------------------------------- tabs (niri: tabbed columns)
+[layout.tabs]
+default_display = "normal"
+new_tab_position = "after_active"
+middle_click_closes = true

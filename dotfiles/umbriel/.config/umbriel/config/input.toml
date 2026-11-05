@@ -1,0 +1,39 @@
+# Input device configuration.
+# https://docs.noctalia.dev/umbriel/input/
+
+[input.keyboard]
+layout = "us,ir,fr"
+variant = ",winkeys"
+# Super+Space switches the keyboard layout (so Mod+Space is NOT bound in binds.toml).
+options = "grp:win_space_toggle"
+# Track the layout globally (like niri). Use "window" for a per-window layout.
+track_layout = "global"
+# numlock_toggle = true
+
+[input.touchpad]
+tap = true                       # tap-to-click
+disable_while_typing = true      # dwt
+natural_scroll = true
+sensitivity = 0.4                # niri: accel-speed 0.4
+# accel_profile = "flat"
+# scroll_method = "two_finger"
+# disable_on_external_mouse = true
+# drag_lock = "off"
+
+[input.mouse]
+# natural_scroll = true
+# sensitivity = 0.2
+# accel_profile = "flat"
+
+[input.focus]
+# Click-to-focus: hovering never changes focus; click a window (or use a keybind) to focus it.
+follows_mouse = false
+hover_raises = false
+
+[input.cursor]
+theme = "Bibata-Modern-Classic"
+size = 20
+# hide_when_typing = true
+# hide_timeout_ms = 1000
+# Warp the cursor to newly focused windows (niri: warp-mouse-to-focus).
+# follows_focus = true

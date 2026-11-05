@@ -1,0 +1,29 @@
+# Liquid glass (macOS-like) look.
+# - Frosted body: appearance.blur (config/appearance.toml) + window opacity (config/rules.toml).
+# - Glass edge:   the custom "liquid_glass" BORDER shader (effects/liquid_glass/).
+#                 It only draws around windows, so contents (kitty tabs, text near the
+#                 edges) are never distorted.
+#
+# Toggle the glass edge on the focused window: Mod+Alt+Shift+G.
+# Tune the constants at the top of effects/liquid_glass/shader.glsl.
+
+[effects]
+border = "liquid_glass"
+
+# Blur is the cheap "optimized" kind everywhere: it reuses a cached blur of the wallpaper
+# instead of re-blurring the live windows behind ("x-ray"), which costs GPU on every frame.
+# To get x-ray glass on floating windows back, add: [[window_rule]] match.is_floating = true
+# blur_optimized = false
+
+# Video and games stay fully opaque.
+[[window_rule]]
+match.content_type = "video"
+opacity = 1.0
+
+[[window_rule]]
+match.content_type = "game"
+opacity = 1.0
+
+[[window_rule]]
+match.app_id = ["^mpv$", "^vlc$", "^steam_app_.*$", "^gamescope$"]
+opacity = 1.0

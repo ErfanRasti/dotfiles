@@ -1,0 +1,20 @@
+# Default named workspaces (niri: config/workspaces.kdl). NOT included directly:
+# scripts/set_layout.py copies these into config/workspaces.state.toml (git-ignored) and records
+# each workspace's layout there. Edit names/order here, then delete workspaces.state.toml
+# (or run scripts/set_layout.py --init) to regenerate it.
+
+[[workspace]]
+name = "Entertainment"
+layout.mode = "scrolling"
+
+[[workspace]]
+name = "Main"
+layout.mode = "scrolling"
+
+[[workspace]]
+name = "Web"
+layout.mode = "scrolling"
+
+[[workspace]]
+name = "Extra"
+layout.mode = "scrolling"

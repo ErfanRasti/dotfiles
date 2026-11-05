@@ -1,0 +1,15 @@
+# Environment variables passed to spawned clients.
+# XDG_CURRENT_DESKTOP is set by umbriel itself, so it is not overridden here.
+
+[environment]
+XCURSOR_THEME = "Bibata-Modern-Classic"
+XCURSOR_SIZE = "20"
+GDK_SCALE = "1.0"
+TERMINAL = "kitty"
+QT_QPA_PLATFORM = "wayland"
+ELECTRON_OZONE_PLATFORM_HINT = "auto"
+QT_QPA_PLATFORMTHEME = "qt6ct"
+QT_QPA_PLATFORMTHEME_QT = "qt6ct"
+# Qt apps (Telegram with "Use Qt window frame", ...) never draw their own title bar:
+# they get umbriel's server-side title bar in stacking and none in the tiling layouts.
+QT_WAYLAND_DISABLE_WINDOWDECORATION = "1"
