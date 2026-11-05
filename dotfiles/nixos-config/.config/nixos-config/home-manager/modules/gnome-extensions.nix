@@ -1,19 +1,19 @@
 { pkgs, ... }: {
 
   home.packages = with pkgs.gnomeExtensions; [
-    airpod-battery-monitor
+    # airpod-battery-monitor
     app-grid-wizard
     appindicator
     app-menu-is-back
     applications-menu
     gsconnect
-    hibernate-status-button
+    # hibernate-status-button
     lock-keys-2
-    open-desktop-file-location
+    # open-desktop-file-location
     places-status-indicator
     tiling-shell
-    window-gestures
-    auto-adwaita-colors
+    # window-gestures
+    # auto-adwaita-colors
     battery-health-charging
     battery-time-2
     blocker
@@ -53,18 +53,18 @@
         disable-user-extensions = false;
 
         enabled-extensions = with pkgs.gnomeExtensions; [
-          airpod-battery-monitor.extensionUuid
+          # airpod-battery-monitor.extensionUuid
           app-grid-wizard.extensionUuid
           appindicator.extensionUuid
           app-menu-is-back.extensionUuid
           applications-menu.extensionUuid
           gsconnect.extensionUuid
-          hibernate-status-button.extensionUuid
+          # hibernate-status-button.extensionUuid
           lock-keys-2.extensionUuid
-          open-desktop-file-location.extensionUuid
+          # open-desktop-file-location.extensionUuid
           places-status-indicator.extensionUuid
           tiling-shell.extensionUuid
-          window-gestures.extensionUuid
+          # window-gestures.extensionUuid
           dynamic-music-pill.extensionUuid
           dash-to-dock.extensionUuid
         ];
