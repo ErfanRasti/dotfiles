@@ -19,8 +19,9 @@ zoom = 0.5
 background_blur = true
 workspace_wallpaper = true
 
-# Hot corner: top-left opens the overview (niri default behaviour).
+# Hot corner (like niri): pushing the pointer into the top-left corner opens the overview,
+# doing it again closes it.
 [hot_corners.top_left]
 enabled = true
-delay_ms = 500
-action = "overview-open"
+delay_ms = 100           # near-instant, but ignores brief accidental touches
+action = "overview-toggle"

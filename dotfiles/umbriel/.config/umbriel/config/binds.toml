@@ -28,10 +28,10 @@
 "Mod+Shift+F5" = { action = "spawn ~/.config/umbriel/scripts/set_layout.py --all toggle", repeat = false }
 
 # Layout-specific helpers
-"Mod+Alt+T" = { action = "layout-toggle-split", repeat = false }   # dwindle: flip split direction
-"Mod+Ctrl+Equal" = "layout-master-count-increase"                  # master: one more master window
-"Mod+Ctrl+Minus" = "layout-master-count-decrease"                  # master: one less master window
-"Mod+Alt+Return" = "window-swap-next"                              # swap with next (master/dwindle)
+"Mod+Alt+T" = { action = "layout-toggle-split", repeat = false } # dwindle: flip split direction
+"Mod+Ctrl+Equal" = "layout-master-count-increase"                # master: one more master window
+"Mod+Ctrl+Minus" = "layout-master-count-decrease"                # master: one less master window
+"Mod+Alt+Return" = "window-swap-next"                            # swap with next (master/dwindle)
 # Swap with neighbour (useful in dwindle/master)
 "Mod+Ctrl+Alt+Left" = "window-swap-left"
 "Mod+Ctrl+Alt+Right" = "window-swap-right"
@@ -47,7 +47,7 @@
 "Mod+Alt+Shift+C" = { action = "window-clear-region", repeat = false }
 
 # ============================================================== Apps & session
-"Mod+Shift+Slash" = { action = "cheatsheet-toggle", repeat = false }     # niri: show-hotkey-overlay
+"Mod+Shift+Slash" = { action = "cheatsheet-toggle", repeat = false }                                                                                                 # niri: show-hotkey-overlay
 "Mod+T" = { action = "spawn kitty --app-id kitty-main", repeat = false }
 "Mod+Return" = { action = "spawn kitty", repeat = false }
 "Mod+D" = { action = "spawn ~/.config/hypr/scripts/toggle_rofi_launcher.sh", repeat = false }
@@ -88,28 +88,28 @@
 "Mod+O" = { action = "overview-toggle", repeat = false }
 "Mod+Q" = { action = "window-close", repeat = false }
 "Mod+F" = { action = "window-toggle-floating", repeat = false }
-"Mod+Tab" = "spawn ~/.config/umbriel/scripts/scratchpad_cycle.sh focus"   # next window in the open scratchpad, else floating<->tiled
+"Mod+Tab" = "spawn ~/.config/umbriel/scripts/scratchpad_cycle.sh focus" # next window in the open scratchpad, else floating<->tiled
 "Mod+G" = { action = "column-toggle-tabbed", repeat = false }
 # Switch between the tabs of a tab group (wraps around at the ends)
 "Mod+Ctrl+Alt+H" = "column-focus-tab-previous"
 "Mod+Ctrl+Alt+L" = "column-focus-tab-next"
 "Mod+Alt+G" = { action = "column-toggle-tab-bar", repeat = false }
-"Mod+Alt+Shift+G" = { action = "effect-border-toggle", repeat = false }   # liquid glass edge on/off (config/glass.toml)
+"Mod+Alt+Shift+G" = { action = "effect-border-toggle", repeat = false } # liquid glass edge on/off (config/glass.toml)
 "Mod+Alt+Shift+P" = { action = "window-toggle-pinned", repeat = false }
 
-"Mod+M" = { action = "window-toggle-maximize", repeat = false }                    # maximize-column
+"Mod+M" = { action = "window-toggle-maximize", repeat = false }                # maximize-column
 "Mod+Shift+M" = { action = "window-toggle-maximize-to-edges", repeat = false }
 # Minimize (floating/stacking windows only; also the title-bar button) and bring the last one back
 "Mod+Ctrl+M" = { action = "window-minimize", repeat = false }
 "Mod+Alt+M" = { action = "window-restore-minimized", repeat = false }
 "Mod+Shift+F" = { action = "window-toggle-fullscreen", repeat = false }
 
-"Mod+C" = { action = "spawn ~/.config/umbriel/scripts/toggle_center_focus.sh", repeat = false }  # toggle center focus
+"Mod+C" = { action = "spawn ~/.config/umbriel/scripts/toggle_center_focus.sh", repeat = false } # toggle center focus
 "Mod+Shift+C" = "column-center"
 
 # Width / height presets and fine adjustments
-"Mod+Alt+R" = "window-cycle-primary-extent"          # switch-preset-column-width
-"Mod+Shift+R" = "window-cycle-secondary-extent"      # switch-preset-window-height
+"Mod+Alt+R" = "window-cycle-primary-extent"               # switch-preset-column-width
+"Mod+Shift+R" = "window-cycle-secondary-extent"           # switch-preset-window-height
 "Mod+Ctrl+R" = "window-cycle-primary-extent-back"
 "Mod+Minus" = "window-modify-primary-extent -0.1"
 "Mod+Equal" = "window-modify-primary-extent +0.1"
@@ -126,10 +126,11 @@
 
 # Recent windows: noctalia's MRU window switcher (like niri's Alt+Tab); hold Alt, tap Tab.
 "Alt+Tab" = { action = "spawn noctalia msg window-switcher hold", repeat = false }
-# Alt+Shift+Tab is deliberately NOT bound: while the switcher is open, umbriel passes it to
-# noctalia, which steps backwards (a bound key would be swallowed by umbriel).
-"Alt+Grave" = "window-focus-last"            # straight back to the previous window
-"Alt+Shift+Grave" = "window-focus-previous"  # previous window in layout order
+# Alt+Shift+Tab also opens the switcher (like Alt+Tab). Because umbriel consumes bound keys,
+# it can't step backwards inside the open switcher; use Left/Right arrows there for that.
+"Alt+Shift+Tab" = { action = "spawn noctalia msg window-switcher hold", repeat = false }
+"Alt+Grave" = "window-focus-last"           # straight back to the previous window
+"Alt+Shift+Grave" = "window-focus-previous" # previous window in layout order
 
 # ============================================================== Focus
 # Mod+H/J/K/L (and arrows): inside a shown scratchpad they move between its windows; Mod+H/L
@@ -205,7 +206,7 @@
 "Mod+Alt+Down" = "workspace-move-down"
 "Mod+Alt+Up" = "workspace-move-up"
 
-"Mod+P" = "workspace-focus-last"     # niri: focus-workspace-previous
+"Mod+P" = "workspace-focus-last" # niri: focus-workspace-previous
 
 "Mod+1" = "workspace-switch 1"
 "Mod+2" = "workspace-switch 2"
@@ -239,10 +240,10 @@
 # umbriel's default scratchpad (native actions). While it is shown, the rest of the screen
 # blurs + dims ([animation.scratchpad]). App shortcuts (yazi, btop, ...) send their window
 # here when pressed on it (scripts/toggle_app.sh).
-"Mod+W" = { action = "spawn ~/.config/umbriel/scripts/scratchpad_window.sh", repeat = false }   # store / take out (follows it, closes the scratchpad)
-"Mod+Shift+W" = { action = "spawn ~/.config/umbriel/scripts/set_layout.py --scratchpad default", repeat = false }  # show (cascaded) / hide
-"Mod+Ctrl+W" = { action = "window-restore-from-scratchpad", repeat = false }   # just take it out (scratchpad stays open, no follow)
-"Mod+Shift+Tab" = "spawn ~/.config/umbriel/scripts/scratchpad_cycle.sh show"  # show the open scratchpad's windows one at a time
+"Mod+W" = { action = "spawn ~/.config/umbriel/scripts/scratchpad_window.sh", repeat = false }                     # store / take out (follows it, closes the scratchpad)
+"Mod+Shift+W" = { action = "spawn ~/.config/umbriel/scripts/set_layout.py --scratchpad default", repeat = false } # show (cascaded) / hide
+"Mod+Ctrl+W" = { action = "window-restore-from-scratchpad", repeat = false }                                      # just take it out (scratchpad stays open, no follow)
+"Mod+Shift+Tab" = "spawn ~/.config/umbriel/scripts/scratchpad_cycle.sh show"                                      # show the open scratchpad's windows one at a time
 
 # ============================================================== Mouse wheel
 "Mod+WheelDown" = { action = "workspace-next", cooldown_ms = 150 }

@@ -181,6 +181,7 @@
     telegram-desktop
     discord
     teams-for-linux
+    zoom-us
 
     # Camera
     cheese
