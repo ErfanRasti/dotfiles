@@ -8,7 +8,7 @@
 "Alt+space" = { action = "spawn noctalia msg panel-toggle launcher", repeat = false }
 # Tap Super alone to open the launcher. It only fires when Super is pressed and released by
 # itself, so Mod+<key> shortcuts and Super+Space (keyboard layout) are unaffected.
-"Mod" = { action = "spawn noctalia msg panel-toggle launcher", repeat = false }
+# "Mod" = { action = "spawn noctalia msg panel-toggle launcher", repeat = false }
 "Mod+Comma" = { action = "spawn noctalia msg settings-toggle", repeat = false }
 
 # Audio / media (work while locked)
