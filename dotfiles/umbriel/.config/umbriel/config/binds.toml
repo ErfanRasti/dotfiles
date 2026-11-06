@@ -126,8 +126,10 @@
 
 # Recent windows: noctalia's MRU window switcher (like niri's Alt+Tab); hold Alt, tap Tab.
 "Alt+Tab" = { action = "spawn noctalia msg window-switcher hold", repeat = false }
-"Alt+Shift+Tab" = "window-focus-previous"
-"Alt+Grave" = "window-focus-last"
+# Alt+Shift+Tab is deliberately NOT bound: while the switcher is open, umbriel passes it to
+# noctalia, which steps backwards (a bound key would be swallowed by umbriel).
+"Alt+Grave" = "window-focus-last"            # straight back to the previous window
+"Alt+Shift+Grave" = "window-focus-previous"  # previous window in layout order
 
 # ============================================================== Focus
 # Mod+H/J/K/L (and arrows): inside a shown scratchpad they move between its windows; Mod+H/L

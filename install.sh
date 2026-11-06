@@ -208,7 +208,6 @@ paru -S \
   gitfetch-python \
   wdisplays monique \
   gapless \
-  ripdrag \
   figlet-fonts-extra \
   mangowm
 
