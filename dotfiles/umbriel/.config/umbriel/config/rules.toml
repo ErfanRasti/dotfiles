@@ -117,31 +117,32 @@ default_focused = false
 border_width = 0
 
 # ================================================================ Workspaces
+# By number (1 = first named workspace, ...): the names live only in workspaces.defaults.toml.
 [[window_rule]]
 match.app_id = ["^org\\.telegram\\.desktop$", "^chrome-web\\.whatsapp\\.com__-Default$", "^hiddify$"]
 default_scrolling_extent = 0.55
-default_workspace = "Entertainment"
+default_workspace = 1   # En
 
 [[window_rule]]
 match.app_id = ["^spotify$", "^v2rayN$", "^Throne$"]
 default_scrolling_extent = 0.65
-default_workspace = "Entertainment"
+default_workspace = 1   # En
 
 [[window_rule]]
 match.app_id = "^uget-gtk$"
 default_scrolling_extent = 0.65
-default_workspace = "Web"
+default_workspace = 3   # We
 
 [[window_rule]]
 match.app_id = "^kitty-main$"
-default_workspace = "Main"
+default_workspace = 2   # Ma
 
-# Browsers: maximized to edges on "Web".
+# Browsers: maximized to edges on workspace 3.
 [[window_rule]]
 match.app_id = ["^google-chrome$", "^microsoft-edge$", "^zen$", "^firefox$"]
 match.title = [".*Google Chrome$", ".*Microsoft.*Edge$", ".*Zen Browser$", ".*Mozilla Firefox$"]
 default_maximize_to_edges = true
-default_workspace = "Web"
+default_workspace = 3   # We
 
 # ================================================================ MATLAB
 [[window_rule]]

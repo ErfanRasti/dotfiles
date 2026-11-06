@@ -5,11 +5,11 @@ CONFIG_AUTOSTART_FILE="$HOME/.config/niri/config/autostarts.kdl"
 
 # Restart noctalia
 if grep -q '^include "config/noctalia.kdl"' "$CONFIG_FILE"; then
-  pkill -f qs
-  pkill -f dms
-  pkill -f dsearch
+  pkill -f '^(\S*/)?\.?qs(-wrapped)?( |$)'
+  pkill -f '^(\S*/)?\.?dms(-wrapped)?( |$)'
+  pkill -f '^(\S*/)?\.?dsearch(-wrapped)?( |$)'
   if pgrep -f "noctalia"; then
-    pkill -f "noctalia"
+    pkill -f '^(\S*/)?\.?noctalia(-wrapped)?( |$)'
   fi
   # noctalia has its own polkit
   systemctl --user stop polkit-gnome.service
@@ -23,10 +23,10 @@ fi
 
 # Restart dms
 if grep -q '^include "config/dms.kdl"' "$CONFIG_FILE"; then
-  pkill -f "noctalia"
-  pkill -f qs
-  pkill -f dms
-  pkill -f dsearch
+  pkill -f '^(\S*/)?\.?noctalia(-wrapped)?( |$)'
+  pkill -f '^(\S*/)?\.?qs(-wrapped)?( |$)'
+  pkill -f '^(\S*/)?\.?dms(-wrapped)?( |$)'
+  pkill -f '^(\S*/)?\.?dsearch(-wrapped)?( |$)'
   dsearch serve
   if pgrep -x "dms"; then
     dms restart

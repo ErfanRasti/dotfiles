@@ -5,7 +5,7 @@ Usage:
   set_layout.py [--all] <scrolling|stacking|dwindle|master|toggle>
   set_layout.py --cascade [ws-id]   re-cascade the focused workspace if it is in stacking
                                     (with ws-id: only if that workspace is still focused)
-  set_layout.py --init              create config/workspaces.state.toml from the defaults
+  set_layout.py --init              (re)build config/workspaces.state.toml from the defaults
   set_layout.py --scratchpad NAME   toggle a scratchpad; when it opens with 2+ windows they are
                                     cascaded, centered on the screen
 
@@ -210,10 +210,40 @@ def scratchpad(name):
 
 
 # ------------------------------------------------------------------ main
+def parse_workspaces(text):
+    head, *blocks = re.split(r"(?m)^\[\[workspace\]\][ \t]*$", text)
+    def field(b, key):
+        m = re.search(rf'(?m)^{key}[ \t]*=[ \t]*"?([^"\n]+?)"?[ \t]*$', b)
+        return m.group(1) if m else None
+    return head, [{"name": field(b, "name"), "index": field(b, "index"), "layout": field(b, "layout\\.mode")}
+                  for b in blocks]
+
+
+def sync_state():
+    """Build workspaces.state.toml from the defaults (names, order) while keeping each named
+    workspace's current layout by position, plus layouts of unnamed workspaces. Writes only
+    when something changed, so it doesn't trigger needless reloads."""
+    with open(DEFAULTS) as f:
+        head, defaults = parse_workspaces(f.read())
+    state = []
+    if os.path.exists(STATE):
+        with open(STATE) as f:
+            state = parse_workspaces(f.read())[1]
+    named = [e for e in state if e["name"]]
+    out = head.rstrip("\n") + "\n"
+    for i, d in enumerate(defaults):
+        layout = (named[i]["layout"] if i < len(named) else None) or d["layout"] or "scrolling"
+        out += f'\n[[workspace]]\nname = "{d["name"]}"\nlayout.mode = "{layout}"\n'
+    for e in state:
+        if not e["name"] and e["index"] and e["layout"]:
+            out += f'\n[[workspace]]\nindex = {e["index"]}\nlayout.mode = "{e["layout"]}"\n'
+    old = open(STATE).read() if os.path.exists(STATE) else None
+    if out != old:
+        write_atomic(STATE, out)
+
+
 def main(argv):
-    if not os.path.exists(STATE):
-        with open(DEFAULTS) as f:
-            write_atomic(STATE, f.read())
+    sync_state()
     if argv[:1] == ["--init"]:
         return 0
     os.makedirs(PENDING, exist_ok=True)

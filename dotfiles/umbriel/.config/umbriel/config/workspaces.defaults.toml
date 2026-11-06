@@ -1,20 +1,20 @@
-# Default named workspaces (niri: config/workspaces.kdl). NOT included directly:
-# scripts/set_layout.py copies these into config/workspaces.state.toml (git-ignored) and records
-# each workspace's layout there. Edit names/order here, then delete workspaces.state.toml
-# (or run scripts/set_layout.py --init) to regenerate it.
+# Named workspaces, in order (workspace 1, 2, ...). This is the ONLY place the names live:
+# rules refer to workspaces by number, and scripts/set_layout.py builds the list umbriel loads
+# (workspaces.state.toml) from this file, keeping each workspace's current layout.
+# Rename/reorder here; it applies at the next login or layout key press.
 
 [[workspace]]
-name = "Entertainment"
+name = "En"
 layout.mode = "scrolling"
 
 [[workspace]]
-name = "Main"
+name = "Ma"
 layout.mode = "scrolling"
 
 [[workspace]]
-name = "Web"
+name = "We"
 layout.mode = "scrolling"
 
 [[workspace]]
-name = "Extra"
+name = "Ex"
 layout.mode = "scrolling"
