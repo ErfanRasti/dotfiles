@@ -3,7 +3,7 @@
 # Restart noctalia
 if grep -q '^require("config\.noctalia")' "$CONFIG_FILE"; then
   if pgrep -f "noctalia-shell"; then
-    pkill -f "noctalia-shell"
+    pkill -f '^(\S*/)?\.?noctalia\-shell(-wrapped)?( |$)'
   fi
   noctalia-shell &
   disown
