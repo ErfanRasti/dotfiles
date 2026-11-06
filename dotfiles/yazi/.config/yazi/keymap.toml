@@ -1,17 +1,5 @@
 # Press F1 to search in keybindings
 
-# Drag and drop
-# https://github.com/sxyazi/yazi/discussions/2153
-[[mgr.prepend_keymap]]
-on = "<C-y>"
-run = 'shell -- ripdrag --icon-size 64 --and-exit --all "$@"'
-desc = "Drag and drop out of the yazi"
-
-[[mgr.prepend_keymap]]
-on = "<C-v>"
-run = 'shell -- ripdrag --target --icon-size 64 --and-exit --all --no-click "$@" | while read filepath; do cp -nR "$filepath" .; done'
-desc = "Drag and drop isnide the yazi"
-
 # toggle-pane
 [[mgr.prepend_keymap]]
 on = "T"
@@ -30,26 +18,21 @@ on = "<C-l>"
 run = "open"
 desc = "Open selected files"
 
+# Drag and drop is built in since yazi v26.8.15 (mouse, needs kitty >= 0.47.1)
+# https://yazi-rs.github.io/docs/dnd
 
-# Copy yanked files to the system clipboard
+# System clipboard
+# Pasting files copied in other apps is built in: press the terminal's paste key
+# (kitty: Ctrl+Shift+V) in the file list.
+# Copying to the system clipboard is not built in yet, so yank also sends the
+# files to wl-copy (https://yazi-rs.github.io/docs/tips)
 [[mgr.prepend_keymap]]
 on = "y"
-run = ["yank", 'plugin clipboard -- --action=copy']
-
-
-# Paste files from the system clipboard into the current directory
-[[mgr.prepend_keymap]]
-on = "<C-p>"
-run = ['plugin clipboard -- --action=paste']
-
-# clipboard-copy
-# [[mgr.prepend_keymap]]
-# on = "y"
-# run = [
-#   'shell -- for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list',
-#   "yank",
-# ]
-# desc = "Copy to system clipboard"
+run = [
+  'shell -- for path in %s; do echo "file://$path"; done | wl-copy -t text/uri-list',
+  "yank",
+]
+desc = "Yank selected files and copy them to the system clipboard"
 
 # confirm-quit
 [[mgr.prepend_keymap]]

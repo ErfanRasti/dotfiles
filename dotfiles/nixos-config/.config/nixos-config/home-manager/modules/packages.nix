@@ -46,7 +46,6 @@
     wget
     zoxide
     ripgrep
-    ripdrag
     file
     (pkgs.runCommand "figlet-with-fonts"
       {
