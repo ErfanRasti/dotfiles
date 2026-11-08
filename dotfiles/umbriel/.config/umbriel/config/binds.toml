@@ -129,8 +129,8 @@
 # Alt+Shift+Tab also opens the switcher (like Alt+Tab). Because umbriel consumes bound keys,
 # it can't step backwards inside the open switcher; use Left/Right arrows there for that.
 "Alt+Shift+Tab" = { action = "spawn noctalia msg window-switcher hold", repeat = false }
-"Alt+Grave" = "window-focus-last"           # straight back to the previous window
-"Alt+Shift+Grave" = "window-focus-previous" # previous window in layout order
+"Alt+Grave" = "window-focus-last"                                                        # straight back to the previous window
+"Alt+Shift+Grave" = "window-focus-previous"                                              # previous window in layout order
 
 # ============================================================== Focus
 # Mod+H/J/K/L (and arrows): inside a shown scratchpad they move between its windows; Mod+H/L
@@ -196,13 +196,17 @@
 "Mod+Page_Up" = "workspace-previous"
 "Mod+Ctrl+Page_Down" = "column-move-to-workspace-next"
 "Mod+Ctrl+Page_Up" = "column-move-to-workspace-previous"
+# Move the focused window straight to the next / previous workspace (any layout, incl.
+# stacking; you follow it). Same keys as niri's move-column-to-workspace-down/up.
+"Mod+Ctrl+U" = "column-move-to-workspace-next"
+"Mod+Ctrl+I" = "column-move-to-workspace-previous"
 
 "Mod+Shift+Page_Down" = "workspace-move-down"
 "Mod+Shift+Page_Up" = "workspace-move-up"
 "Mod+Shift+U" = "workspace-move-down"
 "Mod+Shift+I" = "workspace-move-up"
-"Mod+Alt+J" = "workspace-move-down"
-"Mod+Alt+K" = "workspace-move-up"
+# "Mod+Alt+J" = "workspace-move-down"
+# "Mod+Alt+K" = "workspace-move-up"
 "Mod+Alt+Down" = "workspace-move-down"
 "Mod+Alt+Up" = "workspace-move-up"
 

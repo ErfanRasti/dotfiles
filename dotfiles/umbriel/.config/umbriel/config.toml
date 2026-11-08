@@ -22,6 +22,7 @@ files = [
   "config/noctalia.toml",
   # Custom effects (paths are relative to this file)
   "effects/liquid_glass/effect.toml",
+  "effects/spotify_wave/effect.toml",
   "config/glass.toml",
 ]
 

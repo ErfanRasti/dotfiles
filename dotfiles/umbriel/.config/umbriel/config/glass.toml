@@ -9,6 +9,12 @@
 
 [effects]
 border = "liquid_glass"
+max_fps = 30   # cap border-effect redraws (the Spotify wave) to save GPU
+
+# Spotify gets the audio-reactive wave border instead (effects/spotify_wave/).
+[[window_rule]]
+match.app_id = "^spotify$"
+border_effect = "spotify_wave"
 
 # Blur is the cheap "optimized" kind everywhere: it reuses a cached blur of the wallpaper
 # instead of re-blurring the live windows behind ("x-ray"), which costs GPU on every frame.

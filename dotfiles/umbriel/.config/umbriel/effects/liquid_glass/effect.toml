@@ -4,11 +4,11 @@
 # this shader turns the border ring into a glass rim:
 #   - the ring is lifted toward white on the side facing the light (top-left),
 #   - a thin specular hairline sits just outside the window edge,
-#   - a soft halo fades out into the padding, like light caught in the glass.
+#   - outside the ring the native pixels (the drop shadow) are kept, so focused windows keep it.
 # Select globally with [effects] border = "liquid_glass",
 # or per window with [[window_rule]] border_effect = "liquid_glass".
 [effects.preset.liquid_glass]
 kind = "border"
 shader = "shader.glsl"
-padding = 14       # px around the ring for the halo
+padding = 18       # px around the ring: room for the shadow (softness 10 + offset 5)
 animated = false   # static: only redrawn when the window/border changes

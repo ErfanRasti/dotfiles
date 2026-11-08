@@ -3,15 +3,22 @@
 //   umbriel_sample(uv)          -> the native border ring (premultiplied, focused/unfocused colour)
 //   umbriel_border_distance(uv) -> signed distance in logical px to the window rect (<0 inside)
 // The window's own pixels are cut out of the result, so contents stay untouched.
+//
+// Border effects apply to the focused window, and this effect paints the padded area around it,
+// where the drop shadow falls. So only the 2 px ring gets the glass look; outside it the native
+// pixels pass through unchanged, and if that area is empty a matching soft shadow is drawn
+// (a tight soft shadow in colors.shadow's strength), so focused windows keep their shadow.
 
 // ---- tunables -------------------------------------------------------------
+const float RING_W       = 2.0;   // px: border width (appearance.border_width)
 const float RING_LIFT    = 0.45;  // how much the lit side of the ring brightens toward white
 const float RING_BASE    = 0.12;  // brightening on the side away from the light
-const float SPEC_WIDTH   = 1.1;   // px: specular hairline just outside the edge
+const float SPEC_WIDTH   = 1.1;   // px: specular hairline at the window edge
 const float SPEC_GAIN    = 0.55;  // hairline strength
-const float HALO_WIDTH   = 5.0;   // px: falloff of the soft outer halo
-const float HALO_GAIN    = 0.16;  // halo strength
 const vec2  LIGHT_DIR    = vec2(-0.6, -0.8); // light from the top-left
+const float SHADOW_ALPHA = 0.44;  // colors.shadow alpha (#00000070)
+const float SHADOW_SOFT  = 6.0;   // px: how far the shadow fades out
+const vec2  SHADOW_OFF   = vec2(0.0, 3.0); // px: shadow offset (down)
 
 vec2 outward_normal(vec2 uv) {
   vec2 e = vec2(1.0) / umbriel_size;
@@ -25,23 +32,21 @@ vec4 border(vec2 uv) {
   float d = umbriel_border_distance(uv);   // > 0 outside the window
   if (d < 0.0) return vec4(0.0);           // never draw over the window itself
 
-  vec4 ring = umbriel_sample(uv);          // native ring, premultiplied
+  vec4 native = umbriel_sample(uv);        // premultiplied
+
+  // Outside the ring: keep the native pixels (the shadow), or draw a matching one if empty.
+  if (d > RING_W + 0.5) {
+    if (native.a > 0.01) return native;
+    float ds = umbriel_border_distance(uv - SHADOW_OFF / umbriel_size);
+    float s = clamp(1.0 - max(ds, 0.0) / SHADOW_SOFT, 0.0, 1.0);
+    return vec4(0.0, 0.0, 0.0, SHADOW_ALPHA * s * s);
+  }
+
+  // The ring itself: lift toward white on the lit side, plus a specular hairline.
   vec2 n = outward_normal(uv);
   float facing = clamp(dot(n, normalize(LIGHT_DIR)), 0.0, 1.0);
-
-  // Glass ring: lift the native colour toward white, more on the lit side.
   float lift = RING_BASE + RING_LIFT * facing;
-  vec3 rim = mix(ring.rgb, vec3(ring.a), lift);
-
-  // Specular hairline right at the window edge on the lit side.
+  vec4 c = vec4(mix(native.rgb, vec3(native.a), lift), native.a);
   float spec = exp(-d / SPEC_WIDTH) * SPEC_GAIN * (0.25 + 0.75 * facing);
-
-  // Soft halo fading into the padding (only outside the ring).
-  float halo = exp(-d / HALO_WIDTH) * HALO_GAIN * (0.4 + 0.6 * facing) * (1.0 - ring.a);
-
-  float add = spec + halo;
-  vec4 c = vec4(rim, ring.a);
-  // Premultiplied "over": light on top of the ring.
-  c = vec4(vec3(add) + c.rgb * (1.0 - add), add + c.a * (1.0 - add));
-  return c;
+  return vec4(vec3(spec) + c.rgb * (1.0 - spec), spec + c.a * (1.0 - spec));
 }

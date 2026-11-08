@@ -215,8 +215,8 @@ def parse_workspaces(text):
     def field(b, key):
         m = re.search(rf'(?m)^{key}[ \t]*=[ \t]*"?([^"\n]+?)"?[ \t]*$', b)
         return m.group(1) if m else None
-    return head, [{"name": field(b, "name"), "index": field(b, "index"), "layout": field(b, "layout\\.mode")}
-                  for b in blocks]
+    return head, [{"name": field(b, "name"), "index": field(b, "index"), "layout": field(b, "layout\\.mode"),
+                   "raw": b} for b in blocks]
 
 
 def sync_state():
@@ -233,7 +233,11 @@ def sync_state():
     out = head.rstrip("\n") + "\n"
     for i, d in enumerate(defaults):
         layout = (named[i]["layout"] if i < len(named) else None) or d["layout"] or "scrolling"
-        out += f'\n[[workspace]]\nname = "{d["name"]}"\nlayout.mode = "{layout}"\n'
+        # Keep any other per-workspace settings from the defaults (e.g. layout.struts.*).
+        extra = [l.strip() for l in d["raw"].splitlines()
+                 if l.strip() and not l.lstrip().startswith(("#", "name", "layout.mode"))]
+        out += f'\n[[workspace]]\nname = "{d["name"]}"\n' + "".join(l + "\n" for l in extra) + \
+               f'layout.mode = "{layout}"\n'
     for e in state:
         if not e["name"] and e["index"] and e["layout"]:
             out += f'\n[[workspace]]\nindex = {e["index"]}\nlayout.mode = "{e["layout"]}"\n'
