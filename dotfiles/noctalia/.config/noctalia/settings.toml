@@ -340,6 +340,8 @@ background_opacity = 0.6
 enabled = []
 
 [shell]
+# Feed audio spectrum data to umbriel (used by the Spotify wave border effect).
+umbriel_audio_provider_enabled = true
 font_family = "CaskaydiaCove NF"
 niri_overview_type_to_launch_enabled = true
 password_style = "random"
