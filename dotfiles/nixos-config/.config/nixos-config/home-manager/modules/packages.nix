@@ -6,11 +6,54 @@
   system,
   ...
 }:
+let
+  # Install Mathematica? It needs its installer (~/programs/wolfram/Wolfram_<version>.sh) in
+  # the Nix store, which can't be detected during a pure flake evaluation. Set false on
+  # machines without it, so home-manager doesn't fail.
+  withMathematica = true;
+
+  # Mathematica's installer must already be in the Nix store (nixpkgs uses requireFile), but a
+  # hand-added store path is unreferenced, so `nh clean` deletes it and the next switch fails.
+  # This adds every ~/programs/wolfram/Wolfram_*.sh to the store and pins it with a GC root
+  # (~/.local/state/nix-gcroots/), at login and whenever an installer lands in that folder.
+  # Upgrading: put the new installer there, then bump `version` below. Delete old roots in
+  # ~/.local/state/nix-gcroots/ to let old installers be collected.
+  wolframPin = pkgs.writeShellScript "wolfram-installer-pin" ''
+    set -eu
+    roots="$HOME/.local/state/nix-gcroots"
+    mkdir -p "$roots"
+    shopt -s nullglob
+    for f in "$HOME"/programs/wolfram/Wolfram_*.sh; do
+      root="$roots/$(basename "$f")"
+      [ -e "$root" ] && continue # already in the store and pinned
+      path="$(${pkgs.nix}/bin/nix-store --add-fixed sha256 "$f")"
+      ${pkgs.nix}/bin/nix-store --add-root "$root" --indirect --realise "$path" >/dev/null
+      echo "pinned $f -> $path"
+    done
+  '';
+in
 {
 
   imports = [
     inputs.nix-flatpak.homeManagerModules.nix-flatpak
   ];
+
+  # Keep the Wolfram installer in the store (see wolframPin above).
+  systemd.user.services.wolfram-installer-pin = {
+    Unit.Description = "Add and pin the Wolfram installer in the Nix store";
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${wolframPin}";
+    };
+    Install.WantedBy = [ "default.target" ]; # run once at login
+  };
+  systemd.user.paths.wolfram-installer-pin = {
+    Unit.Description = "Watch ~/programs/wolfram for Wolfram installers";
+    Path = {
+      PathChanged = "%h/programs/wolfram"; # a file finished writing / was moved in
+    };
+    Install.WantedBy = [ "default.target" ];
+  };
 
   # programs.firefox.enable = false;
   # programs.google-chrome.enable = true;
@@ -320,12 +363,6 @@
     nodejs
     sqlite
     jdk17
-    # Remember to run: nix-store --add-fixed sha256 ~/programs/wolfram/Wolfram_15.0.1.sh
-    # nix profile remove mathematica   # use the name shown by the list
-    (mathematica.override {
-      version = "15.0.1"; # the version you downloaded
-      webdoc = false; # true if you took the smaller web-docs installer
-    })
 
     # Power Management tools
     acpi
@@ -389,7 +426,14 @@
     # USB
     ntfs3g
 
-  ];
+  ]
+  # Mathematica only where its installer exists (see withMathematica at the top of this file).
+  ++ lib.optional withMathematica (
+    pkgs.mathematica.override {
+      version = "15.0.1"; # the version you downloaded (installer pinned by wolfram-installer-pin)
+      webdoc = false; # true if you took the smaller web-docs installer
+    }
+  );
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
