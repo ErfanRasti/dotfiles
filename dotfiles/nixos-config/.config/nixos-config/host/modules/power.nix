@@ -36,9 +36,11 @@ in
 
   services.upower.enable = true;
 
-  services.logind.settings.Login.LidSwitch = "suspend";
-  services.logind.settings.Login.PowerKey = "suspend";
-  services.logind.settings.Login.PowerKeyLongPress = "poweroff";
+  # logind keys need the "Handle" prefix; unknown keys are silently ignored.
+  services.logind.settings.Login.HandleLidSwitch = "suspend";
+  # Short press: suspend (swayidle/hypridle lock the screen before sleep).
+  services.logind.settings.Login.HandlePowerKey = "suspend";
+  services.logind.settings.Login.HandlePowerKeyLongPress = "poweroff";
 
   # PCIe Active State Power Management — lets PCIe devices enter low-power idle
   boot.kernelParams = [
