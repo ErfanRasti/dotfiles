@@ -30,12 +30,11 @@
       });
     })
     inputs.nix-matlab.overlay
-    # nix-matlab uses its own config-less nixpkgs, where gtk2 is marked broken.
-    # Drop gtk2 from its FHS env (R2024a doesn't link it).
+    # nix-matlab's library list, minus gtk2 and the deprecated xorg names (see matlab-libs.nix).
     (final: prev: {
-      matlab = prev.matlab.override (old: {
-        targetPkgs = p: builtins.filter (x: (x.pname or "") != "gtk+") (old.targetPkgs p);
-      });
+      matlab = prev.matlab.override {
+        targetPkgs = import ./modules/matlab-libs.nix inputs;
+      };
     })
   ];
 }
