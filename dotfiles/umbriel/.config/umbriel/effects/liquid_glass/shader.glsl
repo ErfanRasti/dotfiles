@@ -8,6 +8,12 @@ const float GLOSS_HEIGHT = 0.30;  // gloss fades out over this fraction of the h
 const float EDGE_THIN    = 0.12;  // how much alpha drops at the very edge (blur shows through)
 const float EDGE_THIN_PX = 16.0;  // width of that thinning
 const vec2  LIGHT_DIR    = vec2(-0.6, -0.8); // light from the top-left
+// Light windows: white can't show on white, so the lit edge gets a thin cool line instead.
+const float SHADE_LIGHT  = 0.16;  // inner shade on the bottom-right edge (light windows)
+const float HAIR_LIGHT   = 0.22;  // strength of the lit-edge line (light windows)
+const float HAIR_PX      = 1.6;   // width of that line
+const vec3  HAIR_TINT    = vec3(0.55, 0.60, 0.70); // cool gray-blue
+const vec2  LIGHT_RANGE  = vec2(0.50, 0.80); // pixel luminance where "dark" fades into "light"
 
 // Signed distance (logical px) to the rounded window edge: negative inside.
 float edge_distance(vec2 uv) {
@@ -30,14 +36,23 @@ vec4 window(vec2 uv) {
   vec2 n = p / max(umbriel_size * 0.5, vec2(1.0));
   float facing = clamp(dot(normalize(n + 1e-5), normalize(LIGHT_DIR)) * 0.5 + 0.5, 0.0, 1.0);
 
-  float rim = exp(-e / RIM_PX);
-  float light = rim * mix(RIM_BASE, RIM_LIGHT, facing * facing)
-              + GLOSS * smoothstep(GLOSS_HEIGHT, 0.0, uv.y);
-  float shade = rim * SHADE * (1.0 - facing);
+  vec3 col = c.rgb / c.a;                   // straight (unpremultiplied) colour
+  float k = smoothstep(LIGHT_RANGE.x, LIGHT_RANGE.y, dot(col, vec3(0.2126, 0.7152, 0.0722)));
+  float f2 = facing * facing;
 
-  vec3 rgb = c.rgb * (1.0 - shade);
-  rgb = mix(rgb, vec3(c.a), clamp(light, 0.0, 1.0));   // lift toward white (premultiplied)
+  float rim = exp(-e / RIM_PX);
+  // Dark pixels: white sheen on the lit side + top gloss.
+  float lift = (1.0 - k) * (rim * mix(RIM_BASE, RIM_LIGHT, f2)
+                            + GLOSS * smoothstep(GLOSS_HEIGHT, 0.0, uv.y));
+  // Both: inner shade on the far side, deeper on light pixels.
+  float shade = rim * (1.0 - facing) * mix(SHADE, SHADE_LIGHT, k);
+  // Light pixels: thin cool line hugging the lit edge.
+  float hair = k * exp(-e / HAIR_PX) * mix(0.3, 1.0, f2) * HAIR_LIGHT;
+
+  vec3 rgb = col * (1.0 - shade);
+  rgb = mix(rgb, vec3(1.0), clamp(lift, 0.0, 1.0));
+  rgb = mix(rgb, HAIR_TINT, clamp(hair, 0.0, 1.0));
 
   float thin = 1.0 - EDGE_THIN * exp(-e / EDGE_THIN_PX);
-  return vec4(rgb, c.a) * thin;
+  return vec4(rgb * c.a, c.a) * thin;
 }

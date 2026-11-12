@@ -1,8 +1,8 @@
 # macOS-like "liquid glass" feel, drawn as a WINDOW effect on top of umbriel's built-in blur.
 # It never moves or blurs pixels (text stays sharp). It only adds light near the window edges:
-#   - a soft specular rim, brightest on the top-left (light) side,
-#   - a faint shade on the bottom-right inner edge for depth,
-#   - a light gloss across the top of the window,
+#   - dark pixels: a soft white rim, brightest on the top-left (light) side, + a top gloss,
+#   - light pixels (white can't show on white): a thin cool gray-blue line on the lit edge,
+#   - both: a shade on the bottom-right inner edge for depth (deeper on light pixels),
 #   - slightly thinner alpha along the edges so the backdrop blur shows through more there.
 # Shaders can't read what is behind a window, so the frost itself is appearance.blur.
 # Select globally with [effects] window = "liquid_glass" (config/glass.toml),
