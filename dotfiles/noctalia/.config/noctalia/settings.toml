@@ -263,10 +263,14 @@ auto_locate = true
 # kitty sitting on its hint bar (drawn last, so in front), a media player top-left and
 # a month calendar on the right. The kitty lives in ./stickers (path relative to $HOME).
 # The battery tile's text is filled in by ~/.config/noctalia/scripts/lock_battery.sh.
-# Portable across machines: positions are in logical pixels for a 1536x864 screen
-# (placement_width/height), and noctalia moves widgets proportionally on other
-# screen sizes (box sizes stay in logical pixels, which already follow the output
-# scale). No `output`, so the layout isn't tied to one connector name.
+# Portable across machines: this is the design on a 1536x864 logical canvas
+# (placement_width/height). Edit it here at that size. lock_battery.sh fits it to
+# each machine's screen: it writes a copy into ~/.local/state/noctalia/settings.toml
+# scaled uniformly by min(W/1536, H/864), box sizes included, and centered, so the
+# aspect ratio holds on 16:9, 16:10, 3:2, any output scale (noctalia alone would
+# stretch x and y apart and keep box sizes). It refits on its own when this
+# section changes or the screen size changes. No `output` (except the login box),
+# so the layout isn't tied to one connector name.
 [lockscreen_widgets]
 enabled = true
 schema_version = 2
@@ -484,11 +488,12 @@ reversed = false
 show_wave = false
 show_when_idle = true
 
+# The password panel turned, a little larger (+10 x +6) and on the same center.
 [lockscreen_widgets.widget.lockscreen-login-back]
-box_height = 210.0
-box_width = 736.0
-cx = 762.0
-cy = 696.0
+box_height = 202.0
+box_width = 730.0
+cx = 768.0
+cy = 690.0
 placement_height = 864.0
 placement_width = 1536.0
 rotation = -0.0349       # -2 degrees (noctalia uses radians)
