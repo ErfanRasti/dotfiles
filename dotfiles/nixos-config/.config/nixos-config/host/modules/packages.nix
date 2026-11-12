@@ -11,7 +11,12 @@
   # You can use https://search.nixos.org/ to find more packages (and options).
 
   # Enable Wayland compositors for display manager session entries
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    # Keep this true: the nixpkgs hyprland package is built (and cached) with UWSM on, but the
+    # module defaults it to false, which overrides the package and builds hyprland from source.
+    withUWSM = true;
+  };
   programs.niri.enable = true;
   programs.umbriel.enable = true;
 
