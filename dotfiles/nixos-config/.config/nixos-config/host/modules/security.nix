@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   # sudo visudo
   security.sudo.extraConfig = ''
     Defaults env_keep += "http_proxy https_proxy HTTP_PROXY HTTPS_PROXY ftp_proxy no_proxy"
@@ -95,5 +95,12 @@
     };
   };
   services.howdy.control = "sufficient";
+
+  # Noctalia's lockscreen authenticates through the `login` service. Howdy normally runs
+  # before the password check there, so a correct password still waited for the camera.
+  # Run the password check first: a right password unlocks at once, and howdy is only
+  # tried when it fails (Enter on an empty field = face scan).
+  security.pam.services.login.rules.auth.howdy.order =
+    config.security.pam.services.login.rules.auth.unix.order + 10;
   # services.linux-enable-ir-emitter.enable = true;
 }

@@ -17,16 +17,13 @@ opacity = 1.0
 # ================================================================ Scratchpad
 # umbriel's single default scratchpad (no named ones): Mod+W stores/restores the focused
 # window, Mod+Shift+W shows/hides it. App shortcuts (yazi, btop, ...) use
-# scripts/toggle_app.sh: they open the app as a normal floating window, and the same shortcut
+# scripts/toggle_app.sh: they open the app as a normal window, and the same shortcut
 # on that window puts it into the scratchpad / brings it back.
 
-# Utility apps always open floating (niri: 0.65 x 0.7).
+# The drop-down terminal opens floating; the other app shortcuts (yazi, btop, Settings,
+# Nautilus, ...) open as normal windows in whatever layout the workspace uses.
 [[window_rule]]
-match.app_id = [
-  "^kitty-dropterm$", "^btop$", "^htop$", "^nvtop$", "^yazi$",
-  "^io\\.missioncenter\\.MissionCenter$", "^org\\.gnome\\.SystemMonitor$",
-  "^org\\.gnome\\.Nautilus$", "^org\\.gnome\\.Settings$",
-]
+match.app_id = "^kitty-dropterm$"
 default_floating = true
 default_floating_size = { width = 0.65, height = 0.7 }
 

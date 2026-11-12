@@ -56,7 +56,7 @@
 "Mod+Alt+E" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.sh yazi kitty --override confirm_os_window_close=0 --class yazi bash -c yazi", repeat = false }
 "Mod+Grave" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.sh kitty-dropterm kitty --class kitty-dropterm --title kitty-dropterm", repeat = false }
 
-# System monitors (open floating; same key again -> scratchpad)
+# System monitors (open as a normal window; same key again -> scratchpad)
 "Ctrl+Shift+Escape" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.sh btop kitty --override confirm_os_window_close=0 --class btop -e btop", repeat = false }
 "Ctrl+Shift+F1" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.sh nvtop kitty --override confirm_os_window_close=0 --class nvtop -e nvtop", repeat = false }
 "Ctrl+Shift+F2" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.sh org.gnome.SystemMonitor gnome-system-monitor", repeat = false }
