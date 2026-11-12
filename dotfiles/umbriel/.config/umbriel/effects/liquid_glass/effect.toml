@@ -1,14 +1,12 @@
-# macOS-style "liquid glass" window edge, drawn as a BORDER effect.
-# Window contents are never touched (no distortion of text, kitty tabs, etc.).
-# The frosted body comes from umbriel's backdrop blur (appearance.blur) plus window opacity;
-# this shader turns the border ring into a glass rim:
-#   - the ring is lifted toward white on the side facing the light (top-left),
-#   - a thin specular hairline sits just outside the window edge,
-#   - outside the ring the native pixels (the drop shadow) are kept, so focused windows keep it.
-# Select globally with [effects] border = "liquid_glass",
-# or per window with [[window_rule]] border_effect = "liquid_glass".
+# macOS-like "liquid glass" feel, drawn as a WINDOW effect on top of umbriel's built-in blur.
+# It never moves or blurs pixels (text stays sharp). It only adds light near the window edges:
+#   - a soft specular rim, brightest on the top-left (light) side,
+#   - a faint shade on the bottom-right inner edge for depth,
+#   - a light gloss across the top of the window,
+#   - slightly thinner alpha along the edges so the backdrop blur shows through more there.
+# Shaders can't read what is behind a window, so the frost itself is appearance.blur.
+# Select globally with [effects] window = "liquid_glass" (config/glass.toml),
+# or per window with [[window_rule]] window_effect = "liquid_glass".
 [effects.preset.liquid_glass]
-kind = "border"
+kind = "window"
 shader = "shader.glsl"
-padding = 18       # px around the ring: room for the shadow (softness 10 + offset 5)
-animated = false   # static: only redrawn when the window/border changes

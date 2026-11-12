@@ -1,52 +1,43 @@
-// Liquid glass border.
-// The compositor supplies main(), precision, uniforms and the helpers:
-//   umbriel_sample(uv)          -> the native border ring (premultiplied, focused/unfocused colour)
-//   umbriel_border_distance(uv) -> signed distance in logical px to the window rect (<0 inside)
-// The window's own pixels are cut out of the result, so contents stay untouched.
-//
-// Border effects apply to the focused window, and this effect paints the padded area around it,
-// where the drop shadow falls. So only the 2 px ring gets the glass look; outside it the native
-// pixels pass through unchanged, and if that area is empty a matching soft shadow is drawn
-// (a tight soft shadow in colors.shadow's strength), so focused windows keep their shadow.
-
-// ---- tunables -------------------------------------------------------------
-const float RING_W       = 2.0;   // px: border width (appearance.border_width)
-const float RING_LIFT    = 0.45;  // how much the lit side of the ring brightens toward white
-const float RING_BASE    = 0.12;  // brightening on the side away from the light
-const float SPEC_WIDTH   = 1.1;   // px: specular hairline at the window edge
-const float SPEC_GAIN    = 0.55;  // hairline strength
+// Liquid glass window sheen. Tune these:
+const float RIM_PX       = 7.0;   // width of the specular rim (logical px)
+const float RIM_LIGHT    = 0.22;  // rim brightness on the lit (top-left) side
+const float RIM_BASE     = 0.05;  // rim brightness on the far side
+const float SHADE        = 0.10;  // inner shade on the bottom-right edge
+const float GLOSS        = 0.035; // gloss across the top of the window
+const float GLOSS_HEIGHT = 0.30;  // gloss fades out over this fraction of the height
+const float EDGE_THIN    = 0.12;  // how much alpha drops at the very edge (blur shows through)
+const float EDGE_THIN_PX = 16.0;  // width of that thinning
 const vec2  LIGHT_DIR    = vec2(-0.6, -0.8); // light from the top-left
-const float SHADOW_ALPHA = 0.44;  // colors.shadow alpha (#00000070)
-const float SHADOW_SOFT  = 6.0;   // px: how far the shadow fades out
-const vec2  SHADOW_OFF   = vec2(0.0, 3.0); // px: shadow offset (down)
 
-vec2 outward_normal(vec2 uv) {
-  vec2 e = vec2(1.0) / umbriel_size;
-  vec2 g = vec2(umbriel_border_distance(uv + vec2(e.x, 0.0)) - umbriel_border_distance(uv - vec2(e.x, 0.0)),
-                umbriel_border_distance(uv + vec2(0.0, e.y)) - umbriel_border_distance(uv - vec2(0.0, e.y)));
-  float len = length(g);
-  return len > 1e-4 ? g / len : vec2(0.0);
+// Signed distance (logical px) to the rounded window edge: negative inside.
+float edge_distance(vec2 uv) {
+  vec2 half_size = umbriel_size * 0.5;
+  vec2 p = uv * umbriel_size - half_size;
+  float r = p.y < 0.0 ? (p.x < 0.0 ? umbriel_corner_radius.x : umbriel_corner_radius.y)
+                      : (p.x < 0.0 ? umbriel_corner_radius.w : umbriel_corner_radius.z);
+  r = min(r, min(half_size.x, half_size.y));
+  vec2 q = abs(p) - half_size + r;
+  return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - r;
 }
 
-vec4 border(vec2 uv) {
-  float d = umbriel_border_distance(uv);   // > 0 outside the window
-  if (d < 0.0) return vec4(0.0);           // never draw over the window itself
+vec4 window(vec2 uv) {
+  vec4 c = umbriel_sample(uv);          // premultiplied
+  if (c.a <= 0.0) return c;
 
-  vec4 native = umbriel_sample(uv);        // premultiplied
+  float e = max(-edge_distance(uv), 0.0);   // px inside the edge
+  vec2 p = uv * umbriel_size - umbriel_size * 0.5;
+  // Which side of the window this pixel is on, relative to the light (1 = facing it).
+  vec2 n = p / max(umbriel_size * 0.5, vec2(1.0));
+  float facing = clamp(dot(normalize(n + 1e-5), normalize(LIGHT_DIR)) * 0.5 + 0.5, 0.0, 1.0);
 
-  // Outside the ring: keep the native pixels (the shadow), or draw a matching one if empty.
-  if (d > RING_W + 0.5) {
-    if (native.a > 0.01) return native;
-    float ds = umbriel_border_distance(uv - SHADOW_OFF / umbriel_size);
-    float s = clamp(1.0 - max(ds, 0.0) / SHADOW_SOFT, 0.0, 1.0);
-    return vec4(0.0, 0.0, 0.0, SHADOW_ALPHA * s * s);
-  }
+  float rim = exp(-e / RIM_PX);
+  float light = rim * mix(RIM_BASE, RIM_LIGHT, facing * facing)
+              + GLOSS * smoothstep(GLOSS_HEIGHT, 0.0, uv.y);
+  float shade = rim * SHADE * (1.0 - facing);
 
-  // The ring itself: lift toward white on the lit side, plus a specular hairline.
-  vec2 n = outward_normal(uv);
-  float facing = clamp(dot(n, normalize(LIGHT_DIR)), 0.0, 1.0);
-  float lift = RING_BASE + RING_LIFT * facing;
-  vec4 c = vec4(mix(native.rgb, vec3(native.a), lift), native.a);
-  float spec = exp(-d / SPEC_WIDTH) * SPEC_GAIN * (0.25 + 0.75 * facing);
-  return vec4(vec3(spec) + c.rgb * (1.0 - spec), spec + c.a * (1.0 - spec));
+  vec3 rgb = c.rgb * (1.0 - shade);
+  rgb = mix(rgb, vec3(c.a), clamp(light, 0.0, 1.0));   // lift toward white (premultiplied)
+
+  float thin = 1.0 - EDGE_THIN * exp(-e / EDGE_THIN_PX);
+  return vec4(rgb, c.a) * thin;
 }

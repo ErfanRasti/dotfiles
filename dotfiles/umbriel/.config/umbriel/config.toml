@@ -37,4 +37,6 @@ files = [
   "config/overwrites.toml",
   # Title bars on/off, written by scripts/stacking_watch.py (on while a stacking workspace is focused)
   "config/titlebar.toml",
+  # Liquid glass window shader off, written by scripts/toggle_glass.sh (Mod+Alt+Shift+G)
+  "config/glass_effect.toml",
 ]

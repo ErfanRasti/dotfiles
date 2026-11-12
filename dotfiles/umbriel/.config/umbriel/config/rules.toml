@@ -6,7 +6,7 @@
 # ================================================================ All windows
 [[window_rule]]
 blur = true
-opacity = 0.9                 # niri: opacity 0.9 (focused and unfocused)
+opacity = 0.8                 # see-through enough for the glass blur to show
 default_maximize_to_edges = false
 
 # Keep noctalia windows fully opaque (niri: exclude title="Noctalia").

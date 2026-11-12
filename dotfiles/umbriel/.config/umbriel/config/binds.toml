@@ -94,7 +94,7 @@
 "Mod+Ctrl+Alt+H" = "column-focus-tab-previous"
 "Mod+Ctrl+Alt+L" = "column-focus-tab-next"
 "Mod+Alt+G" = { action = "column-toggle-tab-bar", repeat = false }
-"Mod+Alt+Shift+G" = { action = "effect-border-toggle", repeat = false } # liquid glass edge on/off (config/glass.toml)
+"Mod+Alt+Shift+G" = { action = "spawn ~/.config/umbriel/scripts/toggle_glass.sh", repeat = false } # liquid glass window shader on/off (all windows)
 "Mod+Alt+Shift+P" = { action = "window-toggle-pinned", repeat = false }
 
 "Mod+M" = { action = "window-toggle-maximize", repeat = false }                # maximize-column
