@@ -107,7 +107,7 @@ sudo pacman -S \
   rofi \
   hyprpaper \
   hyprsunset hyprpicker \
-  bash zsh fish nvim starship lolcat bash-language-server tmux flatpak zoxide lazygit kitty ghostty \
+  bash zsh fish nvim starship lolcat bash-language-server tmux flatpak zoxide lazygit kitty ghostty ptyxis \
   xdg-desktop-portal-hyprland \
   feh \
   papirus-icon-theme \
@@ -225,7 +225,6 @@ echo "------------------- flatpak packages -------------------"
 # flatpak packages
 flatpak update
 flatpak install flathub io.missioncenter.MissionCenter
-flatpak install flathub app.devsuite.Ptyxis
 flatpak install flathub com.github.neithern.g4music
 flatpak install flathub com.jeffser.Nocturne
 
@@ -273,6 +272,9 @@ cd "$HOME/dotfiles/dotfiles/" || exit
 
 # shellcheck disable=SC2035
 stow */
+
+# load ptyxis settings (native ptyxis reads gsettings/dconf, not files)
+dconf load /org/gnome/Ptyxis/ <"$HOME/.config/ptyxis/ptyxis.dconf"
 
 # or
 # stow --adopt -v */

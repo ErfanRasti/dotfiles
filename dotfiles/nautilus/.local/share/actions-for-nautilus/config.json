@@ -82,8 +82,8 @@
         },
         {
           "type": "command",
-          "label": "Ptyxis (Flatpak)",
-          "command_line": "flatpak run app.devsuite.Ptyxis --tab -d %f",
+          "label": "Ptyxis",
+          "command_line": "ptyxis --tab -d %f",
           "cwd": "%f",
           "max_items": 1,
           "filetypes": ["directory"]
