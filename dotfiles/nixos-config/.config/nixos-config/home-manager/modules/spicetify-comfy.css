@@ -57,3 +57,71 @@
 		}
 	}
 }
+
+/* Spotify hardcodes dark-theme veils into these gradients (black, or its #121212
+   background), which turn into muddy grey bands on a light matugen scheme. Fade
+   through the theme's own background instead; on a dark scheme it looks the same. */
+
+/* Home header (Comfy's "Home Header" option): tinted by the hovered shortcut's
+   album color under a 60% black veil. A mostly-opaque veil leaves just a hint of it. */
+:root .main-home-homeHeader {
+	background-image: linear-gradient(rgba(var(--spice-rgb-main), 0.85) 0, var(--spice-main) 100%), var(--background-noise) !important;
+}
+
+/* Now Playing panel: behind the track title, and over Canvas videos */
+:root .main-nowPlayingView-contextItemInfo::before {
+	background: linear-gradient(rgba(var(--spice-rgb-main), 0) 0%, rgba(var(--spice-rgb-main), 0.45) 18%, var(--spice-main) 89% 96%);
+}
+:root .main-nowPlayingView-canvasVisualEnhancement::before {
+	/* !important: Spotify also has a 3-class variant of this rule for its wide layout */
+	background: linear-gradient(rgba(var(--spice-rgb-main), 0.85) 0%, rgba(var(--spice-rgb-main), 0) 30% 80%, rgba(var(--spice-rgb-main), 0.8) 93.25%, var(--spice-main) 100%) !important;
+}
+:root .main-nowPlayingView-canvasVisualEnhancement::after {
+	/* Spotify dims the whole video to ~55% for white text; dark text needs far less */
+	background: linear-gradient(rgba(var(--spice-rgb-main), 0.3) 0%, rgba(var(--spice-rgb-main), 0.1) 30% 70%, var(--spice-main) 95%) !important;
+}
+
+/* Artist page */
+:root .Root__main-view .main-view-container .main-entityHeader-container.main-entityHeader-withBackgroundImage {
+	/* Comfy's 64px top margin pushed the header (and the action bar under it) below
+	   the artist photo, leaving a blank strip between them */
+	margin-top: 0 !important;
+}
+:root .main-entityHeader-withBackgroundImage .main-entityHeader-headerText {
+	/* Name, "Verified" and listener count sit on a photo Spotify darkens for white
+	   text; the theme's dark text color disappears into it */
+	&, * { color: #fff !important; }
+	text-shadow: var(--elevation-1);
+	svg { filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4)); } /* verified badge */
+}
+:root .playlist-playlist-actionBarBackground-background {
+	/* Play/Follow bar: Spotify fills it with a deep shade of the artist's color.
+	   Keep only a hint of it under the theme background. */
+	background-image: linear-gradient(rgba(var(--spice-rgb-main), 0.75), var(--spice-main)), linear-gradient(var(--background-base-70), transparent) !important;
+}
+
+/* Shadows: Spotify's are tuned for its black UI (0.3-0.5 black, up to 60px blur),
+   which on a light scheme turns into grey haze around every image. Use one small
+   elevation scale instead: a tight contact shadow to define the edge plus a soft,
+   low-opacity ambient one, bigger for bigger surfaces. Subtle on dark schemes too. */
+:root {
+	--elevation-1: 0 1px 2px rgba(0, 0, 0, 0.14), 0 1px 4px rgba(0, 0, 0, 0.08);
+	--elevation-2: 0 1px 3px rgba(0, 0, 0, 0.12), 0 6px 16px rgba(0, 0, 0, 0.12);
+	--elevation-3: 0 2px 4px rgba(0, 0, 0, 0.12), 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+/* small: library thumbnails, shortcut images, cover art, play buttons */
+:root .x-entityImage-imageContainer,
+:root .cover-art,
+:root .view-homeShortcutsGrid-imageWrapper,
+:root .e-10451-button-primary__inner {
+	box-shadow: var(--elevation-1) !important;
+}
+/* cards */
+:root .main-cardImage-imageWrapper {
+	box-shadow: var(--elevation-2) !important;
+}
+/* large: playlist/album header cover, home promo image */
+:root .main-entityHeader-shadow,
+:root [class*="PromotionDefaultNativeImage-module_image-container"] {
+	box-shadow: var(--elevation-3) !important;
+}
