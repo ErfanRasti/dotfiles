@@ -249,7 +249,6 @@
 
       # Music
       # spotify - installed via flatpak
-      # amberol
       fum
       gapless
 
@@ -258,9 +257,6 @@
       pavucontrol
       # audacity
       gnome-sound-recorder
-
-      # Radio
-      shortwave
 
       # Videos
       mpv
@@ -279,9 +275,6 @@
       gnome-software
       inputs.nix-software-center.packages.${stdenv.hostPlatform.system}.nix-software-center
       inputs.app-manager.packages.${pkgs.stdenv.hostPlatform.system}.default
-
-      # Dictionaries
-      wordbook
 
       # Container managers
       docker
@@ -326,7 +319,6 @@
       acpi
 
       # Storage
-      impression
       gparted
       gptfdisk # use it as gdisk
 
@@ -369,9 +361,6 @@
 
       # Screen recorder
       obs-studio
-
-      # Graph tools
-      gnome-graphs
 
       # GNOME
       gnome-extension-manager
