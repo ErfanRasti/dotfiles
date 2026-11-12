@@ -9,8 +9,9 @@ const vec4  EDGE_MASK    = vec4(0.0, 0.0, 1.0, 1.0); // (bottom, top, left, righ
 const float BASELINE_PX  = 1.0;   // resting line: flush against the border, no gap
 const float MAX_PX       = 11.0;  // never draw the line further out than this
 const float AMPLITUDE_PX = 2.8;   // waves push outward from the border
-const float V_SHIFT      = 0.15;  // side-wave band centre, as a fraction above the middle
-const float V_SPAN       = 0.70;  // side-wave band half-height, as a fraction of the window
+const float V_SHIFT      = 0.10;  // side-wave band centre, as a fraction above the middle
+const float V_SPAN       = 0.85;  // side-wave band half-height, as a fraction of the window
+const float V_FLAT       = 0.60;  // inner part of the band (fraction of V_SPAN) at full strength
 
 vec4 border(vec2 uv) {
   float d = max(umbriel_border_distance(uv), 0.0);
@@ -33,8 +34,9 @@ vec4 border(vec2 uv) {
 
   // Side waves: only along a band shifted up from the middle, so they stay clear of the bar
   // (top) and the dock (bottom). V_SHIFT moves the band up, V_SPAN sets its height.
+  // Flat-topped: full strength across the inner V_FLAT of the band, fading out only at the ends.
   float vy = clamp((uv_norm.y + V_SHIFT) / V_SPAN, -1.0, 1.0);
-  bell.y = (1.0 - vy * vy) * (1.0 - vy * vy);
+  bell.y = 1.0 - smoothstep(V_FLAT, 1.0, abs(vy));
 
   // Vectorized edge masks: (bottom, top, left, right)
   vec4 edge_step_masks = smoothstep(win_half.yyxx - 4.0, win_half.yyxx, vec4(p.y, -p.y, -p.x, p.x));
@@ -112,6 +114,9 @@ vec4 border(vec2 uv) {
 
   vec3 beam_rgb = mix(base_palette.rgb, vec3(1.0), trace * (0.25 + 0.50 * min(local_loudness, 1.0)));
   float intensity = min(trace + glow, 1.0);
-  return mix(native, vec4(beam_rgb, 1.0), intensity) * max(native.a, intensity);
+  // Plain "beam over native" (premultiplied). Multiplying by native.a again here squared the
+  // alpha of the semi-transparent window shadow, leaving a see-through band around the border,
+  // widest along the bottom where the shadow sits (appearance.shadow offset_y = 5).
+  return mix(native, vec4(beam_rgb, 1.0), intensity);
 }
 
