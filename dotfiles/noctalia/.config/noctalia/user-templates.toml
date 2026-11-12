@@ -179,3 +179,9 @@ output_path = '~/.config/dgop/colors.json'
 input_path = '~/.config/matugen/templates/mango.conf'
 output_path = '~/.config/mango/config/colors.conf'
 post_hook = 'mmsg -d reload_config'
+
+# Neovim reads this to pick tokyonight-night (dark) or tokyonight-day (light)
+# and watches it to switch live, so no post_hook is needed.
+[theme.templates.user.nvim]
+input_path = '~/.config/matugen/templates/nvim-mode'
+output_path = '~/.local/state/nvim/matugen-mode'
