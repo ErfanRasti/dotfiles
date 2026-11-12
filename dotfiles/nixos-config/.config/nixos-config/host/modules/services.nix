@@ -1,4 +1,4 @@
-{ username, ... }: {
+{ pkgs, username, ... }: {
   # Enable the X11 windowing system.
   services.xserver.enable = false;
 
@@ -13,6 +13,12 @@
     };
   };
   services.desktopManager.gnome.enable = true;
+
+  # Unlock the GNOME keyring with the login password when signing in through ly,
+  # so apps that use the Secret Service (Claude Code, browsers, ...) don't prompt
+  # for the keyring password on first use.
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.ly.enableGnomeKeyring = true;
 
   services.gvfs.enable = true;
 
