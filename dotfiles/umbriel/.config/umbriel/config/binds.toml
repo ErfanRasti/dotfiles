@@ -51,17 +51,17 @@
 "Mod+T" = { action = "spawn kitty --app-id kitty-main", repeat = false }
 "Mod+Return" = { action = "spawn kitty", repeat = false }
 "Mod+D" = { action = "spawn ~/.config/hypr/scripts/toggle_rofi_launcher.sh", repeat = false }
-"Mod+I" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.sh org.gnome.Settings env XDG_CURRENT_DESKTOP=GNOME gnome-control-center", repeat = false }
-"Mod+E" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.sh org.gnome.Nautilus env XDG_CURRENT_DESKTOP=GNOME nautilus", repeat = false }
-"Mod+Alt+E" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.sh yazi kitty --override confirm_os_window_close=0 --class yazi bash -c yazi", repeat = false }
-"Mod+Grave" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.sh kitty-dropterm kitty --class kitty-dropterm --title kitty-dropterm", repeat = false }
+"Mod+I" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.py org.gnome.Settings env XDG_CURRENT_DESKTOP=GNOME gnome-control-center", repeat = false }
+"Mod+E" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.py org.gnome.Nautilus env XDG_CURRENT_DESKTOP=GNOME nautilus", repeat = false }
+"Mod+Alt+E" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.py yazi kitty --override confirm_os_window_close=0 --class yazi bash -c yazi", repeat = false }
+"Mod+Grave" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.py kitty-dropterm kitty --class kitty-dropterm --title kitty-dropterm", repeat = false }
 
 # System monitors (open as a normal window; same key again -> scratchpad)
-"Ctrl+Shift+Escape" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.sh btop kitty --override confirm_os_window_close=0 --class btop -e btop", repeat = false }
-"Ctrl+Shift+F1" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.sh nvtop kitty --override confirm_os_window_close=0 --class nvtop -e nvtop", repeat = false }
-"Ctrl+Shift+F2" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.sh org.gnome.SystemMonitor gnome-system-monitor", repeat = false }
-"Ctrl+Shift+F3" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.sh io.missioncenter.MissionCenter missioncenter", repeat = false }
-"Ctrl+Shift+F4" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.sh htop kitty --override confirm_os_window_close=0 --class htop -e htop", repeat = false }
+"Ctrl+Shift+Escape" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.py btop kitty --override confirm_os_window_close=0 --class btop -e btop", repeat = false }
+"Ctrl+Shift+F1" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.py nvtop kitty --override confirm_os_window_close=0 --class nvtop -e nvtop", repeat = false }
+"Ctrl+Shift+F2" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.py org.gnome.SystemMonitor gnome-system-monitor", repeat = false }
+"Ctrl+Shift+F3" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.py io.missioncenter.MissionCenter missioncenter", repeat = false }
+"Ctrl+Shift+F4" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.py htop kitty --override confirm_os_window_close=0 --class htop -e htop", repeat = false }
 
 # Rofi applets
 "Mod+Alt+A" = "spawn ~/.config/rofi/applets/scripts/apps.sh"
@@ -243,7 +243,7 @@
 # ============================================================== Scratchpad (umbriel native)
 # umbriel's default scratchpad (native actions). While it is shown, the rest of the screen
 # blurs + dims ([animation.scratchpad]). App shortcuts (yazi, btop, ...) send their window
-# here when pressed on it (scripts/toggle_app.sh).
+# here when pressed on it (scripts/toggle_app.py).
 "Mod+W" = { action = "spawn ~/.config/umbriel/scripts/scratchpad_window.sh", repeat = false }                     # store / take out (follows it, closes the scratchpad)
 "Mod+Shift+W" = { action = "spawn ~/.config/umbriel/scripts/set_layout.py --scratchpad default", repeat = false } # show (cascaded) / hide
 "Mod+Ctrl+W" = { action = "window-restore-from-scratchpad", repeat = false }                                      # just take it out (scratchpad stays open, no follow)
