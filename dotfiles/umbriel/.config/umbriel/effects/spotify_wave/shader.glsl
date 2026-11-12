@@ -6,7 +6,7 @@
 // 64-band additive standing-wave border oscilloscope for Umbriel compositor.
 
 const vec4  EDGE_MASK    = vec4(0.0, 0.0, 1.0, 1.0); // (bottom, top, left, right)
-const float BASELINE_PX  = 2.5;   // resting line: just outside the 2 px border ring
+const float BASELINE_PX  = 1.0;   // resting line: flush against the border, no gap
 const float MAX_PX       = 11.0;  // never draw the line further out than this
 const float AMPLITUDE_PX = 2.8;   // waves push outward from the border
 const float V_SHIFT      = 0.15;  // side-wave band centre, as a fraction above the middle
@@ -15,7 +15,7 @@ const float V_SPAN       = 0.70;  // side-wave band half-height, as a fraction o
 vec4 border(vec2 uv) {
   float d = max(umbriel_border_distance(uv), 0.0);
   vec4 native = umbriel_sample(uv);
-  // Keep the window shadow when the native border area comes in empty (as in liquid_glass).
+  // Keep the window shadow when the native border area comes in empty.
   if (native.a <= 0.01) {
     float ds = max(umbriel_border_distance(uv - vec2(0.0, 3.0) / umbriel_size), 0.0);
     float s = clamp(1.0 - ds / 6.0, 0.0, 1.0);
