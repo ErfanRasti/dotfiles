@@ -55,6 +55,15 @@
 
       # Optional but recommended to limit the size of your system closure.
       inputs.nixpkgs.follows = "nixpkgs";
+      # Its own rust-overlay pin uses stdenv.isLinux/isDarwin (evaluation warnings
+      # on current nixpkgs); use an up-to-date one instead.
+      inputs.rust-overlay.follows = "rust-overlay";
+    };
+
+    # Rust toolchain for building lanzaboote (see above).
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
@@ -64,11 +73,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-software-center.url = "github:snowfallorg/nix-software-center";
+    # `follows` so it doesn't pull its own copy of nixpkgs.
+    nix-software-center = {
+      url = "github:snowfallorg/nix-software-center";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
+    # No `follows`: on the main nixpkgs its dwarfs dependency fails its tests.
     app-manager.url = "github:kem-a/AppManager";
 
     # claude
+    # No `follows`: it still uses nodePackages, which current nixpkgs removed.
     claude-desktop.url = "github:k3d3/claude-desktop-linux-flake";
   };
 

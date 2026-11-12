@@ -74,9 +74,8 @@ let
       xterm
     ]
     # LiveLink for MATLAB starts ~/matlab inside this FHS env, so it needs
-    # MATLAB's libraries too (libpam, libXt, ...). Reuse nix-matlab's list, minus
-    # gtk2: nixpkgs marks it broken and R2024a doesn't link it.
-    ++ builtins.filter (p: (p.pname or "") != "gtk+") (import "${inputs.nix-matlab}/common.nix" pkgs);
+    # MATLAB's libraries too (libpam, libXt, ...): the same list as the matlab package.
+    ++ import ./matlab-libs.nix inputs pkgs;
 
   # A shell inside the FHS sandbox. Use it to run the installer (./setup).
   # NO SPACE IN INSTALLATION PATH
