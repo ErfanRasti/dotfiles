@@ -46,8 +46,8 @@ binds {
     // column move binds
     Mod+Ctrl+Right hotkey-overlay-title="Move column right" { move-column-right-or-to-monitor-right; }
     Mod+Ctrl+Left  hotkey-overlay-title="Move column left" { move-column-left-or-to-monitor-left; }
-    Mod+Ctrl+Up     hotkey-overlay-title="Move window up" { move-window-up-or-to-workspace-up; }
-    Mod+Ctrl+Down     hotkey-overlay-title="Move window down" { move-window-down-or-to-workspace-down; }
+    Mod+Ctrl+Up     hotkey-overlay-title="Move window up" { move-window-up; }
+    Mod+Ctrl+Down     hotkey-overlay-title="Move window down" { move-window-down; }
     // Mod+Ctrl+Right { move-column-right; }
     // Mod+Ctrl+Left  { move-column-left; }
     // Mod+Ctrl+Up    { move-window-up; }
@@ -55,8 +55,12 @@ binds {
 
     Mod+Ctrl+L hotkey-overlay-title="Move column right" { move-column-right-or-to-monitor-right; }
     Mod+Ctrl+H  hotkey-overlay-title="Move column left" { move-column-left-or-to-monitor-left; }
-    Mod+Ctrl+K     hotkey-overlay-title="Move window up" { move-window-up-or-to-workspace-up; }
-    Mod+Ctrl+J     hotkey-overlay-title="Move window down" { move-window-down-or-to-workspace-down; }
+    Mod+Ctrl+K     hotkey-overlay-title="Move window up" { move-window-up; }
+    Mod+Ctrl+J     hotkey-overlay-title="Move window down" { move-window-down; }
+
+    // move window between workspaces (kept separate from in-workspace moves)
+    Mod+Ctrl+U     hotkey-overlay-title="Move window to workspace down" { move-window-to-workspace-down; }
+    Mod+Ctrl+I     hotkey-overlay-title="Move window to workspace up" { move-window-to-workspace-up; }
 
 
     Mod+Home hotkey-overlay-title="Focus first column" { focus-column-first; }
