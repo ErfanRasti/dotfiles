@@ -1,4 +1,16 @@
+{ pkgs, ... }:
 {
+  # GNOME Settings ships with OnlyShowIn=GNOME, so shells running under other
+  # desktops (umbriel/noctalia) drop the entry and fall back to fuzzy token
+  # matching, which resolves org.gnome.Settings to nvidia-settings' icon.
+  # Derive the entry from the installed package, minus the OnlyShowIn filter.
+  xdg.dataFile."applications/org.gnome.Settings.desktop".source =
+    pkgs.runCommand "org.gnome.Settings.desktop" { } ''
+      sed -e '/^OnlyShowIn=/d' \
+        -e 's|^Exec=gnome-control-center|Exec=env XDG_CURRENT_DESKTOP=GNOME gnome-control-center|' \
+        ${pkgs.gnome-control-center}/share/applications/org.gnome.Settings.desktop > $out
+    '';
+
   xdg.desktopEntries.google-chrome = {
     name = "Google Chrome";
     genericName = "Web Browser";
