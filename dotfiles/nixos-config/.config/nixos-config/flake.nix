@@ -63,6 +63,13 @@
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
+    # GNOME Circle membership list (data/apps.json), see home-manager/modules/gnome-circle.nix.
+    # `nix flake update gnome-circle` picks up apps added to or removed from Circle.
+    gnome-circle = {
+      url = "gitlab:Teams/Circle?host=gitlab.gnome.org";
+      flake = false;
+    };
+
     gsr-ui-nix = {
       url = "github:rPlakama/gsr-ui-nix";
       inputs.nixpkgs.follows = "nixpkgs";
