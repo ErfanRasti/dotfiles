@@ -11,6 +11,7 @@ autostart = [
   "wl-clip-persist --clipboard regular",            # keep clipboard after programs close
   "~/.config/umbriel/scripts/swayidle_runner.sh",
   "~/.config/umbriel/scripts/stacking_watch.py",  # title bars in the stacking layout
+  "~/.config/umbriel/scripts/tab_group_watch.py", # new windows open inside the focused tab group
   "~/scripts/battery_watcher.sh",
   "~/scripts/system_resume.sh restore",
   "paplay ~/.nix-profile/share/sounds/ocean/stereo/desktop-login.oga",
