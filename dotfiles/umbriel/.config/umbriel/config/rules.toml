@@ -17,7 +17,7 @@ opacity = 1.0
 # ================================================================ Scratchpad
 # umbriel's single default scratchpad (no named ones): Mod+W stores/restores the focused
 # window, Mod+Shift+W shows/hides it. App shortcuts (yazi, btop, ...) use
-# scripts/toggle_app.sh: they open the app as a normal window, and the same shortcut
+# scripts/toggle_app.py: they open the app as a normal window, and the same shortcut
 # on that window puts it into the scratchpad / brings it back.
 
 # The drop-down terminal opens floating; the other app shortcuts (yazi, btop, Settings,
