@@ -11,71 +11,46 @@ let
   # nixpkgs' spicetify-cli doesn't install its bundled Extensions folder
   builtinExtensions = "${pkgs.spicetify-cli.src}/Extensions";
 
-  # Must match spotify_path / prefs_path in config-xpui.ini
-  spotifyDir = "$HOME/.local/share/flatpak/app/com.spotify.Client/x86_64/stable/active/files/extra/share/spotify";
-  spotifyPrefs = "$HOME/.var/app/com.spotify.Client/config/spotify/prefs";
-
-  # Reload the open Spotify through its DevTools port (see spotify-flags.conf)
-  # instead of restarting it; does nothing when Spotify isn't running
-  reloadSpotifyPage = ''
-    ws=$(curl -sf "http://127.0.0.1:9222/json/list" |
-      jq -r '[.[] | select(.type == "page")][0].webSocketDebuggerUrl // empty') || exit 0
-    [ -n "$ws" ] || exit 0
-    echo '{"id":1,"method":"Page.reload"}' | websocat -n1 "$ws" >/dev/null
-  '';
-
-  # First-time patch of a stock Spotify: on a new system, and again after every
-  # Flatpak update (an update swaps in fresh, unpatched files). No-op once patched.
-  spicetify-setup = pkgs.writeShellApplication {
-    name = "spicetify-setup";
-    runtimeInputs = with pkgs; [
-      spicetify-cli
-      flatpak
-      gnused
-      curl
-      jq
-      websocat
-    ];
-    text = ''
-      spotify="${spotifyDir}"
-      prefs="${spotifyPrefs}"
-
-      if [ ! -d "$spotify/Apps" ]; then
-        echo "spicetify-setup: Spotify Flatpak isn't installed yet, skipping"
-        exit 0
-      fi
-      # Patched Spotify has an extracted Apps/xpui folder instead of xpui.spa
-      [ -f "$spotify/Apps/xpui.spa" ] || exit 0
-
-      # spicetify reads Spotify's version from prefs, which Spotify only writes on its
-      # first launch (and only updates on the launch after an update). Take it from
-      # Flatpak instead, so the backup is tagged with the installed version.
-      version=$(flatpak info --user com.spotify.Client | sed -n 's/^ *Version: *//p')
-      mkdir -p "$(dirname "$prefs")"
-      touch "$prefs"
-      sed -i '/^app\.last-launched-version=/d' "$prefs"
-      echo "app.last-launched-version=\"$version\"" >>"$prefs"
-
-      echo "spicetify-setup: patching Spotify $version"
-      spicetify -q backup apply --no-restart
-      ${reloadSpotifyPage}
-    '';
-  };
-
-  # matugen/Noctalia post_hook: apply the new colors, then reload the open Spotify
+  # Applies the theme/extensions and reloads the open Spotify through its DevTools
+  # port (see spotify-flags.conf) instead of restarting it. Run by the matugen/Noctalia
+  # post_hook and by the spicetify-setup service below.
   spicetify-reload = pkgs.writeShellApplication {
     name = "spicetify-reload";
     runtimeInputs = with pkgs; [
       spicetify-cli
-      spicetify-setup
+      flatpak
       curl
       jq
       websocat
     ];
     text = ''
-      spicetify-setup # patches a stock Spotify first, if needed
-      spicetify -q refresh || spicetify -q apply --no-restart
-      ${reloadSpotifyPage}
+      # Paths must match spotify_path / prefs_path in config-xpui.ini
+      spotify="$HOME/.local/share/flatpak/app/com.spotify.Client/x86_64/stable/active/files/extra/share/spotify"
+      prefs="$HOME/.var/app/com.spotify.Client/config/spotify/prefs"
+
+      if [ ! -d "$spotify/Apps" ]; then
+        echo "spicetify-reload: Spotify Flatpak isn't installed yet, skipping"
+        exit 0
+      fi
+
+      if [ -f "$spotify/Apps/xpui.spa" ]; then
+        # Stock Spotify (new system, or a Flatpak update swapped in fresh files):
+        # first-time patch. spicetify reads Spotify's version from prefs, which Spotify
+        # only writes when launched, so take it from Flatpak instead.
+        version=$(flatpak info --user com.spotify.Client | sed -n 's/^ *Version: *//p')
+        mkdir -p "$(dirname "$prefs")"
+        touch "$prefs"
+        sed -i '/^app\.last-launched-version=/d' "$prefs"
+        echo "app.last-launched-version=\"$version\"" >>"$prefs"
+        spicetify -q backup
+      fi
+      # Not just `refresh`: only `apply` loads newly listed extensions (~0.1s either way)
+      spicetify -q apply --no-restart
+
+      ws=$(curl -sf "http://127.0.0.1:9222/json/list" |
+        jq -r '[.[] | select(.type == "page")][0].webSocketDebuggerUrl // empty') || exit 0
+      [ -n "$ws" ] || exit 0
+      echo '{"id":1,"method":"Page.reload"}' | websocat -n1 "$ws" >/dev/null
     '';
   };
 
@@ -91,11 +66,10 @@ in
   # Settings (spotify_path, theme, extensions) live in ~/.config/spicetify/config-xpui.ini.
   home.packages = [
     pkgs.spicetify-cli
-    spicetify-setup
     spicetify-reload
   ];
 
-  # Runs spicetify-setup at login, on `home-manager switch`, and right after
+  # Patches a stock Spotify at login, on `home-manager switch`, and right after
   # nix-flatpak installs/updates Flatpaks (which can reset Spotify to stock)
   systemd.user.services.spicetify-setup = {
     Unit = {
@@ -104,7 +78,7 @@ in
     };
     Service = {
       Type = "oneshot";
-      ExecStart = lib.getExe spicetify-setup;
+      ExecStart = lib.getExe spicetify-reload;
     };
     Install.WantedBy = [
       "default.target"
@@ -137,5 +111,6 @@ in
     ".config/spicetify/Extensions/keyboardShortcut.js".source =
       "${builtinExtensions}/keyboardShortcut.js";
     ".config/spicetify/Extensions/adblock.js".source = "${adblock}/adblock/adblock.js";
+    ".config/spicetify/Extensions/coverExpand.js".source = ./spicetify-cover-expand.js;
   };
 }
