@@ -40,7 +40,6 @@
     # graphics
     vulkan-tools
     mesa-demos
-    mesa
 
     # power management tools
     powertop

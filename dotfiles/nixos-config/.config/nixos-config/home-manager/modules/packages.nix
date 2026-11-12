@@ -135,7 +135,6 @@ in
       dwt1-shell-color-scripts
       ggh
       ascii-image-converter
-      rPackages.treesitter
       unzip
       unrar
 
