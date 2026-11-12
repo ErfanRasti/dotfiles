@@ -1,4 +1,33 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+let
+  # Face scan in the background, unlocking through logind on a match (Noctalia listens
+  # to logind's Unlock). It returns at once, so the password field stays usable while
+  # the camera works. Only scans while the session is locked, at most 3 tries, one
+  # instance at a time. Started by the lockscreen's `login` PAM stack on a failed or
+  # empty password, and by swayidle after resume.
+  howdyBackgroundUnlock = pkgs.writeShellScriptBin "howdy-background-unlock" ''
+    user="''${PAM_USER:-$(${pkgs.coreutils}/bin/id -un)}"
+    uid=$(${pkgs.coreutils}/bin/id -u "$user" 2>/dev/null) || exit 0
+    [ "$(${pkgs.coreutils}/bin/id -u)" = "$uid" ] || exit 0 # only for your own session
+    session=$(${pkgs.systemd}/bin/loginctl show-user "$user" -p Display --value 2>/dev/null)
+    [ -n "$session" ] || exit 0
+    ${pkgs.util-linux}/bin/setsid -f ${pkgs.bash}/bin/bash -c '
+      exec 9>"$1"; ${pkgs.util-linux}/bin/flock -n 9 || exit 0
+      for _ in 1 2 3; do
+        [ "$(${pkgs.systemd}/bin/loginctl show-session "$2" -p LockedHint --value)" = yes ] || exit 0
+        # workaround = "native" makes pam_howdy ask for a password alongside the scan;
+        # an input that stays open but empty keeps that prompt waiting (a closed one
+        # makes howdy give up before the camera starts).
+        if ${pkgs.pamtester}/bin/pamtester howdy-unlock "$3" authenticate < <(${pkgs.coreutils}/bin/sleep 10); then
+          ${pkgs.systemd}/bin/loginctl unlock-session "$2"
+          exit 0
+        fi
+      done
+    ' _ "/run/user/$uid/howdy-background-unlock.lock" "$session" "$user" </dev/null >/dev/null 2>&1
+    exit 0
+  '';
+in
+{
   # sudo visudo
   security.sudo.extraConfig = ''
     Defaults env_keep += "http_proxy https_proxy HTTP_PROXY HTTPS_PROXY ftp_proxy no_proxy"
@@ -90,17 +119,50 @@
     settings = {
       core = {
         # no_confirmation = true;
-        # workaround = "input";
+        # pam_howdy only asks for the password *alongside* the face scan when this is not
+        # "off" (the NixOS default). "native" cancels the pending prompt on a face match;
+        # "input" would fake an Enter via /dev/uinput, which the sandboxed polkit helper
+        # can't reach.
+        workaround = "native";
       };
     };
   };
   services.howdy.control = "sufficient";
 
-  # Noctalia's lockscreen authenticates through the `login` service. Howdy normally runs
-  # before the password check there, so a correct password still waited for the camera.
-  # Run the password check first: a right password unlocks at once, and howdy is only
-  # tried when it fails (Enter on an empty field = face scan).
-  security.pam.services.login.rules.auth.howdy.order =
-    config.security.pam.services.login.rules.auth.unix.order + 10;
+  # Noctalia's lockscreen authenticates through the `login` service. With howdy in that
+  # stack, a correct password waited for the camera, and a face scan blocked the
+  # password field. Instead: the password is checked alone, and when it fails (Enter on
+  # an empty field included) pam_exec starts the background face scan above and
+  # returns at once, so you can type the password while the camera works.
+  security.pam.services.login = {
+    howdy.enable = false;
+    rules.auth.howdy-background = {
+      order = config.security.pam.services.login.rules.auth.unix.order + 10;
+      control = "optional";
+      modulePath = "${pkgs.linux-pam}/lib/security/pam_exec.so";
+      args = [
+        "quiet"
+        "${howdyBackgroundUnlock}/bin/howdy-background-unlock"
+      ];
+    };
+  };
+
+  # Face-only service the background scan authenticates against.
+  security.pam.services.howdy-unlock = {
+    howdy.enable = true;
+    unixAuth = false;
+  };
+  # On PATH so swayidle can start a scan after resume (umbriel/scripts/swayidle_runner.sh).
+  environment.systemPackages = [ howdyBackgroundUnlock ];
+
+  # polkit >= 127 runs the PAM stack for pkexec/polkit agents (Noctalia) in a sandboxed,
+  # socket-activated `polkit-agent-helper@` unit with PrivateDevices + DevicePolicy=strict,
+  # so howdy can't open the camera there ("not possible to open camera at configured path")
+  # and the request fails before the password prompt. Let that unit reach the camera.
+  systemd.services."polkit-agent-helper@".serviceConfig = {
+    PrivateDevices = false;
+    DeviceAllow = [ "char-video4linux rw" ];
+    MemoryDenyWriteExecute = false; # howdy's python/dlib/opencv
+  };
   # services.linux-enable-ir-emitter.enable = true;
 }
