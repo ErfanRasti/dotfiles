@@ -123,19 +123,6 @@
     clean.enable = true; # Better automatic GC
     clean.extraArgs = "--keep-since 4d --keep 3";
     flake = "path:$HOME/dotfiles/dotfiles/nixos-config/.config/nixos-config"; # Sets NH_FLAKE
-    # Evaluate impurely so home-manager can check whether the Mathematica installer is in the
-    # store (see home-manager/modules/packages.nix). Costs no eval time for a path: flake.
-    package = pkgs.symlinkJoin {
-      name = "nh";
-      paths = [ pkgs.nh ];
-      meta.mainProgram = "nh"; # the nh module calls lib.getExe on it
-      nativeBuildInputs = [ pkgs.makeWrapper ];
-      postBuild = ''
-        wrapProgram $out/bin/nh \
-          --run 'export NIX_CONFIG="pure-eval = false''${NIX_CONFIG:+
-        $NIX_CONFIG}"'
-      '';
-    };
   };
 
 }

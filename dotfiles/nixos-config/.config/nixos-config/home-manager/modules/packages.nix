@@ -6,72 +6,12 @@
   system,
   ...
 }:
-let
-  # Mathematica, built from the pinned nixpkgs-mathematica input (see flake.nix) so updates
-  # don't rebuild it.
-  mathematica =
-    (import inputs.nixpkgs-mathematica {
-      inherit system;
-      config.allowUnfree = true;
-    }).mathematica.override
-      {
-        version = "15.0.1"; # the version you downloaded (installer pinned by wolfram-installer-pin)
-        webdoc = false; # true if you took the smaller web-docs installer
-      };
-
-  # Its installer must already be in the Nix store (nixpkgs uses requireFile), so it is only
-  # installed when it is; otherwise it is skipped instead of failing the switch. The check
-  # needs impure evaluation (nh is wrapped with pure-eval = false in host/modules/packages.nix);
-  # a pure eval can't see the store path and just skips Mathematica. tryEval also skips it if
-  # nixpkgs drops this version.
-  withMathematica =
-    let
-      src = builtins.tryEval (builtins.unsafeDiscardStringContext mathematica.src.outPath);
-    in
-    src.success && builtins.pathExists src.value;
-
-  # A hand-added store path is unreferenced, so `nh clean` would delete it. This adds every
-  # ~/programs/wolfram/Wolfram_*.sh to the store and pins it with a GC root
-  # (~/.local/state/nix-gcroots/), at login, whenever an installer lands in that folder, and
-  # on every switch (so the next switch picks Mathematica up).
-  # Upgrading: put the new installer there, then bump `version` above. Delete old roots in
-  # ~/.local/state/nix-gcroots/ to let old installers be collected.
-  wolframPin = pkgs.writeShellScript "wolfram-installer-pin" ''
-    set -eu
-    roots="$HOME/.local/state/nix-gcroots"
-    mkdir -p "$roots"
-    shopt -s nullglob
-    for f in "$HOME"/programs/wolfram/Wolfram_*.sh; do
-      root="$roots/$(basename "$f")"
-      [ -e "$root" ] && continue # already in the store and pinned
-      path="$(${pkgs.nix}/bin/nix-store --add-fixed sha256 "$f")"
-      ${pkgs.nix}/bin/nix-store --add-root "$root" --indirect --realise "$path" >/dev/null
-      echo "pinned $f -> $path"
-    done
-  '';
-in
 {
 
   imports = [
     inputs.nix-flatpak.homeManagerModules.nix-flatpak
   ];
 
-  # Keep the Wolfram installer in the store (see wolframPin above).
-  systemd.user.services.wolfram-installer-pin = {
-    Unit.Description = "Add and pin the Wolfram installer in the Nix store";
-    Service = {
-      Type = "oneshot";
-      ExecStart = "${wolframPin}";
-    };
-    Install.WantedBy = [ "default.target" ]; # run once at login
-  };
-  systemd.user.paths.wolfram-installer-pin = {
-    Unit.Description = "Watch ~/programs/wolfram for Wolfram installers";
-    Path = {
-      PathChanged = "%h/programs/wolfram"; # a file finished writing / was moved in
-    };
-    Install.WantedBy = [ "default.target" ];
-  };
 
   # programs.firefox.enable = false;
   # programs.google-chrome.enable = true;
@@ -440,9 +380,7 @@ in
       # USB
       ntfs3g
 
-    ]
-    # Mathematica only where its installer is in the store (see withMathematica at the top of this file).
-    ++ lib.optional withMathematica mathematica;
+    ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -450,11 +388,6 @@ in
 
   # https://wiki.nixos.org/wiki/Polkit
   # services.polkit-gnome.enable = true;
-
-  # Pin the Wolfram installer now too, not only via the user service (see wolframPin above).
-  home.activation.wolframInstallerPin = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    run ${wolframPin} || warnEcho "wolfram: failed to pin the installer, skipping"
-  '';
 
   # Activation snippets all run in one `set -eu -o pipefail` script, so they must not
   # `exit`, set traps or let a failing command through: that stops the whole switch.

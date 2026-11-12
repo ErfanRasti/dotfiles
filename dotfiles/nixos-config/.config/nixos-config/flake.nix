@@ -6,11 +6,6 @@
     # List your channels using: nix-channel --list
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Mathematica only (see home-manager/modules/packages.nix). Pinned to a commit so
-    # `--update` leaves it alone: on the main nixpkgs every update changes its hash and
-    # rebuilds it, re-extracting the ~8 GB installer. Bump the rev by hand to upgrade.
-    nixpkgs-mathematica.url = "github:nixos/nixpkgs/1d060086d60cb76a40cf37109f979d88a5bd6396";
-
     home-manager = {
       url = "github:nix-community/home-manager";
 

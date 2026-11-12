@@ -6,6 +6,7 @@
     ./spicetify.nix
     ./gnome-extensions.nix
     ./comsol.nix
+    ./mathematica.nix
     ./claude.nix
   ];
 }
