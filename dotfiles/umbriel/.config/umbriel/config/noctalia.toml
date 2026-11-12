@@ -43,7 +43,9 @@
 
 # Screenshots
 "Print" = { action = "spawn noctalia msg screenshot-region", repeat = false }
-"Shift+Print" = { action = "spawn noctalia msg screenshot-fullscreen", repeat = false }
+# Shift+Print also works on the lock screen (fullscreen only: region/freeze/annotate
+# overlays are hidden under the session lock).
+"Shift+Print" = { action = "spawn noctalia msg screenshot-fullscreen --no-freeze-screen --no-annotate", allow_when_locked = true, repeat = false }
 
 # The shell itself is started from config/autostarts.toml ("noctalia").
 

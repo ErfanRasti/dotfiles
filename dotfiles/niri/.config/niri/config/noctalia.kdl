@@ -35,7 +35,9 @@ binds {
     // Mod+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
 
     Print hotkey-overlay-title="Screenshot" { spawn-sh "noctalia msg screenshot-region"; }
-    Shift+Print hotkey-overlay-title="Screenshot screen" { spawn-sh "noctalia msg screenshot-fullscreen"; }
+    // allow-when-locked: also works on the lock screen. Fullscreen only - overlays
+    // (region pick, freeze, annotate) are hidden under the session lock.
+    Shift+Print allow-when-locked=true hotkey-overlay-title="Screenshot screen" { spawn-sh "noctalia msg screenshot-fullscreen --no-freeze-screen --no-annotate"; }
     Mod+Print hotkey-overlay-title="Screenshot window" { screenshot-window; }
 
 
