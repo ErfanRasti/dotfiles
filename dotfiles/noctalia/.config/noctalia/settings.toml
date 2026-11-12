@@ -3,9 +3,7 @@ config_version = 1
 [audio]
 enable_overdrive = true
 enable_sounds = true
-notification_sound = "~/.nix-profile/share/sounds/freedesktop/stereo/message.oga"
 sound_volume = 1.0
-volume_change_sound = "~/.nix-profile/share/sounds/ocean/stereo/audio-volume-change.oga"
 
 [backdrop]
 enabled = true
@@ -259,15 +257,35 @@ up = ["Up", "Ctrl+k"]
 auto_locate = true
 
 
+# Lockscreen layout, designed on a 1536x864 logical screen, modelled on a
+# reference design: "L O C K E D" over a tilted card stack (clock, date, volume,
+# battery tiles), an audio visualizer over a compact login box with the
+# kitty sitting on its hint bar (drawn last, so in front), a media player top-left and
+# a month calendar on the right. The kitty lives in ./stickers (path relative to $HOME).
+# The battery tile's text is filled in by ~/.config/noctalia/scripts/lock_battery.sh.
+# Portable across machines: positions are in logical pixels for a 1536x864 screen
+# (placement_width/height), and noctalia moves widgets proportionally on other
+# screen sizes (box sizes stay in logical pixels, which already follow the output
+# scale). No `output`, so the layout isn't tied to one connector name.
 [lockscreen_widgets]
 enabled = true
-remember_last_region = true
 schema_version = 2
 widget_order = [
+  "lockscreen-media",
+  "lockscreen-title",
+  "lockscreen-card-back",
+  "lockscreen-card",
+  "lockscreen-time",
+  "lockscreen-date",
+  "lockscreen-volume",
+  "lockscreen-battery-tile",
+  "lockscreen-battery",
+  "lockscreen-visualizer",
+  "lockscreen-login-back",
   "lockscreen-login-box@eDP-1",
-  "lockscreen-widget-0000000000000001",
-  "lockscreen-widget-0000000000000002",
-  "lockscreen-widget-0000000000000003",
+  "lockscreen-kitty-caption",
+  "lockscreen-calendar",
+  "lockscreen-kitty",
 ]
 
 [lockscreen_widgets.grid]
@@ -275,54 +293,306 @@ cell_size = 16
 major_interval = 4
 visible = true
 
+# Mirrors the calendar: 20px from the screen edge, same top edge.
+[lockscreen_widgets.widget.lockscreen-media]
+box_height = 140.0
+box_width = 320.0
+cx = 180.0
+cy = 238.0
+placement_height = 864.0
+placement_width = 1536.0
+rotation = 0.0
+type = "media_player"
+
+[lockscreen_widgets.widget.lockscreen-media.settings]
+album_art_background = true
+background = true
+background_color = "surface"
+background_opacity = 0.92
+background_radius = 20
+hide_when_no_media = true
+layout = "horizontal"
+shadow = false
+
+[lockscreen_widgets.widget.lockscreen-title]
+box_height = 40.0
+box_width = 320.0
+cx = 768.0
+cy = 140.0
+placement_height = 864.0
+placement_width = 1536.0
+rotation = 0.0
+type = "label"
+
+[lockscreen_widgets.widget.lockscreen-title.settings]
+background = false
+color = "on_surface"
+description = ""
+shadow = false
+title = "L  O  C  K  E  D"
+
+[lockscreen_widgets.widget.lockscreen-card-back]
+box_height = 330.0
+box_width = 470.0
+cx = 762.0
+cy = 344.0
+placement_height = 864.0
+placement_width = 1536.0
+rotation = -0.1047       # -6 degrees (noctalia uses radians)
+type = "label"
+
+[lockscreen_widgets.widget.lockscreen-card-back.settings]
+background = true
+background_color = "on_surface"
+background_opacity = 0.25
+background_radius = 24
+description = ""
+shadow = false
+title = " "
+
+[lockscreen_widgets.widget.lockscreen-card]
+box_height = 322.0
+box_width = 470.0
+cx = 768.0
+cy = 335.0
+placement_height = 864.0
+placement_width = 1536.0
+rotation = 0.0
+type = "label"
+
+[lockscreen_widgets.widget.lockscreen-card.settings]
+background = true
+background_color = "surface"
+background_opacity = 0.92
+background_radius = 24
+description = ""
+shadow = false
+title = " "
+
+[lockscreen_widgets.widget.lockscreen-time]
+box_height = 120.0
+box_width = 440.0
+cx = 768.0
+cy = 243.0
+placement_height = 864.0
+placement_width = 1536.0
+rotation = 0.0
+type = "clock"
+
+[lockscreen_widgets.widget.lockscreen-time.settings]
+background = false
+center_text = true
+clock_style = "digital"
+color = "on_surface"
+format = "{:%H:%M}"
+shadow = false
+
+[lockscreen_widgets.widget.lockscreen-date]
+box_height = 28.0
+box_width = 300.0
+cx = 768.0
+cy = 315.0
+placement_height = 864.0
+placement_width = 1536.0
+rotation = 0.0
+type = "clock"
+
+[lockscreen_widgets.widget.lockscreen-date.settings]
+background = false
+center_text = true
+clock_style = "digital"
+color = "on_surface"
+format = "{:%a,  %b  %d}"
+shadow = false
+
+[lockscreen_widgets.widget.lockscreen-volume]
+box_height = 120.0
+box_width = 215.0
+cx = 655.5
+cy = 420.0
+placement_height = 864.0
+placement_width = 1536.0
+rotation = 0.0
+type = "volume"
+
+[lockscreen_widgets.widget.lockscreen-volume.settings]
+background = true
+background_color = "surface_container"
+background_opacity = 0.9
+background_padding = 10
+background_radius = 16
+fill_color = "primary"
+shadow = false
+show_device = true
+
+[lockscreen_widgets.widget.lockscreen-battery-tile]
+box_height = 120.0
+box_width = 215.0
+cx = 880.5
+cy = 420.0
+placement_height = 864.0
+placement_width = 1536.0
+rotation = 0.0
+type = "label"
+
+[lockscreen_widgets.widget.lockscreen-battery-tile.settings]
+background = true
+background_color = "surface_container"
+background_opacity = 0.9
+background_padding = 10
+background_radius = 16
+description = ""
+shadow = false
+title = " "
+
+# Text is filled in by ~/.config/noctalia/scripts/lock_battery.sh (see [hooks]).
+[lockscreen_widgets.widget.lockscreen-battery]
+box_height = 52.0
+box_width = 160.0
+cx = 880.5
+cy = 420.0
+placement_height = 864.0
+placement_width = 1536.0
+rotation = 0.0
+type = "label"
+
+[lockscreen_widgets.widget.lockscreen-battery.settings]
+background = false
+color = "on_surface"
+description = "Battery"
+shadow = false
+title = "󰁹  --%"
+
+[lockscreen_widgets.widget.lockscreen-visualizer]
+box_height = 48.0
+box_width = 500.0
+cx = 730.0
+cy = 521.0
+placement_height = 864.0
+placement_width = 1536.0
+rotation = 0.0
+type = "audio_visualizer"
+
+[lockscreen_widgets.widget.lockscreen-visualizer.settings]
+background = false
+bands = 48
+color_1 = "primary"
+centered = false      # bars grow up from the bottom edge, which sits on the hint bar
+color_2 = "tertiary"
+mirrored = false
+reversed = false
+show_wave = false
+show_when_idle = true
+
+[lockscreen_widgets.widget.lockscreen-login-back]
+box_height = 210.0
+box_width = 736.0
+cx = 762.0
+cy = 696.0
+placement_height = 864.0
+placement_width = 1536.0
+rotation = -0.0349       # -2 degrees (noctalia uses radians)
+type = "label"
+
+[lockscreen_widgets.widget.lockscreen-login-back.settings]
+background = true
+background_color = "on_surface"
+background_opacity = 0.25
+background_radius = 24
+description = ""
+shadow = false
+title = " "
+
 [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
-box_height = 200.0
-box_width = 800.0
-cx = 450.0
-cy = 500.0
-output = "eDP-1"
+box_height = 196.0
+box_width = 720.0
+cx = 768.0
+cy = 690.0
+placement_height = 864.0
+placement_width = 1536.0
+output = "eDP-1"         # login boxes are matched to a monitor by output; without it noctalia adds a plain default box
 rotation = 0.0
 type = "login_box"
 
 [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
-background_color = "surface_variant"
-background_opacity = 0.88
-background_radius = 12.0
+background_color = "surface"
+background_opacity = 0.92
+background_radius = 20
+center_password_text = false
 input_opacity = 1.0
-input_radius = 6.0
+input_radius = 10.0
+layout = "regular"
 show_caps_lock = true
+show_media = true
 show_keyboard_layout = true
 show_login_button = true
+show_unlock_hint = true
+show_password_reveal = true
+show_session_buttons = true
 
-[lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
-box_height = 100.0
-box_width = 200.0
-cx = 150.0
-cy = 160.0
-output = "eDP-1"
+# Paws rest on the hint bar's top edge. Overlapping it would hide them: noctalia always
+# draws the login box (and its hint bar) above every other widget, whatever the order.
+[lockscreen_widgets.widget.lockscreen-kitty]
+box_height = 112.0
+box_width = 112.0
+cx = 1048.0
+cy = 500.0
+placement_height = 864.0
+placement_width = 1536.0
 rotation = 0.0
-type = "clock"
+type = "sticker"
 
-[lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
-box_height = 100.0
-box_width = 200.0
-cx = 150.0
-cy = 280.0
-output = "eDP-1"
+[lockscreen_widgets.widget.lockscreen-kitty.settings]
+background = false
+image_path = ".config/noctalia/stickers/kitty.svg" # relative to noctalia's working dir, which is $HOME (~ is not expanded)
+opacity = 1.0
+
+[lockscreen_widgets.widget.lockscreen-kitty-caption]
+box_height = 34.0
+box_width = 150.0
+cx = 1095.0
+cy = 430.0
+placement_height = 864.0
+placement_width = 1536.0
+rotation = 0.2094        # 12 degrees (noctalia uses radians)
+type = "label"
+
+[lockscreen_widgets.widget.lockscreen-kitty-caption.settings]
+background = false
+color = "on_surface"
+description = ""
+shadow = false
+title = "Locked, meow"
+
+[lockscreen_widgets.widget.lockscreen-calendar]
+box_height = 300.0
+box_width = 320.0
+cx = 1356.0
+cy = 318.0
+placement_height = 864.0
+placement_width = 1536.0
 rotation = 0.0
-type = "weather"
+type = "calendar"
 
-[lockscreen_widgets.widget.lockscreen-widget-0000000000000003]
-box_height = 150.0
-box_width = 300.0
-cx = 200.0
-cy = 750.0
-output = "eDP-1"
-rotation = 0.0
-type = "media_player"
+[lockscreen_widgets.widget.lockscreen-calendar.settings]
+background = true
+background_color = "surface"
+background_opacity = 0.85
+background_padding = 12
+background_radius = 20
+show_events = false
+show_week_numbers = false
 
-[lockscreen_widgets.widget.lockscreen-widget-0000000000000003.settings]
-hide_when_no_media = true
+[lockscreen]
+allow_empty_password = true # Enter on an empty field runs a face scan (howdy comes after the password in PAM)
+
+[hooks]
+battery_percentage_changed = "~/.config/noctalia/scripts/lock_battery.sh"
+battery_charging = "~/.config/noctalia/scripts/lock_battery.sh"
+battery_discharging = "~/.config/noctalia/scripts/lock_battery.sh"
+battery_plugged = "~/.config/noctalia/scripts/lock_battery.sh"
+session_unlocked = "~/.config/noctalia/scripts/lock_battery.sh"
+started = "~/.config/noctalia/scripts/lock_battery.sh"
 
 [nightlight]
 force = true
@@ -366,7 +636,7 @@ transparency_mode = "glass"
 [shell.screenshot]
 confirm_region = true
 directory = "~/Pictures/Screenshots"
-annotate = true
+annotate = false
 remember_last_region = true
 show_cursor = true
 
@@ -415,6 +685,9 @@ enabled = true
 shortcut = "5"
 variant = "destructive"
 
+# Shadow strength for everything noctalia draws. It is multiplied by each
+# component's background opacity, so the lockscreen cards (opacity 0.6) get a
+# lighter shadow than the clock, which has no background.
 [shell.shadow]
 alpha = 0.8
 
@@ -434,6 +707,9 @@ directory_dark = "~/Pictures/Wallpapers/"
 directory_light = "~/Pictures/Wallpapers/"
 fill_color = "primary"
 transition_on_startup = true
+
+[wallpaper.automation]
+recursive = true
 
 [widget.active_window]
 max_length = 120
