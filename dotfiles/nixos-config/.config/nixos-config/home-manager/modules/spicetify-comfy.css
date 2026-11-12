@@ -1,0 +1,63 @@
+/* My overrides on top of Comfy (appended to its user.css by spicetify.nix).
+   Comfy's "Custom Playbar Layout" (on by default) moves the "Playing on <device>"
+   bar above the playbar and turns the seek bar into a full-width strip at the
+   window's bottom edge. Put both back where stock Spotify has them. */
+
+/* "Playing on <device>" bar: below the playbar, not above it */
+:root #main.Custom-Playbar-Snippet:not(.Playbar-Above-Right-Panel-Snippet) .Root__top-container .Root__now-playing-bar .main-nowPlayingBar-container {
+	flex-direction: column !important;
+}
+:root #main.Custom-Playbar-Snippet:not(.Playbar-Above-Right-Panel-Snippet) .Root__top-container .Root__now-playing-bar .main-nowPlayingBar-container:has(.main-connectBar-connectBar)::before {
+	top: 0;
+}
+/* Comfy only kept this gap free for its bottom-edge seek bar */
+:root #main.Custom-Playbar-Snippet:not(.Playbar-Above-Right-Panel-Snippet) .Root__top-container .Root__now-playing-bar .main-nowPlayingBar-container .main-nowPlayingBar-nowPlayingBar {
+	margin-bottom: 0;
+}
+
+/* Seek bar: centered under the controls, "elapsed ━━●━━ remaining" */
+:root #main.Custom-Playbar-Snippet:not(.Playbar-Above-Right-Panel-Snippet) .Root__top-container .Root__now-playing-bar .main-nowPlayingBar-container .main-nowPlayingBar-nowPlayingBar .main-nowPlayingBar-center .playback-bar {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	width: 100%;
+	bottom: auto;
+	right: auto;
+}
+:root #main.Custom-Playbar-Snippet:not(.Playbar-Above-Right-Panel-Snippet) .Root__top-container .Root__now-playing-bar .main-nowPlayingBar-container .main-nowPlayingBar-nowPlayingBar .main-nowPlayingBar-center .playback-bar > div:not(.playback-progressbar-container) {
+	min-width: 40px;
+}
+:root #main.Custom-Playbar-Snippet:not(.Playbar-Above-Right-Panel-Snippet) .Root__top-container .Root__now-playing-bar .main-nowPlayingBar-container .main-nowPlayingBar-nowPlayingBar .main-nowPlayingBar-center .playback-bar > div:not(.playback-progressbar-container):first-of-type {
+	text-align: right;
+}
+:root #main.Custom-Playbar-Snippet:not(.Playbar-Above-Right-Panel-Snippet) .Root__top-container .Root__now-playing-bar .main-nowPlayingBar-container .main-nowPlayingBar-nowPlayingBar .main-nowPlayingBar-center .playback-bar > div:not(.playback-progressbar-container):last-of-type {
+	text-align: left;
+}
+:root #main.Custom-Playbar-Snippet:not(.Playbar-Above-Right-Panel-Snippet) .Root__top-container .Root__now-playing-bar .main-nowPlayingBar-container .main-nowPlayingBar-nowPlayingBar .main-nowPlayingBar-center .playback-bar .playback-progressbar-container {
+	display: flex;
+	flex: 1 1 auto;
+	align-items: center;
+	min-width: 0;
+}
+:root #main.Custom-Playbar-Snippet:not(.Playbar-Above-Right-Panel-Snippet) .Root__top-container .Root__now-playing-bar .main-nowPlayingBar-container .main-nowPlayingBar-nowPlayingBar .main-nowPlayingBar-center .playback-bar .playback-progressbar {
+	width: 100%;
+	height: 12px;
+}
+:root #main.Custom-Playbar-Snippet:not(.Playbar-Above-Right-Panel-Snippet) .Root__top-container .Root__now-playing-bar .main-nowPlayingBar-container .main-nowPlayingBar-nowPlayingBar .main-nowPlayingBar-center .playback-bar .playback-progressbar .x-progressBar-progressBarBg {
+	--bg-color: rgba(var(--spice-rgb-subtext), 0.3); /* visible unplayed track */
+	--progress-bar-height: 4px;
+	--progress-bar-radius: 2px;
+}
+:root #main.Custom-Playbar-Snippet:not(.Playbar-Above-Right-Panel-Snippet) .Root__top-container .Root__now-playing-bar .main-nowPlayingBar-container .main-nowPlayingBar-nowPlayingBar .main-nowPlayingBar-center .playback-bar .playback-progressbar .x-progressBar-progressBarBg .x-progressBar-fillColor {
+	width: 100%;
+	background-image: none;
+	background-color: var(--fg-color);
+}
+/* the round handle, shown on hover like stock Spotify (Comfy hides it for good) */
+:root #main.Custom-Playbar-Snippet:not(.Playbar-Above-Right-Panel-Snippet) .Root__top-container .Root__now-playing-bar .main-nowPlayingBar-container .main-nowPlayingBar-nowPlayingBar .main-nowPlayingBar-center .playback-bar .playback-progressbar .progress-bar:hover .progress-bar__slider,
+:root #main.Custom-Playbar-Snippet:not(.Playbar-Above-Right-Panel-Snippet) .Root__top-container .Root__now-playing-bar .main-nowPlayingBar-container .main-nowPlayingBar-nowPlayingBar .main-nowPlayingBar-center .playback-bar .playback-progressbar:focus-within .progress-bar__slider {
+	display: flex;
+}
