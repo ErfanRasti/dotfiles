@@ -16,6 +16,14 @@
 
   services.gvfs.enable = true;
 
+  # iPhone support: usbmuxd daemon handles pairing ("Trust This Computer"),
+  # required for USB tethering (ipheth) and file access.
+  services.usbmuxd.enable = true;
+  environment.systemPackages = with pkgs; [
+    libimobiledevice # idevicepair, ideviceinfo, ...
+    ifuse # mount iPhone filesystem
+  ];
+
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
