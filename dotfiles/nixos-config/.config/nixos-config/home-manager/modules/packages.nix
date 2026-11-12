@@ -463,14 +463,24 @@ in
     run ${lib.getExe pkgs.pywalfox-native} update || warnEcho "pywalfox: update failed, skipping"
   '';
 
-  # Mount only if not already mounted: mounting again fails and used to abort the switch.
-  home.activation.rclone = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    run mkdir -p ~/GoogleDrive
-    if ! ${pkgs.util-linux}/bin/mountpoint -q ~/GoogleDrive; then
-      run ${lib.getExe pkgs.rclone} mount "Google Drive": ~/GoogleDrive --daemon \
-        || warnEcho "rclone: failed to mount Google Drive, skipping"
-    fi
-  '';
+  # Google Drive mount as a user service instead of an activation step: it mounts at
+  # every login (not only after a switch), retries while offline, and unmounts on logout.
+  systemd.user.services.rclone-gdrive = {
+    Unit.Description = "Mount Google Drive at ~/GoogleDrive with rclone";
+    Service = {
+      Type = "notify";
+      Environment = [ "PATH=/run/wrappers/bin" ]; # setuid fusermount3
+      ExecStartPre = [
+        "${pkgs.coreutils}/bin/mkdir -p %h/GoogleDrive"
+        "-/run/wrappers/bin/fusermount3 -uz %h/GoogleDrive" # clear a stale mount
+      ];
+      ExecStart = "${lib.getExe pkgs.rclone} mount \"Google Drive:\" %h/GoogleDrive";
+      ExecStop = "/run/wrappers/bin/fusermount3 -u %h/GoogleDrive";
+      Restart = "on-failure";
+      RestartSec = 30;
+    };
+    Install.WantedBy = [ "default.target" ];
+  };
 
   # Noctalia keeps the wallpaper panel's "Flatten" toggle in its state file, not in
   # settings.toml, so set it here. Only that key is touched; the rest of the file is
@@ -518,37 +528,17 @@ in
       fi
     done
   '';
-  # Install or update the latest Xray core for v2rayN. Offline or rate-limited: keep what's there.
-  home.activation.installXrayCore =
-    let
-      xrayAsset =
-        {
-          x86_64-linux = "Xray-linux-64.zip";
-          aarch64-linux = "Xray-linux-arm64-v8a.zip";
-        }
-        .${system};
-      curl = lib.getExe pkgs.curl;
-    in
-    lib.hm.dag.entryAfter [ "writeBoundary" "installPackages" ] ''
-      xrayDir="${config.home.homeDirectory}/.local/share/v2rayN/bin/xray"
-      xrayVersion="$(${curl} -fsSL https://api.github.com/repos/xtls/xray-core/releases/latest \
-        | ${lib.getExe pkgs.jq} -r .tag_name)" || xrayVersion=""
-      if [[ -z "$xrayVersion" || "$xrayVersion" == null ]]; then
-        warnEcho "xray: couldn't get the latest version, skipping"
-      elif [[ ! -f "$xrayDir/xray" || "$(cat "$xrayDir/.version" 2>/dev/null)" != "$xrayVersion" ]]; then
-        xrayZip="$(mktemp)"
-        if ${curl} -fsSLo "$xrayZip" \
-          "https://github.com/xtls/xray-core/releases/download/$xrayVersion/${xrayAsset}" \
-          && run mkdir -p "$xrayDir" \
-          && run ${lib.getExe pkgs.unzip} -oq "$xrayZip" -d "$xrayDir"; then
-          run chmod +x "$xrayDir/xray"
-          echo "$xrayVersion" > "$xrayDir/.version"
-        else
-          warnEcho "xray: failed to install $xrayVersion, skipping"
-        fi
-        rm -f "$xrayZip"
-      fi
-    '';
+  # Xray core for v2rayN, from nixpkgs: it updates with the flake, needs no network at
+  # switch time, and is the same on every machine. Copied, not linked, so v2rayN can
+  # chmod it. pkgs.xray is a wrapper that only sets XRAY_LOCATION_ASSET when unset, so
+  # v2rayN's own geoip/geosite files in bin/ still win.
+  home.activation.installXrayCore = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    xrayDir="${config.home.homeDirectory}/.local/share/v2rayN/bin/xray"
+    if ! cmp -s ${lib.getExe pkgs.xray} "$xrayDir/xray"; then
+      run install -Dm755 ${lib.getExe pkgs.xray} "$xrayDir/xray"
+    fi
+    run rm -f "$xrayDir/.version" # left over from the old GitHub download
+  '';
 
   services.flatpak = {
     enable = true;
