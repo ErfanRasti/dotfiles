@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Lockscreen sticker: a sleepy kitty curled up. Hand-drawn for these dotfiles. -->
+  <defs>
+    <linearGradient id="fur" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE4C4"/>
+      <stop offset="1" stop-color="#F7C99B"/>
+    </linearGradient>
+  </defs>
+  <g stroke="#5B4335" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <!-- tail wrapping around the front -->
+    <path d="M196 196 C238 186 236 128 206 122 C192 120 186 134 196 142 C214 150 212 176 186 182"
+          fill="none" stroke-width="20"/>
+    <path d="M196 196 C238 186 236 128 206 122 C192 120 186 134 196 142 C214 150 212 176 186 182"
+          fill="none" stroke="#F7C99B" stroke-width="9"/>
+    <!-- body -->
+    <ellipse cx="128" cy="178" rx="74" ry="52" fill="url(#fur)"/>
+    <!-- ears -->
+    <path d="M70 92 L62 34 L108 66 Z" fill="url(#fur)"/>
+    <path d="M186 92 L194 34 L148 66 Z" fill="url(#fur)"/>
+    <path d="M74 78 L70 50 L94 66 Z" fill="#F9A8B8" stroke="none"/>
+    <path d="M182 78 L186 50 L162 66 Z" fill="#F9A8B8" stroke="none"/>
+    <!-- head -->
+    <ellipse cx="128" cy="106" rx="70" ry="56" fill="url(#fur)"/>
+    <!-- front paws -->
+    <ellipse cx="100" cy="222" rx="20" ry="13" fill="#FFE9D0"/>
+    <ellipse cx="156" cy="222" rx="20" ry="13" fill="#FFE9D0"/>
+  </g>
+  <!-- forehead stripes -->
+  <g stroke="#E8A877" stroke-width="6" stroke-linecap="round" fill="none">
+    <path d="M128 56 L128 70"/>
+    <path d="M112 58 L115 70"/>
+    <path d="M144 58 L141 70"/>
+  </g>
+  <!-- blush -->
+  <ellipse cx="88" cy="124" rx="13" ry="8" fill="#F9A8B8" opacity="0.8"/>
+  <ellipse cx="168" cy="124" rx="13" ry="8" fill="#F9A8B8" opacity="0.8"/>
+  <!-- sleepy eyes, nose, mouth, whiskers -->
+  <g stroke="#5B4335" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M90 106 Q100 115 110 106"/>
+    <path d="M146 106 Q156 115 166 106"/>
+    <path d="M120 120 L136 120 L128 128 Z" fill="#F48FA6" stroke-width="4"/>
+    <path d="M128 128 Q128 138 118 138"/>
+    <path d="M128 128 Q128 138 138 138"/>
+    <path d="M70 116 L42 110" stroke-width="4"/>
+    <path d="M70 126 L42 130" stroke-width="4"/>
+    <path d="M186 116 L214 110" stroke-width="4"/>
+    <path d="M186 126 L214 130" stroke-width="4"/>
+  </g>
+  <!-- zzz -->
+  <g fill="none" stroke="#9DB8F2" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M196 30 L212 30 L196 46 L212 46"/>
+    <path d="M222 10 L232 10 L222 20 L232 20"/>
+  </g>
+</svg>
