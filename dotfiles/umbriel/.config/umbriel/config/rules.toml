@@ -107,7 +107,19 @@ default_position = { x = 2, y = 2, anchor = "bottom_right" }
 default_focused = false
 
 [[window_rule]]
-match.title = ["^meet\\.google\\.com is sharing your screen\\.$", "^web\\.bale\\.ai is sharing your screen\\.$"]
+match.app_id = "^chrome-web\\.whatsapp\\.com__-Default$"
+# Chrome maps the call popup as "web.whatsapp.com/call/popout", then renames it "WhatsApp call".
+match.title = ["^web\\.whatsapp\\.com/call/popout$", "^WhatsApp call$"]
+default_floating = true
+# Chrome won't shrink the call popup below 280x280; asking for less gets it placed for the
+# smaller size and then pushed past the screen edge when it grows.
+default_floating_size_px = { width = 280, height = 280 }
+default_position = { x = 2, y = 2, anchor = "bottom_right" }
+default_focused = false
+
+[[window_rule]]
+match.title = ["^meet\\.google\\.com is sharing your screen\\.$", "^web\\.bale\\.ai is sharing your screen\\.$",
+               "^web\\.whatsapp\\.com is sharing your screen\\.$"]
 default_floating = true
 default_position = { x = 2, y = 2, anchor = "bottom_right" }
 default_focused = false
@@ -192,6 +204,7 @@ title_bar = "forced"
 
 [[window_rule]]
 match.title = ["^fum$", "^cava$", "^Floating Window - Show Me The Key$", "^Meet - .*$",
+               "^WhatsApp call$", "^web\\.whatsapp\\.com/call/popout$",
                "^(Picture-in-Picture|Picture in picture)$", ".* is sharing your screen\\.$"]
 title_bar = "off"
 

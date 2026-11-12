@@ -239,9 +239,22 @@ window-rule {
     open-focused false
 }
 
+// Chrome maps the WhatsApp call popup with the first title, then renames it "WhatsApp call".
+// It won't shrink below 280x280, so ask for that size to keep it inside the corner.
+window-rule {
+    match title=r#"^web\.whatsapp\.com/call/popout$"# app-id="chrome-web.whatsapp.com__-Default"
+    match title="WhatsApp call" app-id="chrome-web.whatsapp.com__-Default"
+    default-floating-position x=2 y=2 relative-to="bottom-right"
+    default-column-width { fixed 280; }
+    default-window-height { fixed 280; }
+    open-floating true
+    open-focused false
+}
+
 window-rule {
     match title="meet.google.com is sharing your screen."
     match title="web.bale.ai is sharing your screen."
+    match title="web.whatsapp.com is sharing your screen."
     default-floating-position x=2 y=2 relative-to="bottom-right"
     open-floating true
     open-focused false
