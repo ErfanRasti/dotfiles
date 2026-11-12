@@ -7,7 +7,7 @@ lock_cmd='noctalia msg session lock'
 swayidle -w \
   lock "$lock_cmd" \
   before-sleep 'loginctl lock-session;~/scripts/system_resume.sh save' \
-  after-resume 'umbriel msg dpms-on;~/scripts/system_resume.sh restore' \
+  after-resume 'umbriel msg dpms-on;~/scripts/system_resume.sh restore;howdy-background-unlock' \
   timeout 150 'brightnessctl -s set 5%' resume 'brightnessctl -r' \
   timeout 160 'brightnessctl -sd asus::kbd_backlight set 0' resume 'brightnessctl -rd asus::kbd_backlight' \
   timeout 300 'loginctl lock-session' \
