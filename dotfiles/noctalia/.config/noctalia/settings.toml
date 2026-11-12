@@ -105,15 +105,24 @@ type = "google"
 
 [desktop_widgets]
 schema_version = 2
+# Minimal, compact desktop in the lockscreen's style: tiles in surface colours,
+# text in on_surface with the shell font.
+#
+# One design on a 1536x864 canvas (placement_width/height). On other screens
+# ~/.config/noctalia/scripts/desktop_fit.sh (see [hooks]) scales it uniformly by
+# min(W/1536, H/864), boxes included, and keeps each widget's distance to its
+# nearest screen edges, so corners stay corners on any size, aspect or scale.
+#
+#   top-left    : one card, time and date on the left, weather on the right
+#   top-right   : calendar
+#   bottom-left : media (hidden when nothing plays)
 widget_order = [
-  "desktop-widget-0000000000000001",
-  "desktop-widget-0000000000000002",
-  "desktop-widget-0000000000000003",
-  "desktop-widget-0000000000000004",
-  # "desktop-widget-0000000000000005",
-  # "desktop-widget-0000000000000006",
-  # "desktop-widget-0000000000000007",
-  # "desktop-widget-0000000000000008",
+  "desktop-card",
+  "desktop-time",
+  "desktop-date",
+  "desktop-weather",
+  "desktop-calendar",
+  "desktop-media",
 ]
 
 [desktop_widgets.grid]
@@ -121,102 +130,140 @@ cell_size = 16
 major_interval = 4
 visible = true
 
-[desktop_widgets.widget.desktop-widget-0000000000000001]
-box_height = 100.0
-box_width = 200.0
-cx = 120.0
-cy = 120.0
+# ── Top-left card, x 24–344, y 52–148 (24px below the 28px bar) ───────────────
+# A blank label is the card (as on the lockscreen). Time and date stack on the
+# left, 16px inside it; the weather sits on the right, centred on the card.
+# Clocks with center_text = false start at their box's left edge; both boxes are
+# wider than their text, so the text fills the height and the left edges line up.
+
+[desktop_widgets.widget.desktop-card]
+box_height = 96.0
+box_width = 320.0
+cx = 184.0
+cy = 100.0
 output = "eDP-1"
+placement_height = 864.0
+placement_width = 1536.0
+rotation = 0.0
+type = "label"
+
+[desktop_widgets.widget.desktop-card.settings]
+background = true
+background_color = "surface"
+background_opacity = 0.85
+background_radius = 16
+description = ""
+shadow = false
+title = " "
+
+# y 66–110
+[desktop_widgets.widget.desktop-time]
+box_height = 44.0
+box_width = 136.0
+cx = 108.0
+cy = 88.0
+output = "eDP-1"
+placement_height = 864.0
+placement_width = 1536.0
 rotation = 0.0
 type = "clock"
 
-[desktop_widgets.widget.desktop-widget-0000000000000002]
-box_height = 40.0
-box_width = 200.0
-cx = 120.0
-cy = 200.0
+[desktop_widgets.widget.desktop-time.settings]
+background = false
+center_text = false
+clock_style = "digital"
+color = "on_surface"
+format = "{:%H:%M}"
+shadow = false
+
+# y 114–134
+[desktop_widgets.widget.desktop-date]
+box_height = 20.0
+box_width = 136.0
+cx = 108.0
+cy = 124.0
 output = "eDP-1"
+placement_height = 864.0
+placement_width = 1536.0
 rotation = 0.0
 type = "clock"
 
-[desktop_widgets.widget.desktop-widget-0000000000000002.settings]
-format = "{:%a, %b %d}"
+[desktop_widgets.widget.desktop-date.settings]
+background = false
+center_text = false
+clock_style = "digital"
+color = "on_surface"
+format = "{:%a,  %b  %d}"
+shadow = false
 
-
-[desktop_widgets.widget.desktop-widget-0000000000000003]
-box_height = 100.0
-box_width = 200.0
-cx = 340.0
-cy = 120.0
+# Pushed to the card's right edge. The box has the widget's own aspect (180x72 =
+# 2.5:1) so the content fills it. Noctalia left-aligns the text in a fixed frame
+# (no setting), so the right edge is placed for the text widths, measured at this
+# size: a usual reading ("12°C" / "Overcast", ~61px) ends 21px from the card's
+# edge, the longest ("-12°C" / "Mostly clear", ~82px) right at it.
+# Box x 212–362 (overhangs the card where it is empty), y 70–130.
+[desktop_widgets.widget.desktop-weather]
+box_height = 60.0
+box_width = 150.0
+cx = 287.0
+cy = 100.0
 output = "eDP-1"
+placement_height = 864.0
+placement_width = 1536.0
 rotation = 0.0
 type = "weather"
 
-[desktop_widgets.widget.desktop-widget-0000000000000004]
-box_height = 150.0
-box_width = 300.0
-cx = 200.0
-cy = 750.0
+[desktop_widgets.widget.desktop-weather.settings]
+background = false
+color = "on_surface"
+shadow = false
+show_forecast = false
+
+# ── Top-right: calendar, x 1256–1512, y 52–348 ────────────────────────────────
+
+[desktop_widgets.widget.desktop-calendar]
+box_height = 296.0
+box_width = 256.0
+cx = 1384.0
+cy = 200.0
 output = "eDP-1"
+placement_height = 864.0
+placement_width = 1536.0
+rotation = 0.0
+type = "calendar"
+
+[desktop_widgets.widget.desktop-calendar.settings]
+background = true
+background_color = "surface"
+background_opacity = 0.85
+background_padding = 10
+background_radius = 16
+show_events = false
+show_week_numbers = false
+
+# ── Bottom-left: media, x 24–344 (as wide as the clock card), y 648–776 ─────────
+
+[desktop_widgets.widget.desktop-media]
+box_height = 128.0
+box_width = 320.0
+cx = 184.0
+cy = 712.0
+output = "eDP-1"
+placement_height = 864.0
+placement_width = 1536.0
 rotation = 0.0
 type = "media_player"
 
-[desktop_widgets.widget.desktop-widget-0000000000000004.settings]
-hide_when_no_media = true
-
-[desktop_widgets.widget.desktop-widget-0000000000000005]
-box_height = 120.0
-box_width = 200.0
-cx = 1350.0
-cy = 525.0
-output = "eDP-1"
-rotation = 0.0
-type = "sysmon"
-
-[desktop_widgets.widget.desktop-widget-0000000000000005.settings]
-display = "graph"
-stat = "cpu_usage"
-stat2 = "cpu_temp"
-
-
-[desktop_widgets.widget.desktop-widget-0000000000000006]
-box_height = 120.0
-box_width = 200.0
-cx = 1350.0
-cy = 650.0
-output = "eDP-1"
-rotation = 0.0
-type = "sysmon"
-
-[desktop_widgets.widget.desktop-widget-0000000000000006.settings]
-stat = "ram_pct"
-stat2 = "swap_pct"
-
-[desktop_widgets.widget.desktop-widget-0000000000000007]
-box_height = 120.0
-box_width = 200.0
-cx = 1350.0
-cy = 775.0
-output = "eDP-1"
-rotation = 0.0
-type = "sysmon"
-
-[desktop_widgets.widget.desktop-widget-0000000000000007.settings]
-stat = "net_rx"
-stat2 = "net_tx"
-
-[desktop_widgets.widget.desktop-widget-0000000000000008]
-box_height = 300.0
-box_width = 300.0
-cx = 1300.0
-cy = 200.0
-output = "eDP-1"
-rotation = 0.0
-type = "fancy_audio_visualizer"
-
-[desktop_widgets.widget.desktop-widget-0000000000000008.settings]
+[desktop_widgets.widget.desktop-media.settings]
+album_art_background = false
 background = true
-visualization_mode = "wave_rings"
+background_color = "surface"
+background_opacity = 0.92
+background_padding = 8
+background_radius = 16
+hide_when_no_media = true
+layout = "horizontal"
+shadow = false
 
 [dock]
 auto_hide = false
@@ -596,8 +643,8 @@ battery_percentage_changed = "~/.config/noctalia/scripts/lock_battery.sh"
 battery_charging = "~/.config/noctalia/scripts/lock_battery.sh"
 battery_discharging = "~/.config/noctalia/scripts/lock_battery.sh"
 battery_plugged = "~/.config/noctalia/scripts/lock_battery.sh"
-session_unlocked = "~/.config/noctalia/scripts/lock_battery.sh"
-started = "~/.config/noctalia/scripts/lock_battery.sh"
+session_unlocked = "~/.config/noctalia/scripts/lock_battery.sh; ~/.config/noctalia/scripts/desktop_fit.sh"
+started = "~/.config/noctalia/scripts/lock_battery.sh; ~/.config/noctalia/scripts/desktop_fit.sh"
 
 [nightlight]
 force = true
