@@ -156,10 +156,14 @@ output_path = '~/.config/starship.toml'
 input_path = '~/.config/matugen/templates/obs-colors.obt'
 output_path = '~/.config/obs-studio/themes/matugen.obt'
 
+# Pywalfox reads pywal's fixed slots, not roles: it expects color0 to be dark
+# in both modes and derives its own light theme (text = color0, accents =
+# color3/5, field = color7). Slots therefore use explicit .dark/.light
+# variants, and the hook flips the extension's mode to match matugen.
 [theme.templates.user.pywalfox]
 input_path = '~/.config/matugen/templates/pywalfox-colors.json'
 output_path = '~/.cache/wal/colors.json'
-post_hook = 'pywalfox update'
+post_hook = 'pywalfox {{mode}}; pywalfox update'
 
 [theme.templates.user.zed]
 input_path = '~/.config/matugen/templates/zed-colors.json'
