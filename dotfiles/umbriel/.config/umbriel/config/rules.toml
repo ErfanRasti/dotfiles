@@ -117,6 +117,22 @@ default_floating_size_px = { width = 280, height = 280 }
 default_position = { x = 2, y = 2, anchor = "bottom_right" }
 default_focused = false
 
+# Zoom maps a transparent "annotate_toolbar" overlay (just a pencil button) whenever the
+# meeting window loses focus while someone shares. Left tiled it steals a column and the
+# global blur/border paint it as a glass pane; float it bare and never give it focus.
+[[window_rule]]
+match.app_id = "^zoom"
+match.title = "^annotate_toolbar$"
+default_floating = true
+default_focused = false
+focus_on_activate = false
+blur = false
+shadow = false
+border_width = 0
+outer_border_width = 0
+opacity = 1.0
+title_bar = "off"
+
 [[window_rule]]
 match.title = ["^meet\\.google\\.com is sharing your screen\\.$", "^web\\.bale\\.ai is sharing your screen\\.$",
                "^web\\.whatsapp\\.com is sharing your screen\\.$"]
