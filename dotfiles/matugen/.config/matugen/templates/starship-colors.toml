@@ -7,8 +7,9 @@ palette = 'colors'
 
 [palettes.colors]
 mustard = '#af8700'                                  # example
-color1 = '{{colors.primary_fixed_dim.default.hex}}'
-color2 = '{{colors.on_primary.default.hex}}'
+# Only mode-aware roles: *_fixed and hardcoded hex stay dark-tuned in light mode
+color1 = '{{colors.secondary.default.hex}}'
+color2 = '{{colors.on_secondary.default.hex}}'
 color3 = '{{colors.on_surface_variant.default.hex}}'
 color4 = '{{colors.surface_container.default.hex}}'
 color5 = '{{colors.on_primary.default.hex}}'
@@ -21,7 +22,7 @@ color9 = '{{colors.tertiary.default.hex}}'
 [character]
 success_symbol = "[🞈](color9 bold)"
 error_symbol = "[🞈](@{error})"
-vicmd_symbol = "[🞈](#f9e2af)"
+vicmd_symbol = "[🞈](color8 bold)"
 
 [directory]
 format = "[](fg:color1 bg:color4)[󰉋](bg:color1 fg:color2)[ ](fg:color1 bg:color4)[$path ](fg:color3 bg:color4)[ ](fg:color4)"
@@ -38,7 +39,7 @@ format = "[](fg:color8 bg:color4)(bg:color8 fg:color5)[](fg:color8 bg:colo
 
 [git_status]
 style = "bg:{{colors.surface_container.default.hex}}"
-format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
+format = '[[($all_status$ahead_behind )](fg:color8 bg:color4)]($style)'
 
 
 [time]
@@ -55,25 +56,25 @@ pyenv_prefix = 'venv'
 
 [nodejs]
 symbol = ""
-style = "bg:#212736"
+style = "bg:color4"
 format = '[[ $symbol ($version) ](fg:color8 bg:color4)]($style)'
 
 [bun]
 symbol = ""
-style = "bg:#212736"
+style = "bg:color4"
 format = '[[ $symbol ($version) ](fg:color8 bg:color4)]($style)'
 
 [rust]
 symbol = ""
-style = "bg:#212736"
+style = "bg:color4"
 format = '[[ $symbol ($version) ](fg:color8 bg:color4)]($style)'
 
 [golang]
 symbol = ""
-style = "bg:#212736"
+style = "bg:color4"
 format = '[[ $symbol ($version) ](fg:color8 bg:color4)]($style)'
 
 [php]
 symbol = ""
-style = "bg:#212736"
+style = "bg:color4"
 format = '[[ $symbol ($version) ](fg:color8 bg:color4)]($style)'

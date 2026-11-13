@@ -3,7 +3,8 @@
 * Generated with Matugen
 */
 
-@define-color accent_color {{colors.primary_fixed_dim.default.hex}};
+/* accent_color is drawn as text on the window, so it must follow the mode */
+@define-color accent_color {{colors.primary.default.hex}};
 @define-color accent_fg_color {{colors.on_primary_fixed.default.hex}};
 @define-color accent_bg_color {{colors.primary_fixed_dim.default.hex}};
 @define-color window_bg_color {{colors.surface_dim.default.hex}};
