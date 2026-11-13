@@ -11,20 +11,23 @@
 # distance to the screen edges it is nearest to (left/right of the canvas
 # center, above/below it). Corners stay corners and groups stay together.
 #
-# W x H comes from noctalia itself: when a widget's placement size differs from
-# its output's logical size, noctalia remaps it and saves the desktop table to
-# the state file stamped with that size. That is read back here and replaced.
-# When the screen matches the design nothing is saved and nothing is done.
+# W x H is the output's logical size as noctalia sees it. Noctalia never saves
+# the desktop table on its own (config-set on a desktop key writes only that key),
+# but every save of the lockscreen table stamps its placement_width/height with
+# the output's size, and lock_battery.sh (run just before this from the same
+# hooks) makes that save. That stamp is read back here, so this works on any
+# compositor and needs no query of its own. A desktop table noctalia saved itself
+# (its editor) is the fallback.
 #
 # Run from the started and session_unlocked hooks (there is no output-change hook;
 # after plugging in a monitor, the next unlock refits). Desktop widgets edited in
 # noctalia's editor are kept until settings.toml's layout changes again.
-FIT_VERSION=1 # bump when the fitting rules change, to refit existing machines
+FIT_VERSION=2 # bump when the fitting rules change, to refit existing machines
 
 config="${XDG_CONFIG_HOME:-$HOME/.config}/noctalia/settings.toml"
 state="${XDG_STATE_HOME:-$HOME/.local/state}/noctalia/settings.toml"
 cache="${XDG_CACHE_HOME:-$HOME/.cache}/noctalia"
-stamp="$cache/desktop-layout.sha" # "<dotfiles layout hash> <screen sizes hash>" of the fitted layout
+stamp="$cache/desktop-layout.sha" # "<dotfiles layout hash> <W> <H>" of the fitted layout
 
 # Prints the [desktop_widgets] table (with its subtables) of a settings file.
 # Noctalia indents subtables in the state file, so headers may be indented.
@@ -38,18 +41,14 @@ strip_section() {
   awk '/^[ \t]*\[/ { h = $0; sub(/^[ \t]+/, "", h); in_dw = (h ~ /^\[desktop_widgets[].]/) } !in_dw' "$1" >"$tmp" &&
     mv "$tmp" "$1"
 }
-# Prints "<widget> <placement_width> <placement_height>" for every widget of a section.
-sizes() {
-  awk '
-    /^[ \t]*\[/ {
-      n = $0; sub(/^[ \t]+/, "", n)
-      if (n !~ /^\[desktop_widgets\.widget\./ || n ~ /\.settings\]/) { n = ""; next }
-      sub(/^\[desktop_widgets\.widget\./, "", n); sub(/\][ \t]*$/, "", n); gsub(/"/, "", n)
-      next
-    }
-    n != "" && $1 == "placement_width"  { w[n] = $3 + 0 }
-    n != "" && $1 == "placement_height" { h[n] = $3 + 0 }
-    END { for (n in w) if (w[n] > 0 && h[n] > 0) printf "%s %d %d\n", n, w[n], h[n] }' | sort
+# Prints "<W> <H>": the first placement_width/height of a settings table.
+size_of() {
+  awk '$1 == "placement_width" && !w { w = $3 } $1 == "placement_height" && !h { h = $3 }
+    END { if (w > 0 && h > 0) printf "%d %d", w, h }'
+}
+# Prints the [lockscreen_widgets] table of a settings file (subtables may be indented).
+lock_section() {
+  awk '/^[ \t]*\[/ { h = $0; sub(/^[ \t]+/, "", h); in_ls = (h ~ /^\[lockscreen_widgets[].]/) } in_ls' "$1"
 }
 
 status="$(noctalia msg status 2>/dev/null)" || exit 0 # noctalia not running
@@ -61,18 +60,18 @@ mkdir -p "$cache"
 exec 9>"$cache/lock-battery.lock"
 flock 9
 
-screen="$(section "$state" | sizes)"
-[[ -n "$screen" ]] || exit 0 # nothing saved: the screen matches the design
+size="$(lock_section "$state" | size_of)"
+[[ -n "$size" ]] || size="$(section "$state" | size_of)"
+[[ -n "$size" ]] || exit 0 # no size known yet; the next hook run retries
+read -r W H <<<"$size"
 
 hash="$({ echo "fit-v$FIT_VERSION"; section "$config"; } | sha256sum)"
 hash="${hash%% *}"
-sig="$(sha256sum <<<"$screen")"
-sig="${sig%% *}"
 old=""
 [[ -f "$stamp" ]] && read -r old <"$stamp"
-[[ "$old" == "$hash $sig" ]] && exit 0 # already fitted (or edited since) for this screen
+[[ "$old" == "$hash $W $H" ]] && exit 0 # already fitted (or edited since) for this screen
 
-fitted="$(awk 'NR == FNR { SW[$1] = $2; SH[$1] = $3; next }
+fitted="$(section "$config" | awk -v W="$W" -v H="$H" '
   function key(l) { sub(/^[ \t]+/, "", l); sub(/[ \t]*=.*/, "", l); return l }
   function num(l) { sub(/^[^=]*=[ \t]*/, "", l); sub(/[ \t]*#.*/, "", l); return l + 0 }
   # Widget name of a [desktop_widgets.widget.<name>] header, "" for other tables.
@@ -98,9 +97,8 @@ fitted="$(awk 'NR == FNR { SW[$1] = $2; SH[$1] = $3; next }
     for (i = 1; i <= N; i++) {
       if (L[i] ~ /^\[/) { n = wname(L[i]); print L[i]; continue }
       k = key(L[i]); pw = g[n, "placement_width"]; ph = g[n, "placement_height"]
-      if (n == "" || !(pw > 0 && ph > 0) || !(n in SW) ||
+      if (n == "" || !(pw > 0 && ph > 0) ||
           k !~ /^(cx|cy|box_width|box_height|placement_width|placement_height)$/) { print L[i]; continue }
-      W = SW[n]; H = SH[n]
       s = (W / pw < H / ph) ? W / pw : H / ph
       v = g[n, k]
       if (k == "cx") v = place(v, pw, W, s)
@@ -110,10 +108,10 @@ fitted="$(awk 'NR == FNR { SW[$1] = $2; SH[$1] = $3; next }
       else v = H
       print k " = " sprintf("%.1f", v)
     }
-  }' <(echo "$screen") <(section "$config"))"
+  }')"
 [[ -n "$fitted" ]] || exit 0
 
 sleep 1 # let a reload from lock_battery.sh land first; overlapping reloads crashed noctalia
 strip_section "$state"
 printf '\n%s\n' "$fitted" >>"$state" # noctalia's watcher reloads it
-echo "$hash $sig" >"$stamp"
+echo "$hash $W $H" >"$stamp"

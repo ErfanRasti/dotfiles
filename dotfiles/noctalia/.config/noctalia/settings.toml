@@ -109,7 +109,8 @@ schema_version = 2
 # text in on_surface with the shell font.
 #
 # One design on a 1536x864 canvas (placement_width/height). On other screens
-# ~/.config/noctalia/scripts/desktop_fit.sh (see [hooks]) scales it uniformly by
+# ~/.config/noctalia/scripts/desktop_fit.sh (see [hooks]) scales it to the
+# screen size noctalia reports (as for the lockscreen), uniformly by
 # min(W/1536, H/864), boxes included, and keeps each widget's distance to its
 # nearest screen edges, so corners stay corners on any size, aspect or scale.
 #
