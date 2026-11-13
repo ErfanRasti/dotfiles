@@ -27,6 +27,11 @@ input_path = '~/.config/matugen/templates/umbriel-colors.toml'
 output_path = '~/.config/umbriel/config/colors.toml'
 post_hook = 'if pgrep -x umbriel >/dev/null; then umbriel msg config-reload; fi'
 
+[templates.umbriel_spotify_wave]
+input_path = '~/.config/matugen/templates/umbriel-spotify-wave.glsl'
+output_path = '~/.config/umbriel/config/spotify_wave.glsl'
+post_hook = 'if pgrep -x umbriel >/dev/null; then umbriel msg config-reload; fi'
+
 [templates.hyprland]
 input_path = '~/.config/matugen/templates/hyprland-colors.lua'
 output_path = '~/.config/hypr/config/colors.lua'
