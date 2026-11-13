@@ -130,7 +130,7 @@ cell_size = 16
 major_interval = 4
 visible = true
 
-# ── Top-left card, x 24–344, y 52–148 (24px below the 28px bar) ───────────────
+# ── Top-left card, x 24–376, y 52–148 (24px below the 28px bar) ───────────────
 # A blank label is the card (as on the lockscreen). Time and date stack on the
 # left, 16px inside it; the weather sits on the right, centred on the card.
 # Clocks with center_text = false start at their box's left edge; both boxes are
@@ -138,8 +138,8 @@ visible = true
 
 [desktop_widgets.widget.desktop-card]
 box_height = 96.0
-box_width = 320.0
-cx = 184.0
+box_width = 352.0
+cx = 200.0
 cy = 100.0
 output = "eDP-1"
 placement_height = 864.0
@@ -196,16 +196,14 @@ color = "on_surface"
 format = "{:%a,  %b  %d}"
 shadow = false
 
-# Pushed to the card's right edge. The box has the widget's own aspect (180x72 =
-# 2.5:1) so the content fills it. Noctalia left-aligns the text in a fixed frame
-# (no setting), so the right edge is placed for the text widths, measured at this
-# size: a usual reading ("12°C" / "Overcast", ~61px) ends 21px from the card's
-# edge, the longest ("-12°C" / "Mostly clear", ~82px) right at it.
-# Box x 212–362 (overhangs the card where it is empty), y 70–130.
+# On the card's right side. The box has the widget's own aspect (180x72 = 2.5:1)
+# so the content fills it. Noctalia left-aligns the text in a fixed frame and
+# clips it at the frame's right edge (no setting for either), so the card reaches
+# 16px past that edge: any reading stays inside the card. Box x 210–360, y 70–130.
 [desktop_widgets.widget.desktop-weather]
 box_height = 60.0
 box_width = 150.0
-cx = 287.0
+cx = 285.0
 cy = 100.0
 output = "eDP-1"
 placement_height = 864.0
@@ -241,13 +239,13 @@ background_radius = 16
 show_events = false
 show_week_numbers = false
 
-# ── Bottom-left: media, x 24–344 (as wide as the clock card), y 648–776 ─────────
+# ── Bottom-left: media, x 24–280, y 664–776 (clear of the dock) ────────────────── ─────────
 
 [desktop_widgets.widget.desktop-media]
-box_height = 128.0
-box_width = 320.0
-cx = 184.0
-cy = 712.0
+box_height = 112.0
+box_width = 256.0
+cx = 152.0
+cy = 720.0
 output = "eDP-1"
 placement_height = 864.0
 placement_width = 1536.0
