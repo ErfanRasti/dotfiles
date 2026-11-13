@@ -56,6 +56,12 @@
 				}
 			}
 		}
+
+		/* Volume bar: Comfy's near-white track vanishes on a light scheme, leaving just
+		   the filled part; give it the seek bar's track (set on the child to beat Comfy's) */
+		.main-nowPlayingBar-volumeBar .x-progressBar-progressBarBg {
+			--bg-color: rgba(var(--spice-rgb-subtext), 0.3);
+		}
 	}
 }
 
@@ -102,6 +108,23 @@
 	/* Play/Follow bar: Spotify fills it with a deep shade of the artist's color.
 	   Keep only a hint of it under the theme background. */
 	background-image: linear-gradient(rgba(var(--spice-rgb-main), 0.75), var(--spice-main)), linear-gradient(var(--background-base-70), transparent);
+}
+/* The artist photo (and its veil, which carries the artist color as an inline
+   --background-base) ended in a hard edge above that bar. Fade its bottom into the
+   bar's top color: main 0.75 over 0.7 artist color over main = 82.5% main.
+   ::before, as the veil's ::after is Spotify's fade-on-scroll. */
+:root .before-scroll-node > div > :last-child::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(transparent 65%, color-mix(in srgb, var(--spice-main) 82.5%, var(--background-base)));
+}
+
+/* Play button: Comfy lifts it 24px to overlap the header, which leaves it sitting
+   above the shuffle/Follow/... buttons instead of in line with them. Same selector
+   as Comfy's, so it ties on specificity and wins by coming later. */
+:root .Root__main-view .main-view-container .main-actionBar-ActionBar .main-actionBar-ActionBarRow:first-of-type > :first-child {
+	margin-top: 0;
 }
 
 /* Shadows: Spotify's are tuned for its black UI (0.3-0.5 black, up to 60px blur),
