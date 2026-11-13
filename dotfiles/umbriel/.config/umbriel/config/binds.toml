@@ -149,8 +149,9 @@
 "Mod+End" = "column-focus-last"
 
 # ============================================================== Move
-# Floating/stacking windows move 5% of the screen per press; tiled ones move as usual
-# (scripts/move_window.sh).
+# Mod+Ctrl+H/J/K/L (and arrows): floating/stacking windows move 5% of the screen per press and
+# stop at the edge; tiled ones move as usual, to the next output/workspace at the edge
+# (scripts/move_window.sh). Mod+Alt+J/K move any window to another workspace (see Workspaces).
 "Mod+Ctrl+Left" = "spawn ~/.config/umbriel/scripts/move_window.sh left"
 "Mod+Ctrl+Right" = "spawn ~/.config/umbriel/scripts/move_window.sh right"
 "Mod+Ctrl+Up" = "spawn ~/.config/umbriel/scripts/move_window.sh up"
@@ -196,19 +197,18 @@
 "Mod+Page_Up" = "workspace-previous"
 "Mod+Ctrl+Page_Down" = "column-move-to-workspace-next"
 "Mod+Ctrl+Page_Up" = "column-move-to-workspace-previous"
-# Move the focused window straight to the next / previous workspace (any layout, incl.
-# stacking; you follow it). Same keys as niri's move-column-to-workspace-down/up.
-"Mod+Ctrl+U" = "column-move-to-workspace-next"
-"Mod+Ctrl+I" = "column-move-to-workspace-previous"
 
 "Mod+Shift+Page_Down" = "workspace-move-down"
 "Mod+Shift+Page_Up" = "workspace-move-up"
 "Mod+Shift+U" = "workspace-move-down"
 "Mod+Shift+I" = "workspace-move-up"
-# "Mod+Alt+J" = "workspace-move-down"
-# "Mod+Alt+K" = "workspace-move-up"
-"Mod+Alt+Down" = "workspace-move-down"
-"Mod+Alt+Up" = "workspace-move-up"
+
+# Move the focused window to the next / previous workspace (any layout, incl. stacking; you
+# follow it).
+"Mod+Alt+J" = "window-move-to-workspace-next"
+"Mod+Alt+K" = "window-move-to-workspace-previous"
+"Mod+Alt+Down" = "window-move-to-workspace-next"
+"Mod+Alt+Up" = "window-move-to-workspace-previous"
 
 "Mod+P" = "workspace-focus-last" # niri: focus-workspace-previous
 
