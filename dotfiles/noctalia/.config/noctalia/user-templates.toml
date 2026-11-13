@@ -95,8 +95,8 @@ post_hook = 'gsettings set org.gnome.desktop.interface color-scheme prefer-{{mod
 [theme.templates.user.kitty]
 input_path = '~/.config/matugen/templates/kitty-colors.conf'
 output_path = '~/.config/kitty/themes/matugen.conf'
-# post_hook = "sh -c 'kitty @ load-config'"
-post_hook = "kitty +kitten themes --reload-in=all matugen"
+# Not `kitty +kitten themes`: it needs network and pins kitty to a theme copy.
+post_hook = '~/.config/matugen/scripts/kitty_reload.sh'
 
 [theme.templates.user.opencode]
 input_path = '~/.config/matugen/templates/opencode-colors.json'
@@ -105,12 +105,14 @@ output_path = '~/.config/opencode/themes/matugen.json'
 [theme.templates.user.tmux]
 input_path = '~/.config/matugen/templates/tmux-colors.conf'
 output_path = '~/.config/tmux/matugen.conf'
-post_hook = 'tmux source-file ~/.config/tmux/matugen.conf'
+post_hook = 'if tmux info >/dev/null 2>&1; then tmux source-file ~/.config/tmux/matugen.conf; fi'
 
 [theme.templates.user.btop]
 input_path = '~/.config/matugen/templates/btop.theme'
 output_path = '~/.config/btop/themes/matugen.theme'
+post_hook = 'pkill -USR2 -x btop || true'
 
+# Uses terminal palette slots (see the kitty template), so yazi recolors live.
 [theme.templates.user.yazi]
 input_path = '~/.config/matugen/templates/yazi-theme.toml'
 output_path = '~/.config/yazi/theme.toml'
@@ -129,6 +131,7 @@ post_hook = 'touch ~/.config/zellij/config.kdl'
 [theme.templates.user.zathura]
 input_path = '~/.config/matugen/templates/zathura-colors'
 output_path = '~/.config/zathura/zathurarc'
+post_hook = '~/.config/matugen/scripts/zathura_reload.sh'
 
 [theme.templates.user.cava]
 input_path = '~/.config/matugen/templates/cava-colors.ini'
@@ -142,7 +145,7 @@ output_path = '~/.config/ashell/config.toml'
 [theme.templates.user.ghostty]
 input_path = '~/.config/matugen/templates/ghostty'
 output_path = '~/.config/ghostty/themes/Matugen'
-# post_hook = 'pkill -SIGUSR2 ghostty'
+post_hook = 'systemctl --user reload app-com.mitchellh.ghostty.service 2>/dev/null || true'
 
 [theme.templates.user.micro]
 input_path = '~/.config/matugen/templates/micro.micro'
@@ -187,7 +190,7 @@ output_path = '~/.config/dgop/colors.json'
 [theme.templates.user.mango]
 input_path = '~/.config/matugen/templates/mango.conf'
 output_path = '~/.config/mango/config/colors.conf'
-post_hook = 'mmsg -d reload_config'
+post_hook = 'if command -v mmsg >/dev/null; then mmsg -d reload_config; fi'
 
 # Neovim reads this to pick tokyonight-night (dark) or tokyonight-day (light)
 # and watches it to switch live, so no post_hook is needed.

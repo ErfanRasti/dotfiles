@@ -15,8 +15,8 @@ set inputbar-fg             "{{colors.primary.default.hex}}"
 set notification-error-bg   "{{colors.on_error.default.hex}}"
 set notification-error-fg   "{{colors.error.default.hex}}"
 
-set notification-warning-bg "{{colors.primary_fixed.default.hex}}"
-set notification-warning-fg "{{colors.error_container.default.hex}}"
+set notification-warning-bg "{{colors.tertiary_container.default.hex}}"
+set notification-warning-fg "{{colors.on_tertiary_container.default.hex}}"
 
 set highlight-color         "{{colors.primary_fixed.default.hex}}"
 set highlight-active-color  "{{colors.primary_fixed_dim.default.hex}}"
