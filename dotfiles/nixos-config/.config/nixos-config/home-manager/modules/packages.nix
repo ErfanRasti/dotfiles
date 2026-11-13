@@ -490,4 +490,13 @@
       };
     };
   };
+
+  # Update Flatpaks when flake.lock changed, i.e. on `nh home switch --update`
+  home.activation.flatpakUpdate = lib.hm.dag.entryAfter [ "flatpak-managed-install" ] ''
+    stamp=${config.xdg.stateHome}/flatpak-lock-hash
+    hash=${builtins.hashFile "sha256" ../../flake.lock}
+    if [ "$(cat $stamp 2>/dev/null)" != $hash ]; then
+      ${lib.getExe pkgs.flatpak} update --user -y --noninteractive && echo $hash > $stamp
+    fi
+  '';
 }
