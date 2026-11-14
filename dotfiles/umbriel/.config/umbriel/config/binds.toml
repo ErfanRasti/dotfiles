@@ -52,7 +52,8 @@
 "Mod+Return" = { action = "spawn kitty", repeat = false }
 "Mod+D" = { action = "spawn ~/.config/hypr/scripts/toggle_rofi_launcher.sh", repeat = false }
 "Mod+I" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.py org.gnome.Settings env XDG_CURRENT_DESKTOP=GNOME gnome-control-center", repeat = false }
-"Mod+E" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.py org.gnome.Nautilus env XDG_CURRENT_DESKTOP=GNOME nautilus", repeat = false }
+"Mod+E" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.py org.gnome.Nautilus env XDG_CURRENT_DESKTOP=GNOME nautilus --new-window", repeat = false }
+"Mod+Shift+E" = { action = "spawn env XDG_CURRENT_DESKTOP=GNOME nautilus --new-window", repeat = false }
 "Mod+Alt+E" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.py yazi kitty --override confirm_os_window_close=0 --class yazi bash -c yazi", repeat = false }
 "Mod+Grave" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.py kitty-dropterm kitty --class kitty-dropterm --title kitty-dropterm", repeat = false }
 

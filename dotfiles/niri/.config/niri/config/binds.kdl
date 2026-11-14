@@ -289,7 +289,8 @@ binds {
     // moving the mouse or pressing any other key.
     Mod+Shift+P hotkey-overlay-title="Power off monitors" { power-off-monitors; }
 
-  Mod+E hotkey-overlay-title="Open file manager" { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'org.gnome.Nautilus' 'env XDG_CURRENT_DESKTOP=GNOME nautilus'"; }
+  Mod+E hotkey-overlay-title="Open file manager" { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'org.gnome.Nautilus' 'env XDG_CURRENT_DESKTOP=GNOME nautilus --new-window'"; }
+  Mod+Shift+E hotkey-overlay-title="Open a new file manager window" { spawn-sh "env XDG_CURRENT_DESKTOP=GNOME nautilus --new-window"; }
   Mod+Alt+E hotkey-overlay-title="Open yazi file manager" { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'yazi' 'kitty --override confirm_os_window_close=0 --class yazi bash -c yazi'"; }
   Ctrl+Shift+Escape hotkey-overlay-title="Open btop" { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'btop' 'kitty --override confirm_os_window_close=0 --class btop -e btop'"; }
   Ctrl+Shift+F1 hotkey-overlay-title="Open nvtop" { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'nvtop' 'kitty --override confirm_os_window_close=0 --class nvtop -e nvtop'"; }

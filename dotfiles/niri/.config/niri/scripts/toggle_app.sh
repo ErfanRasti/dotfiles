@@ -15,11 +15,12 @@
 #     when focus moves to another window.  Use --no-auto-hide to disable.
 #
 # Semantics:
-#   - If the focused window matches the requested app-id/class (and title, if provided),
-#     send it to workspace "Scratchpad".
+#   - Only the window this script started is toggled (its id is kept in
+#     $XDG_RUNTIME_DIR/toggle_app/); other windows of the app are left alone.
+#   - If that window is focused, send it to workspace "Scratchpad".
 #   - Otherwise:
-#       - If a matching window already exists, bring it to the current workspace and focus it.
-#       - Else, spawn the given command.
+#       - If it exists, bring it to the current workspace and focus it.
+#       - Else, spawn the given command and track the window it opens.
 #   - Unless --no-auto-hide is used, the script blocks after showing the window and
 #     watches for focus changes.  When focus moves to a different regular window, the
 #     tracked window is automatically sent back to the Scratchpad.
@@ -106,11 +107,6 @@ handle_arguments() {
       echo "Error: Command to spawn is required" >&2
       exit 1
     fi
-
-    # If no title is provided, select the window with the matching app-id
-    if [ -z "$TITLE" ]; then
-      TITLE=$(echo "$WINDOWS_JSON" | jq -r --arg app "$APP_ID" '.[] | select(.app_id == $app) | .title' | head -n1)
-    fi
   fi
 }
 get_workspaces_info() {
@@ -161,14 +157,12 @@ auto_hide_monitor() {
 }
 
 hide_or_show() {
-  # Find window id based on its app-id and title
-  WIN_ID="$(
-    echo "$WINDOWS_JSON" | jq -r \
-      --arg app "$APP_ID" \
-      --arg title "$TITLE" \
-      '.[] | select(.app_id == $app and (.title | contains($title))) | .id' |
-      head -n1
-  )"
+  # The tracked window, if it still exists
+  local state="${XDG_RUNTIME_DIR:-/tmp}/toggle_app/$APP_ID${TITLE:+:$TITLE}"
+  WIN_ID="$(cat "$state" 2>/dev/null || true)"
+  if [[ -n "$WIN_ID" ]] && ! jq -e --argjson id "$WIN_ID" 'any(.[]; .id == $id)' <<<"$WINDOWS_JSON" >/dev/null 2>&1; then
+    WIN_ID=""
+  fi
   # --- If focused window already matches -> hide it to scratch ---
   if [[ -n "$FOCUSED_WIN_ID" && "$FOCUSED_WIN_ID" == "$WIN_ID" ]]; then
     #  --focus <FOCUS>  Whether the focus should follow the moved window.
@@ -179,29 +173,22 @@ hide_or_show() {
 
   # --- Otherwise, show existing window or launch new one ---
 
-  # If no matching window is found, spawn a new one.
-  if [ -z "$WIN_ID" ] && [ -n "$APP_CMD" ]; then
-    echo "I'M READY TO LAUNCH"
+  # Not open: spawn it and track the new window it opens (up to ~30 s).
+  if [[ -z "$WIN_ID" ]]; then
+    local before
+    before="$(jq -c '[.[].id]' <<<"$WINDOWS_JSON")"
     niri msg action spawn -- sh -c "$APP_CMD"
-
-    if [[ "$AUTO_HIDE" == true ]]; then
-      # Poll for the window to appear (up to ~15 s, every 0.5 s)
-      local timeout=30
-      while [ $timeout -gt 0 ]; do
-        sleep 0.5
-        WIN_ID=$(niri msg -j windows | jq -r \
-          --arg app "$APP_ID" \
-          --arg title "$TITLE" \
-          '.[] | select(.app_id == $app and (.title | contains($title))) | .id' |
-          head -n1)
-        if [[ -n "$WIN_ID" ]]; then
-          auto_hide_monitor "$WIN_ID" "$SCRATCH_WS_NAME"
-          exit 0
-        fi
-        timeout=$((timeout - 1))
-      done
-      # Window didn't appear in time — just exit
-    fi
+    for _ in {1..60}; do
+      sleep 0.5
+      WIN_ID="$(niri msg -j windows | jq -r --arg app "$APP_ID" --arg title "$TITLE" --argjson before "$before" \
+        'first(.[] | select(.app_id == $app and (.title | contains($title)) and (.id | IN($before[]) | not)) | .id) // empty')"
+      if [[ -n "$WIN_ID" ]]; then
+        mkdir -p "${state%/*}"
+        echo "$WIN_ID" >"$state"
+        [[ "$AUTO_HIDE" == true ]] && auto_hide_monitor "$WIN_ID" "$SCRATCH_WS_NAME"
+        exit 0
+      fi
+    done
     exit 0
   fi
 
