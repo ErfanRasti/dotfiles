@@ -129,17 +129,18 @@ cell_size = 16
 major_interval = 4
 visible = true
 
-# ── Top-left card, x 24–336, y 52–148 (24px below the 28px bar) ───────────────
+# ── Top-left card, x 24–368, y 52–148 (24px below the 28px bar) ───────────────
 # One widget, the week-weather plugin's "card" mode: time over date on the left,
 # icon and temperature over "condition · low/high" on the right, 16px inside the
 # card. Both sides share the same two rows (44 + 20 tall, same font sizes), so
 # the time lines up with the temperature and the date with the condition.
 # Content is `width` x 64, the box that plus the padding, so it renders at scale 1;
-# 280 keeps the two sides close while the longest caption still fits.
+# 312 fits the longest date and caption ("Wed, Sep 30" and "Thunderstorm · -12°/-3°")
+# with at least 16px between the two sides.
 [desktop_widgets.widget.desktop-clock]
 box_height = 96.0
-box_width = 312.0
-cx = 180.0
+box_width = 344.0
+cx = 196.0
 cy = 100.0
 placement_height = 864.0
 placement_width = 1536.0
@@ -153,7 +154,7 @@ background_opacity = 0.85
 background_padding = 16
 background_radius = 16
 mode = "card"
-width = 280
+width = 312
 
 # ── Top-right: calendar, x 1256–1512, y 52–348 ────────────────────────────────
 

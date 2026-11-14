@@ -153,7 +153,7 @@ local function card()
   local h = TIME_ROW + DATE_ROW
   return ui.row({ width = width, minWidth = width, height = h, minHeight = h }, {
     ui.column({ align = "center" }, left),
-    ui.spacer({ flexGrow = 1 }),
+    ui.spacer({ flexGrow = 1, minWidth = 16 }),
     ui.column({ align = "center" }, right),
   })
 end
