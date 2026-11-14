@@ -178,18 +178,18 @@ background_radius = 16
 show_events = false
 show_week_numbers = false
 
-# ── Right, under the calendar: the week's weather, x 1256–1512, y 364–620 ─────
+# ── Right, under the calendar: the week's weather, x 1256–1512, y 364–660 ─────
 # The week-weather plugin (~/.local/share/noctalia/plugins/week-weather): today's
 # temperature hour by hour, then today and the next 6 days (min, avg, max). Now
-# and today's low/high are on the top-left card already. Its content is `width`
-# wide and ~225 tall; the box is that plus the padding, so it renders at scale 1.
+# and today's low/high are on the top-left card already. Content `width` x `height`
+# (as tall as the calendar), the box that plus the padding, so it renders at scale 1.
 # Its center is below the canvas middle, so desktop_fit.sh would pin it to the
 # bottom edge; "anchor: top" keeps it 16px under the calendar on any screen.
 [desktop_widgets.widget.desktop-forecast]
-box_height = 256.0
+box_height = 296.0
 box_width = 256.0
 cx = 1384.0
-cy = 492.0 # anchor: top
+cy = 512.0 # anchor: top
 output = "eDP-1"
 placement_height = 864.0
 placement_width = 1536.0
@@ -202,6 +202,7 @@ background_color = "surface"
 background_opacity = 0.85
 background_padding = 14
 background_radius = 16
+height = 268
 mode = "week"
 width = 228
 
@@ -309,15 +310,13 @@ cell_size = 16
 major_interval = 4
 visible = true
 
-# 20px from the screen edge, the calendar's top edge, and the same tile as the
-# desktop's forecast (256x256, same content and text size): the week-weather
-# plugin in week mode, the next hours' temperatures, then today and the next 6
-# days (min, avg, max). Content `width` wide and ~223 tall, so it renders at scale 1.
+# Weather top-left and calendar top-right: the desktop's two tiles, mirrored about
+# the center column, 48px from the screen edge, tops on the clock card's top edge.
 [lockscreen_widgets.widget.lockscreen-weather]
-box_height = 256.0
+box_height = 296.0
 box_width = 256.0
-cx = 148.0
-cy = 296.0
+cx = 176.0
+cy = 322.0
 placement_height = 864.0
 placement_width = 1536.0
 rotation = 0.0
@@ -329,14 +328,15 @@ background_color = "surface"
 background_opacity = 0.85
 background_padding = 14
 background_radius = 16
+height = 268
 mode = "week"
 width = 228
 
-# Bottom-left, 20px from the screen edge, bottom edge level with the login box's.
+# Bottom-left, on the weather's left edge, bottom edge level with the login box's.
 [lockscreen_widgets.widget.lockscreen-media]
 box_height = 140.0
 box_width = 320.0
-cx = 180.0
+cx = 208.0
 cy = 718.0
 placement_height = 864.0
 placement_width = 1536.0
@@ -605,10 +605,10 @@ shadow = false
 title = "Locked, meow"
 
 [lockscreen_widgets.widget.lockscreen-calendar]
-box_height = 300.0
-box_width = 320.0
-cx = 1356.0
-cy = 318.0
+box_height = 296.0
+box_width = 256.0
+cx = 1360.0
+cy = 322.0
 placement_height = 864.0
 placement_width = 1536.0
 rotation = 0.0
@@ -618,8 +618,8 @@ type = "calendar"
 background = true
 background_color = "surface"
 background_opacity = 0.85
-background_padding = 12
-background_radius = 20
+background_padding = 10
+background_radius = 16
 show_events = false
 show_week_numbers = false
 

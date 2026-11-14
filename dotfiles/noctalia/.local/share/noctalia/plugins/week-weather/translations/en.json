@@ -6,6 +6,7 @@
       "card": "Clock and now"
     },
     "width": { "label": "Content width" },
+    "height": { "label": "Content height" },
     "days": { "label": "Days after today" },
     "hours": { "label": "Hours" }
   },

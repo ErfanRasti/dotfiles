@@ -19,6 +19,7 @@ local CACHE = "~/.cache/noctalia/weather.json"
 
 local mode = noctalia.getConfig("mode")
 local width = noctalia.getConfig("width")
+local height = noctalia.getConfig("height")
 local days = noctalia.getConfig("days")
 local hours = noctalia.getConfig("hours")
 
@@ -123,7 +124,8 @@ end
 
 -- ── card: the desktop's top-left card ──────────────────────────────────────────
 -- Time over date on the left, icon and temperature over "condition · low/high"
--- on the right, on the same two rows (heights and font sizes), so they line up.
+-- on the right, each caption centered under its line, on the same two rows
+-- (heights and font sizes), so they line up.
 local TIME_ROW, DATE_ROW = 44, 20
 
 local function card()
@@ -147,9 +149,9 @@ local function card()
     }
   end
   return ui.row({ width = width, minWidth = width }, {
-    ui.column({ align = "start" }, left),
+    ui.column({ align = "center" }, left),
     ui.spacer({ flexGrow = 1 }),
-    ui.column({ align = "end" }, right),
+    ui.column({ align = "center" }, right),
   })
 end
 
@@ -216,7 +218,9 @@ local function dayRows()
       temps(text(temp(day.temperature_min_c), 12, DIM), bold(temp(average(day)), 12), text(temp(day.temperature_max_c), 12)),
     }))
   end
-  return ui.column({ gap = 4 }, rows)
+  -- With a set height the day list takes the room left over and spreads its rows.
+  local fill = height > 0
+  return ui.column({ gap = 4, flexGrow = fill and 1 or nil, justify = fill and "space_between" or nil }, rows)
 end
 
 local function week()
@@ -224,7 +228,8 @@ local function week()
   if snapshot then
     children = { hourStrip(), ui.box({ fill = "outline_variant/0.5", height = 1 }), dayRows() }
   end
-  return ui.column({ gap = 10, width = width, minWidth = width }, children)
+  local h = height > 0 and height or nil
+  return ui.column({ gap = 10, width = width, minWidth = width, height = h, minHeight = h }, children)
 end
 
 function update()

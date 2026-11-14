@@ -14,7 +14,7 @@
 
 id = "dotfiles/week-weather"
 name = "Week weather"
-version = "1.3.0"
+version = "1.4.0"
 plugin_api = 3
 author = "dotfiles"
 license = "GPL-3.0" # same as the rest of the dotfiles (LICENSE at the repo root)
@@ -45,6 +45,18 @@ entry = "week.luau"
   default = 220
   min = 120
   max = 600
+
+  # Content height in logical px for the week; 0 keeps its natural height (~221).
+  # Taller, the day rows spread evenly over it, so the tile can match a neighbour's
+  # height at the same text size (box inner height = this, for scale 1).
+  [[desktop_widget.setting]]
+  key = "height"
+  type = "int"
+  label_key = "settings.height.label"
+  default = 0
+  min = 0
+  max = 800
+  visible_when = { key = "mode", values = ["week"] }
 
   [[desktop_widget.setting]]
   key = "days"
