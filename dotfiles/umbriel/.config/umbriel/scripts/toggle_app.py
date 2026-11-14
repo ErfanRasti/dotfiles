@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """App toggle (umbriel port of niri/scripts/toggle_app.sh), using umbriel's default scratchpad.
 
-Usage: toggle_app.py <app-id> <command...>
+Usage: toggle_app.py [--float[=WxH]] <app-id> <command...>
+--float opens the app floating and centered, WxH of the screen (default 0.65x0.7).
 Only the window this script started is toggled (its id is kept in $XDG_RUNTIME_DIR/toggle_app/);
 other windows of the app are left alone.
-  not open               -> start <command> (it opens as a normal window in the workspace's layout)
+  not open               -> start <command> (in the workspace's layout, or floating with --float)
   focused on a workspace -> put it into the scratchpad (Mod+Shift+W shows the scratchpad)
   in the scratchpad      -> (shown or hidden) move it out to the current workspace and focus it
   on another workspace   -> bring it to the current workspace and focus it
@@ -28,6 +29,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import umbriel_ipc as ipc  # noqa: E402
 
 STATE = os.path.join(os.environ.get("XDG_RUNTIME_DIR", "/tmp"), "toggle_app")
+FLOAT = (0.65, 0.7)  # default --float size, as fractions of the screen
 
 
 def act(name, **args):
@@ -81,8 +83,35 @@ def bring(wid, cur, anchor, scrolling):
         place_after(wid, anchor)
 
 
-def spawn(cmd, app_id, state, windows):
-    """Start <cmd> and save the id of the window it opens as the one to toggle."""
+def wait_for(wid, ok):
+    """Poll <wid> until ok(window) (at most ~1 s); return the window, or None."""
+    for _ in range(100):
+        w = next((x for x in ipc.query("windows") if x["id"] == wid), None)
+        if w and ok(w):
+            return w
+        time.sleep(0.01)
+    return None
+
+
+def make_floating(wid, size):
+    """Float <wid>, resize it to <size> (fractions of its output) and center it."""
+    if not focus(wid):
+        return
+    act("window-toggle-floating", window=wid)
+    w = wait_for(wid, lambda w: w["floating"])
+    if not w:
+        return
+    out = next(o for o in ipc.query("outputs") if o["name"] == w["output"])["logical_size"]
+    ow, oh = out["width"], out["height"]
+    act("window-modify-width-right", delta=round(size[0] - w["w"] / ow, 4))
+    act("window-modify-height-down", delta=round(size[1] - w["h"] / oh, 4))
+    # Center once the resize has landed, or the old size is used.
+    wait_for(wid, lambda w: abs(w["w"] / ow - size[0]) < 0.02 and abs(w["h"] / oh - size[1]) < 0.05)
+    act("window-center")
+
+
+def spawn(cmd, app_id, state, windows, size=None):
+    """Start <cmd> and save the id of the window it opens as the one to toggle (floated if <size>)."""
     before = {w["id"] for w in windows}
     subprocess.run(["umbriel", "msg", "spawn", *cmd], check=False)
     for _ in range(300):  # up to ~30 s, for a slow cold start
@@ -92,14 +121,20 @@ def spawn(cmd, app_id, state, windows):
             os.makedirs(STATE, exist_ok=True)
             with open(state, "w") as f:
                 f.write(new[0])
+            if size:
+                make_floating(new[0], size)
             return
         time.sleep(0.1)
 
 
 def main():
-    if len(sys.argv) < 3:
-        sys.exit("usage: toggle_app.py <app-id> <command...>")
-    app_id, cmd = sys.argv[1], sys.argv[2:]
+    args, size = sys.argv[1:], None
+    if args and args[0].startswith("--float"):
+        wh = args.pop(0).partition("=")[2]
+        size = tuple(map(float, wh.split("x"))) if wh else FLOAT
+    if len(args) < 2:
+        sys.exit("usage: toggle_app.py [--float[=WxH]] <app-id> <command...>")
+    app_id, cmd = args[0], args[1:]
     state = os.path.join(STATE, app_id)
 
     windows = ipc.query("windows")
@@ -110,7 +145,7 @@ def main():
         tracked = None
     target = next((w for w in windows if w["id"] == tracked), None)
     if target is None:
-        return spawn(cmd, app_id, state, windows)
+        return spawn(cmd, app_id, state, windows, size)
 
     ws = next(w for w in ipc.query("workspaces") if w["focused"])
     cur, scrolling = ws["index"], ws["layout"] == "scrolling"

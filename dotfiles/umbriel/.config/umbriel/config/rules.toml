@@ -20,13 +20,6 @@ opacity = 1.0
 # scripts/toggle_app.py: they open the app as a normal window, and the same shortcut
 # on that window puts it into the scratchpad / brings it back.
 
-# The drop-down terminal opens floating; the other app shortcuts (yazi, btop, Settings,
-# Nautilus, ...) open as normal windows in whatever layout the workspace uses.
-[[window_rule]]
-match.app_id = "^kitty-dropterm$"
-default_floating = true
-default_floating_size = { width = 0.65, height = 0.7 }
-
 # ================================================================ Sizes
 [[window_rule]]
 match.app_id = ["^vlc$", "^mpv$", "^kitty$"]

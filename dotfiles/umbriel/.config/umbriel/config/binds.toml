@@ -51,6 +51,7 @@
 "Mod+T" = { action = "spawn kitty --app-id kitty-main", repeat = false }
 "Mod+Return" = { action = "spawn kitty", repeat = false }
 "Mod+D" = { action = "spawn ~/.config/hypr/scripts/toggle_rofi_launcher.sh", repeat = false }
+# toggle_app.py opens apps in the workspace's layout; add --float[=WxH] after it to float one.
 "Mod+I" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.py org.gnome.Settings env XDG_CURRENT_DESKTOP=GNOME gnome-control-center", repeat = false }
 "Mod+E" = { action = "spawn ~/.config/umbriel/scripts/toggle_app.py org.gnome.Nautilus env XDG_CURRENT_DESKTOP=GNOME nautilus --new-window", repeat = false }
 "Mod+Shift+E" = { action = "spawn env XDG_CURRENT_DESKTOP=GNOME nautilus --new-window", repeat = false }
