@@ -680,6 +680,12 @@ directory = "~/Pictures/Screenshots"
 annotate = false
 remember_last_region = true
 show_cursor = true
+# Noctalia's "Screenshot saved" toast has no buttons, so the script saves the
+# file instead and shows a toast with Open / Show in Folder buttons.
+save_to_file = false
+copy_to_clipboard = true
+pipe_to_command = true
+pipe_command = "~/.config/noctalia/scripts/screenshot_notify.sh"
 
 
 [[shell.session.actions]]
