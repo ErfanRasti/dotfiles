@@ -13,8 +13,10 @@
     # If you want to use JACK applications, uncomment the following
     #jack.enable = true;
 
-    # Share app audio in calls: play an app to "Meet-Mix" (you still hear it)
-    # and pick "Meet-Mic" as the mic, which carries that audio plus your voice.
+    # Share app audio in calls: play an app to "Meet-Mix" (you still hear it).
+    # "Meet-Mic" carries that audio plus your voice; make it the default mic
+    # once (wpctl set-default) so calls keep it when they reopen the mic, e.g.
+    # on screen share. Meet-Mix's volume only changes what you hear.
     extraConfig.pipewire."90-meet-mic"."context.modules" =
       map (args: { name = "libpipewire-module-loopback"; inherit args; }) [
         # Meet-Mix sink -> your speakers
@@ -29,8 +31,12 @@
           "capture.props" = { "target.object" = "meet_mix"; "stream.capture.sink" = true; };
           "playback.props"."target.object" = "meet_out";
         }
-        # your mic -> meet_out, kept out of your speakers
-        { "playback.props"."target.object" = "meet_out"; }
+        # laptop mic -> meet_out, kept out of your speakers; never falls back to
+        # the default mic, which is Meet-Mic itself
+        {
+          "capture.props" = { "target.object" = "alsa_input.pci-0000_00_1f.3.analog-stereo"; "node.dont-fallback" = true; };
+          "playback.props"."target.object" = "meet_out";
+        }
       ];
   };
 }
