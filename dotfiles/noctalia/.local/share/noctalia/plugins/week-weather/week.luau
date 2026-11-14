@@ -1,20 +1,18 @@
 --!nonstrict
--- Minimal weekly weather tile. Reads the forecast noctalia's weather service
--- already caches, so it follows the shell's location, units and refresh.
+-- Minimal weather for the desktop and the lockscreen, drawn from the forecast
+-- noctalia's weather service already caches (same location, units and refresh).
 --
---   hourly :  Now  01  02  03  04  05      daily :  5°               Clear
---             5°   5°  4°  4°  3°  3°               ───────────────  3° · 11°
---            ──────────────────────────             (days as in hourly,
---                          min  avg  max             from tomorrow on)
---            Today ☁        3°   7°  11°
---            Sun   ☂        5°  10°  14°     now :         ☾ 5°
---            …                                         Clear · 3°/11°
+--   card :  00:37            ☾ 5°      week :  Now  01  02  03  04  05
+--           Sat, Nov 14  Clear · 3°/11°         5°   5°  4°  4°  3°  3°
+--                                              ──────────────────────────
+--   time and temperature share a row,                       min  avg  max
+--   so do date and condition                Today ☁         3°   6°  11°
+--                                              Sun   ☂         5°  10°  14°
 --
--- Lows are dimmed (on_surface_variant), averages bold (the day in one number). A day's average is the mean
--- of its hourly temperatures (the cache holds 7 days of hours). Every row has
--- fixed column widths, so the content's size never changes with the numbers and
--- the tile's fitted text size stays put.
-
+-- A day's average is the mean of its hourly temperatures (the cache holds 7 days
+-- of hours); it is bold, lows are dimmed. Every cell has a fixed size, so the
+-- content never resizes with the numbers and the tile's fitted text size stays put.
+--
 -- Part of the dotfiles, under the repo's GPL-3.0 license (LICENSE at the repo root).
 
 local CACHE = "~/.cache/noctalia/weather.json"
@@ -26,10 +24,10 @@ local hours = noctalia.getConfig("hours")
 
 local FG = "on_surface"
 local DIM = "on_surface_variant"
-local LINE = "outline_variant/0.5"
 
 local snapshot = nil
 local cacheMtime = -1
+local imperial = false
 
 -- WMO weather interpretation codes (WMO 4677), the "weather_code" Open-Meteo
 -- reports (https://open-meteo.com/en/docs): each code's short name and icon.
@@ -75,27 +73,11 @@ local function glyphFor(code, isDay)
   return icon
 end
 
-local function conditionFor(code)
-  return (WMO[code] or UNKNOWN)[1]
-end
-
 local function temp(celsius)
   if celsius == nil then
     return "--"
   end
-  local v = celsius
-  if noctalia.getSetting("weather.unit") == "imperial" then
-    v = 32 + celsius * 1.8
-  end
-  return tostring(math.floor(v + 0.5)) .. "°"
-end
-
-local function weekday(iso)
-  local y, m, d = string.match(iso or "", "^(%d+)-(%d+)-(%d+)")
-  if not y then
-    return iso or ""
-  end
-  return os.date("%a", os.time({ year = tonumber(y), month = tonumber(m), day = tonumber(d), hour = 12 }))
+  return math.floor((imperial and 32 + celsius * 1.8 or celsius) + 0.5) .. "°"
 end
 
 -- Re-parses the cache only when noctalia rewrote it.
@@ -103,100 +85,35 @@ local function load()
   local info = noctalia.fileInfo(CACHE)
   if not info then
     snapshot = nil
-    return
-  end
-  if info.mtime == cacheMtime and snapshot then
-    return
-  end
-  local raw = noctalia.readFile(CACHE)
-  local data = raw and noctalia.json.decode(raw)
-  if data and data.snapshot and data.snapshot.valid then
-    snapshot = data.snapshot
-    cacheMtime = info.mtime
-  end
-end
-
-local function caption(text, color, w, align)
-  return ui.label({ text = text, fontSize = 11, color = color, width = w, maxLines = 1, textAlign = align or "start" })
-end
-
-local function body(text, color, w, align)
-  return ui.label({ text = text, fontSize = 12, color = color, width = w, maxLines = 1, textAlign = align or "start" })
-end
-
-local function separator()
-  return ui.box({ fill = LINE, height = 1 })
-end
-
--- Mean of a day's hourly temperatures, the low/high midpoint when it has no hours.
-local function average(day)
-  local sum, n = 0, 0
-  for _, h in ipairs(snapshot.forecast_hours or {}) do
-    if h.temperature_c and string.sub(h.time_iso or "", 1, 10) == day.date_iso then
-      sum += h.temperature_c
-      n += 1
+  elseif info.mtime ~= cacheMtime then
+    local raw = noctalia.readFile(CACHE)
+    local data = raw and noctalia.json.decode(raw)
+    if data and data.snapshot and data.snapshot.valid then
+      snapshot = data.snapshot
+      cacheMtime = info.mtime
     end
   end
-  if n > 0 then
-    return sum / n
-  end
-  if day.temperature_min_c and day.temperature_max_c then
-    return (day.temperature_min_c + day.temperature_max_c) / 2
-  end
-  return nil
 end
 
--- The three temperature columns: fixed width, numbers right-aligned so the
--- degree signs line up, and a clear gap between columns.
-local TEMP_W = 32
-local TEMP_GAP = 10
-
--- Each number sits right-aligned in its own fixed-width cell.
-local function cell(child)
-  return ui.row({ width = TEMP_W, minWidth = TEMP_W, justify = "end" }, { child })
+local function text(t, size, color, props)
+  local p = props or {}
+  p.text, p.fontSize, p.color, p.maxLines = t, size, color or FG, 1
+  return ui.label(p)
 end
 
-local function temps(children)
-  local cells = {}
-  for _, child in ipairs(children) do
-    table.insert(cells, cell(child))
-  end
-  return ui.row({ gap = TEMP_GAP, align = "center" }, cells)
+local function bold(t, size)
+  return text(t, size, FG, { fontWeight = "bold" })
 end
 
--- One "day  glyph ……… min  avg  max" row.
-local function dayRow(key, name, day)
-  -- A label's width doesn't pin its size (it hugs its text), so the name and the
-  -- glyph sit in fixed-width cells: every row's glyph starts at the same x.
-  return ui.row({ key = key, gap = 6, align = "center", height = 18 }, {
-    ui.row({ width = 44, minWidth = 44 }, { body(name, FG) }),
-    ui.row({ width = 16, minWidth = 16, justify = "center" }, {
-      ui.glyph({ name = glyphFor(day.weather_code or 3, true), size = 14, color = DIM }),
-    }),
-    ui.spacer({ flexGrow = 1 }),
-    temps({
-      body(temp(day.temperature_min_c), DIM, TEMP_W, "end"),
-      ui.label({ text = temp(average(day)), fontSize = 12, fontWeight = "bold", color = FG,
-        width = TEMP_W, maxLines = 1, textAlign = "end" }),
-      body(temp(day.temperature_max_c), FG, TEMP_W, "end"),
-    }),
-  })
+-- A fixed-size cell: a label's own width doesn't pin its size (it hugs its text).
+local function cell(w, justify, child)
+  return ui.row({ width = w, minWidth = w, justify = justify, align = "center" }, { child })
 end
 
--- Column titles over the day rows' temperatures, right-aligned like the numbers.
-local function dayHeader()
-  local function title(text)
-    return ui.label({ text = text, fontSize = 10, color = DIM, width = TEMP_W, maxLines = 1, textAlign = "end" })
-  end
-  return ui.row({ align = "center", height = 12 }, {
-    ui.spacer({ flexGrow = 1 }), temps({ title("min"), title("avg"), title("max") }),
-  })
-end
-
--- Index of the first daily entry for today (the cache starts at today).
-local function todayIndex(list)
+-- Today's entry in the daily list (the cache starts at today).
+local function todayIndex()
   local today = os.date("%Y-%m-%d")
-  for i, day in ipairs(list) do
+  for i, day in ipairs(snapshot.forecast_days) do
     if day.date_iso == today then
       return i
     end
@@ -204,90 +121,117 @@ local function todayIndex(list)
   return 1
 end
 
-local function dayRows(fromToday)
-  local list = snapshot.forecast_days or {}
-  local first = todayIndex(list)
-  local rows = { dayHeader() }
-  local start = fromToday and first or first + 1
-  for i = start, math.min(#list, first + days) do
-    local name = (i == first) and noctalia.tr("ui.today") or weekday(list[i].date_iso)
-    table.insert(rows, dayRow("d" .. i, name, list[i]))
+-- ── card: the desktop's top-left card ──────────────────────────────────────────
+-- Time over date on the left, icon and temperature over "condition · low/high"
+-- on the right, on the same two rows (heights and font sizes), so they line up.
+local TIME_ROW, DATE_ROW = 44, 20
+
+local function card()
+  local left = {
+    ui.row({ height = TIME_ROW, align = "center" }, { bold(os.date("%H:%M"), 36) }),
+    ui.row({ height = DATE_ROW, align = "center" }, { text(os.date("%a, %b ") .. tonumber(os.date("%d")), 13) }),
+  }
+  local right = {}
+  if snapshot then
+    local now = snapshot.current
+    local today = snapshot.forecast_days[todayIndex()]
+    right = {
+      ui.row({ height = TIME_ROW, gap = 8, align = "center" }, {
+        ui.glyph({ name = glyphFor(now.weather_code, now.is_day), size = 30, color = FG }),
+        bold(temp(now.temperature_c), 36),
+      }),
+      ui.row({ height = DATE_ROW, align = "center" }, {
+        text((WMO[now.weather_code] or UNKNOWN)[1] .. " · "
+          .. temp(today.temperature_min_c) .. "/" .. temp(today.temperature_max_c), 13),
+      }),
+    }
   end
-  return ui.column({ gap = 4 }, rows)
-end
-
-local function dailyHeader()
-  local current = snapshot.current or {}
-  local list = snapshot.forecast_days or {}
-  local today = list[todayIndex(list)] or {}
-  return ui.row({ align = "center", height = 34 }, {
-    ui.label({ text = temp(current.temperature_c), fontSize = 26, fontWeight = "bold", color = FG }),
+  return ui.row({ width = width, minWidth = width }, {
+    ui.column({ align = "start" }, left),
     ui.spacer({ flexGrow = 1 }),
-    ui.column({ gap = 2, align = "end" }, {
-      caption(conditionFor(current.weather_code or 3), FG, 110, "end"),
-      caption(temp(today.temperature_min_c) .. " · " .. temp(today.temperature_max_c), DIM, 110, "end"),
-    }),
+    ui.column({ align = "end" }, right),
   })
 end
 
--- Current temperature over "condition · low/high", right-aligned: the weather
--- beside the clock on the desktop card, mirroring its time-over-date.
-local function nowBlock()
-  local current = snapshot.current or {}
-  local list = snapshot.forecast_days or {}
-  local today = list[todayIndex(list)] or {}
-  local line = conditionFor(current.weather_code or 3) .. " · "
-    .. temp(today.temperature_min_c) .. "/" .. temp(today.temperature_max_c)
-  return ui.column({ gap = 0, align = "end", width = width }, {
-    ui.row({ gap = 8, align = "center", justify = "end" }, {
-      ui.glyph({ name = glyphFor(current.weather_code or 3, current.is_day), size = 30, color = FG }),
-      ui.label({ text = temp(current.temperature_c), fontSize = 36, fontWeight = "bold", color = FG, maxLines = 1 }),
-    }),
-    ui.label({ text = line, fontSize = 12, color = FG, width = width, maxLines = 1, textAlign = "end" }),
-  })
+-- ── week: hours from now, then today and the next days ────────────────────────
+local TEMP_W, TEMP_GAP = 32, 10
+
+-- The min/avg/max columns, numbers right-aligned so the degree signs line up.
+local function temps(min, avg, max)
+  return ui.row({ gap = TEMP_GAP, align = "center" }, { cell(TEMP_W, "end", min), cell(TEMP_W, "end", avg), cell(TEMP_W, "end", max) })
 end
 
-local function hourlyStrip()
-  local list = snapshot.forecast_hours or {}
-  local now = os.date("%Y-%m-%dT%H")
+-- Mean of a day's hourly temperatures, the low/high midpoint when it has no hours.
+local function average(day)
+  local sum, n = 0, 0
+  for _, h in ipairs(snapshot.forecast_hours) do
+    if string.sub(h.time_iso, 1, 10) == day.date_iso then
+      sum += h.temperature_c
+      n += 1
+    end
+  end
+  return n > 0 and sum / n or (day.temperature_min_c + day.temperature_max_c) / 2
+end
+
+local function hourStrip()
+  local list = snapshot.forecast_hours
+  local hour = os.date("%Y-%m-%dT%H")
   local first = 1
   for i, h in ipairs(list) do
-    if string.sub(h.time_iso or "", 1, 13) == now then
+    if string.sub(h.time_iso, 1, 13) == hour then
       first = i
       break
     end
   end
-  -- Equal-width cells across the whole width, label and temperature centred in each.
-  local cell = math.floor(width / hours)
+  local w = math.floor(width / hours) -- equal cells across the width
   local cols = {}
   for i = first, math.min(#list, first + hours - 1) do
-    local h = list[i]
-    local label = (i == first) and noctalia.tr("ui.now") or string.sub(h.time_iso, 12, 13)
-    local value = (i == first and snapshot.current) and snapshot.current.temperature_c or h.temperature_c
-    table.insert(cols, ui.column({ key = "h" .. i, gap = 2, align = "center", width = cell }, {
-      caption(label, DIM, cell, "center"),
-      ui.label({ text = temp(value), fontSize = 13, fontWeight = "bold", color = FG, width = cell, textAlign = "center" }),
+    local now = i == first
+    table.insert(cols, ui.column({ key = "h" .. i, gap = 2, align = "center", width = w }, {
+      text(now and noctalia.tr("ui.now") or string.sub(list[i].time_iso, 12, 13), 11, DIM),
+      bold(temp(now and snapshot.current.temperature_c or list[i].temperature_c), 13),
     }))
   end
-  return ui.row({ gap = 0, justify = "center", height = 34 }, cols)
+  return ui.row({ justify = "center", height = 34 }, cols)
 end
 
-local function render()
-  load()
-  local children
-  if not snapshot then
-    children = { caption(noctalia.tr("ui.waiting"), DIM) }
-  elseif mode == "now" then
-    children = { nowBlock() }
-  elseif mode == "hourly" then
-    children = { hourlyStrip(), separator(), dayRows(true) }
-  else
-    children = { dailyHeader(), separator(), dayRows(false) }
+local function dayRows()
+  local list = snapshot.forecast_days
+  local first = todayIndex()
+  local rows = {
+    ui.row({ align = "center", height = 12 }, {
+      ui.spacer({ flexGrow = 1 }),
+      temps(text("min", 10, DIM), text("avg", 10, DIM), text("max", 10, DIM)),
+    }),
+  }
+  for i = first, math.min(#list, first + days) do
+    local day = list[i]
+    local name = i == first and noctalia.tr("ui.today")
+      or os.date("%a", os.time({ year = tonumber(day.date_iso:sub(1, 4)), month = tonumber(day.date_iso:sub(6, 7)),
+        day = tonumber(day.date_iso:sub(9, 10)), hour = 12 }))
+    table.insert(rows, ui.row({ key = "d" .. i, gap = 6, align = "center", height = 18 }, {
+      cell(44, "start", text(name, 12)),
+      cell(16, "center", ui.glyph({ name = glyphFor(day.weather_code), size = 14, color = DIM })),
+      ui.spacer({ flexGrow = 1 }),
+      temps(text(temp(day.temperature_min_c), 12, DIM), bold(temp(average(day)), 12), text(temp(day.temperature_max_c), 12)),
+    }))
   end
-  desktopWidget.render(ui.column({ gap = 10, width = width, minWidth = width }, children))
+  return ui.column({ gap = 4 }, rows)
+end
+
+local function week()
+  local children = { text(noctalia.tr("ui.waiting"), 11, DIM) }
+  if snapshot then
+    children = { hourStrip(), ui.box({ fill = "outline_variant/0.5", height = 1 }), dayRows() }
+  end
+  return ui.column({ gap = 10, width = width, minWidth = width }, children)
 end
 
 function update()
-  noctalia.setUpdateInterval(60000) -- the hour and the day roll over; the cache refreshes on its own schedule
-  render()
+  -- The card shows the time, so it ticks every second (load() then only stats the
+  -- cache file); the week ticks once a minute, for the hour and day to roll over.
+  noctalia.setUpdateInterval(mode == "card" and 1000 or 60000)
+  imperial = noctalia.getSetting("weather.unit") == "imperial"
+  load()
+  desktopWidget.render(mode == "card" and card() or week())
 end

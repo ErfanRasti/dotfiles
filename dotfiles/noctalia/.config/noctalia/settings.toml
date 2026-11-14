@@ -114,14 +114,11 @@ schema_version = 2
 # min(W/1536, H/864), boxes included, and keeps each widget's distance to its
 # nearest screen edges, so corners stay corners on any size, aspect or scale.
 #
-#   top-left    : one card, time over date on the left, weather mirroring it on the right
+#   top-left    : one card, time over date on the left, the weather on the same rows on the right
 #   top-right   : calendar, and the week's weather under it
 #   bottom-left : media (hidden when nothing plays)
 widget_order = [
-  "desktop-card",
-  "desktop-time",
-  "desktop-date",
-  "desktop-weather",
+  "desktop-clock",
   "desktop-calendar",
   "desktop-forecast",
   "desktop-media",
@@ -132,81 +129,17 @@ cell_size = 16
 major_interval = 4
 visible = true
 
-# ── Top-left card, x 24–376, y 52–148 (24px below the 28px bar) ───────────────
-# A blank label is the card (as on the lockscreen). Time and date stack on the
-# left, 16px inside it; the weather mirrors them on the right, 16px inside it.
-# Clocks with center_text = false start at their box's left edge; both boxes are
-# wider than their text, so the text fills the height and the left edges line up.
-
-[desktop_widgets.widget.desktop-card]
+# ── Top-left card, x 24–336, y 52–148 (24px below the 28px bar) ───────────────
+# One widget, the week-weather plugin's "card" mode: time over date on the left,
+# icon and temperature over "condition · low/high" on the right, 16px inside the
+# card. Both sides share the same two rows (44 + 20 tall, same font sizes), so
+# the time lines up with the temperature and the date with the condition.
+# Content is `width` x 64, the box that plus the padding, so it renders at scale 1;
+# 280 keeps the two sides close while the longest caption still fits.
+[desktop_widgets.widget.desktop-clock]
 box_height = 96.0
-box_width = 352.0
-cx = 200.0
-cy = 100.0
-output = "eDP-1"
-placement_height = 864.0
-placement_width = 1536.0
-rotation = 0.0
-type = "label"
-
-[desktop_widgets.widget.desktop-card.settings]
-background = true
-background_color = "surface"
-background_opacity = 0.85
-background_radius = 16
-description = ""
-shadow = false
-title = " "
-
-# y 66–110
-[desktop_widgets.widget.desktop-time]
-box_height = 44.0
-box_width = 136.0
-cx = 108.0
-cy = 88.0
-output = "eDP-1"
-placement_height = 864.0
-placement_width = 1536.0
-rotation = 0.0
-type = "clock"
-
-[desktop_widgets.widget.desktop-time.settings]
-background = false
-center_text = false
-clock_style = "digital"
-color = "on_surface"
-format = "{:%H:%M}"
-shadow = false
-
-# y 114–134
-[desktop_widgets.widget.desktop-date]
-box_height = 20.0
-box_width = 136.0
-cx = 108.0
-cy = 124.0
-output = "eDP-1"
-placement_height = 864.0
-placement_width = 1536.0
-rotation = 0.0
-type = "clock"
-
-[desktop_widgets.widget.desktop-date.settings]
-background = false
-center_text = false
-clock_style = "digital"
-color = "on_surface"
-format = "{:%a,  %b  %d}"
-shadow = false
-
-# On the card's right side: the week-weather plugin's "now" mode, temperature over
-# "condition · low/high", right-aligned 16px inside the card, spanning the same
-# rows as the time and date (y 66–134), the temperature as tall as the time.
-# Content is `width` (= box) wide, room for "Mostly clear · 12°/16°", and ~66
-# tall, so it renders at scale 1. Box x 192–360.
-[desktop_widgets.widget.desktop-weather]
-box_height = 68.0
-box_width = 168.0
-cx = 276.0
+box_width = 312.0
+cx = 180.0
 cy = 100.0
 output = "eDP-1"
 placement_height = 864.0
@@ -214,10 +147,14 @@ placement_width = 1536.0
 rotation = 0.0
 type = "dotfiles/week-weather:week"
 
-[desktop_widgets.widget.desktop-weather.settings]
-background = false
-mode = "now"
-width = 168
+[desktop_widgets.widget.desktop-clock.settings]
+background = true
+background_color = "surface"
+background_opacity = 0.85
+background_padding = 16
+background_radius = 16
+mode = "card"
+width = 280
 
 # ── Top-right: calendar, x 1256–1512, y 52–348 ────────────────────────────────
 
@@ -265,9 +202,7 @@ background_color = "surface"
 background_opacity = 0.85
 background_padding = 14
 background_radius = 16
-days = 6
-hours = 6
-mode = "hourly"
+mode = "week"
 width = 228
 
 # ── Bottom-left: media, x 24–280, y 664–776 (clear of the dock) ───────────────
@@ -376,7 +311,7 @@ visible = true
 
 # 20px from the screen edge, the calendar's top edge, and the same tile as the
 # desktop's forecast (256x256, same content and text size): the week-weather
-# plugin in hourly mode, the next hours' temperatures, then today and the next 6
+# plugin in week mode, the next hours' temperatures, then today and the next 6
 # days (min, avg, max). Content `width` wide and ~223 tall, so it renders at scale 1.
 [lockscreen_widgets.widget.lockscreen-weather]
 box_height = 256.0
@@ -394,9 +329,7 @@ background_color = "surface"
 background_opacity = 0.85
 background_padding = 14
 background_radius = 16
-days = 6
-hours = 6
-mode = "hourly"
+mode = "week"
 width = 228
 
 # Bottom-left, 20px from the screen edge, bottom edge level with the login box's.
