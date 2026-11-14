@@ -3,6 +3,8 @@
 
 [general]
 autostart = [
+  # Screen sharing: a portal started without XDG_CURRENT_DESKTOP=umbriel (e.g. after leaving GNOME) has no ScreenCast.
+  "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP && systemctl --user try-restart xdg-desktop-portal.service",
   "~/.config/umbriel/scripts/set_layout.py --init",  # create workspaces.state.toml if missing
   "noctalia",                                       # shell (see config/noctalia.toml)
   "wl-paste --type text --watch cliphist store",
