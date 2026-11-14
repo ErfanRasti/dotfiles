@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Keep wifi, bluetooth, speaker/mic mute and volume the same across suspend, re-login and reboot.
-#   watch    at login: restore the saved state, then save it every 2s when it changes
+#   watch    at login: restore the saved state, then save it every 2s when it changes;
+#            when the default mic changes (late device, reconnect), give it the saved mute
 #   save     before suspend: save and pause the watcher until the next restore
 #   restore  after resume: put the saved state back and unpause the watcher
 
@@ -30,6 +31,22 @@ onoff() {
 }
 
 volume() { pactl "get-$1-volume" "@DEFAULT_${1^^}@" 2>/dev/null | grep -o '[0-9]*%' | head -n1; }
+
+# "name#index" of the default mic. The index changes when the node is recreated,
+# e.g. after resume, a bluetooth reconnect or a headset profile switch.
+default_source() {
+  local name
+  name=$(pactl get-default-source 2>/dev/null) || return
+  echo "$name#$(pactl list sources short 2>/dev/null | awk -v n="$name" '$2 == n { print $1; exit }')"
+}
+
+# Put the saved mic mute on the current default mic
+apply_source_mute() {
+  case "$(sed -n 's/^source://p' "$STATE_FILE" 2>/dev/null)" in
+  on) pactl set-source-mute @DEFAULT_SOURCE@ 0 ;;
+  off) pactl set-source-mute @DEFAULT_SOURCE@ 1 ;;
+  esac
+}
 
 save_state() {
   # Services power devices off while the system goes down; don't record that
@@ -82,8 +99,19 @@ watch)
   kill "$(cat "$PID_FILE" 2>/dev/null)" 2>/dev/null
   echo $$ >"$PID_FILE"
   restore_state
+  # The mic often shows up (or becomes the default) only after the restore:
+  # devices come back late after resume and login. When the default mic changes,
+  # give it the saved mute instead of saving whatever mute the new device has.
+  mic=$(default_source)
   while true; do
-    [[ -e $HOLD_FILE ]] || save_state
+    if [[ ! -e $HOLD_FILE ]]; then
+      now=$(default_source)
+      if [[ -n $now && $now != "$mic" ]]; then
+        apply_source_mute >/dev/null 2>&1
+        mic=$now
+      fi
+      save_state
+    fi
     sleep 2
   done
   ;;
