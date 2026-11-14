@@ -6,6 +6,7 @@
 - Folders: FOLDER_ICONS sets folder icons; Nautilus ignores them in the sidebar, so the
   sidebar rows of those folders get the icons' symbolic versions here.
 - Bookmarks: made from ~/.config/gtk-3.0/bookmarks-template on the first run.
+- Resident: held so it keeps running when no window is open (see the nautilus service).
 """
 
 import os
@@ -22,6 +23,8 @@ ICONS = os.path.join(GLib.get_user_data_dir(), "icons", ICON_THEME)
 CSS = os.path.join(GLib.get_user_config_dir(), "gtk-4.0", "gtk.css")
 GTK3 = os.path.join(GLib.get_user_config_dir(), "gtk-3.0")
 FOLDER_ICONS = {"Desktop": "user-desktop", "programs": "folder-programs"}  # under $HOME
+
+Gio.Application.get_default().hold()
 
 
 def descendants(widget):
