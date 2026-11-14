@@ -1,0 +1,18 @@
+{
+  "settings": {
+    "mode": {
+      "label": "Layout",
+      "daily": "Now, then days",
+      "hourly": "Hours, then days",
+      "now": "Now only"
+    },
+    "width": { "label": "Content width" },
+    "days": { "label": "Days after today" },
+    "hours": { "label": "Hours" }
+  },
+  "ui": {
+    "now": "Now",
+    "today": "Today",
+    "waiting": "Waiting for weather…"
+  }
+}

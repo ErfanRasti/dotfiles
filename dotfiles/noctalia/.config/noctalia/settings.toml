@@ -114,8 +114,8 @@ schema_version = 2
 # min(W/1536, H/864), boxes included, and keeps each widget's distance to its
 # nearest screen edges, so corners stay corners on any size, aspect or scale.
 #
-#   top-left    : one card, time and date on the left, weather on the right
-#   top-right   : calendar
+#   top-left    : one card, time over date on the left, weather mirroring it on the right
+#   top-right   : calendar, and the week's weather under it
 #   bottom-left : media (hidden when nothing plays)
 widget_order = [
   "desktop-card",
@@ -123,6 +123,7 @@ widget_order = [
   "desktop-date",
   "desktop-weather",
   "desktop-calendar",
+  "desktop-forecast",
   "desktop-media",
 ]
 
@@ -133,7 +134,7 @@ visible = true
 
 # ── Top-left card, x 24–376, y 52–148 (24px below the 28px bar) ───────────────
 # A blank label is the card (as on the lockscreen). Time and date stack on the
-# left, 16px inside it; the weather sits on the right, centred on the card.
+# left, 16px inside it; the weather mirrors them on the right, 16px inside it.
 # Clocks with center_text = false start at their box's left edge; both boxes are
 # wider than their text, so the text fills the height and the left edges line up.
 
@@ -197,26 +198,26 @@ color = "on_surface"
 format = "{:%a,  %b  %d}"
 shadow = false
 
-# On the card's right side. The box has the widget's own aspect (180x72 = 2.5:1)
-# so the content fills it. Noctalia left-aligns the text in a fixed frame and
-# clips it at the frame's right edge (no setting for either), so the card reaches
-# 16px past that edge: any reading stays inside the card. Box x 210–360, y 70–130.
+# On the card's right side: the week-weather plugin's "now" mode, temperature over
+# "condition · low/high", right-aligned 16px inside the card, spanning the same
+# rows as the time and date (y 66–134), the temperature as tall as the time.
+# Content is `width` (= box) wide, room for "Mostly clear · 12°/16°", and ~66
+# tall, so it renders at scale 1. Box x 192–360.
 [desktop_widgets.widget.desktop-weather]
-box_height = 60.0
-box_width = 150.0
-cx = 285.0
+box_height = 68.0
+box_width = 168.0
+cx = 276.0
 cy = 100.0
 output = "eDP-1"
 placement_height = 864.0
 placement_width = 1536.0
 rotation = 0.0
-type = "weather"
+type = "dotfiles/week-weather:week"
 
 [desktop_widgets.widget.desktop-weather.settings]
 background = false
-color = "on_surface"
-shadow = false
-show_forecast = false
+mode = "now"
+width = 168
 
 # ── Top-right: calendar, x 1256–1512, y 52–348 ────────────────────────────────
 
@@ -240,7 +241,36 @@ background_radius = 16
 show_events = false
 show_week_numbers = false
 
-# ── Bottom-left: media, x 24–280, y 664–776 (clear of the dock) ────────────────── ─────────
+# ── Right, under the calendar: the week's weather, x 1256–1512, y 364–620 ─────
+# The week-weather plugin (~/.local/share/noctalia/plugins/week-weather): today's
+# temperature hour by hour, then today and the next 6 days (min, avg, max). Now
+# and today's low/high are on the top-left card already. Its content is `width`
+# wide and ~225 tall; the box is that plus the padding, so it renders at scale 1.
+# Its center is below the canvas middle, so desktop_fit.sh would pin it to the
+# bottom edge; "anchor: top" keeps it 16px under the calendar on any screen.
+[desktop_widgets.widget.desktop-forecast]
+box_height = 256.0
+box_width = 256.0
+cx = 1384.0
+cy = 492.0 # anchor: top
+output = "eDP-1"
+placement_height = 864.0
+placement_width = 1536.0
+rotation = 0.0
+type = "dotfiles/week-weather:week"
+
+[desktop_widgets.widget.desktop-forecast.settings]
+background = true
+background_color = "surface"
+background_opacity = 0.85
+background_padding = 14
+background_radius = 16
+days = 6
+hours = 6
+mode = "hourly"
+width = 228
+
+# ── Bottom-left: media, x 24–280, y 664–776 (clear of the dock) ───────────────
 
 [desktop_widgets.widget.desktop-media]
 box_height = 112.0
@@ -306,8 +336,8 @@ auto_locate = true
 # Lockscreen layout, designed on a 1536x864 logical screen, modelled on a
 # reference design: "L O C K E D" over a tilted card stack (clock, date, volume,
 # battery tiles), an audio visualizer over a compact login box with the
-# kitty sitting on its hint bar (drawn last, so in front), a media player top-left and
-# a month calendar on the right. The kitty lives in ./stickers (path relative to $HOME).
+# kitty sitting on its hint bar (drawn last, so in front), the week's weather top-left
+# mirroring a month calendar top-right, and a media player bottom-left. The kitty lives in ./stickers (path relative to $HOME).
 # The battery tile's text is filled in by ~/.config/noctalia/scripts/lock_battery.sh.
 # Portable across machines: this is the design on a 1536x864 logical canvas
 # (placement_width/height). Edit it here at that size. lock_battery.sh fits it to
@@ -321,6 +351,7 @@ auto_locate = true
 enabled = true
 schema_version = 2
 widget_order = [
+  "lockscreen-weather",
   "lockscreen-media",
   "lockscreen-title",
   "lockscreen-card-back",
@@ -343,12 +374,37 @@ cell_size = 16
 major_interval = 4
 visible = true
 
-# Mirrors the calendar: 20px from the screen edge, same top edge.
+# 20px from the screen edge, the calendar's top edge, and the same tile as the
+# desktop's forecast (256x256, same content and text size): the week-weather
+# plugin in hourly mode, the next hours' temperatures, then today and the next 6
+# days (min, avg, max). Content `width` wide and ~223 tall, so it renders at scale 1.
+[lockscreen_widgets.widget.lockscreen-weather]
+box_height = 256.0
+box_width = 256.0
+cx = 148.0
+cy = 296.0
+placement_height = 864.0
+placement_width = 1536.0
+rotation = 0.0
+type = "dotfiles/week-weather:week"
+
+[lockscreen_widgets.widget.lockscreen-weather.settings]
+background = true
+background_color = "surface"
+background_opacity = 0.85
+background_padding = 14
+background_radius = 16
+days = 6
+hours = 6
+mode = "hourly"
+width = 228
+
+# Bottom-left, 20px from the screen edge, bottom edge level with the login box's.
 [lockscreen_widgets.widget.lockscreen-media]
 box_height = 140.0
 box_width = 320.0
 cx = 180.0
-cy = 238.0
+cy = 718.0
 placement_height = 864.0
 placement_width = 1536.0
 rotation = 0.0
@@ -658,13 +714,14 @@ layer = "overlay"
 background_opacity = 0.6
 
 [plugins]
-enabled = []
+enabled = ["dotfiles/week-weather"] # ~/.local/share/noctalia/plugins (stowed from this package)
 
 [shell]
 # Feed audio spectrum data to umbriel (used by the Spotify wave border effect).
 umbriel_audio_provider_enabled = true
 font_family = "CaskaydiaCove NF"
 niri_overview_type_to_launch_enabled = true
+umbriel_overview_type_to_launch_enabled = true
 password_style = "random"
 polkit_agent = true
 screen_time_enabled = true
@@ -828,6 +885,10 @@ show_workspace_label = true
 
 [widget.control-center]
 glyph = "niri"
+
+[control_center.calendar]
+show_events_location = true
+show_week_numbers = true
 
 [[control_center.shortcuts]]
 type = "wifi"

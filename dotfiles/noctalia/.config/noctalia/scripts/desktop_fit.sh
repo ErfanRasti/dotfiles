@@ -10,6 +10,10 @@
 # min(W/1536, H/864), boxes included, with every widget keeping its scaled
 # distance to the screen edges it is nearest to (left/right of the canvas
 # center, above/below it). Corners stay corners and groups stay together.
+# A widget that belongs to a group on the other side of the middle (the forecast
+# under the calendar) names its edge in a comment on its cx/cy line instead:
+# `cy = 484.0 # anchor: top` (top/bottom/left/right, or center to scale about
+# the middle).
 #
 # W x H is the output's logical size as noctalia sees it. Noctalia never saves
 # the desktop table on its own (config-set on a desktop key writes only that key),
@@ -22,7 +26,7 @@
 # Run from the started and session_unlocked hooks (there is no output-change hook;
 # after plugging in a monitor, the next unlock refits). Desktop widgets edited in
 # noctalia's editor are kept until settings.toml's layout changes again.
-FIT_VERSION=2 # bump when the fitting rules change, to refit existing machines
+FIT_VERSION=3 # bump when the fitting rules change, to refit existing machines
 
 config="${XDG_CONFIG_HOME:-$HOME/.config}/noctalia/settings.toml"
 state="${XDG_STATE_HOME:-$HOME/.local/state}/noctalia/settings.toml"
@@ -80,8 +84,17 @@ fitted="$(section "$config" | awk -v W="$W" -v H="$H" '
     sub(/^\[desktop_widgets\.widget\./, "", h); sub(/\]$/, "", h); gsub(/"/, "", h)
     return h
   }
-  # Scaled position along one axis, anchored to the nearer edge of the canvas.
-  function place(v, design, actual, s) {
+  # Edge named by an "anchor: <edge>" comment on the line, "" when there is none.
+  function anchor(l) {
+    if (!match(l, /#.*anchor:[ \t]*[a-z]+/)) return ""
+    l = substr(l, RSTART, RLENGTH); sub(/.*anchor:[ \t]*/, "", l)
+    return l
+  }
+  # Scaled position along one axis, anchored to the named edge, else the nearer one.
+  function place(v, design, actual, s, a) {
+    if (a == "top" || a == "left") return v * s
+    if (a == "bottom" || a == "right") return actual - (design - v) * s
+    if (a == "center") return actual / 2 + (v - design / 2) * s
     if (v < design / 2) return v * s
     if (v > design / 2) return actual - (design - v) * s
     return actual / 2
@@ -91,7 +104,7 @@ fitted="$(section "$config" | awk -v W="$W" -v H="$H" '
     # Pass 1: design geometry of every widget.
     for (i = 1; i <= N; i++) {
       if (L[i] ~ /^\[/) { n = wname(L[i]); continue }
-      if (n != "" && L[i] ~ /=/) g[n, key(L[i])] = num(L[i])
+      if (n != "" && L[i] ~ /=/) { g[n, key(L[i])] = num(L[i]); a[n, key(L[i])] = anchor(L[i]) }
     }
     # Pass 2: emit with fitted geometry.
     for (i = 1; i <= N; i++) {
@@ -101,8 +114,8 @@ fitted="$(section "$config" | awk -v W="$W" -v H="$H" '
           k !~ /^(cx|cy|box_width|box_height|placement_width|placement_height)$/) { print L[i]; continue }
       s = (W / pw < H / ph) ? W / pw : H / ph
       v = g[n, k]
-      if (k == "cx") v = place(v, pw, W, s)
-      else if (k == "cy") v = place(v, ph, H, s)
+      if (k == "cx") v = place(v, pw, W, s, a[n, k])
+      else if (k == "cy") v = place(v, ph, H, s, a[n, k])
       else if (k == "box_width" || k == "box_height") v = v * s
       else if (k == "placement_width") v = W
       else v = H
