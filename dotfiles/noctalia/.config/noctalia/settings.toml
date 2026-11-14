@@ -109,10 +109,10 @@ schema_version = 2
 # text in on_surface with the shell font.
 #
 # One design on a 1536x864 canvas (placement_width/height). On other screens
-# ~/.config/noctalia/scripts/desktop_fit.sh (see [hooks]) scales it to the
-# screen size noctalia reports (as for the lockscreen), uniformly by
-# min(W/1536, H/864), boxes included, and keeps each widget's distance to its
-# nearest screen edges, so corners stay corners on any size, aspect or scale.
+# ~/.config/noctalia/scripts/widgets_fit.sh (see [hooks]) fits it to the monitor
+# in use (as for the lockscreen): scaled uniformly by min(W/1536, H/864), boxes
+# included, each widget keeping its distance to its nearest screen edges, so
+# corners stay corners on any size, aspect or scale. No `output`: the fit sets it.
 #
 #   top-left    : one card, time over date on the left, the weather on the same rows on the right
 #   top-right   : calendar, and the week's weather under it
@@ -141,7 +141,6 @@ box_height = 96.0
 box_width = 312.0
 cx = 180.0
 cy = 100.0
-output = "eDP-1"
 placement_height = 864.0
 placement_width = 1536.0
 rotation = 0.0
@@ -163,7 +162,6 @@ box_height = 296.0
 box_width = 256.0
 cx = 1384.0
 cy = 200.0
-output = "eDP-1"
 placement_height = 864.0
 placement_width = 1536.0
 rotation = 0.0
@@ -183,14 +181,13 @@ show_week_numbers = false
 # temperature hour by hour, then today and the next 6 days (min, avg, max). Now
 # and today's low/high are on the top-left card already. Content `width` x `height`
 # (as tall as the calendar), the box that plus the padding, so it renders at scale 1.
-# Its center is below the canvas middle, so desktop_fit.sh would pin it to the
+# Its center is below the canvas middle, so widgets_fit.sh would pin it to the
 # bottom edge; "anchor: top" keeps it 16px under the calendar on any screen.
 [desktop_widgets.widget.desktop-forecast]
 box_height = 296.0
 box_width = 256.0
 cx = 1384.0
 cy = 512.0 # anchor: top
-output = "eDP-1"
 placement_height = 864.0
 placement_width = 1536.0
 rotation = 0.0
@@ -213,7 +210,6 @@ box_height = 112.0
 box_width = 256.0
 cx = 152.0
 cy = 720.0
-output = "eDP-1"
 placement_height = 864.0
 placement_width = 1536.0
 rotation = 0.0
@@ -276,13 +272,14 @@ auto_locate = true
 # mirroring a month calendar top-right, and a media player bottom-left. The kitty lives in ./stickers (path relative to $HOME).
 # The battery tile's text is filled in by ~/.config/noctalia/scripts/lock_battery.sh.
 # Portable across machines: this is the design on a 1536x864 logical canvas
-# (placement_width/height). Edit it here at that size. lock_battery.sh fits it to
+# (placement_width/height). Edit it here at that size. widgets_fit.sh fits it to
 # each machine's screen: it writes a copy into ~/.local/state/noctalia/settings.toml
-# scaled uniformly by min(W/1536, H/864), box sizes included, and centered, so the
+# scaled uniformly by min(W/1536, H/864), box sizes included, and centered (the
+# widgets by the login box follow it: `# anchor: login/hint`), so the
 # aspect ratio holds on 16:9, 16:10, 3:2, any output scale (noctalia alone would
 # stretch x and y apart and keep box sizes). It refits on its own when this
-# section changes or the screen size changes. No `output` (except the login box),
-# so the layout isn't tied to one connector name.
+# section changes or the monitor changes, and sets every widget's `output` to the
+# monitor's, so the layout isn't tied to one connector name.
 [lockscreen_widgets]
 enabled = true
 schema_version = 2
@@ -299,7 +296,7 @@ widget_order = [
   "lockscreen-battery",
   "lockscreen-visualizer",
   "lockscreen-login-back",
-  "lockscreen-login-box@eDP-1",
+  "lockscreen-login-box",
   "lockscreen-kitty-caption",
   "lockscreen-calendar",
   "lockscreen-kitty",
@@ -332,12 +329,13 @@ height = 268
 mode = "week"
 width = 228
 
-# Bottom-left, on the weather's left edge, bottom edge level with the login box's.
+# Bottom-left, on the weather's left edge, bottom edge level with the login box's;
+# the desktop media tile's size.
 [lockscreen_widgets.widget.lockscreen-media]
-box_height = 140.0
-box_width = 320.0
-cx = 208.0
-cy = 718.0
+box_height = 112.0
+box_width = 256.0
+cx = 176.0
+cy = 732.0
 placement_height = 864.0
 placement_width = 1536.0
 rotation = 0.0
@@ -506,7 +504,7 @@ title = "󰁹  --%"
 box_height = 48.0
 box_width = 500.0
 cx = 730.0
-cy = 521.0
+cy = 521.0 # anchor: hint
 placement_height = 864.0
 placement_width = 1536.0
 rotation = 0.0
@@ -525,10 +523,10 @@ show_when_idle = true
 
 # The password panel turned, a little larger (+10 x +6) and on the same center.
 [lockscreen_widgets.widget.lockscreen-login-back]
-box_height = 202.0
+box_height = 202.0 # anchor: login
 box_width = 730.0
 cx = 768.0
-cy = 690.0
+cy = 690.0 # anchor: login
 placement_height = 864.0
 placement_width = 1536.0
 rotation = -0.0349       # -2 degrees (noctalia uses radians)
@@ -543,18 +541,18 @@ description = ""
 shadow = false
 title = " "
 
-[lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
-box_height = 196.0
+[lockscreen_widgets.widget.lockscreen-login-box]
+box_height = 196.0 # anchor: login (noctalia fixes the panel's height)
 box_width = 720.0
 cx = 768.0
 cy = 690.0
 placement_height = 864.0
 placement_width = 1536.0
-output = "eDP-1"         # login boxes are matched to a monitor by output; without it noctalia adds a plain default box
+output = "eDP-1"         # set to the monitor by widgets_fit.sh; login boxes are matched by output, and without one noctalia adds a plain default box
 rotation = 0.0
 type = "login_box"
 
-[lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+[lockscreen_widgets.widget.lockscreen-login-box.settings]
 background_color = "surface"
 background_opacity = 0.92
 background_radius = 20
@@ -576,7 +574,7 @@ show_session_buttons = true
 box_height = 112.0
 box_width = 112.0
 cx = 1048.0
-cy = 500.0
+cy = 500.0 # anchor: hint
 placement_height = 864.0
 placement_width = 1536.0
 rotation = 0.0
@@ -591,7 +589,7 @@ opacity = 1.0
 box_height = 34.0
 box_width = 150.0
 cx = 1095.0
-cy = 430.0
+cy = 430.0 # anchor: hint
 placement_height = 864.0
 placement_width = 1536.0
 rotation = 0.2094        # 12 degrees (noctalia uses radians)
@@ -631,8 +629,8 @@ battery_percentage_changed = "~/.config/noctalia/scripts/lock_battery.sh"
 battery_charging = "~/.config/noctalia/scripts/lock_battery.sh"
 battery_discharging = "~/.config/noctalia/scripts/lock_battery.sh"
 battery_plugged = "~/.config/noctalia/scripts/lock_battery.sh"
-session_unlocked = "~/.config/noctalia/scripts/lock_battery.sh; ~/.config/noctalia/scripts/desktop_fit.sh"
-started = "~/.config/noctalia/scripts/lock_battery.sh; ~/.config/noctalia/scripts/desktop_fit.sh"
+session_unlocked = "~/.config/noctalia/scripts/lock_battery.sh; ~/.config/noctalia/scripts/widgets_fit.sh"
+started = "~/.config/noctalia/scripts/lock_battery.sh; ~/.config/noctalia/scripts/widgets_fit.sh"
 
 [nightlight]
 force = true
