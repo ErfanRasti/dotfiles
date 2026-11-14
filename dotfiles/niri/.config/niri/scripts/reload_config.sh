@@ -10,6 +10,8 @@ if grep -q '^include "config/noctalia.kdl"' "$CONFIG_FILE"; then
   pkill -f '^(\S*/)?\.?dsearch(-wrapped)?( |$)'
   if pgrep -f "noctalia"; then
     pkill -f '^(\S*/)?\.?noctalia(-wrapped)?( |$)'
+    # Wait for it to exit: its single-instance lock makes a new one quit otherwise.
+    for _ in {1..30}; do pgrep -f '^(\S*/)?\.?noctalia(-wrapped)?( |$)' >/dev/null || break; sleep 0.1; done
   fi
   # noctalia has its own polkit
   systemctl --user stop polkit-gnome.service
