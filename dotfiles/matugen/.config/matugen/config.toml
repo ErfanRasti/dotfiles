@@ -195,3 +195,10 @@ post_hook = 'if command -v mmsg >/dev/null; then mmsg -d reload_config; fi'
 [templates.nvim]
 input_path = '~/.config/matugen/templates/nvim-mode'
 output_path = '~/.local/state/nvim/matugen-mode'
+
+# Papirus-Matugen (system) and Adwaita-Matugen (Nautilus) icon themes, with Adwaita's
+# folders in the primary palette. The template lists its tones; folder_icons.py builds them.
+[templates.folder_icons]
+input_path = '~/.config/matugen/templates/folder-icons-tones.txt'
+output_path = '~/.cache/matugen/folder-icons-tones.txt'
+post_hook = '~/.config/matugen/scripts/folder_icons.py ~/.cache/matugen/folder-icons-tones.txt'
