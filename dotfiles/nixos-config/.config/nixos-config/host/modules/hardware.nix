@@ -15,5 +15,6 @@
 
   # Bluetooth driver for TP-LINK Bluetooth dongle
   hardware.firmware = [ pkgs.rtl8761b-firmware ];
+  boot.extraModprobeConfig = "options btusb enable_autosuspend=0";
 
 }

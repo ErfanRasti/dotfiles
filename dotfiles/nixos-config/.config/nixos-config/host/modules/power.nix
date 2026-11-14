@@ -17,6 +17,8 @@ let
       product=$(cat "$prod" 2>/dev/null)
       [[ "$product" != *[Bb]luetooth* ]] && continue
 
+      echo on >"$dev/power/control" # autosuspend drops idle BT mice
+
       wakeup="$dev/power/wakeup"
       if [ -w "$wakeup" ]; then
         echo 'enabled' >"$wakeup"
