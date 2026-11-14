@@ -189,7 +189,7 @@ in
         wrapFirefox = wrapFirefoxPipeWire;
       })
       (withPipeWireCamera google-chrome)
-      chromium
+      (withPipeWireCamera chromium)
       (withPipeWireCamera microsoft-edge)
       (wrapFirefoxPipeWire firefox-unwrapped { })
 
