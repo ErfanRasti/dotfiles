@@ -1,6 +1,7 @@
 {
   imports = [
     ./packages.nix
+    ./nautilus
     ./themes.nix
     ./desktop-entries.nix
     ./spicetify.nix

@@ -70,6 +70,29 @@
       flake = false;
     };
 
+    # Nautilus extensions missing from nixpkgs (see home-manager/modules/nautilus.nix).
+    # They track upstream: `nix flake update` moves them to the latest commit.
+    actions-for-nautilus = {
+      url = "github:bassmanitram/actions-for-nautilus";
+      flake = false;
+    };
+    nautilus-admin-gtk4 = {
+      url = "github:MacTavishAO/nautilus-admin-gtk4";
+      flake = false;
+    };
+    nautilus-checksums = {
+      url = "git+https://gitlab.gnome.org/madmurphy/nautilus-checksums.git";
+      flake = false;
+    };
+    nautilus-image-converter = {
+      url = "git+https://gitlab.gnome.org/coreyberla/nautilus-image-converter.git";
+      flake = false;
+    };
+    nautilus-share = {
+      url = "git+https://gitlab.gnome.org/coreyberla/nautilus-share.git";
+      flake = false;
+    };
+
     gsr-ui-nix = {
       url = "github:rPlakama/gsr-ui-nix";
       inputs.nixpkgs.follows = "nixpkgs";

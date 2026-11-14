@@ -217,11 +217,7 @@
       kdePackages.kdenlive
       v4l-utils
 
-      # Nautilus
-      nautilus
-      sushi
-      nautilus-open-any-terminal
-      code-nautilus
+      # Nautilus: see nautilus/
       rclone
 
       # Nix
