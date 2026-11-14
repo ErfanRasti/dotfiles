@@ -117,6 +117,15 @@
   #     "Find your bus IDs by running: lspci | grep -E 'VGA|3D'"
   #   ];
 
+  # Keep the desktop off the dGPU; it stays for CUDA and `nvidia-offload`.
+  # mutter (GNOME) opens every DRM card and, with only Mesa EGL visible (see
+  # __EGL_VENDOR_LIBRARY_FILENAMES above), segfaults on the NVIDIA one. This tag
+  # makes mutter skip it. niri/Hyprland/umbriel already render on the iGPU only.
+  services.udev.extraRules = ''
+    SUBSYSTEM=="drm", KERNEL=="card[0-9]*", DRIVERS=="nvidia", TAG+="mutter-device-ignore"
+    SUBSYSTEM=="drm", KERNEL=="card[0-9]*", DRIVERS=="i915", TAG+="mutter-device-preferred-primary"
+  '';
+
   system.activationScripts.nvidia-bus-ids =
     let
       inherit (config.hardware.nvidia.prime) nvidiaBusId intelBusId;
