@@ -13,6 +13,6 @@ autostart = [
   "~/.config/umbriel/scripts/stacking_watch.py",  # title bars in the stacking layout
   "~/.config/umbriel/scripts/tab_group_watch.py", # new windows open inside the focused tab group
   "~/scripts/battery_watcher.sh",
-  "~/scripts/system_resume.sh restore",
+  "~/scripts/system_resume.sh watch",
   "paplay ~/.nix-profile/share/sounds/ocean/stereo/desktop-login.oga",
 ]

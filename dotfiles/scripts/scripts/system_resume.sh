@@ -1,86 +1,95 @@
 #!/usr/bin/env bash
+# Keep wifi, bluetooth, speaker/mic mute and volume the same across suspend, re-login and reboot.
+#   watch    at login: restore the saved state, then save it every 2s when it changes
+#   save     before suspend: save and pause the watcher until the next restore
+#   restore  after resume: put the saved state back and unpause the watcher
 
-# File to save state
 STATE_FILE="$HOME/.cache/devices.state"
+HOLD_FILE="$XDG_RUNTIME_DIR/devices.state.hold"
 
-# Wait until a Bluetooth adapter exists (max 5s)
-wait_for_bt() {
-  local timeout=10
-  while ((timeout > 0)); do
-    if bluetoothctl show >/dev/null 2>&1; then
-      return 0
-    fi
+# Run "$@" until it succeeds, for at most $1 seconds
+wait_for() {
+  local tries=$(($1 * 2))
+  shift
+  until "$@" >/dev/null 2>&1; do
+    ((--tries > 0)) || return 1
     sleep 0.5
-    ((timeout--))
   done
-  # return 1
 }
 
-case "$1" in
-save)
-  # Save network state
-  if [[ $(nmcli radio wifi) == "enabled" ]]; then
-    echo "network:on" >"$STATE_FILE"
-  else
-    echo "network:off" >"$STATE_FILE"
-  fi
+bt_adapter() { busctl tree org.bluez 2>/dev/null | grep -om1 '/org/bluez/hci[0-9]*'; }
 
-  # Save bluetooth state
-  # if bluetoothctl show | grep -qF "Powered: yes"; then
+# "key:value", or the saved value when the device can't be read right now
+field() { echo "$1:${2:-$(sed -n "s/^$1://p" "$STATE_FILE" 2>/dev/null)}"; }
 
-  ADAPTER=$(busctl tree org.bluez | grep -o '/org/bluez/hci[0-9]*' | head -n1)
+onoff() {
+  case "$1" in
+  enabled | "b true" | "Mute: no") echo on ;;
+  disabled | "b false" | "Mute: yes") echo off ;;
+  esac
+}
 
-  if [ -n "$ADAPTER" ] && busctl get-property org.bluez "$ADAPTER" org.bluez.Adapter1 Powered | grep -q true; then
-    echo "bluetooth:on" >>"$STATE_FILE"
-  else
-    echo "bluetooth:off" >>"$STATE_FILE"
-  fi
+volume() { pactl "get-$1-volume" "@DEFAULT_${1^^}@" 2>/dev/null | grep -o '[0-9]*%' | head -n1; }
 
-  # Save output state
-  if pactl get-sink-mute @DEFAULT_SINK@ | grep -q "no"; then
-    echo "sink:on" >>"$STATE_FILE"
-  else
-    echo "sink:off" >>"$STATE_FILE"
-  fi
+save_state() {
+  # Services power devices off while the system goes down; don't record that
+  [[ $(systemctl is-system-running) == stopping ]] && return
+  local adapter new
+  adapter=$(bt_adapter)
+  new=$(
+    field network "$(onoff "$(nmcli radio wifi 2>/dev/null)")"
+    field bluetooth "$(onoff "$([[ -n $adapter ]] && busctl get-property org.bluez "$adapter" org.bluez.Adapter1 Powered 2>/dev/null)")"
+    field sink "$(onoff "$(pactl get-sink-mute @DEFAULT_SINK@ 2>/dev/null)")"
+    field source "$(onoff "$(pactl get-source-mute @DEFAULT_SOURCE@ 2>/dev/null)")"
+    field sinkvol "$(volume sink)"
+    field sourcevol "$(volume source)"
+  )
+  [[ $new == "$(cat "$STATE_FILE" 2>/dev/null)" ]] && return
+  # Write and rename, so an interrupted write never leaves a broken file
+  echo "$new" >"$STATE_FILE.tmp" && mv -f "$STATE_FILE.tmp" "$STATE_FILE"
+}
 
-  # Save input state
-  if pactl get-source-mute @DEFAULT_SOURCE@ | grep -q "no"; then
-    echo "source:on" >>"$STATE_FILE"
-  else
-    echo "source:off" >>"$STATE_FILE"
-  fi
+restore_state() {
+  if [[ -f $STATE_FILE ]]; then
+    # At login these services may still be starting
+    wait_for 15 pactl info
+    wait_for 15 nmcli general status
+    grep -qx bluetooth:on "$STATE_FILE" && rfkill unblock bluetooth
+    wait_for 15 bt_adapter
 
-  # Save input and output volumes
-  echo "sinkvol:$(pactl get-sink-volume @DEFAULT_SINK@ | awk 'NR==1 {print $5}')" >>"$STATE_FILE"
-  echo "sourcevol:$(pactl get-source-volume @DEFAULT_SOURCE@ | awk 'NR==1 {print $5}')" >>"$STATE_FILE"
-  ;;
-
-restore)
-  if [[ -f "$STATE_FILE" ]]; then
-    wait_for_bt || echo "No Bluetooth adapter found"
     while read -r line; do
       case "$line" in
-      network:on)
-        rfkill unblock wifi
-        nmcli radio wifi on
-        ;;
+      network:on) rfkill unblock wifi && nmcli radio wifi on ;;
       network:off) nmcli radio wifi off ;;
-      bluetooth:on)
-        rfkill unblock bluetooth
-        bluetoothctl power on
-        ;;
+      bluetooth:on) bluetoothctl power on ;;
       bluetooth:off) bluetoothctl power off ;;
       sink:on) pactl set-sink-mute @DEFAULT_SINK@ 0 ;;
       sink:off) pactl set-sink-mute @DEFAULT_SINK@ 1 ;;
-      source:on)
-        pactl set-source-mute @DEFAULT_SOURCE@ 0
-        pactl set-source-volume @DEFAULT_SOURCE@ 30%
-        ;;
+      source:on) pactl set-source-mute @DEFAULT_SOURCE@ 0 ;;
       source:off) pactl set-source-mute @DEFAULT_SOURCE@ 1 ;;
-      sinkvol:*) pactl set-sink-volume @DEFAULT_SINK@ "${line#sinkvol:}" ;;
-      sourcevol:*) pactl set-source-volume @DEFAULT_SOURCE@ "${line#sourcevol:}" ;;
+      sinkvol:?*) pactl set-sink-volume @DEFAULT_SINK@ "${line#*:}" ;;
+      sourcevol:?*) pactl set-source-volume @DEFAULT_SOURCE@ "${line#*:}" ;;
       esac
-    done <"$STATE_FILE"
+    done <"$STATE_FILE" >/dev/null
   fi
+  rm -f "$HOLD_FILE"
+}
+
+case "$1" in
+watch)
+  # Replace a watcher left over from an earlier session
+  PID_FILE="$XDG_RUNTIME_DIR/devices.state.pid"
+  kill "$(cat "$PID_FILE" 2>/dev/null)" 2>/dev/null
+  echo $$ >"$PID_FILE"
+  restore_state
+  while true; do
+    [[ -e $HOLD_FILE ]] || save_state
+    sleep 2
+  done
   ;;
+save)
+  save_state
+  touch "$HOLD_FILE"
+  ;;
+restore) restore_state ;;
 esac

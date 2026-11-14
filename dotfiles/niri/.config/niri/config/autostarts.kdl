@@ -12,7 +12,7 @@ spawn-sh-at-startup "echo 'Xft.dpi: 125' | xrdb -merge" // Set scaling for xorg 
 spawn-sh-at-startup "wl-clip-persist --clipboard regular" // Keep Wayland clipboard even after programs close
 spawn-at-startup "~/.config/niri/scripts/swayidle_runner.sh"
 spawn-at-startup "~/scripts/battery_watcher.sh"
-spawn-sh-at-startup "~/scripts/system_resume.sh restore"
+spawn-sh-at-startup "~/scripts/system_resume.sh watch"
 
 spawn-sh-at-startup "paplay ~/.nix-profile/share/sounds/ocean/stereo/desktop-login.oga"
 //spawn-sh-at-startup "systemctl --user stop swaync.service;pkill swaync"
