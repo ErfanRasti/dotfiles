@@ -53,8 +53,8 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("swaync")
 	hl.exec_cmd("swayosd-server")
 
-	-- Restore device states
-	hl.exec_cmd("~/scripts/system_resume.sh restore")
+	-- Restore device states and keep saving them
+	hl.exec_cmd("~/scripts/system_resume.sh watch")
 
 	-- udiskie
 	hl.exec_cmd("udiskie")
