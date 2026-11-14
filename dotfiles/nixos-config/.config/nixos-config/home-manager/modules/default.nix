@@ -10,5 +10,6 @@
     ./comsol.nix
     ./mathematica.nix
     ./claude.nix
+    ./meet-mic.nix
   ];
 }
