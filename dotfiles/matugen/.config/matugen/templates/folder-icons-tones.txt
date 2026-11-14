@@ -1,0 +1,11 @@
+0 {{palettes.primary._0.hex}}
+10 {{palettes.primary._10.hex}}
+20 {{palettes.primary._20.hex}}
+30 {{palettes.primary._30.hex}}
+40 {{palettes.primary._40.hex}}
+50 {{palettes.primary._50.hex}}
+60 {{palettes.primary._60.hex}}
+70 {{palettes.primary._70.hex}}
+80 {{palettes.primary._80.hex}}
+90 {{palettes.primary._90.hex}}
+100 {{palettes.primary._100.hex}}
