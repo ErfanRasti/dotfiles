@@ -1,0 +1,66 @@
+# A minimal week-of-weather tile for the desktop and the lockscreen.
+#
+# Noctalia's own weather widget always draws a big condition icon for today and
+# has no range for today and no hourly view, so this draws its own from the data
+# noctalia already fetched (~/.cache/noctalia/weather.json): same location, same
+# refresh, no network access of its own.
+#
+#   mode = "hourly" : temperature hour by hour from now, then today and the next days
+#   mode = "daily"  : now (temperature, condition, today's low/high), then the next days
+#   mode = "now"    : just now and today's low/high, right-aligned (beside a clock)
+# Day rows show each day's min, average (of its hours) and max.
+#
+# Lives in noctalia's built-in "local" plugin source (~/.local/share/noctalia/plugins,
+# stowed from the dotfiles); enabled in settings.toml's [plugins].enabled.
+
+id = "dotfiles/week-weather"
+name = "Week weather"
+version = "1.1.5"
+plugin_api = 3
+author = "dotfiles"
+license = "GPL-3.0" # same as the rest of the dotfiles (LICENSE at the repo root)
+icon = "weather-cloud"
+description = "Minimal weekly forecast, with an hourly strip for the lockscreen."
+tags = ["weather"]
+
+[[desktop_widget]]
+id = "week"
+entry = "week.luau"
+
+  [[desktop_widget.setting]]
+  key = "mode"
+  type = "select"
+  label_key = "settings.mode.label"
+  default = "daily"
+  options = [
+    { value = "daily", label_key = "settings.mode.daily" },
+    { value = "hourly", label_key = "settings.mode.hourly" },
+    { value = "now", label_key = "settings.mode.now" },
+  ]
+
+  # Natural content width in logical px. The tile scales the content to fit its
+  # box, so this sets the text size: box inner width / width = scale.
+  [[desktop_widget.setting]]
+  key = "width"
+  type = "int"
+  label_key = "settings.width.label"
+  default = 220
+  min = 120
+  max = 600
+
+  [[desktop_widget.setting]]
+  key = "days"
+  type = "int"
+  label_key = "settings.days.label"
+  default = 6
+  min = 1
+  max = 6
+
+  [[desktop_widget.setting]]
+  key = "hours"
+  type = "int"
+  label_key = "settings.hours.label"
+  default = 6
+  min = 2
+  max = 12
+  visible_when = { key = "mode", values = ["hourly"] }
