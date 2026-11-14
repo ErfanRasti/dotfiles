@@ -6,6 +6,42 @@
   system,
   ...
 }:
+let
+  # Chromium honors only the last --enable-features, so merge every one passed in
+  # with WebRtcPipeWireCamera: the webcam then goes through PipeWire, where
+  # noctalia's privacy widget can see it.
+  mergeFeatures = pkgs.writeText "merge-chromium-features" ''
+    #!${pkgs.runtimeShell}
+    features=WebRtcPipeWireCamera args=()
+    for arg; do
+      case $arg in
+        --enable-features=*) features+=,''${arg#*=} ;;
+        *) args+=("$arg") ;;
+      esac
+    done
+    exec @target@ --enable-features="$features" "''${args[@]}"
+  '';
+  withPipeWireCamera =
+    pkg:
+    pkgs.symlinkJoin {
+      inherit (pkg) name;
+      paths = [ pkg ];
+      postBuild = ''
+        for bin in $out/bin/*; do
+          target=$(readlink -f "$bin")
+          rm "$bin"
+          substitute ${mergeFeatures} "$bin" --subst-var-by target "$target"
+          chmod +x "$bin"
+        done
+      '';
+    };
+  # Firefox-based browsers need a pref for the same thing.
+  wrapFirefoxPipeWire =
+    browser: args:
+    pkgs.wrapFirefox browser (
+      args // { extraPrefs = ''defaultPref("media.webrtc.camera.allow-pipewire", true);''; }
+    );
+in
 {
 
   imports = [
@@ -149,11 +185,13 @@
       inputs.claude-desktop.packages.${stdenv.hostPlatform.system}.claude-desktop
 
       # Browsers
-      inputs.zen-browser.packages.${stdenv.hostPlatform.system}.default
-      google-chrome
+      (inputs.zen-browser.packages.${stdenv.hostPlatform.system}.default.override {
+        wrapFirefox = wrapFirefoxPipeWire;
+      })
+      (withPipeWireCamera google-chrome)
       chromium
-      microsoft-edge
-      firefox
+      (withPipeWireCamera microsoft-edge)
+      (wrapFirefoxPipeWire firefox-unwrapped { })
 
       # Password Managers
       pass
