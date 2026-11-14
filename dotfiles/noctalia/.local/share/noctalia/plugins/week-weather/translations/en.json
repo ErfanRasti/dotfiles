@@ -2,9 +2,8 @@
   "settings": {
     "mode": {
       "label": "Layout",
-      "daily": "Now, then days",
-      "hourly": "Hours, then days",
-      "now": "Now only"
+      "week": "Hours, then days",
+      "card": "Clock and now"
     },
     "width": { "label": "Content width" },
     "days": { "label": "Days after today" },

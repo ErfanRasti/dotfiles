@@ -1,26 +1,25 @@
-# A minimal week-of-weather tile for the desktop and the lockscreen.
+# Minimal weather for the desktop and the lockscreen.
 #
 # Noctalia's own weather widget always draws a big condition icon for today and
 # has no range for today and no hourly view, so this draws its own from the data
 # noctalia already fetched (~/.cache/noctalia/weather.json): same location, same
 # refresh, no network access of its own.
 #
-#   mode = "hourly" : temperature hour by hour from now, then today and the next days
-#   mode = "daily"  : now (temperature, condition, today's low/high), then the next days
-#   mode = "now"    : just now and today's low/high, right-aligned (beside a clock)
-# Day rows show each day's min, average (of its hours) and max.
+#   mode = "week" : temperature hour by hour from now, then today and the next
+#                   days with their min, average (of their hours) and max
+#   mode = "card" : time over date, and now over today's low/high, on shared rows
 #
 # Lives in noctalia's built-in "local" plugin source (~/.local/share/noctalia/plugins,
 # stowed from the dotfiles); enabled in settings.toml's [plugins].enabled.
 
 id = "dotfiles/week-weather"
 name = "Week weather"
-version = "1.1.5"
+version = "1.3.0"
 plugin_api = 3
 author = "dotfiles"
 license = "GPL-3.0" # same as the rest of the dotfiles (LICENSE at the repo root)
 icon = "weather-cloud"
-description = "Minimal weekly forecast, with an hourly strip for the lockscreen."
+description = "Minimal hourly and weekly forecast, and a clock card with the weather now."
 tags = ["weather"]
 
 [[desktop_widget]]
@@ -31,11 +30,10 @@ entry = "week.luau"
   key = "mode"
   type = "select"
   label_key = "settings.mode.label"
-  default = "daily"
+  default = "week"
   options = [
-    { value = "daily", label_key = "settings.mode.daily" },
-    { value = "hourly", label_key = "settings.mode.hourly" },
-    { value = "now", label_key = "settings.mode.now" },
+    { value = "week", label_key = "settings.mode.week" },
+    { value = "card", label_key = "settings.mode.card" },
   ]
 
   # Natural content width in logical px. The tile scales the content to fit its
@@ -55,6 +53,7 @@ entry = "week.luau"
   default = 6
   min = 1
   max = 6
+  visible_when = { key = "mode", values = ["week"] }
 
   [[desktop_widget.setting]]
   key = "hours"
@@ -63,4 +62,4 @@ entry = "week.luau"
   default = 6
   min = 2
   max = 12
-  visible_when = { key = "mode", values = ["hourly"] }
+  visible_when = { key = "mode", values = ["week"] }
