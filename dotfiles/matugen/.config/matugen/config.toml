@@ -82,7 +82,9 @@ output_path = '~/.config/qt6ct/colors/matugen.conf'
 [templates.gtk3]
 input_path = '~/.config/matugen/templates/gtk-colors.css'
 output_path = '~/.config/gtk-3.0/colors.css'
-post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-{{mode}}'
+# Builds adw-gtk3-matugen(-dark) around colors.css and switches to it, which recolors
+# running GTK 3 apps and Chrome/Chromium (GTK mode) live; see the script.
+post_hook = '~/.config/matugen/scripts/gtk3_theme.sh {{mode}}'
 
 [templates.gtk4]
 input_path = '~/.config/matugen/templates/gtk-colors.css'
