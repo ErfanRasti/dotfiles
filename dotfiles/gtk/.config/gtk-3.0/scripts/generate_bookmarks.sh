@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Converts file://$HOME/... or file://~/... lines into absolute GTK3 bookmark entries.
 
-BOOKMARKS_FILE="$HOME/.config/gtk-3.0/bookmarks"
+BOOKMARKS_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/bookmarks"
 INPUT_FILE="${1:-/dev/stdin}"
 
 mkdir -p "$(dirname "$BOOKMARKS_FILE")"
