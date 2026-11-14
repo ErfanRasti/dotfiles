@@ -70,6 +70,23 @@ in
     pkgs.packet # "Send with Packet"; nautilus-python finds its extension in the profile
   ];
 
+  # Started at login and kept running (theme.py holds it), so `nautilus` only opens a
+  # window. A cold start loads every extension and waits on the volume monitors, whose
+  # probes of the rclone Google Drive mount could leave the window empty for 25-40 s.
+  systemd.user.services.nautilus = {
+    Unit = {
+      Description = "Nautilus, kept running in the background";
+      PartOf = [ "graphical-session.target" ];
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      Environment = [ "XDG_CURRENT_DESKTOP=GNOME" ]; # as in the keybinds
+      ExecStart = "${nautilusWrapped}/bin/nautilus --gapplication-service";
+      KillMode = "process"; # restarting it leaves apps opened from it running
+    };
+    Install.WantedBy = [ "graphical-session.target" ];
+  };
+
   # nautilus-python also scans the profile's share/, so drop the extensions other packages
   # bring along (Ghostty's "Open in Ghostty", Collision's "Check Hashes", GSConnect's).
   home.extraProfileCommands = ''

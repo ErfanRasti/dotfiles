@@ -392,7 +392,9 @@
         "${pkgs.coreutils}/bin/mkdir -p %h/GoogleDrive"
         "-/run/wrappers/bin/fusermount3 -uz %h/GoogleDrive" # clear a stale mount
       ];
-      ExecStart = "${lib.getExe pkgs.rclone} mount \"Google Drive:\" %h/GoogleDrive";
+      # Listings stay cached (Drive's change polling refreshes them), so lookups such as
+      # the volume monitors' probes don't wait on the often throttled Drive API.
+      ExecStart = "${lib.getExe pkgs.rclone} mount \"Google Drive:\" %h/GoogleDrive --dir-cache-time 1000h";
       ExecStop = "/run/wrappers/bin/fusermount3 -u %h/GoogleDrive";
       Restart = "on-failure";
       RestartSec = 30;
