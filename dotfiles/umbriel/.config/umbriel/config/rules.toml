@@ -95,7 +95,7 @@ default_floating_size = { width = 0.3, height = 0.2 }
 match.app_id = "^google-chrome$"
 match.title = "^Meet - .*$"
 default_floating = true
-default_floating_size = { width = 0.1, height = 0.25 }
+default_floating_size = { width = 0.13, height = 0.45 }
 default_position = { x = 2, y = 2, anchor = "bottom_right" }
 default_focused = false
 

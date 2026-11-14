@@ -233,8 +233,8 @@ window-rule {
 window-rule {
     match title=r#"Meet - .*$"# app-id="google-chrome"
     default-floating-position x=2 y=2 relative-to="bottom-right"
-    default-column-width { proportion 0.1; }
-    default-window-height { proportion 0.25; }
+    default-column-width { proportion 0.13; }
+    default-window-height { proportion 0.45; }
     open-floating true
     open-focused false
 }
