@@ -5,6 +5,7 @@
     ./kernel.nix # Kernel packages (needed by nvidia)
     ./inputs.nix # Touchpad etc (lowest priority)
     ./networks.nix # Networking, hostname, firewall
+    ./location.nix # GeoClue, its agent (follows GNOME's Location switch), app rules
     ./graphics.nix # GPU drivers (depends on boot.kernelPackages)
     ./hardware.nix # Hardware peripherals (Bluetooth, USB, etc.)
     ./services.nix # Desktop, display manager, xserver
