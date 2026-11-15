@@ -6,7 +6,7 @@
 # mode = "1920x1080@120.030"
 scale = 1.25
 transform = "normal"
-vrr = "always"            # niri: variable-refresh-rate
+vrr = "fullscreen"      # niri: variable-refresh-rate; "always" makes this panel flicker and pulse its brightness
 position = [0, 0]
 focus_at_startup = true
 
