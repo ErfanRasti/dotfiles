@@ -47,7 +47,7 @@
 "Mod+Alt+Shift+C" = { action = "window-clear-region", repeat = false }
 
 # ============================================================== Apps & session
-"Mod+Shift+Slash" = { action = "cheatsheet-toggle", repeat = false }                                                                                                 # niri: show-hotkey-overlay
+"Mod+Shift+Slash" = { action = "cheatsheet-toggle", repeat = false }                          # niri: show-hotkey-overlay
 "Mod+T" = { action = "spawn kitty --app-id kitty-main", repeat = false }
 "Mod+Return" = { action = "spawn kitty", repeat = false }
 "Mod+D" = { action = "spawn ~/.config/hypr/scripts/toggle_rofi_launcher.sh", repeat = false }
@@ -88,6 +88,7 @@
 
 # ============================================================== Windows
 "Mod+O" = { action = "overview-toggle", repeat = false }
+"Mod" = { action = "overview-toggle", repeat = false }
 "Mod+Q" = { action = "window-close", repeat = false }
 "Mod+F" = { action = "window-toggle-floating", repeat = false }
 "Mod+Tab" = "spawn ~/.config/umbriel/scripts/scratchpad_cycle.sh focus" # next window in the open scratchpad, else floating<->tiled
