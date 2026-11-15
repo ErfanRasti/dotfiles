@@ -206,3 +206,11 @@ output_path = '~/.local/state/nvim/matugen-mode'
 input_path = '~/.config/matugen/templates/folder-icons-tones.txt'
 output_path = '~/.cache/matugen/folder-icons-tones.txt'
 post_hook = '~/.config/matugen/scripts/folder_icons.py ~/.cache/matugen/folder-icons-tones.txt'
+
+# The privacy bar widget's colours, mac style: screen red, camera green, mic orange,
+# location blue. They're the custom colours above (blend = true), so harmonised with
+# the wallpaper and switching with light/dark; the plugin re-reads the file when it
+# changes (~/.local/share/noctalia/plugins/privacy).
+[theme.templates.user.privacy_colors]
+input_path = '~/.config/matugen/templates/noctalia-privacy-colors.json'
+output_path = '~/.cache/noctalia/privacy-colors.json'

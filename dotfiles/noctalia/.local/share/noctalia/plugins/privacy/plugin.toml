@@ -1,0 +1,70 @@
+# macOS-style privacy indicators for the bar: a glyph per thing in use, each in its
+# own colour, screen sharing red, camera green, microphone orange, location blue.
+#
+# Noctalia's own "privacy" widget has no location and one colour for everything, so
+# this replaces it (it sits in the same capsule group). The OSD and the
+# shell.privacy.*_filter_regex filters stay noctalia's; this widget honours them.
+#
+#   probe.sh    : one JSON snapshot from PipeWire (mic, camera, screen) and GeoClue
+#                 (location), polled every second, ~70 ms of work
+#   widget.luau : draws the glyphs, hidden while nothing is in use; hover lists apps
+#
+# Colours are names from matugen's custom colours (red, orange, yellow, green, mint,
+# teal, cyan, blue, indigo, purple, pink, brown: harmonised with the wallpaper),
+# written by the privacy_colors user template to ~/.cache/noctalia/privacy-colors.json,
+# or any palette role (error, primary, tertiary, ...) or #RRGGBB.
+#
+# Lives in noctalia's built-in "local" plugin source (~/.local/share/noctalia/plugins,
+# stowed from the dotfiles); enabled in settings.toml's [plugins].enabled.
+
+id = "dotfiles/privacy"
+name = "Privacy indicators"
+version = "1.0.0"
+plugin_api = 32 # nowMs (12), argv runAsync (24), getSetting (26), tooltip on ui.row (32)
+author = "dotfiles"
+license = "GPL-3.0" # same as the rest of the dotfiles (LICENSE at the repo root)
+icon = "shield"
+description = "Mac-style screen, camera, microphone and location indicators, each in its own colour."
+tags = ["privacy", "bar"]
+
+[[widget]]
+id = "privacy"
+entry = "widget.luau"
+
+  [[widget.setting]]
+  key = "screen_color"
+  type = "string"
+  label_key = "settings.screen_color.label"
+  default = "error"
+
+  [[widget.setting]]
+  key = "camera_color"
+  type = "string"
+  label_key = "settings.camera_color.label"
+  default = "green"
+
+  [[widget.setting]]
+  key = "mic_color"
+  type = "string"
+  label_key = "settings.mic_color.label"
+  default = "orange"
+
+  [[widget.setting]]
+  key = "location_color"
+  type = "string"
+  label_key = "settings.location_color.label"
+  default = "blue"
+
+  [[widget.setting]]
+  key = "gap"
+  type = "int"
+  label_key = "settings.gap.label"
+  default = 4
+  min = 0
+  max = 16
+
+  [[widget.setting]]
+  key = "hide_inactive"
+  type = "bool"
+  label_key = "settings.hide_inactive.label"
+  default = true

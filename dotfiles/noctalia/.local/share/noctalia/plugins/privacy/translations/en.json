@@ -1,0 +1,17 @@
+{
+  "settings": {
+    "screen_color": { "label": "Screen sharing colour" },
+    "camera_color": { "label": "Camera colour" },
+    "mic_color": { "label": "Microphone colour" },
+    "location_color": { "label": "Location colour" },
+    "gap": { "label": "Space between icons" },
+    "hide_inactive": { "label": "Hide when nothing is in use" }
+  },
+  "ui": {
+    "screen": "Screen sharing",
+    "camera": "Camera",
+    "mic": "Microphone",
+    "location": "Location",
+    "idle": "Nothing is using the screen, camera, microphone or location"
+  }
+}

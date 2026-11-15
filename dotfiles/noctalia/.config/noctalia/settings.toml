@@ -646,7 +646,7 @@ layer = "overlay"
 background_opacity = 0.6
 
 [plugins]
-enabled = ["dotfiles/week-weather"] # ~/.local/share/noctalia/plugins (stowed from this package)
+enabled = ["dotfiles/week-weather", "dotfiles/privacy"] # ~/.local/share/noctalia/plugins (stowed from this package)
 
 [shell]
 # Feed audio spectrum data to umbriel (used by the Spotify wave border effect).
@@ -787,8 +787,12 @@ show_label = false
 [widget.output_volume]
 show_label = true
 
+# Mac-style privacy indicators (the dotfiles/privacy plugin): screen red, camera
+# green, mic orange, location blue, from the theme. Noctalia's built-in "privacy"
+# widget has no location and one colour for all, so this entry replaces it (same
+# name, so capsule group g4 is unchanged).
 [widget.privacy]
-active_color = "secondary"
+type = "dotfiles/privacy:privacy"
 hide_inactive = true
 
 [widget.spacer_2]
