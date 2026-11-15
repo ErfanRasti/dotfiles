@@ -27,7 +27,7 @@ let
 in
 {
   powerManagement.enable = true;
-  powerManagement.cpuFreqGovernor = "schedutil";
+  powerManagement.cpuFreqGovernor = "powersave";
 
   services.thermald.enable = true;
 
