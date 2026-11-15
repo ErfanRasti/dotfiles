@@ -58,6 +58,12 @@ blur_popups = true
 
 # (Panels/dock/notifications use the cheap cached wallpaper blur too, not live "x-ray" blur.)
 
+# Desktop icons: blur the frosted selection (0.25) and menus, not fainter tints.
+[[layer_rule]]
+match.namespace = "^noctalia-plugin:dotfiles/desktop-icons:desk$"
+blur = true
+blur_ignore_alpha = 0.22
+
 # Noctalia settings window & umbriel share picker float.
 [[window_rule]]
 match.app_id = "^dev.noctalia.Noctalia$"

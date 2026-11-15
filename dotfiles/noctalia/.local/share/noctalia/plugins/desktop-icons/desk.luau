@@ -2159,9 +2159,10 @@ local function cell(it, c, r, ghost)
   local isSel = selection[it.key] and not ghost
   local isFocus = focusKey == it.key and not isSel and not ghost
   local dragging = drag and selection[it.key] and not ghost
-  local frame, fill = CLEAR, CLEAR
+  -- Always explicit: a reused node keeps a border it is not told to drop.
+  local frame, fill, border = CLEAR, CLEAR, CLEAR
   if isSel then
-    frame, fill = "primary", "primary_container"
+    frame, border = "primary_container/0.25", "primary/0.55" -- frosted glass: umbriel blurs alpha >= 0.22
   elseif isFocus then
     frame = "primary/0.7"
   elseif hoverKey == it.key and not drag then
@@ -2173,12 +2174,7 @@ local function cell(it, c, r, ghost)
   if rename and rename.key == it.key then
     table.insert(children, renameNode())
   else
-    local color, shadow, sub
-    if isSel then
-      color, shadow, sub = "on_primary_container", false, "on_primary_container"
-    else
-      color, shadow, sub = textStyle(c, r)
-    end
+    local color, shadow, sub = textStyle(c, r) -- the glass is too faint to carry its own text colour
     local name = it.name
     if it.kind == "stack" then
       name = (view.expanded[it.key] and "▾ " or "▸ ") .. name
@@ -2186,7 +2182,7 @@ local function cell(it, c, r, ghost)
     table.insert(children, label(name, color, shadow, { fontWeight = (isSel or it.kind == "stack") and "semibold" or nil,
       maxLines = it.info and 1 or 2 }))
     if it.info then
-      table.insert(children, label(it.info, sub, shadow and not isSel,
+      table.insert(children, label(it.info, sub, shadow,
         { maxLines = 1, fontSize = FONT * 0.88 }))
     end
   end
@@ -2194,6 +2190,7 @@ local function cell(it, c, r, ghost)
     key = "cell" .. it.key .. (ghost and "-ghost" or ""),
     width = CW, minWidth = CW, height = CH, minHeight = CH,
     padding = PAD, radius = math.floor(12 * S), fill = frame, align = "stretch",
+    border = border, borderWidth = isSel and math.max(1, math.floor(1.5 * S)) or 0,
     opacity = dragging and 0.35 or (ghost and 0.85 or (fx.cut[it.key] and 0.5 or 1)),
   }, {
     ui.column({ flexGrow = 1, padding = PAD, gap = math.floor(3 * S), radius = math.floor(10 * S),
