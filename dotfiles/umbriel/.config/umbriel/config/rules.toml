@@ -155,11 +155,12 @@ default_workspace = 3   # We
 match.app_id = "^kitty-main$"
 default_workspace = 2   # Ma
 
-# Browsers: maximized to edges on workspace 3.
+# Browsers on workspace 3, in its current layout: the extent only applies to scrolling
+# (full-width column); dwindle/master/stacking place them normally.
 [[window_rule]]
 match.app_id = ["^google-chrome$", "^microsoft-edge$", "^zen$", "^firefox$"]
 match.title = [".*Google Chrome$", ".*Microsoft.*Edge$", ".*Zen Browser$", ".*Mozilla Firefox$"]
-default_maximize_to_edges = true
+default_scrolling_extent = 1.0
 default_workspace = 3   # We
 
 # ================================================================ MATLAB
