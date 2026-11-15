@@ -62,7 +62,7 @@ local function syncMatugenIcons()
   if mtime == matugenMtime then
     return false
   end
-  matugenMtime, matugenDir = mtime, nil
+  matugenDir = nil
   local version = tostring(mtime)
   local names = info and noctalia.listDir(MATUGEN_SRC)
   if names then
@@ -76,6 +76,7 @@ local function syncMatugenIcons()
     end
     matugenDir = dir
   end
+  matugenMtime = mtime -- only now: a sync cut short is redone on the next pass
   for _, v in ipairs(noctalia.listDir(DATA_DIR .. "/icons") or {}) do
     if v ~= version then
       noctalia.runAsync({ "rm", "-rf", "--", DATA_DIR .. "/icons/" .. v })

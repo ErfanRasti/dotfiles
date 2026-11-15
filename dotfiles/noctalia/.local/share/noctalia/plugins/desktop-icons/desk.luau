@@ -1297,31 +1297,48 @@ noctalia.runStream("exec stdbuf -oL umbriel subscribe windows", onWindowsLine)
 -- focused window goes (a switch to an empty workspace, the last window closed),
 -- the desktop takes the keyboard: briefly "exclusive", then back to "on_demand",
 -- which keeps it until a window is clicked or focused. Not while a noctalia panel
--- (the launcher) is open, and only on that transition, never from a window.
+-- or the overview holds the keys; when one closes onto no window, or onto a name
+-- field or prompt here, the desktop takes them back (umbriel doesn't).
 do
-  local hadWindow = true
+  local hadWindow, overview, panel = true, false, false
   local function grab()
     noctalia.layer.configure("desk", { keyboard = "exclusive" })
     noctalia.runAsync({ "sleep", "0.15" }, function()
       noctalia.layer.configure("desk", { keyboard = "on_demand" })
     end)
   end
-  onFocus = function(focused)
-    if focused or not hadWindow then
+  onFocus = function(focused, closed)
+    if focused or not (hadWindow or closed) then
       hadWindow = focused
       return
     end
     hadWindow = false
-    noctalia.runAsync({ "noctalia", "msg", "status" }, function(res)
-      if not (res.stdout or ""):find('"panelOpen": true', 1, true) then
-        grab()
-      end
-    end)
+    if not (overview or panel) then
+      grab()
+    end
   end
-  -- A workspace switch doesn't refresh the window list: ask umbriel then.
-  noctalia.runStream("exec stdbuf -oL umbriel subscribe workspaces", function()
+  -- A workspace switch, the overview or a panel closing doesn't refresh the window
+  -- list: ask umbriel then.
+  noctalia.runStream("exec stdbuf -oL umbriel subscribe workspaces,overview,layers", function(line)
+    local closed = false
+    if line:find('"event":"layers"', 1, true) then
+      local open = line:find('-panel","output"', 1, true) ~= nil
+      closed, panel = panel and not open, open
+      if not closed then
+        return
+      elseif mode ~= "normal" then
+        grab()
+        return
+      end
+    elseif line:find('"event":"overview"', 1, true) then
+      overview = line:find('"open":true', 1, true) ~= nil
+      if overview then
+        return
+      end
+      closed = true
+    end
     noctalia.runAsync({ "umbriel", "focused-window" }, function(res)
-      onFocus(res.exitCode == 0 and not (res.stdout or ""):find("no focused window", 1, true))
+      onFocus(res.exitCode == 0 and not (res.stdout or ""):find("no focused window", 1, true), closed)
     end)
   end)
 end
@@ -2203,6 +2220,9 @@ local function grid()
     for c = 1, COLS do
       local id = cellId(c, r)
       local key = occ[id]
+      if key and not byKey[key] then
+        key = nil -- placed by a refresh that was cut short: blank until the next one
+      end
       local sig
       if key then
         sig = not (rename and rename.key == key) and table.concat({ key, selection[key] and 1 or 0,
@@ -2477,21 +2497,32 @@ relayout = function()
   render()
 end
 
-refresh = function(force)
-  local dir = (force or not folder) and L.desktopDir() or folder -- user-dirs.dirs: at start and F5
-  local info = noctalia.fileInfo(dir)
-  local mtime = info and info.mtime or -2
-  local thumbs = noctalia.fileInfo(CACHE_HOME .. "/thumbnails/large")
-  local tmtime = thumbs and thumbs.mtime or -2
-  local iconsChanged = L.syncMatugenIcons()
-  local geomChanged = computeGeometry()
-  if geomChanged then
-    wallpaper = nil
-  end
-  if force or iconsChanged or geomChanged or dir ~= folder or mtime ~= folderMtime or tmtime ~= thumbsMtime then
-    folder, folderMtime, thumbsMtime = dir, mtime, tmtime
-    readFolder()
-    relayout()
+-- looks: only what a new wallpaper changes (folder colours, name colours), with
+-- nothing moved: for while a name is being edited or a menu is open, so the work
+-- doesn't all pile up on the key that ends it.
+refresh = function(force, looks)
+  if looks then
+    if L.syncMatugenIcons() then
+      nodeCache = {} -- cells resolve icon paths as they are built
+      render()
+    end
+  else
+    local dir = (force or not folder) and L.desktopDir() or folder -- user-dirs.dirs: at start and F5
+    local info = noctalia.fileInfo(dir)
+    local mtime = info and info.mtime or -2
+    local thumbs = noctalia.fileInfo(CACHE_HOME .. "/thumbnails/large")
+    local tmtime = thumbs and thumbs.mtime or -2
+    local iconsChanged = L.syncMatugenIcons()
+    local geomChanged = computeGeometry()
+    if geomChanged then
+      wallpaper = nil
+    end
+    if force or iconsChanged or geomChanged or dir ~= folder or mtime ~= folderMtime or tmtime ~= thumbsMtime then
+      folder, folderMtime = dir, -1 -- left stale until done, so a cut-short pass is redone
+      readFolder()
+      relayout()
+      folderMtime, thumbsMtime = mtime, tmtime
+    end
   end
   local wp = noctalia.wallpaperPath(layer.outputName() or "")
   if wp and wp ~= wallpaper then
@@ -2521,8 +2552,8 @@ function update()
       if not running then startPad() end
     end, "python3", PAD_PY)
   end
-  if not press and mode ~= "rename" and mode ~= "menu" then
-    refresh(false)
+  if not press then
+    refresh(false, mode == "rename" or mode == "menu")
   end
 end
 
