@@ -1,0 +1,114 @@
+{
+  "settings": {
+    "folder": {
+      "label": "Folder (empty: the desktop folder)"
+    },
+    "icon_size": {
+      "label": "Icon size (default; the desktop menu overrides it)",
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large",
+      "huge": "Huge"
+    },
+    "show_home": {
+      "label": "Show Home"
+    },
+    "show_trash": {
+      "label": "Show Trash"
+    },
+    "apps": {
+      "label": "Pinned apps (desktop file ids)"
+    },
+    "open_on": {
+      "label": "Open with",
+      "double": "Double click",
+      "single": "Single click"
+    },
+    "thumbnails": {
+      "label": "Thumbnails"
+    },
+    "show_hidden": {
+      "label": "Show hidden files"
+    },
+    "widget_gap": {
+      "label": "Gap around desktop widgets (canvas px)"
+    }
+  },
+  "ui": {
+    "home": "Home",
+    "trash": "Trash",
+    "more": "+{count} more",
+    "new_folder": "New Folder",
+    "new_document": "New Document",
+    "menu": {
+      "open": "Open",
+      "preview": "Preview",
+      "rename": "Rename",
+      "copy": "Copy",
+      "cut": "Cut",
+      "paste": "Paste",
+      "trash": "Move to Trash",
+      "delete": "Delete Permanently",
+      "show_in_files": "Show in Files",
+      "copy_path": "Copy Path",
+      "empty_trash": "Empty Trash",
+      "new_folder": "New Folder",
+      "new_document": "New Document",
+      "open_folder": "Open Desktop in Files",
+      "terminal": "Open Terminal Here",
+      "select_all": "Select All",
+      "refresh": "Refresh",
+      "help": "Keyboard Shortcuts",
+      "use_stacks": "Use Stacks",
+      "group_by": "Group Stacks By",
+      "sort_by": "Sort By",
+      "clean_up": "Clean Up",
+      "clean_up_by": "Clean Up By",
+      "view_options": "View Options",
+      "expand": "Open Stack",
+      "collapse": "Close Stack",
+      "stacks_off": "Stop Using Stacks",
+      "sort": {
+        "none": "None",
+        "name": "Name",
+        "kind": "Kind",
+        "date": "Date Modified",
+        "size": "Size"
+      },
+      "view": {
+        "icon_size": "Icon size",
+        "small": "Small",
+        "medium": "Medium",
+        "large": "Large",
+        "huge": "Huge",
+        "spacing": "Grid spacing",
+        "tight": "Tight",
+        "normal": "Normal",
+        "wide": "Wide",
+        "text_size": "Text size",
+        "text_small": "Small",
+        "text_normal": "Normal",
+        "text_large": "Large",
+        "show_info": "Show Item Info"
+      }
+    },
+    "confirm": {
+      "empty_trash": "Empty the Trash for good?  y / n",
+      "delete": "Delete {count} item(s) for good?  y / n"
+    },
+    "rename_exists": "“{name}” already exists",
+    "error": "Desktop icons",
+    "info": {
+      "item": "{count} item",
+      "items": "{count} items"
+    },
+    "toast": {
+      "copied": "Copied {count} item(s), paste in any app",
+      "cut": "Cut {count} item(s), paste to move",
+      "pasting": "Pasting {count} item(s)…",
+      "nothing": "Nothing to paste",
+      "trashed": "Moved {count} item(s) to Trash",
+      "moved": "Moved {count} item(s) into {name}"
+    }
+  }
+}

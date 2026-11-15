@@ -1,0 +1,125 @@
+# Desktop icons, Windows style with vim keys: Home, Trash, pinned apps and what's in
+# ~/Desktop, on a grid you arrange by dragging, on the wallpaper under every window.
+#
+#   mouse    : click selects (Ctrl toggles, Shift extends), double-click opens, drag
+#              moves icons (onto a folder moves the files in, onto Trash trashes
+#              them), drag on empty space selects a box, right-click opens a menu
+#   arrange  : as on a Mac (desktop menu): Sort By, Clean Up, Clean Up By, Use
+#              Stacks (by kind or date), View Options (icon size, spacing, text
+#              size, item info); Ctrl+Alt+0 stacks, Ctrl+Alt+1-4/9 sort, Ctrl+wheel zoom
+#   keyboard : (after clicking the desktop) hjkl/arrows move, Shift extends, Ctrl
+#              moves the focus only and Ctrl+Space toggles, HJKL/Alt+arrows move the
+#              icons, Enter/o open, Space previews (GNOME Sushi, as in Nautilus),
+#              F2/r rename, y/Ctrl+C copy, x/Ctrl+X cut, p/Ctrl+V paste, d/Delete
+#              trash, D/Shift+Delete delete, a/Ctrl+Shift+N new folder, / search,
+#              n/N next match, gg/G first/last, v visual, Ctrl+A all, Esc, ? help
+#
+# Looks as Nautilus does: its Adwaita-Matugen icons (folders in the matugen palette,
+# refreshed when matugen rebuilds them) over Adwaita, its thumbnails, and names
+# straight on the wallpaper in black or white, whichever reads on what is behind.
+#
+# A [[layer]] rather than a desktop widget: only a layer takes the keyboard, and the
+# pointer events dragging needs come only from ui.pixelStream (served a transparent
+# frame by pad.py). See desk.luau.
+#
+# Lives in noctalia's built-in "local" plugin source (~/.local/share/noctalia/plugins,
+# stowed from the dotfiles); enabled in settings.toml's [plugins].enabled.
+
+id = "dotfiles/desktop-icons"
+name = "Desktop icons"
+version = "2.0.0"
+plugin_api = 51 # closures (9), nowMs (12), require (22), argv runAsync (24), layers (36), pixel stream, label shadow (51)
+author = "dotfiles"
+license = "GPL-3.0" # same as the rest of the dotfiles (LICENSE at the repo root)
+icon = "folder"
+description = "Windows-like desktop icons with vim keys: drag, select, rename, copy, trash, preview."
+tags = ["desktop", "files"]
+
+# The whole screen, under windows and under the desktop widgets (each widget is
+# its own surface above it, so it keeps its clicks; desk.luau re-creates them when
+# this surface ends up on top). Icons go in the free space between bar, dock and
+# widgets, which desk.luau reads from noctalia's state as widgets change.
+[[layer]]
+id = "desk"
+entry = "desk.luau"
+layer = "bottom"
+anchors = ["top", "bottom", "left", "right"]
+keyboard = "on_demand" # focused on click; clicking a window takes it back
+exclusive_zone = -1 # the whole output, bar and dock areas included (left free)
+output = "focused"
+visible = true
+
+# Shows the layer at startup and again when monitors change, so the icons come back
+# even when no output was focused yet as the shell started (see service.luau).
+[[service]]
+id = "keeper"
+entry = "service.luau"
+
+# Empty: the XDG desktop folder (XDG_DESKTOP_DIR in user-dirs.dirs, else ~/Desktop).
+[[setting]]
+key = "folder"
+type = "folder"
+label_key = "settings.folder.label"
+default = ""
+
+# Space kept free around desktop widgets, in canvas px (1536x864, scaled).
+[[setting]]
+key = "widget_gap"
+type = "int"
+label_key = "settings.widget_gap.label"
+default = 8
+min = 0
+max = 64
+
+[[setting]]
+key = "icon_size"
+type = "select"
+label_key = "settings.icon_size.label"
+default = "medium"
+options = [
+  { value = "small", label_key = "settings.icon_size.small" },
+  { value = "medium", label_key = "settings.icon_size.medium" },
+  { value = "large", label_key = "settings.icon_size.large" },
+  { value = "huge", label_key = "settings.icon_size.huge" },
+]
+
+[[setting]]
+key = "show_home"
+type = "bool"
+label_key = "settings.show_home.label"
+default = true
+
+[[setting]]
+key = "show_trash"
+type = "bool"
+label_key = "settings.show_trash.label"
+default = true
+
+# App ids (desktop file names without .desktop), shown after Home and Trash.
+[[setting]]
+key = "apps"
+type = "string_list"
+label_key = "settings.apps.label"
+default = []
+
+[[setting]]
+key = "open_on"
+type = "select"
+label_key = "settings.open_on.label"
+default = "double"
+options = [
+  { value = "double", label_key = "settings.open_on.double" },
+  { value = "single", label_key = "settings.open_on.single" },
+]
+
+[[setting]]
+key = "thumbnails"
+type = "bool"
+label_key = "settings.thumbnails.label"
+default = true
+
+[[setting]]
+key = "show_hidden"
+type = "bool"
+label_key = "settings.show_hidden.label"
+default = false

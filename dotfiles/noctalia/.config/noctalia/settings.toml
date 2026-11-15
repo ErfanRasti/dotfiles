@@ -116,6 +116,9 @@ schema_version = 2
 #
 #   top-left    : one card, time over date on the left, the weather on the same rows on the right
 #   top-right   : calendar, and the week's weather under it
+#   elsewhere   : desktop icons, in the free space around these widgets: not a widget
+#                 but the desktop-icons plugin's full-screen layer, which reads the
+#                 widgets' boxes from noctalia's state (~/.local/share/noctalia/plugins)
 #   bottom-left : media (hidden when nothing plays)
 widget_order = [
   "desktop-clock",
@@ -646,7 +649,7 @@ layer = "overlay"
 background_opacity = 0.6
 
 [plugins]
-enabled = ["dotfiles/week-weather", "dotfiles/privacy"] # ~/.local/share/noctalia/plugins (stowed from this package)
+enabled = ["dotfiles/week-weather", "dotfiles/desktop-icons", "dotfiles/privacy"] # ~/.local/share/noctalia/plugins (stowed from this package)
 
 [shell]
 # Feed audio spectrum data to umbriel (used by the Spotify wave border effect).
