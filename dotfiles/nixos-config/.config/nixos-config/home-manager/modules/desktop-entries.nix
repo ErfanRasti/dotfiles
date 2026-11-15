@@ -127,5 +127,7 @@
       "Network"
       "Chat"
     ];
+    # chromium --app window app id; lets noctalia match the window to this entry's icon.
+    settings.StartupWMClass = "chrome-web.whatsapp.com__-Default";
   };
 }
