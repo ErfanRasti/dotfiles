@@ -87,6 +87,17 @@ in
     Install.WantedBy = [ "graphical-session.target" ];
   };
 
+  # LocalSearch defaults to all of ~ (~1.8M files, CPU at 100 °C); index only
+  # the XDG folders from user-dirs.dirs (kept fixed by user-dirs.conf).
+  dconf.settings."org/freedesktop/tracker/miner/files".index-recursive-directories = [
+    "&DESKTOP"
+    "&DOCUMENTS"
+    "&DOWNLOAD"
+    "&MUSIC"
+    "&PICTURES"
+    "&VIDEOS"
+  ];
+
   # nautilus-python also scans the profile's share/, so drop the extensions other packages
   # bring along (Ghostty's "Open in Ghostty", Collision's "Check Hashes", GSConnect's).
   home.extraProfileCommands = ''
