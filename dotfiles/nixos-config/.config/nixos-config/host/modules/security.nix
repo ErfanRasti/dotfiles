@@ -1,11 +1,20 @@
 { config, pkgs, ... }:
 let
+  # IR face cameras stream greyscale, webcams colour: udev links the IR one (if any) to
+  # /dev/ir-camera for howdy. Without it the scans below exit, and sudo/polkit skip howdy
+  # (no face model) or fall back to the password.
+  irCamera = "ir-camera";
+  isIrCamera = pkgs.writeShellScript "is-ir-camera" ''
+    ${pkgs.v4l-utils}/bin/v4l2-ctl -d "$1" --list-formats | ${pkgs.gnugrep}/bin/grep -qE "'(GREY|Y8I |Y1[026] )'"
+  '';
+
   # Face scan in the background, unlocking through logind on a match (Noctalia listens
   # to logind's Unlock). It returns at once, so the password field stays usable while
   # the camera works. Only scans while the session is locked, at most 3 tries, one
   # instance at a time. Started by the lockscreen's `login` PAM stack on a failed or
   # empty password, and by swayidle after resume.
   howdyBackgroundUnlock = pkgs.writeShellScriptBin "howdy-background-unlock" ''
+    [ -e /dev/${irCamera} ] || exit 0
     user="''${PAM_USER:-$(${pkgs.coreutils}/bin/id -un)}"
     uid=$(${pkgs.coreutils}/bin/id -u "$user" 2>/dev/null) || exit 0
     [ "$(${pkgs.coreutils}/bin/id -u)" = "$uid" ] || exit 0 # only for your own session
@@ -121,8 +130,12 @@ in
         # can't reach.
         workaround = "native";
       };
+      video.device_path = "/dev/${irCamera}";
     };
   };
+  services.udev.extraRules = ''
+    SUBSYSTEM=="video4linux", KERNEL=="video[0-9]*", PROGRAM="${isIrCamera} $devnode", SYMLINK+="${irCamera}"
+  '';
   services.howdy.control = "sufficient";
 
   # Noctalia's lockscreen authenticates through the `login` service. With howdy in that
