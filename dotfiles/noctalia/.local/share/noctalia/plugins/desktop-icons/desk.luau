@@ -2429,7 +2429,7 @@ local function overlay()
     local hw = 2 * colW + math.floor(28 * S) + 2 * pad
     local hh = titleH + math.floor(12 * S) + bodyH + 2 * pad
     put(ui.column({ width = hw, minWidth = hw, height = hh, minHeight = hh, padding = pad, gap = math.floor(6 * S),
-      radius = math.floor(16 * S), fill = "surface/0.97", border = "outline_variant/0.6", borderWidth = 1 }, {
+      radius = math.floor(16 * S), fill = "surface/0.8", border = "outline_variant/0.6", borderWidth = 1 }, {
       ui.row({ height = titleH, minHeight = titleH, gap = math.floor(9 * S), align = "center" }, {
         ui.glyph({ name = "keyboard", size = fs * 1.7, color = "primary" }),
         ui.label({ text = "Desktop shortcuts", fontSize = fs * 1.4, fontWeight = "bold", color = "on_surface" }),
