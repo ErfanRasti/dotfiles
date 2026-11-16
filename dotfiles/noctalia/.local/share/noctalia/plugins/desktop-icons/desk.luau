@@ -1223,10 +1223,10 @@ end
 
 -- Where Sushi's window is, from umbriel's window events (read only): open on a
 -- workspace not on screen, the next preview reopens it here (see preview()).
-local onFocus -- set below: onFocus(windowFocused); takes the keyboard when none is left
+local onFocus -- set below: onFocus(windowsJson); takes the keyboard when the workspace empties
 
 local function onWindowsLine(line)
-  onFocus(line:find('"active":true', 1, true) ~= nil) -- "active": the window with the keyboard
+  onFocus(line)
   if not line:find("NautilusPreviewer", 1, true) then
     sushiHidden = false -- no Sushi window: skip decoding the whole window list
     return
@@ -1292,14 +1292,17 @@ noctalia.runStream("exec stdbuf -oL gdbus monitor --session --dest org.gnome.Nau
   onPreviewerLine)
 
 -- Tab on an empty desktop: keys only reach a surface that holds the keyboard, and
--- umbriel gives a layer focus only as it appears or is clicked. So when the last
--- focused window goes (a switch to an empty workspace, the last window closed),
--- the desktop takes the keyboard: briefly "exclusive", then back to "on_demand",
--- which keeps it until a window is clicked or focused. Not while another layer
--- (a panel, rofi) or the overview holds the keys, as umbriel drops the window's
--- focus for those too; when one closes, the desk takes the keys back only if it
--- held them as it opened (a click, a name field, a prompt) or no window is left.
+-- umbriel gives a layer focus only as it appears or is clicked. So when the shown
+-- workspace has no window left (a switch to an empty workspace, the last window
+-- closed), the desktop takes the keyboard: briefly "exclusive", then back to
+-- "on_demand", which keeps it until a window is clicked or focused. Only then: a
+-- workspace with windows but none focused (a polkit or other prompt took the keys,
+-- a window just closed) leaves the keys alone, the desk gets them by a click. Not
+-- while another layer (a panel, rofi) or the overview holds the keys; when one
+-- closes, the desk takes the keys back only if it held them as it opened (a click,
+-- a name field, a prompt) or the workspace is empty.
 do
+  -- hadWindow: the shown workspace held a window at the last check.
   -- deskKeys: the desk holds the keyboard; deskHad: it did as a layer opened.
   local hadWindow, overview, panel, deskKeys, deskHad = true, false, false, false, false
   local function grab()
@@ -1308,14 +1311,33 @@ do
       noctalia.layer.configure("desk", { keyboard = "on_demand" })
     end)
   end
-  onFocus = function(focused, closed)
-    if focused or not (hadWindow or closed) then
-      hadWindow = focused
+  -- Whether the workspace shown on this output holds a window, from umbriel's window
+  -- list (JSON: an event line or `umbriel windows --json`). "visible" is true for
+  -- every window of a shown workspace, scrolled off screen included, and false on
+  -- hidden workspaces, minimized or in a scratchpad. Decoded only with several outputs.
+  local function hasWindows(json)
+    if not json:find('"visible":true', 1, true) then
+      return false
+    end
+    local out = layer.outputName()
+    if not out or #noctalia.outputs() < 2 then
+      return true
+    end
+    local ok, d = pcall(noctalia.json.decode, json)
+    for _, w in ipairs(ok and type(d) == "table" and (d.data or d) or {}) do
+      if w.visible == true and w.output == out then
+        return true
+      end
+    end
+    return false
+  end
+  onFocus = function(json, closed)
+    local windows = hasWindows(json)
+    if windows or not (hadWindow or closed) then
+      hadWindow = windows
       return
     end
     hadWindow = false
-    -- deskKeys: focused-window names the last window even while the desk has the
-    -- keys, so each window event would grab again.
     if not (overview or panel or deskKeys) then
       grab()
     end
@@ -1359,8 +1381,10 @@ do
       end
       closed = true
     end
-    noctalia.runAsync({ "umbriel", "focused-window" }, function(res)
-      onFocus(res.exitCode == 0 and not (res.stdout or ""):find("no focused window", 1, true), closed)
+    noctalia.runAsync({ "umbriel", "windows", "--json" }, function(res)
+      if res.exitCode == 0 and res.stdout then
+        onFocus(res.stdout, closed)
+      end
     end)
   end)
 end
