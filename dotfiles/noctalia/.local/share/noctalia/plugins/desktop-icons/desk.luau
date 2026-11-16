@@ -1290,17 +1290,18 @@ end
 -- stdbuf: piped, gdbus would hold its lines in a block buffer.
 noctalia.runStream("exec stdbuf -oL gdbus monitor --session --dest org.gnome.NautilusPreviewer --object-path /org/gnome/NautilusPreviewer",
   onPreviewerLine)
-noctalia.runStream("exec stdbuf -oL umbriel subscribe windows", onWindowsLine)
 
 -- Tab on an empty desktop: keys only reach a surface that holds the keyboard, and
 -- umbriel gives a layer focus only as it appears or is clicked. So when the last
 -- focused window goes (a switch to an empty workspace, the last window closed),
 -- the desktop takes the keyboard: briefly "exclusive", then back to "on_demand",
--- which keeps it until a window is clicked or focused. Not while a noctalia panel
--- or the overview holds the keys; when one closes onto no window, or onto a name
--- field or prompt here, the desktop takes them back (umbriel doesn't).
+-- which keeps it until a window is clicked or focused. Not while another layer
+-- (a panel, rofi) or the overview holds the keys, as umbriel drops the window's
+-- focus for those too; when one closes, the desk takes the keys back only if it
+-- held them as it opened (a click, a name field, a prompt) or no window is left.
 do
-  local hadWindow, overview, panel = true, false, false
+  -- deskKeys: the desk holds the keyboard; deskHad: it did as a layer opened.
+  local hadWindow, overview, panel, deskKeys, deskHad = true, false, false, false, false
   local function grab()
     noctalia.layer.configure("desk", { keyboard = "exclusive" })
     noctalia.runAsync({ "sleep", "0.15" }, function()
@@ -1313,20 +1314,41 @@ do
       return
     end
     hadWindow = false
-    if not (overview or panel) then
+    -- deskKeys: focused-window names the last window even while the desk has the
+    -- keys, so each window event would grab again.
+    if not (overview or panel or deskKeys) then
       grab()
     end
   end
-  -- A workspace switch, the overview or a panel closing doesn't refresh the window
-  -- list: ask umbriel then.
-  noctalia.runStream("exec stdbuf -oL umbriel subscribe workspaces,overview,layers", function(line)
+  -- A workspace switch, the overview or a layer closing doesn't refresh the window
+  -- list: ask umbriel then. One stream keeps umbriel's order: a layer taking the
+  -- keys comes before the window losing them.
+  noctalia.runStream("exec stdbuf -oL umbriel subscribe windows,workspaces,overview,layers", function(line)
+    if line:find('"event":"windows"}', 1, true) then
+      onWindowsLine(line)
+      return
+    end
     local closed = false
     if line:find('"event":"layers"', 1, true) then
-      local open = line:find('-panel","output"', 1, true) ~= nil
-      closed, panel = panel and not open, open
+      local ok, ev = pcall(noctalia.json.decode, line)
+      if not (ok and type(ev) == "table" and type(ev.data) == "table") then
+        return
+      end
+      local open, desk = false, false
+      for _, l in ipairs(ev.data) do
+        if l.namespace == "noctalia-plugin:dotfiles/desktop-icons:desk" then
+          desk = l.focused == true
+        elseif l.focused or l.keyboard_interactivity == "exclusive" then -- rofi: exclusive before mapped
+          open = true
+        end
+      end
+      if open and not panel then
+        deskHad = deskKeys
+      end
+      deskKeys, closed, panel = desk, panel and not open, open
       if not closed then
         return
-      elseif mode ~= "normal" then
+      elseif deskHad then
         grab()
         return
       end
