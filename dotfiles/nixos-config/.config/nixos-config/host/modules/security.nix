@@ -35,6 +35,20 @@ let
     ' _ "/run/user/$uid/howdy-background-unlock.lock" "$session" "$user" </dev/null >/dev/null 2>&1
     exit 0
   '';
+
+  # PAM line placed right before pam_howdy: when the IR camera is missing, it jumps over
+  # howdy so pam_unix asks for the password straight away (see the services below).
+  howdyCameraCheck = service: {
+    order = config.security.pam.services.${service}.rules.auth.howdy.order - 1;
+    control = "[success=ignore default=1]";
+    modulePath = "${pkgs.linux-pam}/lib/security/pam_exec.so";
+    args = [
+      "quiet"
+      "${pkgs.coreutils}/bin/test"
+      "-e"
+      "/dev/${irCamera}"
+    ];
+  };
 in
 {
   # sudo visudo
@@ -155,6 +169,18 @@ in
       ];
     };
   };
+
+  # Without the IR camera (unplugged, lid closed on a dock, …) pam_howdy still runs: with
+  # workaround = "native" it opens a password prompt, the scan dies at once, howdy drops
+  # that prompt and pam_unix opens a second one. Noctalia's polkit dialog rebuilds for it
+  # and loses keyboard focus (typing only works after a click), and terminals get a
+  # "not possible to open camera" error. So skip howdy when the camera isn't there.
+  security.pam.services.polkit-1.rules.auth.howdy-camera-check = howdyCameraCheck "polkit-1";
+  security.pam.services.sudo.rules.auth.howdy-camera-check = howdyCameraCheck "sudo";
+  security.pam.services.su.rules.auth.howdy-camera-check = howdyCameraCheck "su";
+  security.pam.services.systemd-run0.rules.auth.howdy-camera-check = howdyCameraCheck "systemd-run0";
+  security.pam.services.swaylock.rules.auth.howdy-camera-check = howdyCameraCheck "swaylock";
+  security.pam.services.vlock.rules.auth.howdy-camera-check = howdyCameraCheck "vlock";
 
   # Face-only service the background scan authenticates against.
   security.pam.services.howdy-unlock = {
