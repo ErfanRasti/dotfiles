@@ -184,6 +184,22 @@ default_maximize_to_edges = false
 default_floating = true
 default_floating_size_px = { width = 400, height = 400 }
 
+# Java popups (TabCompletionPopup, ...) size/place themselves at the caret: undo the
+# maximize above, float them bare, keep focus in the editor.
+[[window_rule]]
+match.app_id = "^MATLAB"
+match.title = "Popup$"
+default_maximize_to_edges = false
+default_floating = true
+attach_to_parent = false
+default_focused = false
+blur = false
+shadow = false
+border_width = 0
+outer_border_width = 0
+opacity = 1.0
+title_bar = "off"
+
 # ================================================================ Privacy
 # Hide these windows from screencasts and screenshots.
 [[window_rule]]
