@@ -36,10 +36,21 @@ let
       '';
     };
   # Firefox-based browsers need a pref for the same thing.
+  #
+  # Location: only through GeoClue, so GNOME's Location switch (followed by the agent
+  # in host/modules/location.nix) decides. When GeoClue refuses, Firefox falls back
+  # to its network provider (Wi-Fi scan + IP sent to Google's geolocation API),
+  # bypassing the switch and the bar's location indicator; an empty URL kills that.
   wrapFirefoxPipeWire =
     browser: args:
     pkgs.wrapFirefox browser (
-      args // { extraPrefs = ''defaultPref("media.webrtc.camera.allow-pipewire", true);''; }
+      args
+      // {
+        extraPrefs = ''
+          defaultPref("media.webrtc.camera.allow-pipewire", true);
+          lockPref("geo.provider.network.url", "");
+        '';
+      }
     );
 in
 {
