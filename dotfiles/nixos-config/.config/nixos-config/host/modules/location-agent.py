@@ -12,13 +12,18 @@ Location; under umbriel nothing did. This agent:
     cuts off apps already locating as soon as the switch goes off
   - registers with GeoClue (Manager.AddAgent) each time GeoClue appears on the
     bus; GeoClue is D-Bus activated and idles out, and this never starts it
+  - writes the switch ("1"/"0") to $BROWSER_LOCATION_FLAG, which a root unit
+    turns into Chrome/Chromium/Edge policy: they skip GeoClue (location.nix)
 
 The agent's id must be in geoclue.conf's [agent] whitelist (location.nix).
 Part of the dotfiles, under the repo's GPL-3.0 license (LICENSE at the repo root).
 """
 
+import os
+
 from gi.repository import Gio, GLib
 
+FLAG = os.environ["BROWSER_LOCATION_FLAG"]
 AGENT_ID = "geoclue-gsettings-agent"
 GC = "org.freedesktop.GeoClue2"
 AGENT_PATH = "/org/freedesktop/GeoClue2/Agent"
@@ -54,6 +59,14 @@ def log(msg):
     print(msg, flush=True)
 
 
+def write_flag():
+    try:
+        with open(FLAG, "w") as f:
+            f.write("1" if settings.get_boolean("enabled") else "0")
+    except OSError as e:
+        log(f"can't write {FLAG}: {e.strerror}")
+
+
 # GDBus answers calls to undeclared methods and properties itself, so these serve
 # only AuthorizeApp and MaxAccuracyLevel.
 def on_call(conn, sender, path, iface, method, params, invocation):
@@ -70,6 +83,7 @@ def on_get_property(conn, sender, path, iface, prop):
 def on_settings_changed(_settings, _key):
     level = max_level()
     log(f"location settings changed: max accuracy {level}")
+    write_flag()
     bus.emit_signal(
         None,
         AGENT_PATH,
@@ -104,6 +118,7 @@ def main():
     settings.connect("changed::enabled", on_settings_changed)
     settings.connect("changed::max-accuracy-level", on_settings_changed)
     Gio.bus_watch_name_on_connection(bus, GC, Gio.BusNameWatcherFlags.NONE, on_geoclue_appeared, None)
+    write_flag()
     log(f"location agent up; max accuracy {max_level()}")
     GLib.MainLoop().run()
 
