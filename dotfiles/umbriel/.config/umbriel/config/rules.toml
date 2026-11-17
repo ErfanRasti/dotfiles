@@ -1,4 +1,4 @@
-# Window rules, layer rules and scratchpads (niri: config/rules.kdl).
+# Window rules, layer rules and scratchpads.
 # https://docs.noctalia.dev/umbriel/window-rules/
 # Rules combine in order; later values override earlier ones.
 # HINT: find app ids / titles with `umbriel windows`.
@@ -9,7 +9,7 @@ blur = true
 opacity = 0.8                 # see-through enough for the glass blur to show
 default_maximize_to_edges = false
 
-# Keep noctalia windows fully opaque (niri: exclude title="Noctalia").
+# Keep noctalia windows fully opaque.
 [[window_rule]]
 match.app_id = ["^dev\\.noctalia\\..*$"]
 opacity = 1.0
@@ -177,7 +177,7 @@ default_floating = true
 default_floating_size_px = { width = 400, height = 400 }
 
 # ================================================================ Privacy
-# niri: block-out-from "screencast". Umbriel's block_capture also hides them from screenshots.
+# Hide these windows from screencasts and screenshots.
 [[window_rule]]
 match.app_id = ["^org\\.telegram\\.desktop$", "^chrome-web\\.whatsapp\\.com__-Default$", "^v2rayN$", "^Throne$"]
 block_capture = true

@@ -1,4 +1,4 @@
-# Noctalia shell integration (niri: config/noctalia.kdl).
+# Noctalia shell integration.
 # https://docs.noctalia.dev/noctalia/compositor-settings/umbriel
 #
 # NOTE: TOML can't repeat a [keybinds] key across files reliably, so keep these

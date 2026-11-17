@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""App toggle (umbriel port of niri/scripts/toggle_app.sh), using umbriel's default scratchpad.
+"""App toggle, using umbriel's default scratchpad.
 
 Usage: toggle_app.py [--float[=WxH]] <app-id> <command...>
 --float opens the app floating and centered, WxH of the screen (default 0.65x0.7).

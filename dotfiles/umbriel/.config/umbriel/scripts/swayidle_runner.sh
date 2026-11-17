@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# swayidle for umbriel (port of niri/scripts/swayidle_runner.sh)
+# swayidle for umbriel
 # Check https://man.archlinux.org/man/extra/swayidle/swayidle.1.en
 
 lock_cmd='noctalia msg session lock'

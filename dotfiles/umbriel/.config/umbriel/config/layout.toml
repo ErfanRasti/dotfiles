@@ -7,9 +7,9 @@
 # (see the "Layouts" section of config/binds.toml)
 
 [layout]
-mode = "scrolling"                       # default for new workspaces (niri-like)
-gap = 2                                  # niri: gaps 2
-extent_presets = [0.33333, 0.5, 0.66667] # niri: preset-column-widths
+mode = "scrolling"                       # default for new workspaces
+gap = 2
+extent_presets = [0.33333, 0.5, 0.66667] # column width presets
 client_maximize = "column"
 
 # Struts shrink the usable area, like outer gaps.
@@ -19,14 +19,14 @@ client_maximize = "column"
 # top = 64
 # bottom = 64
 
-# ---------------------------------------------------------------- scrolling (niri)
+# ---------------------------------------------------------------- scrolling
 [layout.scrolling]
-# niri: center-focused-column "on-overflow" (toggle with Mod+Shift+C)
+# Center the focused column only when it would not fit (toggle with Mod+Shift+C).
 center_focused = "on_overflow"
-# niri: always-center-single-column
+# Center a lone column.
 center_underfull_strip = true
 center_on_overview_select = true
-# niri: default-column-width {} -> leave unset so apps pick their own width.
+# Leave unset so apps pick their own width.
 # default_extent_fraction = 0.5
 
 # ---------------------------------------------------------------- dwindle (hyprland-like)
@@ -45,7 +45,7 @@ new_on_top = true
 [layout.stacking]
 drop_zones = true              # drag to edges/corners to tile halves/quarters
 
-# ---------------------------------------------------------------- tabs (niri: tabbed columns)
+# ---------------------------------------------------------------- tabs
 [layout.tabs]
 default_display = "normal"
 new_tab_position = "after_active"

@@ -1,7 +1,7 @@
-# Named workspaces (niri: config/workspaces.kdl).
+# Named workspaces.
 # https://docs.noctalia.dev/umbriel/workspaces-overview/
 #
-# niri's "Scratchpad" workspace is replaced by umbriel's default scratchpad
+# Scratch apps live in umbriel's default scratchpad
 # (Mod+W / Mod+Shift+W; see the "Scratchpad" sections of binds.toml and rules.toml).
 
 [workspaces]
@@ -19,7 +19,7 @@ zoom = 0.5
 background_blur = true
 workspace_wallpaper = true
 
-# Hot corner (like niri): pushing the pointer into the top-left corner opens the overview,
+# Hot corner: pushing the pointer into the top-left corner opens the overview,
 # doing it again closes it.
 [hot_corners.top_left]
 enabled = true

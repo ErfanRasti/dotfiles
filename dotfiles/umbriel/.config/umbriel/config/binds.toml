@@ -1,14 +1,10 @@
-# Keybinds (niri: config/binds.kdl).
+# Keybinds.
 # Syntax:  https://docs.noctalia.dev/umbriel/keybinds/
 # Actions: `umbriel msg --help`
 #
 # Defining [keybinds] replaces umbriel's built-in bind set.
 # Shell/panel binds (volume, brightness, screenshots, launcher, ...) are in config/noctalia.toml.
 # NOTE: keep each chord in ONE file only; don't define the same chord twice across includes.
-#
-# Not available in umbriel (niri-only, dropped): touchpad-scroll binds,
-# expand-column-to-available-width, center-visible-columns, toggle-windowed-fullscreen,
-# reset-window-height, screenshot-window, MRU recent-windows switcher.
 
 [keybinds]
 
@@ -47,7 +43,7 @@
 "Mod+Alt+Shift+C" = { action = "window-clear-region", repeat = false }
 
 # ============================================================== Apps & session
-"Mod+Shift+Slash" = { action = "cheatsheet-toggle", repeat = false }                          # niri: show-hotkey-overlay
+"Mod+Shift+Slash" = { action = "cheatsheet-toggle", repeat = false }
 "Mod+T" = { action = "spawn kitty --app-id kitty-main", repeat = false }
 "Mod+Return" = { action = "spawn kitty", repeat = false }
 "Mod+D" = { action = "spawn ~/.config/hypr/scripts/toggle_rofi_launcher.sh", repeat = false }
@@ -127,7 +123,7 @@
 "Mod+Alt+Left" = "window-consume-or-expel-left"
 "Mod+Alt+Right" = "window-consume-or-expel-right"
 
-# Recent windows: noctalia's MRU window switcher (like niri's Alt+Tab); hold Alt, tap Tab.
+# Recent windows: noctalia's MRU window switcher; hold Alt, tap Tab.
 "Alt+Tab" = { action = "spawn noctalia msg window-switcher hold", repeat = false }
 # Alt+Shift+Tab also opens the switcher (like Alt+Tab). Because umbriel consumes bound keys,
 # it can't step backwards inside the open switcher; use Left/Right arrows there for that.
@@ -213,7 +209,7 @@
 "Mod+Alt+Down" = "window-move-to-workspace-next"
 "Mod+Alt+Up" = "window-move-to-workspace-previous"
 
-"Mod+P" = "workspace-focus-last" # niri: focus-workspace-previous
+"Mod+P" = "workspace-focus-last"
 
 "Mod+1" = "workspace-switch 1"
 "Mod+2" = "workspace-switch 2"

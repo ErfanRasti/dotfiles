@@ -1,4 +1,4 @@
-# Umbriel configuration (TOML), ported from ~/.config/niri/config.kdl
+# Umbriel configuration (TOML)
 #
 # Reference:  https://docs.noctalia.dev/umbriel/
 # Validate:   umbriel config validate
@@ -6,7 +6,7 @@
 # Actions:    umbriel msg --help
 #
 # Most changes apply as soon as a file is saved.
-# Files are split the same way as the niri config. Paths are relative to this file.
+# Settings are split across the files below. Paths are relative to this file.
 
 [include]
 files = [
