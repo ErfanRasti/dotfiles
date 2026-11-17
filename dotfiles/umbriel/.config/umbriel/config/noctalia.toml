@@ -46,6 +46,8 @@
 # Shift+Print also works on the lock screen (fullscreen only: region/freeze/annotate
 # overlays are hidden under the session lock).
 "Shift+Print" = { action = "spawn noctalia msg screenshot-fullscreen --no-freeze-screen --no-annotate", allow_when_locked = true, repeat = false }
+# Focused window only.
+"Mod+Print" = { action = "spawn noctalia msg screenshot-window --no-freeze-screen --no-annotate", repeat = false }
 
 # The shell itself is started from config/autostarts.toml ("noctalia").
 
