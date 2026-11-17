@@ -32,8 +32,11 @@ done < <(find /proc/[0-9]*/fd -maxdepth 1 -lname '/dev/video*' -printf '%h\n' 2>
 # Apps GeoClue is locating for, one per line. GeoClue hides a client's DesktopId
 # (and whether it's active) from everyone but the app holding it, so the names come
 # from its debug log (G_MESSAGES_DEBUG, host/modules/location.nix): "'zen'
-# started." / "'zen' stopped." in the current geoclue run, read only while a client
-# exists. A client the log doesn't name still counts, as "Location". Timezone
+# started." / "'zen' stopped." in the current geoclue run, read only while the
+# Manager's public InUse is true (some client is actually locating). A bare client
+# object doesn't count: Zen keeps an idle one after a site asks, even when the
+# agent refused it (Location off). An active client the log doesn't name still
+# counts, as "Location". Timezone
 # daemons are system plumbing, not shown (as on a Mac).
 # Only asks a running geoclue: busctl's --auto-start=no isn't honoured, and polling
 # would restart geoclue every time it idles out after 60 s.
@@ -41,8 +44,7 @@ GC=org.freedesktop.GeoClue2
 location=
 if [[ $(busctl --system call org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus \
   NameHasOwner s $GC 2>/dev/null) == "b true" ]] &&
-  { [[ $(busctl --system tree --list $GC 2>/dev/null) == *"/GeoClue2/Client/"* ]] ||
-    [[ $(busctl --system get-property $GC /org/freedesktop/GeoClue2/Manager $GC.Manager InUse 2>/dev/null) == "b true" ]]; }; then
+  [[ $(busctl --system get-property $GC /org/freedesktop/GeoClue2/Manager $GC.Manager InUse 2>/dev/null) == "b true" ]]; then
   ids=$(journalctl _SYSTEMD_UNIT=geoclue.service _PID="$(systemctl show -p MainPID --value geoclue.service)" \
     -o cat --no-pager 2>/dev/null | awk -v q="'" '
       $NF == "started." || $NF == "stopped." {
