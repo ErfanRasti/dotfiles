@@ -18,6 +18,10 @@ No in-between motion: every step goes straight to umbriel's socket (well under a
 each), so the whole burst (focus on the other workspace, move, switch back) lands inside one
 frame. The workspace the window came from never shows up and nothing slides there and back;
 only the window's own pop out / pop in animation plays.
+
+Scratchpad windows get a forced title bar (config/rules.toml); dropping it on the way out
+animated the bar shrinking away. So it is turned off (config/toggle_app.toml) while the
+window moves out or in, and comes back for the scratchpad view.
 """
 
 import os
@@ -30,10 +34,37 @@ import umbriel_ipc as ipc  # noqa: E402
 
 STATE = os.path.join(os.environ.get("XDG_RUNTIME_DIR", "/tmp"), "toggle_app")
 FLOAT = (0.65, 0.7)  # default --float size, as fractions of the screen
+BAR_RULE = os.path.expanduser("~/.config/umbriel/config/toggle_app.toml")
+HIDE_ANIM = 0.4  # s; keep the bar off this long after hiding (windows_out is 130 ms)
 
 
 def act(name, **args):
     return ipc.action(name, **args)
+
+
+def write_atomic(path, text):
+    with open(path + ".tmp", "w") as f:
+        f.write(text)
+    os.replace(path + ".tmp", path)
+
+
+def bar_off(app_id):
+    """Turn <app_id>'s title bar off now (the file watcher alone takes ~150 ms)."""
+    write_atomic(BAR_RULE, f"# {os.getpid()}\n[[window_rule]]\nmatch.app_id = '^{app_id}$'\n"
+                           'title_bar = "off"\n')
+    act("config-reload")
+
+
+def bar_restore(pid):
+    """Drop the rule, unless a newer run (<pid> differs) owns it now and restores it itself."""
+    try:
+        with open(BAR_RULE) as f:
+            if f.readline() != f"# {pid}\n":
+                return
+    except OSError:
+        return
+    write_atomic(BAR_RULE, "")
+    act("config-reload")
 
 
 def focused_id():
@@ -156,18 +187,32 @@ def main():
     anchor = focused_id()
 
     if anchor == wid and not pad:
+        bar_off(app_id)  # slides away without gaining the scratchpad bar
         act("window-move-to-scratchpad")
+        pid = os.getpid()
+        if os.fork() == 0:  # restore after the hide animation, without blocking the key
+            os.setsid()
+            time.sleep(HIDE_ANIM)
+            bar_restore(pid)
+            os._exit(0)
     elif pad:
         # Restoring needs the scratchpad shown; remember whether it was, so it can be hidden
         # again instead of leaving the other scratchpad windows open over the workspace.
         shown = pad_shown()
-        if not focus(wid):  # reveals it in the scratchpad
-            return
-        act("window-restore-from-scratchpad")  # back to its saved workspace...
-        if shown == 0 and pad_shown() != 0:
-            act("scratchpad-toggle")
-        if focus(wid):
-            bring(wid, cur, anchor, scrolling)  # ...then to the current one
+        bar_off(app_id)
+        wait_for(wid, lambda w: not w["title_bar"])  # dropped while hidden: no visible resize
+        try:
+            if not focus(wid):  # reveals it in the scratchpad
+                return
+            # Not window-restore-from-scratchpad: that goes via its saved workspace and the
+            # view slides over and back. A silent move never switches workspaces.
+            act("window-move-to-workspace-silent", workspace=cur)
+            if shown == 0 and pad_shown() != 0:
+                act("scratchpad-toggle")
+            if focus(wid) and scrolling:
+                place_after(wid, anchor)
+        finally:
+            bar_restore(os.getpid())
     elif target["workspace"] != ws["id"]:
         if focus(wid):
             bring(wid, cur, anchor, scrolling)

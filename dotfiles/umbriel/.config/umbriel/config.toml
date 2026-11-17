@@ -39,4 +39,6 @@ files = [
   "config/titlebar.toml",
   # Liquid glass window shader off, written by scripts/toggle_glass.sh (Mod+Alt+Shift+G)
   "config/glass_effect.toml",
+  # Title bar off for an app while scripts/toggle_app.py moves it out of / into the scratchpad
+  "config/toggle_app.toml",
 ]

@@ -189,7 +189,7 @@ in
       hyprpicker
 
       # AI Tools
-      # opencode # nixos-unstable 2.2.5 has a broken node_modules hash; re-enable after the next update
+      opencode
       ollama
       # codex
       claude-code

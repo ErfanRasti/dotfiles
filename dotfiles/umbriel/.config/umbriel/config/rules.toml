@@ -30,6 +30,14 @@ match.app_id = "^io\\.github\\.kaii_lb\\.Overskride$"
 default_scrolling_extent = 0.5
 
 # ================================================================ Floating widgets
+# Dropdown terminal (Mod+Grave): opens floating and centered straight away, so it never
+# lands as a scrolling column first (the view would slide over to it and back).
+[[window_rule]]
+match.app_id = "^kitty-dropterm$"
+default_floating = true
+default_floating_size = { width = 0.65, height = 0.7 }
+default_position = { x = 0, y = 0, anchor = "center" }
+
 [[window_rule]]
 match.app_id = "^kitty$"
 match.title = "^fum$"
