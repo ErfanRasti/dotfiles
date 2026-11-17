@@ -67,6 +67,11 @@ if [[ $(busctl --system call org.freedesktop.DBus /org/freedesktop/DBus org.free
   done <<< "$ids"
 fi
 
+# Chromium-based browsers locate without GeoClue; root notes which one last scanned
+# Wi-Fi to do it, as "<epoch> <name>" (host/modules/location.nix). Shown 15 s.
+{ read -r t b < /run/browser-location/active; } 2>/dev/null && (( EPOCHSECONDS - t < 15 )) &&
+  location+=$b$'\n'
+
 pw-dump 2>/dev/null | jq -c \
   --arg micRe "${1:-}" --arg camRe "${2:-}" --arg screenRe "${3:-}" \
   --arg direct "$direct" --arg location "$location" '
