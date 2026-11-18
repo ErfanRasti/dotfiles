@@ -44,8 +44,16 @@ let
         echo "app.last-launched-version=\"$version\"" >>"$prefs"
         spicetify -q backup
       fi
-      # Not just `refresh`: only `apply` loads newly listed extensions (~0.1s either way)
-      spicetify -q apply --no-restart
+
+      # A newer spicetify-cli won't `apply` over files preprocessed by the old one,
+      # so re-patch from the stock backup when another version made it
+      backup_with=$(sed -n 's/^with *= *//p' "$HOME/.config/spicetify/config-xpui.ini")
+      if [ -n "$backup_with" ] && [ "$backup_with" != "$(spicetify -v)" ]; then
+        spicetify -q restore backup apply --no-restart
+      else
+        # Not just `refresh`: only `apply` loads newly listed extensions (~0.1s either way)
+        spicetify -q apply --no-restart
+      fi
 
       ws=$(curl -sf "http://127.0.0.1:9222/json/list" |
         jq -r '[.[] | select(.type == "page")][0].webSocketDebuggerUrl // empty') || exit 0
