@@ -221,7 +221,6 @@ in
 
       # Network & Proxy
       v2rayn
-      networkmanagerapplet
       # speedtest
       speedtest-cli
       geteduroam-cli
@@ -351,7 +350,11 @@ in
 
       #Languages
       gcc
-      python3
+      # gi + pywayland: the DMS "Mini Desktop" plugin's helper runs `python3` from PATH
+      (python3.withPackages (ps: [
+        ps.pygobject3
+        ps.pywayland
+      ]))
       matlab
       lua
       lua5
