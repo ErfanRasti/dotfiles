@@ -130,6 +130,8 @@ trap 'kill -- -"$watcher" $child 2>/dev/null' EXIT
 trap 'exit 143' TERM INT HUP
 trap 'restart=1' USR1
 
+"${BASH_SOURCE[0]%/*}/dms-widgets-fit" # desktop widgets from the tracked layout
+
 current="$(factors)"
 # The watcher keeps its own copy of the factors and signals us when they change.
 (

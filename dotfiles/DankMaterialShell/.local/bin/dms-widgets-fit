@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# Places DMS's desktop widgets from a tracked layout, so every desktop gets the same
+# arrangement instead of DMS's default (each new widget centered, all stacked).
+#
+# DMS keeps widget geometry only in ~/.local/state/dms/session.json (machine state, not
+# in the dotfiles) and only after a drag. The layout lives in
+# ~/.config/DankMaterialShell/widgets-layout.json, keyed by widget id or widgetType:
+#   { "x": 24, "y": 88, "width": 200, "height": 200, "anchorX": "end", "anchorY": "end" }
+# x/y are px from the anchored edge (start = left/top, the default; center; end =
+# right/bottom) on the layout's canvas (1920x1080: the size dms-fit makes DMS see on
+# any monitor). They are stored as DMS's synced positions (fractions of the screen),
+# so corners stay corners on every monitor and compositor.
+# Only widgets with "Sync position across screens" on are placed.
+#
+# Writes the layout when it changed since the last write, and fills in widgets that
+# have no position yet; widgets you drag keep their spot until the layout changes.
+# --force re-applies it all. DMS reads session.json only at start: restart it after.
+#
+# Usage: dms-widgets-fit [--force]      (dms-fit runs it before starting DMS)
+
+conf="${XDG_CONFIG_HOME:-$HOME/.config}/DankMaterialShell"
+session="${XDG_STATE_HOME:-$HOME/.local/state}/dms/session.json"
+stamp="${XDG_CACHE_HOME:-$HOME/.cache}/dms-fit/widgets-layout.sum"
+
+sum="$(cksum <"$conf/widgets-layout.json")" || exit 0
+{ read -r old <"$stamp"; } 2>/dev/null
+all=false
+[[ $1 == --force || $sum != "$old" ]] && all=true
+mkdir -p "${session%/*}" "${stamp%/*}"
+[[ -s $session ]] || echo {} >"$session"
+
+# Prints the updated session, or nothing when it would not change.
+new="$(jq -n --argjson all "$all" --slurpfile l "$conf/widgets-layout.json" \
+  --slurpfile s "$conf/settings.json" --slurpfile o "$session" '
+  $o[0] as $orig | $l[0] as $l | ($l.canvas // [1920, 1080]) as [$W, $H]
+  | reduce ($s[0].desktopWidgetInstances[]? | select(.config.syncPositionAcrossScreens)) as $w ($orig;
+      ($l.widgets[$w.id] // $l.widgets[$w.widgetType]) as $p
+      | if $p == null or ($all | not) and .desktopWidgetInstancePositions[$w.id]._synced.x != null then .
+        else .desktopWidgetInstancePositions[$w.id]._synced |= ((. // {}) | del(.anchorX, .anchorY)) + (
+          {x: ($p.x // 0) / $W, y: ($p.y // 0) / $H, width: $p.width, height: $p.height,
+           anchorX: $p.anchorX, anchorY: $p.anchorY}
+          | with_entries(select(.value != null and .value != "start"))) end)
+  | select(. != $orig)
+' 2>/dev/null)" || exit 1
+
+[[ -z $new ]] || { printf '%s\n' "$new" >"$session.tmp" && mv "$session.tmp" "$session"; }
+[[ $sum == "$old" ]] || echo "$sum" >"$stamp"
