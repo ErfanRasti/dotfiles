@@ -56,6 +56,75 @@ watch_outputs() {
   esac
 }
 
+# QML patch for DMS's UI (no rebuild: the patched copy runs with `dms run -c`).
+# After suspend the lock screen comes back without keyboard focus on the password box;
+# grab it again when the lock window is (re)activated and 1s after the system resumes.
+read -rd '' patch <<'EOF'
+--- a/Modules/Lock/LockSurface.qml
++++ b/Modules/Lock/LockSurface.qml
+@@ -3,6 +3,7 @@
+ import QtQuick
+ import Quickshell.Wayland
+ import qs.Common
++import qs.Services
+ 
+ FocusScope {
+     id: root
+@@ -75,6 +76,34 @@
+         onDismissed: Qt.callLater(() => lockContent.focusPasswordField())
+     }
+ 
++    // Focus is set only when the lock is created; after suspend it can be lost.
++    function refocus() {
++        console.info("lock refocus: active=", Window.active, "focusItem=", Window.activeFocusItem);
++        if (isLocked && !videoScreensaver.active)
++            lockContent.focusPasswordField();
++    }
++
++    Connections {
++        target: root.Window.window
++        function onActiveChanged() {
++            if (target.active)
++                root.refocus();
++        }
++    }
++
++    Connections {
++        target: SessionService
++        function onSessionResumed() {
++            resumeRefocus.restart();
++        }
++    }
++
++    Timer {
++        id: resumeRefocus
++        interval: 1000
++        onTriggered: root.refocus()
++    }
++
+     Component.onCompleted: forceActiveFocus()
+ 
+     onIsLockedChanged: {
+EOF
+
+# Prints the patched UI dir, built once per dms version and patch into the cache from the
+# UI dms unpacks to $XDG_RUNTIME_DIR. Prints nothing (stock UI runs) until that exists,
+# i.e. on the first start after a dms update, or when the patch no longer applies.
+ui() {
+  local ver sum src dst
+  ver="$(readlink -f "$(command -v dms)")" # /nix/store/...-dux-shell-<ver>/bin/dms
+  ver="${ver%/bin/dms}" ver="v${ver##*-}"
+  sum="$(cksum <<<"$patch")"
+  dst="${XDG_CACHE_HOME:-$HOME/.cache}/dms-fit/ui-$ver-${sum%% *}"
+  [[ -f $dst/shell.qml ]] && { echo "$dst"; return; }
+  for src in "$XDG_RUNTIME_DIR"/dms-shell/*/; do
+    [[ "$(<"$src/VERSION")" == "$ver" ]] 2>/dev/null || continue
+    rm -rf "${dst%/*}" && mkdir -p "${dst%/*}" && cp -r "$src" "$dst.tmp" && chmod -R u+w "$dst.tmp" &&
+      patch -sd "$dst.tmp" -p1 <<<"$patch" && mv "$dst.tmp" "$dst" && echo "$dst"
+    return
+  done
+}
+
 set -m # background jobs get their own process groups, so cleanup reaches socat too
 trap 'kill -- -"$watcher" $child 2>/dev/null' EXIT
 trap 'exit 143' TERM INT HUP
@@ -75,7 +144,8 @@ watcher=$!
 
 while :; do
   restart=0
-  QT_SCREEN_SCALE_FACTORS="$current" dms run "$@" & # "" = unscaled
+  dir="$(ui)"
+  QT_SCREEN_SCALE_FACTORS="$current" dms run ${dir:+-c "$dir"} "$@" & # "" = unscaled
   child=$!
   while ((!restart)) && kill -0 "$child" 2>/dev/null; do wait "$child"; done
   ((restart)) || { wait "$child"; exit; } # DMS's own exit status
