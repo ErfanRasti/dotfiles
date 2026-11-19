@@ -1,14 +1,24 @@
--- --- dms shell bindings ---
+-------------
+---- DMS ----
+-------------
+-- DankMaterialShell. Active when DESKTOP_SHELL == "dms" in hyprland.lua.
+if DESKTOP_SHELL ~= "dms" then
+	return
+end
 
--- Autostarts
+-- Start the shell and its search backend. Idle/lock timers come from config/autostart.lua.
 hl.on("hyprland.start", function()
-	hl.exec_cmd("~/.config/hypr/scripts/reload_config.sh")
+	hl.exec_cmd("dms run")
 	hl.exec_cmd("dsearch serve")
 end)
 
--- Permissions
-hl.permission({ binary = "/usr/bin/dms", type = "screencopy", mode = "allow" })
-hl.permission({ binary = "/usr/bin/quickshell", type = "screencopy", mode = "allow" })
+-- Permissions (NixOS store paths; dms screenshots and the color picker capture the screen)
+hl.permission({ binary = "/nix/store/[a-z0-9]+-dux-shell-[^/]+/bin/\\.?dms(-wrapped)?", type = "screencopy", mode = "allow" })
+hl.permission({
+	binary = "/nix/store/[a-z0-9]+-quickshell[^/]*/bin/\\.?quickshell(-wrapped)?",
+	type = "screencopy",
+	mode = "allow",
+})
 
 -- Hard-override any earlier bindings for these combos
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
@@ -22,9 +32,9 @@ hl.unbind("XF86AudioMicMute")
 hl.unbind("XF86MonBrightnessUp")
 hl.unbind("XF86MonBrightnessDown")
 hl.unbind(mainMod .. " + N")
-hl.unbind(mainMod .. " + CTRL + SHIFT + B")
+hl.unbind(mainMod .. " + B")
 hl.unbind(mainMod .. " + ALT + W")
-hl.unbind(mainMod .. " + A")
+hl.unbind(mainMod .. " + S")
 hl.unbind(mainMod .. " + V")
 hl.unbind(mainMod .. " + ESCAPE")
 hl.unbind(mainMod .. " + PERIOD")
@@ -35,7 +45,6 @@ hl.unbind("SHIFT + PRINT")
 hl.unbind(mainMod .. " + SHIFT + CTRL + P")
 hl.unbind("CTRL + ALT + DELETE")
 hl.unbind("CTRL + SHIFT + F5")
-hl.unbind(mainMod .. " + SLASH") -- Second occurrence-- spotlight
 
 -- Spotlight
 hl.bind(
@@ -94,7 +103,7 @@ hl.bind(
 	{ description = "[SHELL:dms] Toggle notifications panel" }
 )
 hl.bind(
-	mainMod .. " + CTRL + SHIFT + B",
+	mainMod .. " + B",
 	hl.dsp.exec_cmd("dms ipc call dock toggleAutoHide"),
 	{ description = "[SHELL:dms] Toggle dock auto-hide" }
 )
@@ -104,7 +113,7 @@ hl.bind(
 	{ description = "[SHELL:dms] Toggle wallpaper dashboard" }
 )
 hl.bind(
-	mainMod .. " + A",
+	mainMod .. " + S",
 	hl.dsp.exec_cmd("dms ipc call control-center toggle"),
 	{ description = "[SHELL:dms] Toggle control center" }
 )
@@ -148,14 +157,10 @@ hl.bind(
 	{ description = "[SHELL:dms] Toggle task manager" }
 )
 
--- toggle_app.sh
-hl.bind(
-	"CTRL + SHIFT + F5",
-	hl.dsp.exec_cmd(
-		'~/.config/hypr/scripts/toggle_app.sh "dgop" "kitty --override confirm_os_window_close=0 --class dgop --title dgop dgop"'
-	),
-	{ description = "[SHELL:dms] Toggle dgop system monitor" }
-)
+-- dgop system monitor, toggled like the other TUIs (TOGGLE_APP comes from binds.lua)
+hl.bind("CTRL + SHIFT + F5", function()
+	TOGGLE_APP("dgop", "kitty --override confirm_os_window_close=0 --class dgop --title dgop dgop")
+end, { description = "[SHELL:dms] Toggle dgop system monitor" })
 
 -- Windowrules for dgop
 local dgop_class = "^(dgop)$"
@@ -196,6 +201,5 @@ hl.layer_rule({
 	match = {
 		namespace = "dms:workspace-overview",
 	},
-	-- TODO: manual review — disable "blur" has no layer_rule directive analog
-	ignore_alpha = 0.0,
+	blur = false,
 })

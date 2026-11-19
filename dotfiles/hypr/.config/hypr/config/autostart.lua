@@ -24,11 +24,24 @@ hl.on("hyprland.start", function()
 
 	-- hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1") -- To activate gnome polkit
 
-	hl.exec_cmd("systemctl --user start hyprpolkitagent.service")
-	hl.exec_cmd("systemctl --user start hypridle-runner.service")
-	hl.exec_cmd("systemctl --user start hyprsunset.service")
+	-- noctalia ships its own polkit agent (see umbriel's reload_config.sh)
+	if DESKTOP_SHELL ~= "noctalia" then
+		hl.exec_cmd("systemctl --user start hyprpolkitagent.service")
+	end
 
-	hl.exec_cmd("hyprpaper")
+	-- Bar, notifications, OSD, wallpaper, night light and idle: the desktop shell provides them
+	-- (config/noctalia.lua, config/dms.lua); this stack runs only without one.
+	if DESKTOP_SHELL == "noctalia" or DESKTOP_SHELL == "dms" then
+		-- Idle/lock/suspend timers, as on umbriel, locking with the shell's lock screen
+		hl.exec_cmd("~/.config/hypr/scripts/swayidle_runner.sh " .. DESKTOP_SHELL)
+	else
+		hl.exec_cmd("systemctl --user start hypridle-runner.service")
+		hl.exec_cmd("systemctl --user start hyprsunset.service")
+		hl.exec_cmd("hyprpaper")
+		hl.exec_cmd("waybar")
+		hl.exec_cmd("swaync")
+		hl.exec_cmd("swayosd-server")
+	end
 	-- hl.exec_cmd("swww-daemon")
 	-- hl.exec_cmd("hyprpanel")
 
@@ -37,21 +50,17 @@ hl.on("hyprland.start", function()
 	-- Also check https://wiki.archlinux.org/title/XDG_Desktop_Portal#Portal_does_not_start
 	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
 
-	-- Have plugins loaded at startup and send a notification for fail events only
-	hl.exec_cmd("hyprpm reload -n")
+	-- Plugins: loaded by config/plugins.lua from /etc/hypr/plugins (NixOS), not hyprpm
 
 	-- Prevent logind from handling power key presses
 	hl.exec_cmd(
 		'systemd-inhibit --who="Hyprland config" --why="suspend keybind" --what=handle-power-key --mode=block sleep infinity & echo $! > /tmp/.hyprland-systemd-inhibit'
 	)
 
-	hl.exec_cmd("waybar")
 	-- hl.exec_cmd("ashell")
 	-- hl.exec_cmd("hypr-dock")
 	-- hl.exec_cmd("systemctl --user start vicinae.service")
 
-	hl.exec_cmd("swaync")
-	hl.exec_cmd("swayosd-server")
 
 	-- Restore device states and keep saving them
 	hl.exec_cmd("~/scripts/system_resume.sh watch")
