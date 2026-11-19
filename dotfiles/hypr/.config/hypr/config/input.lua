@@ -10,10 +10,14 @@ hl.config({
 		kb_options = "grp:win_space_toggle",
 		-- kb_options = "grp:win_space_toggle,grp:alt_shift_toggle",
 		kb_rules = "",
-		follow_mouse = 1,
-		sensitivity = 0.25, -- -1.0 - 1.0, 0 means no modification.
+		-- Click-to-focus like umbriel (follows_mouse = false): hovering never moves keyboard focus,
+		-- clicking does; scrolling still goes to the window under the cursor.
+		follow_mouse = 2,
+		sensitivity = 0, -- mouse: no change (umbriel leaves it at default); touchpad below
 		touchpad = {
-			natural_scroll = true,
+			natural_scroll = true, -- also sets the direction of the swipe gestures
+			tap_to_click = true,
+			disable_while_typing = true,
 		},
 	},
 
@@ -24,11 +28,14 @@ hl.config({
 	},
 })
 
--- Example per-device config
+-- Touchpad, same as umbriel's [input.touchpad] (`hyprctl devices` lists the names)
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/
 hl.device({
-	name = "epic-mouse-v1",
-	sensitivity = -0.5,
+	name = "touchpad",
+	sensitivity = 0.4,
+	tap_to_click = true,
+	disable_while_typing = true,
+	natural_scroll = true,
 })
 
 -- https://wiki.hypr.land/Configuring/Advanced-and-Cool/Gestures/
@@ -69,7 +76,7 @@ hl.gesture({
 	fingers = 3,
 	direction = "pinch",
 	action = function()
-		hl.dsp.exec_cmd("~/.config/hypr/scripts/show_desktop.sh")
+		hl.exec_cmd("~/.config/hypr/scripts/show_desktop.sh")
 	end,
 })
 
