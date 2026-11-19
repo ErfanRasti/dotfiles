@@ -2,4 +2,4 @@
 
 CONFIG=${HYPRIDLE_CONFIG:-~/.config/hypr/hypridle.conf}
 
-exec /usr/bin/hypridle -c "$CONFIG"
+exec hypridle -c "$CONFIG"
