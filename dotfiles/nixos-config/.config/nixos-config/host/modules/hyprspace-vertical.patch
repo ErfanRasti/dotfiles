@@ -1,0 +1,350 @@
+Hyprspace patches (niri/umbriel-style overview), all opt-in except the click/scroll fixes:
+- plugin:overview:vertical = 1: workspaces stacked top to bottom in a full-height panel on the
+  left that slides in from the left edge; panelHeight becomes its width; vertical scrolling pans it.
+- plugin:overview:fitWorkspaces = 1: each workspace preview is shrunk to show all its windows,
+  including off-screen columns of the scrolling layout.
+- Clicking a window preview switches to its workspace, focuses it and closes the overview.
+- A short click on a window in the main area focuses it before closing (was: close only).
+- Horizontal scrolling over the main area moves the scrolling strip one column at a time.
+
+diff --git a/src/Globals.hpp b/src/Globals.hpp
+index 23004e0..5c10401 100644
+--- a/src/Globals.hpp
++++ b/src/Globals.hpp
+@@ -107,6 +107,8 @@ struct SConfig {
+     SP<Config::Values::CIntValue> adaptiveHeight;
+     SP<Config::Values::CIntValue> centerAligned;
+     SP<Config::Values::CIntValue> onBottom;
++    SP<Config::Values::CIntValue> vertical;
++    SP<Config::Values::CIntValue> fitWorkspaces;
+     SP<Config::Values::CIntValue> hideBackgroundLayers;
+     SP<Config::Values::CIntValue> hideTopLayers;
+     SP<Config::Values::CIntValue> hideOverlayLayers;
+@@ -152,6 +154,8 @@ inline SConfig config = {
+     .adaptiveHeight = makeShared<Config::Values::CIntValue>("plugin:overview:adaptiveHeight", "description", 0), // TODO: implement
+     .centerAligned = makeShared<Config::Values::CIntValue>("plugin:overview:centerAligned", "description", 1),
+     .onBottom = makeShared<Config::Values::CIntValue>("plugin:overview:onBottom", "description", 0), // TODO: implement
++    .vertical = makeShared<Config::Values::CIntValue>("plugin:overview:vertical", "Stack workspaces top to bottom in a panel on the left (niri-style); panelHeight is its width", 0),
++    .fitWorkspaces = makeShared<Config::Values::CIntValue>("plugin:overview:fitWorkspaces", "Shrink each workspace preview to show all its windows, including off-screen scrolling columns", 0),
+     .hideBackgroundLayers = makeShared<Config::Values::CIntValue>("plugin:overview:hideBackgroundLayers", "description", 0),
+     .hideTopLayers = makeShared<Config::Values::CIntValue>("plugin:overview:hideTopLayers", "description", 0),
+     .hideOverlayLayers = makeShared<Config::Values::CIntValue>("plugin:overview:hideOverlayLayers", "description", 0),
+diff --git a/src/Input.cpp b/src/Input.cpp
+index f4060a4..31a4753 100644
+--- a/src/Input.cpp
++++ b/src/Input.cpp
+@@ -3,6 +3,8 @@
+ #include <hyprland/src/state/WorkspaceState.hpp>
+ #include <hyprland/src/state/MonitorState.hpp>
+ 
++#include <hyprland/src/desktop/state/FocusState.hpp>
++
+ #include "Overview.hpp"
+ #include "Globals.hpp"
+ 
+@@ -56,6 +58,23 @@ bool CHyprspaceWidget::buttonEvent(bool pressed, Vector2D coords) {
+     }
+     Return = false;
+ 
++    // click a window preview: switch to its workspace, focus it and close the overview
++    if (!pressed && couldExit && !targetWindow) {
++        for (auto it = windowBoxes.rbegin(); it != windowBoxes.rend(); ++it) {
++            const auto w = std::get<0>(*it).lock();
++            if (!w || !std::get<1>(*it).containsPoint(coords))
++                continue;
++            const auto ws = w->m_workspace;
++            if (ws && ws->type() != Workspace::eWorkspaceType::SPECIAL && ws->m_monitor) {
++                if (auto monitor = State::monitorState()->query().id(ws->m_monitor->m_id).run(); monitor && monitor->m_activeWorkspace != ws)
++                    monitor->changeWorkspace(ws);
++            }
++            Desktop::focusState()->fullWindowFocus(w, Desktop::FOCUS_REASON_SWITCH_TO_WINDOW_HARD);
++            if (active) hide();
++            return false;
++        }
++    }
++
+     // release window on workspace to drop it in
+     if (targetWindow && targetWorkspace != nullptr && !pressed) {
+         Desktop::globalWindowController()->moveWindowToWorkspace(targetWindow, targetWorkspace);
+@@ -84,7 +103,13 @@ bool CHyprspaceWidget::buttonEvent(bool pressed, Vector2D coords) {
+         if (config.exitOnSwitch->value() && active) hide();
+     }
+     // click elsewhere to exit overview
+-    else if (config.exitOnClick->value() && targetWorkspace == nullptr && active && couldExit && !pressed) hide();
++    else if (config.exitOnClick->value() && targetWorkspace == nullptr && active && couldExit && !pressed) {
++        // a short click on a real window focuses it before closing (umbriel's overview);
++        // a click on empty space just closes
++        if (const auto w = Desktop::viewState()->hitTest().windowAt(coords, Desktop::View::WINDOW_ONLY, nullptr))
++            Desktop::focusState()->fullWindowFocus(w, Desktop::FOCUS_REASON_SWITCH_TO_WINDOW_HARD);
++        hide();
++    }
+ 
+     return Return;
+ }
+@@ -94,11 +119,12 @@ bool CHyprspaceWidget::axisEvent(double delta, wl_pointer_axis axis, Vector2D co
+     const auto owner = getOwner();
+     CBox widgetBox = {owner->m_position.x, owner->m_position.y - curYOffset->value(), owner->m_transformedSize.x, (config.panelHeight->value() + config.reservedArea->value()) * owner->m_scale};
+     if (config.onBottom->value()) widgetBox = {owner->m_position.x, owner->m_position.y + owner->m_transformedSize.y - ((config.panelHeight->value() + config.reservedArea->value()) * owner->m_scale) + curYOffset->value(), owner->m_transformedSize.x, (config.panelHeight->value() + config.reservedArea->value()) * owner->m_scale};
++    if (config.vertical->value()) widgetBox = {owner->m_position.x - curYOffset->value(), owner->m_position.y, (config.panelHeight->value() + config.reservedArea->value()) * owner->m_scale, owner->m_transformedSize.y};
+ 
+     // scroll through panel if cursor is on it
+     if (widgetBox.containsPoint(coords * getOwner()->m_scale)) {
+-        // only horizontal scroll pans the panel; ignore vertical scroll here
+-        if (axis == WL_POINTER_AXIS_HORIZONTAL_SCROLL)
++        // the scroll axis along the panel pans it (vertical panel: vertical scroll)
++        if (axis == (config.vertical->value() ? WL_POINTER_AXIS_VERTICAL_SCROLL : WL_POINTER_AXIS_HORIZONTAL_SCROLL))
+             *workspaceScrollOffset = workspaceScrollOffset->goal() - delta * 2;
+     }
+     // otherwise, scroll to switch active workspace (vertical scroll only)
+@@ -106,6 +132,15 @@ bool CHyprspaceWidget::axisEvent(double delta, wl_pointer_axis axis, Vector2D co
+         if (auto next = relativeNumberedWorkspace(getOwner(), delta < 0 ? -1 : 1))
+             getOwner()->changeWorkspace(next);
+     }
++    // horizontal scroll pans the scrolling strip one column at a time, so off-screen windows
++    // (e.g. behind the panel) can be brought into view; no-op on other layouts
++    else if (axis == WL_POINTER_AXIS_HORIZONTAL_SCROLL) {
++        panAccum += delta;
++        if (std::abs(panAccum) >= 30.) {
++            g_layoutManager->layoutMsg(panAccum > 0 ? "move +col" : "move -col");
++            panAccum = 0.;
++        }
++    }
+ 
+     return false;
+ }
+@@ -153,6 +188,7 @@ bool CHyprspaceWidget::updateSwipe(IPointer::SSwipeUpdateEvent e) {
+             const auto owner = getOwner();
+             CBox widgetBox = {owner->m_position.x, owner->m_position.y - curYOffset->value(), owner->m_transformedSize.x, (config.panelHeight->value() + config.reservedArea->value()) * owner->m_scale};
+             if (config.onBottom->value()) widgetBox = {owner->m_position.x, owner->m_position.y + owner->m_transformedSize.y - ((config.panelHeight->value() + config.reservedArea->value()) * owner->m_scale) + curYOffset->value(), owner->m_transformedSize.x, (config.panelHeight->value() + config.reservedArea->value()) * owner->m_scale};
++    if (config.vertical->value()) widgetBox = {owner->m_position.x - curYOffset->value(), owner->m_position.y, (config.panelHeight->value() + config.reservedArea->value()) * owner->m_scale, owner->m_transformedSize.y};
+             if (widgetBox.containsPoint(g_pInputManager->getMouseCoordsInternal() * getOwner()->m_scale)) {
+                 workspaceScrollOffset->setValueAndWarp(workspaceScrollOffset->goal() + e.delta.x * 2);
+                 return false;
+diff --git a/src/Layout.cpp b/src/Layout.cpp
+index 17808dc..2ffc793 100644
+--- a/src/Layout.cpp
++++ b/src/Layout.cpp
+@@ -35,7 +35,9 @@ void CHyprspaceWidget::updateLayout() {
+     auto* const PGAPSOUT = static_cast<Config::CCssGapData*>(PGAPSOUTBASE);
+ 
+     if (active) {
+-        if (!config.onBottom->value())
++        if (config.vertical->value())
++            pMonitor->m_reservedArea = Desktop::CReservedArea(0, 0, 0, currentHeight); // top, right, bottom, left
++        else if (!config.onBottom->value())
+             pMonitor->m_reservedArea = Desktop::CReservedArea(currentHeight, 0, 0, 0);
+         else
+             pMonitor->m_reservedArea = Desktop::CReservedArea(0, 0, currentHeight, 0);
+diff --git a/src/Overview.hpp b/src/Overview.hpp
+index 8fc11b3..82aa1af 100644
+--- a/src/Overview.hpp
++++ b/src/Overview.hpp
+@@ -28,6 +28,10 @@ class CHyprspaceWidget {
+     // for checking mouse hover for workspace drag and move
+     // modified on draw call, accessed on mouse click and release
+     std::vector<std::tuple<SOverviewWorkspace, CBox>> workspaceBoxes;
++    // window previews drawn last frame, in scaled absolute coordinates (topmost last), for click-to-focus
++    std::vector<std::tuple<PHLWINDOWREF, CBox>> windowBoxes;
++    // horizontal scroll over the main area, accumulated until it is worth a column
++    double panAccum = 0.;
+ 
+     // for storing the fullscreen state of windows prior to overview activation (which unfullscreens all windows)
+     std::vector<std::tuple<PHLWINDOWREF, Fullscreen::eFullscreenMode>> prevFullscreen;
+diff --git a/src/Render.cpp b/src/Render.cpp
+index 24a309d..2539297 100644
+--- a/src/Render.cpp
++++ b/src/Render.cpp
+@@ -1,5 +1,6 @@
+ #include "Overview.hpp"
+ #include "Globals.hpp"
++#include <algorithm>
+ #include <hyprland/src/desktop/view/window/WindowPresentation.hpp>
+ #include <hyprland/src/render/Context.hpp>
+ #include <hyprland/src/helpers/memory/Memory.hpp>
+@@ -172,6 +173,7 @@ void CHyprspaceWidget::draw(Render::CRenderContext& ctx) {
+     Hyprutils::Utils::CScopeGuard resetContext([] { g_overviewContext = nullptr; });
+ 
+     workspaceBoxes.clear();
++    windowBoxes.clear();
+ 
+     if (!active && !curYOffset->isBeingAnimated()) return;
+ 
+@@ -192,6 +194,9 @@ void CHyprspaceWidget::draw(Render::CRenderContext& ctx) {
+ 
+     // Background box
+     CBox widgetBox = {owner->m_position.x, owner->m_position.y + (config.onBottom->value() * (owner->m_transformedSize.y - ((config.panelHeight->value() + config.reservedArea->value()) * owner->m_scale))) - (bottomInvert * curYOffset->value()), owner->m_transformedSize.x, (config.panelHeight->value() + config.reservedArea->value()) * owner->m_scale}; //TODO: update size on monitor change
++    // vertical: a full-height column on the left that slides in from the left edge
++    const bool vertical = config.vertical->value();
++    if (vertical) widgetBox = {owner->m_position.x - curYOffset->value(), owner->m_position.y, (config.panelHeight->value() + config.reservedArea->value()) * owner->m_scale, owner->m_transformedSize.y};
+ 
+     // set widgetBox relative to current monitor for rendering panel
+     widgetBox.x -= owner->m_position.x;
+@@ -211,6 +216,8 @@ void CHyprspaceWidget::draw(Render::CRenderContext& ctx) {
+         // Border box
+         CBox borderBox = {widgetBox.x, owner->m_position.y + (config.onBottom->value() * owner->m_transformedSize.y) + (config.panelHeight->value() + config.reservedArea->value() - curYOffset->value() * owner->m_scale) * bottomInvert, owner->m_transformedSize.x, static_cast<double>(config.panelBorderWidth->value())};
+         borderBox.y -= owner->m_position.y;
++        // vertical: a line along the panel's right edge
++        if (vertical) borderBox = {widgetBox.x + widgetBox.w, 0, static_cast<double>(config.panelBorderWidth->value()), owner->m_transformedSize.y};
+ 
+         renderRect(borderBox, config.panelBorderColor->value());
+     }
+@@ -277,13 +284,21 @@ void CHyprspaceWidget::draw(Render::CRenderContext& ctx) {
+ 
+     // render workspace boxes
+     int wsCount = workspaces.size();
+-    double monitorSizeScaleFactor = ((config.panelHeight->value() - 2 * config.workspaceMargin->value()) / (owner->m_transformedSize.y)) * owner->m_scale; // scale box with panel height
++    // horizontal: boxes fit the panel height; vertical: boxes fit the panel width
++    double monitorSizeScaleFactor = ((config.panelHeight->value() - 2 * config.workspaceMargin->value()) / (vertical ? owner->m_transformedSize.x : owner->m_transformedSize.y)) * owner->m_scale;
+     double workspaceBoxW = owner->m_transformedSize.x * monitorSizeScaleFactor;
+     double workspaceBoxH = owner->m_transformedSize.y * monitorSizeScaleFactor;
+-    double workspaceGroupWidth = workspaceBoxW * wsCount + (config.workspaceMargin->value() * owner->m_scale) * (wsCount - 1);
+-    double curWorkspaceRectOffsetX = config.centerAligned->value() ? workspaceScrollOffset->value() + (widgetBox.w / 2.) - (workspaceGroupWidth / 2.) : workspaceScrollOffset->value() + config.workspaceMargin->value();
++    const double workspaceStep = (vertical ? workspaceBoxH : workspaceBoxW) + config.workspaceMargin->value() * owner->m_scale;
++    const double panelLength = vertical ? widgetBox.h : widgetBox.w;
++    double workspaceGroupWidth = (vertical ? workspaceBoxH : workspaceBoxW) * wsCount + (config.workspaceMargin->value() * owner->m_scale) * (wsCount - 1);
++    const double alongStart = config.centerAligned->value() ? workspaceScrollOffset->value() + (panelLength / 2.) - (workspaceGroupWidth / 2.) : workspaceScrollOffset->value() + config.workspaceMargin->value();
++    double curWorkspaceRectOffsetX = alongStart;
+     double curWorkspaceRectOffsetY = !config.onBottom->value() ? (((config.reservedArea->value() + config.workspaceMargin->value()) * owner->m_scale) - curYOffset->value()) : (owner->m_transformedSize.y - ((config.reservedArea->value() + config.workspaceMargin->value()) * owner->m_scale) - workspaceBoxH + curYOffset->value());
+-    double workspaceOverflowSize = std::max<double>(((workspaceGroupWidth - widgetBox.w) / 2) + (config.workspaceMargin->value() * owner->m_scale), 0);
++    if (vertical) {
++        curWorkspaceRectOffsetX = ((config.reservedArea->value() + config.workspaceMargin->value()) * owner->m_scale) - curYOffset->value();
++        curWorkspaceRectOffsetY = alongStart;
++    }
++    double workspaceOverflowSize = std::max<double>(((workspaceGroupWidth - panelLength) / 2) + (config.workspaceMargin->value() * owner->m_scale), 0);
+ 
+     *workspaceScrollOffset = std::clamp<double>(workspaceScrollOffset->goal(), -workspaceOverflowSize, workspaceOverflowSize);
+ 
+@@ -305,7 +320,8 @@ void CHyprspaceWidget::draw(Render::CRenderContext& ctx) {
+                 renderRect(curWorkspaceBox, config.workspaceActiveBackground->value());
+             }
+             if (!config.drawActiveWorkspace->value()) {
+-                curWorkspaceRectOffsetX += workspaceBoxW + (config.workspaceMargin->value() * owner->m_scale);
++                if (vertical) curWorkspaceRectOffsetY += workspaceStep;
++                else curWorkspaceRectOffsetX += workspaceStep;
+                 continue;
+             }
+         }
+@@ -336,7 +352,7 @@ void CHyprspaceWidget::draw(Render::CRenderContext& ctx) {
+         // the mini panel to cover the awkward empty space reserved by the panel
+         if (owner->m_activeWorkspace == ws && config.affectStrut->value()) {
+             CBox miniPanelBox = {curWorkspaceRectOffsetX, curWorkspaceRectOffsetY, widgetBox.w * monitorSizeScaleFactor, widgetBox.h * monitorSizeScaleFactor};
+-            if (config.onBottom->value()) miniPanelBox = {curWorkspaceRectOffsetX, curWorkspaceRectOffsetY + workspaceBoxH - widgetBox.h * monitorSizeScaleFactor, widgetBox.w * monitorSizeScaleFactor, widgetBox.h * monitorSizeScaleFactor};
++            if (config.onBottom->value() && !vertical) miniPanelBox = {curWorkspaceRectOffsetX, curWorkspaceRectOffsetY + workspaceBoxH - widgetBox.h * monitorSizeScaleFactor, widgetBox.w * monitorSizeScaleFactor, widgetBox.h * monitorSizeScaleFactor};
+ 
+             if (!config.disableBlur->value()) {
+                 renderRectWithBlur(miniPanelBox, CHyprColor(0, 0, 0, 0));
+@@ -348,48 +364,53 @@ void CHyprspaceWidget::draw(Render::CRenderContext& ctx) {
+ 
+         }
+ 
+-        if (ws != nullptr) {
+-            // draw tiled windows
++        // fitWorkspaces: fit every window of the workspace (incl. off-screen scrolling columns) into
++        // the preview, centred; otherwise windows keep their real on-screen positions
++        double fitScale = 1.0;
++        Vector2D fitOffset = {0, 0};
++        if (ws != nullptr && config.fitWorkspaces->value()) {
++            const double monW = owner->m_transformedSize.x / owner->m_scale;
++            const double monH = owner->m_transformedSize.y / owner->m_scale;
++            double x0 = 0, y0 = 0, x1 = monW, y1 = monH;
+             for (auto& w : Desktop::windowState()->windows()) {
+-                if (!w) continue;
+-                if (w->m_workspace == ws && !w->isFloating()) {
+-                    double wX = curWorkspaceRectOffsetX + ((w->position(Desktop::View::IGeometric::GEOMETRIC_CURRENT).x - owner->m_position.x) * monitorSizeScaleFactor * owner->m_scale);
+-                    double wY = curWorkspaceRectOffsetY + ((w->position(Desktop::View::IGeometric::GEOMETRIC_CURRENT).y - owner->m_position.y) * monitorSizeScaleFactor * owner->m_scale);
+-                    double wW = w->size(Desktop::View::IGeometric::GEOMETRIC_CURRENT).x * monitorSizeScaleFactor * owner->m_scale;
+-                    double wH = w->size(Desktop::View::IGeometric::GEOMETRIC_CURRENT).y * monitorSizeScaleFactor * owner->m_scale;
+-                    if (!(wW > 0 && wH > 0)) continue;
+-                    CBox curWindowBox = {wX, wY, wW, wH};
+-                    //g_pHyprOpenGL->renderRectWithBlur(&curWindowBox, CHyprColor(0, 0, 0, 0));
+-                    renderWindowStub(w, owner, owner->m_activeWorkspace, curWindowBox, curWorkspaceBox, time);
+-                }
++                if (!w || w->m_workspace != ws || !w->mapped() || w->isHidden()) continue;
++                const auto p = w->position(Desktop::View::IGeometric::GEOMETRIC_CURRENT) - owner->m_position;
++                const auto sz = w->size(Desktop::View::IGeometric::GEOMETRIC_CURRENT);
++                x0 = std::min(x0, p.x);
++                y0 = std::min(y0, p.y);
++                x1 = std::max(x1, p.x + sz.x);
++                y1 = std::max(y1, p.y + sz.y);
+             }
++            fitScale = std::min({1.0, monW / (x1 - x0), monH / (y1 - y0)});
++            fitOffset = {(monW - (x1 - x0) * fitScale) / 2.0 - x0 * fitScale, (monH - (y1 - y0) * fitScale) / 2.0 - y0 * fitScale};
++        }
++        const double previewScale = monitorSizeScaleFactor * owner->m_scale;
++        const auto drawWindow = [&](const PHLWINDOW& w) {
++            const auto p = (w->position(Desktop::View::IGeometric::GEOMETRIC_CURRENT) - owner->m_position) * fitScale + fitOffset;
++            const auto sz = w->size(Desktop::View::IGeometric::GEOMETRIC_CURRENT) * fitScale;
++            CBox curWindowBox = {curWorkspaceRectOffsetX + p.x * previewScale, curWorkspaceRectOffsetY + p.y * previewScale, sz.x * previewScale, sz.y * previewScale};
++            if (!(curWindowBox.w > 0 && curWindowBox.h > 0)) return;
++            renderWindowStub(w, owner, owner->m_activeWorkspace, curWindowBox, curWorkspaceBox, time);
++            // remember it for click-to-focus (same scaled absolute space as workspaceBoxes)
++            CBox hitBox = curWindowBox;
++            hitBox.scale(1 / owner->m_scale);
++            hitBox.x += owner->m_position.x;
++            hitBox.y += owner->m_position.y;
++            windowBoxes.emplace_back(w, hitBox);
++        };
++
++        if (ws != nullptr) {
++            // draw tiled windows
++            for (auto& w : Desktop::windowState()->windows())
++                if (w && w->m_workspace == ws && !w->isFloating())
++                    drawWindow(w);
+             // draw floating windows
+-            for (auto& w : Desktop::windowState()->windows()) {
+-                if (!w) continue;
+-                if (w->m_workspace == ws && w->isFloating() && ws->getLastFocusedWindow() != w) {
+-                    double wX = curWorkspaceRectOffsetX + ((w->position(Desktop::View::IGeometric::GEOMETRIC_CURRENT).x - owner->m_position.x) * monitorSizeScaleFactor * owner->m_scale);
+-                    double wY = curWorkspaceRectOffsetY + ((w->position(Desktop::View::IGeometric::GEOMETRIC_CURRENT).y - owner->m_position.y) * monitorSizeScaleFactor * owner->m_scale);
+-                    double wW = w->size(Desktop::View::IGeometric::GEOMETRIC_CURRENT).x * monitorSizeScaleFactor * owner->m_scale;
+-                    double wH = w->size(Desktop::View::IGeometric::GEOMETRIC_CURRENT).y * monitorSizeScaleFactor * owner->m_scale;
+-                    if (!(wW > 0 && wH > 0)) continue;
+-                    CBox curWindowBox = {wX, wY, wW, wH};
+-                    //g_pHyprOpenGL->renderRectWithBlur(&curWindowBox, CHyprColor(0, 0, 0, 0));
+-                    renderWindowStub(w, owner, owner->m_activeWorkspace, curWindowBox, curWorkspaceBox, time);
+-                }
+-            }
++            for (auto& w : Desktop::windowState()->windows())
++                if (w && w->m_workspace == ws && w->isFloating() && ws->getLastFocusedWindow() != w)
++                    drawWindow(w);
+             // draw last focused floating window on top
+-            if (ws->getLastFocusedWindow())
+-                if (ws->getLastFocusedWindow()->isFloating()) {
+-                    const auto w = ws->getLastFocusedWindow();
+-                    double wX = curWorkspaceRectOffsetX + ((w->position(Desktop::View::IGeometric::GEOMETRIC_CURRENT).x - owner->m_position.x) * monitorSizeScaleFactor * owner->m_scale);
+-                    double wY = curWorkspaceRectOffsetY + ((w->position(Desktop::View::IGeometric::GEOMETRIC_CURRENT).y - owner->m_position.y) * monitorSizeScaleFactor * owner->m_scale);
+-                    double wW = w->size(Desktop::View::IGeometric::GEOMETRIC_CURRENT).x * monitorSizeScaleFactor * owner->m_scale;
+-                    double wH = w->size(Desktop::View::IGeometric::GEOMETRIC_CURRENT).y * monitorSizeScaleFactor * owner->m_scale;
+-                    if (!(wW > 0 && wH > 0)) continue;
+-                    CBox curWindowBox = {wX, wY, wW, wH};
+-                    //g_pHyprOpenGL->renderRectWithBlur(&curWindowBox, CHyprColor(0, 0, 0, 0));
+-                    renderWindowStub(w, owner, owner->m_activeWorkspace, curWindowBox, curWorkspaceBox, time);
+-                }
++            if (const auto w = ws->getLastFocusedWindow(); w && w->isFloating())
++                drawWindow(w);
+         }
+ 
+         if (owner->m_activeWorkspace != ws || !config.hideRealLayers->value()) {
+@@ -421,7 +442,8 @@ void CHyprspaceWidget::draw(Render::CRenderContext& ctx) {
+         workspaceBoxes.emplace_back(std::make_tuple(tile, curWorkspaceBox));
+ 
+         // set the current position to the next workspace box
+-        curWorkspaceRectOffsetX += workspaceBoxW + config.workspaceMargin->value() * owner->m_scale;
++        if (vertical) curWorkspaceRectOffsetY += workspaceStep;
++        else curWorkspaceRectOffsetX += workspaceStep;
+     }
+ 
+     overviewContext().m_data.clipBox = monitorClip;
+diff --git a/src/main.cpp b/src/main.cpp
+index 0b35005..ba8b9a2 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -400,6 +400,8 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE inHandle) {
+     HyprlandAPI::addConfigValueV2(pHandle, config.adaptiveHeight);
+     HyprlandAPI::addConfigValueV2(pHandle, config.centerAligned);
+     HyprlandAPI::addConfigValueV2(pHandle, config.onBottom);
++    HyprlandAPI::addConfigValueV2(pHandle, config.vertical);
++    HyprlandAPI::addConfigValueV2(pHandle, config.fitWorkspaces);
+     HyprlandAPI::addConfigValueV2(pHandle, config.hideBackgroundLayers);
+     HyprlandAPI::addConfigValueV2(pHandle, config.hideTopLayers);
+     HyprlandAPI::addConfigValueV2(pHandle, config.hideOverlayLayers);

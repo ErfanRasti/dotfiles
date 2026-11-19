@@ -21,6 +21,11 @@
   programs.umbriel.enable = true;
 
   environment.systemPackages = with pkgs; [
+    # Hyprland's quit flow (SUPER+SHIFT+Q -> ~/.config/hypr/scripts/confirm_quit.sh):
+    # hyprland-dialog asks first, hyprshutdown then closes apps gracefully and exits
+    hyprshutdown
+    hyprland-guiutils
+
     # System management
     pciutils
     usbutils

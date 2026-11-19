@@ -1,0 +1,87 @@
+hyprglass: give each glassed window/layer/subsurface its own blur scratch framebuffer.
+Upstream blurs every surface through one shared temporary framebuffer and reallocates it
+whenever the next surface has a different size, which with windows + bar + panels meant
+~40 GPU framebuffer allocations per second (seen in hyprland.log). blurBackground() already
+takes a per-caller buffer; this passes one. Costs one extra sample-sized buffer per glass.
+
+diff --git a/src/GlassDecoration.cpp b/src/GlassDecoration.cpp
+index 94759b8..5ae29d6 100644
+--- a/src/GlassDecoration.cpp
++++ b/src/GlassDecoration.cpp
+@@ -594,7 +594,7 @@ void CGlassDecoration::renderPass(Render::CRenderContext& ctx, PHLMONITOR monito
+                 blurIterations = folded.iterations;
+             }
+ 
+-            GlassRenderer::blurBackground(ctx, m_sampleFramebuffer, blurRadius, blurIterations, source);
++            GlassRenderer::blurBackground(ctx, m_sampleFramebuffer, blurRadius, blurIterations, source, &m_blurTempFramebuffer);
+ 
+             m_frost.sampleChanged();
+ 
+diff --git a/src/GlassDecoration.hpp b/src/GlassDecoration.hpp
+index c03c1b7..5b691b6 100644
+--- a/src/GlassDecoration.hpp
++++ b/src/GlassDecoration.hpp
+@@ -75,6 +75,9 @@ class CGlassDecoration : public IHyprWindowDecoration {
+   private:
+     PHLWINDOWREF m_window;
+     SP<Render::IFramebuffer> m_sampleFramebuffer;
++    // Own blur scratch buffer: the shared global one is reallocated every time glass of a
++    // different size is blurred (windows, bar, panels...), i.e. many times per second.
++    SP<Render::IFramebuffer> m_blurTempFramebuffer;
+     GlassRenderer::SSampleMap m_sampleMap;
+ 
+     // Last geometry seen in updateWindow(), to detect real moves/resizes
+diff --git a/src/GlassLayerSurface.cpp b/src/GlassLayerSurface.cpp
+index 9f2f9dc..334a923 100644
+--- a/src/GlassLayerSurface.cpp
++++ b/src/GlassLayerSurface.cpp
+@@ -508,7 +508,7 @@ void CGlassLayerSurface::sampleAndRedirect(Render::CRenderContext& ctx, PHLMONIT
+             blurIterations = folded.iterations;
+         }
+ 
+-        GlassRenderer::blurBackground(ctx, m_sampleFramebuffer, blurRadius, blurIterations, source);
++        GlassRenderer::blurBackground(ctx, m_sampleFramebuffer, blurRadius, blurIterations, source, &m_blurTempFramebuffer);
+ 
+         m_hasCachedSample      = true;
+         m_cachedFromSnapshot   = xray;
+diff --git a/src/GlassLayerSurface.hpp b/src/GlassLayerSurface.hpp
+index 0c20cad..d426ab7 100644
+--- a/src/GlassLayerSurface.hpp
++++ b/src/GlassLayerSurface.hpp
+@@ -117,6 +117,9 @@ class CGlassLayerSurface {
+     WP<Desktop::View::CPopup> m_popup;
+     ETarget      m_target = ETarget::SURFACE;
+     SP<Render::IFramebuffer> m_sampleFramebuffer;
++    // Own blur scratch buffer: the shared global one is reallocated every time glass of a
++    // different size is blurred (windows, bar, panels...), i.e. many times per second.
++    SP<Render::IFramebuffer> m_blurTempFramebuffer;
+     SP<Render::IFramebuffer> m_surfaceTempFramebuffer;
+     GlassRenderer::SSampleMap m_sampleMap;
+     bool         m_hasCachedSample = false;
+diff --git a/src/GlassSubsurfaceState.cpp b/src/GlassSubsurfaceState.cpp
+index 3916d4c..649adc3 100644
+--- a/src/GlassSubsurfaceState.cpp
++++ b/src/GlassSubsurfaceState.cpp
+@@ -163,7 +163,7 @@ void CGlassSubsurfaceState::sampleAndRedirect(Render::CRenderContext& ctx, PHLMO
+             blurIterations    = folded.iterations;
+         }
+ 
+-        GlassRenderer::blurBackground(ctx, m_sampleFramebuffer, blurRadius, blurIterations, source);
++        GlassRenderer::blurBackground(ctx, m_sampleFramebuffer, blurRadius, blurIterations, source, &m_blurTempFramebuffer);
+ 
+         // only here: a deferred frame still holds the sample of the old box, so a move
+         // that deferred stays a miss until a frame that can sample it
+diff --git a/src/GlassSubsurfaceState.hpp b/src/GlassSubsurfaceState.hpp
+index b8c0fd2..f4c4058 100644
+--- a/src/GlassSubsurfaceState.hpp
++++ b/src/GlassSubsurfaceState.hpp
+@@ -77,6 +77,9 @@ class CGlassSubsurfaceState {
+     WP<CWLSurfaceResource>   m_surface;
+     PHLWINDOWREF             m_window;
+     SP<Render::IFramebuffer> m_sampleFramebuffer; // box-sized, per-item (small)
++    // Own blur scratch buffer: the shared global one is reallocated every time glass of a
++    // different size is blurred (windows, bar, panels...), i.e. many times per second.
++    SP<Render::IFramebuffer> m_blurTempFramebuffer;
+     GlassRenderer::SSampleMap m_sampleMap;
+     bool                     m_hasCachedSample = false;
+ 

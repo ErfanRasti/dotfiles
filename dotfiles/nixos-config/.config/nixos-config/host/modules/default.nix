@@ -15,6 +15,7 @@
     ./system.nix # System state version
     ./envvars.nix # Environment variables
     ./packages.nix # System packages, programs, unfree
+    ./hyprland-plugins.nix # Hyprland plugins built against the system Hyprland
     ./theme.nix # Theme
     ./swap.nix # Swap partition
     ./power.nix # Poewr management
