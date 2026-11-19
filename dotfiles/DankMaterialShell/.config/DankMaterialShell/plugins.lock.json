@@ -1,0 +1,19 @@
+{
+  "lockfileVersion": 1,
+  "plugins": {
+    "dankDesktopWeather": {
+      "repo": "https://github.com/AvengeMedia/dms-plugins",
+      "path": "DankDesktopWeather",
+      "commit": "f4583449f12920e0a2f16808b00a860c27f0173d"
+    },
+    "dankKDEConnect": {
+      "repo": "https://github.com/AvengeMedia/dms-plugins",
+      "path": "DankKDEConnect",
+      "commit": "f4583449f12920e0a2f16808b00a860c27f0173d"
+    },
+    "emojiLauncher": {
+      "repo": "https://github.com/devnullvoid/dms-emoji-launcher",
+      "commit": "1c0a7d337a52b48f9499060076703a35e8dd4f4f"
+    }
+  }
+}
