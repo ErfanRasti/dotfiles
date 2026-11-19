@@ -13,7 +13,6 @@
     "autoStartPomodoros": false
   },
   "dankKDEConnect": {
-    "enabled": true,
-    "selectedDeviceId": ""
+    "enabled": true
   }
 }
