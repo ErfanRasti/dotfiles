@@ -33,7 +33,7 @@ if grep -q '^include "config/dms.kdl"' "$CONFIG_FILE"; then
   if pgrep -x "dms"; then
     dms restart
   else
-    dms run
+    ~/.local/bin/dms-fit
   fi
 fi
 

@@ -8,7 +8,7 @@ end
 
 -- Start the shell and its search backend. Idle/lock timers come from config/autostart.lua.
 hl.on("hyprland.start", function()
-	hl.exec_cmd("dms run")
+	hl.exec_cmd("~/.local/bin/dms-fit") -- dms run, UI scaled to the monitor size
 	hl.exec_cmd("dsearch serve")
 end)
 

@@ -31,7 +31,7 @@ binds {
     Ctrl+Alt+Delete hotkey-overlay-title="Task Manager" { spawn "dms" "ipc" "call" "processlist" "toggle";}
     Ctrl+Shift+F1 hotkey-overlay-title="Open dgop terminal" { spawn-sh "~/.config/niri/scripts/toggle_app.sh -c 'kitty' -t 'dgop' 'kitty --override confirm_os_window_close=0 --class kitty --title 'dgop' -e dgop'"; }
 }
-spawn-at-startup "dms" "run"
+spawn-at-startup "~/.local/bin/dms-fit" // dms run, UI scaled to the monitor size
 spawn-at-startup "dsearch" "serve"
 
 layer-rule {

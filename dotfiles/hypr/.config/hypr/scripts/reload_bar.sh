@@ -25,7 +25,7 @@ dms)
   stop_noctalia
   stop_bars
   stop_dms
-  setsid -f dms run >/dev/null 2>&1
+  setsid -f ~/.local/bin/dms-fit >/dev/null 2>&1
   ;;
 *)
   stop_noctalia

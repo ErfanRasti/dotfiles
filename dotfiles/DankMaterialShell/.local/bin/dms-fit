@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+# Runs `dms run` with its UI scaled to each monitor's size, like noctalia's layouts.
+#
+# DMS sizes its menus, popouts and modals in fixed logical px (many are readonly Theme
+# constants), so they stay the same size on any monitor. Qt can scale a whole app per
+# screen, crisply: QT_SCREEN_SCALE_FACTORS="eDP-1=1.33;DP-1=0.9". Each output gets
+#   s = min(W/REF_W, H/REF_H)   (W x H: the output's logical size)
+# on the same 1536x864 design canvas as noctalia's widgets_fit.sh, clamped to
+# [MIN, MAX], so DMS looks on every monitor as it does on a 1536x864 one.
+#
+# Qt reads the factors only at start, so this stays in the foreground as a supervisor:
+# when an output is added, removed or rescaled and a factor changes, DMS is restarted
+# with the new ones. Outputs come from the compositor (Hyprland, niri, umbriel); on
+# others DMS runs unscaled. Exits when DMS exits (`dms kill`, a crash, ...).
+#
+# Usage: dms-fit [dms run flags]      e.g. dms-fit --log-level warn
+# Tunables (env): DMS_FIT_REF=1536x864  DMS_FIT_MIN=0.75  DMS_FIT_MAX=2
+
+ref="${DMS_FIT_REF:-1536x864}"
+min="${DMS_FIT_MIN:-0.75}"
+max="${DMS_FIT_MAX:-2}"
+desk="${XDG_CURRENT_DESKTOP,,}"
+
+# Prints "<output> <W> <H>" per enabled output, logical px.
+outputs() {
+  case "$desk" in
+  hyprland) hyprctl -j monitors | jq -r '.[] |
+    (if .transform % 2 == 1 then [.height, .width] else [.width, .height] end) as $wh |
+    "\(.name) \($wh[0] / .scale | floor) \($wh[1] / .scale | floor)"' ;;
+  niri) niri msg -j outputs | jq -r 'to_entries[] | select(.value.logical) |
+    "\(.key) \(.value.logical.width) \(.value.logical.height)"' ;;
+  umbriel) umbriel outputs --json | jq -r '.[] |
+    "\(.name) \(.logical_size.width) \(.logical_size.height)"' ;;
+  esac 2>/dev/null
+}
+
+# Prints the QT_SCREEN_SCALE_FACTORS value ("" when nothing is known).
+factors() {
+  outputs | awk -v ref="$ref" -v lo="$min" -v hi="$max" '
+    BEGIN { split(ref, r, "x") }
+    NF == 3 && $2 > 0 && $3 > 0 {
+      s = $2 / r[1]; if ($3 / r[2] < s) s = $3 / r[2]
+      if (s < lo) s = lo; if (s > hi) s = hi
+      printf "%s%s=%.2f", sep, $1, s; sep = ";"
+    }'
+}
+
+# Prints a line on every output change (or a tick where there is no event stream).
+watch_outputs() {
+  case "$desk" in
+  hyprland) socat -U - "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" |
+    grep --line-buffered -E '^(monitoradded|monitorremoved|configreloaded)' ;;
+  umbriel) umbriel subscribe outputs ;;
+  niri) while sleep 5; do echo; done ;; # niri's event stream has no output events
+  *) sleep infinity ;;
+  esac
+}
+
+set -m # background jobs get their own process groups, so cleanup reaches socat too
+trap 'kill -- -"$watcher" $child 2>/dev/null' EXIT
+trap 'exit 143' TERM INT HUP
+trap 'restart=1' USR1
+
+current="$(factors)"
+# The watcher keeps its own copy of the factors and signals us when they change.
+(
+  trap - EXIT TERM INT HUP USR1
+  watch_outputs | while read -r _; do
+    sleep 1 # let the compositor settle (a hotplug fires several events)
+    new="$(factors)"
+    [[ -n "$new" && "$new" != "$current" ]] && current="$new" && kill -USR1 $$
+  done
+) &
+watcher=$!
+
+while :; do
+  restart=0
+  QT_SCREEN_SCALE_FACTORS="$current" dms run "$@" & # "" = unscaled
+  child=$!
+  while ((!restart)) && kill -0 "$child" 2>/dev/null; do wait "$child"; done
+  ((restart)) || { wait "$child"; exit; } # DMS's own exit status
+  kill "$child" 2>/dev/null
+  wait "$child" 2>/dev/null
+  current="$(factors)"
+done
