@@ -241,30 +241,7 @@ flatpak override --user \
 
 echo "✅ flatpak packages installed successfully!"
 
-echo "------------------- hyprpm packages -------------------"
-hyprpm update
-hyprpm add https://github.com/hyprwm/hyprland-plugins
-#hyprpm enable hyprexpo
-hyprpm enable hyprbars
-hyprpm enable hyprscrolling
-hyprpm enable xtra-dispatchers
-hyprpm enable hyprfocus
-
-hyprpm add https://github.com/gfhdhytghd/hymission
-hyprpm enable hymission
-
-hyprpm add https://github.com/VirtCode/hypr-dynamic-cursors
-hyprpm enable dynamic-cursors
-
-hyprpm add https://github.com/zakk4223/hyprland-easymotion
-hyprpm enable hyprEasymotion
-
-hyprpm add https://github.com/outfoxxed/hy3
-hyprpm enable hy3
-
-hyprpm reload
-
-echo "✅ hyprpm packages installed successfully!"
+# Hyprland plugins: managed by NixOS (nixos-config/host/modules/hyprland-plugins.nix), not hyprpm.
 
 echo "------------------- dotfiles -------------------"
 git clone --recurse-submodules https://github.com/ErfanRasti/dotfiles.git "$HOME/dotfiles"
