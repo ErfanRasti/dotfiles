@@ -1,0 +1,70 @@
+/**
+ * Confirmation dialog (used by ~/.config/hypr/scripts/confirm_quit.sh).
+ * Builds on the applet style: a title + subtitle and two equal pill buttons.
+ * The destructive choice is passed as an "urgent" row (rofi -u) and drawn in the error tones;
+ * the highlighted button uses the strong tone of its own color, so keyboard focus is obvious.
+ */
+@import "style.rasi"
+
+window {
+    width:                      440px;
+    border-radius:              28px;
+}
+
+mainbox {
+    children:                   [ "message", "listview" ];
+    padding:                    28px 24px 24px 24px;
+    spacing:                    24px;
+    background-color:           @surface-container;
+}
+
+message {
+    padding:                    0px;
+    background-color:           transparent;
+}
+
+textbox {
+    font:                       @font-regular;
+    text-color:                 @on-surface;
+    horizontal-align:           0.5;
+}
+
+listview {
+    columns:                    2;
+    lines:                      1;
+    spacing:                    12px;
+    fixed-columns:              true;
+    dynamic:                    false;
+}
+
+element {
+    padding:                    12px 0px;
+    border-radius:              24px;
+}
+
+element-text {
+    font:                       @font-big;
+    horizontal-align:           0.5;
+}
+
+/* Cancel */
+element normal.normal,
+element alternate.normal {
+    background-color:           @surface-container-highest;
+    text-color:                 @on-surface;
+}
+element selected.normal {
+    background-color:           @primary;
+    text-color:                 @on-primary;
+}
+
+/* Quit (destructive) */
+element normal.urgent,
+element alternate.urgent {
+    background-color:           @error-container;
+    text-color:                 @on-error-container;
+}
+element selected.urgent {
+    background-color:           @error;
+    text-color:                 @on-error;
+}
