@@ -17,6 +17,16 @@ local suppressMaximizeRule = hl.window_rule({
 })
 suppressMaximizeRule:set_enabled(true)
 
+-- Video and games stay fully opaque, without glass (like umbriel's glass.toml)
+for _, m in ipairs({
+	{ content = "video" },
+	{ content = "game" },
+	{ class = "^(mpv|vlc|gamescope|steam_app_.*)$" },
+	{ fullscreen = true },
+}) do
+	hl.window_rule({ name = "no-glass-" .. (m.content or (m.fullscreen and "fullscreen") or "media"), match = m, tag = "+hyprglass_disabled", opacity = "1.0 override 1.0 override" })
+end
+
 hl.window_rule({
 	-- Fix some dragging issues with XWayland
 	name = "fix-xwayland-drags",
@@ -418,4 +428,12 @@ hl.workspace_rule({
 	border_size = 5,
 	no_border = true,
 	no_shadow = true,
+})
+
+-- Hyprland's own dialogs (quit confirmation, permission prompts) float in the middle
+hl.window_rule({
+	name = "hyprland-dialog",
+	match = { class = "^(hyprland-dialog)$" },
+	float = true,
+	center = true,
 })

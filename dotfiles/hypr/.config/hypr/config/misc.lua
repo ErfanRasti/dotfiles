@@ -17,3 +17,8 @@ hl.config({
 		enable_swallow = false,
 	},
 })
+
+-- Hyprland's own log stays off (the default): it lives in RAM ($XDG_RUNTIME_DIR) and grows by
+-- megabytes per minute. Set disable_logs = false to diagnose plugin load / permission failures in
+-- $XDG_RUNTIME_DIR/hypr/<instance>/hyprland.log; crashes are recorded either way (coredumpctl).
+hl.config({ debug = { disable_logs = true } })

@@ -18,6 +18,10 @@ hl.config({
 		-- Set to true enable resizing windows by clicking and dragging on borders and gaps
 		resize_on_border = true,
 
+		-- Directional focus stops at the edge instead of falling back to another window
+		-- (also stops SUPER+J/K from wrapping inside a scrolling column)
+		no_focus_fallback = true,
+
 		-- Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
 		allow_tearing = true,
 
@@ -109,26 +113,19 @@ hl.animation({
 	bezier = "almostLinear",
 	style = "slidefadevert",
 })
-hl.animation({ leaf = "hyprfocusIn", enabled = true, speed = 1.7, bezier = "linear" })
-hl.animation({ leaf = "hyprfocusOut", enabled = true, speed = 1.7, bezier = "almostLinear" })
 
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
--- "Smart gaps" / "No gaps when only"
--- uncomment all if you wish to use that.
-hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
-hl.workspace_rule({ workspace = "f[1]", gaps_out = 0, gaps_in = 0 })
-hl.window_rule({
-	name = "no-gaps-wtv1",
-	match = { float = false, workspace = "w[tv1]" },
-	border_size = 0,
-	rounding = 0,
-})
-hl.window_rule({
-	name = "no-gaps-f1",
-	match = { float = false, workspace = "f[1]" },
-	border_size = 0,
-	rounding = 0,
-})
+-- "Smart gaps" / "No gaps when only": SUPER+CTRL+F2 toggles these rules (binds.lua)
+SMART_GAPS = {}
+for _, ws in ipairs({ "w[tv1]", "f[1]" }) do
+	SMART_GAPS[#SMART_GAPS + 1] = hl.workspace_rule({ workspace = ws, gaps_out = 0, gaps_in = 0 })
+	SMART_GAPS[#SMART_GAPS + 1] = hl.window_rule({
+		name = "no-gaps-" .. ws,
+		match = { float = false, workspace = ws },
+		border_size = 0,
+		rounding = 0,
+	})
+end
 
 -- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
 hl.config({
@@ -148,6 +145,9 @@ hl.config({
 hl.config({
 	scrolling = {
 		fullscreen_on_one_column = true,
+		-- No wrap-around: focus and column moves stop at the first/last column (like umbriel)
+		wrap_focus = false,
+		wrap_swapcol = false,
 	},
 })
 
