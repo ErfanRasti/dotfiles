@@ -3,11 +3,21 @@ set -euo pipefail
 
 # --- config ---------------------------------------------------------------
 
-FILE="${HOME}/.config/hypr/config/keybindings.conf"
-FILE2="${HOME}/.config/hypr/config/hyprscrolling.conf"
-FILE3="${HOME}/.config/hypr/config/hy3.conf"
-FILE4="${HOME}/.config/hypr/config/noctalia.conf"
-FILE5="${HOME}/.config/hypr/config/dms.conf"
+# Binds come from the running Hyprland (`hyprctl binds -j`), so every hl.bind with a
+# description is listed, whichever config file defines it (the old *.conf files are gone
+# since the Lua migration). They are turned into "bind = MODS, KEY, x # description" lines
+# for the parser below. modmask bits: SHIFT=1 CTRL=4 ALT=8 SUPER=64.
+hypr_binds() {
+  hyprctl binds -j | jq -r '
+    def bit($b): ((.modmask / $b | floor) % 2) == 1;
+    .[]
+    | select((.submap // "") == "" and (.description // "") != "" and (.key // "") != "")
+    | [ (if bit(64) then "SUPER" else empty end),
+        (if bit(4) then "CTRL" else empty end),
+        (if bit(8) then "ALT" else empty end),
+        (if bit(1) then "SHIFT" else empty end) ] as $mods
+    | "bind = \($mods | join(" ")), \(.key), x # \(.description)"'
+}
 
 # Nerd Font modifier glyphs (can override via env)
 ALT_ICON="${ALT_ICON:-󰘵}"
@@ -68,30 +78,12 @@ if ! command -v "$ROFI_CMD" >/dev/null 2>&1; then
   exit 1
 fi
 
-if [[ ! -f "$FILE" ]]; then
-  echo "Error: keybindings file not found at: $FILE" >&2
-  exit 1
-fi
-
-if [[ ! -f "$FILE2" ]]; then
-  echo "Error: keybindings file not found at: $FILE2" >&2
-  exit 1
-fi
-
-if [[ ! -f "$FILE3" ]]; then
-  echo "Error: keybindings file not found at: $FILE3" >&2
-  exit 1
-fi
-
-if [[ ! -f "$FILE4" ]]; then
-  echo "Error: keybindings file not found at: $FILE4" >&2
-  exit 1
-fi
-
-if [[ ! -f "$FILE5" ]]; then
-  echo "Error: keybindings file not found at: $FILE5" >&2
-  exit 1
-fi
+for cmd in hyprctl jq; do
+  if ! command -v "$cmd" >/dev/null 2>&1; then
+    echo "Error: $cmd not found." >&2
+    exit 1
+  fi
+done
 
 # Pick the active theme based on the flag
 if [[ $OVERVIEW -eq 1 ]]; then
@@ -248,7 +240,7 @@ awk \
     # Two-line entry -> separated by SEP for rofi
     printf "%s\n  %s%s", head, comment, sep
   }
-' <(cat "$FILE" "$FILE2" "$FILE3" "$FILE4" "$FILE5") | {
+' <(hypr_binds) | {
 
   # Build rofi command with your theme only (no radius overrides)
   rofi_args=(
