@@ -28,15 +28,21 @@ hl.config({
 	},
 })
 
--- Touchpad, same as umbriel's [input.touchpad] (`hyprctl devices` lists the names)
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/
-hl.device({
-	name = "touchpad",
-	sensitivity = 0.4,
-	tap_to_click = true,
-	disable_while_typing = true,
-	natural_scroll = true,
-})
+-- Touchpad, same as umbriel's [input.touchpad]. Found by name in the kernel's device list so no
+-- hardware ID is stored here; Hyprland names devices in lowercase with spaces as dashes.
+local devices = io.open("/proc/bus/input/devices", "r")
+if devices then
+	for name in devices:read("a"):gmatch('N: Name="([^"]*[Tt]ouchpad)"') do
+		hl.device({
+			name = (name:lower():gsub(" ", "-")),
+			sensitivity = 0.4,
+			tap_to_click = true,
+			disable_while_typing = true,
+			natural_scroll = true,
+		})
+	end
+	devices:close()
+end
 
 -- https://wiki.hypr.land/Configuring/Advanced-and-Cool/Gestures/
 
