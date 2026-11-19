@@ -12,6 +12,9 @@ binds {
     // Mod-Shift-/, which is usually the same as Mod-?,
     // shows a list of important hotkeys.
     Mod+Shift+Slash hotkey-overlay-title="Show hotkey overlay" { show-hotkey-overlay; }
+    // rofi keybinding menus (~/.config/rofi/keybindings): searchable list / overview grid
+    Mod+Ctrl+Slash hotkey-overlay-title="Keybindings menu (rofi)" { spawn "~/.config/rofi/keybindings/run.sh"; }
+    Mod+Ctrl+Shift+Slash hotkey-overlay-title="Keybindings cheatsheet (rofi)" { spawn "~/.config/rofi/keybindings/run.sh" "-o"; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn-sh "kitty --app-id kitty-main"; }

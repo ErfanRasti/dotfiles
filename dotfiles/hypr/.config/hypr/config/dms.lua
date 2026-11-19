@@ -133,7 +133,13 @@ hl.bind(
 	{ description = "[SHELL:dms] Open spotlight emoji panel" }
 )
 hl.bind("ALT + F4", hl.dsp.exec_cmd("dms ipc call powermenu toggle"), { description = "[SHELL:dms] Toggle power menu" })
--- bind = $mainMod, SLASH, exec, dms ipc call keybinds toggle hyprland # [SHELL:dms] Toggle keybindings overlay
+-- Shell cheatsheet on SUPER+SLASH like niri/umbriel; the rofi menus stay on SUPER+SHIFT+SLASH and
+-- SUPER+CTRL(+SHIFT)+SLASH (binds.lua).
+hl.bind(
+	mainMod .. " + SLASH",
+	hl.dsp.exec_cmd("dms ipc call keybinds toggle hyprland"),
+	{ description = "[SHELL:dms] Toggle keybindings overlay" }
+)
 
 -- Screenshot
 hl.bind("PRINT", hl.dsp.exec_cmd("dms screenshot"), { description = "[SHELL:dms] Take area screenshot" })

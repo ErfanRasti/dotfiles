@@ -44,6 +44,8 @@
 
 # ============================================================== Apps & session
 "Mod+Shift+Slash" = { action = "cheatsheet-toggle", repeat = false }
+"Mod+Ctrl+Slash" = { action = "spawn ~/.config/rofi/keybindings/run.sh", repeat = false }             # keybindings menu (rofi, searchable)
+"Mod+Ctrl+Shift+Slash" = { action = "spawn ~/.config/rofi/keybindings/run.sh -o", repeat = false }    # keybindings cheatsheet (rofi, overview)
 "Mod+T" = { action = "spawn kitty --app-id kitty-main", repeat = false }
 "Mod+Return" = { action = "spawn kitty", repeat = false }
 "Mod+D" = { action = "spawn ~/.config/hypr/scripts/toggle_rofi_launcher.sh", repeat = false }

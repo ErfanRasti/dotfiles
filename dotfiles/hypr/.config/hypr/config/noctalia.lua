@@ -63,6 +63,9 @@ nbind(mainMod .. " + V", "panel-toggle clipboard", { description = "Toggle clipb
 nbind(mainMod .. " + B", "dock-toggle", { description = "Toggle the dock" })
 nbind(mainMod .. " + PERIOD", "panel-toggle launcher /emo", { description = "Open emoji picker" })
 nbind(mainMod .. " + ALT + PERIOD", "panel-toggle plugin:kaomoji", { description = "Open kaomoji picker" })
+-- Shell cheatsheet on SUPER+SLASH like niri/umbriel; the rofi menus stay on SUPER+SHIFT+SLASH and
+-- SUPER+CTRL(+SHIFT)+SLASH (binds.lua).
+nbind(mainMod .. " + SLASH", "panel-toggle plugin:keybind-cheatsheet", { description = "Toggle keybind cheatsheet" })
 nbind(mainMod .. " + CTRL + ALT + SHIFT + K", "panel-toggle plugin:show-keys", { description = "Show pressed keys" })
 nbind(mainMod .. " + SHIFT + N", "panel-toggle plugin:sticky-notes", { description = "Toggle sticky notes" })
 nbind(mainMod .. " + CTRL + SHIFT + S", "panel-toggle plugin:screen-toolkit", { description = "Open screen toolkit" })

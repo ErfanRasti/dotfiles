@@ -341,7 +341,12 @@ hl.bind(M .. "ALT + SHIFT + C", hl.dsp.window.float({ action = "disable" }), { d
 
 -- ============================================================== Apps & session
 hl.bind(M .. "SHIFT + SLASH", hl.dsp.exec_cmd("~/.config/rofi/keybindings/run.sh -o"), { description = "Keybindings cheatsheet" })
+-- SUPER+SLASH: rofi menu without a desktop shell; dms.lua / noctalia.lua rebind it to the shell's
+-- keybind cheatsheet (as on niri/umbriel).
 hl.bind(M .. "SLASH", hl.dsp.exec_cmd("~/.config/rofi/keybindings/run.sh"), { description = "Keybindings menu" })
+-- Same rofi keys as niri/umbriel, never taken by the shell configs.
+hl.bind(M .. "CTRL + SHIFT + SLASH", hl.dsp.exec_cmd("~/.config/rofi/keybindings/run.sh -o"), { description = "Keybindings cheatsheet" })
+hl.bind(M .. "CTRL + SLASH", hl.dsp.exec_cmd("~/.config/rofi/keybindings/run.sh"), { description = "Keybindings menu" })
 hl.bind(M .. "T", hl.dsp.exec_cmd("kitty --class kitty-main"), { description = "Open the terminal" })
 hl.bind(M .. "RETURN", hl.dsp.exec_cmd(TERMINAL), { description = "Open the terminal" })
 hl.bind(M .. "D", hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle_rofi_launcher.sh"), { description = "Open search menu" })
