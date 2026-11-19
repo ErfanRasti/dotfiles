@@ -5,8 +5,8 @@
 # constants), so they stay the same size on any monitor. Qt can scale a whole app per
 # screen, crisply: QT_SCREEN_SCALE_FACTORS="eDP-1=1.33;DP-1=0.9". Each output gets
 #   s = min(W/REF_W, H/REF_H)   (W x H: the output's logical size)
-# on the same 1536x864 design canvas as noctalia's widgets_fit.sh, clamped to
-# [MIN, MAX], so DMS looks on every monitor as it does on a 1536x864 one.
+# on a 1920x1080 design canvas (the size DMS's own layout assumes), clamped to
+# [MIN, MAX], so DMS looks on every monitor as it does on a 1920x1080 one.
 #
 # Qt reads the factors only at start, so this stays in the foreground as a supervisor:
 # when an output is added, removed or rescaled and a factor changes, DMS is restarted
@@ -14,9 +14,9 @@
 # others DMS runs unscaled. Exits when DMS exits (`dms kill`, a crash, ...).
 #
 # Usage: dms-fit [dms run flags]      e.g. dms-fit --log-level warn
-# Tunables (env): DMS_FIT_REF=1536x864  DMS_FIT_MIN=0.75  DMS_FIT_MAX=2
+# Tunables (env): DMS_FIT_REF=1920x1080  DMS_FIT_MIN=0.75  DMS_FIT_MAX=2
 
-ref="${DMS_FIT_REF:-1536x864}"
+ref="${DMS_FIT_REF:-1920x1080}"
 min="${DMS_FIT_MIN:-0.75}"
 max="${DMS_FIT_MAX:-2}"
 desk="${XDG_CURRENT_DESKTOP,,}"
