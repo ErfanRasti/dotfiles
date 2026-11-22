@@ -4,9 +4,12 @@
 [general]
 autostart = [
   # Screen sharing: a portal started without XDG_CURRENT_DESKTOP=umbriel (e.g. after leaving GNOME) has no ScreenCast.
-  "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP && systemctl --user try-restart xdg-desktop-portal.service",
+  # XDG_SESSION_ID: apps launched via systemd (kitty, ...) otherwise keep a stale id from an older login, and a
+  # noctalia restarted from them registers its polkit agent for the wrong session (pkexec falls back to a tty prompt).
+  "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_ID XDG_VTNR && systemctl --user try-restart xdg-desktop-portal.service",
   "~/.config/umbriel/scripts/set_layout.py --init",  # create workspaces.state.toml if missing
   "noctalia",                                       # shell (see config/noctalia.toml)
+  "~/.config/umbriel/scripts/polkit_watch.sh",     # re-register noctalia's polkit agent after polkitd restarts
   "wl-paste --type text --watch cliphist store",
   "wl-paste --type image --watch cliphist store",
   "echo 'Xft.dpi: 125' | xrdb -merge",              # scaling for xorg apps
