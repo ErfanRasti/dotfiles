@@ -11,8 +11,8 @@ track_layout = "global"
 # numlock_toggle = true
 
 [input.touchpad]
-tap = true                       # tap-to-click
-disable_while_typing = true      # dwt
+tap = true                  # tap-to-click
+disable_while_typing = true # dwt
 natural_scroll = true
 sensitivity = 0.4
 # accel_profile = "flat"
@@ -26,9 +26,8 @@ sensitivity = 0.4
 # accel_profile = "flat"
 
 [input.focus]
-# Click-to-focus: hovering never changes focus; click a window (or use a keybind) to focus it.
-follows_mouse = false
-hover_raises = false
+follows_mouse = "sloppy" # "off" (click), "sloppy" (hover), "always" (+refocus on layout change)
+hover_raises = false     # clicks/keybinds raise, hover doesn't
 
 [input.cursor]
 theme = "Bibata-Modern-Classic"
